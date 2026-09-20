@@ -1,0 +1,103 @@
+/* ============================================
+   theme.css · 主题变量
+   ============================================ */
+
+:root {
+  /* 背景 */
+  --bg-gradient-start: #eaf2ff;
+  --bg-gradient-end: #f7fbff;
+  --bg-card: #ffffff;
+  --bg-soft: #f0f6ff;
+  --bg-code: #1e2a44;
+
+  /* 代码块深色主题 */
+  --code-bg: #1e2a44;
+  --code-header-bg: rgba(0, 0, 0, 0.25);
+  --code-text: #e6f1ff;
+  --code-comment: rgba(230, 241, 255, 0.28);
+  --code-filename: rgba(230, 241, 255, 0.7);
+  --code-title: #e6f1ff;
+  --code-border: rgba(255, 255, 255, 0.06);
+
+  /* 主色 */
+  --primary: #165DFF;
+  --primary-light: #4A8BFF;
+  --primary-soft: #dbe7ff;
+  --accent: #FF7A00;
+  --accent-soft: #ffe8d1;
+  --success: #00B42A;
+  --success-soft: #d9f7e2;
+  --error: #F53F3F;
+  --error-soft: #ffe0e0;
+
+  /* 文字 */
+  --text-main: #1a2f4a;
+  --text-sub: #3d5878;
+  --text-dim: #6b84a3;
+  --text-light: #98adc4;
+  --text-code: #e6f1ff;
+
+  /* 卡片 */
+  --card-border: rgba(22, 93, 255, 0.12);
+  --card-shadow: 0 2px 8px rgba(22, 93, 255, 0.06), 0 10px 28px rgba(22, 93, 255, 0.05);
+  --card-shadow-hover: 0 6px 16px rgba(22, 93, 255, 0.14), 0 16px 40px rgba(22, 93, 255, 0.1);
+  --card-shadow-accent: 0 6px 20px rgba(255, 122, 0, 0.18);
+
+  /* 尺寸 */
+  --radius-md: 14px;
+  --radius-sm: 8px;
+
+  /* 字体 */
+  --font-base: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-code: 'Consolas', 'Monaco', 'Courier New', monospace;
+
+  /* ============================================
+     字号缩放（4 档）
+     ============================================ */
+  --font-scale: 1;
+
+  /* 基础字号 */
+  --fs-base: calc(20px * var(--font-scale));
+  --fs-sm: calc(16px * var(--font-scale));
+  --fs-lg: calc(22px * var(--font-scale));
+
+  /* 标题 */
+  --fs-slide-title:      calc(52px * var(--font-scale));
+  --fs-slide-subtitle:   calc(28px * var(--font-scale));
+  --fs-cover-title:      calc(88px * var(--font-scale));
+  --fs-cover-subtitle:   calc(32px * var(--font-scale));
+  --fs-transition-title: calc(64px * var(--font-scale));
+
+  /* 卡片 */
+  --fs-card-title: calc(26px * var(--font-scale));
+  --fs-card-desc:  calc(22px * var(--font-scale));
+
+  /* 其他 */
+  --fs-badge:          calc(16px * var(--font-scale));
+  --fs-hint:           calc(22px * var(--font-scale));
+  --fs-code:           calc(20px * var(--font-scale));
+  --fs-chapter-tag:    calc(16px * var(--font-scale));
+  --fs-timeline-title: calc(26px * var(--font-scale));
+  --fs-timeline-desc:  calc(22px * var(--font-scale));
+  --fs-quote-text:     calc(28px * var(--font-scale));
+  --fs-bubble:         calc(22px * var(--font-scale));
+  --fs-bubble-speaker: calc(16px * var(--font-scale));
+
+  /* ============================================
+     QuizSlide 专用
+     ============================================ */
+  --fs-quiz-index:      calc(20px * var(--font-scale));
+  --fs-quiz-difficulty: calc(16px * var(--font-scale));
+  --fs-quiz-source:     calc(15px * var(--font-scale));
+  --fs-quiz-question:   calc(22px * var(--font-scale));
+  --fs-quiz-option:     calc(20px * var(--font-scale));
+  --fs-quiz-label:      calc(18px * var(--font-scale));
+  --fs-quiz-analysis:   calc(19px * var(--font-scale));
+
+  /* 间距 */
+  --space-slide-padding:  calc(48px * var(--font-scale));
+  --space-card-padding-y: calc(24px * var(--font-scale));
+  --space-card-padding-x: calc(30px * var(--font-scale));
+  --space-gap-md:         calc(18px * var(--font-scale));
+  --space-gap-lg:         calc(24px * var(--font-scale));
+}

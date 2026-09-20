@@ -1,0 +1,34 @@
+/* ============================================
+   animation.css · 分步动画与工具类
+   ============================================ */
+
+/* 未出现：完全隐藏，不占空间 */
+[data-step]:not(.visible) {
+  display: none !important;
+}
+
+/* 出现：淡入 */
+[data-step].visible {
+  animation: fadeInUp 0.35s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 工具类 ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 122, 0, 0.25); }
+  50% { box-shadow: 0 0 44px rgba(255, 122, 0, 0.55); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.float { animation: float 3s ease-in-out infinite; }
+.glow  { animation: glow 2.2s ease-in-out infinite; }

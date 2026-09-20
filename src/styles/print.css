@@ -1,0 +1,34 @@
+@media print {
+  .nav-btn, .step-hint, .back-btn,
+  .marker-widget, .marker-canvas,
+  .copy-btn, .shortcuts-bar { display: none !important; }
+
+  .slide {
+    page-break-after: always;
+    height: auto;
+    min-height: 100vh;
+    padding: 20px 30px;
+  }
+  .step-wrapper:not(.visible) { display: block !important; }
+  .slide-body { overflow: visible !important; max-height: none !important; }
+  pre {
+    max-height: none !important;
+    overflow: visible !important;
+    white-space: pre-wrap !important;
+    word-break: break-all;
+  }
+  .card { page-break-inside: avoid; }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* 独立滚动容器打印时展开 */
+  .scroll-pane {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+  .code-split-body {
+    overflow: visible !important;
+    display: block !important;
+  }
+}

@@ -1,0 +1,13 @@
+/* ============================================
+   syntax.css · 语法高亮（深色代码块）
+   ============================================ */
+
+.tok-pre   { color: #f48fb1; font-weight: 600; }
+.tok-kw    { color: #ff8a65; font-weight: 600; }
+.tok-type  { color: #4dd0e1; }
+.tok-fn    { color: #ce93d8; }
+.tok-str   { color: #a5d6a7; }
+.tok-num   { color: #ffcc80; font-weight: 600; }
+.tok-com   { color: #7a8ea6; font-style: italic; }
+.tok-op    { color: #90caf9; }
+.tok-punc  { color: #b0bec5; }

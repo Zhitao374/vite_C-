@@ -1,0 +1,33 @@
+/* ============================================
+   responsive.css · 响应式适配
+   ============================================ */
+
+/* ---------- 1280px 及以下：缩小字号与内边距 ---------- */
+@media (max-width: 1280px) {
+  .slide { padding: 28px 36px 64px; }
+  .slide-title { font-size: calc(32px * var(--font-scale)); }
+  .slide-subtitle { font-size: calc(16px * var(--font-scale)); }
+}
+
+/* ---------- 900px 及以下：单列布局 ---------- */
+@media (max-width: 900px) {
+  .slide { padding: 20px 20px 56px; }
+  .slide-title { font-size: calc(26px * var(--font-scale)); }
+  .slide-subtitle { font-size: calc(14px * var(--font-scale)); }
+
+  /* 网格类降为单列 */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 { grid-template-columns: 1fr; }
+
+  /* 分栏降为单列 */
+  .split { grid-template-columns: 1fr; }
+  .quote-split { grid-template-columns: 1fr; }
+
+  /* level-map 侧栏压缩 */
+  .level-map-layout { grid-template-columns: 100px 1fr; }
+  .level-map-top { grid-template-columns: 1fr; }
+
+  /* 首页统计 */
+  .home-stats { grid-template-columns: repeat(2, 1fr); }
+}
