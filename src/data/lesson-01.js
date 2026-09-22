@@ -1,29 +1,19 @@
 export default {
   title: '第 1 讲 初识 C++',
   subtitle: '第一个程序与 OJ 提交',
-  total: 28,
+  total: 32,
   category: '语法与基础算法',
   slides: [
 
-    /* ======================= slide-01 封面 ======================= */
+    /* ===== 01 封面 ===== */
     {
-      id: 1,
-      type: 'cover',
-      title: '初识 C++',
-      subtitle: '第一个程序与 OJ 提交',
-      chapterTag: false,
-      data: {
-        accentWord: 'C++',
-        meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 1 讲']
-      }
+      id: 1, type: 'cover', title: '初识 C++', subtitle: '第一个程序与 OJ 提交', chapterTag: false,
+      data: { accentWord: 'C++', meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 1 讲'] }
     },
 
-    /* ======================= slide-02 为什么要学C++ ======================= */
+    /* ===== 02 ===== */
     {
-      id: 2,
-      type: 'grid',
-      title: '为什么要学 C++？',
-      subtitle: '竞赛官方语言，高手的第一选择',
+      id: 2, type: 'grid', title: '为什么要学 C++？', subtitle: '竞赛官方语言，高手的第一选择',
       data: {
         cards: [
           { icon: '🏆', title: '竞赛官方语言', desc: 'CSP-J/S、NOIP、NOI 均支持' },
@@ -38,12 +28,9 @@ export default {
       }
     },
 
-    /* ======================= slide-03 本节课目标 ======================= */
+    /* ===== 03 ===== */
     {
-      id: 3,
-      type: 'grid',
-      title: '本节课目标',
-      subtitle: '四步进入编程世界',
+      id: 3, type: 'grid', title: '本节课目标', subtitle: '四步进入编程世界',
       data: {
         cards: [
           { number: '01', title: '认识 C++', desc: '理解程序是什么、计算机如何运行' },
@@ -58,49 +45,23 @@ export default {
       }
     },
 
-    /* ======================= slide-04 学习地图 ======================= */
+    /* ===== 04 学习地图 ===== */
     {
-      id: 4,
-      type: 'timeline',
-      title: '本讲学习地图',
-      subtitle: '四站闯关，从零到提交',
+      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从零到提交',
       data: {
         items: [
-          {
-            icon: '🧠', badge: '基础', title: '第一站 · 概念理解',
-            desc: '程序、C++、编译过程',
-            points: ['程序 = 指令 + 数据', 'C++ 是编译型语言', '.cpp → .obj → .exe', '冯·诺依曼存储程序']
-          },
-          {
-            icon: '💻', badge: '核心', title: '第二站 · 第一个程序',
-            desc: 'Hello, World! 逐行拆解',
-            points: ['程序框架四件套', 'cout 输出与 endl 换行', '中文标点会报错', '大小写敏感']
-          },
-          {
-            icon: '📥', badge: '关键', title: '第三站 · 输入与输出',
-            desc: 'cin、cout、A+B 问题',
-            points: ['cin 从键盘读数据', 'cin 方向是 >>', 'A+B 是竞赛第一题', '变量命名见名知意']
-          },
-          {
-            icon: '🏆', badge: '实战', title: '第四站 · OJ 实战',
-            desc: '提交、判题、闯关',
-            points: ['注册 → 找题 → 提交', 'AC 通过 · WA 答案错', 'CE 编译错 · TLE 超时', '三题闯关拿积分']
-          }
+          { icon: '🧠', badge: '基础', title: '第一站 · 概念理解', desc: '程序、C++、编译过程', points: ['程序 = 指令 + 数据', 'C++ 是编译型语言', '.cpp → .obj → .exe', '冯·诺依曼存储程序'] },
+          { icon: '💻', badge: '核心', title: '第二站 · 第一个程序', desc: 'Hello, World! 逐行拆解', points: ['程序框架四件套', 'cout 输出与 endl 换行', '中文标点会报错', '大小写敏感'] },
+          { icon: '📥', badge: '关键', title: '第三站 · 输入与输出', desc: 'cin、cout、A+B 问题', points: ['cin 从键盘读数据', 'cin 方向是 >>', 'A+B 是竞赛第一题', '变量命名见名知意'] },
+          { icon: '🏆', badge: '实战', title: '第四站 · OJ 实战', desc: '提交、判题、闯关', points: ['注册 → 找题 → 提交', 'AC 通过 · WA 答案错', 'CE 编译错 · TLE 超时', '三题闯关拿积分'] }
         ],
-        extra: {
-          title: '🏆 积分规则',
-          desc: '每通过一关 +10 分，全部通过额外 +10 分。本月排位赛积分上榜，赛季冠军获得"C++ 启航者"徽章。'
-        }
+        extra: { title: '🏆 积分规则', desc: '每通过一关 +10 分，全部通过额外 +10 分。本月排位赛积分上榜，赛季冠军获得"C++ 启航者"徽章。' }
       }
     },
 
-    /* ======================= slide-05 什么是程序（补丁 1-1：埋下 0/1 伏笔） ======================= */
+    /* ===== 05 什么是程序 ===== */
     {
-      id: 5,
-      type: 'dialog',
-      title: '什么是程序？',
-      subtitle: '程序 = 指令 + 数据',
-      chapterTag: '第 1 讲 · 概念理解',
+      id: 5, type: 'dialog', title: '什么是程序？', subtitle: '程序 = 指令 + 数据', chapterTag: '第 1 讲 · 概念理解',
       data: {
         lines: [
           { who: 'student', text: '小 C，我按了电源键，计算机就亮了。它怎么知道要做什么？' },
@@ -120,13 +81,9 @@ export default {
       }
     },
 
-    /* ======================= slide-06 什么是C++ ======================= */
+    /* ===== 06 什么是C++ ===== */
     {
-      id: 6,
-      type: 'dialog',
-      title: '什么是 C++？',
-      subtitle: '编译型编程语言，竞赛王者',
-      chapterTag: '第 1 讲 · 概念理解',
+      id: 6, type: 'dialog', title: '什么是 C++？', subtitle: '编译型编程语言，竞赛王者', chapterTag: '第 1 讲 · 概念理解',
       data: {
         lines: [
           { who: 'student', text: '为什么叫 C++？为什么不叫 D？' },
@@ -144,12 +101,9 @@ export default {
       }
     },
 
-    /* ======================= slide-07 从代码到运行（补丁 1-2：埋下内存伏笔） ======================= */
+    /* ===== 07 ===== */
     {
-      id: 7,
-      type: 'grid',
-      title: '从代码到运行',
-      subtitle: '源程序如何变成可执行程序',
+      id: 7, type: 'grid', title: '从代码到运行', subtitle: '源程序如何变成可执行程序',
       data: {
         cards: [
           { icon: '📄', title: '① 源程序', desc: '<b>hello.cpp</b><br>用 C++ 写的代码文件<br>人类可读<br>扩展名 .cpp' },
@@ -164,12 +118,9 @@ export default {
       }
     },
 
-    /* ======================= slide-08 开发环境 ======================= */
+    /* ===== 08 ===== */
     {
-      id: 8,
-      type: 'grid',
-      title: '开发环境与工具准备',
-      subtitle: '工欲善其事，必先利其器',
+      id: 8, type: 'grid', title: '开发环境与工具准备', subtitle: '工欲善其事，必先利其器',
       data: {
         cards: [
           { icon: '💻', title: '本地编译器', desc: 'Dev-C++：轻量<br>CodeBlocks：功能全<br>VS Code：适合进阶' },
@@ -183,21 +134,15 @@ export default {
       }
     },
 
-    /* ======================= slide-09 过渡页 ======================= */
+    /* ===== 09 过渡页 ===== */
     {
-      id: 9,
-      type: 'transition',
-      title: '第二站 · 开始写代码',
-      subtitle: '从 Hello World 到输入输出',
+      id: 9, type: 'transition', title: '第二站 · 开始写代码', subtitle: '从 Hello World 到输入输出',
       data: { note: '接下来你将写出人生第一个 C++ 程序，并学会让程序与用户对话' }
     },
 
-    /* ======================= slide-10 Hello World（补丁 1-3：埋下 ASCII 伏笔） ======================= */
+    /* ===== 10 Hello World ===== */
     {
-      id: 10,
-      type: 'code-split',
-      title: '第一个程序：Hello, World!',
-      subtitle: '逐行拆解，理解每一行的使命',
+      id: 10, type: 'code-split', title: '第一个程序：Hello, World!', subtitle: '逐行拆解，理解每一行的使命',
       data: {
         codeFile: 'codes/lesson-01/hello-world.cpp',
         snippet: 'main',
@@ -213,12 +158,9 @@ export default {
       }
     },
 
-    /* ======================= slide-11 编译运行演示 ======================= */
+    /* ===== 11 编译运行演示 ===== */
     {
-      id: 11,
-      type: 'flow',
-      title: '编译运行演示',
-      subtitle: '让代码变成程序',
+      id: 11, type: 'flow', title: '编译运行演示', subtitle: '让代码变成程序',
       data: {
         nodes: [
           { icon: '📝', label: '新建 .cpp' },
@@ -234,12 +176,31 @@ export default {
       }
     },
 
-    /* ======================= slide-12 常见错误大盘点 ======================= */
+    /* ===== 12 【新增】第一次编译报错怎么办？ ===== */
     {
-      id: 12,
-      type: 'compare',
-      title: '常见错误大盘点',
-      subtitle: '4 个新手必踩的坑',
+      id: 12, type: 'dialog', title: '第一次编译报错怎么办？', subtitle: '小C教你读错误信息', chapterTag: '第 1 讲 · 概念理解',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，我点了编译，屏幕上跳出一大段红色文字，好吓人！' },
+          { who: 'robot', text: '别怕，红色文字是<b>编译器在帮你</b>。它告诉你哪里有问题，就像医生诊断。' },
+          { who: 'student', text: '那怎么读呢？' },
+          { who: 'robot', text: '看<b>第一行</b>就够了。它会说"第几行、什么错"。后面的细节可以先忽略。' },
+          { who: 'student', text: '常见的错误有哪些？' },
+          { who: 'robot', text: '新手最常见的四种：<br>① 中文标点<br>② 漏分号<br>③ 大小写错<br>④ cin 和 cout 的方向反了。' },
+          { who: 'student', text: '如果我找不到错呢？' },
+          { who: 'robot', text: '可以对照第一行报错的位置，看那一行有没有这四个问题。<br><b>90% 的编译错误都是这四种。</b>' }
+        ],
+        extra: {
+          title: '💡 报错的三段式',
+          desc: '编译报错信息通常长这样：<br><code>hello.cpp:5:10: error: expected \';\' before \'return\'</code><br><b>翻译</b>：<br>· 文件：hello.cpp<br>· 位置：第 5 行第 10 列<br>· 类型：error（错误）<br>· 信息：return 前面少了个分号<br><b>看这三个部分就够了</b>——文件、行号、错误描述。<br>不用怕那些看不懂的细节。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 13 ===== */
+    {
+      id: 13, type: 'compare', title: '常见错误大盘点', subtitle: '4 个新手必踩的坑',
       data: {
         groups: [
           { wrong: 'cout &lt;&lt; “Hello”；', right: 'cout &lt;&lt; "Hello";' },
@@ -254,12 +215,9 @@ export default {
       }
     },
 
-    /* ======================= slide-13 输出进阶（补丁 1-4：埋下 endl/二进制伏笔） ======================= */
+    /* ===== 14 ===== */
     {
-      id: 13,
-      type: 'code-split',
-      title: '输出进阶：多个内容与换行',
-      subtitle: '灵活使用 cout',
+      id: 14, type: 'code-split', title: '输出进阶：多个内容与换行', subtitle: '灵活使用 cout',
       data: {
         code: `cout << "A" << "B" << endl;           // 输出 AB
 cout << 1 + 2 << endl;                // 输出 3
@@ -276,45 +234,21 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-14 练习1 ======================= */
+    /* ===== 15 ===== */
     {
-      id: 14,
-      type: 'level-map',
-      title: '课堂练习1：Hello World',
-      subtitle: '独立完成第一个输出程序',
-      chapterTag: '第 1 讲 · 实战演练',
+      id: 15, type: 'level-map', title: '课堂练习1：Hello World', subtitle: '独立完成第一个输出程序', chapterTag: '第 1 讲 · 实战演练',
       data: {
-        question: {
-          title: '题干',
-          desc: '输出 <code>Hello, World!</code>。要求：用 <code>cout</code>，英文双引号，末尾分号。',
-          timer: '⏱ 限时 5 分钟'
-        },
-        hints: [
-          '用 <code>cout</code> 输出',
-          '字符串用英文双引号',
-          '语句末尾有分号'
-        ],
-        answer: {
-          codeFile: 'codes/lesson-01/hello-world.cpp'
-        },
-        analysis: {
-          title: '📖 解析',
-          desc: '<code>cout</code> 输出 · <code>endl</code> 换行 · <code>return 0</code> 正常结束。跨学科：输出的文字就像广播里的"一句话"，要用引号"打包"好才能送出去。'
-        },
-        extra: {
-          title: '📖 知识扩展 · 第一位程序员',
-          desc: '1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。<br>她原本只是在翻译一篇意大利论文，却忍不住加了 <b>7 篇注释</b>，总长度是原文的 <b>3 倍</b>。其中一篇注释详细描述了如何用机器一步步计算伯努利数。<b>这就是人类第一个计算机算法</b>。<br>她还第一次意识到：<b>机器不只是算数，还能处理符号</b>。她写道："分析机编织代数图案，就像提花机编织花朵和叶子。"<br>她的父亲是诗人<a href="https://baike.baidu.com/item/拜伦" target="_blank" class="wiki-link">拜伦</a>，但她走的不是文学路，而是数学与机器的交叉路。100 年后，<a href="https://baike.baidu.com/item/美国国防部" target="_blank" class="wiki-link">美国国防部</a>用一种编程语言纪念她——<b>语言的名字叫 <a href="https://baike.baidu.com/item/Ada" target="_blank" class="wiki-link">Ada</a></b>。'
-        }
+        question: { title: '题干', desc: '输出 <code>Hello, World!</code>。要求：用 <code>cout</code>，英文双引号，末尾分号。', timer: '⏱ 限时 5 分钟' },
+        hints: ['用 <code>cout</code> 输出', '字符串用英文双引号', '语句末尾有分号'],
+        answer: { codeFile: 'codes/lesson-01/hello-world.cpp' },
+        analysis: { title: '📖 解析', desc: '<code>cout</code> 输出 · <code>endl</code> 换行 · <code>return 0</code> 正常结束。跨学科：输出的文字就像广播里的"一句话"，要用引号"打包"好才能送出去。' },
+        extra: { title: '📖 知识扩展 · 第一位程序员', desc: '1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。<br>她原本只是在翻译一篇意大利论文，却忍不住加了 <b>7 篇注释</b>，总长度是原文的 <b>3 倍</b>。其中一篇注释详细描述了如何用机器一步步计算伯努利数。<b>这就是人类第一个计算机算法</b>。<br>她还第一次意识到：<b>机器不只是算数，还能处理符号</b>。她写道："分析机编织代数图案，就像提花机编织花朵和叶子。"<br>她的父亲是诗人<a href="https://baike.baidu.com/item/拜伦" target="_blank" class="wiki-link">拜伦</a>，但她走的不是文学路，而是数学与机器的交叉路。100 年后，<a href="https://baike.baidu.com/item/美国国防部" target="_blank" class="wiki-link">美国国防部</a>用一种编程语言纪念她——<b>语言的名字叫 <a href="https://baike.baidu.com/item/Ada" target="_blank" class="wiki-link">Ada</a></b>。' }
       }
     },
 
-    /* ======================= slide-15 cin 与 A+B ======================= */
+    /* ===== 16 ===== */
     {
-      id: 15,
-      type: 'code-split',
-      title: '让程序与用户对话：cin',
-      subtitle: '核心语法：cin >> 变量名;',
-      chapterTag: '第 1 讲 · 输入输出',
+      id: 16, type: 'code-split', title: '让程序与用户对话：cin', subtitle: '核心语法：cin >> 变量名;', chapterTag: '第 1 讲 · 输入输出',
       data: {
         codeFile: 'codes/lesson-01/cin-ab.cpp',
         snippet: 'main',
@@ -333,45 +267,21 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-16 练习2 A+B ======================= */
+    /* ===== 17 ===== */
     {
-      id: 16,
-      type: 'level-map',
-      title: '课堂练习2：A+B',
-      subtitle: '独立完成竞赛第一题',
-      chapterTag: '第 1 讲 · 实战演练',
+      id: 17, type: 'level-map', title: '课堂练习2：A+B', subtitle: '独立完成竞赛第一题', chapterTag: '第 1 讲 · 实战演练',
       data: {
-        question: {
-          title: '题干',
-          desc: '输入两个整数 <code>a</code> 和 <code>b</code>，输出 <code>a+b</code>。<br>输入样例：<code>10 20</code><br>输出样例：<code>30</code>',
-          timer: '⏱ 限时 7 分钟，提交到 OJ，AC 得 10 分'
-        },
-        hints: [
-          '定义两个整数 <code>int a, b;</code>',
-          '用 <code>cin &gt;&gt; a &gt;&gt; b;</code> 输入',
-          '用 <code>cout &lt;&lt; a + b &lt;&lt; endl;</code> 输出'
-        ],
-        answer: {
-          codeFile: 'codes/lesson-01/ab-practice.cpp'
-        },
-        analysis: {
-          title: '📖 解析',
-          desc: '输入两个数，输出它们的和。注意 <code>cin &gt;&gt;</code> 和 <code>cout &lt;&lt;</code> 的方向。'
-        },
-        extra: {
-          title: '📖 知识扩展 · cin 为什么能跳过空格',
-          desc: '<code>cin</code> 会<b>自动跳过空格、Tab、回车</b>，只读有效数据。所以你可以在同一行输入多个数，也可以分多行输入，效果一样。<br>但这也带来一个<b>陷阱</b>：如果输入数据里包含空格，cin 会把它当分隔符。<br>比如名字 "Hello World" 想读成一个字符串，cin 会只读到 "Hello"，剩下的 "World" 会流入下一个变量。<br>要读一整行（含空格），要用 <code>getline(cin, str)</code>。这是初学者的经典坑之一。<br>记住：<b>cin 读"词"，getline 读"行"</b>。'
-        }
+        question: { title: '题干', desc: '输入两个整数 <code>a</code> 和 <code>b</code>，输出 <code>a+b</code>。<br>输入样例：<code>10 20</code><br>输出样例：<code>30</code>', timer: '⏱ 限时 7 分钟，提交到 OJ，AC 得 10 分' },
+        hints: ['定义两个整数 <code>int a, b;</code>', '用 <code>cin &gt;&gt; a &gt;&gt; b;</code> 输入', '用 <code>cout &lt;&lt; a + b &lt;&lt; endl;</code> 输出'],
+        answer: { codeFile: 'codes/lesson-01/ab-practice.cpp' },
+        analysis: { title: '📖 解析', desc: '输入两个数，输出它们的和。注意 <code>cin &gt;&gt;</code> 和 <code>cout &lt;&lt;</code> 的方向。' },
+        extra: { title: '📖 知识扩展 · cin 为什么能跳过空格', desc: '<code>cin</code> 会<b>自动跳过空格、Tab、回车</b>，只读有效数据。所以你可以在同一行输入多个数，也可以分多行输入，效果一样。<br>但这也带来一个<b>陷阱</b>：如果输入数据里包含空格，cin 会把它当分隔符。<br>比如名字 "Hello World" 想读成一个字符串，cin 会只读到 "Hello"，剩下的 "World" 会流入下一个变量。<br>要读一整行（含空格），要用 <code>getline(cin, str)</code>。这是初学者的经典坑之一。<br>记住：<b>cin 读"词"，getline 读"行"</b>。' }
       }
     },
 
-    /* ======================= slide-17 OJ 是什么 ======================= */
+    /* ===== 18 OJ 是什么 ===== */
     {
-      id: 17,
-      type: 'dialog',
-      title: 'OJ 是什么？',
-      subtitle: 'Online Judge 在线判题系统',
-      chapterTag: '第 1 讲 · OJ 实战',
+      id: 18, type: 'dialog', title: 'OJ 是什么？', subtitle: 'Online Judge 在线判题系统', chapterTag: '第 1 讲 · OJ 实战',
       data: {
         lines: [
           { who: 'student', text: '我提交代码后，谁在检查对不对？' },
@@ -389,12 +299,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-18 OJ 提交步骤 ======================= */
+    /* ===== 19 OJ 提交步骤 ===== */
     {
-      id: 18,
-      type: 'flow',
-      title: 'OJ 提交步骤',
-      subtitle: '手把手教你提交代码',
+      id: 19, type: 'flow', title: 'OJ 提交步骤', subtitle: '手把手教你提交代码',
       data: {
         rows: [
           [
@@ -416,12 +323,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-19 判题结果 ======================= */
+    /* ===== 20 判题结果 ===== */
     {
-      id: 19,
-      type: 'compare',
-      title: 'OJ 判题结果解读',
-      subtitle: '看懂反馈，快速改进',
+      id: 20, type: 'compare', title: 'OJ 判题结果解读', subtitle: '看懂反馈，快速改进',
       data: {
         groups: [
           { wrong: '❌ WA 答案错误', right: '✅ AC 答案正确' },
@@ -437,87 +341,44 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-20 练习3 输出图形 ======================= */
+    /* ===== 21 ===== */
     {
-      id: 20,
-      type: 'level-map',
-      title: '课堂练习3：输出图形',
-      subtitle: '巩固输出与换行',
-      chapterTag: '第 1 讲 · 实战演练',
+      id: 21, type: 'level-map', title: '课堂练习3：输出图形', subtitle: '巩固输出与换行', chapterTag: '第 1 讲 · 实战演练',
       data: {
-        question: {
-          title: '题干',
-          desc: '输出下面图形：<br><code>*<br>***<br>*****</code><br>要求：使用 <code>cout</code> 和 <code>endl</code>，每行独立输出。',
-          timer: '⏱ 限时 5 分钟'
-        },
-        hints: [
-          '第一行输出 <code>"*"</code>',
-          '第二行输出 <code>"***"</code>',
-          '第三行输出 <code>"*****"</code>',
-          '每行末尾加 <code>endl</code> 换行'
-        ],
-        answer: {
-          codeFile: 'codes/lesson-01/pattern.cpp'
-        },
-        analysis: {
-          title: '📖 解析',
-          desc: '每行一个 <code>cout</code> 语句；<code>endl</code> 控制换行；字符串必须用英文双引号。'
-        },
-        extra: {
-          title: '💡 输出格式的重要性',
-          desc: '在竞赛中，输出格式非常重要。有时候答案完全正确，但因为多了一个空格或换行，就会被判 WA。这是最可惜的失分。'
-        }
+        question: { title: '题干', desc: '输出下面图形：<br><code>*<br>***<br>*****</code><br>要求：使用 <code>cout</code> 和 <code>endl</code>，每行独立输出。', timer: '⏱ 限时 5 分钟' },
+        hints: ['第一行输出 <code>"*"</code>', '第二行输出 <code>"***"</code>', '第三行输出 <code>"*****"</code>', '每行末尾加 <code>endl</code> 换行'],
+        answer: { codeFile: 'codes/lesson-01/pattern.cpp' },
+        analysis: { title: '📖 解析', desc: '每行一个 <code>cout</code> 语句；<code>endl</code> 控制换行；字符串必须用英文双引号。' },
+        extra: { title: '💡 输出格式的重要性', desc: '在竞赛中，输出格式非常重要。有时候答案完全正确，但因为多了一个空格或换行，就会被判 WA。这是最可惜的失分。' }
       }
     },
 
-    /* ======================= slide-21 三题闯关 ======================= */
+    /* ===== 22 ===== */
     {
-      id: 21,
-      type: 'level-map',
-      title: '课堂挑战：三题闯关',
-      subtitle: '限时实战，检验成果',
-      chapterTag: '第 1 讲 · 实战演练',
+      id: 22, type: 'level-map', title: '课堂挑战：三题闯关', subtitle: '限时实战，检验成果', chapterTag: '第 1 讲 · 实战演练',
       data: {
-        question: {
-          title: '闯关规则',
-          desc: '限时 15 分钟，连续通过三关。<br>每通过一关得 10 分，全部通过额外奖励 10 分。<br>可求助老师或同学，求助扣 2 分。',
-          timer: '⏱ 限时 15 分钟'
-        },
-        hints: [
-          '遇到难题先跳过，把会做的先做完',
-          '每题至少测试一遍样例',
-          '提交前检查英文标点和分号'
-        ],
-        extra: {
-          title: '💡 竞赛中的时间管理',
-          desc: '竞赛就像闯关游戏，每一题都是一个关卡。你的目标是尽可能多地拿到分数。时间管理也是竞赛的重要能力。'
-        }
+        question: { title: '闯关规则', desc: '限时 15 分钟，连续通过三关。<br>每通过一关得 10 分，全部通过额外奖励 10 分。<br>可求助老师或同学，求助扣 2 分。', timer: '⏱ 限时 15 分钟' },
+        hints: ['遇到难题先跳过，把会做的先做完', '每题至少测试一遍样例', '提交前检查英文标点和分号'],
+        extra: { title: '💡 竞赛中的时间管理', desc: '竞赛就像闯关游戏，每一题都是一个关卡。你的目标是尽可能多地拿到分数。时间管理也是竞赛的重要能力。' }
       }
     },
 
-    /* ======================= slide-22 总结与初赛渗透 ======================= */
+    /* ===== 23 总结与初赛渗透 ===== */
     {
-      id: 22,
-      type: 'split',
-      title: '总结与初赛渗透',
-      subtitle: '易错点回顾 + 计算机基础知识',
+      id: 23, type: 'split', title: '总结与初赛渗透', subtitle: '易错点回顾 + 计算机基础知识',
       data: {
-        left: {
-          items: [
-            { title: '❌ 中文标点', desc: '； “” （） 全部会报错' },
-            { title: '❌ 漏分号', desc: '每条语句末尾必须有 ;' },
-            { title: '❌ 大小写错误', desc: 'main ≠ Main，cout ≠ count' },
-            { title: '❌ 方向反了', desc: 'cout &lt;&lt;，cin &gt;&gt;' }
-          ]
-        },
-        right: {
-          items: [
-            { title: '🖥️ 硬件五大部件', desc: '运算器、控制器、存储器、输入、输出' },
-            { title: '⚙️ 程序编译过程', desc: '.cpp → 编译 → .obj → 链接 → .exe' },
-            { title: '⌨️ 常见输入设备', desc: '键盘、鼠标、扫描仪' },
-            { title: '🖨️ 常见输出设备', desc: '显示器、打印机、音箱' }
-          ]
-        },
+        left: { items: [
+          { title: '❌ 中文标点', desc: '； “” （） 全部会报错' },
+          { title: '❌ 漏分号', desc: '每条语句末尾必须有 ;' },
+          { title: '❌ 大小写错误', desc: 'main ≠ Main，cout ≠ count' },
+          { title: '❌ 方向反了', desc: 'cout &lt;&lt;，cin &gt;&gt;' }
+        ]},
+        right: { items: [
+          { title: '🖥️ 硬件五大部件', desc: '运算器、控制器、存储器、输入、输出' },
+          { title: '⚙️ 程序编译过程', desc: '.cpp → 编译 → .obj → 链接 → .exe' },
+          { title: '⌨️ 常见输入设备', desc: '键盘、鼠标、扫描仪' },
+          { title: '🖨️ 常见输出设备', desc: '显示器、打印机、音箱' }
+        ]},
         extra: {
           title: '📖 知识扩展 · 计算机之父',
           desc: '<b><a href="https://baike.baidu.com/item/约翰·冯·诺依曼" target="_blank" class="wiki-link">冯·诺依曼</a></b>出生于 1903 年的匈牙利，从小就展现出超常的数学天赋。<br>他 6 岁能心算 8 位数除法，8 岁学会微积分，23 岁获得数学博士学位。<br>他一生跨越<b>数学、物理、经济、计算机</b>多个领域。在<a href="https://baike.baidu.com/item/量子力学" target="_blank" class="wiki-link">量子力学</a>、<a href="https://baike.baidu.com/item/博弈论" target="_blank" class="wiki-link">博弈论</a>、流体力学里都有建树。<br>1945 年他提出"<a href="https://baike.baidu.com/item/存储程序" target="_blank" class="wiki-link">存储程序</a>"概念，让计算机第一次能"自己运行程序"。这就是今天所有计算机的基础——<b>冯·诺依曼结构</b>。<br>他被称为"<b>计算机之父</b>"，也被称为"<b>最后一个什么都知道的人</b>"。',
@@ -526,19 +387,35 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-23 课堂小测（选择题） ======================= */
+    /* ===== 24 【新增】从 WA 到 AC 的心路历程 ===== */
     {
-      id: 23,
-      type: 'quiz',
-      title: '课堂小测 · 选择题',
-      subtitle: '编译器、头文件与命名规则',
-      chapterTag: '第 1 讲 · 课堂小测',
+      id: 24, type: 'dialog', title: '从 WA 到 AC 的心路历程', subtitle: '小C与同学聊"改错"', chapterTag: '第 1 讲 · OJ 实战',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，我提交了 3 次，都是 WA，好沮丧。' },
+          { who: 'robot', text: '这是每个竞赛选手都走过的路。<b>WA 不是失败，是信息</b>——它告诉你"哪里不对"。' },
+          { who: 'student', text: '那我怎么找到不对的地方？' },
+          { who: 'robot', text: '三步走：<br>① 用题目给的样例测一遍，看看输出对不对<br>② 看看有没有边界情况没考虑，比如 n=1、全是负数<br>③ 检查输出格式：是不是多空格、少换行' },
+          { who: 'student', text: '样例过了还 WA 呢？' },
+          { who: 'robot', text: '那更常见——是<b>隐藏测试点</b>的问题。<br>比如题目说"n ≤ 1000"，你的数组就开 1000，遇到 1000 就刚好越界。<br>所以数组要开大一点。<br>这也是第 5 讲要重点讲的。' },
+          { who: 'student', text: '原来如此。' },
+          { who: 'robot', text: '记住这句话：<b>"AC 是运气，WA 是礼物。"</b><br>每次 WA 都让你更接近真正的答案。' }
+        ],
+        extra: {
+          title: '💡 一个程序员的成长',
+          desc: '职业选手的 <b>WA 率</b>也不低——他们只是"见识过的坑更多"。<br>新手 WA 一次慌半天，老手 WA 一次看一眼就找到问题。<br>区别不是聪明，而是<b>经验</b>。<br>经验从哪来？<b>从每一次 WA 中积累</b>。<br>所以，别怕错。看到 WA，先深呼吸，再按部就班排查。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 25 ===== */
+    {
+      id: 25, type: 'quiz', title: '课堂小测 · 选择题', subtitle: '编译器、头文件与命名规则', chapterTag: '第 1 讲 · 课堂小测',
       data: {
         questions: [
           {
-            id: 1,
-            type: 'single',
-            difficulty: 3,
+            id: 1, type: 'single', difficulty: 3,
             source: '2020 CSP-J 初赛 · 第 2 题',
             question: '编译器的主要功能是（　）。',
             options: [
@@ -550,9 +427,7 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
             analysis: '编译器的作用是把高级语言编写的<b>源程序</b>整体翻译成等价的<b>机器指令代码</b>。选项 C 方向反了；选项 D 是"转译器"的功能。这正是本讲 slide-07"从代码到运行"的核心知识点。'
           },
           {
-            id: 2,
-            type: 'single',
-            difficulty: 3,
+            id: 2, type: 'single', difficulty: 3,
             source: 'CSP-J 2026 初赛模拟卷一 · 第 5 题',
             question: 'C++ 中使用 <code>cin</code> 和 <code>cout</code>，需要包含哪个头文件？',
             options: [
@@ -564,9 +439,7 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
             analysis: '<code>cin</code> 和 <code>cout</code> 定义在标准输入输出流库中，对应头文件 <code>&lt;iostream&gt;</code>。这是本讲 slide-10"Hello, World!"中 <code>#include &lt;iostream&gt;</code> 的直接考查。'
           },
           {
-            id: 3,
-            type: 'single',
-            difficulty: 3,
+            id: 3, type: 'single', difficulty: 3,
             source: 'C++ 信息学奥赛总复习题 · 第一章',
             question: '以下哪个是 C++ 的合法标识符（变量名）？',
             options: [
@@ -586,19 +459,13 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-        /* ======================= slide-24 课堂小测（判断题） ======================= */
+    /* ===== 26 ===== */
     {
-      id: 24,
-      type: 'quiz',
-      title: '课堂小测 · 判断题',
-      subtitle: '编译、执行与程序入口',
-      chapterTag: '第 1 讲 · 课堂小测',
+      id: 26, type: 'quiz', title: '课堂小测 · 判断题', subtitle: '编译、执行与程序入口', chapterTag: '第 1 讲 · 课堂小测',
       data: {
         questions: [
           {
-            id: 1,
-            type: 'judge',
-            difficulty: 2,
+            id: 1, type: 'judge', difficulty: 2,
             source: 'CSP-J 初赛真题练习 · C++ 语法',
             question: '程序员用 C、C++、Python、Scratch 等编写的程序能在 CPU 上直接执行。',
             options: [
@@ -608,9 +475,7 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
             analysis: 'CPU 只能直接执行<b>机器指令</b>（0/1 序列）。高级语言（C++、Python）和图形化语言（Scratch）都需要经过<b>编译或解释</b>，转换成机器码后才能被 CPU 执行。这正是本讲 slide-07"从代码到运行"的核心知识点。'
           },
           {
-            id: 2,
-            type: 'judge',
-            difficulty: 3,
+            id: 2, type: 'judge', difficulty: 3,
             source: 'C++ 信息学奥赛总复习题 · 第一章',
             question: '一个 C++ 程序可以没有 <code>main</code> 函数。',
             options: [
@@ -628,12 +493,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-25 今日总结（补丁 1-5：新埋"程序记住数据"伏笔） ======================= */
+    /* ===== 27 ===== */
     {
-      id: 25,
-      type: 'quote',
-      title: '今日总结',
-      subtitle: '今天我们学会了',
+      id: 27, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
         text: '程序框架不能少，头文件加命名空间。',
         author: '—— 竞赛第一课口诀',
@@ -644,10 +506,7 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
           'OJ 提交：注册、找题、提交、看结果',
           '判题结果：AC、WA、CE、RE、TLE 等'
         ],
-        highlight: {
-          title: '📌 关键口诀',
-          desc: '主函数是入口，return 0 结束；cout 输出用 &lt;&lt;，cin 输入用 &gt;&gt;；英文标点要记牢，分号千万别漏掉。'
-        },
+        highlight: { title: '📌 关键口诀', desc: '主函数是入口，return 0 结束；cout 输出用 &lt;&lt;，cin 输入用 &gt;&gt;；英文标点要记牢，分号千万别漏掉。' },
         extra: {
           title: '💡 今天你写下了第一个程序',
           desc: '这是编程之路的起点。1972 年，第一个 Hello World 程序诞生。今天你也写了一个。记住这一刻，未来你会感谢今天努力的自己。<br><br>🔮 <b>伏笔</b>：今天我们写的程序只在屏幕上输出，下一讲，程序将学会 <b>记住数据</b>——用变量。',
@@ -656,12 +515,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-26 课后作业 ======================= */
+    /* ===== 28 ===== */
     {
-      id: 26,
-      type: 'grid',
-      title: '课后作业 · OJ 实战',
-      subtitle: '打开洛谷，完成以下 3 道题',
+      id: 28, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
           { icon: '🟢', title: '基础 1 · P1000', link: 'https://www.luogu.com.cn/problem/P1000', desc: '<b>Hello, World!</b><br>考察：输出格式<br>难度：★<br>目标：直接输出指定文本' },
@@ -676,12 +532,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-27 下节预告（补丁 1-6：加远期彩蛋） ======================= */
+    /* ===== 29 ===== */
     {
-      id: 27,
-      type: 'radial',
-      title: '下节预告',
-      subtitle: '第 2 讲 数据类型 · 给数据找个家',
+      id: 29, type: 'radial', title: '下节预告', subtitle: '第 2 讲 数据类型 · 给数据找个家',
       data: {
         center: '数据类型',
         items: [
@@ -698,13 +551,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-28 答疑时间 ======================= */
+    /* ===== 30 ===== */
     {
-      id: 28,
-      type: 'dialog',
-      title: '答疑时间',
-      subtitle: '有问题尽管问',
-      chapterTag: '第 1 讲 · 答疑',
+      id: 30, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 1 讲 · 答疑',
       data: {
         lines: [
           { who: 'student', text: '为什么我的程序编译不通过？' },
@@ -722,13 +571,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-29 知识清单 ======================= */
+    /* ===== 31 ===== */
     {
-      id: 29,
-      type: 'grid',
-      title: '第 1 讲 · 知识清单',
-      subtitle: '一页看完本讲所有重点',
-      chapterTag: '第 1 讲 · 复习',
+      id: 31, type: 'grid', title: '第 1 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 1 讲 · 复习',
       data: {
         cards: [
           { icon: '📄', title: '程序结构', desc: '<b>头文件</b> #include &lt;iostream&gt;<br><b>命名空间</b> using namespace std;<br><b>主函数</b> int main() { }<br><b>返回</b> return 0;' },
@@ -744,13 +589,9 @@ cout << "1 + 2 = " << 1 + 2 << endl;  // 输出 1 + 2 = 3`,
       }
     },
 
-    /* ======================= slide-30 结束页 ======================= */
-    { 
-      id: 30,
-      type: 'ending',
-      title: '第一讲结束',
-      subtitle: '点击返回目录，复习本讲内容',
-      chapterTag: false,
+    /* ===== 32 结束页 ===== */
+    {
+      id: 32, type: 'ending', title: '第一讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
         extra: {

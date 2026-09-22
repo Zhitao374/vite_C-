@@ -1,7 +1,7 @@
 export default {
   title: '第 6 讲 字符串基础',
   subtitle: '一串字符的容器',
-  total: 30,
+  total: 31,
   category: '语法与基础算法',
   slides: [
 
@@ -235,16 +235,45 @@ export default {
         ],
         output: '5\n5\n5',
         extra: {
-          title: '💡 三种求长度的方式',
-          desc: '<b>string</b>：<code>s.size()</code> 或 <code>s.length()</code>，两者完全等价。<br><b>char[]</b>：<code>strlen(s)</code>，需要 <code>#include &lt;cstring&gt;</code>。<br><b>sizeof</b>：返回数组占用字节数，<b>不是字符串长度</b>！<br>比如 <code>char s[100]</code>，<code>sizeof(s)</code> 是 100，但 <code>strlen(s)</code> 是实际长度。<br><b>竞赛建议</b>：string 用 <code>.size()</code>，char[] 用 <code>strlen</code>。',
+          title: '💡 两种类型，两种方法',
+          desc: '<b>string</b> 用 <code>.size()</code>；<b>char[]</b> 用 <code>strlen()</code>。<br>下一屏详细对比三种求长度方式。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 15 字符串遍历 ===== */
+    /* ===== 15 三种求长度的方式（新增 grid） ===== */
     {
-      id: 15, type: 'code-split', title: '字符串遍历', subtitle: '下标 vs 范围 for',
+      id: 15, type: 'grid', title: '三种求长度的方式', subtitle: '各有各的用途，别用错',
+      data: {
+        cards: [
+          {
+            icon: '📝',
+            title: 'string · s.size()',
+            desc: '<b>最常用</b><br>返回字符个数<br>例：<code>"Hello".size() = 5</code><br>等价写法：<code>s.length()</code>'
+          },
+          {
+            icon: '🔤',
+            title: 'char[] · strlen(s)',
+            desc: '需要 <code>#include &lt;cstring&gt;</code><br>返回实际字符数<br>遇到 <code>\\0</code> 停止<br>例：<code>char s[]="Hello" → 5</code>'
+          },
+          {
+            icon: '⚠️',
+            title: '陷阱 · sizeof(s)',
+            desc: '<b>返回数组占用字节数</b><br>不是字符串长度！<br>例：<code>char s[100]</code><br><code>sizeof(s) = 100</code><br>但 <code>strlen(s)</code> 是实际长度'
+          }
+        ],
+        extra: {
+          title: '💡 竞赛建议',
+          desc: '优先用 <b>string + .size()</b>——最安全、最简洁。<br>如果必须用 char[]，就用 <code>strlen</code>。<br><b>绝对不要用 sizeof 求字符串长度</b>——这是新手陷阱。<br><br>🔮 <b>伏笔</b>：<code>sizeof</code> 是"编译期"就知道的字节数，<code>strlen</code> 是"运行期"才能算出的字符数。<br>它们语义完全不同，第 16 讲"指针"会再讲。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 16 字符串遍历 ===== */
+    {
+      id: 16, type: 'code-split', title: '字符串遍历', subtitle: '下标 vs 范围 for',
       data: {
         codeFile: 'codes/lesson-06/string-traverse.cpp',
         snippet: 'main',
@@ -263,9 +292,9 @@ export default {
       }
     },
 
-    /* ===== 16 遍历答疑 ===== */
+    /* ===== 16 字符串 遍历答疑 ===== */
     {
-      id: 16, type: 'dialog', title: '遍历答疑', subtitle: '小C回答常见问题', chapterTag: '第 6 讲 · 概念理解',
+      id: 17, type: 'dialog', title: '遍历答疑', subtitle: '小C回答常见问题', chapterTag: '第 6 讲 · 概念理解',
       data: {
         lines: [
           { who: 'student', text: '小 C，string 和 char[] 的遍历一样吗？' },
@@ -285,9 +314,9 @@ export default {
       }
     },
 
-    /* ===== 17 练习1 统计字符 ===== */
+    /* ===== 18 练习1 统计字符 ===== */
     {
-      id: 17, type: 'level-map', title: '课堂练习1：统计字符', subtitle: '统计字符串中非空格字符数', chapterTag: '第 6 讲 · 实战演练',
+      id: 18, type: 'level-map', title: '课堂练习1：统计字符', subtitle: '统计字符串中非空格字符数', chapterTag: '第 6 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '读入一行字符串（含空格），统计其中<b>非空格字符</b>的个数。<br>输入样例：<code>Hello World</code>　输出样例：<code>10</code>', timer: '⏱ 限时 6 分钟' },
         hints: ['用 <code>getline(cin, s)</code> 读整行', '遍历每个字符', '用 <code>if (s[i] != \' \')</code> 判断非空格'],
@@ -297,9 +326,9 @@ export default {
       }
     },
 
-    /* ===== 18 练习2 回文判断 ===== */
+    /* ===== 19 练习2 回文判断 ===== */
     {
-      id: 18, type: 'level-map', title: '课堂练习2：回文判断', subtitle: '正着读和倒着读一样吗', chapterTag: '第 6 讲 · 实战演练',
+      id: 19, type: 'level-map', title: '课堂练习2：回文判断', subtitle: '正着读和倒着读一样吗', chapterTag: '第 6 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '读入一个字符串，判断它是否是回文。<br>回文：正着读和倒着读完全相同。<br>是回文输出 <code>yes</code>，否则 <code>no</code>。<br>输入样例：<code>level</code>　输出样例：<code>yes</code>', timer: '⏱ 限时 8 分钟' },
         hints: ['用下标 <code>i</code> 和 <code>n-1-i</code> 对比', '只需比较前一半', '发现不同就 <code>break</code>'],
@@ -309,9 +338,9 @@ export default {
       }
     },
 
-    /* ===== 19 回文讲评 ===== */
+    /* ===== 20 回文讲评 ===== */
     {
-      id: 19, type: 'dialog', title: '回文判断的三种写法', subtitle: '小C带你对比', chapterTag: '第 6 讲 · 概念理解',
+      id: 20, type: 'dialog', title: '回文判断的三种写法', subtitle: '小C带你对比', chapterTag: '第 6 讲 · 概念理解',
       data: {
         lines: [
           { who: 'student', text: '小 C，回文除了两两对比，还有别的方法吗？' },
@@ -331,9 +360,9 @@ export default {
       }
     },
 
-    /* ===== 20 练习3 字符串逆序 ===== */
+    /* ===== 21 练习3 字符串逆序 ===== */
     {
-      id: 20, type: 'level-map', title: '课堂练习3：字符串逆序', subtitle: '把字符串倒着输出', chapterTag: '第 6 讲 · 实战演练',
+      id: 21, type: 'level-map', title: '课堂练习3：字符串逆序', subtitle: '把字符串倒着输出', chapterTag: '第 6 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '读入一个字符串，把它倒着输出。<br>输入样例：<code>Hello</code>　输出样例：<code>olleH</code>', timer: '⏱ 限时 5 分钟' },
         hints: ['从 <code>s.size()-1</code> 倒着遍历到 0', '循环条件 <code>i &gt;= 0</code>', '和数组逆序完全一样'],
@@ -343,9 +372,9 @@ export default {
       }
     },
 
-    /* ===== 21 常见错误 ===== */
+    /* ===== 22 常见错误 ===== */
     {
-      id: 21, type: 'compare', title: '字符串常见错误', subtitle: '避开这些坑',
+      id: 22, type: 'compare', title: '字符串常见错误', subtitle: '避开这些坑',
       data: {
         groups: [
           { wrong: 'char c = "A"; 双引号', right: 'char c = \'A\'; 单引号' },
@@ -361,9 +390,9 @@ export default {
       }
     },
 
-    /* ===== 22 初赛小知识 ASCII ===== */
+    /* ===== 23 初赛小知识 ASCII ===== */
     {
-      id: 22, type: 'dialog', title: '初赛小知识：ASCII 码', subtitle: '字符背后的数字', chapterTag: '第 6 讲 · 初赛渗透',
+      id: 23, type: 'dialog', title: '初赛小知识：ASCII 码', subtitle: '字符背后的数字', chapterTag: '第 6 讲 · 初赛渗透',
       data: {
         lines: [
           { who: 'student', text: '小 C，字符在计算机里是怎么存的？' },
@@ -383,9 +412,9 @@ export default {
       }
     },
 
-    /* ===== 23 字符串应用 ===== */
+    /* ===== 24 字符串应用 ===== */
     {
-      id: 23, type: 'grid', title: '字符串的实际应用', subtitle: '从竞赛到生活',
+      id: 24, type: 'grid', title: '字符串的实际应用', subtitle: '从竞赛到生活',
       data: {
         cards: [
           { icon: '📝', title: '文本统计', desc: '统计一篇文章的<br>单词数、字符数、行数<br><b>例：P1308 统计单词数</b>' },
@@ -401,9 +430,9 @@ export default {
       }
     },
 
-    /* ===== 24 课堂小测 ===== */
+    /* ===== 25 课堂小测 ===== */
     {
-      id: 24, type: 'quiz', title: '课堂小测', subtitle: '字符、字符串与读入',
+      id: 25, type: 'quiz', title: '课堂小测', subtitle: '字符、字符串与读入',
       chapterTag: '第 6 讲 · 课堂小测',
       data: {
         questions: [
@@ -485,9 +514,9 @@ cout << s[1] << endl;`,
       }
     },
 
-    /* ===== 25 今日总结 ===== */
+    /* ===== 26 今日总结 ===== */
     {
-      id: 25, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 26, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
         text: '字符串是文字的容器，本质是字符的数组。',
         author: '—— 字符串第一课',
@@ -508,9 +537,9 @@ cout << s[1] << endl;`,
       }
     },
 
-    /* ===== 26 课后作业 ===== */
+    /* ===== 27 课后作业 ===== */
     {
-      id: 26, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 27, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
           { icon: '🟢', title: '基础 1 · P5015', link: 'https://www.luogu.com.cn/problem/P5015', desc: '<b>标题统计</b><br>考察：getline、字符遍历<br>难度：★★<br>目标：统计非空格字符数' },
@@ -525,9 +554,9 @@ cout << s[1] << endl;`,
       }
     },
 
-    /* ===== 27 下节预告 ===== */
+    /* ===== 28 下节预告 ===== */
     {
-      id: 27, type: 'radial', title: '下节预告', subtitle: '第 7 讲 · 函数',
+      id: 28, type: 'radial', title: '下节预告', subtitle: '第 7 讲 · 函数',
       data: {
         center: '函数',
         items: [
@@ -544,9 +573,9 @@ cout << s[1] << endl;`,
       }
     },
 
-    /* ===== 28 答疑时间 ===== */
+    /* ===== 29 答疑时间 ===== */
     {
-      id: 28, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 6 讲 · 答疑',
+      id: 29, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 6 讲 · 答疑',
       data: {
         lines: [
           { who: 'student', text: 'string 和 char[] 到底用哪个？' },
@@ -566,9 +595,9 @@ cout << s[1] << endl;`,
       }
     },
 
-    /* ===== 29 知识清单 ===== */
+    /* ===== 30 知识清单 ===== */
     {
-      id: 29, type: 'grid', title: '第 6 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 6 讲 · 复习',
+      id: 30, type: 'grid', title: '第 6 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 6 讲 · 复习',
       data: {
         cards: [
           { icon: '🔤', title: '字符 vs 字符串', desc: '<b>char</b> 用单引号 \'A\'<br><b>string</b> 用双引号 "A"<br>char 占 1 字节<br>字符串含结束符 \\0' },
@@ -584,9 +613,9 @@ cout << s[1] << endl;`,
       }
     },
 
-    /* ===== 30 结束页 ===== */
+    /* ===== 31 结束页 ===== */
     {
-      id: 30, type: 'ending', title: '第六讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
+      id: 31, type: 'ending', title: '第六讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
         extra: { title: '🌟 你已经让程序会处理文字了', desc: '从数字到文字，程序能处理的数据类型越来越丰富。<br>下一讲，我们学习"函数"——让代码可以复用。<br>程序将变得更简洁、更强大。', variant: 'card-glow' }

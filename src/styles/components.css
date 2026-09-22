@@ -175,3 +175,48 @@ pre code {
    ============================================ */
 .float { animation: float 3s ease-in-out infinite; }
 .glow  { animation: glow 2.2s ease-in-out infinite; }
+
+/* ============================================
+   通用滚动容器
+   用法：给需要滚动的元素加 class="scroll-pane"
+   ============================================ */
+.scroll-pane {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+}
+
+.scroll-pane::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-pane::-webkit-scrollbar-thumb {
+  background: rgba(22, 93, 255, 0.25);
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.scroll-pane::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 93, 255, 0.45);
+}
+
+.scroll-pane::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 横向滚动容器（备用） */
+.scroll-pane-x {
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scroll-pane-x::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-pane-x::-webkit-scrollbar-thumb {
+  background: rgba(22, 93, 255, 0.25);
+  border-radius: 4px;
+}

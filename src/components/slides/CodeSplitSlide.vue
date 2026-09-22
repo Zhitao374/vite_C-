@@ -6,14 +6,23 @@
     </h1>
 
     <div class="slide-body code-split-body">
+      <!-- 顶部引入（可选，占第 1 步） -->
+      <StepWrapper v-if="d.intro" :step="1">
+        <IntroCard :html="d.intro" />
+      </StepWrapper>
+
       <div class="split">
         <div class="split-left scroll-pane">
-          <StepWrapper :step="1">
+          <StepWrapper :step="baseOffset">
             <CodeBlock :code="d.code" :code-file="d.codeFile" :snippet="d.snippet" :density="d.density" />
           </StepWrapper>
         </div>
         <div class="split-right scroll-pane">
-          <StepWrapper v-for="(a, i) in annotations" :key="i" :step="i + 2">
+          <StepWrapper
+            v-for="(a, i) in annotations"
+            :key="i"
+            :step="baseOffset + i"
+          >
             <div class="card annotation-card">
               <div class="card-title">
                 <span class="badge badge-primary">第 {{ a.line }} 行</span>
@@ -26,7 +35,11 @@
       </div>
 
       <div v-if="d.output || extra" class="bottom-row">
-        <StepWrapper v-if="d.output" :step="annotations.length + 2" class="bottom-col">
+        <StepWrapper
+          v-if="d.output"
+          :step="baseOffset + annotations.length"
+          class="bottom-col"
+        >
           <div class="card output-card">
             <div class="output-title">🖥️ 运行结果</div>
             <pre><code>{{ d.output }}</code></pre>
@@ -50,6 +63,7 @@ import { computed } from 'vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
 import CodeBlock from '@/components/common/CodeBlock.vue';
 import ExtraCard from '@/components/common/ExtraCard.vue';
+import IntroCard from '@/components/common/IntroCard.vue';
 import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
 
@@ -63,8 +77,16 @@ const d = computed(() => props.slide.data || {});
 const annotations = computed(() => d.value.annotations || []);
 const extra = computed(() => d.value.extra);
 
+// 代码块起始 step：有 intro 时是 2（intro 占 1），否则是 1
+const baseOffset = computed(() => (d.value.intro ? 2 : 1));
+
+// 步数：intro（可选）+ 代码块 + 注释 + output（可选）+ extra（可选）
 useStepCount(emit, () =>
-  1 + annotations.value.length + (d.value.output ? 1 : 0) + (extra.value ? 1 : 0)
+  (d.value.intro ? 1 : 0) +
+  1 +
+  annotations.value.length +
+  (d.value.output ? 1 : 0) +
+  (extra.value ? 1 : 0)
 );
 
 const { max: maxStep } = useStep();
@@ -86,29 +108,6 @@ const { max: maxStep } = useStep();
   gap: 18px;
   flex: 1;
   min-height: 0;
-}
-
-/* 左右独立滚动容器 */
-.scroll-pane {
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 6px;
-}
-
-/* 滚动条美化 */
-.scroll-pane::-webkit-scrollbar {
-  width: 8px;
-}
-.scroll-pane::-webkit-scrollbar-thumb {
-  background: rgba(22, 93, 255, 0.25);
-  border-radius: 4px;
-}
-.scroll-pane::-webkit-scrollbar-thumb:hover {
-  background: rgba(22, 93, 255, 0.45);
-}
-.scroll-pane::-webkit-scrollbar-track {
-  background: transparent;
 }
 
 /* 注释栏：内部卡片纵向排列 */
@@ -203,6 +202,32 @@ const { max: maxStep } = useStep();
 /* 只有一块时，占满宽度 */
 .bottom-row:has(> :only-child) {
   grid-template-columns: 1fr;
+}
+
+/* 防止 extra 内容撑破布局 */
+.bottom-row {
+  min-width: 0;
+  max-height: 320px;          /* 限高 */
+  overflow: hidden;
+}
+
+.bottom-col {
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-col > * {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;            /* 超出时内部滚动 */
+}
+
+/* extra 内的 pre 保护 */
+.bottom-row :deep(pre) {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 /* 窄屏改单列 */

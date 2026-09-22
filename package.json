@@ -8,9 +8,9 @@
     "preview": "vite preview",
     "lint": "eslint src --ext .vue,.js",
     "format": "prettier --write src",
-    "validate": "node scripts/validate.js",
-    "pack-ai": "node scripts/pack-for-ai.js",
-    "check-codes": "node scripts/check-codes.js"
+    "verify": "node verify-codes.js",
+    "verify:check": "node verify-codes.js --check",
+    "verify:clean": "node verify-codes.js --clean"
   },
   "dependencies": {
     "vue": "^3.4.0",

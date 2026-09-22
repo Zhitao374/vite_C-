@@ -4,7 +4,7 @@
 .slide {
   width: 100vw;
   height: 100vh;
-  padding: 28px 56px 64px;
+  padding: 16px 56px 56px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -38,7 +38,7 @@
    ============================================ */
 .slide-body {
   flex: 1;
-  margin-top: 16px;
+  margin-top: 10px;
   min-height: 0;
   overflow-y: auto;
   padding-right: 6px;
@@ -49,16 +49,20 @@
    章节标签
    ============================================ */
 .chapter-tag {
-  display: inline-block;
-  align-self: flex-start;
-  padding: 6px 18px;
+  /* 绝对定位到右上角，脱离文档流 */
+  position: absolute;
+  top: 18px;
+  right: 140px;          /* 给右侧工具按钮留空间 */
+  z-index: 10;
+
+  padding: 5px 16px;
   background: var(--primary-soft);
   border-radius: 999px;
   font-size: var(--fs-chapter-tag);
   font-weight: 700;
   color: var(--primary);
   letter-spacing: 1px;
-  margin-bottom: 14px;
+  /* 无 margin-bottom */
 }
 .chapter-tag.accent {
   background: var(--accent-soft);

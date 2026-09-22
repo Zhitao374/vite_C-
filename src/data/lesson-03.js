@@ -1,7 +1,7 @@
 export default {
   title: '第 3 讲 分支结构',
   subtitle: '让程序学会判断',
-  total: 30,
+  total: 31,
   category: '语法与基础算法',
   slides: [
 
@@ -468,9 +468,31 @@ int main() {
       }
     },
 
-    /* ===== 24 常见错误总结 ===== */
+    /* ===== 24 【新增】分支结构的实际应用 ===== */
     {
-      id: 24, type: 'compare', title: '分支与运算符常见错误', subtitle: '避开这些坑',
+      id: 24, type: 'dialog', title: '分支结构的实际应用', subtitle: '从代码到真实世界', chapterTag: '第 3 讲 · 概念理解',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，分支结构除了做数学题，还能干嘛？' },
+          { who: 'robot', text: '太多了。你手机里的每个 App 都在用它。' },
+          { who: 'student', text: '举个例子？' },
+          { who: 'robot', text: '比如微信：<br>· 密码对 → 登录<br>· 密码错 → 提示重试<br>· 重试 3 次错 → 锁定账号<br>每一步都是 if 判断。' },
+          { who: 'student', text: '游戏里也有？' },
+          { who: 'robot', text: '当然！<br>· 血量 = 0 → 死亡<br>· 金币 ≥ 100 → 可以买装备<br>· 距离 &lt; 5 米 → 攻击命中<br>游戏的每一帧，都在跑上万个 if 判断。' },
+          { who: 'student', text: '所以分支结构是无处不在的。' },
+          { who: 'robot', text: '对！<b>程序 = 数据 + 指令 + 判断</b>。<br>没有分支，程序就是死板的流水账。<br>有了分支，程序才能"随机应变"。' }
+        ],
+        extra: {
+          title: '📖 知识扩展 · if 的历史',
+          desc: '最早的 "if 语句" 出现在 <b>1957 年</b>的 FORTRAN 语言中。<br>FORTRAN 是第一个高级编程语言，为科学家计算服务。<br>它的设计者约翰·巴克斯说："我们要让科学家写公式一样写代码。"<br>IF 语句就是那个"如果 A 成立，就做 B"的语法。<br><b>60 多年过去，所有编程语言都保留了 if</b>——因为它就是人类"做判断"的最自然表达。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 25 常见错误总结 ===== */
+    {
+      id: 25, type: 'compare', title: '分支与运算符常见错误', subtitle: '避开这些坑',
       data: {
         groups: [
           { wrong: 'if (a = 5) 赋值不是判断', right: 'if (a == 5) 用两个等号判断' },
@@ -486,9 +508,9 @@ int main() {
       }
     },
 
-    /* ===== 25 课堂小测 ===== */
+    /* ===== 26 课堂小测 ===== */
     {
-      id: 25, type: 'quiz', title: '课堂小测', subtitle: '运算符与分支结构',
+      id: 26, type: 'quiz', title: '课堂小测', subtitle: '运算符与分支结构',
       chapterTag: '第 3 讲 · 课堂小测',
       data: {
         questions: [
@@ -573,9 +595,9 @@ if (a > 3)
       }
     },
 
-    /* ===== 26 今日总结 ===== */
+    /* ===== 27 今日总结 ===== */
     {
-      id: 26, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 27, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
         text: '条件为真走一条路，为假走另一条路。',
         author: '—— 分支结构第一课',
@@ -596,9 +618,9 @@ if (a > 3)
       }
     },
 
-    /* ===== 27 课后作业 ===== */
+    /* ===== 28 课后作业 ===== */
     {
-      id: 27, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 28, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
           { icon: '🟢', title: '基础 1 · P5710', link: 'https://www.luogu.com.cn/problem/P5710', desc: '<b>数的性质</b><br>考察：逻辑运算、if 判断<br>难度：★★<br>目标：用 &amp;&amp; || 组合多个条件' },
@@ -613,9 +635,9 @@ if (a > 3)
       }
     },
 
-    /* ===== 28 下节预告 ===== */
+    /* ===== 29 - 下节预告 ===== */
     {
-      id: 28, type: 'radial', title: '下节预告', subtitle: '第 4 讲 · 循环结构',
+      id: 29, type: 'radial', title: '下节预告', subtitle: '第 4 讲 · 循环结构',
       data: {
         center: '循环结构',
         items: [
@@ -632,9 +654,9 @@ if (a > 3)
       }
     },
 
-    /* ===== 29 答疑时间 ===== */
+    /* ===== 30 - 答疑时间 ===== */
     {
-      id: 29, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 3 讲 · 答疑',
+      id: 30, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 3 讲 · 答疑',
       data: {
         lines: [
           { who: 'student', text: '为什么 if (a = 5) 不报错？' },
@@ -652,9 +674,9 @@ if (a > 3)
       }
     },
 
-    /* ===== 30 结束页 ===== */
+    /* ===== 31 结束页 ===== */
     {
-      id: 30, type: 'ending', title: '第三讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
+      id: 31, type: 'ending', title: '第三讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
         extra: { title: '🌟 你已经让程序学会了思考', desc: '程序从此不是流水账，而是能根据条件做判断的"智能体"。<br>下一讲，我们让程序学会重复——循环结构。<br>三大结构，你已经掌握了两个。', variant: 'card-glow' }

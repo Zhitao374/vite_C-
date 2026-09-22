@@ -75,23 +75,58 @@ export default {
       }
     },
 
-    /* ===== 06 while 循环（已迁移 codeFile） ===== */
+    /* ===== 06 while 循环：i 怎么变（evolution） ===== */
     {
-      id: 6, type: 'code-split', title: 'while 循环 · 条件为真就重复', subtitle: '循环三要素：初始、条件、更新',
+      id: 6, type: 'evolution', title: 'while 循环：i 一步步长大', subtitle: '循环三要素：初始、条件、更新', chapterTag: '第 4 讲 · 过程演示',
       data: {
+        intro: '📖 循环最难理解的是"<b>每次循环，i 都在变</b>"。<br>看 i 怎么从 1 慢慢走到 10，输出序列怎么一步步变长。',
         codeFile: 'codes/lesson-04/while-loop.cpp',
         snippet: 'main',
-        annotations: [
-          { line: 6, title: 'int i = 1;', desc: '① 初始值：循环的起点' },
-          { line: 7, title: 'while (i &lt;= 10)', desc: '② 循环条件：为真才继续' },
-          { line: 8, title: 'cout &lt;&lt; i', desc: '循环体：每次执行的内容' },
-          { line: 9, title: 'i++;', desc: '③ 更新 i：慢慢接近 10' },
-          { line: 11, title: '输出结果', desc: '循环结束后打印换行' }
+        steps: [
+          {
+            line: 6,
+            expression: 'i = 1',
+            note: '① <b>初始值</b>：循环开始前，i 设为 1。<br>这就是循环的"起点"。'
+          },
+          {
+            line: 7,
+            expression: 'i = 1<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1',
+            note: '② <b>循环条件</b>：i = 1 ≤ 10，为真，进入循环体。<br>③ 执行 <code>cout &lt;&lt; i</code>：输出 <b>1</b>。'
+          },
+          {
+            line: 9,
+            expression: 'i = 1<br>输出：1<br>→ i++ 后 i = 2',
+            note: '④ <b>更新 i</b>：<code>i++</code> 让 i 从 1 变成 2。<br>然后回到条件判断。'
+          },
+          {
+            line: 7,
+            expression: 'i = 2<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1 2',
+            note: 'i = 2 ≤ 10，继续循环。<br>输出 <b>2</b>，序列变成 <code>1 2</code>。'
+          },
+          {
+            line: 7,
+            expression: 'i = 3<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1 2 3',
+            note: 'i = 3 ≤ 10，继续。<br>输出 <b>3</b>，序列变成 <code>1 2 3</code>。'
+          },
+          {
+            line: 8,
+            expression: 'i = 4 → 5 → ... → 10<br>每次都输出<br>输出：1 2 3 4 5 6 7 8 9 10',
+            note: 'i 继续从 4 变到 10，每次输出当前 i。<br>序列慢慢变长：<code>1 2 3 4 5 6 7 8 9 10</code>。'
+          },
+          {
+            line: 7,
+            expression: 'i = 11<br>条件 i &lt;= 10 ? <b>❌ 假</b><br>→ 跳出循环',
+            note: '🎯 <b>关键拐点</b>：<br>i 更新到 11，<code>11 &lt;= 10</code> 为假，<b>循环结束</b>。<br>这就是"条件决定何时停"。'
+          },
+          {
+            line: 11,
+            expression: '输出结果：1 2 3 4 5 6 7 8 9 10',
+            note: '✅ 最终输出：<code>1 2 3 4 5 6 7 8 9 10</code>。<br><br><b>循环三要素回顾</b>：<br>① 初始值 <code>i = 1</code><br>② 条件 <code>i &lt;= 10</code><br>③ 更新 <code>i++</code><br>缺一不可——忘了 i++ 就死循环。'
+          }
         ],
-        output: '1 2 3 4 5 6 7 8 9 10',
         extra: {
-          title: '💡 循环三要素 + do-while 初识',
-          desc: '<b>循环三要素</b>：<br>① <b>初始值</b>：从哪里开始（int i = 1）<br>② <b>循环条件</b>：什么时候继续（i &lt;= 10）<br>③ <b>更新语句</b>：每次怎么变（i++）<br>缺一个都会出问题。最常忘的是 i++，会导致死循环。<br><b>补充</b>：C++ 还有一种 <code>do-while</code> 循环，特点是"先执行一次，再判断条件"，即循环体至少执行一次。它较少用，认识即可。',
+          title: '💡 三要素缺一不可',
+          desc: '<b>忘了初始值</b>：i 是"垃圾值"，循环从哪开始不确定。<br><b>忘了条件</b>：<code>while (true)</code> 会无限循环。<br><b>忘了更新</b>：i 永远是 1，条件永远为真，<b>死循环</b>。<br><br><b>常见错误</b>：<br><code>while (i &lt;= 10) { cout &lt;&lt; i; }</code><br>忘写 i++，程序会卡死。<br>竞赛里这叫 <b>TLE</b>（超时）。<br><br>📖 <b>提前剧透</b>：同样的循环，用 for 写更紧凑——<br><code>for (int i = 1; i &lt;= 10; i++) cout &lt;&lt; i;</code><br>一行搞定三要素。<br>下一屏我们看 for 的写法。<br><br>🔮 <b>伏笔</b>：为什么死循环会"超时"？因为 CPU 一直在跑，时间耗光了。<br>第 40 讲"复杂度"会讲"程序跑多久"。',
           variant: 'card-primary'
         }
       }

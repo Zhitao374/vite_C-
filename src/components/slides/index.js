@@ -1,13 +1,16 @@
 /**
  * 自动注册所有 slide 组件
+ * 支持子目录（如 animations/）
  */
-const modules = import.meta.glob('./*Slide.vue', { eager: true });
+const modules = import.meta.glob([
+  './*Slide.vue',
+  '../animations/*Slide.vue'
+], { eager: true });
 
 export const slideComponents = {};
 
 Object.entries(modules).forEach(([path, mod]) => {
-  const name = path.match(/\.\/(.+)\.vue$/)[1];
-  // CoverSlide → cover，LevelMapSlide → level-map
+  const name = path.match(/\/([^/]+)\.vue$/)[1];
   const type = name
     .replace(/Slide$/, '')
     .replace(/([A-Z])/g, '-$1')

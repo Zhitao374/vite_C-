@@ -9,15 +9,19 @@
       </div>
       <button class="copy-btn" :class="{ 'copy-success': copied }" @click="handleCopy" title="复制代码">
         <svg viewBox="0 0 24 24" width="15" height="15">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"
-                fill="none" stroke="currentColor" stroke-width="2" />
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                fill="none" stroke="currentColor" stroke-width="2" />
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor"
+            stroke-width="2" />
         </svg>
       </button>
     </div>
     <pre :class="densityClass"><code>
-      <span v-for="(line, i) in lines" :key="i" class="code-line">
+      <span
+        v-for="(line, i) in lines"
+        :key="i"
+        class="code-line"
+        :class="{ 'is-highlighted': (i + startLine) === highlightLine }"
+      >
         <span class="code-num">{{ i + startLine }}</span>
         <span class="code-text" v-html="safeHighlight(line)"></span>
       </span>
@@ -32,11 +36,12 @@ import { useHighlight } from '@/composables/useHighlight';
 import { useCopy } from '@/composables/useCopy';
 
 const props = defineProps({
-  code:     { type: String, default: '' },
+  code: { type: String, default: '' },
   codeFile: { type: String, default: '' },
-  snippet:  { type: String, default: '' },   // ← 新增
-  density:  { type: String, default: '' },
-  title:    { type: String, default: '' }
+  snippet: { type: String, default: '' },
+  density: { type: String, default: '' },
+  title: { type: String, default: '' },
+  highlightLine: { type: Number, default: 0 }
 });
 
 const { load } = useCodeLoader();
@@ -158,14 +163,24 @@ async function handleCopy() {
   gap: 6px;
   flex-shrink: 0;
 }
+
 .code-dots span {
   width: 11px;
   height: 11px;
   border-radius: 50%;
 }
-.code-dots span:nth-child(1) { background: #ff5f57; }
-.code-dots span:nth-child(2) { background: #febc2e; }
-.code-dots span:nth-child(3) { background: #28c840; }
+
+.code-dots span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.code-dots span:nth-child(2) {
+  background: #febc2e;
+}
+
+.code-dots span:nth-child(3) {
+  background: #28c840;
+}
 
 .code-header-title {
   display: flex;
@@ -177,16 +192,19 @@ async function handleCopy() {
   text-overflow: ellipsis;
   min-width: 0;
 }
+
 .code-title {
   color: var(--code-title);
   font-size: calc(16px * var(--font-scale));
   font-weight: 600;
 }
+
 .code-filename {
   color: var(--code-filename);
   font-family: var(--font-code);
   font-size: calc(15px * var(--font-scale));
 }
+
 .code-sep {
   color: rgba(230, 241, 255, 0.4);
   margin: 0 2px;
@@ -205,11 +223,25 @@ pre {
   tab-size: 4;
   margin: 0;
 }
-pre.code-md { font-size: calc(var(--fs-code) * 0.95); line-height: 1.55; }
-pre.code-sm { font-size: calc(var(--fs-code) * 0.9); line-height: 1.5; }
-pre.code-xs { font-size: calc(var(--fs-code) * 0.85); line-height: 1.45; }
 
-pre code { display: block; }
+pre.code-md {
+  font-size: calc(var(--fs-code) * 0.95);
+  line-height: 1.55;
+}
+
+pre.code-sm {
+  font-size: calc(var(--fs-code) * 0.9);
+  line-height: 1.5;
+}
+
+pre.code-xs {
+  font-size: calc(var(--fs-code) * 0.85);
+  line-height: 1.45;
+}
+
+pre code {
+  display: block;
+}
 
 .code-line {
   display: flex;
@@ -217,6 +249,7 @@ pre code { display: block; }
   min-height: 1.4em;
   padding-right: 20px;
 }
+
 .code-num {
   flex: 0 0 3.2em;
   text-align: right;
@@ -226,6 +259,7 @@ pre code { display: block; }
   user-select: none;
   pointer-events: none;
 }
+
 .code-text {
   flex: 1;
   min-width: 0;
@@ -251,7 +285,29 @@ pre code { display: block; }
   transition: all 0.2s;
   z-index: 2;
 }
-.code-block:hover .copy-btn { color: rgba(230, 241, 255, 0.9); }
-.copy-btn:hover { background: rgba(255, 255, 255, 0.1); }
-.copy-btn.copy-success { color: #00B42A; }
+
+.code-block:hover .copy-btn {
+  color: rgba(230, 241, 255, 0.9);
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.copy-btn.copy-success {
+  color: #00B42A;
+}
+
+.code-line.is-highlighted {
+  background: rgba(255, 122, 0, 0.15);
+  border-left: 3px solid var(--accent);
+  padding-left: 5px;
+  margin-left: -8px;
+  transition: background 0.3s ease;
+}
+
+.code-line.is-highlighted .code-num {
+  color: var(--accent);
+  font-weight: 700;
+}
 </style>

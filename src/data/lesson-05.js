@@ -99,7 +99,7 @@ export default {
         codeFile: 'codes/lesson-05/array-def.cpp',
         snippet: 'main',
         annotations: [
-          { line: 7,  title: 'int a[5];', desc: '定义长度 5 的整型数组，能存 5 个整数' },
+          { line: 7, title: 'int a[5];', desc: '定义长度 5 的整型数组，能存 5 个整数' },
           { line: 10, title: 'a[0] = 10;', desc: '下标从 0 开始！第一个元素是 a[0]' },
           { line: 17, title: 'int b[5] = {...}', desc: '定义时直接初始化，推荐写法' },
           { line: 20, title: 'a[0]', desc: '访问下标 0 的元素，值是 10' }
@@ -242,22 +242,53 @@ export default {
       }
     },
 
-    /* ===== 15 数组求和（code-split） ===== */
+    /* ===== 15 数组求和：累加过程（evolution） ===== */
     {
-      id: 15, type: 'code-split', title: '实战：数组求和', subtitle: '累加器 + 遍历模板',
+      id: 15, type: 'evolution', title: '数组求和：累加器怎么变', subtitle: 'sum 一步步变大', chapterTag: '第 5 讲 · 过程演示',
       data: {
+        intro: '📖 数组求和的核心是"<b>累加器</b>"——它像一个存钱罐，每次把新元素加进去。<br>看 sum 怎么从 0 一步步长大。',
         codeFile: 'codes/lesson-05/array-sum.cpp',
         snippet: 'main',
-        annotations: [
-          { line: 8, title: 'int a[1005]', desc: '多开几个位置，防止越界' },
-          { line: 9, title: '读入循环', desc: 'i 从 0 到 n-1，逐个读入' },
-          { line: 12, title: 'sum = 0', desc: '累加器初始化为 0' },
-          { line: 14, title: 'sum += a[i]', desc: '把每个元素加到 sum 里' }
+        steps: [
+          {
+            line: 12,
+            expression: 'sum = 0',
+            note: '循环开始前，累加器 <code>sum</code> 初始化为 0。<br>就像空的存钱罐，还没放钱。'
+          },
+          {
+            line: 14,
+            expression: 'sum = sum + a[0] = 0 + 1 = 1',
+            note: '第 1 次循环（i=0）：<br>取出 <code>a[0] = 1</code>，加进 sum。<br>存钱罐里现在有 <b>1</b>。'
+          },
+          {
+            line: 14,
+            expression: 'sum = sum + a[1] = 1 + 2 = 3',
+            note: '第 2 次循环（i=1）：<br>取出 <code>a[1] = 2</code>，加进 sum。<br>存钱罐里现在有 <b>3</b>。'
+          },
+          {
+            line: 14,
+            expression: 'sum = sum + a[2] = 3 + 3 = 6',
+            note: '第 3 次循环（i=2）：<br>取出 <code>a[2] = 3</code>，加进 sum。<br>存钱罐里现在有 <b>6</b>。'
+          },
+          {
+            line: 14,
+            expression: 'sum = sum + a[3] = 6 + 4 = 10',
+            note: '第 4 次循环（i=3）：<br>取出 <code>a[3] = 4</code>，加进 sum。<br>存钱罐里现在有 <b>10</b>。'
+          },
+          {
+            line: 14,
+            expression: 'sum = sum + a[4] = 10 + 5 = 15',
+            note: '第 5 次循环（i=4）：<br>取出 <code>a[4] = 5</code>，加进 sum。<br>存钱罐里现在有 <b>15</b>。<br>循环结束。'
+          },
+          {
+            line: 16,
+            expression: 'sum = 15',
+            note: '✅ 输出 <b>15</b>。<br><b>5 个元素，5 次累加</b>——这就是数组求和的全过程。<br><br>🔮 关键：<code>sum</code> 必须初始化为 <b>0</b>，否则第一次加法就错了。'
+          }
         ],
-        output: '输入：5\n1 2 3 4 5\n输出：15',
         extra: {
-          title: '💡 为什么 sum 要初始化为 0？',
-          desc: '因为 sum 是累加器，初始值必须是"加法单位元"0。<br>就像空钱包，第一次放钱就是第一笔存款。<br>如果不初始化，sum 里是垃圾值，结果就错了。<br><b>对比</b>：累乘的初始值是 1，因为 1 是乘法单位元。<br>这是第 4 讲阶乘练习里讲过的知识点。',
+          title: '💡 累加 vs 累乘',
+          desc: '<b>累加</b>：<code>sum = 0;  sum += a[i];</code><br>初始值为 0（加法的单位元）<br><br><b>累乘</b>：<code>fact = 1;  fact *= a[i];</code><br>初始值为 1（乘法的单位元）<br><br>为什么初始值不同？<br>· 加 0 不影响结果 → 用 0 初始化<br>· 乘 1 不影响结果 → 用 1 初始化<br>· 如果累乘用 0 初始化 → 结果永远是 0<br><br>🔮 <b>伏笔</b>：这个"单位元"思想，在第 8 讲阶乘递归里会再次出现。',
           variant: 'card-primary'
         }
       }
@@ -280,10 +311,16 @@ export default {
       id: 17, type: 'level-map', title: '课堂练习2：找最大值', subtitle: '读入 n 个数，找出最大的那个', chapterTag: '第 5 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '第一行输入整数 <code>n</code>，第二行输入 <code>n</code> 个整数，输出其中的最大值。<br>输入样例：<code>5</code> 然后 <code>3 7 2 9 5</code>　输出样例：<code>9</code>', timer: '⏱ 限时 8 分钟' },
-        hints: ['定义 <code>maxVal</code> 记录当前最大值', '初始值设为 <code>-1e9</code>', '每次读入新数后与 maxVal 比较'],
+        hints: [
+          '定义 <code>maxVal</code> 记录当前最大值',
+          '初始值要<b>比所有可能的输入都小</b>，竞赛常用 <code>-1e9</code>（-10 亿）',
+          '每次读入新数后与 maxVal 比较'
+        ],
         answer: { codeFile: 'codes/lesson-05/max.cpp' },
-        analysis: { title: '📖 解析', desc: 'maxVal 初始值必须是"极小值"，才能保证第一个数一定更大。<br>常见坑：初始化为 0，遇到全负数输入就错了。' },
-        extra: { title: '💡 更省内存的写法', desc: '其实可以不存数组，边读边比较：<br><code>for (int i = 0; i &lt; n; i++) { int x; cin &gt;&gt; x; if (x &gt; maxVal) maxVal = x; }</code><br>这样处理 100 万个数也不占内存。<br><b>竞赛经验</b>：只用到一次的数据，不必存数组。', variant: 'card-primary' }
+        analysis: {
+          title: '📖 解析',
+          desc: '<b>为什么 maxVal 初始值要小？</b><br>maxVal 是"当前最大值"，必须保证<b>第一个数一定能打败它</b>。<br>初始值太大，第一个数可能"打不败"，结果就错。<br><br><b>为什么用 -1e9？</b><br><code>1e9</code> 是<b>科学计数法</b>，表示 10 的 9 次方 = <b>10 亿</b>。<br>所以 <code>-1e9</code> = <b>-10 亿</b>。<br>竞赛数据范围通常在 ±10 亿以内，用 -10 亿一定安全。<br><br><b>如果初始化为 0？</b><br>输入 <code>-3 -7 -2 -9 -5</code> 时，0 > 所有数，程序会错误地输出 <b>0</b>（而不是 -2）。<br><br><b>口诀</b>：找最大值，初始值宁小勿大；找最小值，初始值宁大勿小。'
+        }
       }
     },
 
