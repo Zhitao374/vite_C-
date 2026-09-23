@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// @snippet-start main
-int fib(int n) {
+long long fib(int n) {
     if (n <= 1) return n;
     return fib(n - 1) + fib(n - 2);
 }
@@ -13,4 +12,3 @@ int main() {
     cout << fib(n) << endl;
     return 0;
 }
-// @snippet-end main
