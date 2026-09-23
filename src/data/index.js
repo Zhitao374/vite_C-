@@ -1,6 +1,7 @@
 /**
  * data/index.js · 自动导入所有讲次
  */
+import coursePlan, { PREVIEW_LESSON, STAGE_ORDER } from './course-plan.js';
 
 const modules = import.meta.glob('./lesson-*.js', { eager: true });
 
@@ -61,3 +62,17 @@ console.log(
   `✅ 已加载 ${Object.keys(lessons).length} 讲：`,
   Object.keys(lessons)
 );
+
+// ============================================
+// 课程蓝图（含未生成讲次）
+// ============================================
+
+export { coursePlan, PREVIEW_LESSON, STAGE_ORDER };
+
+// 合并后的完整列表（含预览课）
+export const fullPlan = [PREVIEW_LESSON, ...coursePlan];
+
+// 判断某讲是否已生成
+export function isGenerated(id) {
+  return !!lessons[`lesson-${id}`];
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet">
+  <rect width="200" height="130" fill="#1e293b" rx="10"/>
+  <g font-family="ui-monospace,SFMono-Regular,Consolas,Menlo,monospace" font-size="13" fill="#93c5fd">
+    <text x="100" y="36" text-anchor="middle" xml:space="preserve">   ∩∩∩∩   </text>
+    <text x="100" y="58" text-anchor="middle" xml:space="preserve">  (◕⁰◕)っ—  </text>
+    <text x="100" y="80" text-anchor="middle" xml:space="preserve">  し  ノ    </text>
+    <text x="100" y="102" text-anchor="middle" xml:space="preserve">  し-」     </text>
+  </g>
+  <g font-family="ui-monospace,monospace" font-size="13" fill="#fbbf24">
+    <text x="145" y="58" xml:space="preserve">☆☆☆°</text>
+    <text x="155" y="80" xml:space="preserve">☆☆</text>
+    <text x="150" y="102" xml:space="preserve">° +</text>
+  </g>
+</svg>

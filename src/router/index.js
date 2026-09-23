@@ -19,6 +19,11 @@ const routes = [
     props: true
   },
   {
+    path: '/glossary',
+    name: 'glossary',
+    component: () => import('@/views/GlossaryView.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/'
   }

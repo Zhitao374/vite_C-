@@ -1,429 +1,420 @@
 export default {
-  title: '第 5 讲 一维数组',
-  subtitle: '一排储物柜，批量装数据',
-  total: 29,
+  title: '第 5 讲 循环结构',
+  subtitle: '让程序学会重复',
+  total: 30,
   category: '语法与基础算法',
   slides: [
 
     /* ===== 01 封面 ===== */
     {
-      id: 1, type: 'cover', title: '一维数组', subtitle: '一排储物柜，批量装数据', chapterTag: false,
-      data: { accentWord: '数组', meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 5 讲'] }
+      id: 1, type: 'cover', title: '循环结构', subtitle: '让程序学会重复', chapterTag: false,
+      data: { accentWord: '循环', meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 5 讲'] }
     },
 
-    /* ===== 02 上节回顾（回收"数组"伏笔） ===== */
+    /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '循环结构，让程序学会重复',
+      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '运算符与分支，让程序学会判断',
       data: {
         items: [
-          { icon: '🔁', badge: '基础', title: 'while 循环', desc: '条件为真就重复执行', points: ['循环三要素', '防止死循环'] },
-          { icon: '🔂', badge: '核心', title: 'for 循环', desc: '三要素写在一行，计数首选', points: ['初始; 条件; 更新', '分号分隔'] },
-          { icon: '🔄', badge: '嵌套', title: '循环嵌套', desc: '外层走一步，内层走一圈', points: ['总次数 = 外 × 内', '九九乘法表'] },
-          { icon: '⚡', badge: '控制', title: 'break / continue', desc: '跳出整圈 vs 跳过本次', points: ['break 跳出', 'continue 跳过'] }
+          { icon: '➕', badge: '运算符', title: '四类运算符', desc: '算术、赋值、关系、逻辑', points: ['+ - * / %', '= += -=', '> < == !=', '&& || !'] },
+          { icon: '🔀', badge: '分支', title: 'if 家族', desc: '单分支、双分支、多分支', points: ['if (条件)', 'if-else', 'else if 多路'] },
+          { icon: '🔢', badge: '进阶', title: 'switch 语句', desc: '多分支的另一种写法', points: ['switch (变量)', 'case 常量', 'break 跳出'] },
+          { icon: '⚠️', badge: '易错', title: '常见错误', desc: '= 和 ==、优先级、break', points: ['= 不是 ==', '括号不能漏', '别忘 break'] }
         ],
-        extra: { title: '💡 今天的新问题', desc: '循环能处理海量数据，但输入 100 个数，难道要定义 100 个变量吗？<br>显然不行。今天我们就学习能"一次存很多数据"的工具——数组。<br><br>🔮 <b>回收伏笔</b>：第 4 讲讲循环时说过"数据存哪"，今天揭晓。' }
+        extra: { title: '💡 今天的新问题', desc: '如果要计算 1 加到 100，难道要写 100 行加法吗？<br>当然不用。循环可以让程序自动重复执行，一行代码解决千万次计算。<br>今天我们就学习程序的第三种基本结构——循环。<br><br>🔮 <b>回收伏笔</b>：第 4 讲讲过分支只能"走一次"，今天我们学习"走很多次"。' }
       }
     },
 
     /* ===== 03 本节课目标 ===== */
     {
-      id: 3, type: 'grid', title: '本节课目标', subtitle: '四步掌握批量数据存储',
+      id: 3, type: 'grid', title: '本节课目标', subtitle: '四步让程序学会重复',
       data: {
         cards: [
-          { number: '01', title: '理解数组', desc: '为什么需要数组、一排储物柜的比喻' },
-          { number: '02', title: '定义与访问', desc: '定义语法、下标访问、初始化' },
-          { number: '03', title: '数组与循环', desc: '遍历、求和、找最大值、逆序' },
-          { number: '04', title: '常见错误', desc: '越界、初始化、数组大小' }
+          { number: '01', title: 'while 循环', desc: '条件为真就重复执行' },
+          { number: '02', title: 'for 循环', desc: '最常用的循环结构' },
+          { number: '03', title: '循环嵌套', desc: '循环里面还有循环' },
+          { number: '04', title: 'break 与 continue', desc: '提前跳出或跳过' }
         ],
-        extra: { title: '📖 知识扩展 · 数组的重要性', desc: '数组是第一个真正的"数据结构"。<br>没有数组，竞赛题几乎做不了。<br>后续要学的字符串、栈、队列、二叉树，底层都依赖数组。<br><b>数组是数据结构的地基。</b>' }
+        extra: { title: '📖 知识扩展 · 三大结构收官', desc: '顺序、分支、循环是程序的三大基本结构。<br>前两讲学完顺序和分支，本讲学完循环，<b>三大结构就齐了</b>。<br><b>顺序</b>是基础，<b>分支</b>让程序会思考，<b>循环</b>让程序会重复。<br>掌握这三件套，程序就能处理任何复杂任务。' }
       }
     },
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从一格到一排',
+      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从重复到嵌套',
       data: {
         items: [
-          { icon: '🧠', badge: '基础', title: '第一站 · 数组概念', desc: '为什么需要数组、一排储物柜的比喻', points: ['一次存多个数据', '同类型连续存储', '下标从 0 开始'] },
-          { icon: '🔢', badge: '核心', title: '第二站 · 定义与访问', desc: '定义语法、下标访问、初始化', points: ['int a[100];', 'a[0] 到 a[99]', '数组宁开大一点'] },
-          { icon: '🔄', badge: '关键', title: '第三站 · 数组与循环', desc: '遍历、求和、最大值、逆序', points: ['for 遍历数组', '边读边处理', '逆序输出技巧'] },
-          { icon: '⚠️', badge: '易错', title: '第四站 · 常见错误', desc: '越界、未初始化、数组太小', points: ['下标 < 长度', 'sum = 0;', '按范围开大点'] }
+          { icon: '🔁', badge: '基础', title: '第一站 · while 循环', desc: '条件为真就重复执行', points: ['while (条件)', '循环三要素', '防止死循环'] },
+          { icon: '🔂', badge: '核心', title: '第二站 · for 循环', desc: '最常用、最紧凑的循环结构', points: ['for (初始; 条件; 更新)', '计数循环', '和 while 的选择'] },
+          { icon: '🔄', badge: '进阶', title: '第三站 · 循环嵌套', desc: '循环里面还有循环', points: ['外层 + 内层', '九九乘法表', '总次数 = 外 × 内'] },
+          { icon: '⚡', badge: '实战', title: '第四站 · break 与 continue', desc: '提前跳出或跳过某次循环', points: ['break 跳出循环', 'continue 跳过本次', '常用场景'] }
         ],
-        extra: { title: '🏆 积分规则', desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"数组大师"徽章。' }
+        extra: { title: '🏆 积分规则', desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"循环大师"徽章。' }
       }
     },
 
-    /* ===== 05 为什么要数组（dialog） ===== */
+    /* ===== 05 为什么需要循环 ===== */
     {
-      id: 5, type: 'dialog', title: '为什么要数组？', subtitle: '一百个数据，一百个变量？', chapterTag: '第 5 讲 · 概念理解',
+      id: 5, type: 'dialog', title: '为什么要循环？', subtitle: '让程序自动重复做事', chapterTag: '第 5 讲 · 概念理解',
       data: {
         lines: [
-          { who: 'student', text: '小 C，如果我要存 100 个同学的成绩，难道要定义 100 个变量？' },
-          { who: 'robot', text: '不用。用数组，一次就能定义 100 个格子。' },
-          { who: 'student', text: '数组是什么？' },
-          { who: 'robot', text: '数组就像一排储物柜。柜子有编号，你可以按编号存东西、取东西。' },
-          { who: 'student', text: '那每个柜子可以存不同类型的东西吗？' },
-          { who: 'robot', text: '不行，同一排柜子只能存同一种类型。整型数组就存整数，不能混装小数。' },
-          { who: 'student', text: '为什么？' },
-          { who: 'robot', text: '因为每个柜子大小一样，计算机按固定大小找位置。<br>类型统一，查找才快。这也是数组最大的特点。' }
+          { who: 'student', text: '小 C，如果要计算 1 加到 100，难道要写 100 行加法吗？' },
+          { who: 'robot', text: '不用。用循环，几行代码就能搞定。' },
+          { who: 'student', text: '循环是什么？' },
+          { who: 'robot', text: '循环就是让计算机<b>重复执行</b>一段代码，直到满足某个条件为止。' },
+          { who: 'student', text: '举个例子？' },
+          { who: 'robot', text: '比如打印 1 到 100，只需要写一次 <code>cout</code>，加上循环，计算机就帮你打印 100 次。' },
+          { who: 'student', text: '那程序岂不是能自动做很多事？' },
+          { who: 'robot', text: '对！循环让程序有了"<b>批量处理</b>"的能力。<br>这就是程序能处理海量数据的原因。' }
         ],
         extra: {
-          title: '📖 知识扩展 · 从"变量"到"数组"',
-          desc: '变量是"一个盒子"，数组是"一排盒子"。<br>盒子多了，就能存更多数据。<br>数组的英文是 <b>array</b>，意思是"排列、阵列"。<br>它的核心思想是：<b>把相同类型的数据连续放在内存里，用下标快速访问</b>。<br>这个思想是后来所有数据结构的基础。',
+          title: '📖 知识扩展 · 循环 vs 复制粘贴',
+          desc: '如果没有循环，想打印 1 到 100 就要写 100 行 <code>cout</code>。<br>有了循环，<b>3 行代码就够了</b>。<br><br>循环是程序员最强大的工具之一。<br><b>计算机每秒能执行上亿次循环</b>，这是人类做不到的。<br><br>学会循环，就能把重复工作交给计算机。<br>程序从此不再是"一条条指令"，而是"批量生产"的工厂。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 06 一维数组特性总览 ===== */
+    /* ===== 06 while 循环 i 怎么变 ===== */
     {
-      id: 6, type: 'grid', title: '一维数组的三大特点', subtitle: '同类型、连续存储、下标访问',
+      id: 6, type: 'evolution', title: 'while 循环：i 一步步长大', subtitle: '循环三要素：初始、条件、更新', chapterTag: '第 5 讲 · 过程演示',
       data: {
-        cards: [
-          { icon: '🔢', title: '同类型', desc: '一排柜子只能放同一种数据<br>整型数组全是 int<br>字符数组全是 char<br><b>不能混装</b>' },
-          { icon: '📏', title: '长度固定', desc: '定义时就要写死长度<br>运行中不能改<br>如 <code>int a[100];</code><br><b>长度就是 100 个格子</b>' },
-          { icon: '📍', title: '下标访问', desc: '用 <code>a[i]</code> 取第 i 个元素<br>下标从 <b>0</b> 开始<br>长度 100 的数组<br>合法下标是 0 到 99' }
-        ],
-        extra: {
-          title: '💡 为什么数组访问这么快？',
-          desc: '因为数组在内存里是<b>连续存放</b>的。<br>想访问 a[i]，计算机直接算：<b>地址 = 起点 + i × 类型大小</b>，一步定位。<br>这种"按下标直接跳"的能力，叫<b>随机访问</b>。<br>不管数组多大，访问任意元素都一样快。这是数组最大的优势。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 07 一维数组定义与访问（code-split） ===== */
-    {
-      id: 7, type: 'code-split', title: '一维数组 · 定义与访问', subtitle: '语法：类型 数组名[长度];',
-      data: {
-        codeFile: 'codes/lesson-05/array-def.cpp',
-        snippet: 'main',
-        annotations: [
-          { line: 7, title: 'int a[5];', desc: '定义长度 5 的整型数组，能存 5 个整数' },
-          { line: 10, title: 'a[0] = 10;', desc: '下标从 0 开始！第一个元素是 a[0]' },
-          { line: 17, title: 'int b[5] = {...}', desc: '定义时直接初始化，推荐写法' },
-          { line: 20, title: 'a[0]', desc: '访问下标 0 的元素，值是 10' }
-        ],
-        output: '10\n3',
-        extra: {
-          title: '💡 数组的三个关键点',
-          desc: '① <b>长度固定</b>：定义时就要写死，运行中不能改。<br>② <b>下标从 0 开始</b>：a[5] 的合法下标是 0、1、2、3、4。<br>③ <b>越界危险</b>：访问 a[5] 或 a[-1] 是越界，可能崩溃或输出垃圾值。<br><b>为什么从 0 开始？</b> 因为下标本质是"偏移量"。a[0] 表示从数组起点偏移 0 个位置，a[1] 偏移 1 个位置。<br>这是 C 语言的设计，C++ 沿用至今。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 08 内存布局 flow ===== */
-    {
-      id: 8, type: 'flow', title: '数组在内存中的样子', subtitle: '一排连续的格子',
-      data: {
-        nodes: [
-          { icon: '📦', label: 'a[0]', sub: '地址 1000' },
-          { icon: '📦', label: 'a[1]', sub: '地址 1004' },
-          { icon: '📦', label: 'a[2]', sub: '地址 1008' },
-          { icon: '📦', label: 'a[3]', sub: '地址 1012' },
-          { icon: '📦', label: 'a[4]', sub: '地址 1016', glow: true }
-        ],
-        extra: {
-          title: '💡 为什么 int 数组元素差 4 个地址？',
-          desc: '每个 <code>int</code> 占 4 个字节。<br>a[0] 占 1000—1003，a[1] 就从 1004 开始。<br>如果是 <code>double</code> 数组，每个元素占 8 字节，地址会差 8。<br><b>地址差值 = 元素类型的大小</b>。<br>这个规律是理解指针的关键（第 16 讲）。<br><br>🔮 <b>伏笔</b>：数组为什么要连续存放？如果不连续呢？第 27 讲"链表"会告诉你答案。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 09 下标从 0 开始（dialog） ===== */
-    {
-      id: 9, type: 'dialog', title: '为什么下标从 0 开始？', subtitle: '这是最容易搞错的细节', chapterTag: '第 5 讲 · 概念理解',
-      data: {
-        lines: [
-          { who: 'student', text: '小 C，为什么数组下标要从 0 开始？从 1 开始不是更自然吗？' },
-          { who: 'robot', text: '这是个好问题。你想想，如果 a 是数组起点，那"第 0 个元素"是什么意思？' },
-          { who: 'student', text: '嗯……从起点开始偏移 0 个位置？' },
-          { who: 'robot', text: '对！下标本质是"<b>偏移量</b>"。<br>a[0] 表示偏移 0 个位置，a[1] 偏移 1 个位置。' },
-          { who: 'student', text: '所以 a[5] 是第 6 个元素？' },
-          { who: 'robot', text: '对。长度 5 的数组，合法下标是 0 到 4，不是 1 到 5。<br>这是初学者最容易搞错的地方。' },
-          { who: 'student', text: '怎么避免搞错？' },
-          { who: 'robot', text: '一句话记牢：<b>下标 < 长度</b>。<br>循环写 <code>i &lt; n</code>，而不是 <code>i &lt;= n</code>。' }
-        ],
-        extra: {
-          title: '💡 下标是偏移量，不是序号',
-          desc: '很多人以为 a[1] 是"第一个元素"，其实它是"从起点偏移 1 个位置的元素"。<br>所以 <b>a[0] 才是第一个</b>。<br>这个设计来自 C 语言，本质是"指针运算"的语法糖。<br>写成 <code>a[i]</code> 相当于 <code>*(a + i)</code>——"从 a 出发，走 i 步，取那个位置的值"。<br><b>记住：下标 0 就是起点</b>。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 10 compare：从 0 开始 vs 从 1 开始 ===== */
-    {
-      id: 10, type: 'compare', title: '下标从 0 开始', subtitle: '最容易搞错的细节',
-      data: {
-        groups: [
-          { wrong: 'int a[5]; 认为下标是 1 到 5', right: 'int a[5]; 下标是 0 到 4' },
-          { wrong: 'a[5] = 10; 越界！', right: 'a[4] = 10; 最后一个元素' },
-          { wrong: 'for (i=1; i&lt;=5; i++)', right: 'for (i=0; i&lt;5; i++)' },
-          { wrong: '访问 a[0] 时以为是"第零个"', right: 'a[0] 就是第一个，习惯它' }
-        ],
-        extra: {
-          title: '💡 一句话记住',
-          desc: '<b>下标 < 长度</b>。<br>长度 5 的数组，循环写 <code>i &lt; 5</code> 或 <code>i &lt;= 4</code>。<br>写成 <code>i &lt;= 5</code> 就是越界。<br><b>记忆口诀</b>：宁可少一次，不要越一次。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 11 数组越界（dialog） ===== */
-    {
-      id: 11, type: 'dialog', title: '数组越界：看不见的炸弹', subtitle: '越界可能崩溃，也可能静悄悄出错', chapterTag: '第 5 讲 · 易错点',
-      data: {
-        lines: [
-          { who: 'student', text: '小 C，访问 a[5] 会怎样？明明只定义了 5 个格子。' },
-          { who: 'robot', text: '这是越界。C++ 不会报错，但程序可能崩溃，也可能读到别处的垃圾值。' },
-          { who: 'student', text: '为什么不报错？' },
-          { who: 'robot', text: '因为 C++ 追求速度，不做下标检查。检查是要花时间的，程序员要自己保证正确。' },
-          { who: 'student', text: '那不是很危险？' },
-          { who: 'robot', text: '对。竞赛中，越界是 WA 和 RE 的高频原因。<br>所以数组定义时，宁可开大一点，也不要刚好。' },
-          { who: 'student', text: '开多大比较安全？' },
-          { who: 'robot', text: '例如题目说 n ≤ 1000，就开 1005 或 1010。<br>多留几个空位，防止循环边界写错。' }
-        ],
-        extra: {
-          title: '📖 竞赛中的数组大小',
-          desc: '常见数据范围与建议数组大小：<br>n ≤ 100 → 开 105<br>n ≤ 1000 → 开 1005<br>n ≤ 10⁵ → 开 100005<br>n ≤ 10⁶ → 开 1000005<br><b>原则</b>：在数据范围基础上多开 5—10 个空位。<br>为什么多开？因为题目可能有隐藏边界。<br>多开几个格子，几乎不占内存，但能避免悲剧。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 12 过渡页 ===== */
-    {
-      id: 12, type: 'transition', title: '第二站 · 数组实战', subtitle: '用数组解决三大经典问题',
-      data: { note: '接下来你将用数组和循环解决求和、找最大值、逆序输出三个经典问题' }
-    },
-
-    /* ===== 13 数组遍历（code-split） ===== */
-    {
-      id: 13, type: 'code-split', title: '数组与循环：黄金组合', subtitle: '用 for 遍历数组',
-      data: {
-        codeFile: 'codes/lesson-05/array-traverse.cpp',
-        snippet: 'main',
-        annotations: [
-          { line: 8, title: 'i = 0; i &lt; 5', desc: '下标从 0 到 4，正好覆盖 5 个元素' },
-          { line: 9, title: 'cin &gt;&gt; a[i]', desc: '用循环变量当数组下标，逐个读入' },
-          { line: 14, title: 'cout &lt;&lt; a[i]', desc: '遍历输出所有元素' }
-        ],
-        output: '1 2 3 4 5',
-        extra: {
-          title: '💡 数组 + 循环 = 竞赛解题模板',
-          desc: '<b>读入模板</b>：<br><code>for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];</code><br><b>遍历模板</b>：<br><code>for (int i = 0; i &lt; n; i++) { /* 处理 a[i] */ }</code><br>几乎所有数组题都是这个套路。<br>把这两个模板记熟，一半的数组题就稳了。<br><b>注意</b>：循环条件写 <code>i &lt; n</code>，不是 <code>i &lt;= n</code>，否则越界。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 14 数组实战答疑（dialog） ===== */
-    {
-      id: 14, type: 'dialog', title: '数组实战答疑', subtitle: '小C与同学聊遍历技巧', chapterTag: '第 5 讲 · 概念理解',
-      data: {
-        lines: [
-          { who: 'student', text: '小 C，遍历数组一定要用 for 吗？' },
-          { who: 'robot', text: '大多数时候是。因为数组长度已知，for 最适合计数循环。' },
-          { who: 'student', text: '那什么时候用 while？' },
-          { who: 'robot', text: '比如"一直读直到输入 0"，长度未知，就用 while。' },
-          { who: 'student', text: '读入的时候能不能直接处理，不存数组？' },
-          { who: 'robot', text: '能！如果只用一次，比如求和、找最大值，可以边读边算。<br>这样处理 100 万个数也不占内存。' },
-          { who: 'student', text: '那什么时候一定要用数组？' },
-          { who: 'robot', text: '需要"回头看"的时候。比如逆序输出、排序、找第 k 大——必须存下来才能处理。' }
-        ],
-        extra: {
-          title: '💡 存不存数组？判断标准',
-          desc: '<b>边读边处理</b>（不用数组）：<br>· 求和<br>· 找最大值 / 最小值<br>· 计数<br><b>必须用数组</b>：<br>· 逆序输出<br>· 排序<br>· 找第 k 大<br><b>口诀</b>：用到一次不用存，用到多次先存下。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 15 数组求和：累加过程（evolution） ===== */
-    {
-      id: 15, type: 'evolution', title: '数组求和：累加器怎么变', subtitle: 'sum 一步步变大', chapterTag: '第 5 讲 · 过程演示',
-      data: {
-        intro: '📖 数组求和的核心是"<b>累加器</b>"——它像一个存钱罐，每次把新元素加进去。<br>看 sum 怎么从 0 一步步长大。',
-        codeFile: 'codes/lesson-05/array-sum.cpp',
+        intro: '📖 循环最难理解的是"<b>每次循环，i 都在变</b>"。<br>看 i 怎么从 1 慢慢走到 10，输出序列怎么一步步变长。',
+        codeFile: 'codes/lesson-05/while-loop.cpp',
         snippet: 'main',
         steps: [
           {
-            line: 12,
-            expression: 'sum = 0',
-            note: '循环开始前，累加器 <code>sum</code> 初始化为 0。<br>就像空的存钱罐，还没放钱。'
+            line: 6,
+            expression: 'i = 1',
+            note: '① <b>初始值</b>：循环开始前，i 设为 1。<br>这就是循环的"起点"。'
           },
           {
-            line: 14,
-            expression: 'sum = sum + a[0] = 0 + 1 = 1',
-            note: '第 1 次循环（i=0）：<br>取出 <code>a[0] = 1</code>，加进 sum。<br>存钱罐里现在有 <b>1</b>。'
+            line: 7,
+            expression: 'i = 1<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1',
+            note: '② <b>循环条件</b>：i = 1 ≤ 10，为真，进入循环体。<br>③ 执行 <code>cout &lt;&lt; i</code>：输出 <b>1</b>。'
           },
           {
-            line: 14,
-            expression: 'sum = sum + a[1] = 1 + 2 = 3',
-            note: '第 2 次循环（i=1）：<br>取出 <code>a[1] = 2</code>，加进 sum。<br>存钱罐里现在有 <b>3</b>。'
+            line: 9,
+            expression: 'i = 1<br>输出：1<br>→ i++ 后 i = 2',
+            note: '④ <b>更新 i</b>：<code>i++</code> 让 i 从 1 变成 2。<br>然后回到条件判断。'
           },
           {
-            line: 14,
-            expression: 'sum = sum + a[2] = 3 + 3 = 6',
-            note: '第 3 次循环（i=2）：<br>取出 <code>a[2] = 3</code>，加进 sum。<br>存钱罐里现在有 <b>6</b>。'
+            line: 7,
+            expression: 'i = 2<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1 2',
+            note: 'i = 2 ≤ 10，继续循环。<br>输出 <b>2</b>，序列变成 <code>1 2</code>。'
           },
           {
-            line: 14,
-            expression: 'sum = sum + a[3] = 6 + 4 = 10',
-            note: '第 4 次循环（i=3）：<br>取出 <code>a[3] = 4</code>，加进 sum。<br>存钱罐里现在有 <b>10</b>。'
+            line: 8,
+            expression: 'i = 3 → 4 → ... → 10<br>每次都输出<br>输出：1 2 3 4 5 6 7 8 9 10',
+            note: 'i 继续从 3 变到 10，每次输出当前 i。<br>序列慢慢变长：<code>1 2 3 4 5 6 7 8 9 10</code>。'
           },
           {
-            line: 14,
-            expression: 'sum = sum + a[4] = 10 + 5 = 15',
-            note: '第 5 次循环（i=4）：<br>取出 <code>a[4] = 5</code>，加进 sum。<br>存钱罐里现在有 <b>15</b>。<br>循环结束。'
+            line: 7,
+            expression: 'i = 11<br>条件 i &lt;= 10 ? <b>❌ 假</b><br>→ 跳出循环',
+            note: '🎯 <b>关键拐点</b>：<br>i 更新到 11，<code>11 &lt;= 10</code> 为假，<b>循环结束</b>。<br>这就是"条件决定何时停"。'
           },
           {
-            line: 16,
-            expression: 'sum = 15',
-            note: '✅ 输出 <b>15</b>。<br><b>5 个元素，5 次累加</b>——这就是数组求和的全过程。<br><br>🔮 关键：<code>sum</code> 必须初始化为 <b>0</b>，否则第一次加法就错了。'
+            line: 11,
+            expression: '输出结果：1 2 3 4 5 6 7 8 9 10',
+            note: '✅ 最终输出：<code>1 2 3 4 5 6 7 8 9 10</code>。<br><br><b>循环三要素回顾</b>：<br>① 初始值 <code>i = 1</code><br>② 条件 <code>i &lt;= 10</code><br>③ 更新 <code>i++</code><br>缺一不可——忘了 i++ 就死循环。'
           }
         ],
         extra: {
-          title: '💡 累加 vs 累乘',
-          desc: '<b>累加</b>：<code>sum = 0;  sum += a[i];</code><br>初始值为 0（加法的单位元）<br><br><b>累乘</b>：<code>fact = 1;  fact *= a[i];</code><br>初始值为 1（乘法的单位元）<br><br>为什么初始值不同？<br>· 加 0 不影响结果 → 用 0 初始化<br>· 乘 1 不影响结果 → 用 1 初始化<br>· 如果累乘用 0 初始化 → 结果永远是 0<br><br>🔮 <b>伏笔</b>：这个"单位元"思想，在第 8 讲阶乘递归里会再次出现。',
+          title: '💡 三要素缺一不可',
+          desc: '<b>忘了初始值</b>：i 是"垃圾值"，循环从哪开始不确定。<br><b>忘了条件</b>：<code>while (true)</code> 会无限循环。<br><b>忘了更新</b>：i 永远是 1，条件永远为真，<b>死循环</b>。<br><br><b>常见错误</b>：<br><code>while (i &lt;= 10) { cout &lt;&lt; i; }</code><br>忘写 i++，程序会卡死。<br>竞赛里这叫 <b>TLE</b>（超时）。<br><br>📖 <b>提前剧透</b>：同样的循环，用 for 写更紧凑——<br><code>for (int i = 1; i &lt;= 10; i++) cout &lt;&lt; i;</code><br>一行搞定三要素。<br>下一屏我们看 for 的写法。<br><br>🔮 <b>伏笔</b>：为什么死循环会"超时"？因为 CPU 一直在跑，时间耗光了。<br>第 36 讲"复杂度"会讲"程序跑多久"。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 16 练习1：求和（level-map） ===== */
+    /* ===== 07 for 循环 ===== */
     {
-      id: 16, type: 'level-map', title: '课堂练习1：求和', subtitle: '用数组读入 n 个数，输出它们的和', chapterTag: '第 5 讲 · 实战演练',
+      id: 7, type: 'code-split', title: 'for 循环 · 三要素写在一行', subtitle: '最常用、最紧凑的循环',
       data: {
-        question: { title: '题干', desc: '第一行输入整数 <code>n</code>，第二行输入 <code>n</code> 个整数，输出它们的和。<br>输入样例：<code>5</code> 然后 <code>1 2 3 4 5</code>　输出样例：<code>15</code>', timer: '⏱ 限时 6 分钟' },
-        hints: ['定义数组 <code>int a[1005];</code>', '用 <code>for (int i = 0; i &lt; n; i++)</code> 读入', '用累加器 <code>sum</code> 求和，初始为 0'],
-        answer: { codeFile: 'codes/lesson-05/sum.cpp' },
-        analysis: { title: '📖 解析', desc: '典型的"读入 + 遍历"模板。<br>数组长度开 1005，比题目最大范围多留几个空位。<br>循环条件写 <code>i &lt; n</code> 而不是 <code>i &lt;= n</code>，避免越界。' },
-        extra: { title: '📖 知识扩展 · 高斯的算法 vs 计算机的循环', desc: '<a href="https://baike.baidu.com/item/高斯" target="_blank" class="wiki-link">高斯</a>用公式 <code>n(n+1)/2</code> 秒算 1 到 100。<br>计算机用循环逐个数加起来，也能得到同样结果。<br>公式更快，但循环更通用——任何数列求和，循环都能算。<br><b>这就是计算机的哲学</b>：不追求最聪明，只追求最通用。', variant: 'card-primary' }
-      }
-    },
-
-    /* ===== 17 练习2：找最大值 ===== */
-    {
-      id: 17, type: 'level-map', title: '课堂练习2：找最大值', subtitle: '读入 n 个数，找出最大的那个', chapterTag: '第 5 讲 · 实战演练',
-      data: {
-        question: { title: '题干', desc: '第一行输入整数 <code>n</code>，第二行输入 <code>n</code> 个整数，输出其中的最大值。<br>输入样例：<code>5</code> 然后 <code>3 7 2 9 5</code>　输出样例：<code>9</code>', timer: '⏱ 限时 8 分钟' },
-        hints: [
-          '定义 <code>maxVal</code> 记录当前最大值',
-          '初始值要<b>比所有可能的输入都小</b>，竞赛常用 <code>-1e9</code>（-10 亿）',
-          '每次读入新数后与 maxVal 比较'
+        intro: '📖 <b>语法</b>：<code>for (初始; 条件; 更新) { 循环体 }</code>。<br>三要素用<b>分号</b>分隔，写在同一行。',
+        codeFile: 'codes/lesson-05/for-loop.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 6, title: 'for (三要素)', desc: '初始、条件、更新写在同一行' },
+          { line: 6, title: '分号分隔', desc: '三部分用分号分隔，不是逗号' },
+          { line: 6, title: 'i++', desc: '每次循环 i 加 1' },
+          { line: 7, title: 'cout', desc: '循环体输出当前 i' }
         ],
-        answer: { codeFile: 'codes/lesson-05/max.cpp' },
-        analysis: {
-          title: '📖 解析',
-          desc: '<b>为什么 maxVal 初始值要小？</b><br>maxVal 是"当前最大值"，必须保证<b>第一个数一定能打败它</b>。<br>初始值太大，第一个数可能"打不败"，结果就错。<br><br><b>为什么用 -1e9？</b><br><code>1e9</code> 是<b>科学计数法</b>，表示 10 的 9 次方 = <b>10 亿</b>。<br>所以 <code>-1e9</code> = <b>-10 亿</b>。<br>竞赛数据范围通常在 ±10 亿以内，用 -10 亿一定安全。<br><br><b>如果初始化为 0？</b><br>输入 <code>-3 -7 -2 -9 -5</code> 时，0 > 所有数，程序会错误地输出 <b>0</b>（而不是 -2）。<br><br><b>口诀</b>：找最大值，初始值宁小勿大；找最小值，初始值宁大勿小。'
-        }
-      }
-    },
-
-    /* ===== 18 练习3：逆序输出 ===== */
-    {
-      id: 18, type: 'level-map', title: '课堂练习3：逆序输出', subtitle: '把 n 个数倒着输出', chapterTag: '第 5 讲 · 实战演练',
-      data: {
-        question: { title: '题干', desc: '输入 <code>n</code> 个整数，按相反顺序输出。<br>输入样例：<code>5</code> 然后 <code>1 2 3 4 5</code>　输出样例：<code>5 4 3 2 1</code>', timer: '⏱ 限时 8 分钟' },
-        hints: ['先全部读入数组', '再从 <code>i = n-1</code> 遍历到 <code>i = 0</code>', '循环条件 <code>i &gt;= 0</code>'],
-        answer: { codeFile: 'codes/lesson-05/reverse.cpp' },
-        analysis: { title: '📖 解析', desc: '关键在于倒着遍历。<br><code>for (int i = n-1; i &gt;= 0; i--)</code><br>从最后一个下标 n-1 一直递减到 0。<br>注意 <code>i &gt;= 0</code> 用 <code>&gt;=</code>，不是 <code>&gt;</code>，否则会漏掉 a[0]。' },
-        extra: { title: '📖 知识扩展 · 洛谷 P1427 小鱼的数字游戏', desc: '这道题在洛谷的编号是 <a href="https://www.luogu.com.cn/problem/P1427" target="_blank" class="wiki-link">P1427</a>，是数组入门经典题。<br>题目说小鱼在玩数字游戏，你要帮它把数字倒过来读。<br>这道题的核心就是今天学的"逆序输出"。<br><b>建议</b>：课后作业就做这道题，巩固逆序技巧。', variant: 'card-primary' }
-      }
-    },
-
-    /* ===== 19 初赛小知识：数组内存（dialog） ===== */
-    {
-      id: 19, type: 'dialog', title: '初赛小知识：数组内存', subtitle: 'CSP-J/S 初赛必考', chapterTag: '第 5 讲 · 初赛渗透',
-      data: {
-        lines: [
-          { who: 'student', text: '小 C，初赛会考数组吗？' },
-          { who: 'robot', text: '会。常考的是：数组占多少内存、下标范围、能不能越界。' },
-          { who: 'student', text: '比如 int a[100] 占多少内存？' },
-          { who: 'robot', text: 'int 占 4 字节，100 个就是 400 字节。<br>如果是 long long，每个占 8 字节，100 个就是 800 字节。' },
-          { who: 'student', text: '二维数组呢？' },
-          { who: 'robot', text: 'int a[10][10] 是 100 个 int，占 400 字节。<br>算内存就把所有维度乘起来，再乘每个类型的字节数。' },
-          { who: 'student', text: '还有什么考点？' },
-          { who: 'robot', text: '常考数组下标范围。长度 100 的数组，合法下标是 0 到 99。<br>考卷经常出"下面哪个访问是越界的"这种题。' }
-        ],
+        output: '1 2 3 4 5 6 7 8 9 10',
         extra: {
-          title: '📖 数组内存速算',
-          desc: '<b>一维数组</b>：<code>int a[100];</code> → 100 × 4 = 400 字节<br><b>二维数组</b>：<code>int a[10][10];</code> → 10 × 10 × 4 = 400 字节<br><b>三维数组</b>：<code>int a[5][5][5];</code> → 5 × 5 × 5 × 4 = 500 字节<br><b>规律</b>：所有维度相乘，再乘每个元素的字节数。<br><b>常用类型字节数</b>：int 4、long long 8、double 8、char 1、bool 1。<br>这些数字是初赛必背。',
+          title: '💡 for 的三个细节',
+          desc: '① 变量 i 可以在 for 里定义：<code>for (int i = 0; ...)</code>，离开循环后 i 就消失<br>② 条件不写默认为真：<code>for (;;)</code> 是死循环<br>③ 更新可以是任意表达式：<code>i += 2</code> 也可以，比如输出所有偶数<br><br><b>竞赛惯例</b>：计数循环优先用 for，写起来更紧凑。<br><br><b>对比 while</b>：<br><code>int i = 1;</code><br><code>while (i &lt;= 10) { ...; i++; }</code><br>与<br><code>for (int i = 1; i &lt;= 10; i++) { ... }</code><br>完全等价——但 for 更清晰。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 20 compare：数组常见错误 ===== */
+    /* ===== 08 while vs for ===== */
     {
-      id: 20, type: 'compare', title: '数组常见错误', subtitle: '避开这些坑',
+      id: 8, type: 'compare', title: 'while vs for', subtitle: '什么时候用哪个',
       data: {
         groups: [
-          { wrong: '数组越界：a[5] 访问长度 5 的数组', right: '合法下标 0 到 4，循环用 i &lt; n' },
-          { wrong: '数组太小：int a[100] 存 1000 个数', right: '按数据范围开大一点，如 a[1005]' },
-          { wrong: '忘记初始化：int sum; 就用 sum +=', right: 'int sum = 0; 先初始化' },
-          { wrong: '二维数组写错：a[i, j]', right: '用两个中括号 a[i][j]' }
+          { wrong: '已知循环次数 → 用 for', right: '循环次数未知 → 用 while' },
+          { wrong: '例：1 到 100 求和', right: '例：直到输入 0 才停止' },
+          { wrong: '三要素集中，一目了然', right: '只关心条件，更灵活' },
+          { wrong: '竞赛中的主力', right: '处理未知长度的输入' }
+        ],
+        extra: {
+          title: '📖 选择建议',
+          desc: '<b>用 for</b>：循环次数已知，或需要计数变量。<br><b>用 while</b>：循环次数不确定，只看条件。<br><br>两者可以互相转换，选更清晰的那个。<br><br><b>口诀</b>：<b>次数已知用 for，次数未知用 while</b>。<br><br>📖 <b>知识扩展 · C++11 的范围 for</b><br>C++11 引入了一种"范围 for"，可以自动遍历数组或容器：<br><code>for (int x : arr) { ... }</code><br>不需要写下标，直接拿到每个元素。<br>这是"现代 C++"的写法，等学数组时详细介绍。<br><br><b>现在记住</b>：for 和 while 是基础，范围 for 是糖。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 09 for 循环答疑 ===== */
+    {
+      id: 9, type: 'dialog', title: 'for 循环答疑', subtitle: '小C回答常见疑问', chapterTag: '第 5 讲 · 概念理解',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，为什么 for 里可以写 <code>int i = 1</code>？<br>这个 i 是哪里来的？' },
+          { who: 'robot', text: '这是 <b>for 的语法糖</b>——<br>你可以在 for 的初始化部分直接定义变量。<br>离开循环后，i 就"消失"了。' },
+          { who: 'student', text: '消失是什么意思？' },
+          { who: 'robot', text: '意思是 i 只在 for 循环里"存在"。<br>循环外的代码，访问不到 i。<br>这叫<b>变量的作用域</b>。' },
+          { who: 'student', text: '那 <code>i++</code> 和 <code>++i</code> 有什么区别？' },
+          { who: 'robot', text: '单独用时没区别——都是 i 加 1。<br>只有一种场景有区别：<br>把它们<b>放进表达式</b>时——<br>· <code>x = i++</code>：先赋值，后加 1<br>· <code>x = ++i</code>：先加 1，后赋值' },
+          { who: 'student', text: '那竞赛里用哪个？' },
+          { who: 'robot', text: '看习惯。大多数选手用 <code>i++</code>。<br>因为它是"经典写法"，早年的 C 语言教程都用 i++。<br>两者性能没差异，选一个用顺手的就行。' },
+          { who: 'student', text: '明白了。' },
+          { who: 'robot', text: '总结一句：<br><b>单独用没区别，放进表达式才有区别</b>。<br>初学者用 i++ 就好，不会踩坑。' }
+        ],
+        extra: {
+          title: '💡 作用域与自增的两个细节',
+          desc: '<b>① 变量作用域</b>：<br><code>for (int i = 0; i &lt; n; i++) { ... }</code><br>这里的 i 只在 for 循环里有效。循环外的代码访问 i 会报错"未定义"。<br><br><b>② 两种自增的细微差别</b>：<br><code>i++</code>（后置）：先用 i 的值，再加 1<br><code>++i</code>（前置）：先加 1，再用 i 的值<br><br>只有放进表达式时才看得出区别：<br><code>int i = 5;</code><br><code>int a = i++;  // a = 5, i = 6</code><br><code>int b = ++i;  // i = 7, b = 7</code><br><br><b>竞赛建议</b>：<br>· 循环更新写 <code>i++</code>——不会出错<br>· 放进表达式时想清楚前置后置的区别<br><br><b>为什么大多数人用 i++？</b><br>历史原因——C 语言早期教程约定用 i++。后来就成了惯例。<br>两种写法性能一样，选顺手的即可。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 10 过渡页 ===== */
+    {
+      id: 10, type: 'transition', title: '第三站 · 循环进阶', subtitle: '嵌套、break、continue',
+      data: { note: '接下来你将学会循环嵌套、break 与 continue，以及循环的实战应用' }
+    },
+
+    /* ===== 11 循环嵌套 ===== */
+    {
+      id: 11, type: 'code-split', title: '循环嵌套 · 循环里还有循环', subtitle: '外层走一步，内层走完整圈',
+      data: {
+        intro: '📖 循环里再写一个循环，叫<b>嵌套循环</b>。<br>外层每走一步，内层走完整的一圈。',
+        codeFile: 'codes/lesson-05/nested-loop.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 6, title: '外层循环 i', desc: 'i 从 1 到 3，共 3 次' },
+          { line: 7, title: '内层循环 j', desc: 'j 从 1 到 4，共 4 次' },
+          { line: 8, title: '循环体', desc: '输出 (i,j)' },
+          { line: 10, title: 'endl', desc: '内层结束后换行' }
+        ],
+        output: '(1,1) (1,2) (1,3) (1,4)\n(2,1) (2,2) (2,3) (2,4)\n(3,1) (3,2) (3,3) (3,4)',
+        extra: {
+          title: '💡 执行次数',
+          desc: '外层走 1 步，内层走 1 整圈。<br>外层走 3 步，内层总共走 <b>3 × 4 = 12 次</b>。<br><br><b>总次数 = 外层次数 × 内层次数</b>。<br><br>这是竞赛高频考点，初赛经常让你算循环执行了多少次。<br><br><b>例子</b>：两层 n 次循环，总次数是 n² 次。<br>比如 3 层 n 次，就是 n³ 次。<br>层数越深，次数增长越快。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 12 九九乘法表 ===== */
+    {
+      id: 12, type: 'code-split', title: '循环嵌套实例 · 九九乘法表', subtitle: '两个 for 画出三角形',
+      data: {
+        intro: '📖 内层循环的条件可以<b>依赖外层变量</b>——<br>比如 <code>j &lt;= i</code>，让内层每行越来越长。',
+        codeFile: 'codes/lesson-05/multiplication-table.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 6, title: '外层 i', desc: '代表行号，从 1 到 9' },
+          { line: 7, title: '内层 j', desc: 'j 从 1 到 i，所以每行越来越长' },
+          { line: 8, title: '输出', desc: '格式：j*i=结果' },
+          { line: 10, title: '换行', desc: '每行结束后换行' }
+        ],
+        output: '1*1=1\n1*2=2 2*2=4\n1*3=3 2*3=6 3*3=9\n...',
+        extra: {
+          title: '📖 交叉学科 · 数学',
+          desc: '九九乘法表是中国古代数学的瑰宝。<br>早在<a href="https://baike.baidu.com/item/春秋战国" target="_blank" class="wiki-link">春秋战国</a>时期就有"九九歌"，比欧洲早了 <b>1000 多年</b>。<br><br>用循环嵌套，9 行代码就能画出这张表。<br>这就是计算机的威力——<b>把人脑的工作变成程序</b>。<br><br><b>变化的模式</b>：<br>· 内层固定次数 → 矩形<br>· 内层 <code>j &lt;= i</code> → 三角形<br>· 内层 <code>j &lt;= n - i</code> → 倒三角形<br>· 内层复杂规律 → 各种图案<br><br>图案打印题，就是考"找规律"。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 13 嵌套答疑 ===== */
+    {
+      id: 13, type: 'dialog', title: '循环嵌套答疑', subtitle: '小C用排队打比方', chapterTag: '第 5 讲 · 概念理解',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，循环嵌套好难懂，外层内层老分不清。' },
+          { who: 'robot', text: '你可以想象排队：外层是"队伍"，内层是"队伍里的每个人"。' },
+          { who: 'student', text: '怎么说？' },
+          { who: 'robot', text: '外层走一步，相当于换一支队伍；<br>内层走一圈，相当于把队伍里每个人点一遍。' },
+          { who: 'student', text: '那如果外层 3 支队伍，每队 4 人？' },
+          { who: 'robot', text: '总共点 <b>3 × 4 = 12 次</b>。这就是嵌套循环的执行次数。' },
+          { who: 'student', text: '那什么时候用嵌套？' },
+          { who: 'robot', text: '处理二维数据，比如矩阵、棋盘、图案打印。<br>只要问题有"两层循环"的感觉，就用嵌套。' }
+        ],
+        extra: {
+          title: '💡 嵌套的两种常见形态',
+          desc: '<b>形态 1：固定次数</b>（如打印 3×4 的矩形）<br>外层 3 次，内层 4 次，总 12 次。<br><br><b>形态 2：可变次数</b>（如打印三角形）<br>外层 9 次，内层从 1 到 i，总次数是 1+2+...+9 = 45 次。<br><br>第一种好算，第二种需要观察内层次数随外层的变化。<br><br><b>竞赛经验</b>：嵌套循环是算法基础，几乎所有二维问题都要用到。<br>初赛题目经常让你数"总执行次数"——<br>固定次数直接乘，可变次数要列出公式求和。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 14 break 与 continue ===== */
+    {
+      id: 14, type: 'compare', title: 'break 与 continue', subtitle: '跳出整圈 vs 跳过本次',
+      data: {
+        groups: [
+          { wrong: 'break：遇到 5 就跳出整个循环', right: 'continue：遇到偶数就跳过本次' },
+          { wrong: 'for (i=1; i&lt;=10; i++) {<br>&nbsp;&nbsp;if (i == 5) break;<br>&nbsp;&nbsp;cout &lt;&lt; i;<br>}', right: 'for (i=1; i&lt;=10; i++) {<br>&nbsp;&nbsp;if (i % 2 == 0) continue;<br>&nbsp;&nbsp;cout &lt;&lt; i;<br>}' },
+          { wrong: '输出：1 2 3 4', right: '输出：1 3 5 7 9' },
+          { wrong: 'break 是"我不干了"', right: 'continue 是"这次不算，继续"' }
+        ],
+        extra: {
+          title: '💡 break 的常见场景',
+          desc: '① <b>查找</b>：找到目标就跳出，不用继续找<br>② <b>菜单</b>：用户输入"退出"就跳出主循环<br>③ <b>限时</b>：超时后终止循环<br><br><b>记忆</b>：break 跳出整个循环，continue 只跳过本次。<br><br><b>陷阱</b>：break 只能跳出<b>一层</b>循环。<br>嵌套循环里，break 只跳出<b>最内层</b>，外层继续走。<br>想跳出多层，需要额外技巧（后续讲）。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 15 常见错误 ===== */
+    {
+      id: 15, type: 'compare', title: '循环常见错误', subtitle: '避开这些坑',
+      data: {
+        groups: [
+          { wrong: '忘写 i++，死循环', right: '每次循环更新 i' },
+          { wrong: 'for 里用逗号分隔', right: 'for 里用分号分隔' },
+          { wrong: 'while (i = 10) 少个等号', right: 'while (i == 10)' },
+          { wrong: 'break 写在循环外', right: 'break 必须在循环内' }
         ],
         extra: {
           title: '📖 四大错误的原因',
-          desc: '① <b>越界</b>：C++ 不检查下标，越界不报错但结果错。<br>② <b>数组太小</b>：数据范围看错，答案全错。<br>③ <b>未初始化</b>：垃圾值参与运算，结果不可预测。<br>④ <b>二维语法</b>：C++ 用 a[i][j]，不是 a[i, j]。<br><b>口诀</b>：数组开大点，循环写 n，累加先清零，二维两括号。',
+          desc: '① <b>死循环</b>：忘记更新，条件永远为真。<br>② <b>分号</b>：for 的三部分必须用分号分隔，不是逗号。<br>③ <b>= 与 ==</b>：赋值和判断的区别。<br>④ <b>break 位置</b>：只能在循环或 switch 里用。<br><br><b>调试循环的三板斧</b>：<br>1. 打印中间值：<code>cout &lt;&lt; "i=" &lt;&lt; i &lt;&lt; endl;</code><br>2. 检查边界：i 从几到几，最后几次是否正常<br>3. 小数据测试：n = 1、2、3 手动推一遍',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 21 数组的典型应用（code-split） ===== */
+    /* ===== 16 初赛渗透 ===== */
     {
-      id: 21, type: 'code-split', title: '数组的典型应用', subtitle: '统计、查找、累积',
-      data: {
-        codeFile: 'codes/lesson-05/array-application.cpp',
-        snippet: 'main',
-        annotations: [
-          { line: 8, title: 'count 数组', desc: '用数组统计每个数字出现的次数' },
-          { line: 12, title: 'cnt[x]++', desc: '读入 x，计数数组对应位置加 1' },
-          { line: 14, title: 'maxCnt', desc: '遍历计数数组，找出现次数最多的' }
-        ],
-        output: '输入：5\n3 1 3 2 3\n输出：3 出现 3 次',
-        extra: {
-          title: '💡 计数数组：竞赛技巧',
-          desc: '<b>计数数组</b>是数组最常用的技巧之一。<br>思路：让数组下标 = 数值，数组元素 = 该数值出现的次数。<br>例如统计 100 以内每个数出现几次，就开 <code>int cnt[105]</code>。<br><b>应用场景</b>：<br>· 统计频次<br>· 去重（cnt[x] > 0 就是出现过）<br>· 桶排序的基础<br>竞赛里非常常见，一定要掌握。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 22 数组和方法总结（dialog） ===== */
-    {
-      id: 22, type: 'dialog', title: '数组方法总结', subtitle: '小C带同学复盘', chapterTag: '第 5 讲 · 概念理解',
+      id: 16, type: 'dialog', title: '初赛小知识：循环次数', subtitle: 'CSP-J/S 初赛必考', chapterTag: '第 5 讲 · 初赛渗透',
       data: {
         lines: [
-          { who: 'robot', text: '同学，我们来回看一下今天学的数组。' },
-          { who: 'student', text: '好！' },
-          { who: 'robot', text: '数组定义用什么语法？' },
-          { who: 'student', text: 'int a[100]; 类型 名字[长度];' },
-          { who: 'robot', text: '下标从几开始？合法范围？' },
-          { who: 'student', text: '从 0 开始，长度 100 的数组合法下标是 0 到 99。' },
-          { who: 'robot', text: '遍历数组用什么？' },
-          { who: 'student', text: 'for (int i = 0; i &lt; n; i++) 遍历。' },
-          { who: 'robot', text: '数组最常见的错误？' },
-          { who: 'student', text: '越界！所以数组宁可开大一点。' },
-          { who: 'robot', text: '非常好。你已经掌握了数组的核心了。' }
+          { who: 'student', text: '小 C，初赛真的会考循环吗？' },
+          { who: 'robot', text: '会，而且是最常见的题型之一——<b>给代码，数执行次数</b>。' },
+          { who: 'student', text: '怎么算？' },
+          { who: 'robot', text: '看循环变量的变化范围。<br>比如 <code>for (i=1; i&lt;=10; i++)</code>，i 从 1 到 10，共 10 次。' },
+          { who: 'student', text: '如果是嵌套呢？' },
+          { who: 'robot', text: '外层乘内层。比如外层 5 次，内层 8 次，总共 5 × 8 = 40 次。' },
+          { who: 'student', text: '有没有陷阱？' },
+          { who: 'robot', text: '有！看 <code>&lt;</code> 还是 <code>&lt;=</code>：<br><code>i=0; i&lt;n</code> → n 次<br><code>i=1; i&lt;=n</code> → n 次<br><code>i=1; i&lt;n</code> → n-1 次<br>边界差一次，初赛经常考。' }
         ],
         extra: {
-          title: '💡 四个核心要点',
-          desc: '① <b>定义</b>：类型 名字[长度];<br>② <b>访问</b>：a[i]，下标从 0 开始<br>③ <b>遍历</b>：for (i=0; i&lt;n; i++)<br>④ <b>防越界</b>：数组宁开大一点<br>这四条是数组的地基。',
+          title: '📖 常见循环次数速查',
+          desc: '<b>for (i=0; i&lt;n; i++)</b> → n 次<br><b>for (i=1; i&lt;=n; i++)</b> → n 次<br><b>for (i=0; i&lt;=n; i++)</b> → n+1 次<br><b>for (i=1; i&lt;n; i++)</b> → n-1 次<br><br><b>记忆口诀</b>：<br><code>&lt;</code> 看差值，<code>&lt;=</code> 看差值加一。<br><br><b>嵌套总次数</b>：<br>外层 × 内层（若内层次数固定）<br>逐层累加（若内层次数随外层变化）<br><br><b>初赛高频</b>：每年至少 1—2 道。<br>把这张表背下来，送分题稳拿。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 23 课堂小测 ===== */
+    /* ===== 17 练习1：求和 ===== */
     {
-      id: 23, type: 'quiz', title: '课堂小测', subtitle: '数组定义、访问与内存',
+      id: 17, type: 'level-map', title: '课堂练习1：求和', subtitle: '用循环计算 1 + 2 + ... + n', chapterTag: '第 5 讲 · 实战演练',
+      data: {
+        question: { title: '题干', desc: '输入一个正整数 <code>n</code>，计算 1 + 2 + ... + n 的和。<br>输入样例：<code>100</code>　输出样例：<code>5050</code>', timer: '⏱ 限时 6 分钟' },
+        hints: [
+          '用一个变量 <code>sum</code> 累加',
+          'sum 初始化为 0',
+          '循环变量 i 从 1 到 n'
+        ],
+        answer: { codeFile: 'codes/lesson-05/sum.cpp' },
+        analysis: { title: '📖 解析', desc: 'sum 就像一个<b>累加器</b>，每次循环把当前的 i 加进去。<br>初始 sum = 0，循环结束后 sum 就是 1+2+...+n。<br><br><b>为什么初始化为 0？</b><br>因为 0 加任何数都不变，是"加法的起点"。' },
+        extra: { title: '📖 知识扩展 · 高斯的故事', desc: '200 多年前，数学家<a href="https://baike.baidu.com/item/高斯" target="_blank" class="wiki-link">高斯</a> 9 岁时，老师让算 1 加到 100。<br>其他孩子都在埋头苦算。小高斯发现 1+100 = 101，2+99 = 101……共 50 对，所以答案 = 50 × 101 = 5050。<br>这就是等差数列求和公式。<br><br><b>但计算机不用想捷径</b>——它直接循环 100 次，一样得出 5050。<br>计算机的优势不是聪明，而是<b>快</b>。<br><br><b>算法的价值</b>：<br>高斯的方法 1 步算出，O(1)；<br>循环的方法跑 100 步，O(n)。<br>数据越大，"聪明算法"越值钱。', variant: 'card-primary' }
+      }
+    },
+
+    /* ===== 18 练习2：阶乘 ===== */
+    {
+      id: 18, type: 'level-map', title: '课堂练习2：阶乘', subtitle: '计算 n! = 1 × 2 × ... × n', chapterTag: '第 5 讲 · 实战演练',
+      data: {
+        question: { title: '题干', desc: '输入一个正整数 <code>n</code>，输出 n 的阶乘 <code>n!</code>。<br>输入样例：<code>5</code>　输出样例：<code>120</code>', timer: '⏱ 限时 6 分钟' },
+        hints: [
+          '用一个变量 <code>fact</code> 累乘',
+          'fact 初始化为 1（不能是 0）',
+          '循环变量 i 从 1 到 n',
+          'n 可能会大，用 <code>long long</code>'
+        ],
+        answer: { codeFile: 'codes/lesson-05/factorial.cpp' },
+        analysis: { title: '📖 解析', desc: '累乘和累加思路一样，只是初始值不同。<br><b>累加</b>：初始 0，因为加 0 不影响。<br><b>累乘</b>：初始 1，因为乘 1 不影响。<br>如果 fact = 0，结果永远是 0。<br><br><b>为什么用 long long？</b><br>阶乘增长极快：13! 就超过 int 范围（21 亿）。<br>用 long long 能撑到 20!。' },
+        extra: { title: '💡 阶乘的增长速度', desc: '阶乘是"爆炸式增长"的典型：<br>· 5! = 120<br>· 10! = 362 万<br>· 13! = 62 亿（超过 int）<br>· 20! = 2.4 × 10¹⁸（long long 上限）<br>· 100! ≈ 9.3 × 10¹⁵⁷（天文数字）<br><br><b>竞赛应用</b>：排列组合题会大量用到阶乘。<br>n 很大时要用"取模"技巧，第 40 讲讲。<br><br><b>记忆</b>：累乘的初始值必须为 <b>1</b>，不是 0。', variant: 'card-primary' }
+      }
+    },
+
+    /* ===== 19 练习3：找最大值 ===== */
+    {
+      id: 19, type: 'level-map', title: '课堂练习3：找最大值', subtitle: '循环比较，找出最大的数', chapterTag: '第 5 讲 · 实战演练',
+      data: {
+        question: { title: '题干', desc: '第一行输入整数 <code>n</code>，第二行输入 n 个整数，输出其中的最大值。<br>输入样例：<code>5</code> 然后 <code>3 7 2 9 5</code>　输出样例：<code>9</code>', timer: '⏱ 限时 8 分钟' },
+        hints: [
+          '用变量 <code>maxVal</code> 记录当前最大值',
+          '初始化为一个很小的数，如 <code>-1e9</code>（-10 亿）',
+          '每次读入新数，如果更大就更新',
+          '可以在循环里直接 <code>cin &gt;&gt; x</code>，不用数组'
+        ],
+        answer: { codeFile: 'codes/lesson-05/max.cpp' },
+        analysis: { title: '📖 解析', desc: 'maxVal 初始值必须很小，才能被第一个数"打败"。<br>如果初始值写 0，那遇到全是负数的输入，结果就错了。<br><br><b>常用技巧</b>：初始化为 <code>-1e9</code>（-10 亿）。<br>竞赛数据范围通常在 ±10 亿以内，用 -10 亿一定安全。<br><br><b>口诀</b>：找最大值，初始值宁小勿大；找最小值，初始值宁大勿小。' },
+        extra: { title: '💡 循环读入的技巧', desc: '可以在循环里直接 <code>cin &gt;&gt; x</code>，不需要数组。<br>因为每次读完立即比较，用完就丢。<br>这样处理 <b>100 万个数</b>也不占内存。<br><br><b>竞赛常用</b>：边读边处理，比先存数组再处理更省内存。<br><br><b>什么时候必须用数组？</b><br>需要"回头看"的时候——逆序输出、排序、找第 k 大。<br>这些题必须先把数据存下来。', variant: 'card-primary' }
+      }
+    },
+
+    /* ===== 20 练习小结 ===== */
+    {
+      id: 20, type: 'dialog', title: '练习小结', subtitle: '小C点评三道练习', chapterTag: '第 5 讲 · 答疑',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，三道练习我都做完了。' },
+          { who: 'robot', text: '很好。说说你的发现。' },
+          { who: 'student', text: '练习 1 和 2 都是"循环 + 一个变量"，<br>一个累加、一个累乘。' },
+          { who: 'robot', text: '对。这就是<b>累加器</b>和<b>累乘器</b>的模式——<br>循环里的经典套路。' },
+          { who: 'student', text: '练习 3 用了 if 判断，和循环结合。' },
+          { who: 'robot', text: '对。<b>循环 + 分支</b>是程序的黄金组合。<br>循环遍历所有数据，分支处理每个数据——<br>这是竞赛题最常见的结构。' },
+          { who: 'student', text: '那什么时候用数组？' },
+          { who: 'robot', text: '需要"回头看"的时候。<br>练习 3 是边读边比，用完就丢，不用数组。<br>但如果要"逆序输出"，就必须先把所有数存下来。' }
+        ],
+        extra: {
+          title: '💡 三个核心模式',
+          desc: '<b>模式 1：累加</b><br><code>sum = 0;</code><br><code>for (...) sum += x;</code><br><br><b>模式 2：累乘</b><br><code>fact = 1;</code><br><code>for (...) fact *= x;</code><br><br><b>模式 3：极值</b><br><code>maxVal = -1e9;</code><br><code>for (...) if (x &gt; maxVal) maxVal = x;</code><br><br>这三个模式，几乎所有循环题都用得到。<br><b>记熟它们，就能应对 80% 的循环题。</b>',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 21 趣味扩展 ===== */
+    {
+      id: 21, type: 'grid', title: '🎨 难题后的放松 · 循环的真实应用', subtitle: '循环无处不在',
+      chapterTag: '第 5 讲 · 知识讲解',
+      data: {
+        cards: [
+          { icon: '🎮', title: '游戏主循环', desc: '游戏每秒运行 <b>60 次</b>画面刷新<br>每次刷新都在循环里更新<br>角色位置、血量、碰撞检测<br><b>没有循环，游戏无法运行</b>' },
+          { icon: '📊', title: '数据处理', desc: '统计 <b>100 万条</b>记录<br>逐条读取、计算、汇总<br>循环让计算机"批量处理"<br><b>人做不到的事，计算机一秒完成</b>' },
+          { icon: '🔬', title: '科学计算', desc: '物理模拟、天气预报、基因分析<br>用循环一步步逼近答案<br><b>数值计算</b>的核心是循环<br>模拟精度越高，循环次数越多' },
+          { icon: '🤖', title: '人工智能', desc: '神经网络训练循环 <b>上万次</b><br>每次调整权重、计算误差<br><b>循环是 AI 训练的引擎</b><br>GPT 训练需要循环数月' }
+        ],
+        extra: {
+          title: '💡 循环：计算机的"超能力"',
+          desc: '人类做重复工作会累，计算机不会。<br><b>人类每秒最多做 10 次计算，计算机每秒能做上亿次</b>。<br><br>这就是为什么计算机能解决人类无法解决的复杂问题。<br><br><b>一个有趣的对比</b>：<br>1946 年，世界第一台电子计算机 <a href="https://baike.baidu.com/item/ENIAC" target="_blank" class="wiki-link">ENIAC</a> 每秒能算 5000 次。<br>今天的手机芯片，每秒能算几十亿次——<b>快了 100 万倍</b>。<br>但即使这么快，程序还得靠循环才能"批量工作"。<br><br><b>学会循环，你就掌握了计算机的超能力。</b>',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 22 课堂小测 ===== */
+    {
+      id: 22, type: 'quiz', title: '课堂小测', subtitle: '循环结构与次数',
       chapterTag: '第 5 讲 · 课堂小测',
       data: {
         questions: [
@@ -431,110 +422,120 @@ export default {
             id: 1,
             type: 'single',
             difficulty: 2,
-            source: 'C++ 信息学奥赛总复习题 · 第四章',
-            question: '定义 <code>int a[10];</code> 后，合法下标范围是？',
+            source: 'CSP-J 初赛真题练习 · 循环结构',
+            question: '下面代码的循环体会执行多少次？',
+            questionCode: `int sum = 0;
+for (int i = 1; i <= 100; i++) {
+    sum += i;
+}`,
             options: [
-              { label: 'A', text: '1 到 10' },
-              { label: 'B', text: '0 到 10' },
-              { label: 'C', text: '0 到 9', correct: true },
-              { label: 'D', text: '1 到 9' }
+              { label: 'A', text: '99 次' },
+              { label: 'B', text: '100 次', correct: true },
+              { label: 'C', text: '101 次' },
+              { label: 'D', text: '无限次' }
             ],
-            analysis: 'C++ 数组下标从 <b>0</b> 开始，长度 10 的数组，合法下标是 <b>0 到 9</b>。<br>口诀：<b>下标 &lt; 长度</b>。<br>访问 a[10] 是越界，可能崩溃或输出垃圾值。'
+            analysis: 'i 从 1 开始，到 100 结束（包含 100），<b>共 100 次</b>。<br>计算公式：循环次数 = 结束值 - 起始值 + 1 = 100 - 1 + 1 = 100。<br>这是初赛最高频的题型之一。<br>对应本讲 slide-16"初赛渗透：循环次数"。'
           },
           {
             id: 2,
             type: 'single',
-            difficulty: 2,
-            source: 'CSP-J 初赛真题练习 · 数组',
-            question: '在常见编译器中，<code>int a[100];</code> 占用多少字节内存？',
+            difficulty: 3,
+            source: 'CSP-J 初赛真题练习 · while 循环',
+            question: '下面代码的输出是什么？',
+            questionCode: `int i = 0;
+while (i < 5) {
+    cout << i << " ";
+    i += 2;
+}`,
             options: [
-              { label: 'A', text: '100 字节' },
-              { label: 'B', text: '200 字节' },
-              { label: 'C', text: '400 字节', correct: true },
-              { label: 'D', text: '800 字节' }
+              { label: 'A', text: '0 1 2 3 4' },
+              { label: 'B', text: '0 2 4', correct: true },
+              { label: 'C', text: '0 2 4 6' },
+              { label: 'D', text: '0' }
             ],
-            analysis: 'int 占 4 字节，数组有 100 个元素。<br>总内存 = 100 × 4 = <b>400 字节</b>。<br><b>规律</b>：数组内存 = 元素个数 × 每个元素的字节数。<br>int = 4、long long = 8、double = 8、char = 1。'
+            analysis: '每次循环 i 加 2，依次输出 0、2、4。<br>当 i = 6 时，<code>i &lt; 5</code> 为假，循环结束。<br><br><b>关键</b>：<code>i += 2</code> 不是 <code>i++</code>，步长是 2。<br>所以输出 "0 2 4"，选 B。'
           },
           {
             id: 3,
             type: 'single',
             difficulty: 3,
-            source: '2020 CSP-J 初赛模拟题 · 数组',
-            question: '下面代码的输出是什么？',
-            questionCode: `int a[5] = {10, 20, 30, 40, 50};
-cout << a[2] + a[4] << endl;`,
+            source: 'CSP-J 2021 初赛模拟题 · 嵌套循环',
+            question: '下面代码会输出多少个 <code>*</code>？',
+            questionCode: `for (int i = 1; i <= 3; i++)
+    for (int j = 1; j <= 4; j++)
+        cout << "*";`,
             options: [
-              { label: 'A', text: '50' },
-              { label: 'B', text: '70' },
-              { label: 'C', text: '80', correct: true },
-              { label: 'D', text: '编译错误' }
+              { label: 'A', text: '7 个' },
+              { label: 'B', text: '12 个', correct: true },
+              { label: 'C', text: '3 个' },
+              { label: 'D', text: '4 个' }
             ],
-            analysis: 'a[2] 是第三个元素 30，a[4] 是第五个元素 50。<br>30 + 50 = <b>80</b>。<br>关键：<b>a[0] 是第一个元素</b>，不要数错。<br>a[0]=10，a[1]=20，a[2]=30，a[3]=40，a[4]=50。'
+            analysis: '外层 3 次，内层 4 次，共 3 × 4 = <b>12 次</b>。<br><b>嵌套循环的总次数 = 外层 × 内层</b>（内层次数固定时）。<br><br>如果内层次数随外层变化（如 <code>j &lt;= i</code>），要逐层累加，不一定是乘法。'
           },
           {
             id: 4,
             type: 'judge',
             difficulty: 2,
-            source: 'C++ 信息学奥赛总复习题 · 第四章',
-            question: '在 C++ 中，访问数组越界元素时，程序一定会报错。',
+            source: 'C++ 信息学奥赛总复习题 · 第三章',
+            question: '在 C++ 中，<code>break</code> 和 <code>continue</code> 的效果完全一样。',
             options: [
               { label: 'A', text: '正确' },
               { label: 'B', text: '错误', correct: true }
             ],
-            analysis: 'C++ <b>不做下标检查</b>，越界访问不会报错。<br>可能的结果：<br>· 读到垃圾值（不崩溃但结果错）<br>· 修改了其他变量的值<br>· 程序崩溃（Segmentation Fault）<br>所以越界问题很隐蔽，要主动避免。<br>这是 C++ 追求速度的代价。'
+            analysis: '两者完全不同：<br><b>break</b>：跳出<b>整个循环</b>，不再执行循环。<br><b>continue</b>：跳过<b>本次循环</b>，继续下一次循环。<br><br>记忆口诀：break 是"我不干了"，continue 是"这次不算，继续"。'
           },
           {
             id: 5,
             type: 'judge',
             difficulty: 2,
-            source: 'CSP-J 初赛真题练习 · 数组',
-            question: '数组的长度在定义时可以不确定，运行时再决定。',
+            source: 'C++ 信息学奥赛总复习题 · 第三章',
+            question: '在 C++ 中，<code>while (true) { }</code> 是一个死循环，程序会一直执行下去。',
             options: [
-              { label: 'A', text: '正确' },
-              { label: 'B', text: '错误', correct: true }
+              { label: 'A', text: '正确', correct: true },
+              { label: 'B', text: '错误' }
             ],
-            analysis: 'C 风格数组的长度在<b>定义时必须确定</b>，不能运行时改变。<br>例如 <code>int a[n];</code> 这种写法在标准 C++ 中<b>不允许</b>（n 是变量）。<br>要动态长度，用 <code>vector</code>（C++ STL 容器）。<br>竞赛中，通常按题目最大数据范围定义一个够大的数组。'
+            analysis: '<code>while (true)</code> 的条件永远为真，所以循环体会一直执行，形成"死循环"。<br><br>在竞赛中，意外的死循环会触发 <b>TLE</b>（超时）。<br>但<b>故意的死循环</b>也有用武之地，比如服务器监听、游戏主循环。<br>关键是<b>循环体里要有跳出机制</b>（如 break、return）。'
           }
         ],
         extra: {
-          title: '📖 知识扩展 · 数组 vs vector',
-          desc: 'C++ 有两种"数组"：<br>① <b>C 风格数组</b>：<code>int a[100];</code> 长度固定，速度快。<br>② <b>vector</b>：<code>vector&lt;int&gt; a;</code> 长度可变，更安全。<br>竞赛中主要用 C 风格数组，因为速度更快、兼容性更好。<br>vector 适合长度不确定的场景。<br>详细的 vector 用法在"STL"讲次介绍。',
+          title: '📖 知识扩展 · 初赛循环题三大考点',
+          desc: '<b>① 循环次数</b>：看起始值、结束值、步长<br><b>② 输出内容</b>：逐次模拟，或找规律<br><b>③ 嵌套总次数</b>：外层 × 内层（若内层固定）<br><br>这三类题占了初赛循环题的 <b>90%</b>。<br>多练几道，就能秒杀。<br><br><b>建议</b>：做初赛真题时，把每次循环的变量值写在纸上，一步步推。<br>不要心算，容易错。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 24 今日总结 ===== */
+    /* ===== 23 今日总结 ===== */
     {
-      id: 24, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 23, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
-        text: '一个变量存一个数，一个数组存一排数。',
-        author: '—— 数组第一课',
+        text: '让程序重复做事，才是真正的自动化。',
+        author: '—— 循环结构第一课',
         points: [
-          '数组是一排连续存储的同类型数据',
-          '定义：类型 数组名[长度];',
-          '下标从 0 开始，合法范围 0 到 长度-1',
-          '数组 + 循环 = 竞赛解题黄金组合',
-          '遍历模板：for (int i = 0; i < n; i++)',
-          '越界不报错，数组宁开大一点'
+          'while 循环：条件为真就重复',
+          'for 循环：三要素写在一行，最常用',
+          '循环三要素：初始、条件、更新',
+          '循环嵌套：外层走一步，内层走一圈',
+          'break：提前跳出循环',
+          'continue：跳过本次循环'
         ],
-        highlight: { title: '📌 关键口诀', desc: '数组一排柜，类型要统一；下标从 0 起，长度别忘记；循环遍历它，求和找最大；防越界开大点，累加先清零。' },
+        highlight: { title: '📌 关键口诀', desc: 'while 看条件，for 三要素；初始、条件、更新，缺一不可；嵌套外乘内，break 跳整圈；continue 跳一次，记住别搞混。' },
         extra: {
-          title: '💡 数组是数据结构的地基',
-          desc: '数组是第一个真正的数据结构。<br>后面要学的字符串、栈、队列、树、图，底层都依赖数组。<br>把数组学好，后面一马平川。<br><br>🔮 <b>伏笔</b>：数组为什么访问快？因为它连续存放。<br>那如果不连续呢？第 27 讲"链表"会告诉你另一种可能。',
+          title: '💡 三大结构已掌握',
+          desc: '顺序、分支、循环——程序的三大基本结构，你已经全部学会。<br>从下一讲开始，我们进入<b>批量存储数据</b>的世界——数组。<br><br>数组 + 循环 = 竞赛解题的黄金组合。<br><br>🔮 <b>伏笔</b>：<br>· 循环能处理海量数据，但数据本身存哪？→ 第 6 讲数组<br>· 为什么有些循环很快，有些很慢？→ 第 36 讲复杂度',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 25 课后作业 ===== */
+    /* ===== 24 课后作业 ===== */
     {
-      id: 25, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 24, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
-          { icon: '🟢', title: '基础 1 · P1046', link: 'https://www.luogu.com.cn/problem/P1046', desc: '<b>陶陶摘苹果</b><br>考察：数组读入、遍历<br>难度：★<br>目标：读入 10 个高度，统计能摘到的苹果数' },
-          { icon: '🟢', title: '基础 2 · P1427', link: 'https://www.luogu.com.cn/problem/P1427', desc: '<b>小鱼的数字游戏</b><br>考察：逆序输出<br>难度：★<br>目标：倒着输出一串数字' },
-          { icon: '🔴', title: '挑战 · P5728', link: 'https://www.luogu.com.cn/problem/P5728', desc: '<b>旗鼓相当的对手</b><br>考察：二维数组、双重循环<br>难度：★★★<br>目标：用二维数组存多科成绩，两两比较' }
+          { icon: '🟢', title: '基础 1 · P5722', link: 'https://www.luogu.com.cn/problem/P5722', desc: '<b>数列求和</b><br>考察：for 循环、累加<br>难度：★<br>目标：读入 n 个数，输出和' },
+          { icon: '🟢', title: '基础 2 · P5721', link: 'https://www.luogu.com.cn/problem/P5721', desc: '<b>数字直角三角形</b><br>考察：循环嵌套、输出格式<br>难度：★★<br>目标：打印数字三角形' },
+          { icon: '🔴', title: '挑战 · P5727', link: 'https://www.luogu.com.cn/problem/P5727', desc: '<b>冰雹猜想</b><br>考察：while 循环、条件判断<br>难度：★★★<br>目标：反复迭代直到 1' }
         ],
         extra: {
           title: '📌 提交方式',
@@ -544,42 +545,65 @@ cout << a[2] + a[4] << endl;`,
       }
     },
 
-    /* ===== 26 下节预告 ===== */
+    /* ===== 25 下节预告 ===== */
     {
-      id: 26, type: 'radial', title: '下节预告', subtitle: '第 6 讲 · 字符串',
+      id: 25, type: 'radial', title: '下节预告', subtitle: '第 6 讲 · 一维数组',
       data: {
-        center: '字符串',
+        center: '数组',
         items: [
-          { text: '字符数组' },
-          { text: 'string 类型' },
-          { text: '常用函数' },
-          { text: '回文判断' }
+          { text: '什么是数组' },
+          { text: '定义与访问' },
+          { text: '遍历与统计' },
+          { text: '常见错误' }
         ],
         extra: {
-          title: '💡 文字的存储',
-          desc: '数组能存整数，那文字呢？<br>"Hello" 这 5 个字母，怎么存？<br>下一讲，我们学习能存一串文字的"字符串"。<br>字符串是数组思想的延伸，也是竞赛中处理文本问题的核心。<br><br>🔮 <b>远期彩蛋</b>：数组是连续内存，那计算机怎么区分"数组"和"字符串"？第 6 讲揭晓。',
+          title: '💡 批量存储数据',
+          desc: '循环能处理海量数据，但数据存哪呢？<br>如果输入 100 个数，用 100 个变量吗？<br>下一讲，我们学习能一次存很多数据的"数组"。<br>数组 + 循环 = 竞赛解题的黄金组合。<br><br>🔮 <b>远期彩蛋</b>：数组为什么访问快？因为它是连续内存。<br>如果不连续呢？第 27 讲"链表"会告诉你另一种可能。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 27 答疑时间 ===== */
+    /* ===== 26 答疑时间 ===== */
     {
-      id: 27, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 5 讲 · 答疑',
+      id: 26, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 5 讲 · 答疑',
       data: {
         lines: [
-          { who: 'student', text: '数组长度可以运行时确定吗？' },
-          { who: 'robot', text: 'C 风格数组不行，长度必须是编译期常量。<br>如果长度要动态确定，后面会学 vector。' },
-          { who: 'student', text: '为什么数组从 0 开始编号？' },
-          { who: 'robot', text: '因为下标本质是"偏移量"。a[0] 偏移 0，a[1] 偏移 1。<br>习惯就好，竞赛里所有数组都从 0 开始。' },
-          { who: 'student', text: '数组开多大合适？' },
-          { who: 'robot', text: '看题目数据范围，在此基础上多开 5 到 10 个空位。<br>宁可浪费几字节，也别越界。' },
-          { who: 'student', text: '什么时候用数组？' },
-          { who: 'robot', text: '需要"回头看"的时候。逆序、排序、找第 k 大，都要先存下来。' }
+          { who: 'student', text: 'for 和 while 到底用哪个？' },
+          { who: 'robot', text: '循环次数确定用 for，次数不确定用 while。<br>其实可以互换，选读起来更清晰的。' },
+          { who: 'student', text: '为什么我的循环会死循环？' },
+          { who: 'robot', text: '检查三要素。最常见的是忘写更新语句 i++ 或 i--。' },
+          { who: 'student', text: 'break 和 continue 区别是什么？' },
+          { who: 'robot', text: 'break 跳出整个循环，continue 只跳过本次。<br>画个图就懂了：<br>break 是"全都不干了"，continue 是"这次不算"。' },
+          { who: 'student', text: '循环嵌套很难懂怎么办？' },
+          { who: 'robot', text: '想象排队：外层是队伍，内层是每个人。<br>外层动一步，内层所有人都走一遍。<br>多画几遍就懂了。' },
+          { who: 'student', text: '循环执行次数有什么用？' },
+          { who: 'robot', text: '初赛必考。而且理解执行次数，能帮你估算程序跑多快。<br>n 次循环 vs n² 次循环，速度差很多。<br>这就是"复杂度"的雏形——第 36 讲会详细讲。' }
         ],
         extra: {
           title: '📌 一个建议',
-          desc: '数组是编程的基本功。<br>初学者至少要写 <b>30 道数组题</b>才能熟练。<br>从"读入 - 遍历 - 处理 - 输出"这个模板开始，反复练。',
+          desc: '循环是编程的核心。<br>初学者至少要写 <b>50 道循环题</b>才能熟练。<br><br>练习时注意：<br>· 每道题先想"循环几次"<br>· 再想"每次做什么"<br>· 最后想"循环结束输出什么"<br><br>这个思考顺序，能帮你避免大部分 bug。<br>别怕错，每错一次就进步一次。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 27 本讲英文单词 ===== */
+    {
+      id: 27, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
+      chapterTag: '第 5 讲 · 复习',
+      data: {
+        words: [
+          { word: 'while',    cn: '当……时', pron: '/waɪl/',            origin: '英文原意"当……时"',   category: '关键字' },
+          { word: 'for',      cn: '为了',   pron: '/fɔːr/',            origin: '英文原意"为了"',      category: '关键字' },
+          { word: 'break',    cn: '打断',   pron: '/breɪk/',           origin: '英文原意"打破"',      category: '关键字' },
+          { word: 'continue', cn: '继续',   pron: '/kənˈtɪnjuː/',       origin: '英文原意"继续"',      category: '关键字' },
+          { word: 'loop',     cn: '循环',   pron: '/luːp/',            origin: '英文原意"环、圈"',    category: '概念' },
+          { word: 'iteration', cn: '迭代',  pron: '/ˌɪtəˈreɪʃn/',       origin: '英文原意"重复"',      category: '概念' }
+        ],
+        extra: {
+          title: '💡 记忆法 · 英文原意',
+          desc: '<b>关键字</b>（C++ 语法，必须记牢）：<br><code>while</code> = 当……时（条件成立时循环）<br><code>for</code> = 为了（为了做某事而循环）<br><code>break</code> = 打断（跳出循环）<br><code>continue</code> = 继续（跳过本次）<br><br><b>概念</b>（理解意思就行）：<br><code>loop</code> = 循环（圈）<br><code>iteration</code> = 迭代（每次重复叫一次迭代）<br><br><b>易错拼写</b>：<br>· <code>while</code> 不是 <code>whlie</code><br>· <code>continue</code> 有 8 个字母，容易拼错<br>· <code>iteration</code> 两个 t、两个 i<br><br><b>延伸</b>：<br>· <code>endless loop</code> = 死循环<br>· <code>infinite loop</code> = 无限循环（同义）',
           variant: 'card-primary'
         }
       }
@@ -590,25 +614,35 @@ cout << a[2] + a[4] << endl;`,
       id: 28, type: 'grid', title: '第 5 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 5 讲 · 复习',
       data: {
         cards: [
-          { icon: '📦', title: '一维数组', desc: '<b>定义</b>：int a[100];<br><b>下标</b>：0 到 99<br><b>访问</b>：a[i]<br><b>初始化</b>：int a[5] = {1,2,3,4,5};' },
-          { icon: '🔄', title: '数组与循环', desc: '<b>读入</b>：for (i=0; i&lt;n; i++) cin &gt;&gt; a[i];<br><b>遍历</b>：for (i=0; i&lt;n; i++) {...}<br><b>求和</b>：sum += a[i];<br><b>逆序</b>：for (i=n-1; i&gt;=0; i--)' },
-          { icon: '📏', title: '数组内存', desc: '<b>元素大小</b>：int 4 / double 8 / char 1<br><b>总内存</b>：个数 × 元素大小<br><b>例</b>：int a[100]; 占 400 字节' },
-          { icon: '⚠️', title: '常见错误', desc: '<b>越界</b>：下标 ≥ 长度<br><b>数组太小</b>：按数据范围开大<br><b>未初始化</b>：sum = 0;<br><b>二维语法</b>：a[i][j] 不是 a[i,j]' }
+          { icon: '🔁', title: 'while 循环', desc: '<b>语法</b>：while (条件) { ... }<br><b>初始</b>：循环外定义<br><b>更新</b>：循环体内写<br><b>陷阱</b>：忘写 i++ 会死循环' },
+          { icon: '🔂', title: 'for 循环', desc: '<b>语法</b>：for (初始; 条件; 更新) { ... }<br><b>三要素</b>：初始、条件、更新<br><b>分号</b>：三部分用分号分隔<br><b>优势</b>：计数循环首选' },
+          { icon: '🔄', title: '循环嵌套', desc: '<b>语法</b>：for 里套 for<br><b>执行</b>：外层 1 步，内层 1 圈<br><b>总次数</b>：外层 × 内层<br><b>应用</b>：九九乘法表、图案打印' },
+          { icon: '⚡', title: 'break 与 continue', desc: '<b>break</b>：跳出整个循环<br><b>continue</b>：跳过本次，下次继续<br><b>位置</b>：必须在循环内<br><b>区别</b>：全不干 vs 这次不算' }
         ],
         extra: {
-          title: '📌 关键口诀 + 小 C 彩蛋',
-          desc: '<b>口诀</b>：数组一排柜，类型要统一；下标从 0 起，长度别忘记；循环遍历它，求和找最大；防越界开大点，累加先清零。<br><b>小 C 彩蛋</b>：数组是计算机最基础的数据结构。<br>你手机里的联系人列表、微信聊天记录、游戏背包，底层都是数组。<br>学会数组，你就理解了计算机"批量处理数据"的核心秘密。',
+          title: '📌 关键口诀 + 挑战题单',
+          desc: '<b>口诀</b>：while 看条件，for 三要素；初始、条件、更新，缺一不可；嵌套外乘内，break 跳整圈；continue 跳一次，记住别搞混。<br><br>📌 <b>挑战题单</b>：<br><b>⭐ 基础</b>：P5722 数列求和<br><b>⭐⭐ 进阶</b>：P5721 数字直角三角形<br><b>⭐⭐⭐ 挑战</b>：P5727 冰雹猜想<br><b>🔗 延伸</b>：洛谷搜索"入门 3"，挑 3 道循环题练手。<br><br><b>小 C 彩蛋</b>：世界第一台电子计算机 <a href="https://baike.baidu.com/item/ENIAC" target="_blank" class="wiki-link">ENIAC</a> 每秒只能算 5000 次。<br>现在的电脑每秒能算几十亿次。<br>你写的 for 循环，计算机 1 秒能跑上亿遍。',
           variant: 'card-glow'
         }
       }
     },
 
-    /* ===== 29 结束页 ===== */
+    /* ===== 29 小结过渡 ===== */
     {
-      id: 29, type: 'ending', title: '第五讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
+      id: 29, type: 'transition', title: '循环结构 · 小结', subtitle: '你已经让程序学会重复',
+      data: { note: '下一讲，我们将学习批量存储数据的工具——数组' }
+    },
+
+    /* ===== 30 结束页 ===== */
+    {
+      id: 30, type: 'ending', title: '第五讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
-        extra: { title: '🌟 你已经掌握了批量数据的工具', desc: '数组是数据结构的地基。<br>从下一讲开始，我们用它来处理文字——字符串。<br>数组 + 字符串 + 循环 + 分支，你就能解决绝大多数基础题了。', variant: 'card-glow' }
+        extra: {
+          title: '🌟 三大结构已掌握',
+          desc: '顺序、分支、循环，程序的三大基本结构你已经全部学会。<br>从下一讲开始，我们进入数据结构与算法的世界。<br><br>数组、字符串、函数、递归——<br>这些工具能让你的程序变得更强大、更灵活。<br>编程的大门，才刚刚打开。',
+          variant: 'card-glow'
+        }
       }
     }
 

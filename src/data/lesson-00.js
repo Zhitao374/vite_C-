@@ -7,7 +7,7 @@
 export default {
   title: '动画布局合集',
   subtitle: '预览所有 visual-step 布局',
-  total: 10,
+  total: 17,
   category: '演示工具',
   slides: [
     /* ===== 01 封面 ===== */
@@ -159,7 +159,7 @@ export default {
         }
       }
     }, 
-        /* ===== 06 排序动画 ===== */
+    /* ===== 06 排序动画 ===== */
     {
       id: 6, type: 'sort-animation', title: '冒泡排序：第 1 轮', subtitle: '相邻比较 + 交换', chapterTag: '预览 · 动画组件',
       data: {
@@ -492,9 +492,178 @@ export default {
       }
     },
 
-    /* ===== 11 结束页 ===== */
+    /* ===== 12 过渡页 ===== */
     {
-      id: 11, type: 'ending', title: '预览结束', subtitle: '所有布局演示完毕', chapterTag: false,
+      id: 12, type: 'transition', title: '第二站 · 代码的多种展示方式', subtitle: '看一遍就懂，不用猜',
+      data: { note: '接下来展示课程里会用到的几种代码展示形式' }
+    },
+
+        /* ===== 13 单栏代码（整段） ===== */
+    {
+      id: 13, type: 'code-split', title: '展示方式 ① · 单栏代码（整段）', subtitle: '短代码直接显示全部',
+      chapterTag: '第 0 讲 · 代码展示',
+      data: {
+        intro: '📖 <b>规则</b>：代码 ≤ 20 行时，直接显示整个文件。<br>左边是代码，右边是注释卡片。',
+        codeFile: 'codes/lesson-00/hello-demo.cpp',
+        annotations: [
+          { line: 4, title: 'int main() {', desc: '程序入口' },
+          { line: 5, title: 'cout &lt;&lt; "Hello, World!"', desc: '输出一句话' },
+          { line: 6, title: 'return 0;', desc: '正常结束' }
+        ],
+        output: 'Hello, World!',
+        extra: {
+          title: '💡 什么时候用整段代码',
+          desc: '代码短（≤ 20 行），或者关键内容分散在文件各处时，用整段显示。<br>学生能看到完整的上下文，不需要猜"省略了什么"。<br><br><b>判断口诀</b>：短代码，整段显。<br><br>📌 <b>数据写法</b>：<code>codeFile</code> + <b>不写</b> <code>snippet</code>。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 14 单栏代码（片段） ===== */
+    {
+      id: 14, type: 'code-split', title: '展示方式 ② · 单栏代码（片段）', subtitle: '长代码只显示关键区域',
+      chapterTag: '第 0 讲 · 代码展示',
+      data: {
+        intro: '📖 <b>规则</b>：代码 > 20 行时，用 <code>snippet</code> 标记出关键区域。<br>页面上只显示这部分，但文件仍是完整可编译的。',
+        codeFile: 'codes/lesson-00/if-demo.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 12, title: 'int score;', desc: '定义变量' },
+          { line: 13, title: 'cin &gt;&gt; score;', desc: '读入数据' },
+          { line: 15, title: 'if (score &gt;= 90)', desc: '判断最高档' },
+          { line: 17, title: '} else if (score &gt;= 80) {', desc: '依次往下判断' }
+        ],
+        output: '（输入 85）\nB',
+        extra: {
+          title: '💡 什么时候用片段',
+          desc: '代码很长，但关键内容集中在某一区域时，用 snippet 只显示那一部分。<br>页面清爽，学生注意力集中。<br><br><b>注意</b>：一个 .cpp 里<b>只放一段 snippet</b>。<br>如果需要显示两段不连续的代码 → 用"分栏"（下一页展示）。<br><br><b>判断口诀</b>：长代码，一段包。<br><br>📌 <b>数据写法</b>：<code>codeFile</code> + <code>snippet: \'main\'</code>。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 15 左右分栏对照 ===== */
+    {
+      id: 15, type: 'split', title: '展示方式 ③ · 两栏对照', subtitle: '两段代码放一起看',
+      chapterTag: '第 0 讲 · 代码展示',
+      data: {
+        intro: '📖 一个 <code>.cpp</code> 文件，两段<b>不同名</b>的 snippet，左右两栏各提取一段。',
+        cols: 2,
+        panes: [
+          {
+            icon: '📝',
+            codeFile: 'codes/lesson-00/func-demo.cpp',
+            snippet: 'func-add',
+            title: '① 函数定义',
+            note: '位置：文件上半部分。作用：定义"计算规则"。'
+          },
+          {
+            icon: '📞',
+            codeFile: 'codes/lesson-00/func-demo.cpp',
+            snippet: 'main',
+            title: '② 函数调用',
+            note: '位置：main 函数。作用：使用"计算规则"。'
+          }
+        ],
+        extra: {
+          title: '💡 什么时候用两栏',
+          desc: '当两段代码<b>物理上分得很远</b>（如函数定义在文件头、调用在 main 里），但需要<b>对照理解</b>时，用两栏。<br><br><b>常见场景</b>：<br>· 函数定义 vs 函数调用<br>· 错误写法 vs 正确写法<br>· 两种算法对比<br>· 输入格式 vs 输出格式<br><br><b>实现关键</b>：同一个 .cpp 文件里写<b>两段不同名 snippet</b>（如 <code>func-add</code> 和 <code>main</code>），左右两栏各提取一段。<br><br>📌 <b>数据写法</b>：<code>data.panes</code> 数组，写 2 项；可加 <code>cols: 2</code>。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 16 展示方式汇总 ===== */
+    {
+      id: 16, type: 'grid', title: '代码展示方式 · 一览表', subtitle: '5 种方式，各有用途', chapterTag: '第 0 讲 · 代码展示',
+      data: {
+        cards: [
+          {
+            icon: '📄',
+            title: '① 单栏 · 整段',
+            desc: '代码 ≤ 20 行<br>显示整个文件<br><b>codeFile，不写 snippet</b><br>例：Hello World'
+          },
+          {
+            icon: '✂️',
+            title: '② 单栏 · 片段',
+            desc: '代码 > 20 行<br>只显示关键区域<br><b>codeFile + snippet</b><br>例：if 判断'
+          },
+          {
+            icon: '⚖️',
+            title: '③ 左右分栏',
+            desc: '两段代码对照<br>左右并列<br><b>split + 两段不同名 snippet</b><br>例：定义 vs 调用'
+          },
+          {
+            icon: '🔀',
+            title: '④ 错误对比',
+            desc: '错误写法 vs 正确写法<br><b>compare 组件</b><br>例：= 与 =='
+          },
+          {
+            icon: '🎬',
+            title: '⑤ 逐行演化',
+            desc: '一步高亮一行<br>表达式逐步展开<br><b>evolution 组件</b><br>例：递归展开'
+          },
+          {
+            icon: '📌',
+            title: '判断口诀',
+            desc: '<b>短代码整段显</b><br><b>长代码一段包</b><br><b>两段不连续 → 分栏</b><br><b>一步一行 → evolution</b>'
+          }
+        ],
+        extra: {
+          title: '💡 为什么要统一展示方式',
+          desc: '同一个课程里，代码展示方式应该一致——<br>学生看惯了，就能快速"扫"到重点。<br><br><b>课程约定</b>：<br>· 语法演示用 code-split（片段）<br>· 练习答案用 code-split（整段）<br>· 对比用 compare<br>· 函数/调用用 split<br>· 递归/递推用 evolution<br><br>这套约定，贯穿全部 57 讲。',
+          variant: 'card-glow'
+        }
+      }
+    },
+
+    /* ===== 17 三栏并列 ===== */
+    {
+      id: 17, type: 'split', title: '展示方式 ④ · 多栏并列', subtitle: '3 栏同时对比',
+      chapterTag: '第 0 讲 · 代码展示',
+      data: {
+        intro: '📖 当需要对比<b>多个对象</b>时，可以在 <code>panes</code> 里写更多项。<br>下面演示 <b>3 栏</b>的效果——三种常用数据类型并列。',
+        cols: 3,
+        panes: [
+          {
+            icon: '🔢',
+            title: 'int · 整数',
+            items: [
+              { desc: '存储整数：<code>-5</code>、<code>100</code>' },
+              { desc: '占 <b>4 字节</b>' },
+              { desc: '范围：约 <code>±21 亿</code>' }
+            ]
+          },
+          {
+            icon: '📐',
+            title: 'double · 小数',
+            items: [
+              { desc: '存储小数：<code>3.14</code>、<code>-0.5</code>' },
+              { desc: '占 <b>8 字节</b>' },
+              { desc: '精度：约 15 位有效数字' }
+            ]
+          },
+          {
+            icon: '🔤',
+            title: 'char · 字符',
+            items: [
+              { desc: '存储单字符：<code>\'A\'</code>、<code>\'7\'</code>' },
+              { desc: '占 <b>1 字节</b>' },
+              { desc: '本质是 ASCII 码' }
+            ]
+          }
+        ],
+        extra: {
+          title: '💡 什么时候用多栏',
+          desc: '<b>3 栏适合"并列对比 3 个对象"</b>——<br>· 三种排序算法<br>· 三种数据类型<br>· 三种解决方案<br>· 三种错误类型<br><br><b>4 栏</b>也能用，但每栏会变窄，适合"短标签"（如 <code>+ - * /</code> 四个运算符）。<br><br><b>栏数上限</b>：4 栏。再多会看不清。<br><br><b>代码模式例外</b>：代码块宽度敏感，<b>最多 2 栏</b>——3 栏代码会挤成一团。<br><br>📌 <b>数据写法</b>：<code>data.panes</code> 写 3 项；<code>cols: 3</code> 可显式指定（也可省略，会自动按 panes.length 判断）。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 18 结束页 ===== */
+    {
+      id: 18, type: 'ending', title: '预览结束', subtitle: '所有布局演示完毕', chapterTag: false,
       data: {
         slogan: '开发预览用 · 后续课程陆续接入',
         extra: {

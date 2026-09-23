@@ -1,507 +1,410 @@
 export default {
-  title: '第 7 讲 函数',
-  subtitle: '让代码可以复用',
+  title: '第 7 讲 字符串基础',
+  subtitle: '一串字符的容器',
   total: 30,
   category: '语法与基础算法',
   slides: [
 
     /* ===== 01 封面 ===== */
     {
-      id: 1, type: 'cover', title: '函数', subtitle: '让代码可以复用', chapterTag: false,
-      data: { accentWord: '函数', meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 7 讲'] }
+      id: 1, type: 'cover', title: '字符串基础', subtitle: '一串字符的容器', chapterTag: false,
+      data: { accentWord: '字符串', meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 7 讲'] }
     },
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '字符串，文字的容器',
+      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '一维数组，批量数据的好帮手',
       data: {
         items: [
-          { icon: '🔤', badge: '基础', title: '字符 vs 字符串', desc: "char 用单引号，string 用双引号", points: ['char 1 字节', '字符串含 \\0', '本质是字符数组'] },
-          { icon: '📝', badge: '核心', title: '两种定义', desc: 'char[] vs string', points: ['char s[100];', 'string s;', '推荐用 string'] },
-          { icon: '📥', badge: '关键', title: '读入与遍历', desc: 'cin / getline / s[i]', points: ['cin 读词', 'getline 读行', '范围 for'] },
-          { icon: '🏆', badge: '实战', title: '三大经典题', desc: '统计、回文、逆序', points: ['字符统计', '回文判断', '字符串逆序'] }
+          { icon: '📦', badge: '基础', title: '数组概念', desc: '一排储物柜，同类型连续存放', points: ['同类型', '连续存储', '下标访问'] },
+          { icon: '🔢', badge: '核心', title: '定义与访问', desc: 'int a[100];', points: ['下标 0 到 99', '类型 名字[长度];', '数组宁开大点'] },
+          { icon: '🔄', badge: '关键', title: '数组与循环', desc: '遍历、求和、找最大值', points: ['for (i=0; i<n; i++)', '边读边处理', '逆序输出'] },
+          { icon: '⚠️', badge: '易错', title: '常见错误', desc: '越界、未初始化、数组太小', points: ['下标 < 长度', 'sum = 0', '按范围开大'] }
         ],
-        extra: { title: '💡 今天的新问题', desc: '目前我们写的代码都在 main 里，越写越长。<br>如果某段代码要用 10 次，难道要复制 10 遍？<br>不用。今天我们就学习"函数"——把代码打包起来，想用就调用。<br><br>🔮 <b>回收伏笔</b>：第 6 讲讲回文时说过"函数的底层是栈"，今天先学函数是什么。' }
+        extra: { title: '💡 今天的新问题', desc: '数组能存整数，那文字呢？<br>"Hello" 这 5 个字母，怎么存？<br>今天我们就学习能存一串文字的"字符串"。<br><br>🔮 <b>回收伏笔</b>：第 6 讲说过"字符串本质是字符数组"，今天揭晓。' }
       }
     },
 
     /* ===== 03 本节课目标 ===== */
     {
-      id: 3, type: 'grid', title: '本节课目标', subtitle: '四步掌握代码复用',
+      id: 3, type: 'grid', title: '本节课目标', subtitle: '四步掌握文字的存储',
       data: {
         cards: [
-          { number: '01', title: '理解函数', desc: '为什么需要函数、料理机的比喻' },
-          { number: '02', title: '定义与调用', desc: '函数语法、返回类型、参数列表' },
-          { number: '03', title: '参数与返回值', desc: '值传递、形参实参、return' },
-          { number: '04', title: '作用域', desc: '局部变量、全局变量、生命周期' }
+          { number: '01', title: '理解字符', desc: '字符 \'A\' 和字符串 "A" 的区别' },
+          { number: '02', title: '两种定义', desc: '字符数组 char[] 和 string 类型' },
+          { number: '03', title: '读入与遍历', desc: 'cin、getline、下标、范围 for' },
+          { number: '04', title: '实战应用', desc: '统计字符、回文判断、逆序输出' }
         ],
-        extra: { title: '📖 知识扩展 · 函数的重要性', desc: '函数是程序设计的核心思想之一。<br>没有函数，代码会变成一坨面条——到处重复、难以维护。<br>有了函数，程序变成一个个"积木"，想用就拼。<br><b>函数是编程从"写代码"到"做工程"的第一步。</b>' }
+        extra: { title: '📖 知识扩展 · 字符串的重要性', desc: '字符串是竞赛中的高频考点。<br>CSP-J 每年至少 1 道字符串题。<br>从"统计单词"到"密码破解"，从"文本处理"到"数据解析"，字符串无处不在。<br><b>掌握字符串，你就能处理真实的文本数据。</b>' }
       }
     },
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，学会封装',
+      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从字符到字符串',
       data: {
         items: [
-          { icon: '🧠', badge: '基础', title: '第一站 · 为什么需要函数', desc: '重复代码的问题、料理机的比喻', points: ['代码复用', '逻辑清晰', '便于调试'] },
-          { icon: '🔧', badge: '核心', title: '第二站 · 定义与调用', desc: '语法、返回类型、参数列表', points: ['返回类型 函数名(参数)', '函数体', '调用语法'] },
-          { icon: '📦', badge: '关键', title: '第三站 · 参数与返回值', desc: '形参实参、值传递、return', points: ['值传递', 'return 返回值', 'void 无返回'] },
-          { icon: '🌐', badge: '进阶', title: '第四站 · 作用域', desc: '局部变量、全局变量、生命周期', points: ['局部变量', '全局变量', '变量作用域'] }
+          { icon: '🔤', badge: '基础', title: '第一站 · 字符 vs 字符串', desc: '单引号 \'A\' 和双引号 "A" 的区别', points: ['char 用单引号', 'string 用双引号', 'char 占 1 字节'] },
+          { icon: '📝', badge: '核心', title: '第二站 · 两种定义方式', desc: '字符数组 vs string 类型', points: ['char s[100];', 'string s;', '各有优缺点'] },
+          { icon: '📥', badge: '关键', title: '第三站 · 读入与遍历', desc: 'cin、getline、下标、范围 for', points: ['cin 遇空格停', 'getline 读整行', 's[i] 访问'] },
+          { icon: '🏆', badge: '实战', title: '第四站 · 字符串实战', desc: '统计、回文、逆序三大经典问题', points: ['统计字符数', '回文判断', '逆序输出'] }
         ],
-        extra: { title: '🏆 积分规则', desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"函数大师"徽章。' }
+        extra: { title: '🏆 积分规则', desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"字符串大师"徽章。' }
       }
     },
 
-    /* ===== 05 为什么要函数（dialog） ===== */
+    /* ===== 05 为什么要学字符串 ===== */
     {
-      id: 5, type: 'dialog', title: '为什么要函数？', subtitle: '重复代码的救星', chapterTag: '第 7 讲 · 概念理解',
+      id: 5, type: 'dialog', title: '为什么要学字符串？', subtitle: '文字也是一种数据', chapterTag: '第 7 讲 · 概念理解',
       data: {
         lines: [
-          { who: 'student', text: '小 C，我写了 3 道题，每道题都要判断质数，难道每次都要复制粘贴？' },
-          { who: 'robot', text: '不用。把"判断质数"写成一个函数，以后直接调用。' },
-          { who: 'student', text: '函数是什么？' },
-          { who: 'robot', text: '函数就像一台料理机——你把食材（参数）放进去，它按程序处理，最后吐出结果（返回值）。' },
-          { who: 'student', text: '所以函数就是"打包好的一段代码"？' },
-          { who: 'robot', text: '对！定义一次，到处使用。改一处，全部生效。' },
-          { who: 'student', text: '那我直接复制粘贴不行吗？' },
-          { who: 'robot', text: '能跑，但灾难。比如要改判断逻辑，你要找到每一处复制的地方改。<br>函数只用改一处。' }
+          { who: 'student', text: '小 C，数组能存整数，那文字怎么存？' },
+          { who: 'robot', text: '用字符串。字符串就是一串字符的容器，比如 "Hello"、"China"、"2024"。' },
+          { who: 'student', text: '我们平时写代码不是为了算数吗？为什么要处理文字？' },
+          { who: 'robot', text: '竞赛里很多题目都是文字处理。<br>比如统计一篇文章里某个单词出现几次、判断一个单词是不是回文、给密码加密。' },
+          { who: 'student', text: '那字符串和数组有什么关系？' },
+          { who: 'robot', text: '字符串本质上就是"<b>字符的数组</b>"。<br>所以你第 6 讲学的数组知识，这里都能用上。' },
+          { who: 'student', text: '那我今天学起来会轻松些？' },
+          { who: 'robot', text: '对！数组是地基，字符串是在地基上盖的第一层楼。' }
         ],
         extra: {
-          title: '📖 知识扩展 · 函数的历史',
-          desc: '函数思想最早来自数学——<code>f(x) = x²</code> 就是"输入 x，返回 x²"。<br>1950 年代，FORTRAN 语言第一次把"函数"引入编程——程序员可以定义自己的"运算"。<br>1970 年代，C 语言的函数成了标配。<br>今天所有编程语言都有函数。<br><b>函数是程序从"流水账"进化到"积木化"的关键一步。</b>',
+          title: '📖 知识扩展 · 字符串的英文',
+          desc: '字符串的英文是 <b>string</b>，意思是"一串、一线"。<br><br>古代航海时，水手把珠子串成一串记录信息——这就是"字符串"最早的比喻。<br>现代计算机里，字符串就是一串字符按顺序排列。<br><br><b>从珠子到字符，人类记录信息的方式一直在变。</b><br><br>🔮 <b>伏笔</b>：为什么 \'A\' 是 65、\'a\' 是 97？这张"字符身份证"叫 <b>ASCII 表</b>。第 22 讲专门讲。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 06 函数三大作用（grid） ===== */
+    /* ===== 06 字符 vs 字符串 ===== */
     {
-      id: 6, type: 'grid', title: '函数的三大作用', subtitle: '复用、清晰、易调试',
+      id: 6, type: 'grid', title: '字符 vs 字符串', subtitle: '单引号 \'A\' 和双引号 "A" 的区别',
       data: {
         cards: [
-          { icon: '♻️', title: '代码复用', desc: '写一次，多处调用<br>比如"判断质数"<br>一次定义，用 100 次<br><b>省时省力</b>' },
-          { icon: '📖', title: '逻辑清晰', desc: '主程序只调用函数<br>不用看细节<br>像看目录一样<br><b>主程序短，易读</b>' },
-          { icon: '🔍', title: '便于调试', desc: '函数可以单独测试<br>问题定位到具体函数<br>改一处，全部生效<br><b>维护成本低</b>' }
+          { icon: '🔤', title: '字符 char', desc: '<b>用单引号</b>：<code>\'A\'</code><br>只表示<b>一个</b>字符<br>占 1 字节<br>本质是 ASCII 码（整数）' },
+          { icon: '📝', title: '字符串 string', desc: '<b>用双引号</b>：<code>"A"</code><br>表示<b>一串</b>字符<br>用 <code>string</code> 类型<br>占多个字节（含结束符）' },
+          { icon: '⚠️', title: '常见错误', desc: '<code>char c = "A";</code> ❌<br>char 要用单引号<br><code>string s = \'A\';</code> ❌<br>string 要用双引号' }
         ],
         extra: {
-          title: '💡 函数的"黑盒"思想',
-          desc: '调用函数时，你不需要知道内部怎么实现。<br>比如用 <code>sqrt(9)</code> 求平方根，你只关心"输入 9 得到 3"，不关心它内部怎么算。<br>这就是"<b>黑盒</b>"——只关心输入输出，不关心内部。<br><b>函数让复杂程序变简单。</b>',
+          title: '💡 单引号 vs 双引号',
+          desc: '<b>单引号</b>：<code>\'A\'</code> 是字符（char），占 1 字节。<br><b>双引号</b>：<code>"A"</code> 是字符串（string），占 <b>2</b> 字节（含结尾的 <code>\\0</code>）。<br><br><b>为什么字符串多 1 字节？</b><br>因为字符串需要一个"结束标记" <code>\\0</code>，告诉程序"这里结束了"。<br><br><b>记忆</b>：单引号一个字符，双引号一串字符。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 07 第一个函数（code-split） ===== */
+    /* ===== 07 代码演示 ===== */
     {
-      id: 7, type: 'code-split', title: '第一个函数', subtitle: '语法：返回类型 函数名(参数) { ... }',
+      id: 7, type: 'code-split', title: '代码演示：字符 vs 字符串', subtitle: '一眼看出区别',
       data: {
-        codeFile: 'codes/lesson-07/func-basic.cpp',
+        intro: '📖 同一个字母 \'A\'，用单引号和双引号，含义完全不同。',
+        codeFile: 'codes/lesson-07/char-vs-string.cpp',
         snippet: 'main',
         annotations: [
-          { line: 5, title: 'int add(int a, int b)', desc: '定义函数：返回 int，两个 int 参数' },
-          { line: 6, title: 'return a + b;', desc: '返回值：把结果送回调用者' },
-          { line: 9, title: 'int main()', desc: '主函数' },
-          { line: 10, title: 'add(3, 5)', desc: '调用函数：传入参数 3 和 5' },
-          { line: 11, title: 'cout &lt;&lt; result', desc: '输出返回值 8' }
+          { line: 6, title: 'char c = \'A\';', desc: '单引号，1 个字符' },
+          { line: 7, title: 'string s = "Hello";', desc: '双引号，一串字符' },
+          { line: 9, title: 'cout &lt;&lt; c', desc: '输出字符 A' },
+          { line: 10, title: 'cout &lt;&lt; s', desc: '输出字符串 Hello' }
         ],
-        output: '8',
-        intro: '📖 <b>函数三要素</b>：返回类型 + 函数名 + 参数列表。<br>格式：<code>返回类型 函数名(参数) { 函数体 }</code>。函数定义要写在 <code>main</code> 之前，否则编译器找不到。',
+        output: 'A\nHello',
         extra: {
-          title: '💡 函数的三要素',
-          desc: '① <b>返回类型</b>：函数返回什么类型（如 int）<br>② <b>函数名</b>：给函数起名，见名知意（如 add、max）<br>③ <b>参数列表</b>：接收什么输入（如 <code>int a, int b</code>）<br><b>口诀</b>：返回类型 函数名(参数) { 函数体 }。<br>函数定义要写在 <code>main</code> <b>之前</b>，否则编译器找不到。',
+          title: '💡 为什么需要两种？',
+          desc: '因为它们的用途不同：<br><b>char</b>：存单个字符，如判断"是不是大写字母"<br><b>string</b>：存一串字符，如存一个人的名字<br><br>有些场景需要 char（如字符分类），有些场景需要 string（如文本处理）。<br>竞赛中两种都会用到。<br><br><b>注意</b>：<code>string</code> 需要 <code>#include &lt;string&gt;</code>。<br>不加这句，编译器会报错"未定义"。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 08 函数 vs 复制粘贴（compare） ===== */
+    /* ===== 08 字符数组 ===== */
     {
-      id: 8, type: 'compare', title: '函数 vs 复制粘贴', subtitle: '为什么要封装',
+      id: 8, type: 'code-split', title: '字符数组 · char[]', subtitle: 'C 风格字符串',
+      data: {
+        intro: '📖 <code>char s[100];</code> 是一个字符数组。<br>C 语言时代用它存字符串，需要在末尾自动加一个 <code>\\0</code> 结束符。',
+        codeFile: 'codes/lesson-07/char-array.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 6, title: 'char s[100];', desc: '字符数组，能存 99 个字符 + 结束符' },
+          { line: 7, title: 'cin &gt;&gt; s;', desc: '读入字符串，遇到空格停止' },
+          { line: 9, title: 'char t[] = "Hello";', desc: '定义时初始化，自动分配 6 字节' }
+        ],
+        output: '（输入 Hello World）\nHello\nHello',
+        extra: {
+          title: '📖 知识扩展 · \\0 结束符',
+          desc: 'C 风格字符串结尾有一个隐藏的 <code>\\0</code>（ASCII 码 0），告诉程序"字符串到此结束"。<br><br>所以 <code>char s[5]</code> 只能存 <b>4 个字符 + 1 个 \\0</b>。<br><code>char t[] = "Hello";</code> 实际占 <b>6</b> 字节（H e l l o \\0）。<br><br><b>陷阱</b>：忘留 \\0 的位置，输出会乱码或越界。<br>这就是为什么 string 类型更好用——它自动管理长度。<br><br><b>历史原因</b>：<br>C 语言设计时，没有专门的字符串类型，只能用字符数组。<br>用 <code>\\0</code> 标记结束，是一种"轻量级"的设计。<br>这个设计被 C++ 保留了下来——为了兼容 C。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 09 string 类型 ===== */
+    {
+      id: 9, type: 'code-split', title: 'string 类型 · 更方便', subtitle: 'C++ 独有的字符串',
+      data: {
+        intro: '📖 <code>string</code> 是 C++ 的字符串类型。<br>它自动管理长度，用起来更方便。<br>需要 <code>#include &lt;string&gt;</code>。',
+        codeFile: 'codes/lesson-07/string-type.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 7, title: 'string s = "Hello";', desc: '定义并初始化' },
+          { line: 8, title: 's = "World";', desc: '可以重新赋值，不用管长度' },
+          { line: 10, title: 's + "!"', desc: '可以用 + 拼接字符串' },
+          { line: 11, title: 'cout &lt;&lt; s2', desc: '输出拼接结果' }
+        ],
+        output: 'World\nWorld!',
+        extra: {
+          title: '💡 string 的三大优势',
+          desc: '① <b>自动管理长度</b>：赋值时自动调整，不用手动留 \\0<br>② <b>可以用 +</b>：字符串拼接像加法一样简单<br>③ <b>更安全</b>：内置边界检查，避免越界<br><br><b>竞赛建议</b>：优先用 string，除非题目明确要求 char[]。<br><br><b>string 需要 #include &lt;string&gt;</b><br>这个头文件不在 iostream 里，要单独包含。<br>竞赛中写 <code>#include &lt;bits/stdc++.h&gt;</code> 能一次性包含所有头文件——后面学。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 10 char[] vs string 讨论 ===== */
+    {
+      id: 10, type: 'dialog', title: 'char[] 还是 string？', subtitle: '小C与同学的选择', chapterTag: '第 7 讲 · 概念理解',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，既然有两种字符串，我该用哪个？' },
+          { who: 'robot', text: '看场景。<b>99% 的情况用 string</b>——更方便、更安全。' },
+          { who: 'student', text: '那什么时候用 char[]？' },
+          { who: 'robot', text: '三种情况：<br>① 某些老竞赛题要求用 char[]<br>② 需要和 C 风格函数配合<br>③ 追求极限性能（极少见）' },
+          { who: 'student', text: '为什么 string 更好？' },
+          { who: 'robot', text: '因为 string 自动管理长度，能用 + 拼接，还能直接比较——<br><code>if (s1 == s2)</code>，不用调函数。' },
+          { who: 'student', text: '那 char[] 有什么好处？' },
+          { who: 'robot', text: '性能略高、内存更省。<br>但初学阶段不用担心这些——<br><b>能 string 就 string，简单又安全。</b>' }
+        ],
+        extra: {
+          title: '📖 char[] vs string 速查表',
+          desc: '<b>长度</b>：<br>· char[] 固定长度，要预留 \\0 位置<br>· string 自动长度，想存多少存多少<br><br><b>拼接</b>：<br>· char[] 用 <code>strcat</code><br>· string 用 <code>+</code><br><br><b>求长度</b>：<br>· char[] 用 <code>strlen</code><br>· string 用 <code>.size()</code><br><br><b>比较</b>：<br>· char[] 用 <code>strcmp</code><br>· string 用 <code>==</code> 直接比较<br><br><b>口诀</b>：能 string 就 string，简单又安全。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 11 char[] vs string 对比 ===== */
+    {
+      id: 11, type: 'compare', title: 'char[] vs string', subtitle: '什么时候用哪个',
       data: {
         groups: [
-          { wrong: '复制粘贴 10 遍', right: '写 1 个函数，调用 10 次' },
-          { wrong: '改逻辑要改 10 处', right: '改逻辑只改 1 处' },
-          { wrong: '主程序 100 行', right: '主程序 20 行 + 函数' },
-          { wrong: '出错不知从哪查', right: '定位到具体函数' }
+          { wrong: 'char s[100]; 长度固定，需要预留空间', right: 'string s; 长度自动，想存多少存多少' },
+          { wrong: 'char 用 strcat 拼接', right: 'string 用 + 拼接' },
+          { wrong: 'char 用 strlen 求长度', right: 'string 用 s.size()' },
+          { wrong: 'char 用 strcmp 比较', right: 'string 用 == 直接比较' }
         ],
         extra: {
-          title: '📖 复制粘贴的三大问题',
-          desc: '① <b>改起来痛苦</b>：要改就改所有副本<br>② <b>容易漏改</b>：改了一部分，漏了另一部分<br>③ <b>代码膨胀</b>：100 行能写的东西，膨胀到 1000 行<br><b>编程戒律之一</b>：不要重复自己（DRY，Don\'t Repeat Yourself）。',
+          title: '📖 选择建议',
+          desc: '<b>用 string</b>：几乎任何场景，除非题目明确要求 char[]。<br><br><b>用 char[]</b>：<br>· 需要精确控制内存（罕见）<br>· 处理 C 风格 API（少见）<br>· 某些老的竞赛题<br><br><b>口诀</b>：<b>能 string 就 string，简单又安全</b>。<br><br><b>竞赛提示</b>：<br>CSP-J/S 近年的题目几乎都支持 string。<br>不过 char[] 也要会读——因为真题解析里经常出现。<br>两者都懂，才能应对各种情况。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 09 函数定义答疑（dialog） ===== */
+    /* ===== 12 字符串读入 ===== */
     {
-      id: 9, type: 'dialog', title: '函数定义答疑', subtitle: '小C回答常见问题', chapterTag: '第 7 讲 · 概念理解',
+      id: 12, type: 'code-split', title: '字符串读入：cin 和 getline', subtitle: '两种读法，两种场景',
       data: {
-        lines: [
-          { who: 'student', text: '函数一定要写在 main 前面吗？' },
-          { who: 'robot', text: '定义可以写在后面，但要<b>先声明</b>。<br>最简单的方式是写在 main 前面。' },
-          { who: 'student', text: '函数名有命名规则吗？' },
-          { who: 'robot', text: '和变量一样：字母数字下划线，不能数字开头。<br>建议见名知意：add、max、is_prime。' },
-          { who: 'student', text: '函数没有返回值怎么办？' },
-          { who: 'robot', text: '返回类型写 <code>void</code>，比如 <code>void print_hello()</code>。<br>void 表示"什么都不返回"。' },
-          { who: 'student', text: '函数能没有参数吗？' },
-          { who: 'robot', text: '能。<code>int get_year() { return 2024; }</code><br>参数可以有 0 个、1 个、多个。' }
-        ],
-        extra: {
-          title: '📖 知识扩展 · main 也是函数',
-          desc: '你天天写的 <code>int main()</code> 就是一个函数！<br>· 返回类型是 <code>int</code><br>· 名字是 <code>main</code><br>· 参数列表是空<br>· 函数体是 <code>{ ... }</code><br>只不过它很特殊——操作系统会直接调用它。<br><b>其他函数是你调用，main 是系统调用。</b>',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 10 过渡页 ===== */
-    {
-      id: 10, type: 'transition', title: '第二站 · 参数与返回值', subtitle: '函数的输入和输出',
-      data: { note: '接下来你将学会函数的参数、返回值，以及值传递的机制' }
-    },
-
-    /* ===== 11 函数参数（code-split） ===== */
-    {
-      id: 11, type: 'code-split', title: '函数参数 · 形参和实参', subtitle: '函数接收输入的方式',
-      data: {
-        codeFile: 'codes/lesson-07/func-params.cpp',
+        intro: '📖 <code>cin &gt;&gt; s</code> 遇到空格就停，只读一个"单词"。<br><code>getline(cin, s)</code> 读整行，包含空格。',
+        codeFile: 'codes/lesson-07/string-input.cpp',
         snippet: 'main',
         annotations: [
-          { line: 5, title: 'int a, int b', desc: '形参：函数定义时写的参数' },
-          { line: 6, title: 'return a + b;', desc: '用形参参与运算' },
-          { line: 10, title: 'int x = 3, y = 5;', desc: '实参：调用时传入的值' },
-          { line: 11, title: 'add(x, y)', desc: '把 x、y 的值传进函数' }
+          { line: 7, title: 'string s1, s2;', desc: '定义两个字符串' },
+          { line: 8, title: 'cin &gt;&gt; s1;', desc: '读一个单词，遇到空格停止' },
+          { line: 10, title: 'cin.ignore();', desc: '忽略换行符，避免 getline 读到空行' },
+          { line: 11, title: 'getline(cin, s2);', desc: '读一整行，包含空格' }
         ],
-        output: '8',
-        intro: '📖 调用时传"实参"，函数内接收为"形参"。<br>形参是实参的<b>副本</b>，改形参不影响实参。这叫"值传递"。',
+        output: '（输入：Hello 然后 你好 世界）\ns1 = Hello\ns2 = 你好 世界',
         extra: {
-          title: '💡 形参 vs 实参',
-          desc: '<b>形参</b>（形式参数）：函数定义时写的参数，如 <code>int a, int b</code>。<br><b>实参</b>（实际参数）：调用时传入的具体值，如 <code>add(x, y)</code> 里的 x 和 y。<br><b>关系</b>：调用时，实参的值<b>复制</b>给形参。<br>就像你把文件复印一份交给别人——别人改了复印件，不影响你的原件。<br>这就是<b>值传递</b>。',
+          title: '💡 混合使用的陷阱',
+          desc: '如果先用 <code>cin &gt;&gt; n</code>，再用 <code>getline</code>，会读到"空行"。<br>因为 cin 读完后，换行符还留在缓冲区。<br><br><b>解决方法</b>：cin 后加一句 <code>cin.ignore()</code>，忽略换行符。<br><br>这是竞赛中极常见的坑，一定要记住。<br><br><b>记忆</b>：<br>· <code>cin &gt;&gt;</code> 读"词"<br>· <code>getline</code> 读"行"<br>· 混用时加 <code>cin.ignore()</code>',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 12 返回值（code-split） ===== */
+    /* ===== 13 cin vs getline 答疑 ===== */
     {
-      id: 12, type: 'code-split', title: '返回值 · return 的作用', subtitle: '函数把结果送回调用者',
+      id: 13, type: 'dialog', title: 'cin vs getline 答疑', subtitle: '两个函数，两种用途', chapterTag: '第 7 讲 · 输入输出',
       data: {
-        codeFile: 'codes/lesson-07/func-return.cpp',
+        lines: [
+          { who: 'student', text: '小 C，为什么要用两个函数读字符串？' },
+          { who: 'robot', text: '因为它们读的方式不同：<br>· <code>cin &gt;&gt;</code>：遇到空格、换行就停<br>· <code>getline</code>：读到换行才停' },
+          { who: 'student', text: '那什么场景用 cin？' },
+          { who: 'robot', text: '读"一个单词"用 cin，比如输入名字、题目给的单个字符串。<br>读"一整行"用 getline，比如带空格的句子。' },
+          { who: 'student', text: '如果 cin 后接 getline，为什么会读到空行？' },
+          { who: 'robot', text: '因为 cin 读完后，换行符还留在输入缓冲区。<br>getline 看到这个换行符，就以为"读到了空行"，直接结束。' },
+          { who: 'student', text: '怎么解决？' },
+          { who: 'robot', text: '加一句 <code>cin.ignore()</code>——把那个换行符"吃掉"。<br>之后 getline 就能正常读了。' }
+        ],
+        extra: {
+          title: '💡 输入缓冲区概念',
+          desc: '<b>输入缓冲区</b>：用户键盘输入的数据，先放进一个"缓冲区"，程序再从中读取。<br><br><code>cin &gt;&gt;</code> 只读"有效数据"（数字、单词），把空格和换行留在缓冲区。<br><code>getline</code> 读"整行"（包括空格），遇到换行才停。<br><br><b>混用场景</b>：<br><code>cin &gt;&gt; n;         // 读数字</code><br><code>cin.ignore();     // 吃掉换行符</code><br><code>getline(cin, s);  // 读整行</code><br><br><b>竞赛建议</b>：<br>如果题目只需读"一个单词"，用 <code>cin &gt;&gt;</code>。<br>如果要读"整行"（如标题、句子），用 <code>getline</code>。<br>混用时加 <code>cin.ignore()</code>。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 14 过渡页 ===== */
+    {
+      id: 14, type: 'transition', title: '第二站 · 字符串操作', subtitle: '长度、遍历、实战',
+      data: { note: '接下来你将学会字符串的长度、遍历，以及统计、回文、逆序三大经典问题' }
+    },
+
+    /* ===== 15 字符串长度 ===== */
+    {
+      id: 15, type: 'code-split', title: '字符串长度怎么算', subtitle: 'size() / length() / strlen()',
+      data: {
+        intro: '📖 <b>string</b> 用 <code>.size()</code> 或 <code>.length()</code>。<br><b>char[]</b> 用 <code>strlen()</code>，需要 <code>#include &lt;cstring&gt;</code>。',
+        codeFile: 'codes/lesson-07/string-length.cpp',
         snippet: 'main',
         annotations: [
-          { line: 5, title: 'int max(int a, int b)', desc: '返回 int 类型的函数' },
-          { line: 6, title: 'if (a &gt; b) return a;', desc: '返回较大的数' },
-          { line: 7, title: 'return b;', desc: '否则返回 b' },
-          { line: 10, title: 'void print_hello()', desc: 'void 表示无返回值' },
-          { line: 11, title: 'cout &lt;&lt; "Hello";', desc: '只做事，不返回' }
+          { line: 8, title: 'string s = "Hello";', desc: '定义 string' },
+          { line: 9, title: 's.size()', desc: 'string 求长度，返回 5' },
+          { line: 12, title: 'strlen(t)', desc: 'char 数组用 strlen，返回 5' }
         ],
-        output: '10\nHello',
-        intro: '📖 <code>return</code> 返回结果并<b>立即结束函数</b>；<code>void</code> 表示无返回值。<br>非 void 函数的所有分支都必须有 return。',
+        output: '5\n5',
         extra: {
-          title: '💡 return 的三条规则',
-          desc: '① <b>return 会立即结束函数</b>，后面的代码不再执行<br>② <b>非 void 函数必须有 return</b>，否则可能返回垃圾值<br>③ <b>void 函数不需要 return</b>，或写 <code>return;</code>（不带值）<br><b>竞赛经验</b>：写完函数，先测试它的返回值对不对，再嵌入主程序。<br>这叫"单元测试"，能提前发现 bug。',
+          title: '💡 三种求长度的方式',
+          desc: '<b>① string · s.size()</b><br>最常用。返回字符个数。<br>等价写法：<code>s.length()</code>。<br><br><b>② char[] · strlen(s)</b><br>需要 <code>#include &lt;cstring&gt;</code>。<br>返回实际字符数（不含 \\0）。<br><br><b>③ sizeof 陷阱</b><br><code>sizeof(s)</code> 返回的是<b>数组占用的字节数</b>，不是字符串长度！<br><code>char s[100]</code> 的 sizeof 是 100，即使里面只存了 "Hi"。<br><br><b>竞赛建议</b>：<br>优先用 string + .size()，最安全。<br><br>🔮 <b>伏笔</b>：<code>sizeof</code> 是"编译期"就知道的字节数，<code>strlen</code> 是"运行期"才能算出的字符数。<br>它们语义完全不同，第 27 讲"指针"会再讲。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 13 参数答疑（dialog） ===== */
+    /* ===== 16 字符串遍历 ===== */
     {
-      id: 13, type: 'dialog', title: '参数答疑', subtitle: '小C解答疑惑', chapterTag: '第 7 讲 · 概念理解',
+      id: 16, type: 'code-split', title: '字符串遍历', subtitle: '下标 vs 范围 for',
       data: {
-        lines: [
-          { who: 'student', text: '函数能返回多个值吗？' },
-          { who: 'robot', text: '不能直接返回多个。C++ 函数只有一个返回值。<br>但可以用数组、结构体等方式"打包"返回。' },
-          { who: 'student', text: '那如果我需要输出两个值呢？' },
-          { who: 'robot', text: '有两种方式：<br>① 直接 <code>cout</code> 输出（不返回）<br>② 用引用参数（后面会讲）' },
-          { who: 'student', text: '函数参数可以传数组吗？' },
-          { who: 'robot', text: '可以。比如 <code>void print(int a[], int n)</code>。<br>数组参数比较特殊——它传的是"地址"，不是复制。' },
-          { who: 'student', text: '为什么数组不复制？' },
-          { who: 'robot', text: '因为复制大数组很慢。<br>C++ 的设计哲学是"效率优先"。<br>具体原理第 16 讲讲指针时揭晓。' }
-        ],
-        extra: {
-          title: '💡 参数个数的建议',
-          desc: '函数的参数<b>最好不要超过 4 个</b>。<br>太多参数会让调用变复杂，也容易传错顺序。<br>如果确实需要很多参数，考虑：<br>· 用结构体打包<br>· 拆成多个函数<br><b>简单就是美</b>——这是编程界的共识。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 14 函数调用流程（flow） ===== */
-    {
-      id: 14, type: 'function-call-animation', title: '函数调用流程', subtitle: '调用栈是怎么变化的', chapterTag: '第 7 讲 · 过程演示',
-      data: {
-        steps: [
-          {
-            line: 9,
-            code: 'int main() {',
-            stack: [
-              { id: 'm1', name: 'main', vars: {}, status: 'running' }
-            ],
-            note: '程序从 <code>main</code> 开始执行。<br>调用栈里压入第一帧：<b>main</b>。'
-          },
-          {
-            line: 10,
-            code: 'int x = 3, y = 5;',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5 }, status: 'running' }
-            ],
-            note: '在 main 里定义两个局部变量 <code>x = 3</code>、<code>y = 5</code>。'
-          },
-          {
-            line: 11,
-            code: 'int result = add(x, y);',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5 }, status: 'calling' },
-              { id: 'a1', name: 'add', vars: { a: 3, b: 5 }, status: 'running' }
-            ],
-            note: '🎯 调用 <code>add(x, y)</code>。<br>实参 x、y 的值<b>复制</b>给形参 a、b。<br>调用栈里压入第二帧：<b>add</b>。'
-          },
-          {
-            line: 6,
-            code: 'return a + b;',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5 }, status: 'calling' },
-              { id: 'a1', name: 'add', vars: { a: 3, b: 5 }, status: 'running' }
-            ],
-            note: '执行 <code>a + b</code>，得到中间结果 <b>8</b>。'
-          },
-          {
-            line: 6,
-            code: 'return a + b;',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5 }, status: 'calling' },
-              { id: 'a1', name: 'add', vars: { a: 3, b: 5 }, returns: 8, status: 'returning' }
-            ],
-            note: '🎯 <code>return 8</code> 把结果送回调用者。<br>add 帧准备弹出。'
-          },
-          {
-            line: 11,
-            code: 'int result = add(x, y);',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5, result: 8 }, status: 'running' }
-            ],
-            note: '✅ add 帧弹出。<br>返回值 8 存入 <code>result</code>。<br>调用栈回到只有 main。'
-          },
-          {
-            line: 12,
-            code: 'cout << result << endl;',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5, result: 8 }, status: 'running' }
-            ],
-            note: 'main 继续执行，输出 <b>8</b>。'
-          },
-          {
-            line: 13,
-            code: 'return 0;',
-            stack: [
-              { id: 'm1', name: 'main', vars: { x: 3, y: 5, result: 8 }, returns: 0, status: 'done' }
-            ],
-            note: 'main 返回 0，程序结束。<br>调用栈清空。'
-          },
-          {
-            line: 13,
-            code: '(程序结束)',
-            stack: [],
-            note: '🎯 整个调用栈空了。<br>这就是<b>函数调用的底层机制</b>——用"栈"管理每一次调用。'
-          }
-        ],
-        extra: {
-          title: '💡 函数调用的三大关键点',
-          desc: '<b>① 参数复制</b>：实参 x、y 的值复制给形参 a、b——这是"值传递"。<br><b>② 栈帧压入</b>：每次调用，都在栈上开辟新帧，记录参数、局部变量、返回地址。<br><b>③ 栈帧弹出</b>：函数返回时，帧被弹出，控制权交回调用者。<br><br>🔮 <b>伏笔</b>：这就是第 25 讲"栈"要详细讲的数据结构。<br>递归之所以能"一层套一层"，就是靠栈帧不断压入。<br>第 8 讲"递归"会用到这个原理。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 15 值传递：a 和 x 的故事（evolution） ===== */
-    {
-      id: 15, type: 'evolution', title: '值传递：改的是副本，不是原件', subtitle: 'a 和 x 的故事', chapterTag: '第 7 讲 · 过程演示',
-      data: {
-        intro: '📖 值传递最容易困惑："为什么函数里改了参数，外面没变？"<br>跟着 <code>a</code> 和 <code>x</code> 走一遍，你就懂了。',
-        codeFile: 'codes/lesson-07/func-scope.cpp',
+        intro: '📖 两种遍历方式：<b>下标</b>（<code>s[i]</code>）和 <b>范围 for</b>（<code>for (char c : s)</code>）。<br>后者是 C++11 语法，更简洁。',
+        codeFile: 'codes/lesson-07/string-traverse.cpp',
         snippet: 'main',
-        steps: [
-          {
-            line: 10,
-            expression: 'a = 5',
-            note: '<code>main</code> 里定义 <code>a = 5</code>。<br>a 是一个局部变量，住在 main 的"地盘"里。'
-          },
-          {
-            line: 11,
-            expression: 'a = 5 → change(a)',
-            note: '调用 <code>change(a)</code>。<br>这时会发生一次<b>复制</b>——把 a 的值 5 复制一份，交给 change 里的 x。'
-          },
-          {
-            line: 5,
-            expression: 'a = 5  |  x = 5（副本）',
-            note: '函数开始执行。<br>此时 <b>a 和 x 是两个独立的变量</b>，只是恰好值相同。<br>就像你把文件复印一份给同事——两边的修改互不影响。'
-          },
-          {
-            line: 6,
-            expression: 'a = 5  |  x = 100',
-            note: '🎯 函数内执行 <code>x = 100</code>。<br>改的是<b>副本 x</b>，<b>原件 a 还是 5</b>。<br>这就是"值传递"的关键。'
-          },
-          {
-            line: 7,
-            expression: 'a = 5  |  x 销毁',
-            note: 'change 函数结束。<br>形参 x 随函数返回被<b>销毁</b>——它的"地盘"收回了。<br>a 依然稳稳地是 <b>5</b>。'
-          },
-          {
-            line: 12,
-            expression: '输出：a = 5',
-            note: '✅ 回到 main，<code>cout &lt;&lt; a</code> 输出 <b>5</b>。<br><br><b>结论</b>：值传递 = <b>复制一份</b>。函数改的是副本，原件不受影响。'
-          }
+        annotations: [
+          { line: 7, title: 'string s = "Hello";', desc: '定义字符串' },
+          { line: 9, title: '下标遍历', desc: '用 s[i] 访问每个字符' },
+          { line: 10, title: 's[i]', desc: '返回第 i 个字符' },
+          { line: 14, title: '范围 for', desc: 'C++11 语法，更简洁' }
         ],
+        output: 'H e l l o\nH e l l o',
         extra: {
-          title: '💡 值传递的本质',
-          desc: '调用函数时，实参的<b>值</b>被复制给形参。<br>函数内改形参，改的是副本，不影响实参。<br><br>就像你把一张 100 元钞票<b>拍照</b>发给朋友——朋友在照片上涂画，不影响你手里的钞票。<br><br><b>这是 C++ 的默认行为</b>，也是最安全的做法——函数不会"偷偷"改你的数据。<br><br>📖 <b>反过来呢？</b>如果想让函数修改实参，要用"引用传递"——第 16 讲会讲。<br><br>🔮 <b>伏笔</b>：为什么函数里能"改"参数？因为形参是独立的变量。<br>这和第 8 讲"栈帧"里"每一层都有自己的一份 n"是同一个原理。',
+          title: '📖 知识扩展 · 范围 for 的由来',
+          desc: 'C++11（2011 年）引入了"范围 for"，让遍历容器更简洁。<br><br>以前要写 <code>for (int i = 0; i &lt; s.size(); i++)</code>，现在写 <code>for (char c : s)</code>。<br><br>这个语法借鉴自 Python 的 <code>for x in list</code>。<br>有人说，C++11 是"现代 C++"的起点——它让 C++ 写起来更舒服。<br><br><b>竞赛里两种都用</b>，看哪个更清晰。<br>需要下标（如回文判断）时用下标；只读每个字符时用范围 for。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 16 值传递答疑（dialog） ===== */
+    /* ===== 17 遍历答疑 ===== */
     {
-      id: 16, type: 'dialog', title: '值传递答疑', subtitle: '为什么改了没用？', chapterTag: '第 7 讲 · 概念理解',
+      id: 17, type: 'dialog', title: '遍历答疑', subtitle: '小C回答常见问题', chapterTag: '第 7 讲 · 概念理解',
       data: {
         lines: [
-          { who: 'student', text: '小 C，我在函数里改了参数，为什么外面没变？' },
-          { who: 'robot', text: '因为你用的是值传递。函数里操作的是"副本"，不是"原件"。' },
-          { who: 'student', text: '那我怎么让函数修改外面的变量？' },
-          { who: 'robot', text: '两种方式：<br>① 用"引用参数" <code>int &amp;x</code>（第 16 讲）<br>② 用"指针参数" <code>int *p</code>（第 16 讲）' },
-          { who: 'student', text: '那值传递有什么用？' },
-          { who: 'robot', text: '大部分时候，我们<b>不希望</b>函数改外面。<br>比如求平方根 <code>sqrt(9)</code>，你不想让它把 9 改成别的吧？' },
-          { who: 'student', text: '所以值传递更安全？' },
-          { who: 'robot', text: '对！值传递是"隔离"的——函数改动只影响函数内部。<br>这种"隔离性"是编程的基本原则。' }
+          { who: 'student', text: '小 C，string 和 char[] 的遍历一样吗？' },
+          { who: 'robot', text: '基本一样。都能用下标 <code>s[i]</code> 访问每个字符。' },
+          { who: 'student', text: '那 s[i] 返回的是什么类型？' },
+          { who: 'robot', text: '<code>char</code> 类型——一个字符。可以当字符用，也可以转成整数看 ASCII 码。' },
+          { who: 'student', text: '范围 for 和下标遍历，用哪个更好？' },
+          { who: 'robot', text: '如果只需要"读"每个字符，范围 for 更简洁。<br>如果需要用到下标（如回文判断），就用下标遍历。' },
+          { who: 'student', text: '遍历时能修改字符吗？' },
+          { who: 'robot', text: '能。<code>s[i] = \'X\';</code> 就可以修改第 i 个字符。<br>这也叫"原地修改"，竞赛里很常用。' },
+          { who: 'student', text: '怎么把整个字符串变成大写？' },
+          { who: 'robot', text: '遍历每个字符，用 <code>toupper(c)</code> 转大写。<br>需要 <code>#include &lt;cctype&gt;</code>。<br>或者手写：<code>if (c &gt;= \'a\' &amp;&amp; c &lt;= \'z\') c -= 32;</code>' }
         ],
         extra: {
-          title: '📖 知识扩展 · 值传递的成本',
-          desc: '值传递会<b>复制</b>参数。如果参数是大数组（如 100 万个 int），复制一遍要花不少时间。<br>这时用"引用传递"更快——只传地址，不复制数据。<br>但引用传递有风险：函数能改原数据。<br><b>权衡</b>：<br>· 小数据（int、char）：用值传递，安全<br>· 大数据（数组、结构体）：用引用传递，快<br>这是竞赛中常见的性能优化点。',
+          title: '💡 三个遍历技巧',
+          desc: '① <b>逆序遍历</b>：<code>for (int i = s.size()-1; i &gt;= 0; i--)</code><br>② <b>隔一个遍历</b>：<code>for (int i = 0; i &lt; s.size(); i += 2)</code><br>③ <b>范围 for 修改</b>：<code>for (char &amp;c : s) c = toupper(c);</code><br><br><b>注</b>：<code>&amp;c</code> 是引用，能修改原字符串。<br>不加 <code>&amp;</code> 只是副本，改了也不影响原串。<br>第 12 讲"函数"会详细讲引用。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 17 练习1 判断质数（level-map） ===== */
+    /* ===== 18 练习1：统计字符 ===== */
     {
-      id: 17, type: 'level-map', title: '课堂练习1：判断质数', subtitle: '用函数封装判断逻辑', chapterTag: '第 7 讲 · 实战演练',
+      id: 18, type: 'level-map', title: '课堂练习1：统计字符', subtitle: '统计字符串中非空格字符数', chapterTag: '第 7 讲 · 实战演练',
       data: {
-        question: { title: '题干', desc: '输入一个正整数 <code>n</code>，判断它是否是质数。<br>是质数输出 <code>yes</code>，否则 <code>no</code>。<br>要求：写一个函数 <code>is_prime(n)</code> 完成判断。<br>输入样例：<code>17</code>　输出样例：<code>yes</code>', timer: '⏱ 限时 8 分钟' },
-        hints: [ '质数：只能被 1 和自身整除的数', '从 2 试到 <code>sqrt(n)</code>（n 的平方根）即可', '发现能整除立即返回 <code>false</code>'],
-        answer: { codeFile: 'codes/lesson-07/func-prime.cpp' },
-        analysis: { title: '📖 解析', desc: '核心是"逐个试除"。<br>只需试到 <code>sqrt(n)</code>——因为如果 n = a × b，a 和 b 必有一个 ≤ sqrt(n)。<br>函数返回 bool 类型：true 是质数，false 不是。<br>使用函数后，主程序只有 3 行。' },
-        extra: { title: '📖 知识扩展 · 质数的千年探索', desc: '质数是数学的"原子"——所有整数都能分解为质数乘积。<br>古希腊的<a href="https://baike.baidu.com/item/欧几里得" target="_blank" class="wiki-link">欧几里得</a>证明了质数有<b>无穷多个</b>。<br>2000 多年来，数学家一直在找更大的质数。<br>目前已知最大质数有 <b>4100 万位</b>，2018 年由一位程序员用个人电脑算出。<br><b>质数是密码学的基础</b>——RSA 加密就是基于大质数分解的困难性。', variant: 'card-primary' }
-      }
-    },
-
-    /* ===== 18 练习2 最大公约数（level-map） ===== */
-    {
-      id: 18, type: 'level-map', title: '课堂练习2：最大公约数', subtitle: '用函数封装 GCD', chapterTag: '第 7 讲 · 实战演练',
-      data: {
-        question: { title: '题干', desc: '输入两个正整数 <code>a</code> 和 <code>b</code>，输出它们的最大公约数。<br>要求：写一个函数 <code>gcd(a, b)</code> 完成计算。<br>输入样例：<code>12 18</code>　输出样例：<code>6</code>', timer: '⏱ 限时 8 分钟' },
-        hints: ['用辗转相除法（欧几里得算法）', '<code>gcd(a, b) = gcd(b, a % b)</code>', '当 b == 0 时，返回 a'],
-        answer: { codeFile: 'codes/lesson-07/func-gcd.cpp' },
-        analysis: { title: '📖 解析', desc: '辗转相除法：<br>· 12 % 18 = 12，变成 gcd(18, 12)<br>· 18 % 12 = 6，变成 gcd(12, 6)<br>· 12 % 6 = 0，返回 6<br>函数里用 while 循环实现，代码只有 5 行。' },
-        extra: { title: '📖 知识扩展 · 欧几里得算法', desc: '欧几里得算法是<b>最古老的算法之一</b>，出现在公元前 300 年的《几何原本》中。<br>2300 多年过去，它仍然是计算 GCD 最快的算法——时间复杂度 O(log min(a, b))。<br>算法思想：<b>用较小数除较大数，再用余数继续</b>，直到余数为 0。<br><b>古老的智慧，永恒的优雅。</b>', variant: 'card-primary' }
-      }
-    },
-
-    /* ===== 19 练习3 两点距离（level-map） ===== */
-    {
-      id: 19, type: 'level-map', title: '课堂练习3：两点距离', subtitle: '用函数计算几何距离', chapterTag: '第 7 讲 · 实战演练',
-      data: {
-        question: { title: '题干', desc: '输入两个点的坐标 <code>(x1, y1)</code> 和 <code>(x2, y2)</code>，输出两点间的距离（保留 2 位小数）。<br>要求：写一个函数 <code>distance(x1, y1, x2, y2)</code> 完成计算。<br>输入样例：<code>0 0 3 4</code>　输出样例：<code>5.00</code>', timer: '⏱ 限时 10 分钟' },
-        hints: ['公式：<code>d = sqrt((x1-x2)² + (y1-y2)²)</code>', '用 <code>#include &lt;cmath&gt;</code> 引入 sqrt', '用 <code>cout &lt;&lt; fixed &lt;&lt; setprecision(2)</code> 保留 2 位小数'],
-        answer: { codeFile: 'codes/lesson-07/func-distance.cpp' },
-        analysis: { title: '📖 解析', desc: '这是函数最典型的用法——把一个数学公式封装成函数。<br>主程序读入坐标，调用函数，输出结果。<br>函数内部计算距离，隐藏了细节。<br>如果以后要算 100 对点的距离，只需调用 100 次。' },
-        extra: { title: '📖 知识扩展 · 从勾股定理到机器学习', desc: '两点距离公式来自<b>勾股定理</b>（公元前 6 世纪）。<br>但它的应用远超几何：<br>· 机器学习里衡量数据"相似度"<br>· 图像识别里比较特征<br>· 导航软件计算最短路径<br>· 游戏引擎判断碰撞<br><b>一个 2500 年前的定理，支撑着今天的 AI。</b>', variant: 'card-primary' }
-      }
-    },
-
-    /* ===== 20 作用域答疑（dialog） ===== */
-    {
-      id: 20, type: 'dialog', title: '作用域答疑', subtitle: '变量在哪里能用', chapterTag: '第 7 讲 · 概念理解',
-      data: {
-        lines: [
-          { who: 'student', text: '小 C，为什么函数里定义的变量，外面访问不了？' },
-          { who: 'robot', text: '因为它是<b>局部变量</b>——只在函数内有效。就像酒店房间的灯，只能房间里的开关控制。' },
-          { who: 'student', text: '那我想要外面也能用呢？' },
-          { who: 'robot', text: '两种方式：<br>① 定义<b>全局变量</b>（写在所有函数外）<br>② 用参数传进去、用返回值传出来' },
-          { who: 'student', text: '全局变量是不是更好？' },
-          { who: 'robot', text: '不一定。<b>全局变量有风险</b>——任何函数都能改它，容易出 bug。<br>竞赛中，通常只在必要时用全局变量（如大数组）。' },
-          { who: 'student', text: '那推荐用什么？' },
-          { who: 'robot', text: '推荐用<b>局部变量 + 参数 + 返回值</b>。<br>这样每个函数"自给自足"，代码更清晰。<br>这叫"低耦合，高内聚"。' }
+        question: { title: '题干', desc: '读入一行字符串（含空格），统计其中<b>非空格字符</b>的个数。<br>输入样例：<code>Hello World</code>　输出样例：<code>10</code>', timer: '⏱ 限时 6 分钟' },
+        hints: [
+          '用 <code>getline(cin, s)</code> 读整行',
+          '遍历每个字符',
+          '用 <code>if (s[i] != \' \')</code> 判断非空格'
         ],
-        extra: {
-          title: '📖 知识扩展 · 变量作用域规则',
-          desc: '<b>局部变量</b>：定义在函数或代码块内，只在该范围内有效。<br><b>全局变量</b>：定义在所有函数外，整个程序都能访问。<br><b>同名冲突</b>：如果局部变量和全局变量同名，局部<b>覆盖</b>全局。<br><b>生命周期</b>：局部变量随函数调用创建，随函数返回销毁。<br>全局变量从程序开始到结束一直存在。<br><b>建议</b>：能局部就局部，全局变量越少越好。',
-          variant: 'card-primary'
-        }
+        answer: { codeFile: 'codes/lesson-07/char-count.cpp' },
+        analysis: { title: '📖 解析', desc: '典型的一遍遍历。<br>用 <code>getline</code> 读整行，用循环遍历每个字符，遇到非空格就 <code>count++</code>。<br><br>时间复杂度 <b>O(n)</b>，只需扫一遍字符串。' },
+        extra: { title: '📖 知识扩展 · 洛谷 P5015 标题统计', desc: '这道题在洛谷的编号是 <a href="https://www.luogu.com.cn/problem/P5015" target="_blank" class="wiki-link">P5015</a>，是 CSP-J 2018 的真题。<br>题目说"标题"由数字、大小写字母、空格组成，让你统计非空格字符数。<br>核心就是今天学的字符串遍历 + 条件判断。<br><br><b>建议</b>：课后作业就做这道题，巩固基础。<br><br><b>变体</b>：如果让你"统计字母数"，只需把条件改成 <code>if ((c &gt;= \'a\' &amp;&amp; c &lt;= \'z\') || (c &gt;= \'A\' &amp;&amp; c &lt;= \'Z\'))</code>。', variant: 'card-primary' }
       }
     },
 
-    /* ===== 21 常见错误（compare） ===== */
+    /* ===== 19 练习2：回文判断 ===== */
     {
-      id: 21, type: 'compare', title: '函数常见错误', subtitle: '避开这些坑',
+      id: 19, type: 'level-map', title: '课堂练习2：回文判断', subtitle: '正着读和倒着读一样吗', chapterTag: '第 7 讲 · 实战演练',
+      data: {
+        question: { title: '题干', desc: '读入一个字符串，判断它是否是回文。<br>回文：正着读和倒着读完全相同。<br>是回文输出 <code>yes</code>，否则 <code>no</code>。<br>输入样例：<code>level</code>　输出样例：<code>yes</code>', timer: '⏱ 限时 8 分钟' },
+        hints: [
+          '用下标 <code>i</code> 和 <code>n-1-i</code> 对比',
+          '只需比较<b>前一半</b>',
+          '发现不同就 <code>break</code>'
+        ],
+        answer: { codeFile: 'codes/lesson-07/palindrome.cpp' },
+        analysis: { title: '📖 解析', desc: '只需比较<b>前一半</b>字符。<br>第 i 个字符和第 <code>n-1-i</code> 个字符对比。<br>只要有一对不相同，就不是回文。<br><br>循环次数 <code>n/2</code>，效率是 <b>O(n)</b>。<br>这是"双指针"思想的雏形——一头一尾往中间走。' },
+        extra: { title: '📖 知识扩展 · 回文的文化意义', desc: '"回文"在中文里叫"回环诗"，在英文里叫 <b>palindrome</b>（希腊语"再次跑"）。<br><br>最有名的英文回文是 <code>"A man, a plan, a canal, Panama"</code>——读一百多年不腻。<br>数学里也有"回文数"，如 121、12321。<br><br><b>回文是人类对称审美的体现。</b><br><br><b>进阶变体</b>：<br>· 忽略大小写：先把 s 全部转小写<br>· 忽略标点：遇到非字母字符就跳过<br>· 最长回文子串：更难，第 42 讲双指针会讲', variant: 'card-primary' }
+      }
+    },
+
+    /* ===== 20 练习3：字符串逆序 ===== */
+    {
+      id: 20, type: 'level-map', title: '课堂练习3：字符串逆序', subtitle: '把字符串倒着输出', chapterTag: '第 7 讲 · 实战演练',
+      data: {
+        question: { title: '题干', desc: '读入一个字符串，把它倒着输出。<br>输入样例：<code>Hello</code>　输出样例：<code>olleH</code>', timer: '⏱ 限时 5 分钟' },
+        hints: [
+          '从 <code>s.size()-1</code> 倒着遍历到 0',
+          '循环条件 <code>i &gt;= 0</code>',
+          '和数组逆序完全一样'
+        ],
+        answer: { codeFile: 'codes/lesson-07/string-reverse.cpp' },
+        analysis: { title: '📖 解析', desc: '和数组逆序一模一样。<br>字符串本质上就是字符数组，下标访问方式完全相同。<br>这就是"字符串 = 字符数组"的具体体现。' },
+        extra: { title: '💡 更简洁的写法', desc: 'C++ 有内置的 <code>reverse</code> 函数：<br><code>reverse(s.begin(), s.end());</code><br>一行搞定逆序。<br>需要 <code>#include &lt;algorithm&gt;</code>。<br><br><b>建议</b>：初学者先手写循环，理解原理后再用 STL。<br>但到了竞赛阶段，能用 STL 就用——省时间。<br><br><b>反向思考</b>：如果不用额外空间，怎么原地反转字符串？<br>交换 <code>s[i]</code> 和 <code>s[n-1-i]</code>，遍历前一半。<br>这是"双指针"的经典应用——第 42 讲讲。', variant: 'card-primary' }
+      }
+    },
+
+    /* ===== 21 常见错误 ===== */
+    {
+      id: 21, type: 'compare', title: '字符串常见错误', subtitle: '避开这些坑',
       data: {
         groups: [
-          { wrong: '函数写在 main 后面，没声明', right: '函数写在 main 前面，或先声明' },
-          { wrong: 'int 函数没写 return', right: '所有分支都要 return' },
-          { wrong: '调用时漏了参数', right: '参数个数、类型要匹配' },
-          { wrong: '函数名和变量名重名', right: '函数名和变量名不能重名' }
+          { wrong: 'char c = "A"; 双引号', right: 'char c = \'A\'; 单引号' },
+          { wrong: 'char s[5] = "Hello"; 装不下', right: 'char s[6] = "Hello"; 留 \\0 位置' },
+          { wrong: 'cin &gt;&gt; s 读整行', right: 'getline(cin, s) 读整行' },
+          { wrong: 's = "Hello" + "World" 直接拼接', right: 'string s = string("Hello") + "World";' }
         ],
         extra: {
           title: '📖 四大错误的原因',
-          desc: '① <b>未声明</b>：编译器找不到函数<br>② <b>缺 return</b>：返回值不确定，可能返回垃圾值<br>③ <b>参数错</b>：类型不匹配会隐式转换，可能出错<br>④ <b>重名</b>：编译器分不清是函数还是变量<br><b>调试函数三步骤</b>：<br>1. 单独测试函数（给几组输入看输出）<br>2. 检查参数和返回值类型<br>3. 检查是否有 return 缺失',
+          desc: '① <b>引号错</b>：char 用单引号，string 用双引号<br>② <b>空间不够</b>：char 数组要预留 \\0 位置<br>③ <b>cin 遇空格停</b>：读整行用 getline<br>④ <b>字面量拼接</b>：两个字符串字面量不能直接 <code>+</code>，要至少一个是 string<br><br><b>口诀</b>：单引字符双引串，\\0 位置别忘留，读行要用 getline，拼接至少一个 string。<br><br><b>用"文字项链"理解</b>：<br>字符串就像一串项链——每个字符是一颗珠子，末尾有颗特殊的珠子 <code>\\0</code>（表示"项链到此结束"）。<br>忘留 \\0 的位置 = 项链少了收尾的珠子，会散开。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 22 函数进阶：声明与定义分离（grid） ===== */
+    /* ===== 22 初赛渗透 ===== */
     {
-      id: 22, type: 'grid', title: '函数进阶：声明与定义分离', subtitle: '让函数写在 main 后面',
-      data: {
-        cards: [
-          { icon: '📝', title: '函数声明', desc: '告诉编译器有这个函数<br>格式：返回类型 函数名(参数);<br>只写"头部"，用分号结尾<br><b>例</b>：<code>int add(int a, int b);</code>' },
-          { icon: '🔧', title: '函数定义', desc: '函数的完整实现<br>格式：返回类型 函数名(参数) { 函数体 }<br>写完整逻辑<br><b>例</b>：<code>int add(int a, int b) { return a+b; }</code>' },
-          { icon: '📐', title: '使用建议', desc: '简单函数：直接定义在 main 前<br>复杂函数：先声明，后定义<br><b>好处</b>：主程序写在前面，更易读' }
-        ],
-        extra: {
-          title: '📖 知识扩展 · 为什么需要"声明"',
-          desc: '编译器是"从上往下"读代码的。<br>当它在 main 里看到 <code>add(3, 5)</code> 时，必须<b>已经知道</b> add 是什么。<br>所以 add 要么定义在 main 前，要么先声明。<br>这就是 C++ 的"<b>先声明后使用</b>"规则。<br>大型项目中，所有函数声明通常放在 <code>.h</code> 头文件里，统一声明。<br>这也是为什么 C++ 有 <code>#include</code>——引入头文件里的声明。',
-          variant: 'card-primary'
-        }
-      }
-    },
-
-    /* ===== 23 初赛渗透（dialog） ===== */
-    {
-      id: 23, type: 'dialog', title: '初赛小知识：函数与递归', subtitle: 'CSP-J 初赛必考', chapterTag: '第 7 讲 · 初赛渗透',
+      id: 22, type: 'dialog', title: '初赛小知识：ASCII 码', subtitle: '字符背后的数字', chapterTag: '第 7 讲 · 初赛渗透',
       data: {
         lines: [
-          { who: 'student', text: '小 C，初赛会考函数吗？' },
-          { who: 'robot', text: '会。常考的是：读程序写结果，特别是"函数调用"的题。' },
+          { who: 'student', text: '小 C，字符在计算机里是怎么存的？' },
+          { who: 'robot', text: '每个字符对应一个数字，叫 <b>ASCII 码</b>。' },
           { who: 'student', text: '能举个例子吗？' },
-          { who: 'robot', text: '比如给一段函数代码，问"调用 f(3, 5) 返回什么"。<br>要你顺着函数一步步算。' },
-          { who: 'student', text: '有没有更难的？' },
-          { who: 'robot', text: '有——递归。<br>函数调用自己，一层套一层。<br>初赛常考"递归几次"或"返回什么"。' },
-          { who: 'student', text: '递归？听起来很难。' },
-          { who: 'robot', text: '不难。<b>递归就是函数自己调用自己</b>。<br>下一讲专门讲。<br>今天先把普通函数搞懂。' }
+          { who: 'robot', text: '大写字母 \'A\' 是 65，小写 \'a\' 是 97，数字 \'0\' 是 48。' },
+          { who: 'student', text: '那大写和小写差多少？' },
+          { who: 'robot', text: '差 <b>32</b>。所以小写字母 - 32 = 对应的大写字母。<br>这是竞赛常用技巧：<code>toupper(c)</code> 或 <code>c - 32</code>。' },
+          { who: 'student', text: '那怎么判断一个字符是数字？' },
+          { who: 'robot', text: '看 ASCII 范围：\'0\' 到 \'9\' 是 48 到 57。<br><code>if (c &gt;= \'0\' &amp;&amp; c &lt;= \'9\')</code> 就是数字。<br>第 22 讲会详细讲 ASCII 表。' }
         ],
         extra: {
-          title: '📖 初赛函数题三大考点',
-          desc: '<b>① 值传递</b>：形参改了不影响实参<br><b>② 返回值</b>：顺着函数逻辑算出结果<br><b>③ 递归调用</b>：函数自己调自己，求返回值或调用次数<br><b>解题技巧</b>：<br>· 在草稿纸上画出"调用链"<br>· 逐层算出参数和返回值<br>· 注意<b>返回时机</b>（return 立即结束）<br>这类题占初赛程序阅读题的 30%。',
+          title: '📖 常用 ASCII 码速查',
+          desc: '\'A\' = 65，\'Z\' = 90<br>\'a\' = 97，\'z\' = 122<br>\'0\' = 48，\'9\' = 57<br>空格 = 32<br>换行 = 10<br><br><b>规律</b>：<br>· 大写字母 + 32 = 小写字母<br>· 小写字母 - 32 = 大写字母<br>· 数字字符 - \'0\' = 对应整数（\'7\' - \'0\' = 7）<br><br>这些是初赛必背。<br><br>🔮 <b>伏笔</b>：为什么 \'A\' 是 65，\'a\' 是 97？第 22 讲从二进制讲起。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 24 课堂小测（quiz） ===== */
+    /* ===== 23 课堂小测 ===== */
     {
-      id: 24, type: 'quiz', title: '课堂小测', subtitle: '函数定义、参数与返回值',
+      id: 23, type: 'quiz', title: '课堂小测', subtitle: '字符、字符串与读入',
       chapterTag: '第 7 讲 · 课堂小测',
       data: {
         questions: [
@@ -509,127 +412,111 @@ export default {
             id: 1,
             type: 'single',
             difficulty: 2,
-            source: 'C++ 信息学奥赛总复习题 · 第六章',
-            question: '下面关于函数的说法，正确的是？',
+            source: 'C++ 信息学奥赛总复习题 · 第五章',
+            question: '下面哪个是合法的 C++ 字符串定义？',
             options: [
-              { label: 'A', text: '函数可以没有返回值，用 <code>void</code> 声明' , correct: true },
-              { label: 'B', text: '函数必须有参数' },
-              { label: 'C', text: '函数不能返回整数' },
-              { label: 'D', text: '函数必须写在 main 里' }
+              { label: 'A', text: '<code>string s = \'Hello\';</code>' },
+              { label: 'B', text: '<code>string s = "Hello";</code>', correct: true },
+              { label: 'C', text: '<code>char s = \'Hello\';</code>' },
+              { label: 'D', text: '<code>char s = "Hello";</code>' }
             ],
-            analysis: 'A 对：<code>void</code> 表示无返回值。<br>B 错：函数可以无参数，如 <code>int get_year()</code>。<br>C 错：函数可以返回任何类型，包括 int。<br>D 错：函数必须写在 main <b>外面</b>，不能嵌套定义。'
+            analysis: '<b>string 用双引号</b>，<b>char 用单引号</b>。<br>A 错：string 用了单引号<br>B 对<br>C 错：char 只能存 1 个字符<br>D 错：char 用双引号会报错<br><b>口诀</b>：单引字符双引串。'
           },
           {
             id: 2,
             type: 'single',
             difficulty: 2,
-            source: 'CSP-J 初赛真题练习 · 函数',
-            question: '下面代码的输出是什么？',
-            questionCode: `void change(int x) {
-    x = 100;
-}
-
-int main() {
-    int a = 5;
-    change(a);
-    cout << a << endl;
-    return 0;
-}`,
+            source: 'CSP-J 初赛真题练习 · 字符串',
+            question: '在 C++ 中，<code>char s[] = "Hello";</code> 数组 s 占几个字节？',
             options: [
-              { label: 'A', text: '100' },
-              { label: 'B', text: '5', correct: true },
-              { label: 'C', text: '0' },
-              { label: 'D', text: '编译错误' }
+              { label: 'A', text: '5 字节' },
+              { label: 'B', text: '6 字节', correct: true },
+              { label: 'C', text: '7 字节' },
+              { label: 'D', text: '不确定' }
             ],
-            analysis: 'C++ 函数默认是<b>值传递</b>——把实参的值复制给形参。<br>函数里改 <code>x</code>，改的是副本，不影响 <code>a</code>。<br>所以输出仍是 <b>5</b>，选 B。<br><b>关键</b>：值传递是"复制"，不是"共享"。'
+            analysis: '字符串 "Hello" 有 5 个字符，但 C 风格字符串<b>结尾还有一个 \\0 结束符</b>。<br>所以总占 <b>5 + 1 = 6</b> 字节。<br>这就是为什么定义字符数组时，长度要多留一位。'
           },
           {
             id: 3,
             type: 'single',
             difficulty: 3,
-            source: '2021 CSP-J 初赛模拟题 · 函数',
+            source: 'CSP-J 2021 初赛模拟题 · 字符串',
             question: '下面代码的输出是什么？',
-            questionCode: `int f(int n) {
-    if (n == 0) return 1;
-    return n * f(n - 1);
-}
-
-int main() {
-    cout << f(4) << endl;
-    return 0;
-}`,
+            questionCode: `string s = "abc";
+cout << s.size() << endl;
+cout << s[1] << endl;`,
             options: [
-              { label: 'A', text: '4' },
-              { label: 'B', text: '10' },
-              { label: 'C', text: '24', correct: true },
-              { label: 'D', text: '120' }
+              { label: 'A', text: '3 然后 b', correct: true },
+              { label: 'B', text: '3 然后 a' },
+              { label: 'C', text: '4 然后 b' },
+              { label: 'D', text: '编译错误' }
             ],
-            analysis: '这是<b>递归函数</b>——函数自己调用自己。<br>f(4) = 4 × f(3) = 4 × 3 × f(2) = 4 × 3 × 2 × f(1) = 4 × 3 × 2 × 1 × f(0)。<br>f(0) = 1（终止条件）。<br>所以结果 = 4 × 3 × 2 × 1 × 1 = <b>24</b>。<br>这就是<b>阶乘</b>的递归实现，下一讲会详细讲。'
+            analysis: '<code>s.size()</code> 返回字符串长度，<b>3</b>（不是 4）。<br><code>s[1]</code> 是第 2 个字符（下标从 0 开始），即 <b>b</b>。<br>所以输出 3 和 b，选 A。<br><b>关键</b>：string 的 size() 不含结束符（\\0）。'
           },
           {
             id: 4,
             type: 'judge',
             difficulty: 2,
-            source: 'C++ 信息学奥赛总复习题 · 第六章',
-            question: '在 C++ 中，函数可以定义在 <code>main</code> 函数内部。',
+            source: 'C++ 信息学奥赛总复习题 · 第五章',
+            question: '在 C++ 中，<code>cin &gt;&gt; s</code> 可以读入含空格的整行字符串。',
             options: [
               { label: 'A', text: '正确' },
               { label: 'B', text: '错误', correct: true }
             ],
-            analysis: 'C++ 函数必须定义在 <b>main 外面</b>，不能嵌套定义。<br>如果函数写在 main 后面，需要在 main 前<b>先声明</b>。<br><b>正确结构</b>：<br>· 函数声明（可选）<br>· 函数定义<br>· main 函数'
+            analysis: '<code>cin &gt;&gt; s</code> 遇到空格、Tab、换行就停止。<br>比如输入 "Hello World"，cin 只读到 "Hello"。<br>要读整行（含空格），必须用 <code>getline(cin, s)</code>。<br><b>口诀</b>：cin 读词，getline 读行。'
           },
           {
             id: 5,
             type: 'judge',
             difficulty: 2,
-            source: 'CSP-J 初赛真题练习 · 函数',
-            question: '函数的参数和返回值都可以是 <code>int</code>、<code>double</code>、<code>char</code> 等基本类型。',
+            source: 'CSP-J 初赛真题练习 · 字符串',
+            question: '字符 \'A\' 在 ASCII 码表中是 65，字符 \'a\' 是 97。',
             options: [
               { label: 'A', text: '正确', correct: true },
               { label: 'B', text: '错误' }
             ],
-            analysis: 'C++ 函数的参数和返回值可以是任意类型：<br>· 基本类型：int、double、char、bool<br>· 数组、字符串<br>· 结构体、类<br>· 甚至函数指针<br>这就是 C++ 的"<b>类型系统</b>"——万物皆可作类型。'
+            analysis: '常见 ASCII 码：<br>\'A\' = 65，\'Z\' = 90<br>\'a\' = 97，\'z\' = 122<br>\'0\' = 48，\'9\' = 57<br>空格 = 32<br><br><b>规律</b>：大写和小写相差 32，所以 <code>\'a\' - \'A\' = 32</code>。<br>这是竞赛常考的知识点。'
           }
         ],
         extra: {
-          title: '📖 知识扩展 · 初赛读程序题技巧',
-          desc: '<b>函数类读程序题解题步骤</b>：<br>① 找到"调用点"——主程序里的调用语句<br>② 顺着调用进入函数，把实参值代入<br>③ 逐行执行函数体，得到返回值<br>④ 回到调用点，继续执行<br>⑤ 如果是递归，画"调用树"层层展开<br><b>技巧</b>：把每一步的变量值写在纸上，不容易乱。',
+          title: '📖 知识扩展 · 初赛字符串三大考点',
+          desc: '<b>① 类型区分</b>：char 用单引号，string 用双引号<br><b>② 字节数计算</b>：C 风格字符串含 \\0，string 不含<br><b>③ 读入方式</b>：cin 遇空格停，getline 读整行<br><br>这三类占了初赛字符串题的 <b>80%</b>。<br><b>建议</b>：做初赛真题时，重点练这三类。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 25 今日总结（quote） ===== */
+    /* ===== 24 今日总结 ===== */
     {
-      id: 25, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 24, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
-        text: '函数是把代码打包，想用就调用。',
-        author: '—— 函数第一课',
+        text: '字符串是文字的容器，本质是字符的数组。',
+        author: '—— 字符串第一课',
         points: [
-          '函数 = 一段有名字的代码块',
-          '函数三要素：返回类型、函数名、参数',
-          '值传递：函数内改参数，不影响外部',
-          'return：返回值并立即结束函数',
-          '作用域：局部变量只在函数内有效',
-          '声明与定义分离：函数可以写在 main 后面'
+          '字符用单引号 \'A\'，字符串用双引号 "A"',
+          '两种定义：char s[100]; 和 string s;',
+          'cin 读词，getline 读行',
+          '长度：string 用 .size()，char[] 用 strlen()',
+          '遍历：下标 s[i] 或范围 for',
+          '实战：统计、回文、逆序三大经典问题'
         ],
-        highlight: { title: '📌 关键口诀', desc: '返回类型 函数名(参数)，函数体用大括号；调用时传实参，返回值用 return；值传递是复制，函数里改外面不变；能封装就封装，主程序才简洁。' },
+        highlight: { title: '📌 关键口诀', desc: '单引字符双引串，char 数组留 \\0 位；cin 读词行用 getline，大小写差 32；字符串本质是字符数组，数组知识全都用得上。' },
         extra: {
-          title: '💡 函数：编程的"积木"',
-          desc: '函数是程序从"流水账"进化到"工程化"的关键一步。<br>有了函数，代码不再堆在 main 里。<br>每个函数只做一件事，组合起来完成复杂任务。<br>这就是<b>模块化编程</b>思想。<br><br>🔮 <b>伏笔</b>：函数能不能自己调用自己？下一讲"递归"揭晓。',
+          title: '💡 字符串是通往"真实世界"的门',
+          desc: '前面学的都是数字，从今天开始，程序能处理"人类的语言"了。<br>能处理文字，就能做聊天机器人、文本分析、密码破解。<br>这是编程能力的一次大跃迁。<br><br>🔮 <b>伏笔</b>：<br>· 字符串的常用函数（find、substr、replace）还有很多，第 12 讲专门讲。<br>· 字符串比较大小、排序，第 14 讲讲。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 26 课后作业（grid） ===== */
+    /* ===== 25 课后作业 ===== */
     {
-      id: 26, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 25, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
-          { icon: '🟢', title: '基础 1 · P5735', link: 'https://www.luogu.com.cn/problem/P5735', desc: '<b>距离函数</b><br>考察：函数定义、sqrt<br>难度：★★<br>目标：封装距离计算为函数' },
-          { icon: '🟢', title: '基础 2 · P5737', link: 'https://www.luogu.com.cn/problem/P5737', desc: '<b>闰年展示</b><br>考察：函数判断闰年<br>难度：★★<br>目标：把闰年判断封装成函数' },
-          { icon: '🔴', title: '挑战 · P5738', link: 'https://www.luogu.com.cn/problem/P5738', desc: '<b>歌唱比赛</b><br>考察：函数、排序<br>难度：★★★<br>目标：去掉最高最低分后求平均' }
+          { icon: '🟢', title: '基础 1 · P5015', link: '...', desc: '<b>标题统计</b><br>考察：getline、字符遍历<br>难度：★★<br>目标：统计非空格字符数' },
+          { icon: '🟢', title: '基础 2 · P1914', link: 'https://www.luogu.com.cn/problem/P1914', desc: '<b>小书童——凯撒密码</b><br>考察：字符遍历、字符加减<br>难度：★★<br>目标：把每个字符向后移动 n 位' },
+          { icon: '🔴', title: '挑战 · P1553', link: '...', desc: '<b>数字反转（升级版）</b><br>考察：字符串处理、分类讨论<br>难度：★★★<br>目标：处理小数、分数、百分数、整数四种情况' }
         ],
         extra: {
           title: '📌 提交方式',
@@ -639,71 +526,99 @@ int main() {
       }
     },
 
-    /* ===== 27 下节预告（radial） ===== */
+    /* ===== 26 下节预告 ===== */
     {
-      id: 27, type: 'radial', title: '下节预告', subtitle: '第 8 讲 · 递归',
+      id: 26, type: 'radial', title: '下节预告', subtitle: '第 8 讲 · 函数',
       data: {
-        center: '递归',
+        center: '函数',
         items: [
-          { text: '什么是递归' },
-          { text: '递归三要素' },
-          { text: '阶乘与斐波那契' },
-          { text: '汉诺塔' }
+          { text: '什么是函数' },
+          { text: '定义与调用' },
+          { text: '参数与返回值' },
+          { text: '作用域' }
         ],
         extra: {
-          title: '💡 函数调用自己',
-          desc: '函数能调用别的函数，那能不能调用自己？<br>能！这叫"递归"。<br>递归是算法世界的魔法——用几行代码解决看似复杂的问题。<br>下一讲，我们揭开递归的神秘面纱。<br><br>🔮 <b>远期彩蛋</b>：递归的底层是"栈"，第 25 讲会讲。',
+          title: '💡 代码复用的秘密',
+          desc: '目前我们写的代码都在 main 里，越写越长。<br>如果某段代码要用 10 次，难道要复制 10 遍？<br>不用。把代码打包成"函数"，想用就调用。<br>下一讲，程序将学会"复用"——函数。<br><br>🔮 <b>远期彩蛋</b>：函数的底层是怎么工作的？第 25 讲"栈"会揭晓。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 28 答疑时间（dialog） ===== */
+    /* ===== 27 答疑时间 ===== */
     {
-      id: 28, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 7 讲 · 答疑',
+      id: 27, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 7 讲 · 答疑',
       data: {
         lines: [
-          { who: 'student', text: '函数和"方法"有什么区别？' },
-          { who: 'robot', text: '本质一样。"方法"是 Java、Python 里的叫法，"函数"是 C++ 里的叫法。<br>都是"打包好的代码块"。' },
-          { who: 'student', text: '函数能返回数组吗？' },
-          { who: 'robot', text: 'C++ 里不能直接返回数组。<br>但可以返回"指针"（第 16 讲）或用结构体包装。' },
-          { who: 'student', text: '一个程序能有多少个函数？' },
-          { who: 'robot', text: '理论上无限。<br>实际项目中，一个程序可能有几千个函数。<br>大型项目里，函数还要分文件组织。' },
-          { who: 'student', text: '那竞赛里一般写几个函数？' },
-          { who: 'robot', text: '看题目复杂度。<br>简单的 2—3 个，复杂的 10 个以上。<br>原则：<b>一个函数只做一件事</b>。' }
+          { who: 'student', text: 'string 和 char[] 到底用哪个？' },
+          { who: 'robot', text: '除非题目明确要求 char[]，否则都用 string。<br>string 更安全、更方便。' },
+          { who: 'student', text: 'cin 和 getline 怎么选？' },
+          { who: 'robot', text: '读一个单词用 cin，读一整行用 getline。<br>如果 cin 后面接 getline，别忘了 cin.ignore()。' },
+          { who: 'student', text: '为什么字符要用 ASCII 码表示？' },
+          { who: 'robot', text: '因为计算机只认识数字。<br>把字符编码成数字，计算机才能存储和比较。<br>ASCII 是最早的编码标准，1963 年就诞生了。' },
+          { who: 'student', text: '回文题还有什么变种？' },
+          { who: 'robot', text: '有。比如"忽略大小写和标点"的回文，要先把字符串"规范化"，再做判断。<br>这是进阶题，等练熟基础后可以挑战。' },
+          { who: 'student', text: '字符串能相加吗？' },
+          { who: 'robot', text: 'string 可以：<code>"Hello" + " " + "World"</code> → "Hello World"。<br>但注意：两个字面量不能直接相加，至少一个是 string 变量。<br><code>string("Hello") + "World"</code> 这样写才对。' }
         ],
         extra: {
           title: '📌 一个建议',
-          desc: '函数是编程的基本功。<br>初学者至少要写 <b>30 道函数题</b>才能熟练。<br>练题时不要只追求"做出来"，要追求"写得好"：<br>· 函数名见名知意<br>· 函数体短小精悍<br>· 一个函数只做一件事<br>好习惯受益终身。',
+          desc: '字符串是竞赛的"第二大地基"（第一是数组）。<br>初学者至少要写 <b>20 道字符串题</b>才能熟练。<br><br>从"读入 - 遍历 - 处理 - 输出"这个模板开始，反复练。<br>练到"看到字符串题就知道怎么处理"，字符串就过关了。',
           variant: 'card-primary'
         }
       }
     },
 
-    /* ===== 29 知识清单（grid） ===== */
+    /* ===== 28 本讲英文单词 ===== */
+    {
+      id: 28, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
+      chapterTag: '第 7 讲 · 复习',
+      data: {
+        words: [
+          { word: 'string',   cn: '字符串', pron: '/strɪŋ/',       origin: '英文原意"一串、一线"',     category: '类型' },
+          { word: 'char',     cn: '字符',   pron: '/kɑːr/',        origin: 'character 的缩写',         category: '类型' },
+          { word: 'getline',  cn: '读整行', pron: '/ɡet laɪn/',    origin: 'get（获取）+ line（行）',  category: '函数' },
+          { word: 'length',   cn: '长度',   pron: '/leŋθ/',        origin: '英文原意"长度"',           category: '概念' },
+          { word: 'size',     cn: '大小',   pron: '/saɪz/',        origin: '英文原意"大小、尺寸"',     category: '函数' },
+          { word: 'ignore',   cn: '忽略',   pron: '/ɪɡˈnɔːr/',     origin: '英文原意"忽略"',           category: '函数' },
+          { word: 'reverse',  cn: '反转',   pron: '/rɪˈvɜːrs/',    origin: '英文原意"颠倒、反转"',     category: '函数' }
+        ],
+        extra: {
+          title: '💡 记忆法 · 组合词与缩写',
+          desc: '<b>缩写类</b>：<br><code>char</code> = <b>char</b>acter（字符）<br><br><b>组合类</b>：<br><code>getline</code> = <b>get</b>（获取）+ <b>line</b>（行）<br>读一整行的意思。<br><br><b>原意类</b>：<br><code>string</code> = 一串、一线（字符串）<br><code>length</code> = 长度<br><code>size</code> = 大小（在 C++ 里和 length 等价）<br><code>ignore</code> = 忽略（跳过某些字符）<br><code>reverse</code> = 反转（颠倒顺序）<br><br><b>易错拼写</b>：<br>· <code>getline</code> 是一个单词，中间没空格<br>· <code>length</code> 不是 <code>lenght</code><br>· <code>reverse</code> 不是 <code>revers</code><br><br><b>发音</b>：<code>char</code> 读 "car"（车），<code>string</code> 读 "string"（和英文单词一样）。',
+          variant: 'card-primary'
+        }
+      }
+    },
+
+    /* ===== 29 知识清单 ===== */
     {
       id: 29, type: 'grid', title: '第 7 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 7 讲 · 复习',
       data: {
         cards: [
-          { icon: '🔧', title: '函数定义', desc: '<b>语法</b>：返回类型 函数名(参数) { 函数体 }<br><b>三要素</b>：返回类型、函数名、参数<br><b>位置</b>：main 前，或先声明后定义' },
-          { icon: '📞', title: '函数调用', desc: '<b>语法</b>：函数名(实参);<br><b>形参</b>：定义时写的参数<br><b>实参</b>：调用时传的值<br><b>值传递</b>：实参值复制给形参' },
-          { icon: '📤', title: '返回值', desc: '<b>return</b>：立即结束函数，返回值<br><b>void</b>：无返回值<br><b>非 void</b>：必须 return' },
-          { icon: '🌐', title: '作用域', desc: '<b>局部变量</b>：只在函数内有效<br><b>全局变量</b>：整个程序有效<br><b>建议</b>：能局部就局部' }
+          { icon: '🔤', title: '字符 vs 字符串', desc: '<b>char</b> 用单引号 \'A\'<br><b>string</b> 用双引号 "A"<br>char 占 1 字节<br>字符串含结束符 \\0' },
+          { icon: '📝', title: '两种定义', desc: '<b>char s[100];</b> 固定长度<br><b>string s;</b> 自动长度<br><b>推荐</b>：优先用 string<br><b>注意</b>：需要 #include &lt;string&gt;' },
+          { icon: '📥', title: '读入与遍历', desc: '<b>cin &gt;&gt; s</b> 读词<br><b>getline(cin, s)</b> 读行<br><b>s[i]</b> 访问字符<br><b>范围 for</b> 遍历' },
+          { icon: '📏', title: '长度与实战', desc: '<b>s.size()</b> 或 s.length()<br><b>strlen(s)</b> 用于 char[]<br>统计、回文、逆序<br>都是字符串经典题' }
         ],
         extra: {
-          title: '📌 关键口诀 + 小 C 彩蛋',
-          desc: '<b>口诀</b>：返回类型 函数名(参数)，函数体用大括号；调用时传实参，返回值用 return；值传递是复制，函数里改外面不变；能封装就封装，主程序才简洁。<br><b>小 C 彩蛋</b>：世界上最早的函数思想，来自数学。<br>1673 年，数学家莱布尼茨第一次用 <code>f(x)</code> 表示函数。<br>300 年后，这个符号进了编程语言。<br>你写的每个函数，都在延续数学家的智慧。',
+          title: '📌 关键口诀 + 挑战题单',
+          desc: '<b>口诀</b>：单引字符双引串，char 数组留 \\0 位；cin 读词行用 getline，大小写差 32；字符串本质是字符数组，数组知识全都用得上。<br><br>📌 <b>挑战题单</b>：<br><b>⭐ 基础</b>：P5015 标题统计<br><b>⭐⭐ 进阶</b>：P1308 统计单词数<br><b>⭐⭐⭐ 挑战</b>：P1553 数字反转（升级版）<br><b>🔗 延伸</b>：洛谷搜索"字符串"，挑 3 道入门题练手。<br><br><b>小 C 彩蛋</b>：1963 年，ASCII 码标准诞生，规定了 128 个字符的编码。<br>60 多年过去，它仍然是计算机处理文本的基础。<br>你写的每个字符串，背后都是 ASCII 码在默默工作。',
           variant: 'card-glow'
         }
       }
     },
 
-    /* ===== 30 结束页（ending） ===== */
+    /* ===== 30 结束页 ===== */
     {
       id: 30, type: 'ending', title: '第七讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
-        extra: { title: '🌟 你已经学会了封装', desc: '从"流水账代码"到"积木式编程"，函数是关键一步。<br>下一讲，我们将见识一个更神奇的能力——递归。<br>函数调用自己，解决看似复杂的问题。', variant: 'card-glow' }
+        extra: {
+          title: '🌟 你已经让程序会处理文字了',
+          desc: '从数字到文字，程序能处理的数据类型越来越丰富。<br>下一讲，我们学习"函数"——让代码可以复用。<br>程序将变得更简洁、更强大。<br><br>数组 + 字符串 + 函数 + 递归——<br>掌握这四件套，你就能写出"真正的程序"了。',
+          variant: 'card-glow'
+        }
       }
     }
 
