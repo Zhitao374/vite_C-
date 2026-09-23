@@ -290,32 +290,32 @@ export default {
         codeFile: 'codes/lesson-08/func-scope.cpp',
         steps: [
           {
-            line: 11,
+            focusLines: [11],
             expression: 'a = 5',
             note: '<code>main</code> 里定义 <code>a = 5</code>。<br>a 是一个局部变量，住在 main 的"地盘"里。'
           },
           {
-            line: 12,
+            focusLines: [12],
             expression: 'a = 5 → change(a)',
             note: '调用 <code>change(a)</code>。<br>这时会发生一次<b>复制</b>——把 a 的值 5 复制一份，交给 change 里的 x。'
           },
           {
-            line: 6,
+            focusLines: [6],
             expression: 'a = 5  |  x = 5（副本）',
             note: '函数开始执行。<br>此时 <b>a 和 x 是两个独立的变量</b>，只是恰好值相同。<br>就像你把文件复印一份给同事——两边的修改互不影响。'
           },
           {
-            line: 7,
+            focusLines: [7],
             expression: 'a = 5  |  x = 100',
             note: '🎯 函数内执行 <code>x = 100</code>。<br>改的是<b>副本 x</b>，<b>原件 a 还是 5</b>。<br>这就是"值传递"的关键。'
           },
           {
-            line: 8,
+            focusLines: [8],
             expression: 'a = 5  |  x 销毁',
             note: 'change 函数结束。<br>形参 x 随函数返回被<b>销毁</b>——它的"地盘"收回了。<br>a 依然稳稳地是 <b>5</b>。'
           },
           {
-            line: 13,
+            focusLines: [13],
             expression: '输出：a = 5',
             note: '✅ 回到 main，<code>cout &lt;&lt; a</code> 输出 <b>5</b>。<br><br><b>结论</b>：值传递 = <b>复制一份</b>。函数改的是副本，原件不受影响。'
           }

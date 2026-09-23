@@ -209,37 +209,37 @@ export default {
         snippet: 'main',
         steps: [
           {
-            line: 6,
+            focusLines: [6],
             expression: 'sum = 0',
             note: '循环开始前，累加器 <code>sum</code> 初始化为 0。<br>就像空的存钱罐，还没放钱。'
           },
           {
-            line: 9,
+            focusLines: [9],
             expression: 'sum = sum + a[0] = 0 + 1 = 1',
             note: '第 1 次循环（i=0）：<br>取出 <code>a[0] = 1</code>，加进 sum。<br>存钱罐里现在有 <b>1</b>。'
           },
           {
-            line: 9,
+            focusLines: [9],
             expression: 'sum = sum + a[1] = 1 + 2 = 3',
             note: '第 2 次循环（i=1）：<br>取出 <code>a[1] = 2</code>，加进 sum。<br>存钱罐里现在有 <b>3</b>。'
           },
           {
-            line: 9,
+            focusLines: [9],
             expression: 'sum = sum + a[2] = 3 + 3 = 6',
             note: '第 3 次循环（i=2）：<br>取出 <code>a[2] = 3</code>，加进 sum。<br>存钱罐里现在有 <b>6</b>。'
           },
           {
-            line: 9,
+            focusLines: [9],
             expression: 'sum = sum + a[3] = 6 + 4 = 10',
             note: '第 4 次循环（i=3）：<br>取出 <code>a[3] = 4</code>，加进 sum。<br>存钱罐里现在有 <b>10</b>。'
           },
           {
-            line: 9,
+            focusLines: [9],
             expression: 'sum = sum + a[4] = 10 + 5 = 15',
             note: '第 5 次循环（i=4）：<br>取出 <code>a[4] = 5</code>，加进 sum。<br>存钱罐里现在有 <b>15</b>。<br>循环结束。'
           },
           {
-            line: 11,
+            focusLines: [11],
             expression: 'sum = 15',
             note: '✅ 输出 <b>15</b>。<br><b>5 个元素，5 次累加</b>——这就是数组求和的全过程。<br><br>🔮 关键：<code>sum</code> 必须初始化为 <b>0</b>，否则第一次加法就错了。'
           }

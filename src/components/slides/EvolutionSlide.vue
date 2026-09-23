@@ -1,249 +1,254 @@
 <template>
   <div class="slide">
-    <div v-if="chapterTag" class="chapter-tag">{{ chapterTag }}</div>
     <h1 class="slide-title">
       {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
+      <p v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</p>
     </h1>
 
-    <div class="slide-body evolution-body">
-      <!-- 顶部引入（可选） -->
-      <StepWrapper v-if="intro" :step="1">
-        <div class="intro-card" v-html="intro"></div>
-      </StepWrapper>
+    <div class="slide-body">
+      <div v-if="intro" class="evo-intro" v-html="intro"></div>
 
-      <div class="split">
-        <!-- 左：代码（静态 + 高亮跟随） -->
-        <div class="split-left scroll-pane">
-          <StepWrapper :step="intro ? 2 : 1">
+      <div class="evo-layout">
+        <!-- 左栏：代码 -->
+        <div class="evo-code-pane">
+          <div ref="codeWrapRef" class="evo-code-wrap">
             <CodeBlock
-              :code="d.code"
-              :code-file="d.codeFile"
-              :snippet="d.snippet"
-              :density="d.density"
-              :highlight-line="currentLine"
+              :code-file="slide.data.codeFile"
+              :snippet="slide.data.snippet"
+              :highlight-lines="focusLines"
+              density="sm"
             />
-          </StepWrapper>
+          </div>
         </div>
 
-        <!-- 右：演化区（内容替换 + 过渡动画） -->
-        <div class="split-right scroll-pane">
-          <StepWrapper :step="intro ? 3 : 2">
-            <div class="evolution-card">
-              <transition name="evo-fade" mode="out-in">
-                <div :key="currentIndex" class="evolution-content">
-                  <div class="evolution-expression" v-html="currentExpression"></div>
-                  <div v-if="currentNote" class="evolution-note" v-html="currentNote"></div>
-                </div>
-              </transition>
+        <!-- 右栏：当前步骤 -->
+        <div class="evo-step-pane">
+          <div v-if="currentStep" class="step-card">
+            <div class="step-expression" v-html="currentStep.expression"></div>
+            <div class="step-note" v-html="currentStep.note"></div>
+          </div>
 
-              <div class="evolution-progress">
-                <span class="evo-current">{{ currentIndex + 1 }}</span>
-                <span class="evo-sep">/</span>
-                <span class="evo-total">{{ steps.length }}</span>
-              </div>
-            </div>
-          </StepWrapper>
+          <div class="step-progress">
+            <span class="progress-num">{{ currentIndex + 1 }} / {{ steps.length }}</span>
+          </div>
         </div>
       </div>
 
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-primary'"
-        />
-      </StepWrapper>
+      <ExtraCard v-if="slide.data.extra" v-bind="slide.data.extra" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
+import { computed, ref, watch, nextTick } from 'vue';
 import CodeBlock from '@/components/common/CodeBlock.vue';
 import ExtraCard from '@/components/common/ExtraCard.vue';
-import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
 
-const props = defineProps({ slide: { type: Object, required: true } });
-const emit = defineEmits(['step-count']);
-
-const d = computed(() => props.slide.data || {});
-const intro = computed(() => d.value.intro || '');
-const steps = computed(() => d.value.steps || []);
-const extra = computed(() => d.value.extra);
-const chapterTag = computed(() => props.slide.chapterTag);
-
-const { current, max: maxStep } = useStep();
-
-// 当前 step 对应的演化索引
-const currentIndex = computed(() => {
-  const baseOffset = intro.value ? 3 : 2;
-  const idx = current.value - baseOffset;
-  return Math.max(0, Math.min(idx, steps.value.length - 1));
+const props = defineProps({
+  slide: { type: Object, required: true }
 });
 
-const currentExpression = computed(() => steps.value[currentIndex.value]?.expression || '');
-const currentNote = computed(() => steps.value[currentIndex.value]?.note || '');
-const currentLine = computed(() => steps.value[currentIndex.value]?.line || 0);
+const emit = defineEmits(['step-count']);
 
-// 步数：intro（如有）+ 代码 + 演化区 + extra
-useStepCount(emit, () =>
-  (intro.value ? 1 : 0) +       // intro
-  1 +                            // 代码区
-  steps.value.length +           // 每个演化步骤占 1 步
-  (extra.value ? 1 : 0)          // extra
+const { current } = useStep();
+
+// ============================================
+// 步骤数据
+// ============================================
+const steps = computed(() => props.slide.data?.steps || []);
+const intro = computed(() => props.slide.data?.intro || '');
+
+const currentIndex = computed(() =>
+  Math.max(0, Math.min(current.value - 1, steps.value.length - 1))
 );
+
+const currentStep = computed(() => steps.value[currentIndex.value] || null);
+
+/**
+ * 当前高亮的行号数组
+ * 新数据格式：step.focusLines: [n1, n2, ...]
+ */
+const focusLines = computed(() => {
+  const step = currentStep.value;
+  if (!step) return [];
+  return Array.isArray(step.focusLines) ? step.focusLines : [];
+});
+
+// ============================================
+// 步数上报
+// ============================================
+const stepTotal = computed(() =>
+  steps.value.length + (props.slide.data?.extra ? 1 : 0)
+);
+watch(stepTotal, (n) => emit('step-count', n), { immediate: true });
+
+// ============================================
+// 自动滚动到高亮区域
+// ============================================
+const codeWrapRef = ref(null);
+
+watch(
+  currentIndex,
+  async () => {
+    await nextTick();
+    scrollToFocusLine();
+  }
+);
+
+async function scrollToFocusLine() {
+  if (!focusLines.value.length) return;
+
+  const wrap = codeWrapRef.value;
+  if (!wrap) return;
+
+  const scrollContainer = wrap.querySelector('.code-block pre');
+  if (!scrollContainer) return;
+
+  const firstLine = Math.min(...focusLines.value);
+
+  // 通过行号找到 DOM 节点
+  // CodeBlock 渲染时，每行是 .code-line，行号在 .code-num 里
+  const lineNodes = scrollContainer.querySelectorAll('.code-line');
+  const target = Array.from(lineNodes).find(node => {
+    const numEl = node.querySelector('.code-num');
+    return numEl && parseInt(numEl.textContent.trim(), 10) === firstLine;
+  });
+
+  if (!target) return;
+
+  // 检查是否已在可视区
+  const containerRect = scrollContainer.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+
+  const above = targetRect.top < containerRect.top;
+  const below = targetRect.bottom > containerRect.bottom;
+
+  if (above || below) {
+    scrollContainer.scrollTo({
+      top: target.offsetTop - scrollContainer.clientHeight / 3,
+      behavior: 'smooth'
+    });
+  }
+}
 </script>
 
 <style scoped>
-.evolution-body {
+/* ============================================
+   顶部引入
+   ============================================ */
+.evo-intro {
+  font-size: var(--fs-card-desc);
+  color: var(--text-sub);
+  line-height: 1.6;
+  padding: calc(12px * var(--font-scale)) calc(16px * var(--font-scale));
+  background: var(--primary-soft);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-gap-md);
+}
+.evo-intro :deep(b) {
+  color: var(--text-main);
+}
+
+/* ============================================
+   两栏布局
+   ============================================ */
+.evo-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-gap-md);
+  align-items: stretch;
+  min-height: 0;
+}
+
+/* 左栏：代码 */
+.evo-code-pane {
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  min-height: 0;
-  overflow: hidden;
 }
 
-/* 顶部引入 */
-.intro-card {
-  padding: 12px 18px;
-  background: linear-gradient(135deg, var(--primary-soft), #fff);
-  border-left: 4px solid var(--primary);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  font-size: var(--fs-card-desc);
-  line-height: 1.7;
-  color: var(--text-sub);
-  margin-bottom: 12px;
-}
-.intro-card :deep(code) {
-  background: rgba(22, 93, 255, 0.08);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-/* 两栏布局 */
-.split {
-  display: grid;
-  grid-template-columns: 50fr 50fr;
-  gap: 18px;
+.evo-code-wrap {
   flex: 1;
   min-height: 0;
-}
-
-.scroll-pane {
-  min-height: 0;
-  overflow-y: auto;
-  padding-right: 6px;
-}
-
-.scroll-pane::-webkit-scrollbar { width: 8px; }
-.scroll-pane::-webkit-scrollbar-thumb {
-  background: rgba(22, 93, 255, 0.25);
-  border-radius: 4px;
-}
-.scroll-pane::-webkit-scrollbar-thumb:hover {
-  background: rgba(22, 93, 255, 0.45);
-}
-.scroll-pane::-webkit-scrollbar-track { background: transparent; }
-
-/* 演化卡片 */
-.evolution-card {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 320px;
-  padding: 32px 28px 48px;
-  background: linear-gradient(135deg, #fff, var(--bg-soft));
-  border: 2px solid var(--card-border);
+}
+
+.evo-code-wrap :deep(.code-block) {
+  flex: 1;
+  min-height: 0;
+  max-height: 62vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.evo-code-wrap :deep(.code-block pre) {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+}
+
+/* 右栏：当前步骤 */
+.evo-step-pane {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-md);
+}
+
+.step-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   box-shadow: var(--card-shadow);
-  overflow: hidden;
-}
-
-.evolution-content {
+  padding: var(--space-card-padding-y) var(--space-card-padding-x);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-gap-md);
+  min-height: 0;
+  overflow-y: auto;
 }
 
-.evolution-expression {
+.step-expression {
   font-family: var(--font-code);
-  font-size: calc(28px * var(--font-scale));
+  font-size: calc(24px * var(--font-scale));
   font-weight: 700;
   color: var(--primary);
-  line-height: 1.8;
-  letter-spacing: 0.5px;
-  word-break: break-all;
+  line-height: 1.6;
+  white-space: pre-wrap;
 }
 
-.evolution-expression :deep(code) {
-  background: rgba(22, 93, 255, 0.08);
-  padding: 2px 8px;
-  border-radius: 6px;
+.step-note {
+  font-size: var(--fs-card-desc);
+  color: var(--text-sub);
+  line-height: 1.7;
 }
 
-.evolution-note {
+.step-progress {
+  text-align: right;
+  padding-right: calc(4px * var(--font-scale));
+}
+
+.progress-num {
+  font-family: var(--font-code);
   font-size: calc(16px * var(--font-scale));
   color: var(--text-dim);
-  line-height: 1.7;
-  padding-left: 12px;
-  border-left: 3px solid var(--accent-soft);
+  letter-spacing: 0.5px;
 }
 
-.evolution-note :deep(code) {
-  background: var(--primary-soft);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: var(--primary);
-  font-family: var(--font-code);
-  font-weight: 600;
-}
-
-.evolution-progress {
-  position: absolute;
-  bottom: 14px;
-  right: 20px;
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  font-family: var(--font-code);
-  letter-spacing: 1px;
-}
-
-.evo-current {
-  font-size: calc(20px * var(--font-scale));
-  font-weight: 800;
-  color: var(--accent);
-}
-.evo-sep {
-  font-size: calc(14px * var(--font-scale));
-  color: var(--text-light);
-}
-.evo-total {
-  font-size: calc(14px * var(--font-scale));
-  color: var(--text-light);
-}
-
-/* 过渡动画：替换时淡入淡出 */
-.evo-fade-enter-active,
-.evo-fade-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.evo-fade-enter-from {
-  opacity: 0;
-  transform: translateY(8px);
-}
-.evo-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-/* 窄屏适配 */
-@media (max-width: 1100px) {
-  .split { grid-template-columns: 1fr; }
+/* ============================================
+   响应式
+   ============================================ */
+@media (max-width: 900px) {
+  .evo-layout {
+    grid-template-columns: 1fr;
+  }
+  .evo-code-wrap :deep(.code-block) {
+    max-height: 40vh;
+  }
 }
 </style>

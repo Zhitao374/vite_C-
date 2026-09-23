@@ -267,32 +267,32 @@ export default {
         snippet: 'sum',
         steps: [
           {
-            line: 5,
+            focusLines: [5],
             expression: 'sum(5) = 5 + sum(4)',
             note: '要算 sum(5)，先要知道 sum(4) 是多少。<br>表达式从这一行开始"生长"。'
           },
           {
-            line: 6,
+            focusLines: [6],
             expression: 'sum(5) = 5 + 4 + sum(3)',
             note: 'sum(4) 又需要 sum(3)。<br>表达式又长了一截：<code>4 +</code> 被"展开"出来了。'
           },
           {
-            line: 6,
+            focusLines: [6],
             expression: 'sum(5) = 5 + 4 + 3 + sum(2)',
             note: '继续展开 sum(3)，得到 sum(2)。<br>表达式越来越长，但还没到底。'
           },
           {
-            line: 6,
+            focusLines: [6],
             expression: 'sum(5) = 5 + 4 + 3 + 2 + sum(1)',
             note: '再展开一层，sum(2) 变成了 2 + sum(1)。<br>下一层就是边界条件了。'
           },
           {
-            line: 5,
+            focusLines: [5],
             expression: 'sum(5) = 5 + 4 + 3 + 2 + 1',
             note: '🎯 <b>边界条件命中！</b>sum(1) = 1，不再展开。<br>表达式"长到头了"。<br>接下来从最里面往外算。'
           },
           {
-            line: 11,
+            focusLines: [11],
             expression: 'sum(5) = 15',
             note: '✅ 逐层返回，一路算到底：<br>2 + 1 = 3 → 3 + 3 = 6 → 6 + 4 = 10 → 10 + 5 = <b>15</b>。'
           }
@@ -359,48 +359,20 @@ export default {
 
     /* ===== 13 阶乘演化 ===== */
     {
-      id: 13, type: 'evolution', title: '阶乘演化：5!', subtitle: 'n! = n × (n-1)!', chapterTag: '第 9 讲 · 过程演示',
+      id: 13, type: 'evolution', title: '阶乘演化：5!', subtitle: 'n! = n × (n-1)!',
+      chapterTag: '第 9 讲 · 过程演示',
       data: {
         intro: '📖 阶乘的展开和求和几乎一样——只是把"加法"换成"乘法"。<br>看表达式一步步"生长"。',
         codeFile: 'codes/lesson-09/fact-recursive.cpp',
-        snippet: 'fact',
         steps: [
-          {
-            line: 5,
-            expression: '5! = 5 × 4!',
-            note: '要算 5!，先要知道 4! 是多少。<br>表达式开始"生长"。'
-          },
-          {
-            line: 6,
-            expression: '5! = 5 × 4 × 3!',
-            note: '4! 展开为 4 × 3!。<br>表达式又长一截：<code>4 ×</code> 被展开出来。'
-          },
-          {
-            line: 6,
-            expression: '5! = 5 × 4 × 3 × 2!',
-            note: '3! 展开为 3 × 2!。<br>继续长。'
-          },
-          {
-            line: 6,
-            expression: '5! = 5 × 4 × 3 × 2 × 1!',
-            note: '2! 展开为 2 × 1!。<br>下一层就是边界条件了。'
-          },
-          {
-            line: 5,
-            expression: '5! = 5 × 4 × 3 × 2 × 1',
-            note: '🎯 <b>边界条件命中！</b>1! = 1，不再展开。<br>表达式"长到头了"。<br>接下来从最里面往外算。'
-          },
-          {
-            line: 11,
-            expression: '5! = 120',
-            note: '✅ 逐层返回：<br>1 → 2 → 6 → 24 → <b>120</b>。<br>对比求和：结构完全相同，只是运算符从 <code>+</code> 变成 <code>×</code>。'
-          }
+          { focusLines: [5, 6, 7], expression: '5! = 5 × 4!', note: '要算 5!，先要知道 4! 是多少。<br>表达式从这一行开始"生长"。' },
+          { focusLines: [7], expression: '5! = 5 × 4 × 3!', note: '4! 又需要 3!。<br>表达式又长了一截：<code>4 ×</code> 被"展开"出来了。' },
+          { focusLines: [7], expression: '5! = 5 × 4 × 3 × 2!', note: '继续展开 3!，得到 2!。<br>表达式越来越长，但还没到底。' },
+          { focusLines: [7], expression: '5! = 5 × 4 × 3 × 2 × 1!', note: '再展开一层，2! 变成了 2 × 1!。<br>下一层就是边界条件了。' },
+          { focusLines: [6], expression: '5! = 5 × 4 × 3 × 2 × 1', note: '🎯 <b>边界条件命中！</b>1! = 1，不再展开。<br>表达式"长到头了"。<br>接下来从最里面往外算。' },
+          { focusLines: [15], expression: '5! = 120', note: '✅ 逐层返回：<br>1 → 2 → 6 → 24 → <b>120</b>。<br>对比求和：结构完全相同，只是运算符从 <code>+</code> 变成 <code>×</code>。' }
         ],
-        extra: {
-          title: '💡 阶乘 vs 求和：一个模式',
-          desc: '<b>求和</b>：sum(n) = n + sum(n-1)，边界 sum(1) = 1<br><b>阶乘</b>：fact(n) = n × fact(n-1)，边界 fact(1) = 1<br><br>两者<b>结构完全相同</b>——只是运算符从"加"变成"乘"。<br><br>这就是递归的威力：<b>同一套思维模式，解决不同问题。</b><br><br>🔮 <b>伏笔</b>：阶乘增长极快——13! 超过 int 范围，20! 超过 long long。<br>这是"大数问题"的来源，第 39 讲"高精度"会专门处理。',
-          variant: 'card-primary'
-        }
+        extra: { /* 不变 */ }
       }
     },
 

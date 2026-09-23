@@ -1,26 +1,33 @@
 <template>
   <div class="code-block">
     <div class="code-header">
-      <div class="code-dots"><span></span><span></span><span></span></div>
+      <div class="code-dots">
+        <span></span><span></span><span></span>
+      </div>
       <div v-if="title || fileName" class="code-header-title">
         <span v-if="title" class="code-title">{{ title }}</span>
         <span v-if="title && fileName" class="code-sep">·</span>
         <span v-if="fileName" class="code-filename">{{ fileName }}</span>
       </div>
-      <button class="copy-btn" :class="{ 'copy-success': copied }" @click="handleCopy" title="复制代码">
+      <button
+        class="copy-btn"
+        :class="{ 'copy-success': copied }"
+        @click="handleCopy"
+        title="复制代码"
+      >
         <svg viewBox="0 0 24 24" width="15" height="15">
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" />
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor"
-            stroke-width="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" />
         </svg>
       </button>
     </div>
+
     <pre :class="densityClass"><code>
       <span
         v-for="(line, i) in lines"
         :key="i"
         class="code-line"
-        :class="{ 'is-highlighted': (i + startLine) === highlightLine }"
+        :class="{ 'is-highlighted': isLineHighlighted(i) }"
       >
         <span class="code-num">{{ i + startLine }}</span>
         <span class="code-text" v-html="safeHighlight(line)"></span>
@@ -41,13 +48,17 @@ const props = defineProps({
   snippet: { type: String, default: '' },
   density: { type: String, default: '' },
   title: { type: String, default: '' },
-  highlightLine: { type: Number, default: 0 }
+  // 新：多行高亮（数组）
+  highlightLines: { type: Array, default: () => [] }
 });
 
 const { load } = useCodeLoader();
-const { highlightLine, escapeHtml } = useHighlight();
+const { highlightLine: syntaxHighlight, escapeHtml } = useHighlight();
 const { copyText, copied } = useCopy();
 
+// ============================================
+// 原始代码加载
+// ============================================
 const rawCode = ref('');
 
 watchEffect(async () => {
@@ -60,6 +71,9 @@ watchEffect(async () => {
   }
 });
 
+// ============================================
+// 行号起点 + 行内容
+// ============================================
 const startLine = ref(1);
 
 const lines = computed(() => {
@@ -76,15 +90,9 @@ const lines = computed(() => {
   return code.split('\n');
 });
 
-/**
- * 从代码中提取 snippet 标记之间的内容
- * 标记格式：
- *   // @snippet-start name
- *   ...内容...
- *   // @snippet-end name
- *
- * 找不到标记时，返回完整代码（容错）
- */
+// ============================================
+// snippet 提取
+// ============================================
 function extractSnippet(code, name) {
   const startTag = `// @snippet-start ${name}`;
   const endTag = `// @snippet-end ${name}`;
@@ -100,10 +108,25 @@ function extractSnippet(code, name) {
 
   return {
     code: codeLines.slice(startIdx + 1, endIdx).join('\n'),
-    startLine: startIdx + 2   // 内容从 startIdx+1 行开始，行号 = startIdx+2（1-based）
+    startLine: startIdx + 2  // 内容从 startIdx+1 行开始（0-based），显示行号 = startIdx + 2
   };
 }
 
+// ============================================
+// 判断某行是否应该高亮
+// ============================================
+function isLineHighlighted(index) {
+  if (!Array.isArray(props.highlightLines) || props.highlightLines.length === 0) {
+    return false;
+  }
+  // index 是数组索引（0-based），页面行号 = index + startLine
+  const lineNumber = index + startLine.value;
+  return props.highlightLines.includes(lineNumber);
+}
+
+// ============================================
+// 文件名 / 密度
+// ============================================
 const fileName = computed(() => {
   if (!props.codeFile) return '';
   const parts = props.codeFile.split('/');
@@ -119,8 +142,11 @@ const densityClass = computed(() => {
   return 'code-xs';
 });
 
+// ============================================
+// 语法高亮 + 复制
+// ============================================
 function safeHighlight(line) {
-  return highlightLine(escapeHtml(line));
+  return syntaxHighlight(escapeHtml(line));
 }
 
 async function handleCopy() {
@@ -309,5 +335,12 @@ pre code {
 .code-line.is-highlighted .code-num {
   color: var(--accent);
   font-weight: 700;
+}
+
+.code-line.is-highlighted {
+  background: rgba(255, 122, 0, 0.15);
+  border-left: 3px solid var(--accent);
+  padding-left: 5px;
+  margin-left: -8px;
 }
 </style>

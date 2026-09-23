@@ -84,37 +84,37 @@ export default {
         snippet: 'main',
         steps: [
           {
-            line: 6,
+            focusLines: [6],
             expression: 'i = 1',
             note: '① <b>初始值</b>：循环开始前，i 设为 1。<br>这就是循环的"起点"。'
           },
           {
-            line: 7,
+            focusLines: [7],
             expression: 'i = 1<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1',
             note: '② <b>循环条件</b>：i = 1 ≤ 10，为真，进入循环体。<br>③ 执行 <code>cout &lt;&lt; i</code>：输出 <b>1</b>。'
           },
           {
-            line: 9,
+            focusLines: [9],
             expression: 'i = 1<br>输出：1<br>→ i++ 后 i = 2',
             note: '④ <b>更新 i</b>：<code>i++</code> 让 i 从 1 变成 2。<br>然后回到条件判断。'
           },
           {
-            line: 7,
+            focusLines: [7],
             expression: 'i = 2<br>条件 i &lt;= 10 ? <b>✅ 真</b><br>输出：1 2',
             note: 'i = 2 ≤ 10，继续循环。<br>输出 <b>2</b>，序列变成 <code>1 2</code>。'
           },
           {
-            line: 8,
+            focusLines: [8],
             expression: 'i = 3 → 4 → ... → 10<br>每次都输出<br>输出：1 2 3 4 5 6 7 8 9 10',
             note: 'i 继续从 3 变到 10，每次输出当前 i。<br>序列慢慢变长：<code>1 2 3 4 5 6 7 8 9 10</code>。'
           },
           {
-            line: 7,
+            focusLines: [7],
             expression: 'i = 11<br>条件 i &lt;= 10 ? <b>❌ 假</b><br>→ 跳出循环',
             note: '🎯 <b>关键拐点</b>：<br>i 更新到 11，<code>11 &lt;= 10</code> 为假，<b>循环结束</b>。<br>这就是"条件决定何时停"。'
           },
           {
-            line: 11,
+            focusLines: [11],
             expression: '输出结果：1 2 3 4 5 6 7 8 9 10',
             note: '✅ 最终输出：<code>1 2 3 4 5 6 7 8 9 10</code>。<br><br><b>循环三要素回顾</b>：<br>① 初始值 <code>i = 1</code><br>② 条件 <code>i &lt;= 10</code><br>③ 更新 <code>i++</code><br>缺一不可——忘了 i++ 就死循环。'
           }
