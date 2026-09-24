@@ -16,6 +16,8 @@
               :code-file="slide.data.codeFile"
               :snippet="slide.data.snippet"
               :highlight-lines="focusLines"
+              :hidden-lines="hiddenLines"
+              :placeholder="placeholder"
               density="sm"
             />
           </div>
@@ -74,6 +76,14 @@ const focusLines = computed(() => {
   if (!step) return [];
   return Array.isArray(step.focusLines) ? step.focusLines : [];
 });
+
+const hiddenLines = computed(() => {
+  const step = currentStep.value;
+  if (!step) return [];
+  return Array.isArray(step.hiddenLines) ? step.hiddenLines : [];
+});
+
+const placeholder = computed(() => currentStep.value?.placeholder || '');
 
 // ============================================
 // 步数上报

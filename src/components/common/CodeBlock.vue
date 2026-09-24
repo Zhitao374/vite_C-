@@ -24,13 +24,19 @@
 
     <pre :class="densityClass"><code>
       <span
-        v-for="(line, i) in lines"
-        :key="i"
+        v-for="item in renderedLines"
+        :key="item.key"
         class="code-line"
-        :class="{ 'is-highlighted': isLineHighlighted(i) }"
+        :class="{
+          'is-highlighted': !item.isPlaceholder && isLineHighlighted(item.num),
+          'is-placeholder': item.isPlaceholder
+        }"
       >
-        <span class="code-num">{{ i + startLine }}</span>
-        <span class="code-text" v-html="safeHighlight(line)"></span>
+        <span class="code-num">{{ item.num }}</span>
+        <span
+          class="code-text"
+          v-html="item.isPlaceholder ? escapeHtml(item.text) : safeHighlight(item.text)"
+        ></span>
       </span>
     </code></pre>
   </div>
@@ -48,8 +54,9 @@ const props = defineProps({
   snippet: { type: String, default: '' },
   density: { type: String, default: '' },
   title: { type: String, default: '' },
-  // 新：多行高亮（数组）
-  highlightLines: { type: Array, default: () => [] }
+  highlightLines: { type: Array, default: () => [] },
+  hiddenLines: { type: Array, default: () => [] },
+  placeholder: { type: String, default: '' }
 });
 
 const { load } = useCodeLoader();
@@ -90,6 +97,45 @@ const lines = computed(() => {
   return code.split('\n');
 });
 
+/**
+ * 渲染行列表：
+ * - 跳过 hiddenLines 中的行
+ * - 在第一个隐藏行位置插入 placeholder（如果配置了）
+ */
+const renderedLines = computed(() => {
+  const hiddenSet = new Set(props.hiddenLines);
+  const result = [];
+  let placeholderInserted = false;
+
+  lines.value.forEach((line, i) => {
+    const lineNumber = i + startLine.value;
+
+    // 隐藏行：跳过，但第一个隐藏位置插入占位符
+    if (hiddenSet.has(lineNumber)) {
+      if (!placeholderInserted && props.placeholder) {
+        result.push({
+          num: '',
+          text: props.placeholder,
+          isPlaceholder: true,
+          key: `ph-${lineNumber}`
+        });
+        placeholderInserted = true;
+      }
+      return;
+    }
+
+    // 正常行
+    result.push({
+      num: lineNumber,
+      text: line,
+      isPlaceholder: false,
+      key: `l-${lineNumber}`
+    });
+  });
+
+  return result;
+});
+
 // ============================================
 // snippet 提取
 // ============================================
@@ -115,12 +161,11 @@ function extractSnippet(code, name) {
 // ============================================
 // 判断某行是否应该高亮
 // ============================================
-function isLineHighlighted(index) {
+function isLineHighlighted(lineNumber) {
+  if (!lineNumber) return false;
   if (!Array.isArray(props.highlightLines) || props.highlightLines.length === 0) {
     return false;
   }
-  // index 是数组索引（0-based），页面行号 = index + startLine
-  const lineNumber = index + startLine.value;
   return props.highlightLines.includes(lineNumber);
 }
 
@@ -342,5 +387,10 @@ pre code {
   border-left: 3px solid var(--accent);
   padding-left: 5px;
   margin-left: -8px;
+}
+
+.code-line.is-placeholder .code-text {
+  color: var(--code-comment);
+  font-style: italic;
 }
 </style>

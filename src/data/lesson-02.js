@@ -340,11 +340,19 @@ export default {
         hints: [
           '需要一个额外的临时变量 <code>t</code>',
           '三步走：<code>t = a; a = b; b = t;</code>',
-          '不能直接 <code>a = b; b = a;</code>（会丢失 a 的原值）'
+          '不能直接 <code>a = b; b = a;</code>（会丢失 a 的原值）',
+          'C++ 标准库也提供了现成的 <code>swap(a, b)</code> 函数'
         ],
         answer: { codeFile: 'codes/lesson-02/swap.cpp' },
-        analysis: { title: '📖 解析', desc: '为什么不能直接 <code>a = b; b = a;</code>？<br>因为执行 <code>a = b</code> 后，a 原来的值被覆盖了，<br>再执行 <code>b = a</code> 时，等于把 b 的新值又赋给 b——相当于没交换。<br><br>需要<b>临时变量 t</b> 来保存中间值。这是经典的"三杯水交换"问题。' },
-        extra: { title: '📖 交叉学科 · 三杯水交换', desc: '物理课上有一个经典问题：<br>有两杯水，一杯红、一杯蓝，如何交换两个杯子的水，但只能用第三个空杯？<br><br>答案：<br>① 把红水倒进空杯<br>② 把蓝水倒进原红杯<br>③ 把空杯里的红水倒进原蓝杯<br><br>变量交换完全一样：<br><code>t = a; a = b; b = t;</code><br><br><b>编程的很多思想，都能在日常生活里找到原型。</b>', variant: 'card-primary' }
+        analysis: {
+          title: '📖 解析',
+          desc: '为什么不能直接 <code>a = b; b = a;</code>？<br>因为执行 <code>a = b</code> 后，a 原来的值被覆盖了，<br>再执行 <code>b = a</code> 时，等于把 b 的新值又赋给 b——相当于没交换。<br><br>需要<b>临时变量 t</b> 来保存中间值。这是经典的"三杯水交换"问题。'
+        },
+        extra: {
+          title: '📖 交叉学科 · 三杯水交换 + swap 函数',
+          desc: '物理课上有一个经典问题：<br>有两杯水，一杯红、一杯蓝，如何交换两个杯子的水，但只能用第三个空杯？<br><br>答案：<br>① 把红水倒进空杯<br>② 把蓝水倒进原红杯<br>③ 把空杯里的红水倒进原蓝杯<br><br>变量交换完全一样：<br><code>t = a; a = b; b = t;</code><br><br><b>💡 好消息：C++ 有现成的 swap 函数</b><br>其实标准库提供了 <code>swap(a, b)</code> 函数——一行搞定：<br><br><code>#include &lt;algorithm&gt;</code><br><code>swap(a, b);</code><br><br><b>为什么用 swap 而不是手写 t = a; a = b; b = t？</b><br>① <b>更简洁</b>：一行代替三行<br>② <b>更安全</b>：标准库经过千锤百炼，不会出错<br>③ <b>更高效</b>：编译器会针对类型优化（大对象用移动而不是复制）<br>④ <b>更通用</b>：数组、结构体、字符串都能用<br><br><b>手写 vs swap 的对比</b>：<br>· 学习阶段：手写一遍，理解原理<br>· 竞赛阶段：直接用 <code>swap</code>，省时间<br><br><b>本讲（lesson-02）先手写</b>——理解交换的本质。<br><b>后续讲次（排序、字符串反转）直接用 swap</b>。<br><br>这就是"先懂原理，再用工具"的学习路径。',
+          variant: 'card-primary'
+        }
       }
     },
 
