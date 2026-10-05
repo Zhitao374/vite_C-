@@ -21,7 +21,7 @@
               :code-file="d.codeFile"
               :snippet="d.snippet"
               :density="d.density"
-              :highlight-line="currentHighlightLine"
+              :highlight-lines="currentHighlightLine ? [currentHighlightLine] : []"
             />
           </StepWrapper>
         </div>
