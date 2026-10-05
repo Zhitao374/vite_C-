@@ -2,7 +2,11 @@
 #include <algorithm>
 using namespace std;
 
-// @snippet-start main
+// 自定义比较：a 排在 b 前面 ⇔ cmp(a, b) 为真
+bool cmp(int a, int b) {
+    return a > b;   // 从大到小
+}
+
 const int MAXN = 1005;
 
 int main() {
@@ -11,16 +15,9 @@ int main() {
     int a[MAXN];
     for (int i = 0; i < n; i++) cin >> a[i];
 
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - 1 - i; j++) {
-            if (a[j] > a[j + 1]) {
-                swap(a[j], a[j + 1]);
-            }
-        }
-    }
+    sort(a, a + n, cmp);
 
     for (int i = 0; i < n; i++) cout << a[i] << " ";
     cout << endl;
     return 0;
 }
-// @snippet-end main

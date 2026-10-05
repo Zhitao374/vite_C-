@@ -1,6 +1,9 @@
 <template>
   <div class="glossary-page">
     <div class="glossary-container">
+      <div class="page-topbar">
+        <router-link to="/" class="back-home">← 返回课程目录</router-link>
+      </div>
       <div class="page-header">
         <h1>📖 术语表</h1>
         <p class="subtitle">共 {{ stats.total }} 个单词，来自 {{ lessonCount }} 讲</p>
@@ -164,4 +167,32 @@ const filtered = computed(() => {
 .lesson-link:hover { color: var(--primary); text-decoration: underline; }
 
 .empty { padding: 60px 20px; text-align: center; color: var(--text-dim); }
+
+/* ============================================
+   顶部返回栏
+   ============================================ */
+.page-topbar {
+  margin-bottom: 16px;
+}
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-sub);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.back-home:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateX(-2px);
+}
 </style>

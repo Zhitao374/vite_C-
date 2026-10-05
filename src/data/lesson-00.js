@@ -7,7 +7,7 @@
 export default {
   title: '动画布局合集',
   subtitle: '预览所有 visual-step 布局',
-  total: 17,
+  total: 18,
   category: '演示工具',
   slides: [
     /* ===== 01 封面 ===== */

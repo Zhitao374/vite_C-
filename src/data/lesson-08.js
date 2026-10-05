@@ -174,7 +174,7 @@ export default {
         output: '7',
         extra: {
           title: '💡 return 的三条规则',
-          desc: '① <b>return 会立即结束函数</b>，后面的代码不再执行<br>② <b>非 void 函数必须有 return</b>，否则可能返回垃圾值<br>③ <b>void 函数不需要 return</b>，或写 <code>return;</code>（不带值）<br><br><b>竞赛经验</b>：写完函数，先测试它的返回值对不对，再嵌入主程序。<br>这叫"单元测试"，能提前发现 bug。<br><br><b>常见错误</b>：<br>非 void 函数忘了 return——编译器可能只警告，不报错。<br>运行时返回"垃圾值"，程序结果错，很难查。',
+          desc: '<div><b>① return 会立即结束函数</b><br>后面的代码不再执行。</div><div><b>② 非 void 函数必须有 return</b><br>否则可能返回垃圾值。</div><div><b>③ void 函数不需要 return</b><br>或写 <code>return;</code>（不带值）。</div><div><b>💡 常见返回类型</b><br>· <code>int</code>：返回整数<br>· <code>bool</code>：返回 true / false——如 <code>is_prime(n)</code> 返回"是不是质数"<br>· <code>double</code>：返回小数<br>· <code>void</code>：不返回</div><div><b>bool 返回的意义</b><br>判断类函数通常返回 <code>bool</code>——<br>调用方直接用 <code>if (is_prime(n))</code>——<br>代码更自然。</div><div><b>竞赛经验</b>：写完函数先测试返回值，再嵌入主程序。</div>',
           variant: 'card-primary'
         }
       }

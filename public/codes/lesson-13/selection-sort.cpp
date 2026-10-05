@@ -2,11 +2,13 @@
 #include <algorithm>
 using namespace std;
 
+// @snippet-start main
+const int MAXN = 1005;
+
 int main() {
-    // @snippet-start main
     int n;
     cin >> n;
-    int a[105];
+    int a[MAXN];
     for (int i = 0; i < n; i++) cin >> a[i];
 
     for (int i = 0; i < n - 1; i++) {
@@ -19,6 +21,6 @@ int main() {
 
     for (int i = 0; i < n; i++) cout << a[i] << " ";
     cout << endl;
-    // @snippet-end main
     return 0;
 }
+// @snippet-end main

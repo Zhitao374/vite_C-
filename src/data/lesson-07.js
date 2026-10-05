@@ -1,7 +1,7 @@
 export default {
   title: '第 7 讲 字符串基础',
   subtitle: '一串字符的容器',
-  total: 30,
+  total: 31,
   category: '语法与基础算法',
   slides: [
 
@@ -290,9 +290,31 @@ export default {
       }
     },
 
+    // ===== 17 范围 for 的两个细节 =====
+    {
+      id: 17, type: 'dialog', title: '范围 for · 更简洁的遍历', subtitle: 'C++11 的语法糖', chapterTag: '第 7 讲 · 概念理解',
+      data: {
+        lines: [
+          { who: 'student', text: '小 C，我看到有些代码用 <code>for (char c : s)</code>——这是什么语法？' },
+          { who: 'robot', text: '这叫"<b>范围 for</b>"——C++11 引入的语法。<br>它的意思是"<b>遍历 s 里的每个字符</b>"。' },
+          { who: 'student', text: '和下标遍历有什么区别？' },
+          { who: 'robot', text: '看对比：<br><br><b>下标遍历</b>：<br><code>for (int i = 0; i &lt; s.size(); i++) {</code><br><code>&nbsp;&nbsp;char c = s[i];</code><br><code>&nbsp;&nbsp;// 用 c</code><br><code>}</code><br><br><b>范围 for</b>：<br><code>for (char c : s) {</code><br><code>&nbsp;&nbsp;// 用 c</code><br><code>}</code>' },
+          { who: 'student', text: '范围 for 简洁多了！' },
+          { who: 'robot', text: '对。少了"初始化、条件、自增"三段。<br><b>不需要下标时，用范围 for 更清晰。</b>' },
+          { who: 'student', text: '那什么时候用下标？' },
+          { who: 'robot', text: '需要<b>下标信息</b>时——<br>· 回文判断：比较 s[i] 和 s[n-1-i]<br>· 修改字符：s[i] = \'X\'<br>· 访问相邻元素<br><br>口诀：<b>不需要下标用范围 for，需要下标用普通 for。</b>' }
+        ],
+        extra: {
+          title: '💡 范围 for 的两个细节',
+          desc: '<div><b>① 修改元素要加 &amp;</b><br><code>for (char &amp;c : s) c = toupper(c);</code><br>不加 <code>&amp;</code> 只是"读副本"，改了不影响原串。<br>加 <code>&amp;</code> 是"读引用"，改了就是改原串。</div><div><b>② 适用所有容器</b><br>不止 string——数组、vector、map 都能用。<br><code>for (int x : arr) sum += x;</code><br>这是"现代 C++"的通用写法。</div><div><b>🔮 伏笔</b><br><code>&amp;</code>（引用）是什么？<br>第 16 讲讲。</div>',
+          variant: 'card-primary'
+        }
+      }
+    },
+
     /* ===== 17 遍历答疑 ===== */
     {
-      id: 17, type: 'dialog', title: '遍历答疑', subtitle: '小C回答常见问题', chapterTag: '第 7 讲 · 概念理解',
+      id: 18, type: 'dialog', title: '遍历答疑', subtitle: '小C回答常见问题', chapterTag: '第 7 讲 · 概念理解',
       data: {
         lines: [
           { who: 'student', text: '小 C，string 和 char[] 的遍历一样吗？' },
@@ -316,7 +338,7 @@ export default {
 
     /* ===== 18 练习1：统计字符 ===== */
     {
-      id: 18, type: 'level-map', title: '课堂练习1：统计字符', subtitle: '统计字符串中非空格字符数', chapterTag: '第 7 讲 · 实战演练',
+      id: 19, type: 'level-map', title: '课堂练习1：统计字符', subtitle: '统计字符串中非空格字符数', chapterTag: '第 7 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '读入一行字符串（含空格），统计其中<b>非空格字符</b>的个数。<br>输入样例：<code>Hello World</code>　输出样例：<code>10</code>', timer: '⏱ 限时 6 分钟' },
         hints: [
@@ -332,7 +354,7 @@ export default {
 
     /* ===== 19 练习2：回文判断 ===== */
     {
-      id: 19, type: 'level-map', title: '课堂练习2：回文判断', subtitle: '正着读和倒着读一样吗', chapterTag: '第 7 讲 · 实战演练',
+      id: 20, type: 'level-map', title: '课堂练习2：回文判断', subtitle: '正着读和倒着读一样吗', chapterTag: '第 7 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '读入一个字符串，判断它是否是回文。<br>回文：正着读和倒着读完全相同。<br>是回文输出 <code>yes</code>，否则 <code>no</code>。<br>输入样例：<code>level</code>　输出样例：<code>yes</code>', timer: '⏱ 限时 8 分钟' },
         hints: [
@@ -348,7 +370,7 @@ export default {
 
     /* ===== 20 练习3：字符串逆序 ===== */
     {
-      id: 20, type: 'level-map', title: '课堂练习3：字符串逆序', subtitle: '把字符串倒着输出', chapterTag: '第 7 讲 · 实战演练',
+      id: 21, type: 'level-map', title: '课堂练习3：字符串逆序', subtitle: '把字符串倒着输出', chapterTag: '第 7 讲 · 实战演练',
       data: {
         question: { title: '题干', desc: '读入一个字符串，把它倒着输出。<br>输入样例：<code>Hello</code>　输出样例：<code>olleH</code>', timer: '⏱ 限时 5 分钟' },
         hints: [
@@ -364,7 +386,7 @@ export default {
 
     /* ===== 21 常见错误 ===== */
     {
-      id: 21, type: 'compare', title: '字符串常见错误', subtitle: '避开这些坑',
+      id: 22, type: 'compare', title: '字符串常见错误', subtitle: '避开这些坑',
       data: {
         groups: [
           { wrong: 'char c = "A"; 双引号', right: 'char c = \'A\'; 单引号' },
@@ -382,7 +404,7 @@ export default {
 
     /* ===== 22 初赛渗透 ===== */
     {
-      id: 22, type: 'dialog', title: '初赛小知识：ASCII 码', subtitle: '字符背后的数字', chapterTag: '第 7 讲 · 初赛渗透',
+      id: 23, type: 'dialog', title: '初赛小知识：ASCII 码', subtitle: '字符背后的数字', chapterTag: '第 7 讲 · 初赛渗透',
       data: {
         lines: [
           { who: 'student', text: '小 C，字符在计算机里是怎么存的？' },
@@ -404,7 +426,7 @@ export default {
 
     /* ===== 23 课堂小测 ===== */
     {
-      id: 23, type: 'quiz', title: '课堂小测', subtitle: '字符、字符串与读入',
+      id: 24, type: 'quiz', title: '课堂小测', subtitle: '字符、字符串与读入',
       chapterTag: '第 7 讲 · 课堂小测',
       data: {
         questions: [
@@ -488,7 +510,7 @@ cout << s[1] << endl;`,
 
     /* ===== 24 今日总结 ===== */
     {
-      id: 24, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 25, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
         text: '字符串是文字的容器，本质是字符的数组。',
         author: '—— 字符串第一课',
@@ -511,7 +533,7 @@ cout << s[1] << endl;`,
 
     /* ===== 25 课后作业 ===== */
     {
-      id: 25, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 26, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
           { icon: '🟢', title: '基础 1 · P5015', link: '...', desc: '<b>标题统计</b><br>考察：getline、字符遍历<br>难度：★★<br>目标：统计非空格字符数' },
@@ -528,7 +550,7 @@ cout << s[1] << endl;`,
 
     /* ===== 26 下节预告 ===== */
     {
-      id: 26, type: 'radial', title: '下节预告', subtitle: '第 8 讲 · 函数',
+      id: 27, type: 'radial', title: '下节预告', subtitle: '第 8 讲 · 函数',
       data: {
         center: '函数',
         items: [
@@ -547,7 +569,7 @@ cout << s[1] << endl;`,
 
     /* ===== 27 答疑时间 ===== */
     {
-      id: 27, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 7 讲 · 答疑',
+      id: 28, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 7 讲 · 答疑',
       data: {
         lines: [
           { who: 'student', text: 'string 和 char[] 到底用哪个？' },
@@ -571,7 +593,7 @@ cout << s[1] << endl;`,
 
     /* ===== 28 本讲英文单词 ===== */
     {
-      id: 28, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
+      id: 29, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
       chapterTag: '第 7 讲 · 复习',
       data: {
         words: [
@@ -593,7 +615,7 @@ cout << s[1] << endl;`,
 
     /* ===== 29 知识清单 ===== */
     {
-      id: 29, type: 'grid', title: '第 7 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 7 讲 · 复习',
+      id: 30, type: 'grid', title: '第 7 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 7 讲 · 复习',
       data: {
         cards: [
           { icon: '🔤', title: '字符 vs 字符串', desc: '<b>char</b> 用单引号 \'A\'<br><b>string</b> 用双引号 "A"<br>char 占 1 字节<br>字符串含结束符 \\0' },
@@ -611,7 +633,7 @@ cout << s[1] << endl;`,
 
     /* ===== 30 结束页 ===== */
     {
-      id: 30, type: 'ending', title: '第七讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
+      id: 31, type: 'ending', title: '第七讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
         extra: {

@@ -93,6 +93,11 @@ function toggle() {
   font-size: var(--fs-card-desc);
   color: var(--text-sub);
   line-height: 1.85;
+  column-width: 340px;    /* 每栏至少 340px */
+  column-gap: 28px;
+}
+.extra-desc > * {
+  break-inside: avoid;     /* 避免段落被截断到两栏 */
 }
 
 .extra-expand-enter-active,

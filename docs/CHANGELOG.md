@@ -18,6 +18,7 @@
 | v1.5 | 2025-06 | 新增动画演示系统；动画组件独立为 `animations/`；AnimationFrame 用双层缩放；删除旧架构（visual-layouts / visual-elements / VisualStepSlide）；新增 IntroCard 抽取；chapterTag 绝对定位；lesson-00 动画合集预览；**文档拆分为 GUIDE.md / ARCHITECTURE.md / CHANGELOG.md 三份** |
 | v2.0 | 2026-09 | **课程重构**：48 讲 → 五阶段新结构；前 8 讲重组；引入"难度 × 数量"评估框架；新增英文单词汇总系统（页内 glossary + 全局 `/glossary`）；新增课程蓝图 `course-plan.js`；新增 `scripts/glossary-report.js`；文档新增 `COURSE-DESIGN.md` |
 | **v3.0** | 2026-09 | **阶段一完成**：lesson-01～08 全部按新结构重新生成；17 种组件（新增 GlossarySlide）；所有代码统一用 `codeFile`；自检清单扩充为 11 大类（含内容维度、格式一致性、无重复页、词汇维度）；课后作业统一洛谷题（0—3 道）；内容质量红线扩充到 13 条 |
+| v3.1 | 2026-09 | **ExtraCard 多栏**：`.extra-desc` 用 CSS `column-width` 实现自动多栏；数据侧要求用 `<div>` 包裹每段；解决"内容少时右侧留白大"的视觉问题 |
 
 ---
 

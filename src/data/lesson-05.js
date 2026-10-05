@@ -355,19 +355,25 @@ export default {
     },
 
     /* ===== 19 练习3：找最大值 ===== */
-    {
-      id: 19, type: 'level-map', title: '课堂练习3：找最大值', subtitle: '循环比较，找出最大的数', chapterTag: '第 5 讲 · 实战演练',
+        {
+      id: 19, type: 'level-map', title: '课堂练习3：打印直角三角形', subtitle: '用嵌套循环画图案', chapterTag: '第 5 讲 · 实战演练',
       data: {
-        question: { title: '题干', desc: '第一行输入整数 <code>n</code>，第二行输入 n 个整数，输出其中的最大值。<br>输入样例：<code>5</code> 然后 <code>3 7 2 9 5</code>　输出样例：<code>9</code>', timer: '⏱ 限时 8 分钟' },
+        question: { title: '题干', desc: '输入一个正整数 <code>n</code>，输出一个 <code>n</code> 行的直角三角形：<br>第 1 行 1 个 <code>*</code>，第 2 行 2 个，……，第 n 行 n 个。<br><br><b>输入样例</b>：<code>4</code><br><b>输出样例</b>：<br><code>*</code><br><code>**</code><br><code>***</code><br><code>****</code>', timer: '⏱ 限时 10 分钟' },
         hints: [
-          '用变量 <code>maxVal</code> 记录当前最大值',
-          '初始化为一个很小的数，如 <code>-1e9</code>（-10 亿）',
-          '每次读入新数，如果更大就更新',
-          '可以在循环里直接 <code>cin &gt;&gt; x</code>，不用数组'
+          '外层循环 i 控制行号（1 到 n）',
+          '内层循环 j 控制每行的 <code>*</code> 数（1 到 i）',
+          '内层循环结束后输出 <code>endl</code> 换行',
+          '关键：内层循环的<b>上界是 i</b>，不是 n'
         ],
-        answer: { codeFile: 'codes/lesson-05/max.cpp' },
-        analysis: { title: '📖 解析', desc: 'maxVal 初始值必须很小，才能被第一个数"打败"。<br>如果初始值写 0，那遇到全是负数的输入，结果就错了。<br><br><b>常用技巧</b>：初始化为 <code>-1e9</code>（-10 亿）。<br>竞赛数据范围通常在 ±10 亿以内，用 -10 亿一定安全。<br><br><b>口诀</b>：找最大值，初始值宁小勿大；找最小值，初始值宁大勿小。' },
-        extra: { title: '💡 循环读入的技巧', desc: '可以在循环里直接 <code>cin &gt;&gt; x</code>，不需要数组。<br>因为每次读完立即比较，用完就丢。<br>这样处理 <b>100 万个数</b>也不占内存。<br><br><b>竞赛常用</b>：边读边处理，比先存数组再处理更省内存。<br><br><b>什么时候必须用数组？</b><br>需要"回头看"的时候——逆序输出、排序、找第 k 大。<br>这些题必须先把数据存下来。', variant: 'card-primary' }
+        answer: {
+          codeFile: 'codes/lesson-05/print_max.cpp'
+        },
+        analysis: { title: '📖 解析', desc: '关键点：<b>内层循环的上界是 <code>i</code>，不是 <code>n</code></b>。<br><br>· 第 1 行 i=1：内层循环 1 次 → 1 个 *<br>· 第 2 行 i=2：内层循环 2 次 → 2 个 *<br>· 第 3 行 i=3：内层循环 3 次 → 3 个 *<br>……<br><br>这种"内层次数随外层变化"的模式，是<b>图案打印的核心</b>。<br>改一个上界，就能画出各种图案。' },
+        extra: {
+          title: '💡 图案打印的三种模式',
+          desc: '<div><b>模式 1：直角三角形</b><br>内层 <code>j &lt;= i</code>——每行越来越长<br><code>*</code><br><code>**</code><br><code>***</code></div><div><b>模式 2：倒三角形</b><br>内层 <code>j &lt;= n - i + 1</code>——每行越来越短<br><code>***</code><br><code>**</code><br><code>*</code></div><div><b>模式 3：矩形</b><br>内层 <code>j &lt;= m</code>——每行一样长<br><code>***</code><br><code>***</code><br><code>***</code></div><div><b>图案打印的核心</b>：<br>外层控制行，内层控制列。<br>改变内层的"上界"或"初始值"——<br>就能画出不同图案。</div>',
+          variant: 'card-primary'
+        }
       }
     },
 

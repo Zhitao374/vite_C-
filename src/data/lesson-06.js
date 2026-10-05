@@ -296,12 +296,13 @@ export default {
       data: {
         question: { title: '题干', desc: '第一行输入整数 <code>n</code>，第二行输入 <code>n</code> 个整数，输出其中的最大值。<br>输入样例：<code>5</code> 然后 <code>3 7 2 9 5</code>　输出样例：<code>9</code>', timer: '⏱ 限时 8 分钟' },
         hints: [
-          '先把所有数读入数组',
           '用变量 <code>maxVal</code> 记录当前最大值',
-          '初始值用 <code>a[0]</code>，从 <code>i = 1</code> 开始比较'
+          '初始值用 <code>-1e9</code>（<b>-10 亿</b>）——保证第一个数一定能"打败"它',
+          '<code>1e9</code> 是<b>科学计数法</b>：<code>1e9 = 1 × 10⁹ = 10 亿</code>',
+          '每次读入新数，如果更大就更新'
         ],
         answer: { codeFile: 'codes/lesson-06/max.cpp' },
-        analysis: { title: '📖 解析', desc: '用数组的写法：<br>① 先读入所有数到 a[]<br>② maxVal 初始值为 a[0]<br>③ 从 a[1] 开始遍历，逐个比较<br><br><b>为什么 maxVal 初始为 a[0]？</b><br>因为 a[0] 是数组里的有效元素，一定 ≥ 自己，不会被"跳过"。<br><br><b>另一种写法</b>：初始为 <code>-1e9</code>（-10 亿），更通用，但要注意"极小数"的选择。' },
+        analysis: { title: '📖 解析', desc: '<b>为什么 maxVal 初始值要小？</b><br>maxVal 是"当前最大值"，必须保证<b>第一个数一定能打败它</b>。<br>初始值太大，第一个数可能"打不败"，结果就错。<br><br><b>为什么用 -1e9？</b><br><code>1e9</code> 是<b>科学计数法</b>，表示 10 的 9 次方 = <b>10 亿</b>。<br>所以 <code>-1e9</code> = <b>-10 亿</b>。<br>竞赛数据范围通常在 ±10 亿以内，用 -10 亿一定安全。<br><br><b>口诀</b>：找最大值，初始值宁小勿大；找最小值，初始值宁大勿小。' },
         extra: { title: '💡 这道题的两种写法', desc: '<b>写法 1：用数组（本讲练的）</b><br>先读完所有数到 a[]，再遍历找最大值。<br>优点：能看到"完整数据"；缺点：多用内存。<br><br><b>写法 2：不用数组（第 5 讲学的）</b><br>边读边比较，<code>cin &gt;&gt; x</code> 后立即和 maxVal 比。<br>优点：省内存、更快；缺点：数据存不下来。<br><br><b>什么时候用哪个？</b><br>· 只需要"最大值" → 不用数组<br>· 还要"逆序输出"或"找第二大" → 用数组<br><br><b>口诀</b>：用到一次不用存，用到多次先存下。<br><br><b>竞赛建议</b>：能不用数组就不用——省内存、代码短。<br>但本讲练数组，所以用数组写一遍，熟悉套路。', variant: 'card-primary' }
       }
     },
@@ -338,7 +339,7 @@ export default {
         ],
         extra: {
           title: '📖 数组内存速算',
-          desc: '<b>一维数组</b>：<code>int a[100];</code> → 100 × 4 = 400 字节<br><b>二维数组</b>：<code>int a[10][10];</code> → 10 × 10 × 4 = 400 字节<br><b>三维数组</b>：<code>int a[5][5][5];</code> → 5 × 5 × 5 × 4 = 500 字节<br><br><b>规律</b>：所有维度相乘，再乘每个元素的字节数。<br><br><b>常用类型字节数</b>（必背）：<br>· int = 4<br>· long long = 8<br>· double = 8<br>· char = 1<br>· bool = 1<br><br>这些数字是初赛必背。<br>考试时可能直接问"某个数组占多少字节"，也可能间接考。',
+          desc: '<div><b>一维数组</b><br><code>int a[100];</code> → 100 × 4 = 400 字节</div><div><b>二维数组</b><br><code>int a[10][10];</code> → 10 × 10 × 4 = 400 字节</div><div><b>规律</b><br>所有维度相乘，再乘每个元素的字节数。</div><div><b>常用类型字节数</b>（必背）<br>· int = 4<br>· long long = 8<br>· double = 8<br>· char = 1<br>· bool = 1</div><div><b>💡 用 sizeof 查字节数</b><br>不用死记——用 <code>sizeof</code> 操作符查：<br><code>sizeof(int)</code> → 4<br><code>sizeof(double)</code> → 8<br><code>sizeof(a)</code> → 整个数组占多少字节</div><div><b>sizeof 的陷阱</b><br>对数组用 sizeof 得到"整个数组的字节数"，<br>不是"元素个数"。<br>想知道元素个数，用 <code>sizeof(a) / sizeof(a[0])</code>。<br><br>这些是初赛必背。</div>',
           variant: 'card-primary'
         }
       }
@@ -480,7 +481,7 @@ cout << a[2] + a[4] << endl;`,
               { label: 'A', text: '正确' },
               { label: 'B', text: '错误', correct: true }
             ],
-            analysis: 'C 风格数组的长度在<b>定义时必须确定</b>，不能运行时改变。<br><br>例如 <code>int a[n];</code> 这种写法在标准 C++ 中<b>不允许</b>（n 是变量）。<br>要动态长度，用 <code>vector</code>（C++ STL 容器）。<br><br>竞赛中，通常按题目最大数据范围定义一个够大的数组。'
+            analysis: 'C 风格数组的长度在<b>定义时必须确定</b>，不能运行时改变。<br><br>例如 <code>int a[n];</code> 这种写法在标准 C++ 中<b>不允许</b>（n 是变量）。<br>要动态长度，用 <code>vector</code>（C++ STL 容器，<b>第 14 讲详讲</b>）。<br><br>竞赛中，通常按题目最大数据范围定义一个够大的数组。'
           }
         ],
         extra: {

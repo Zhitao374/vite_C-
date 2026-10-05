@@ -250,21 +250,27 @@ export default {
         },
 
         /* ===== 15 练习1：子矩阵求和 ===== */
-        {
-            id: 15, type: 'level-map', title: '课堂练习1：子矩阵求和', subtitle: '求一个矩形区域的和', chapterTag: '第 11 讲 · 实战演练',
-            data: {
-                question: { title: '题干', desc: '第一行输入 <code>n</code> <code>m</code>，接下来 n 行每行 m 个整数。<br>最后一行输入 <code>r1</code> <code>r2</code> <code>c1</code> <code>c2</code>，表示矩形区域的行范围和列范围（闭区间）。<br>输出这个矩形区域所有数的和。<br><br><b>输入样例</b>：<code>3 4</code> 然后 <code>1 2 3 4 / 5 6 7 8 / 9 10 11 12</code> 然后 <code>0 1 1 2</code><br><b>输出样例</b>：<code>21</code>', timer: '⏱ 限时 8 分钟' },
-                hints: [
-                    '读入 n、m 和整个二维数组',
-                    '读入 r1、r2、c1、c2',
-                    '用双重循环遍历 <code>i</code> 从 <code>r1</code> 到 <code>r2</code>',
-                    '内层循环 <code>j</code> 从 <code>c1</code> 到 <code>c2</code>'
-                ],
-                answer: { codeFile: 'codes/lesson-11/sum-rect.cpp' },
-                analysis: { title: '📖 解析', desc: '关键在于"<b>只遍历一部分</b>"——<br>不遍历整个矩阵，只遍历 <code>[r1, r2] × [c1, c2]</code> 这个子矩形。<br><br><b>循环范围</b>：<br><code>for (int i = r1; i &lt;= r2; i++)</code><br><code>&nbsp;&nbsp;for (int j = c1; j &lt;= c2; j++)</code><br><br><b>口诀</b>：<br>子矩阵求和，循环范围就是子矩阵的行列范围。' },
-                extra: { title: '📖 知识扩展 · 二维前缀和', desc: '如果要"<b>多次查询</b>子矩阵的和"，每次都遍历一遍会很慢。<br><br><b>优化方法</b>：二维前缀和——<br>用 <code>sum[i][j]</code> 表示"左上角 (0,0) 到 (i,j) 的矩形和"。<br>然后任意子矩阵的和可以 O(1) 算出来。<br><br><b>公式</b>（先剧透）：<br><code>子矩阵和 = sum[r2][c2] - sum[r1-1][c2] - sum[r2][c1-1] + sum[r1-1][c1-1]</code><br><br><b>为什么不是现在学？</b><br>因为前缀和是"算法"内容，不是"语法"内容。<br>第 19 讲会专门讲"前缀和与差分"。<br><br><b>今天先掌握"暴力遍历"</b>——<br>理解二维数组的基本操作，后面才有优化的基础。', variant: 'card-primary' }
-            }
+            {
+      id: 15, type: 'level-map', title: '课堂练习1：矩阵加法', subtitle: '两个矩阵对应位置相加', chapterTag: '第 11 讲 · 实战演练',
+      data: {
+        question: { title: '题干', desc: '第一行输入 <code>n</code> <code>m</code>；<br>接下来 n 行是矩阵 A；<br>再接下来 n 行是矩阵 B。<br>输出 A + B（对应位置相加）。<br><br><b>输入样例</b>：<code>2 2</code> 然后 A: <code>1 2 / 3 4</code>，B: <code>5 6 / 7 8</code><br><b>输出样例</b>：<code>6 8 / 10 12</code>', timer: '⏱ 限时 8 分钟' },
+        hints: [
+          '定义两个二维数组 <code>a[105][105]</code> 和 <code>b[105][105]</code>',
+          '分别读入两个矩阵',
+          '遍历 <code>i</code> 从 0 到 n-1，<code>j</code> 从 0 到 m-1',
+          '输出 <code>a[i][j] + b[i][j]</code>'
+        ],
+        answer: {
+          codeFile: 'codes/lesson-11/sum-rect.cpp'
         },
+        analysis: { title: '📖 解析', desc: '<b>矩阵加法的规则</b>：<br>两个"同型"矩阵（行列相同）——<br>对应位置相加。<br><br><b>算法</b>：<br>用双重循环遍历所有位置 (i, j)——<br>每个位置算 <code>a[i][j] + b[i][j]</code>。<br><br><b>为什么用两个数组？</b><br>因为要先读完 A，再读 B——<br>不能一边读一边加（数据是分开输入的）。' },
+        extra: {
+          title: '💡 矩阵运算的常见种类',
+          desc: '<div><b>矩阵加法</b><br>同型矩阵，对应位置相加。<br><code>C[i][j] = A[i][j] + B[i][j]</code></div><div><b>矩阵数乘</b><br>每个元素乘同一个数 k。<br><code>C[i][j] = k × A[i][j]</code></div><div><b>矩阵转置</b><br>行列互换。<br><code>C[j][i] = A[i][j]</code></div><div><b>矩阵乘法</b><br>更复杂——<br><code>C[i][j] = Σ A[i][k] × B[k][j]</code><br>需要三重循环。<br>竞赛中常用于"矩阵快速幂"——第 47 讲讲。</div><div><b>📖 应用</b><br>矩阵运算是"线性代数"的基础——<br>计算机图形学、机器学习都依赖它。</div>',
+          variant: 'card-primary'
+        }
+      }
+    },
 
         /* ===== 16 练习2：矩阵转置 ===== */
         {

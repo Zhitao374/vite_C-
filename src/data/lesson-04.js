@@ -340,14 +340,15 @@ export default {
     {
       id: 19, type: 'level-map', title: '课堂练习2：成绩等级', subtitle: '用多分支判断分数等级', chapterTag: '第 4 讲 · 实战演练',
       data: {
-        question: { title: '题干', desc: '输入一个分数 <code>score</code>（0—100），按下面规则输出等级：<br>≥90 → <code>A</code>　≥80 → <code>B</code>　≥60 → <code>C</code>　其他 → <code>D</code>', timer: '⏱ 限时 8 分钟' },
+        question: { title: '题干', desc: '输入一个分数 <code>score</code>（0—100），按下面规则输出等级：<br>≥90 → <code>A</code>　≥80 → <code>B</code>　≥60 → <code>C</code>　其他 → <code>D</code><br><br><b>要求</b>：把分数除以 10 得到整数部分，用 <code>switch</code> 判断等级。', timer: '⏱ 限时 8 分钟' },
         hints: [
-          '用 <code>if-else if-else</code> 多分支',
-          '从高到低依次判断',
-          '条件是 <code>score &gt;= 90</code> 这种写法'
+          '先算 <code>int level = score / 10;</code>（整数除法）',
+          '用 <code>switch (level)</code> 判断 level 的值',
+          'case 10 和 9：A；case 8：B；case 7 和 6：C；default：D',
+          '利用"case 穿透"——多个 case 共用一段代码'
         ],
         answer: { codeFile: 'codes/lesson-04/score-level.cpp' },
-        analysis: { title: '📖 解析', desc: '多分支判断必须<b>从高到低</b>排。<br>如果先判断 <code>score &gt;= 60</code>，那 95 分也会被判为 C，因为它先匹配了。<br>这是多分支题的经典陷阱。' },
+        analysis: { title: '📖 解析', desc: '关键技巧是 <code>score / 10</code>——<br>把 0—100 分成 10 档，再用 switch 判断。<br><br><b>为什么用 case 穿透？</b><br><code>case 10:</code> 后面不写 <code>break</code>——<br>程序会继续执行到 <code>case 9:</code>——<br>所以 90—100 分都输出 A。<br><br>这是 <b>switch 的经典用法</b>——<br>多个 case 共用一段代码，用"穿透"实现。' },
         extra: { title: '💡 多分支的顺序', desc: '在多个条件里，哪个先判断决定了结果。<br>原则：<b>范围窄的、优先级高的先判断</b>。<br>例：先判断 90 以上，再判断 80 以上，以此类推。<br>这是新手最容易忽略的细节。', variant: 'card-primary' }
       }
     },

@@ -202,7 +202,7 @@ src/components/common/
 | 组件 | 关键 prop / 行为 |
 |---|---|
 | `CodeBlock` | `code` / `codeFile` / `snippet` / `highlightLine` / `density` / `title` |
-| `ExtraCard` | `title` / `desc` / `variant` / `defaultExpanded` |
+| `ExtraCard` | `title` / `desc` / `variant` / `defaultExpanded`；**`desc` 内容建议用 `<div>` 包裹每段，触发 CSS 多栏自动排版** |
 | `StepWrapper` | `step` / `tag`；显示时自动滚动到最近滚动父容器 |
 | `IntroCard` | `html`（v-html 渲染） |
 | `FontScaler` | 修改 `--font-scale`（4 档），所有用该变量的字号自动缩放 |
@@ -550,6 +550,19 @@ src/styles/
 | IndexView | 整页滚动（`.index-page` 设 `overflow-y: auto`） |
 | GlossaryView | 整页滚动 |
 | 其他 | 整体滚动（`.slide-body`） |
+
+### 7.5 Extra 多栏布局
+
+**实现**：`ExtraCard.vue` 的 `.extra-desc` 用了 CSS 多栏：
+
+```css
+.extra-desc {
+  column-width: 340px;
+  column-gap: 28px;
+}
+.extra-desc > * {
+  break-inside: avoid;
+}
 
 ---
 

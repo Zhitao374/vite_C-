@@ -178,7 +178,7 @@ export default {
         output: '（输入 3 5）\n8',
         extra: {
           title: '📖 cin 全称与输入技巧',
-          intro: '📖 名字起好了，盒子也有了——现在让用户把数据"喂"进来。<br>这就用到 <code>cin</code>，C++ 的输入工具。<br>方向记忆：<b>cout 用 <code>&lt;&lt;</code>，数据流向屏幕；cin 用 <code>&gt;&gt;</code>，数据流向变量。</b>',
+          desc: '<div><b>cin 全称</b>：character input——字符输入。</div><div><b>三个关键点</b><br>① <b>自动跳过空格</b>：<code>cin &gt;&gt; a &gt;&gt; b</code> 输入 "3 5" 或 "3\\n5" 效果一样<br>② <b>类型自动转换</b>：输入 "3" 会变成整数 3 存入 int 变量<br>③ <b>程序暂停等待</b>：cin 会等用户输入完再继续</div><div><b>陷阱</b>：cin 遇到空格就当分隔符——<br>所以输入 "Hello World" 到 string，只会读到 "Hello"。<br><b>怎么读整行？第 7 讲讲。</b></div><div><b>记忆</b>：cin 读"词"。</div>',
           variant: 'card-primary'
         }
       }
