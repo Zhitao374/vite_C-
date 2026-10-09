@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '字符串进阶，打开工具箱',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '字符串进阶，打开工具箱',
       data: {
         items: [
           { icon: '✂️', badge: '工具', title: 'substr / find / replace', desc: '三把字符串工具', points: ['截取子串', '查找位置', '替换内容'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从乱到序',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从乱到序',
       data: {
         items: [
           { icon: '🫧', badge: '基础', title: '第一站 · 冒泡排序', desc: '相邻两两比较，大的往后走', points: ['先看动画理解过程', '再对照代码实现', 'O(n²)'] },

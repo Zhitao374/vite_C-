@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '枚举与模拟',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '枚举与模拟',
       data: {
         items: [
           { icon: '🔨', badge: '基础', title: '枚举思想', desc: '一个个试', points: ['简单可靠', '范围 + 判定'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从多米诺到 DP',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从多米诺到 DP',
       data: {
         items: [
           { icon: '🎯', badge: '基础', title: '第一站 · 递推思想', desc: '用已知推未知', points: ['多米诺比喻', '递推三要素', '和枚举的区别'] },

@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '变量与整数类型',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '变量与整数类型',
       data: {
         items: [
           { icon: '📦', badge: '变量', title: '变量 = 盒子', desc: '三要素：名字、类型、值', points: ['定义先初始化', '命名见名知意', '未初始化是垃圾值'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，认识数据的多种面孔',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，认识数据的多种面孔',
       data: {
         items: [
           { icon: '📐', badge: '小数', title: '第一站 · double / float', desc: '小数数据的家', points: ['double 精度高', 'float 精度低', '竞赛首选 double'] },

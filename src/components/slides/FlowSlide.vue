@@ -14,7 +14,9 @@
         <template v-for="(node, i) in row" :key="i">
           <StepWrapper :step="stepOf(ri, i)" class="flow-step-node">
             <div class="flow-node" :class="{ active: node.glow, glow: node.glow }">
-              <div v-if="node.icon" class="icon">{{ node.icon }}</div>
+              <div v-if="node.icon" class="icon">
+                <IconMap :emoji="node.icon" :size="36" />
+              </div>
               <div v-if="node.label" class="label">{{ node.label }}</div>
               <div v-if="node.sub" class="sub">{{ node.sub }}</div>
             </div>
@@ -45,6 +47,7 @@
 import { computed } from 'vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
 import ExtraCard from '@/components/common/ExtraCard.vue';
+import IconMap from '@/components/common/IconMap.vue';
 import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
 

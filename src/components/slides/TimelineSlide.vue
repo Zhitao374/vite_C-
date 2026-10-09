@@ -6,7 +6,7 @@
     </h1>
 
     <div class="slide-body">
-      <div class="timeline" :class="{ 'timeline-cols': items.length >= 5 }">
+      <div class="timeline" :class="timelineClass">
         <StepWrapper
           v-for="(it, i) in items"
           :key="i"
@@ -16,7 +16,9 @@
             <div class="timeline-card">
               <div class="timeline-card-head">
                 <span class="timeline-index">{{ String(i + 1).padStart(2, '0') }}</span>
-                <span v-if="it.icon" class="timeline-icon">{{ it.icon }}</span>
+                <span v-if="it.icon" class="timeline-icon">
+                  <IconMap :emoji="it.icon" :size="26" />
+                </span>
                 <span class="timeline-title">{{ it.title }}</span>
                 <span v-if="it.badge" class="badge badge-accent">{{ it.badge }}</span>
               </div>
@@ -44,6 +46,7 @@
 import { computed } from 'vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
 import ExtraCard from '@/components/common/ExtraCard.vue';
+import IconMap from '@/components/common/IconMap.vue';
 import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
 
@@ -55,6 +58,16 @@ const emit = defineEmits(['step-count']);
 
 const items = computed(() => props.slide.data?.items || []);
 const extra = computed(() => props.slide.data?.extra);
+// 页面级 variant（review / map / history）
+const variantClass = computed(() => {
+  const v = props.slide.variant;
+  return v ? `timeline-${v}` : '';
+});
+
+const timelineClass = computed(() => ({
+  'timeline-cols': items.value.length >= 5,
+  [`timeline-${props.slide.variant}`]: !!props.slide.variant
+}));
 
 useStepCount(emit, () => items.value.length + (extra.value ? 1 : 0));
 
@@ -165,7 +178,24 @@ const { max: maxStep } = useStep();
 .timeline-card {
   padding: 20px 26px;
 }
+/* 现有：默认蓝橙渐变 */
+.timeline::before {
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+}
 
+/* 新增：回顾 = 靛蓝 */
+.timeline.timeline-review::before {
+  background: linear-gradient(180deg, #6366F1, #818CF8);
+}
+.timeline.timeline-review .timeline-item::before {
+  background: #818CF8;
+  box-shadow: 0 0 0 5px rgba(129, 140, 248, 0.18);
+}
+
+/* 新增：地图 = 保持现有蓝橙 */
+.timeline.timeline-map::before {
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+}
 @media (max-width: 1100px) {
   .timeline-cols { grid-template-columns: 1fr; }
 }

@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '数据的多种面孔',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '数据的多种面孔',
       data: {
         items: [
           { icon: '📐', badge: '小数', title: 'double 与 float', desc: '小数的家', points: ['double 精度高', 'float 精度低', '竞赛首选 double'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，学会判断',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，学会判断',
       data: {
         items: [
           { icon: '➕', badge: '基础', title: '第一站 · 运算符', desc: '算术、赋值、关系、逻辑四类', points: ['+ - * / %', '= += -= *= /=', '> < == !=', '&& || !'] },

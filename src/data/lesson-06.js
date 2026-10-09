@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '循环结构，让程序学会重复',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '循环结构，让程序学会重复',
       data: {
         items: [
           { icon: '🔁', badge: '基础', title: 'while 循环', desc: '条件为真就重复执行', points: ['循环三要素', '防止死循环'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从一格到一排',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从一格到一排',
       data: {
         items: [
           { icon: '🧠', badge: '基础', title: '第一站 · 数组概念', desc: '为什么需要数组、一排储物柜', points: ['一次存多个数据', '同类型连续存储', '下标从 0 开始'] },

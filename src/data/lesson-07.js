@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '一维数组，批量数据的好帮手',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '一维数组，批量数据的好帮手',
       data: {
         items: [
           { icon: '📦', badge: '基础', title: '数组概念', desc: '一排储物柜，同类型连续存放', points: ['同类型', '连续存储', '下标访问'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从字符到字符串',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从字符到字符串',
       data: {
         items: [
           { icon: '🔤', badge: '基础', title: '第一站 · 字符 vs 字符串', desc: '单引号 \'A\' 和双引号 "A" 的区别', points: ['char 用单引号', 'string 用双引号', 'char 占 1 字节'] },

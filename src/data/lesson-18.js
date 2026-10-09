@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '递推 = 多米诺',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '递推 = 多米诺',
       data: {
         items: [
           { icon: '🎯', badge: '基础', title: '递推思想', desc: '用已知推未知', points: ['多米诺比喻', '三要素', '和枚举的区别'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从局部到全局',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从局部到全局',
       data: {
         items: [
           { icon: '💰', badge: '基础', title: '第一站 · 贪心思想', desc: '每一步都选最好', points: ['找零钱问题', '局部最优 → 全局最优', '和枚举的区别'] },

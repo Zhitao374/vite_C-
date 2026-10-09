@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '字符串，文字的容器',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '字符串，文字的容器',
       data: {
         items: [
           { icon: '🔤', badge: '基础', title: '字符 vs 字符串', desc: 'char 用单引号，string 用双引号', points: ['char 1 字节', '字符串含 \\0', '本质是字符数组'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，学会封装',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，学会封装',
       data: {
         items: [
           { icon: '🧠', badge: '基础', title: '第一站 · 为什么需要函数', desc: '重复代码的问题、料理机的比喻', points: ['代码复用', '逻辑清晰', '便于调试'] },

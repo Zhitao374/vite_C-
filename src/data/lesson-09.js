@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '函数，让代码可以复用',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '函数，让代码可以复用',
       data: {
         items: [
           { icon: '🔧', badge: '定义', title: '函数三要素', desc: '返回类型、函数名、参数', points: ['int add(int a, int b)', '函数体', 'main 前定义'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从套娃到经典',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从套娃到经典',
       data: {
         items: [
           { icon: '🧠', badge: '基础', title: '第一站 · 递归概念', desc: '什么是递归、三要素', points: ['函数调用自己', '边界条件', '递归关系'] },

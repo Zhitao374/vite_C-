@@ -9,7 +9,7 @@
     <router-link :to="`/lesson/${lesson}`" class="back-btn">← 返回目录</router-link>
   </div>
 
-  <div v-else class="slide-view">
+  <div v-else class="slide-view" :style="{ background: bgValue }">
     <component v-if="slideComponent" :is="slideComponent" :slide="slide" :key="slideId" @step-count="onStepCount" />
     <div v-else class="slide-view-error">
       <h1>未注册的版式：{{ slide.type }}</h1>
@@ -47,16 +47,22 @@ import { useSlide } from '@/composables/useSlide';
 import { useSlideNav } from '@/composables/useSlideNav';
 import MarkerTool from '@/components/common/MarkerTool.vue';
 import FontScaler from '@/components/common/FontScaler.vue';
+import { useSlideTheme } from '@/composables/useSlideTheme';
 
 const props = defineProps({
   lesson: { type: String, required: true },
   slide: { type: String, required: true }
 });
 
+// ① 先获取 slide 数据
 const {
   slide, slideId, totalSlides, loaded,
   stepCtx, current, max, next, prev
 } = useSlide(props);
+
+// ② 再根据 slide.type 得到主题变量名
+const { bgVar } = useSlideTheme(slide);
+const bgValue = computed(() => `var(${bgVar.value})`);
 
 function onStepCount(n) {
   stepCtx.setMax(n);
@@ -78,7 +84,6 @@ useSlideNav({
   prev
 });
 
-// 快捷键提示
 const showShortcuts = ref(false);
 onMounted(() => {
   if (!localStorage.getItem('cpp-course-shortcuts-seen')) {

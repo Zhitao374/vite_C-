@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '运算符与分支，让程序学会判断',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '运算符与分支，让程序学会判断',
       data: {
         items: [
           { icon: '➕', badge: '运算符', title: '四类运算符', desc: '算术、赋值、关系、逻辑', points: ['+ - * / %', '= += -=', '> < == !=', '&& || !'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从重复到嵌套',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从重复到嵌套',
       data: {
         items: [
           { icon: '🔁', badge: '基础', title: '第一站 · while 循环', desc: '条件为真就重复执行', points: ['while (条件)', '循环三要素', '防止死循环'] },

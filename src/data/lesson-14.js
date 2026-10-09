@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '三种基础排序',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '三种基础排序',
       data: {
         items: [
           { icon: '🫧', badge: '冒泡', title: '冒泡排序', desc: '相邻比较，大的往后冒', points: ['稳定', 'O(n²)', '交换次数多'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从 sort 到 STL',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从 sort 到 STL',
       data: {
         items: [
           { icon: '🚀', badge: '基础', title: '第一站 · sort 入门', desc: '一行代码搞定排序', points: ['sort(起点, 终点)', '默认从小到大', 'greater 从大到小'] },

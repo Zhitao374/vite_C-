@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '二维数组，表格的世界',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '二维数组，表格的世界',
       data: {
         items: [
           { icon: '📊', badge: '概念', title: '二维数组', desc: '数组的数组', points: ['行列结构', '两个下标', '按行展开'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从工具到模式',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从工具到模式',
       data: {
         items: [
           { icon: '🔧', badge: '工具', title: '第一站 · 常用函数', desc: 'substr / find / replace', points: ['截取、查找、替换', 'npos 的陷阱', '函数返回值'] },

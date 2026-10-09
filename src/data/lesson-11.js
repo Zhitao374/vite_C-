@@ -13,7 +13,7 @@ export default {
 
         /* ===== 02 上节回顾 ===== */
         {
-            id: 2, type: 'timeline', title: '上节课回顾', subtitle: '递归，函数调用自己',
+            id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '递归，函数调用自己',
             data: {
                 items: [
                     { icon: '🔁', badge: '概念', title: '递归定义', desc: '函数调用自己', points: ['套娃', '边界条件', '递归关系'] },
@@ -41,7 +41,7 @@ export default {
 
         /* ===== 04 学习地图 ===== */
         {
-            id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从行到表',
+            id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从行到表',
             data: {
                 items: [
                     { icon: '🧠', badge: '基础', title: '第一站 · 二维概念', desc: '为什么需要二维、表格的比喻', points: ['行列结构', '数组的数组', '内存是连续的一维'] },

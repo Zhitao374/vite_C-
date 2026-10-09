@@ -6,7 +6,7 @@
     </h1>
 
     <div class="slide-body">
-      <div class="quote-split">
+      <div class="quote-split card-hero">
         <StepWrapper :step="1">
           <div class="quote-panel">
             <div class="quote-mark">"</div>

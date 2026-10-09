@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '排序进阶与 STL',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '排序进阶与 STL',
       data: {
         items: [
           { icon: '🚀', badge: '基础', title: 'sort 排序', desc: '一行代码搞定', points: ['O(n log n)', 'greater 降序', '头文件 algorithm'] },
@@ -41,7 +41,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从线性到对数',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从线性到对数',
       data: {
         items: [
           { icon: '➡️', badge: '基础', title: '第一站 · 顺序查找', desc: '一个个比较', points: ['简单直观', 'O(n)', '不需要有序'] },

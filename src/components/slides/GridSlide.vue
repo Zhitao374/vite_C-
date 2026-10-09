@@ -13,8 +13,10 @@
           :key="i"
           :step="i + 1"
         >
-          <div class="card card-compact">
-            <div v-if="card.icon" class="big-icon">{{ card.icon }}</div>
+          <div :class="['card','card-compact',cards.length === 1 ? 'card-hero' : '']">
+            <div v-if="card.icon" class="big-icon">
+              <IconMap :emoji="card.icon" :size="56" />
+            </div>
             <div v-if="card.number" class="big-number">{{ card.number }}</div>
             <div class="card-title">
               <component
@@ -48,6 +50,7 @@ import StepWrapper from '@/components/common/StepWrapper.vue';
 import ExtraCard from '@/components/common/ExtraCard.vue';
 import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
+import IconMap from '@/components/common/IconMap.vue';
 
 const props = defineProps({
   slide: { type: Object, required: true }
@@ -67,7 +70,8 @@ const { max: maxStep } = useStep();
 
 const gridClass = computed(() => {
   const n = cards.value.length;
-  if (n <= 2) return 'grid grid-cols-2';
+  if (n === 1) return 'grid grid-cols-1';   // ← 新增
+  if (n === 2) return 'grid grid-cols-2';
   if (n === 3) return 'grid grid-cols-3';
   return 'grid grid-cols-4';
 });
@@ -83,8 +87,15 @@ const gridClass = computed(() => {
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 .grid :deep(.big-icon) {
-  font-size: 60px;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.grid :deep(.big-icon svg) {
+  width: 56px;
+  height: 56px;
+  color: var(--primary);  /* 跟随主题色 */
 }
 .grid :deep(.big-number) {
   font-size: 52px;

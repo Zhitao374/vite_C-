@@ -1,5 +1,5 @@
 <template>
-  <div class="extra-card" :class="variant">
+  <div class="extra-card" :class="[variant, descLength < 200 ? 'card-subtle' : '']">
     <div
       class="extra-header"
       @click.stop="toggle"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed  } from 'vue';
 
 const props = defineProps({
   title: { type: String, default: '' },
@@ -31,6 +31,8 @@ const props = defineProps({
 });
 
 const expanded = ref(props.defaultExpanded);
+
+const descLength = computed(() => (props.desc || '').length);
 
 function toggle() {
   expanded.value = !expanded.value;

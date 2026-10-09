@@ -2,6 +2,44 @@
    components.css · 全局组件样式（跨组件复用）
    ============================================ */
 
+/* ============================================ */
+/* 三级卡片系统                                   */
+/* ============================================ */
+
+/* ─── Hero：页面的"主角" ─── */
+.card-hero {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F4F8FF 100%);
+  border: 2px solid rgba(22, 93, 255, 0.35);
+  border-radius: 20px;
+  box-shadow:
+    0 4px 12px rgba(22, 93, 255, 0.08),
+    0 16px 48px rgba(22, 93, 255, 0.12);
+  padding: 32px 36px;
+  position: relative;
+}
+.card-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 20px 20px 0 0;
+}
+
+/* ─── Subtle：补充信息 ─── */
+.card-subtle {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  padding: 20px 24px;
+  color: var(--text-dim);
+}
+.card-subtle:hover {
+  background: var(--gray-100);
+  transform: none;   /* 取消悬停上浮 */
+}
+
 /* ============================================
    卡片
    ============================================ */

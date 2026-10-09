@@ -1,14 +1,23 @@
-/* ============================================
-   theme.css · 主题变量
-   ============================================ */
 
+/* ============================================ */
+/* 页面氛围色——按页类型差异化                     */
+/* ============================================ */
 :root {
+  /* 页面氛围色（加深版） */
+  --bg-cover:    linear-gradient(135deg, #E8F0FF 0%, #F5F9FF 100%);
+  --bg-concept:  linear-gradient(135deg, #EDE4FF 0%, #F8F4FF 100%);
+  --bg-code: linear-gradient(135deg, #E4ECFF 0%, #EFF4FF 100%);
+  --bg-practice: linear-gradient(135deg, #FFE8D0 0%, #FFF8F0 100%);
+  --bg-quiz:     linear-gradient(135deg, #FFEFC2 0%, #FFFAEB 100%);
+  --bg-summary:  linear-gradient(135deg, #FFF3CC 0%, #FFFDF2 100%);
+  --bg-analysis: linear-gradient(135deg, #E0EDED 0%, #F2FAFA 100%);
+  --bg-default:  linear-gradient(135deg, #E8F0FF 0%, #F5F9FF 100%);
+
   /* 背景 */
   --bg-gradient-start: #eaf2ff;
   --bg-gradient-end: #f7fbff;
   --bg-card: #ffffff;
   --bg-soft: #f0f6ff;
-  --bg-code: #1e2a44;
 
   /* 代码块深色主题 */
   --code-bg: #1e2a44;
@@ -29,6 +38,18 @@
   --success-soft: #d9f7e2;
   --error: #F53F3F;
   --error-soft: #ffe0e0;
+  
+  /* 中性色阶（用于卡片分级、分隔线、禁用态） */
+  --gray-50:  #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1E293B;
+  --gray-900: #0F172A;
 
   /* 文字 */
   --text-main: #1a2f4a;

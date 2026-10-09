@@ -1,7 +1,7 @@
 export default {
   title: '第 2 讲 变量与整数类型',
   subtitle: '让程序学会记住数据',
-  total: 31,
+  total: 33,
   category: '语法与基础算法',
   slides: [
 
@@ -13,7 +13,7 @@ export default {
 
     /* ===== 02 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', title: '上节课回顾', subtitle: '从第一个程序到今天的新问题',
+      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '从第一个程序到今天的新问题',
       data: {
         items: [
           { icon: '📤', badge: '输出', title: '第一个程序', desc: 'Hello, World! 和程序框架', points: ['头文件、命名空间', 'int main()', 'cout <<', 'return 0'] },
@@ -21,7 +21,10 @@ export default {
           { icon: '🏆', badge: 'OJ', title: '提交与判题', desc: '注册、提交、看结果', points: ['AC 通过', 'WA 答案错', 'CE 编译错', 'TLE 超时'] },
           { icon: '⚠️', badge: '易错', title: '四大常见错误', desc: '编译报错的主要原因', points: ['中文标点', '漏分号', '大小写错', '括号不配对'] }
         ],
-        extra: { title: '💡 今天的新问题', desc: '昨天的程序只会"输出"，不能"记住"任何数据。<br>如果我想让程序算"我输入的两个数的和"，它做不到——因为没有地方存这两个数。<br>今天我们就学习<b>变量</b>——让程序学会记住数据。<br><br>🔮 <b>回收伏笔</b>：第 1 讲结尾说过"下一讲程序将学会记住数据"，今天揭晓。' }
+        extra: { 
+          title: '💡 今天的新问题', 
+          desc: '<div>🎉 <b>上一讲你完成了人生第一个 C++ 程序</b>——<br>还第一次在洛谷上 AC 了题目。<br>这是从"看代码"到"写代码"的跨越。</div><div>昨天的程序只会"输出"，不能"记住"任何数据。<br>如果我想让程序算"我输入的两个数的和"，它做不到——<br>因为没有地方存这两个数。</div><div>今天我们就学习<b>变量</b>——让程序学会记住数据。</div><div>🔮 <b>回收伏笔</b>：第 1 讲结尾说过"下一讲程序将学会记住数据"，今天揭晓。</div>' 
+        }
       }
     },
 
@@ -41,7 +44,7 @@ export default {
 
     /* ===== 04 学习地图 ===== */
     {
-      id: 4, type: 'timeline', title: '本讲学习地图', subtitle: '四站闯关，从盒子到类型',
+      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从盒子到类型',
       data: {
         items: [
           { icon: '📦', badge: '基础', title: '第一站 · 变量概念', desc: '变量 = 带名字的盒子', points: ['为什么需要变量', '变量的三要素', '变量在内存里'] },
@@ -62,12 +65,8 @@ export default {
           { who: 'robot', text: '可以写 <code>cout &lt;&lt; 3 + 5</code>。但这样只能算"3+5"——换个数就要改代码。' },
           { who: 'student', text: '那我想算"用户输入的两个数之和"呢？' },
           { who: 'robot', text: '这时就需要<b>变量</b>。变量像一个带名字的盒子，把数据装进去，程序随时能取出来用。' },
-          { who: 'student', text: '为什么要有名字？' },
-          { who: 'robot', text: '因为计算机内存像一个大仓库，每个格子都有<b>地址</b>。你不想记地址吧？<br>起个名字，比如 <code>a</code>、<code>score</code>，就方便多了。' },
-          { who: 'student', text: '那地址是什么？' },
-          { who: 'robot', text: '是一串 <b>0 和 1</b> 组成的二进制数。第 22 讲会详细讲。🔮' },
           { who: 'student', text: '所以变量就是"数据的名字"？' },
-          { who: 'robot', text: '对。名字最好"见名知意"。<code>age</code> 比 <code>a</code> 清晰，<code>score</code> 比 <code>b</code> 清晰。<br>程序是写给人看的，顺便让电脑跑起来。' }
+          { who: 'robot', text: '对。名字最好"见名知意"。<code>age</code> 比 <code>a</code> 清晰，<code>score</code> 比 <code>b</code> 清晰。<br><br>🔮 为什么计算机能"记住"数据？因为内存像一个大仓库，每个格子有<b>地址</b>——一串二进制数。第 22 讲揭晓。' }
         ],
         extra: {
           title: '📖 知识扩展 · 变量的本质',
@@ -272,9 +271,15 @@ export default {
       }
     },
 
+    /* ===== 17 过渡页：第三站 → 第四站 ===== */
+    {
+      id: 17, type: 'transition', title: '第四站 · 常量', subtitle: '有些值，永远不变',
+      data: { note: '我们学了"会变"的变量，现在看看"不变"的常量' }
+    },
+
     /* ===== 17 const 常量 ===== */
     {
-      id: 17, type: 'dialog', title: '常量 const', subtitle: '不变的值有专门的家', chapterTag: '第 2 讲 · 常量',
+      id: 18, type: 'dialog', title: '常量 const', subtitle: '不变的值有专门的家', chapterTag: '第 2 讲 · 常量',
       data: {
         lines: [
           { who: 'student', text: '小 C，如果程序里有一个值一直不变，比如圆周率 π，也要用变量吗？' },
@@ -294,9 +299,31 @@ export default {
       }
     },
 
+    /* ===== 19 const 代码演示 ===== */
+    {
+      id: 19, type: 'code-split', title: 'const 常量 · 代码演示', subtitle: '定义后不可修改',
+      data: {
+        intro: '📖 <b>语法</b>：<code>const 类型 名字 = 值;</code><br>const 定义的变量，一旦赋值就不能再改——这是它和普通变量唯一的区别。',
+        codeFile: 'codes/lesson-02/const-basic.cpp',
+        snippet: 'main',
+        annotations: [
+          { line: 5, title: 'const double PI = 3.14159;', desc: '定义常量 PI——圆周率，永不改变' },
+          { line: 6, title: 'const int MAXN = 100005;', desc: '定义数组最大长度——统一管理' },
+          { line: 7, title: 'const int MOD = 1000000007;', desc: '竞赛常用的模数——防止"魔法数字"' },
+          { line: 10, title: 'double area = PI * r * r;', desc: '常量参与运算——和普通变量一样' }
+        ],
+        output: '（输入 5）\n78.5397',
+        extra: {
+          title: '📖 竞赛常用常量',
+          desc: '<div><b>① 数组最大长度</b><br><code>const int MAXN = 100005;</code><br>定义一次，全程序通用——改一处，处处更新。</div><div><b>② 模数</b><br><code>const int MOD = 1000000007;</code><br>用于"结果对 10⁹+7 取模"的题——<br>为什么用这个数？第 38 讲讲。</div><div><b>③ 圆周率</b><br><code>const double PI = 3.141592653589793;</code><br>精度写足，避免精度损失。</div><div><b>为什么不用"魔法数字"？</b><br>代码里到处写 <code>1000000007</code>——<br>① 看着乱<br>② 改起来麻烦<br>③ 容易打字打错<br>用 const 定义一次，处处引用——<b>清晰又安全</b>。</div>',
+          variant: 'card-primary'
+        }
+      }
+    },
+
     /* ===== 18 初赛渗透：类型大小 ===== */
     {
-      id: 18, type: 'dialog', title: '初赛小知识：类型大小', subtitle: 'CSP-J/S 初赛必考', chapterTag: '第 2 讲 · 初赛渗透',
+      id: 20, type: 'dialog', title: '初赛小知识：类型大小', subtitle: 'CSP-J/S 初赛必考', chapterTag: '第 2 讲 · 初赛渗透',
       data: {
         lines: [
           { who: 'student', text: '小 C，初赛会考变量和类型吗？' },
@@ -318,9 +345,13 @@ export default {
 
     /* ===== 19 练习1：输出两倍 ===== */
     {
-      id: 19, type: 'level-map', title: '课堂练习1：输出两倍', subtitle: '输入一个数，输出它的两倍', chapterTag: '第 2 讲 · 实战演练',
+      id: 21, type: 'level-map', title: '课堂练习1：输出两倍', subtitle: '输入一个数，输出它的两倍', chapterTag: '第 2 讲 · 实战演练',
       data: {
-        question: { title: '题干', desc: '输入一个整数 <code>n</code>，输出 <code>n × 2</code>。<br>输入样例：<code>7</code>　输出样例：<code>14</code>', timer: '⏱ 限时 4 分钟' },
+        question: {
+          title: '题干',
+          desc: '输入一个整数 <code>n</code>，输出 <code>n × 2</code>。',
+          questionCode: '输入：7\n输出：14'
+        },
         hints: [
           '定义 <code>int n;</code>',
           '用 <code>cin &gt;&gt; n;</code> 读入',
@@ -334,9 +365,13 @@ export default {
 
     /* ===== 20 练习2：交换 ===== */
     {
-      id: 20, type: 'level-map', title: '课堂练习2：交换两个数', subtitle: '用临时变量交换值', chapterTag: '第 2 讲 · 实战演练',
+      id: 22, type: 'level-map', title: '课堂练习2：交换两个数', subtitle: '用临时变量交换值', chapterTag: '第 2 讲 · 实战演练',
       data: {
-        question: { title: '题干', desc: '输入两个整数 <code>a</code> 和 <code>b</code>，交换它们的值后输出。<br>输入样例：<code>3 5</code>　输出样例：<code>5 3</code>', timer: '⏱ 限时 6 分钟' },
+        question: {
+          title: '题干',
+          desc: '输入两个整数 <code>a</code> 和 <code>b</code>，交换它们的值后输出。',
+          questionCode: '输入：3 5\n输出：5 3'
+        },
         hints: [
           '需要一个额外的临时变量 <code>t</code>',
           '三步走：<code>t = a; a = b; b = t;</code>',
@@ -350,7 +385,7 @@ export default {
         },
         extra: {
           title: '📖 交叉学科 · 三杯水交换 + swap 函数',
-          desc: '物理课上有一个经典问题：<br>有两杯水，一杯红、一杯蓝，如何交换两个杯子的水，但只能用第三个空杯？<br><br>答案：<br>① 把红水倒进空杯<br>② 把蓝水倒进原红杯<br>③ 把空杯里的红水倒进原蓝杯<br><br>变量交换完全一样：<br><code>t = a; a = b; b = t;</code><br><br><b>💡 好消息：C++ 有现成的 swap 函数</b><br>其实标准库提供了 <code>swap(a, b)</code> 函数——一行搞定：<br><br><code>#include &lt;algorithm&gt;</code><br><code>swap(a, b);</code><br><br><b>为什么用 swap 而不是手写 t = a; a = b; b = t？</b><br>① <b>更简洁</b>：一行代替三行<br>② <b>更安全</b>：标准库经过千锤百炼，不会出错<br>③ <b>更高效</b>：编译器会针对类型优化（大对象用移动而不是复制）<br>④ <b>更通用</b>：数组、结构体、字符串都能用<br><br><b>手写 vs swap 的对比</b>：<br>· 学习阶段：手写一遍，理解原理<br>· 竞赛阶段：直接用 <code>swap</code>，省时间<br><br><b>本讲（lesson-02）先手写</b>——理解交换的本质。<br><b>后续讲次（排序、字符串反转）直接用 swap</b>。<br><br>这就是"先懂原理，再用工具"的学习路径。',
+          desc: '<div><b>物理课上的经典问题</b><br>有两杯水，一杯红、一杯蓝——<br>如何交换两个杯子的水，但只能用第三个空杯？</div><div><b>答案</b><br>① 把红水倒进空杯<br>② 把蓝水倒进原红杯<br>③ 把空杯里的红水倒进原蓝杯</div><div><b>变量交换完全一样</b><br><code>t = a; a = b; b = t;</code></div><div><b>💡 好消息：C++ 有现成的 swap 函数</b><br>标准库提供了 <code>swap(a, b)</code> 函数——一行搞定：<br><code>#include &lt;algorithm&gt;</code><br><code>swap(a, b);</code></div><div><b>手写 vs swap</b><br>· 学习阶段：手写一遍，理解原理<br>· 竞赛阶段：直接用 swap，省时间<br><br>本讲先手写——理解交换的本质。<br>后续讲次（排序、字符串反转）直接用 swap。</div>',
           variant: 'card-primary'
         }
       }
@@ -358,9 +393,13 @@ export default {
 
     /* ===== 21 练习3：大数和 ===== */
     {
-      id: 21, type: 'level-map', title: '课堂练习3：大数求和', subtitle: '用 long long 避免溢出', chapterTag: '第 2 讲 · 实战演练',
+      id: 23, type: 'level-map', title: '课堂练习3：大数求和', subtitle: '用 long long 避免溢出', chapterTag: '第 2 讲 · 实战演练',
       data: {
-        question: { title: '题干', desc: '输入 4 个大整数（每个可达 <code>10¹⁰</code>），输出它们的和。<br>输入样例：<code>10000000000 20000000000 30000000000 40000000000</code>　输出样例：<code>100000000000</code>', timer: '⏱ 限时 8 分钟' },
+        question: {
+          title: '题干',
+          desc: '输入 4 个大整数，输出它们的和。<br>每个数可达 <code>10¹⁰</code>。',
+          questionCode: '输入：10000000000 20000000000 30000000000 40000000000\n输出：100000000000'
+        },
         hints: [
           '每个数可能超过 21 亿，<b>必须用 long long</b>',
           '四个数之和可能更大，也要用 long long 保存',
@@ -374,7 +413,7 @@ export default {
 
     /* ===== 22 趣味扩展 ===== */
     {
-      id: 22, type: 'grid', title: '🎨 难题后的放松 · 程序员的命名玄学', subtitle: '变量名背后的故事',
+      id: 24, type: 'grid', title: '🎨 难题后的放松 · 程序员的命名玄学', subtitle: '变量名背后的故事',
       chapterTag: '第 2 讲 · 知识讲解',
       data: {
         cards: [
@@ -409,7 +448,7 @@ export default {
 
     /* ===== 23 练习小结 ===== */
     {
-      id: 23, type: 'dialog', title: '练习小结与答疑', subtitle: '小C点评三道练习', chapterTag: '第 2 讲 · 答疑',
+      id: 25, type: 'dialog', title: '练习小结与答疑', subtitle: '小C点评三道练习', chapterTag: '第 2 讲 · 答疑',
       data: {
         lines: [
           { who: 'student', text: '小 C，练习 2 的交换我写成了 a = b; b = a;，结果不对。' },
@@ -431,7 +470,7 @@ export default {
 
     /* ===== 24 课堂小测 ===== */
     {
-      id: 24, type: 'quiz', title: '课堂小测', subtitle: '变量、输入与整数类型',
+      id: 26, type: 'quiz', title: '课堂小测', subtitle: '变量、输入与整数类型',
       chapterTag: '第 2 讲 · 课堂小测',
       data: {
         questions: [
@@ -514,7 +553,7 @@ cout << a << endl;`,
 
     /* ===== 25 今日总结 ===== */
     {
-      id: 25, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 27, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
       data: {
         text: '变量是带名字的盒子，类型是盒子的大小。',
         author: '—— 变量第一课',
@@ -538,7 +577,7 @@ cout << a << endl;`,
 
     /* ===== 26 课后作业 ===== */
     {
-      id: 26, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 28, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
       data: {
         cards: [
           { icon: '🟢', title: '基础 1 · P1001', link: 'https://www.luogu.com.cn/problem/P1001', desc: '<b>A+B Problem</b><br>考察：cin、变量、加法<br>难度：★<br>目标：读两个数，输出和' },
@@ -555,7 +594,7 @@ cout << a << endl;`,
 
     /* ===== 27 下节预告 ===== */
     {
-      id: 27, type: 'radial', title: '下节预告', subtitle: '第 3 讲 · 小数、字符、布尔与类型转换',
+      id: 29, type: 'radial', title: '下节预告', subtitle: '第 3 讲 · 小数、字符、布尔与类型转换',
       data: {
         center: '类型',
         items: [
@@ -574,7 +613,7 @@ cout << a << endl;`,
 
     /* ===== 28 答疑时间 ===== */
     {
-      id: 28, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 2 讲 · 答疑',
+      id: 30, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 2 讲 · 答疑',
       data: {
         lines: [
           { who: 'student', text: 'int 和 long long 到底用哪个？' },
@@ -598,7 +637,7 @@ cout << a << endl;`,
 
     /* ===== 29 本讲英文单词 ===== */
     {
-      id: 29, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
+      id: 31, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
       chapterTag: '第 2 讲 · 复习',
       data: {
         words: [
@@ -619,7 +658,7 @@ cout << a << endl;`,
 
     /* ===== 30 知识清单 ===== */
     {
-      id: 30, type: 'grid', title: '第 2 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 2 讲 · 复习',
+      id: 32, type: 'grid', title: '第 2 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 2 讲 · 复习',
       data: {
         cards: [
           { icon: '📦', title: '变量', desc: '<b>三要素</b>：名字、类型、值<br><b>定义</b>：<code>int age = 11;</code><br><b>命名</b>：字母数字下划线，不能数字开头<br><b>陷阱</b>：未初始化是垃圾值' },
@@ -637,7 +676,7 @@ cout << a << endl;`,
 
     /* ===== 31 结束页 ===== */
     {
-      id: 31, type: 'ending', title: '第二讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
+      id: 33, type: 'ending', title: '第二讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
       data: {
         slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
         extra: {
