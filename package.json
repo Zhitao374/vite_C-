@@ -8,12 +8,7 @@
     "preview": "vite preview",
     "lint": "eslint src --ext .vue,.js",
     "format": "prettier --write src",
-    "check": "node scripts/check.js",
-    "check:code": "node scripts/check.js code",
-    "check:ids": "node scripts/check.js ids",
-    "check:glossary": "node scripts/check.js glossary",
-    "check:all": "node scripts/check.js all",
-    "check:fix": "node scripts/check.js fix"
+    "help": "node scripts/help.js"
   },
   "dependencies": {
     "lucide-vue-next": "^1.0.0",

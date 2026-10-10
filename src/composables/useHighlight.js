@@ -1,6 +1,12 @@
 /**
  * useHighlight.js · C++ 语法高亮
+ *
+ * 优化点（本轮）：
+ *   - 预编译正则 —— 模块加载时编译一次，避免每次调用重建 RegExp
+ *     之前：每行代码 × 9 条规则 = 每页 450 次 RegExp 编译
+ *     现在：0 次（模块加载时完成）
  */
+
 const KEYWORDS = ['if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 'return', 'using', 'namespace', 'const', 'static', 'struct', 'class', 'void', 'true', 'false'];
 const TYPES = ['int', 'long', 'short', 'double', 'float', 'char', 'bool', 'string', 'unsigned', 'signed', 'size_t'];
 const FUNCS = ['cout', 'cin', 'endl', 'main', 'printf', 'scanf', 'sort', 'max', 'min', 'abs', 'swap', 'vector', 'map', 'set', 'queue', 'stack', 'pair'];
@@ -16,6 +22,12 @@ const RULES = [
   { cls: 'tok-op',   re: /&lt;&lt;|&gt;&gt;|&lt;=|&gt;=|&amp;&amp;|&lt;|&gt;|==|!=|\|\||[+\-*\/%=]/ },
   { cls: 'tok-punc', re: /[{}();,]/ }
 ];
+
+// ⚡ 预编译：模块加载时执行一次
+const COMPILED_RULES = RULES.map(r => ({
+  cls: r.cls,
+  re: new RegExp(r.re.source, r.re.flags.replace('g', ''))
+}));
 
 function escapeHtml(str) {
   return String(str == null ? '' : str)
@@ -39,9 +51,8 @@ function highlightLine(line) {
     let bestCls = null;
     let bestIndex = Infinity;
 
-    for (const rule of RULES) {
-      const re = new RegExp(rule.re.source, rule.re.flags.replace('g', ''));
-      const m = re.exec(rest);
+    for (const rule of COMPILED_RULES) {
+      const m = rule.re.exec(rest);
       if (m && m.index < bestIndex) {
         bestIndex = m.index;
         best = m[0];

@@ -29,6 +29,17 @@ const routes = [
   }
 ];
 
+// ============================================
+// 【新增】dev-only 路由
+// ============================================
+if (import.meta.env.DEV) {
+  routes.push({
+    path: '/dev/slides',
+    name: 'dev-slides',
+    component: () => import('@/views/DevSlideGallery.vue')
+  });
+}
+
 export default createRouter({
   history: createWebHashHistory(),
   routes

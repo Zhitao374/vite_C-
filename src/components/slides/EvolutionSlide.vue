@@ -1,57 +1,47 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <p v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</p>
-    </h1>
+  <SlideShell :slide="slide">
+    <div v-if="intro" class="evo-intro" v-html="intro"></div>
 
-    <div class="slide-body">
-      <div v-if="intro" class="evo-intro" v-html="intro"></div>
-
-      <div class="evo-layout">
-        <!-- 左栏：代码 -->
-        <div class="evo-code-pane">
-          <div ref="codeWrapRef" class="evo-code-wrap">
-            <CodeBlock
-              :code-file="slide.data.codeFile"
-              :snippet="slide.data.snippet"
-              :highlight-lines="focusLines"
-              :hidden-lines="hiddenLines"
-              :placeholder="placeholder"
-              density="sm"
-            />
-          </div>
-        </div>
-
-        <!-- 右栏：当前步骤 -->
-        <div class="evo-step-pane">
-          <div v-if="currentStep" class="step-card">
-            <div class="step-expression" v-html="currentStep.expression"></div>
-            <div class="step-note" v-html="currentStep.note"></div>
-          </div>
-
-          <div class="step-progress">
-            <span class="progress-num">{{ currentIndex + 1 }} / {{ steps.length }}</span>
-          </div>
+    <div class="evo-layout">
+      <!-- 左栏：代码 -->
+      <div class="evo-code-pane">
+        <div ref="codeWrapRef" class="evo-code-wrap">
+          <CodeBlock
+            :code-file="slide.data.codeFile"
+            :snippet="slide.data.snippet"
+            :highlight-lines="focusLines"
+            :hidden-lines="hiddenLines"
+            :placeholder="placeholder"
+            density="sm"
+          />
         </div>
       </div>
 
-      <ExtraCard v-if="slide.data.extra" v-bind="slide.data.extra" />
+      <!-- 右栏：当前步骤 -->
+      <div class="evo-step-pane">
+        <div v-if="currentStep" class="step-card">
+          <div class="step-expression" v-html="currentStep.expression"></div>
+          <div class="step-note" v-html="currentStep.note"></div>
+        </div>
+
+        <div class="step-progress">
+          <span class="progress-num">{{ currentIndex + 1 }} / {{ steps.length }}</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed, ref, watch, nextTick } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import CodeBlock from '@/components/common/CodeBlock.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
 import { useStep } from '@/composables/useStep';
+import { useStepCount } from '@/composables/useStepCount';
 
 const props = defineProps({
   slide: { type: Object, required: true }
 });
-
-const emit = defineEmits(['step-count']);
 
 const { current } = useStep();
 
@@ -67,10 +57,6 @@ const currentIndex = computed(() =>
 
 const currentStep = computed(() => steps.value[currentIndex.value] || null);
 
-/**
- * 当前高亮的行号数组
- * 新数据格式：step.focusLines: [n1, n2, ...]
- */
 const focusLines = computed(() => {
   const step = currentStep.value;
   if (!step) return [];
@@ -86,25 +72,21 @@ const hiddenLines = computed(() => {
 const placeholder = computed(() => currentStep.value?.placeholder || '');
 
 // ============================================
-// 步数上报
+// 步数上报（替代原 watch(stepTotal) 老写法）
 // ============================================
-const stepTotal = computed(() =>
+useStepCount(() =>
   steps.value.length + (props.slide.data?.extra ? 1 : 0)
 );
-watch(stepTotal, (n) => emit('step-count', n), { immediate: true });
 
 // ============================================
-// 自动滚动到高亮区域
+// 自动滚动到高亮行
 // ============================================
 const codeWrapRef = ref(null);
 
-watch(
-  currentIndex,
-  async () => {
-    await nextTick();
-    scrollToFocusLine();
-  }
-);
+watch(currentIndex, async () => {
+  await nextTick();
+  scrollToFocusLine();
+});
 
 async function scrollToFocusLine() {
   if (!focusLines.value.length) return;
@@ -117,8 +99,6 @@ async function scrollToFocusLine() {
 
   const firstLine = Math.min(...focusLines.value);
 
-  // 通过行号找到 DOM 节点
-  // CodeBlock 渲染时，每行是 .code-line，行号在 .code-num 里
   const lineNodes = scrollContainer.querySelectorAll('.code-line');
   const target = Array.from(lineNodes).find(node => {
     const numEl = node.querySelector('.code-num');
@@ -127,7 +107,6 @@ async function scrollToFocusLine() {
 
   if (!target) return;
 
-  // 检查是否已在可视区
   const containerRect = scrollContainer.getBoundingClientRect();
   const targetRect = target.getBoundingClientRect();
 
@@ -144,9 +123,9 @@ async function scrollToFocusLine() {
 </script>
 
 <style scoped>
-/* ============================================
-   顶部引入
-   ============================================ */
+/* ============================================ */
+/* 顶部引入                                      */
+/* ============================================ */
 .evo-intro {
   font-size: var(--fs-card-desc);
   color: var(--text-sub);
@@ -161,9 +140,9 @@ async function scrollToFocusLine() {
   color: var(--text-main);
 }
 
-/* ============================================
-   两栏布局
-   ============================================ */
+/* ============================================ */
+/* 两栏布局                                      */
+/* ============================================ */
 .evo-layout {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -172,7 +151,6 @@ async function scrollToFocusLine() {
   min-height: 0;
 }
 
-/* 左栏：代码 */
 .evo-code-pane {
   min-height: 0;
   display: flex;
@@ -201,7 +179,6 @@ async function scrollToFocusLine() {
   overflow-y: auto;
 }
 
-/* 右栏：当前步骤 */
 .evo-step-pane {
   min-height: 0;
   display: flex;
@@ -250,9 +227,9 @@ async function scrollToFocusLine() {
   letter-spacing: 0.5px;
 }
 
-/* ============================================
-   响应式
-   ============================================ */
+/* ============================================ */
+/* 响应式                                        */
+/* ============================================ */
 @media (max-width: 900px) {
   .evo-layout {
     grid-template-columns: 1fr;

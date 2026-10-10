@@ -42,6 +42,12 @@ const CHECKS = {
     desc: '检查 glossary 词条规范 + 统计',
     cmd: 'node',
     args: ['scripts/glossary-report.js', '--check']
+  },
+  html: {
+    name: '🏷️ HTML 标签配对',
+    desc: '检查所有 lesson 数据里的 div 是否配对',
+    cmd: 'node',
+    args: ['scripts/check-html.js']
   }
 };
 

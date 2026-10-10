@@ -10,7 +10,7 @@
   </div>
 
   <div v-else class="slide-view" :style="{ background: bgValue }">
-    <component v-if="slideComponent" :is="slideComponent" :slide="slide" :key="slideId" @step-count="onStepCount" />
+    <component v-if="slideComponent" :is="slideComponent" :slide="slide" :key="slideId" />
     <div v-else class="slide-view-error">
       <h1>未注册的版式：{{ slide.type }}</h1>
     </div>
@@ -64,9 +64,6 @@ const {
 const { bgVar } = useSlideTheme(slide);
 const bgValue = computed(() => `var(${bgVar.value})`);
 
-function onStepCount(n) {
-  stepCtx.setMax(n);
-}
 
 watch(slideId, () => stepCtx.setMax(1), { immediate: false });
 

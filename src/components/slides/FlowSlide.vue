@@ -1,61 +1,43 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
-    </h1>
-
-    <div class="slide-body">
-      <div
-        v-for="(row, ri) in rows"
-        :key="ri"
-        class="flow"
-      >
-        <template v-for="(node, i) in row" :key="i">
-          <StepWrapper :step="stepOf(ri, i)" class="flow-step-node">
-            <div class="flow-node" :class="{ active: node.glow, glow: node.glow }">
-              <div v-if="node.icon" class="icon">
-                <IconMap :emoji="node.icon" :size="36" />
-              </div>
-              <div v-if="node.label" class="label">{{ node.label }}</div>
-              <div v-if="node.sub" class="sub">{{ node.sub }}</div>
+  <SlideShell :slide="slide">
+    <div
+      v-for="(row, ri) in rows"
+      :key="ri"
+      class="flow"
+    >
+      <template v-for="(node, i) in row" :key="i">
+        <StepWrapper :step="stepOf(ri, i)" class="flow-step-node">
+          <div class="flow-node" :class="{ active: node.glow, glow: node.glow }">
+            <div v-if="node.icon" class="icon">
+              <IconMap :emoji="node.icon" :size="36" />
             </div>
-          </StepWrapper>
+            <div v-if="node.label" class="label">{{ node.label }}</div>
+            <div v-if="node.sub" class="sub">{{ node.sub }}</div>
+          </div>
+        </StepWrapper>
 
-          <StepWrapper
-            v-if="i < row.length - 1"
-            :step="stepOf(ri, i) + 1"
-            class="flow-step-arrow"
-          >
-            <div class="flow-arrow">→</div>
-          </StepWrapper>
-        </template>
-      </div>
-
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-primary'"
-        />
-      </StepWrapper>
+        <StepWrapper
+          v-if="i < row.length - 1"
+          :step="stepOf(ri, i) + 1"
+          class="flow-step-arrow"
+        >
+          <div class="flow-arrow">→</div>
+        </StepWrapper>
+      </template>
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
 import IconMap from '@/components/common/IconMap.vue';
 import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
 
 const props = defineProps({
   slide: { type: Object, required: true }
 });
-
-const emit = defineEmits(['step-count']);
 
 const d = computed(() => props.slide.data || {});
 const rows = computed(() => {
@@ -63,18 +45,15 @@ const rows = computed(() => {
   if (d.value.nodes) return [d.value.nodes];
   return [];
 });
-const extra = computed(() => d.value.extra);
 
 // 步数：每个节点 2 步（节点+箭头），最后一个节点 1 步
-useStepCount(emit, () => {
+useStepCount(() => {
   const data = d.value;
   const r = data.rows || (data.nodes ? [data.nodes] : []);
   let n = 0;
   r.forEach(row => { n += row.length * 2 - 1; });
   return n + (data.extra ? 1 : 0);
 });
-
-const { max: maxStep } = useStep();
 
 function stepOf(ri, i) {
   let step = 1;

@@ -23,13 +23,12 @@ const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
 
 const extra = computed(() => props.slide.data?.extra);
 const slogan = computed(() => props.slide.data?.slogan || '');
 
 // 终章页：1 步
-useStepCount(emit, () => 1);
+useStepCount(() => 1);
 </script>
 
 <style scoped>

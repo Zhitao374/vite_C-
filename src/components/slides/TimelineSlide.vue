@@ -1,77 +1,52 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
-    </h1>
-
-    <div class="slide-body">
-      <div class="timeline" :class="timelineClass">
-        <StepWrapper
-          v-for="(it, i) in items"
-          :key="i"
-          :step="i + 1"
-        >
-          <div class="timeline-item">
-            <div class="timeline-card">
-              <div class="timeline-card-head">
-                <span class="timeline-index">{{ String(i + 1).padStart(2, '0') }}</span>
-                <span v-if="it.icon" class="timeline-icon">
-                  <IconMap :emoji="it.icon" :size="26" />
-                </span>
-                <span class="timeline-title">{{ it.title }}</span>
-                <span v-if="it.badge" class="badge badge-accent">{{ it.badge }}</span>
-              </div>
-              <div v-if="it.desc" class="timeline-desc" v-html="it.desc"></div>
-              <ul v-if="it.points?.length" class="timeline-points">
-                <li v-for="(p, j) in it.points" :key="j" v-html="p"></li>
-              </ul>
+  <SlideShell :slide="slide">
+    <div class="timeline" :class="timelineClass">
+      <StepWrapper
+        v-for="(it, i) in items"
+        :key="i"
+        :step="i + 1"
+      >
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-card-head">
+              <span class="timeline-index">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span v-if="it.icon" class="timeline-icon">
+                <IconMap :emoji="it.icon" :size="26" />
+              </span>
+              <span class="timeline-title">{{ it.title }}</span>
+              <span v-if="it.badge" class="badge badge-accent">{{ it.badge }}</span>
             </div>
+            <div v-if="it.desc" class="timeline-desc" v-html="it.desc"></div>
+            <ul v-if="it.points?.length" class="timeline-points">
+              <li v-for="(p, j) in it.points" :key="j" v-html="p"></li>
+            </ul>
           </div>
-        </StepWrapper>
-      </div>
-
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-glow'"
-        />
+        </div>
       </StepWrapper>
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
 import IconMap from '@/components/common/IconMap.vue';
 import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
 
 const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
-
 const items = computed(() => props.slide.data?.items || []);
 const extra = computed(() => props.slide.data?.extra);
-// 页面级 variant（review / map / history）
-const variantClass = computed(() => {
-  const v = props.slide.variant;
-  return v ? `timeline-${v}` : '';
-});
 
 const timelineClass = computed(() => ({
   'timeline-cols': items.value.length >= 5,
   [`timeline-${props.slide.variant}`]: !!props.slide.variant
 }));
 
-useStepCount(emit, () => items.value.length + (extra.value ? 1 : 0));
-
-const { max: maxStep } = useStep();
+useStepCount(() => items.value.length + (extra.value ? 1 : 0));
 </script>
 
 <style scoped>
@@ -116,7 +91,7 @@ const { max: maxStep } = useStep();
   background: var(--bg-card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
-  padding: 12px 18px;
+  padding: 20px 26px;
   box-shadow: var(--card-shadow);
   transition: box-shadow 0.3s, transform 0.3s;
 }
@@ -175,15 +150,11 @@ const { max: maxStep } = useStep();
   color: var(--accent);
   font-weight: 700;
 }
-.timeline-card {
-  padding: 20px 26px;
-}
-/* 现有：默认蓝橙渐变 */
+
+/* variant 配色 */
 .timeline::before {
   background: linear-gradient(180deg, var(--primary), var(--accent));
 }
-
-/* 新增：回顾 = 靛蓝 */
 .timeline.timeline-review::before {
   background: linear-gradient(180deg, #6366F1, #818CF8);
 }
@@ -191,11 +162,10 @@ const { max: maxStep } = useStep();
   background: #818CF8;
   box-shadow: 0 0 0 5px rgba(129, 140, 248, 0.18);
 }
-
-/* 新增：地图 = 保持现有蓝橙 */
 .timeline.timeline-map::before {
   background: linear-gradient(180deg, var(--primary), var(--accent));
 }
+
 @media (max-width: 1100px) {
   .timeline-cols { grid-template-columns: 1fr; }
 }

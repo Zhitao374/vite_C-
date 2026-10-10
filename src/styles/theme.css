@@ -1,45 +1,56 @@
+/* ============================================ */
+/* theme.css · 设计令牌（Design Tokens）         */
+/* ============================================ */
+/*
+ * 结构（自上而下）：
+ *   1. Primitives  —— 原子色彩，只在这里定义数值
+ *   2. Semantic    —— 语义别名，组件优先使用
+ *   3. Component   —— 组件令牌（卡片、代码块、圆角）
+ *   4. 兼容层      —— 旧变量名 → 新变量名（过渡期，未来可删）
+ *   5. 保留层      —— 氛围色、字体、字号、间距
+ *
+ * 使用约定：
+ *   · 新代码优先用 --color-* / --card-* 等新变量
+ *   · 老代码继续用 --primary / --accent 等（兼容层转发）
+ *   · 迁移完成后，删掉第 4 节
+ */
 
-/* ============================================ */
-/* 页面氛围色——按页类型差异化                     */
-/* ============================================ */
 :root {
-  /* 页面氛围色（加深版） */
-  --bg-cover:    linear-gradient(135deg, #E8F0FF 0%, #F5F9FF 100%);
-  --bg-concept:  linear-gradient(135deg, #EDE4FF 0%, #F8F4FF 100%);
-  --bg-code: linear-gradient(135deg, #E4ECFF 0%, #EFF4FF 100%);
-  --bg-practice: linear-gradient(135deg, #FFE8D0 0%, #FFF8F0 100%);
-  --bg-quiz:     linear-gradient(135deg, #FFEFC2 0%, #FFFAEB 100%);
-  --bg-summary:  linear-gradient(135deg, #FFF3CC 0%, #FFFDF2 100%);
-  --bg-analysis: linear-gradient(135deg, #E0EDED 0%, #F2FAFA 100%);
-  --bg-default:  linear-gradient(135deg, #E8F0FF 0%, #F5F9FF 100%);
 
-  /* 背景 */
-  --bg-gradient-start: #eaf2ff;
-  --bg-gradient-end: #f7fbff;
-  --bg-card: #ffffff;
-  --bg-soft: #f0f6ff;
+  /* ============================================ */
+  /* 1. Primitives（原子色彩）                     */
+  /* ============================================ */
+  /* 只在这里定义具体色值，其他地方只能引用     */
 
-  /* 代码块深色主题 */
-  --code-bg: #1e2a44;
-  --code-header-bg: rgba(0, 0, 0, 0.25);
-  --code-text: #e6f1ff;
-  --code-comment: rgba(230, 241, 255, 0.28);
-  --code-filename: rgba(230, 241, 255, 0.7);
-  --code-title: #e6f1ff;
-  --code-border: rgba(255, 255, 255, 0.06);
+  /* 主色 · 蓝 */
+  --blue-50:   #EFF6FF;
+  --blue-100:  #DBE7FF;
+  --blue-200:  #B8CFFF;
+  --blue-400:  #4A8BFF;
+  --blue-500:  #165DFF;
+  --blue-600:  #0F4DD9;
+  --blue-700:  #0B3AA8;
 
-  /* 主色 */
-  --primary: #165DFF;
-  --primary-light: #4A8BFF;
-  --primary-soft: #dbe7ff;
-  --accent: #FF7A00;
-  --accent-soft: #ffe8d1;
-  --success: #00B42A;
-  --success-soft: #d9f7e2;
-  --error: #F53F3F;
-  --error-soft: #ffe0e0;
-  
-  /* 中性色阶（用于卡片分级、分隔线、禁用态） */
+  /* 强调色 · 橙 */
+  --orange-50:  #FFF7ED;
+  --orange-100: #FFE8D1;
+  --orange-200: #FFD4B0;
+  --orange-500: #FF7A00;
+  --orange-600: #E66A00;
+
+  /* 成功 · 绿 */
+  --green-50:  #ECFDF3;
+  --green-100: #D9F7E2;
+  --green-500: #00B42A;
+  --green-700: #0D5F24;
+
+  /* 错误 · 红 */
+  --red-50:  #FEF2F2;
+  --red-100: #FFE0E0;
+  --red-500: #F53F3F;
+  --red-700: #8A1F1F;
+
+  /* 中性色阶 */
   --gray-50:  #F8FAFC;
   --gray-100: #F1F5F9;
   --gray-200: #E2E8F0;
@@ -51,36 +62,143 @@
   --gray-800: #1E293B;
   --gray-900: #0F172A;
 
-  /* 文字 */
-  --text-main: #1a2f4a;
-  --text-sub: #3d5878;
-  --text-dim: #6b84a3;
-  --text-light: #98adc4;
-  --text-code: #e6f1ff;
+  /* 品牌深色（正文用） */
+  --navy-500: #1a2f4a;
+  --navy-400: #3d5878;
+  --navy-300: #6b84a3;
+  --navy-200: #98adc4;
+
+  /* 代码块专用深色 */
+  --ink-900: #1e2a44;
+
+
+  /* ============================================ */
+  /* 2. Semantic（语义别名）                       */
+  /* ============================================ */
+  /* 组件应该用这些名字，而不是直接引用 primitives */
+
+  /* 主题色 */
+  --color-primary:        var(--blue-500);
+  --color-primary-light:  var(--blue-400);
+  --color-primary-soft:   var(--blue-100);
+  --color-primary-hover:  var(--blue-600);
+
+  /* 强调色 */
+  --color-accent:         var(--orange-500);
+  --color-accent-soft:    var(--orange-100);
+  --color-accent-hover:   var(--orange-600);
+
+  /* 状态色 */
+  --color-success:        var(--green-500);
+  --color-success-soft:   var(--green-100);
+  --color-error:          var(--red-500);
+  --color-error-soft:     var(--red-100);
+
+  /* 文本色 */
+  --color-text-main:      var(--navy-500);
+  --color-text-sub:       var(--navy-400);
+  --color-text-dim:       var(--navy-300);
+  --color-text-light:     var(--navy-200);
+  --color-text-code:      #e6f1ff;
+
+  /* 表面色 */
+  --color-surface:        #ffffff;
+  --color-surface-soft:   #f0f6ff;
+  --color-surface-page:   linear-gradient(135deg, #eaf2ff 0%, #f7fbff 100%);
+
+
+  /* ============================================ */
+  /* 3. Component（组件令牌）                      */
+  /* ============================================ */
 
   /* 卡片 */
-  --card-border: rgba(22, 93, 255, 0.12);
-  --card-shadow: 0 2px 8px rgba(22, 93, 255, 0.06), 0 10px 28px rgba(22, 93, 255, 0.05);
-  --card-shadow-hover: 0 6px 16px rgba(22, 93, 255, 0.14), 0 16px 40px rgba(22, 93, 255, 0.1);
-  --card-shadow-accent: 0 6px 20px rgba(255, 122, 0, 0.18);
+  --card-bg:              var(--color-surface);
+  --card-border:          rgba(22, 93, 255, 0.12);
+  --card-shadow:          0 2px 8px rgba(22, 93, 255, 0.06),
+                          0 10px 28px rgba(22, 93, 255, 0.05);
+  --card-shadow-hover:    0 6px 16px rgba(22, 93, 255, 0.14),
+                          0 16px 40px rgba(22, 93, 255, 0.10);
+  --card-shadow-accent:   0 6px 20px rgba(255, 122, 0, 0.18);
+  --card-padding-y:       calc(24px * var(--font-scale));
+  --card-padding-x:       calc(30px * var(--font-scale));
 
-  /* 尺寸 */
-  --radius-md: 14px;
-  --radius-sm: 8px;
+  /* 代码块深色主题 */
+  --code-bg:              var(--ink-900);
+  --code-header-bg:       rgba(0, 0, 0, 0.25);
+  --code-text:            #e6f1ff;
+  --code-comment:         rgba(230, 241, 255, 0.28);
+  --code-filename:        rgba(230, 241, 255, 0.70);
+  --code-title:           #e6f1ff;
+  --code-border:          rgba(255, 255, 255, 0.06);
 
-  /* 字体 */
-  --font-base: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
-  --font-code: 'Consolas', 'Monaco', 'Courier New', monospace;
+  /* 圆角 */
+  --radius-md:            14px;
+  --radius-sm:            8px;
 
-  /* ============================================
-     字号缩放（4 档）
-     ============================================ */
+
+  /* ============================================ */
+  /* 4. 兼容层（旧变量名 → 新变量名）              */
+  /* ============================================ */
+  /* 让现有组件继续工作。组件全部迁移后，删掉这一节 */
+
+  /* 主色 */
+  --primary:              var(--color-primary);
+  --primary-light:        var(--color-primary-light);
+  --primary-soft:         var(--color-primary-soft);
+
+  /* 强调色 */
+  --accent:               var(--color-accent);
+  --accent-soft:          var(--color-accent-soft);
+
+  /* 状态色 */
+  --success:              var(--color-success);
+  --success-soft:         var(--color-success-soft);
+  --error:                var(--color-error);
+  --error-soft:           var(--color-error-soft);
+
+  /* 文字色 */
+  --text-main:            var(--color-text-main);
+  --text-sub:             var(--color-text-sub);
+  --text-dim:             var(--color-text-dim);
+  --text-light:           var(--color-text-light);
+  --text-code:            var(--color-text-code);
+
+  /* 表面色 */
+  --bg-card:              var(--color-surface);
+  --bg-soft:              var(--color-surface-soft);
+  --bg-gradient-start:    #eaf2ff;
+  --bg-gradient-end:      #f7fbff;
+
+  /* 间距（旧名） */
+  --space-card-padding-y: var(--card-padding-y);
+  --space-card-padding-x: var(--card-padding-x);
+
+
+  /* ============================================ */
+  /* 5. 保留层（非色彩 / 非组件令牌）              */
+  /* ============================================ */
+
+  /* ---------- 页面氛围色（按页类型差异化） ---------- */
+  --bg-cover:     linear-gradient(135deg, #E8F0FF 0%, #F5F9FF 100%);
+  --bg-concept:   linear-gradient(135deg, #EDE4FF 0%, #F8F4FF 100%);
+  --bg-code:      linear-gradient(135deg, #E4ECFF 0%, #EFF4FF 100%);
+  --bg-practice:  linear-gradient(135deg, #FFE8D0 0%, #FFF8F0 100%);
+  --bg-quiz:      linear-gradient(135deg, #FFEFC2 0%, #FFFAEB 100%);
+  --bg-summary:   linear-gradient(135deg, #FFF3CC 0%, #FFFDF2 100%);
+  --bg-analysis:  linear-gradient(135deg, #E0EDED 0%, #F2FAFA 100%);
+  --bg-default:   linear-gradient(135deg, #E8F0FF 0%, #F5F9FF 100%);
+
+  /* ---------- 字体 ---------- */
+  --font-base:  'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-code:  'Consolas', 'Monaco', 'Courier New', monospace;
+
+  /* ---------- 字号缩放（4 档，由 FontScaler 运行时覆盖） ---------- */
   --font-scale: 1;
 
   /* 基础字号 */
   --fs-base: calc(20px * var(--font-scale));
-  --fs-sm: calc(16px * var(--font-scale));
-  --fs-lg: calc(22px * var(--font-scale));
+  --fs-sm:   calc(16px * var(--font-scale));
+  --fs-lg:   calc(22px * var(--font-scale));
 
   /* 标题 */
   --fs-slide-title:      calc(52px * var(--font-scale));
@@ -104,9 +222,7 @@
   --fs-bubble:         calc(22px * var(--font-scale));
   --fs-bubble-speaker: calc(16px * var(--font-scale));
 
-  /* ============================================
-     QuizSlide 专用
-     ============================================ */
+  /* ---------- QuizSlide 专用字号 ---------- */
   --fs-quiz-index:      calc(20px * var(--font-scale));
   --fs-quiz-difficulty: calc(16px * var(--font-scale));
   --fs-quiz-source:     calc(15px * var(--font-scale));
@@ -115,10 +231,8 @@
   --fs-quiz-label:      calc(18px * var(--font-scale));
   --fs-quiz-analysis:   calc(19px * var(--font-scale));
 
-  /* 间距 */
-  --space-slide-padding:  calc(48px * var(--font-scale));
-  --space-card-padding-y: calc(24px * var(--font-scale));
-  --space-card-padding-x: calc(30px * var(--font-scale));
-  --space-gap-md:         calc(18px * var(--font-scale));
-  --space-gap-lg:         calc(24px * var(--font-scale));
+  /* ---------- 间距 ---------- */
+  --space-slide-padding: calc(48px * var(--font-scale));
+  --space-gap-md:        calc(18px * var(--font-scale));
+  --space-gap-lg:        calc(24px * var(--font-scale));
 }

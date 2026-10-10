@@ -1,58 +1,36 @@
 <template>
-  <div class="slide">
-    <div v-if="chapterTag" class="chapter-tag">{{ chapterTag }}</div>
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
-    </h1>
-
-    <div class="slide-body">
-      <StepWrapper
-        v-for="(line, i) in lines"
-        :key="i"
-        :step="i + 1"
-      >
-        <div class="dialog-scene" :class="{ reverse: isRobot(line) }">
-          <div class="dialog-avatar">{{ avatarOf(line) }}</div>
-          <div class="bubble">
-            <div v-if="speakerOf(line)" class="bubble-speaker">{{ speakerOf(line) }}</div>
-            <div v-html="line.text"></div>
-          </div>
+  <SlideShell :slide="slide">
+    <StepWrapper
+      v-for="(line, i) in lines"
+      :key="i"
+      :step="i + 1"
+    >
+      <div class="dialog-scene" :class="{ reverse: isRobot(line) }">
+        <div class="dialog-avatar">{{ avatarOf(line) }}</div>
+        <div class="bubble">
+          <div v-if="speakerOf(line)" class="bubble-speaker">{{ speakerOf(line) }}</div>
+          <div v-html="line.text"></div>
         </div>
-      </StepWrapper>
-
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-glow'"
-        />
-      </StepWrapper>
-    </div>
-  </div>
+      </div>
+    </StepWrapper>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
 import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
 import { getCharacter } from '@/config/characters';
 
 const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
-
 const lines = computed(() => props.slide.data?.lines || []);
 const extra = computed(() => props.slide.data?.extra);
-const chapterTag = computed(() => props.slide.chapterTag);
 
-useStepCount(emit, () => lines.value.length + (extra.value ? 1 : 0));
-
-const { max: maxStep } = useStep();
+useStepCount(() => lines.value.length + (extra.value ? 1 : 0));
 
 function isRobot(line) {
   return line.who === 'robot';

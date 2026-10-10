@@ -11,7 +11,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed } from 'vue';
+import { uiState } from '@/store/ui';
 
 const SCALES = [
   { value: 0.9,  label: '小' },
@@ -20,21 +21,16 @@ const SCALES = [
   { value: 1.3,  label: '特大' }
 ];
 
-const index = ref(1);   // 默认中
-
-const scaleLabel = computed(() => SCALES[index.value].label);
-
-function applyScale() {
-  const scale = SCALES[index.value].value;
-  document.documentElement.style.setProperty('--font-scale', scale);
-}
+const scaleLabel = computed(() => {
+  const found = SCALES.find(s => Math.abs(s.value - uiState.fontScale) < 0.001);
+  return found ? found.label : '中';
+});
 
 function cycle() {
-  index.value = (index.value + 1) % SCALES.length;
-  applyScale();
+  const idx = SCALES.findIndex(s => Math.abs(s.value - uiState.fontScale) < 0.001);
+  const next = SCALES[(idx + 1) % SCALES.length];
+  uiState.fontScale = next.value;
 }
-
-onMounted(applyScale);
 </script>
 
 <style scoped>

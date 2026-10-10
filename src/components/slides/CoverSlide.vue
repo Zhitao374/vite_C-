@@ -22,14 +22,13 @@ const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
 
 const d = computed(() => props.slide.data || {});
 const meta = computed(() => d.value.meta || []);
 const chapterTag = computed(() => props.slide.chapterTag);
 
 // 封面：只有 1 步
-useStepCount(emit, () => 1);
+useStepCount(() => 1);
 
 const titleParts = computed(() => {
   const title = props.slide.title || '';

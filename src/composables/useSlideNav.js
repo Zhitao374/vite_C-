@@ -22,15 +22,21 @@ export function useSlideNav({ lesson, slide, total, next, prev }) {
   function onMouseMove(e) {
     if (hasMoved) return;
     if (Math.abs(e.clientX - downX) > MOVE_THRESHOLD ||
-        Math.abs(e.clientY - downY) > MOVE_THRESHOLD) {
+      Math.abs(e.clientY - downY) > MOVE_THRESHOLD) {
       hasMoved = true;
     }
   }
 
   function onMouseUp(e) {
-    if (e.target.closest('a, button, .copy-btn, .nav-btn, .back-btn, input, textarea, select, .font-scaler, .marker-widget, .marker-trigger, .marker-panel, .extra-header')) {
-      return;
-    }
+    // 用 data-no-flip 统一判定
+    const interactiveSelector = [
+      'a', 'button', 'input', 'textarea', 'select',
+      '.copy-btn', '.nav-btn', '.back-btn',
+      '.font-scaler', '.marker-widget', '.marker-trigger', '.marker-panel', '.marker-canvas',
+      '.extra-header', '.shortcuts-close', '.shortcuts-bar',
+      '[data-no-flip]'
+    ].join(', ');
+    if (e.target.closest(interactiveSelector)) return;
     if (hasMoved) return;
 
     const sel = window.getSelection();

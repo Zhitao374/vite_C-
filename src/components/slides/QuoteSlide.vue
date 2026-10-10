@@ -1,64 +1,46 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
-    </h1>
+  <SlideShell :slide="slide">
+    <div class="quote-split card-hero">
+      <StepWrapper :step="1">
+        <div class="quote-panel">
+          <div class="quote-mark">"</div>
+          <div class="quote-text" v-html="text"></div>
+          <div v-if="author" class="quote-author">{{ author }}</div>
+        </div>
+      </StepWrapper>
 
-    <div class="slide-body">
-      <div class="quote-split card-hero">
-        <StepWrapper :step="1">
-          <div class="quote-panel">
-            <div class="quote-mark">"</div>
-            <div class="quote-text" v-html="text"></div>
-            <div v-if="author" class="quote-author">{{ author }}</div>
+      <div class="quote-right">
+        <ul class="list">
+          <StepWrapper
+            v-for="(p, i) in points"
+            :key="i"
+            :step="i + 2"
+            tag="li"
+          >
+            <span v-html="p"></span>
+          </StepWrapper>
+        </ul>
+
+        <StepWrapper v-if="highlight" :step="points.length + 2">
+          <div class="card card-glow">
+            <div v-if="highlight.title" class="card-title">{{ highlight.title }}</div>
+            <div v-if="highlight.desc" class="card-desc" v-html="highlight.desc"></div>
           </div>
         </StepWrapper>
-
-        <div class="quote-right">
-          <ul class="list">
-            <StepWrapper
-              v-for="(p, i) in points"
-              :key="i"
-              :step="i + 2"
-              tag="li"
-            >
-              <span v-html="p"></span>
-            </StepWrapper>
-          </ul>
-
-          <StepWrapper v-if="highlight" :step="points.length + 2">
-            <div class="card card-glow">
-              <div v-if="highlight.title" class="card-title">{{ highlight.title }}</div>
-              <div v-if="highlight.desc" class="card-desc" v-html="highlight.desc"></div>
-            </div>
-          </StepWrapper>
-        </div>
       </div>
-
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-primary'"
-        />
-      </StepWrapper>
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
 import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
 
 const props = defineProps({
   slide: { type: Object, required: true }
 });
-
-const emit = defineEmits(['step-count']);
 
 const d = computed(() => props.slide.data || {});
 const text = computed(() => d.value.text || '');
@@ -67,11 +49,9 @@ const points = computed(() => d.value.points || []);
 const highlight = computed(() => d.value.highlight);
 const extra = computed(() => d.value.extra);
 
-useStepCount(emit, () =>
+useStepCount(() =>
   1 + points.value.length + (highlight.value ? 1 : 0) + (extra.value ? 1 : 0)
 );
-
-const { max: maxStep } = useStep();
 </script>
 
 <style scoped>

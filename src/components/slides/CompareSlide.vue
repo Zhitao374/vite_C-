@@ -1,60 +1,39 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
-    </h1>
-
-    <div class="slide-body">
-      <StepWrapper
-        v-for="(g, i) in groups"
-        :key="i"
-        :step="i + 1"
-      >
-        <div class="compare">
-          <div class="compare-box compare-wrong">
-            <div class="compare-label">❌ 错误</div>
-            <div v-html="g.wrong"></div>
-          </div>
-          <div class="compare-arrow">→</div>
-          <div class="compare-box compare-right">
-            <div class="compare-label">✅ 正确</div>
-            <div v-html="g.right"></div>
-          </div>
+  <SlideShell :slide="slide">
+    <StepWrapper
+      v-for="(g, i) in groups"
+      :key="i"
+      :step="i + 1"
+    >
+      <div class="compare">
+        <div class="compare-box compare-wrong">
+          <div class="compare-label">❌ 错误</div>
+          <div v-html="g.wrong"></div>
         </div>
-      </StepWrapper>
-
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-primary'"
-        />
-      </StepWrapper>
-    </div>
-  </div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-box compare-right">
+          <div class="compare-label">✅ 正确</div>
+          <div v-html="g.right"></div>
+        </div>
+      </div>
+    </StepWrapper>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
 import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
 
 const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
-
 const groups = computed(() => props.slide.data?.groups || []);
 const extra = computed(() => props.slide.data?.extra);
 
-// 步数：每组一步 + extra
-useStepCount(emit, () => groups.value.length + (extra.value ? 1 : 0));
-
-const { max: maxStep } = useStep();
+useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
 </script>
 
 <style scoped>

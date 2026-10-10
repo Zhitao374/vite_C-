@@ -91,12 +91,35 @@ function resizeCanvas() {
   const canvas = canvasRef.value;
   if (!canvas) return;
   const dpr = window.devicePixelRatio || 1;
+  const oldW = canvas.width;
+  const oldH = canvas.height;
+
+  // 1. 先把旧内容截一张图
+  let snapshot = null;
+  if (oldW > 0 && oldH > 0) {
+    try {
+      snapshot = document.createElement('canvas');
+      snapshot.width = oldW;
+      snapshot.height = oldH;
+      snapshot.getContext('2d').drawImage(canvas, 0, 0);
+    } catch (_) { /* 忽略异常 */ }
+  }
+
+  // 2. 改尺寸会清空，这是不可避免的
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
   ctx = canvas.getContext('2d');
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
+
+  // 3. 恢复旧内容（原始像素位置，不缩放）
+  if (snapshot) {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(snapshot, 0, 0);
+    ctx.restore();
+  }
 }
 
 // ==================== 绘制 ====================

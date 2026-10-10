@@ -1,43 +1,25 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
-    </h1>
+  <SlideShell :slide="slide">
+    <div class="radial">
+      <div
+        class="radial-center"
+        :class="{ visible: current >= 1 }"
+      >{{ center }}</div>
 
-    <div class="slide-body">
-      <div class="radial">
-        <!-- 中心：第一步出现 -->
-        <div
-          class="radial-center"
-          :class="{ visible: current >= 1 }"
-        >{{ center }}</div>
-
-        <!-- 分支：第 i 个在 step i+2 出现 -->
-        <div
-          v-for="(it, i) in items"
-          :key="i"
-          class="radial-item"
-          :class="{ visible: current >= i + 2 }"
-          :style="styleOf(it, i)"
-        >{{ it.text }}</div>
-      </div>
-
-      <StepWrapper v-if="extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-primary'"
-        />
-      </StepWrapper>
+      <div
+        v-for="(it, i) in items"
+        :key="i"
+        class="radial-item"
+        :class="{ visible: current >= i + 2 }"
+        :style="styleOf(it, i)"
+      >{{ it.text }}</div>
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
 
@@ -64,17 +46,14 @@ const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
-
 const d = computed(() => props.slide.data || {});
 const center = computed(() => d.value.center || '');
 const items = computed(() => d.value.items || []);
 const extra = computed(() => d.value.extra);
 
-// 上报步数：中心 1 步 + 每个分支 1 步 + extra
-useStepCount(emit, () => 1 + items.value.length + (extra.value ? 1 : 0));
+useStepCount(() => 1 + items.value.length + (extra.value ? 1 : 0));
 
-const { current, max: maxStep } = useStep();
+const { current } = useStep();
 
 function styleOf(it, i) {
   const auto = AUTO_POS[items.value.length] || AUTO_POS[6];
@@ -93,9 +72,6 @@ function styleOf(it, i) {
   justify-content: center;
 }
 
-/* ============================================
-   中心：淡入 + 缩放
-   ============================================ */
 .radial-center {
   width: 160px;
   height: 160px;
@@ -111,7 +87,6 @@ function styleOf(it, i) {
   box-shadow: 0 12px 40px rgba(22, 93, 255, 0.3);
   z-index: 2;
 
-  /* 初始隐藏 */
   opacity: 0;
   transform: scale(0.6);
   transition: opacity 0.35s ease, transform 0.35s ease;
@@ -121,9 +96,6 @@ function styleOf(it, i) {
   transform: scale(1);
 }
 
-/* ============================================
-   分支：淡入，不改变定位
-   ============================================ */
 .radial-item {
   position: absolute;
   padding: 12px 20px;
@@ -136,7 +108,6 @@ function styleOf(it, i) {
   box-shadow: var(--card-shadow);
   white-space: nowrap;
 
-  /* 初始隐藏，不改变位置 */
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -144,9 +115,6 @@ function styleOf(it, i) {
   opacity: 1;
 }
 
-/* ============================================
-   窄屏：网格布局
-   ============================================ */
 @media (max-width: 1100px) {
   .radial {
     display: grid;
@@ -161,7 +129,7 @@ function styleOf(it, i) {
     width: 120px;
     height: 120px;
     font-size: 18px;
-    transform: scale(1);   /* 窄屏不做 scale 动画 */
+    transform: scale(1);
   }
   .radial-center:not(.visible) {
     opacity: 0;

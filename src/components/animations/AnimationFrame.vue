@@ -58,7 +58,6 @@ import { useStepCount } from '@/composables/useStepCount';
 import { useStep } from '@/composables/useStep';
 
 const props = defineProps({ slide: { type: Object, required: true } });
-const emit = defineEmits(['step-count']);
 
 const d = computed(() => props.slide.data || {});
 const steps = computed(() => d.value.steps || []);
@@ -78,7 +77,7 @@ const currentStep = computed(() =>
 
 const totalSteps = computed(() => steps.value.length + (extra.value ? 1 : 0));
 
-useStepCount(emit, () => totalSteps.value);
+useStepCount(() => totalSteps.value);
 
 // ============ 舞台缩放 ============
 // 逻辑尺寸：动画组件的坐标基于这个尺寸计算

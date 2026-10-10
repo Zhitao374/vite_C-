@@ -14,12 +14,11 @@ const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
 
 const note = computed(() => props.slide.data?.note || '');
 
 // 过渡页：只有 1 步
-useStepCount(emit, () => 1);
+useStepCount(() => 1);
 </script>
 
 <style scoped>

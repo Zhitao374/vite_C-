@@ -73,7 +73,7 @@ export default {
           { who: 'student', text: '那计算机看得懂"Hello"吗？' },
           { who: 'robot', text: '这个嘛……其实计算机只认识 <b>0 和 1</b>。它是怎么把"Hello"变成 0 和 1 的？第 22 讲揭晓。🔮' },
           { who: 'student', text: '那 C++ 又是什么？为什么竞赛都用它？' },
-          { who: 'robot', text: 'C++ 是一门<b>编译型编程语言</b>——<br>它比 C 更强：加了面向对象、STL、模板。</div><div><b>竞赛用它的三个原因</b>：<br>① <b>运行快</b>——比 Python 快 10—100 倍<br>② <b>STL 强大</b>——现成的数据结构与算法<br>③ <b>控制精细</b>——能直接操作内存</div><div>所以 CSP-J/S、NOIP、NOI 都选它。</div>' }
+          { who: 'robot', text: '<div>C++ 是一门<b>编译型编程语言</b>——<br>它比 C 更强：加了面向对象、STL、模板。</div><div><b>竞赛用它的三个原因</b>：<br>① <b>运行快</b>——比 Python 快 10—100 倍<br>② <b>STL 强大</b>——现成的数据结构与算法<br>③ <b>控制精细</b>——能直接操作内存</div><div>所以 CSP-J/S、NOIP、NOI 都选它。</div>' }
         ],
         extra: {
           title: '📖 知识扩展 · 冯·诺依曼结构与 C++ 名字由来',

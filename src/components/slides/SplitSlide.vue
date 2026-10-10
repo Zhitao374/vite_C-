@@ -1,80 +1,72 @@
 <template>
-  <div class="slide">
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <p v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</p>
-    </h1>
+  <SlideShell :slide="slide">
+    <div v-if="intro" class="split-intro" v-html="intro"></div>
 
-    <div class="slide-body">
-      <div v-if="intro" class="split-intro" v-html="intro"></div>
-
+    <div
+      class="split-container"
+      :class="[`cols-${cols}`, { 'has-code': hasCode }]"
+    >
       <div
-        class="split-container"
-        :class="[`cols-${cols}`, { 'has-code': hasCode }]"
+        v-for="(pane, idx) in panes"
+        :key="idx"
+        class="split-col"
       >
-        <div
-          v-for="(pane, idx) in panes"
-          :key="idx"
-          class="split-col"
+        <component
+          :is="stepped ? StepWrapper : 'div'"
+          v-bind="stepped ? { step: idx + 1 } : {}"
+          class="split-col-inner"
         >
-          <component
-            :is="stepped ? StepWrapper : 'div'"
-            v-bind="stepped ? { step: idx + 1 } : {}"
-            class="split-col-inner"
-          >
-            <div class="split-pane">
-              <h3 v-if="pane.title" class="pane-title">
-                <span v-if="pane.icon" class="pane-icon">{{ pane.icon }}</span>
-                <span class="pane-title-text">{{ pane.title }}</span>
-              </h3>
+          <div class="split-pane">
+            <h3 v-if="pane.title" class="pane-title">
+              <span v-if="pane.icon" class="pane-icon">{{ pane.icon }}</span>
+              <span class="pane-title-text">{{ pane.title }}</span>
+            </h3>
 
-              <!-- 代码模式 -->
-              <template v-if="pane.codeFile">
-                <div class="pane-code">
-                  <CodeBlock
-                    :code-file="pane.codeFile"
-                    :snippet="pane.snippet"
-                    density="sm"
-                  />
-                </div>
-                <p v-if="pane.note" class="pane-note">{{ pane.note }}</p>
-              </template>
+            <!-- 代码模式 -->
+            <template v-if="pane.codeFile">
+              <div class="pane-code">
+                <CodeBlock
+                  :code-file="pane.codeFile"
+                  :snippet="pane.snippet"
+                  density="sm"
+                />
+              </div>
+              <p v-if="pane.note" class="pane-note">{{ pane.note }}</p>
+            </template>
 
-              <!-- items 模式 -->
-              <template v-else>
-                <div
-                  v-if="pane.icon && !pane.title"
-                  class="pane-icon-standalone"
-                >
-                  {{ pane.icon }}
-                </div>
-                <div
-                  v-for="(item, i) in pane.items || []"
-                  :key="i"
-                  class="pane-item"
-                >
-                  <div v-if="item.title" class="item-title">{{ item.title }}</div>
-                  <div v-if="item.desc" class="item-desc" v-html="item.desc"></div>
-                  <ul v-if="item.items" class="item-list">
-                    <li v-for="(p, j) in item.items" :key="j" v-html="p"></li>
-                  </ul>
-                </div>
-              </template>
-            </div>
-          </component>
-        </div>
+            <!-- items 模式 -->
+            <template v-else>
+              <div
+                v-if="pane.icon && !pane.title"
+                class="pane-icon-standalone"
+              >
+                {{ pane.icon }}
+              </div>
+              <div
+                v-for="(item, i) in pane.items || []"
+                :key="i"
+                class="pane-item"
+              >
+                <div v-if="item.title" class="item-title">{{ item.title }}</div>
+                <div v-if="item.desc" class="item-desc" v-html="item.desc"></div>
+                <ul v-if="item.items" class="item-list">
+                  <li v-for="(p, j) in item.items" :key="j" v-html="p"></li>
+                </ul>
+              </div>
+            </template>
+          </div>
+        </component>
       </div>
-
-      <ExtraCard v-if="slide.data?.extra" v-bind="slide.data.extra" />
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
 import CodeBlock from '@/components/common/CodeBlock.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
+import { useStepCount } from '@/composables/useStepCount';
 
 const props = defineProps({
   slide: { type: Object, required: true }
@@ -83,10 +75,10 @@ const props = defineProps({
 const intro = computed(() => props.slide.data?.intro || '');
 const stepped = computed(() => !!props.slide.data?.stepped);
 const panes = computed(() => props.slide.data?.panes || []);
+const extra = computed(() => props.slide.data?.extra);
 
 /**
  * 栏数：优先 data.cols，否则 = panes.length
- * 限制在 1—4
  */
 const cols = computed(() => {
   const c = props.slide.data?.cols;
@@ -99,6 +91,11 @@ const cols = computed(() => {
 
 const hasCode = computed(() =>
   panes.value.some(p => !!p.codeFile)
+);
+
+// 步数上报（stepped 时每个 pane 一步，否则 1 步；+extra）
+useStepCount(() =>
+  (stepped.value ? panes.value.length : 1) + (extra.value ? 1 : 0)
 );
 
 // 开发环境检查
@@ -115,9 +112,9 @@ if (import.meta.env.DEV) {
 </script>
 
 <style scoped>
-/* ============================================
-   顶部引入
-   ============================================ */
+/* ============================================ */
+/* 顶部引入                                      */
+/* ============================================ */
 .split-intro {
   font-size: var(--fs-card-desc);
   color: var(--text-sub);
@@ -131,9 +128,9 @@ if (import.meta.env.DEV) {
   color: var(--text-main);
 }
 
-/* ============================================
-   分栏网格
-   ============================================ */
+/* ============================================ */
+/* 分栏网格                                      */
+/* ============================================ */
 .split-container {
   display: grid;
   gap: var(--space-gap-md);
@@ -156,9 +153,9 @@ if (import.meta.env.DEV) {
   flex-direction: column;
 }
 
-/* ============================================
-   单栏卡片
-   ============================================ */
+/* ============================================ */
+/* 单栏卡片                                      */
+/* ============================================ */
 .split-pane {
   background: var(--bg-card);
   border: 1px solid var(--card-border);
@@ -173,13 +170,11 @@ if (import.meta.env.DEV) {
   box-sizing: border-box;
 }
 
-/* 栏数多时缩小内边距 */
 .cols-3 .split-pane,
 .cols-4 .split-pane {
   padding: calc(16px * var(--font-scale)) calc(20px * var(--font-scale));
 }
 
-/* 栏标题 */
 .pane-title {
   display: flex;
   align-items: center;
@@ -204,7 +199,6 @@ if (import.meta.env.DEV) {
   margin-bottom: calc(4px * var(--font-scale));
 }
 
-/* 代码区 */
 .pane-code {
   flex: 1;
   min-height: 0;
@@ -216,7 +210,6 @@ if (import.meta.env.DEV) {
   min-height: 0;
 }
 
-/* 底部说明 */
 .pane-note {
   font-size: var(--fs-card-desc);
   color: var(--text-sub);
@@ -224,7 +217,6 @@ if (import.meta.env.DEV) {
   line-height: 1.5;
 }
 
-/* items 模式 */
 .pane-item {
   display: flex;
   flex-direction: column;
@@ -248,9 +240,9 @@ if (import.meta.env.DEV) {
   line-height: 1.6;
 }
 
-/* ============================================
-   响应式
-   ============================================ */
+/* ============================================ */
+/* 响应式                                        */
+/* ============================================ */
 @media (max-width: 1280px) {
   .split-container.cols-4 {
     grid-template-columns: repeat(2, 1fr);

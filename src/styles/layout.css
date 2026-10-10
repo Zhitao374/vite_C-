@@ -95,3 +95,30 @@
   font-family: var(--font-code);
   font-weight: 600;
 }
+
+/* ============================================ */
+/* slide-body 变体（SlideShell 的 body-class）   */
+/* ============================================ */
+
+/* GlossarySlide：分组卡片垂直排列，大间距 */
+.slide-body--glossary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-lg);
+}
+
+/* CodeSplitSlide：撑满剩余高度，内部分栏 */
+.code-split-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* CodeWalkthroughSlide：同上 */
+.code-walkthrough-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}

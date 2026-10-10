@@ -20,7 +20,7 @@
         </div>
       </aside>
 
-      <div class="slide-body">
+      <div class="slide-body slide-body--level-map">
         <div class="level-map-top">
           <StepWrapper v-if="question" :step="1">
             <div class="card card-primary question-card">
@@ -89,7 +89,6 @@ const props = defineProps({
   slide: { type: Object, required: true }
 });
 
-const emit = defineEmits(['step-count']);
 
 const d = computed(() => props.slide.data || {});
 const levels = computed(() => d.value.levels || DEFAULT_LEVELS);
@@ -101,7 +100,7 @@ const extra = computed(() => d.value.extra);
 const chapterTag = computed(() => props.slide.chapterTag);
 
 // 步数规则
-useStepCount(emit, () => {
+useStepCount(() => {
   const data = d.value;
   let n = 1;
   n += (data.hints?.length || 0);
@@ -169,7 +168,7 @@ const timerData = computed(() => {
   color: var(--text-light);
 }
 
-.slide-body {
+.slide-body--level-map {
   margin-top: 0;
   max-height: 100%;
   display: flex;
