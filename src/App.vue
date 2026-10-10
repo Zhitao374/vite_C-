@@ -1,12 +1,15 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <ErrorBoundary>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+  </ErrorBoundary>
 </template>
 
 <script setup>
+import ErrorBoundary from '@/components/common/ErrorBoundary.vue';
 </script>
 
 <style>

@@ -100,6 +100,16 @@ function layoutOf(q) {
   if (q.optionLayout && q.optionLayout !== 'auto') {
     return q.optionLayout;
   }
+
+  // 【新增】dev 模式警告
+  if (import.meta.env.DEV) {
+    console.warn(
+      `[QuizSlide] question ${q.id} 未显式声明 optionLayout，` +
+      `正在使用启发式推断。建议在数据里补上 optionLayout 字段。`
+    );
+  }
+
+  // 保留原有启发式逻辑（不变）
   const opts = q.options || [];
   if (opts.length === 0) return 'vertical';
   if (opts.some(o => o.code)) return 'code';

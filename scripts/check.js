@@ -172,11 +172,12 @@ async function main() {
 
   // 命令映射
   const commands = {
-    code: { keys: ['code'] },
-    ids: { keys: ['ids'] },
+    code:     { keys: ['code'] },
+    ids:      { keys: ['ids'] },
+    html:     { keys: ['html'] },                        // ← 新增
     glossary: { keys: ['glossary'] },
-    all: { keys: ['code', 'ids', 'glossary'] },
-    fix: { keys: ['code', 'ids', 'glossary'], fix: true }
+    all:      { keys: ['code', 'ids', 'html', 'glossary'] },     // ← 加 html
+    fix:      { keys: ['code', 'ids', 'html', 'glossary'], fix: true }
   };
 
   // 有参数：直接执行

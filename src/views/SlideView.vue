@@ -1,52 +1,80 @@
 <template>
-  <div v-if="!loaded" class="slide-loading">
-    <div class="spinner"></div>
-    <p>加载中…</p>
-  </div>
-
-  <div v-else-if="!slide" class="slide-view-error">
-    <h1>未找到该页</h1>
-    <router-link :to="`/lesson/${lesson}`" class="back-btn">← 返回目录</router-link>
-  </div>
-
-  <div v-else class="slide-view" :style="{ background: bgValue }">
-    <component v-if="slideComponent" :is="slideComponent" :slide="slide" :key="slideId" />
-    <div v-else class="slide-view-error">
-      <h1>未注册的版式：{{ slide.type }}</h1>
+  <ErrorBoundary>
+    <!-- 整页加载中：骨架屏 -->
+    <div v-if="!loaded" class="slide-skeleton">
+      <div class="skeleton-title-group">
+        <div class="skeleton-bar skeleton-title"></div>
+        <div class="skeleton-bar skeleton-subtitle"></div>
+      </div>
+      <div class="skeleton-body">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
     </div>
 
-    <!-- 快捷键提示 -->
-    <div v-if="showShortcuts" class="shortcuts-bar">
-      <span>💡 按 <kbd>空格</kbd> / <kbd>→</kbd> 下一页，<kbd>←</kbd> 上一页，<kbd>Esc</kbd> 回目录</span>
-      <button class="shortcuts-close" @click.stop="closeShortcuts">×</button>
+    <!-- 页面未找到 -->
+    <div v-else-if="!slide" class="slide-view-error">
+      <h1>未找到该页</h1>
+      <router-link :to="`/lesson/${lesson}`" class="back-btn" data-no-flip>← 返回目录</router-link>
     </div>
 
-    <router-link :to="`/lesson/${lesson}`" class="back-btn" title="返回本讲目录">⌂</router-link>
+    <!-- 正常渲染 -->
+    <div v-else class="slide-view" :style="{ background: bgValue }">
+      <Suspense v-if="slideComponent">
+        <component :is="slideComponent" :slide="slide" :key="slideId" />
+        <template #fallback>
+          <!-- 切换版式时的过渡骨架屏 -->
+          <div class="slide-skeleton-inner">
+            <div class="skeleton-title-group">
+              <div class="skeleton-bar skeleton-title"></div>
+            </div>
+            <div class="skeleton-body">
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+            </div>
+          </div>
+        </template>
+      </Suspense>
 
-    <div class="step-hint">
-      {{ isLastStep ? '点击进入下一页 →' : `点击继续 · ${current}/${max}` }}
+      <div v-else class="slide-view-error">
+        <h1>未注册的版式：{{ slide.type }}</h1>
+      </div>
+
+      <!-- 快捷键提示 -->
+      <div v-if="showShortcuts" class="shortcuts-bar">
+        <span>💡 按 <kbd>空格</kbd> / <kbd>→</kbd> 下一页，<kbd>←</kbd> 上一页，<kbd>Esc</kbd> 回目录</span>
+        <button class="shortcuts-close" data-no-flip @click.stop="closeShortcuts">×</button>
+      </div>
+
+      <router-link :to="`/lesson/${lesson}`" class="back-btn" data-no-flip title="返回本讲目录">⌂</router-link>
+
+      <div class="step-hint">
+        {{ isLastStep ? '点击进入下一页 →' : `点击继续 · ${current}/${max}` }}
+      </div>
+
+      <div class="slide-nav">
+        <button class="nav-btn" data-no-flip @click.stop="prev">‹</button>
+        <span class="page-num">
+          {{ String(slideId).padStart(2, '0') }} / {{ String(totalSlides).padStart(2, '0') }}
+        </span>
+        <button class="nav-btn" data-no-flip @click.stop="next">›</button>
+      </div>
+
+      <FontScaler />
+      <MarkerTool />
     </div>
-
-    <div class="slide-nav">
-      <button class="nav-btn" @click.stop="prev">‹</button>
-      <span class="page-num">
-        {{ String(slideId).padStart(2, '0') }} / {{ String(totalSlides).padStart(2, '0') }}
-      </span>
-      <button class="nav-btn" @click.stop="next">›</button>
-    </div>
-
-    <FontScaler />
-    <MarkerTool />
-  </div>
+  </ErrorBoundary>
 </template>
 
 <script setup>
 import { computed, ref, onMounted, watch } from 'vue';
-import { slideComponents } from '@/components/slides';
+import { slideComponents, preloadAllSlides } from '@/components/slides';
 import { useSlide } from '@/composables/useSlide';
 import { useSlideNav } from '@/composables/useSlideNav';
 import MarkerTool from '@/components/common/MarkerTool.vue';
 import FontScaler from '@/components/common/FontScaler.vue';
+import ErrorBoundary from '@/components/common/ErrorBoundary.vue';
 import { useSlideTheme } from '@/composables/useSlideTheme';
 
 const props = defineProps({
@@ -54,16 +82,13 @@ const props = defineProps({
   slide: { type: String, required: true }
 });
 
-// ① 先获取 slide 数据
 const {
   slide, slideId, totalSlides, loaded,
   stepCtx, current, max, next, prev
 } = useSlide(props);
 
-// ② 再根据 slide.type 得到主题变量名
 const { bgVar } = useSlideTheme(slide);
 const bgValue = computed(() => `var(${bgVar.value})`);
-
 
 watch(slideId, () => stepCtx.setMax(1), { immediate: false });
 
@@ -86,7 +111,9 @@ onMounted(() => {
   if (!localStorage.getItem('cpp-course-shortcuts-seen')) {
     showShortcuts.value = true;
   }
+  preloadAllSlides();
 });
+
 function closeShortcuts() {
   showShortcuts.value = false;
   localStorage.setItem('cpp-course-shortcuts-seen', '1');
@@ -94,6 +121,9 @@ function closeShortcuts() {
 </script>
 
 <style scoped>
+/* ============================================ */
+/* 页面容器                                      */
+/* ============================================ */
 .slide-view {
   width: 100%;
   height: 100%;
@@ -110,33 +140,83 @@ function closeShortcuts() {
   margin-bottom: 20px;
 }
 
-/* 加载中 */
-.slide-loading {
+/* ============================================ */
+/* 骨架屏 —— 整页加载                            */
+/* ============================================ */
+.slide-skeleton {
+  padding: 16px 56px 56px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 24px;
   height: 100vh;
-  gap: 20px;
-  color: var(--text-dim);
+  box-sizing: border-box;
 }
 
-.spinner {
-  width: 44px;
-  height: 44px;
-  border: 4px solid var(--primary-soft);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+/* ============================================ */
+/* 骨架屏 —— Suspense fallback（切换版式时）     */
+/* ============================================ */
+.slide-skeleton-inner {
+  padding: 16px 56px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* ============================================ */
+/* 骨架屏 —— 通用块                              */
+/* ============================================ */
+.skeleton-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* 快捷键提示 */
+.skeleton-bar,
+.skeleton-card {
+  background: linear-gradient(
+    90deg,
+    rgba(22, 93, 255, 0.05) 0%,
+    rgba(22, 93, 255, 0.15) 50%,
+    rgba(22, 93, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-title {
+  width: 40%;
+  height: 48px;
+}
+
+.skeleton-subtitle {
+  width: 25%;
+  height: 24px;
+}
+
+.skeleton-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.skeleton-card {
+  border-radius: var(--radius-md);
+  min-height: 120px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================ */
+/* 快捷键提示                                    */
+/* ============================================ */
 .shortcuts-bar {
   position: fixed;
   bottom: 70px;
@@ -191,14 +271,15 @@ function closeShortcuts() {
     opacity: 0;
     transform: translate(-50%, 10px);
   }
-
   to {
     opacity: 1;
     transform: translate(-50%, 0);
   }
 }
 
-/* 返回按钮 */
+/* ============================================ */
+/* 返回按钮                                      */
+/* ============================================ */
 .back-btn {
   position: fixed;
   top: 16px;
@@ -223,7 +304,9 @@ function closeShortcuts() {
   transform: scale(1.06);
 }
 
-/* 步数提示 */
+/* ============================================ */
+/* 步数提示                                      */
+/* ============================================ */
 .step-hint {
   position: fixed;
   bottom: 20px;
@@ -236,7 +319,9 @@ function closeShortcuts() {
   z-index: 100;
 }
 
-/* 页码 + 导航 */
+/* ============================================ */
+/* 页码 + 导航                                   */
+/* ============================================ */
 .slide-nav {
   position: fixed;
   bottom: 16px;

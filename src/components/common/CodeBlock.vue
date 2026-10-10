@@ -11,6 +11,7 @@
       </div>
       <button
         class="copy-btn"
+        data-no-flip
         :class="{ 'copy-success': copied }"
         @click="handleCopy"
         title="复制代码"
@@ -199,8 +200,9 @@ async function handleCopy() {
 }
 </script>
 
-<style scoped>
-/* 原样式不变，省略 */
+<style scoped>/* ============================================ */
+/* 代码块容器                                    */
+/* ============================================ */
 .code-block {
   position: relative;
   border-radius: 10px;
@@ -210,15 +212,9 @@ async function handleCopy() {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-.code-block {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--code-bg);
-  border: 1px solid var(--code-border);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
+/* ============================================ */
+/* 代码块头部                                    */
+/* ============================================ */
 .code-header {
   display: flex;
   align-items: center;
@@ -234,24 +230,14 @@ async function handleCopy() {
   gap: 6px;
   flex-shrink: 0;
 }
-
 .code-dots span {
   width: 11px;
   height: 11px;
   border-radius: 50%;
 }
-
-.code-dots span:nth-child(1) {
-  background: #ff5f57;
-}
-
-.code-dots span:nth-child(2) {
-  background: #febc2e;
-}
-
-.code-dots span:nth-child(3) {
-  background: #28c840;
-}
+.code-dots span:nth-child(1) { background: #ff5f57; }
+.code-dots span:nth-child(2) { background: #febc2e; }
+.code-dots span:nth-child(3) { background: #28c840; }
 
 .code-header-title {
   display: flex;
@@ -263,24 +249,24 @@ async function handleCopy() {
   text-overflow: ellipsis;
   min-width: 0;
 }
-
 .code-title {
   color: var(--code-title);
   font-size: calc(16px * var(--font-scale));
   font-weight: 600;
 }
-
 .code-filename {
   color: var(--code-filename);
   font-family: var(--font-code);
   font-size: calc(15px * var(--font-scale));
 }
-
 .code-sep {
   color: rgba(230, 241, 255, 0.4);
   margin: 0 2px;
 }
 
+/* ============================================ */
+/* 代码主体                                      */
+/* ============================================ */
 pre {
   padding: 16px 0;
   font-family: var(--font-code);
@@ -294,33 +280,61 @@ pre {
   tab-size: 4;
   margin: 0;
 }
-
 pre.code-md {
   font-size: calc(var(--fs-code) * 0.95);
   line-height: 1.55;
 }
-
 pre.code-sm {
   font-size: calc(var(--fs-code) * 0.9);
   line-height: 1.5;
 }
-
 pre.code-xs {
   font-size: calc(var(--fs-code) * 0.85);
   line-height: 1.45;
 }
-
 pre code {
   display: block;
 }
 
+/* ============================================ */
+/* 代码行 —— hover 高亮                          */
+/* ============================================ */
 .code-line {
   display: flex;
   align-items: flex-start;
   min-height: 1.4em;
-  padding-right: 20px;
+  /* 左侧预留 8px 出血区（背景可从行号左侧开始） */
+  padding: 0 20px 0 8px;
+  margin-left: -8px;
+  /* 预留 border-left 占位，避免 highlighted 切换时抖动 */
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
+/* hover 高亮 —— 比 is-highlighted 更弱 */
+.code-line:hover:not(.is-highlighted) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.code-line:hover:not(.is-highlighted) .code-num {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* 高亮行（由 highlightLines prop 控制） */
+.code-line.is-highlighted {
+  background: rgba(255, 122, 0, 0.15);
+  border-left-color: var(--accent);
+}
+
+.code-line.is-highlighted .code-num {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================================ */
+/* 行号                                          */
+/* ============================================ */
 .code-num {
   flex: 0 0 3.2em;
   text-align: right;
@@ -329,14 +343,21 @@ pre code {
   font-size: calc(17px * var(--font-scale));
   user-select: none;
   pointer-events: none;
+  transition: color 0.15s ease;
 }
 
+/* ============================================ */
+/* 代码文本                                      */
+/* ============================================ */
 .code-text {
   flex: 1;
   min-width: 0;
   white-space: pre;
 }
 
+/* ============================================ */
+/* 复制按钮                                      */
+/* ============================================ */
 .copy-btn {
   position: absolute;
   top: 50%;
@@ -356,41 +377,29 @@ pre code {
   transition: all 0.2s;
   z-index: 2;
 }
-
 .code-block:hover .copy-btn {
   color: rgba(230, 241, 255, 0.9);
 }
-
 .copy-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .copy-btn.copy-success {
   color: #00B42A;
 }
 
-.code-line.is-highlighted {
-  background: rgba(255, 122, 0, 0.15);
-  border-left: 3px solid var(--accent);
-  padding-left: 5px;
-  margin-left: -8px;
-  transition: background 0.3s ease;
-}
-
-.code-line.is-highlighted .code-num {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.code-line.is-highlighted {
-  background: rgba(255, 122, 0, 0.15);
-  border-left: 3px solid var(--accent);
-  padding-left: 5px;
-  margin-left: -8px;
-}
-
+/* ============================================ */
+/* 占位行                                        */
+/* ============================================ */
 .code-line.is-placeholder .code-text {
   color: var(--code-comment);
   font-style: italic;
+}
+
+/* ============================================ */
+/* 复制按钮无障碍 + data-no-flip                  */
+/* ============================================ */
+.copy-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 </style>

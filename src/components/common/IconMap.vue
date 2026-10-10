@@ -11,8 +11,68 @@
 </template>
 
 <script setup>
+// src/components/common/IconMap.vue
 import { computed } from 'vue';
-import * as LucideIcons from 'lucide-vue-next';
+import {
+  Trophy, Medal, Zap, Toolbox, GraduationCap,
+  Upload, Download, Settings, AlertTriangle, Lock, Key,
+  Target, Lightbulb, BookOpen, FileText, PenLine, Search,
+  Rocket, BarChart3, TrendingUp, RefreshCw, CheckCircle,
+  XCircle, Package, Tag, Gift, Hash, MapPin, Globe,
+  Wrench, Hammer, Coins, Clapperboard, Droplets,
+  Ruler, Puzzle, Flag, Palette
+} from 'lucide-vue-next';
+
+const ICON_MAP = {
+  '🏆': Trophy,
+  '🥇': Medal,
+  '🥈': Medal,
+  '🥉': Medal,
+  '⚡': Zap,
+  '🧰': Toolbox,
+  '🎓': GraduationCap,
+  '📤': Upload,
+  '📥': Download,
+  '⚙️': Settings,
+  '⚠️': AlertTriangle,
+  '🔒': Lock,
+  '🔑': Key,
+  '🎯': Target,
+  '💡': Lightbulb,
+  '📖': BookOpen,
+  '📄': FileText,
+  '📝': PenLine,
+  '🔍': Search,
+  '🚀': Rocket,
+  '📊': BarChart3,
+  '📈': TrendingUp,
+  '🔄': RefreshCw,
+  '✅': CheckCircle,
+  '❌': XCircle,
+  '📦': Package,
+  '🏷️': Tag,
+  '🎁': Gift,
+  '🔢': Hash,
+  '📍': MapPin,
+  '🌐': Globe,
+  '🛠️': Wrench,
+  '🔧': Wrench,
+  '🔨': Hammer,
+  '💰': Coins,
+  '🎬': Clapperboard,
+  '🚰': Droplets,
+  '🪜': TrendingUp,
+  '📐': Ruler,
+  '🧩': Puzzle,
+  '🏁': Flag,
+  '🎨': Palette,
+  // 保留 emoji（氛围图标）
+  '🙏': null,
+  '🧑': null,
+  '🤖': null,
+  '👨‍🏫': null,
+  '🧑‍💻': null
+};
 
 const props = defineProps({
   emoji: { type: String, required: true },
@@ -21,63 +81,7 @@ const props = defineProps({
   color: { type: String, default: 'currentColor' }
 });
 
-// emoji → Lucide 图标名（PascalCase）
-const ICON_MAP = {
-  // ─── 通用 ───
-  '🏆': 'Trophy',
-  '🥇': 'Medal',
-  '🥈': 'Medal',
-  '🥉': 'Medal',
-  '⚡': 'Zap',
-  '🧰': 'Toolbox',
-  '🎓': 'GraduationCap',
-  '📤': 'Upload',
-  '📥': 'Download',
-  '⚙️': 'Settings',
-  '⚠️': 'AlertTriangle',
-  '🔒': 'Lock',
-  '🔑': 'Key',
-  '🎯': 'Target',
-  '💡': 'Lightbulb',
-  '📖': 'BookOpen',
-  '📄': 'FileText',
-  '📝': 'PenLine',
-  '🔍': 'Search',
-  '🚀': 'Rocket',
-  '📊': 'BarChart3',
-  '📈': 'TrendingUp',
-  '🔄': 'RefreshCw',
-  '✅': 'CheckCircle',
-  '❌': 'XCircle',
-  '📦': 'Package',
-  '🏷️': 'Tag',
-  '🎁': 'Gift',
-  '🔢': 'Hash',
-  '📍': 'MapPin',
-  '🌐': 'Globe',
-  '🛠️': 'Wrench',
-  '🔧': 'Wrench',
-  '🔨': 'Hammer',
-  '💰': 'Coins',
-  '🎬': 'Clapperboard',
-  '🚰': 'Droplets',
-  '🪜': 'TrendingUp',
-  '📐': 'Ruler',
-  '🧩': 'Puzzle',
-  '🏁': 'Flag',
-  '🎨': 'Palette',
-  '🙏': null,  // 保留 emoji（氛围图标）
-  '🧑': null,
-  '🤖': null,
-  '👨‍🏫': null,
-  '🧑‍💻': null,
-};
-
-const resolvedIcon = computed(() => {
-  const name = ICON_MAP[props.emoji];
-  if (!name) return null;
-  return LucideIcons[name] || null;
-});
+const resolvedIcon = computed(() => ICON_MAP[props.emoji] || null);
 </script>
 
 <style scoped>

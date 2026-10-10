@@ -2,10 +2,9 @@
  * data/index.js · 数据入口
  *
  * 数据流：
- *   lesson-XX.js  ──(generate-lesson-index.js)──▶  lesson-index.js（元数据索引）
- *   lesson-XX.js  ──(import.meta.glob eager)──▶  lessons（完整数据）
- *
- *   lessonList 从 lessonIndex 派生（单一数据源）
+ *   lesson-XX.js  ──(generate-lesson-index.js)──▶  lesson-index.js（元数据）
+ *   lesson-XX.js  ──(generate-glossary-data.js)──▶  glossary-data.js（术语）
+ *   lesson-XX.js  ──(lazy import)──▶  按需加载详情
  *
  * 注意：
  *   修改讲次的 title / subtitle / total / category 后，
@@ -16,25 +15,60 @@ import { lessonIndex } from './lesson-index.js';
 import coursePlan, { PREVIEW_LESSON, STAGE_ORDER } from './course-plan.js';
 
 // ============================================
-// 完整讲次数据（eager 加载）
+// 懒加载器（Vite 会为每讲生成独立 chunk）
 // ============================================
-// ⚠️ 用 [0-9]* 而不是 *，避免把 lesson-index.js 也匹配进来
-const modules = import.meta.glob('./lesson-[0-9]*.js', { eager: true });
+const lessonLoaders = import.meta.glob('./lesson-[0-9]*.js');
 
-export const lessons = {};
+const detailCache = new Map();   // 已加载的讲次
+const pendingLoads = new Map();  // 正在加载的 promise
 
-Object.entries(modules).forEach(([path, mod]) => {
-  // 双保险：正则不匹配就跳过
-  const m = path.match(/\.\/(lesson-\d+)\.js$/);
-  if (!m) return;
+/**
+ * 异步加载某讲数据（带缓存 + 并发去重）
+ * @param {string} key - 'lesson-01' 或 '01'
+ * @returns {Promise<object|null>}
+ */
+export async function loadLesson(key) {
+  if (!key) return null;
+  const fullKey = key.startsWith('lesson-') ? key : `lesson-${key}`;
 
-  const key = m[1];
-  lessons[key] = mod.default;
-});
+  // 命中缓存
+  if (detailCache.has(fullKey)) return detailCache.get(fullKey);
+
+  // 命中正在加载 —— 复用 promise
+  if (pendingLoads.has(fullKey)) return pendingLoads.get(fullKey);
+
+  const loader = lessonLoaders[`./${fullKey}.js`];
+  if (!loader) return null;
+
+  const promise = loader().then(mod => {
+    detailCache.set(fullKey, mod.default);
+    pendingLoads.delete(fullKey);
+    return mod.default;
+  }).catch(err => {
+    console.error(`[data] 加载 ${fullKey} 失败：`, err);
+    pendingLoads.delete(fullKey);
+    return null;
+  });
+
+  pendingLoads.set(fullKey, promise);
+  return promise;
+}
+
+/**
+ * 同步获取已缓存的讲次（不触发加载）
+ * @returns {object|null}
+ */
+export function getCachedLesson(key) {
+  if (!key) return null;
+  const fullKey = key.startsWith('lesson-') ? key : `lesson-${key}`;
+  return detailCache.get(fullKey) || null;
+}
 
 // ============================================
-// 目录列表（从 lessonIndex 派生，单一数据源）
+// 元数据（同步可用）
 // ============================================
+export const lessons = lessonIndex;
+
 export const lessonList = Object.keys(lessonIndex)
   .sort()
   .map(id => ({
@@ -47,16 +81,14 @@ export const lessonList = Object.keys(lessonIndex)
   }));
 
 // ============================================
-// 工具函数
+// 兼容 API（同步 —— 仅返回已缓存的）
 // ============================================
 export function getLesson(key) {
-  if (!key) return null;
-  const fullKey = key.startsWith('lesson-') ? key : `lesson-${key}`;
-  return lessons[fullKey] || null;
+  return getCachedLesson(key);
 }
 
 export function getSlide(lessonKey, slideId) {
-  const lesson = getLesson(lessonKey);
+  const lesson = getCachedLesson(lessonKey);
   if (!lesson) return null;
   return lesson.slides.find(s => s.id === slideId) || null;
 }
@@ -73,7 +105,7 @@ export const CATEGORY_ORDER = [
 ];
 
 // ============================================
-// 课程蓝图（含未生成讲次）
+// 课程蓝图
 // ============================================
 export { coursePlan, PREVIEW_LESSON, STAGE_ORDER };
 export { lessonIndex };
@@ -81,38 +113,30 @@ export { lessonIndex };
 export const fullPlan = [PREVIEW_LESSON, ...coursePlan];
 
 export function isGenerated(id) {
-  return !!lessons[`lesson-${id}`];
+  return !!lessonIndex[id];
 }
 
 // ============================================
-// 加载日志
-// ============================================
-console.log(
-  `✅ 已加载 ${Object.keys(lessons).length} 讲：`,
-  Object.keys(lessons)
-);
-
-// ============================================
-// 【新增】dev 模式数据校验
+// dev 模式数据校验
 // ============================================
 if (import.meta.env.DEV) {
   import('@/config/schemas').then(({ validateLesson }) => {
     let errorCount = 0;
-    const warn = (msg) => {
-      console.warn(msg);
-      errorCount++;
-    };
+    const warn = (msg) => { console.warn(msg); errorCount++; };
 
-    Object.entries(lessons).forEach(([key, lesson]) => {
-      validateLesson(key, lesson, warn);
+    // 用元数据校验（详情按需加载时再校验）
+    Object.entries(lessonIndex).forEach(([id, meta]) => {
+      if (!meta.title) warn(`[schema] lesson-${id} 缺少 title`);
+      if (!meta.total) warn(`[schema] lesson-${id} 缺少 total`);
     });
 
     if (errorCount > 0) {
       console.group(`⚠️  数据校验发现 ${errorCount} 个问题`);
-      console.info('修复建议：见 scripts/check-lessons.js');
       console.groupEnd();
     } else {
-      console.log('✅ 数据校验全部通过');
+      console.log(`✅ 元数据校验通过（${Object.keys(lessonIndex).length} 讲）`);
     }
   });
 }
+
+console.log(`✅ 元数据已加载：${Object.keys(lessonIndex).length} 讲`);

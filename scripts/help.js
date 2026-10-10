@@ -50,6 +50,7 @@ const COMMANDS = {
     '📊 索引与生成': {
         'index': { run: 'node scripts/generate-index.js', desc: '生成 COURSE-INDEX.md' },
         'index:lessons': { run: 'node scripts/generate-lesson-index.js', desc: '生成 lesson-index.js（元数据索引）' },
+        'index:glossary': { run: 'node scripts/generate-glossary-data.js', desc: '生成 glossary-data.js（术语）' }, 
     },
 
     '🔬 审计': {

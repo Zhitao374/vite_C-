@@ -9,13 +9,39 @@
   .slide-subtitle { font-size: calc(16px * var(--font-scale)); }
 }
 
+/* ---------- 1024px 及以下：平板横屏 / 小笔记本 ---------- */
+@media (max-width: 1024px) {
+  .slide { padding: 24px 32px 60px; }
+  .slide-title { font-size: calc(30px * var(--font-scale)); }
+  .slide-subtitle { font-size: calc(15px * var(--font-scale)); }
+
+  /* 章节标签缩小 */
+  .chapter-tag {
+    font-size: calc(14px * var(--font-scale));
+    padding: 4px 12px;
+  }
+
+  /* 卡片内边距收紧 */
+  .card {
+    padding: calc(20px * var(--font-scale)) calc(24px * var(--font-scale));
+  }
+
+  /* 三级卡片 padding 同步收 */
+  .card-hero {
+    padding: calc(26px * var(--font-scale)) calc(28px * var(--font-scale));
+  }
+  .card-subtle {
+    padding: calc(16px * var(--font-scale)) calc(20px * var(--font-scale));
+  }
+}
+
 /* ---------- 900px 及以下：单列布局 ---------- */
 @media (max-width: 900px) {
   .slide { padding: 20px 20px 56px; }
   .slide-title { font-size: calc(26px * var(--font-scale)); }
   .slide-subtitle { font-size: calc(14px * var(--font-scale)); }
 
-  /* 网格类降为单列 */
+  /* 网格类降为单列（仅对全局类生效，组件 scoped 类在组件内处理） */
   .grid-cols-2,
   .grid-cols-3,
   .grid-cols-4 { grid-template-columns: 1fr; }

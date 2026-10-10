@@ -252,3 +252,44 @@ pre code {
   background: rgba(22, 93, 255, 0.25);
   border-radius: 4px;
 }
+
+/* ============================================ */
+/* 卡片 hover 差异化（追加，覆盖之前的基础 hover） */
+/* ============================================ */
+
+/* 基础卡片：轻微上浮 */
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Hero 主角卡：明显上浮 + 更深的蓝色光晕 */
+.card-hero:hover,
+.card.card-hero:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 20px rgba(22, 93, 255, 0.12),
+    0 24px 56px rgba(22, 93, 255, 0.18);
+}
+
+/* Glow 强调卡：中上浮 + 橙色光晕 */
+.card-glow:hover,
+.card.card-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 122, 0, 0.28);
+}
+
+/* Primary 主色卡：轻微上浮 + 蓝色光晕 */
+.card-primary:hover,
+.card.card-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(22, 93, 255, 0.18);
+}
+
+/* Subtle 补充卡：**不上浮**，只变背景色 */
+.card-subtle:hover,
+.card.card-subtle:hover {
+  background: var(--gray-100);
+  transform: none;
+  box-shadow: none;
+}

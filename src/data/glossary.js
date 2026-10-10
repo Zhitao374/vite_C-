@@ -1,55 +1,54 @@
 /**
  * glossary.js · 全局术语聚合
- * 数据源：每讲的 glossary 页（type: 'glossary'）里的 data.words
+ *
+ * 数据源：glossary-data.js（自动生成）
+ * 不再依赖 lessons 完整对象 —— 支持 lazy 加载
  */
 
-import { lessons } from './index.js';
+import { glossaryWords } from './glossary-data.js';
 
 export const GLOSSARY_CATEGORIES = [
   '关键字', '类型', '函数', '运算符', '语句', '概念'
 ];
 
-// 从 lesson.slides 里提取 glossary 页
-function extractFromLesson(lesson) {
-  if (!Array.isArray(lesson.slides)) return [];
-  const page = lesson.slides.find(s => s.type === 'glossary');
-  return page?.data?.words || [];
-}
-
-// 聚合所有词条（按 word 去重）
+// ============================================
+// 聚合（按 word 去重，记录多讲出现）
+// ============================================
 export const allWords = (() => {
   const words = [];
   const seen = new Map();
 
-  Object.keys(lessons).sort().forEach(key => {
-    const lessonId = key.replace('lesson-', '');
-    const list = extractFromLesson(lessons[key]);
+  // 按 lessonId 排序，保证"第一讲"是最早出现的
+  const sorted = [...glossaryWords].sort((a, b) =>
+    a.lessonId.localeCompare(b.lessonId)
+  );
 
-    list.forEach(item => {
-      const w = (item.word || '').toLowerCase();
-      if (!w) return;
+  sorted.forEach(w => {
+    const key = (w.word || '').toLowerCase();
+    if (!key) return;
 
-      if (!seen.has(w)) {
-        seen.set(w, lessonId);
-        words.push({
-          ...item,
-          word: w,
-          firstLesson: lessonId,
-          allLessons: [lessonId]
-        });
-      } else {
-        const existing = words.find(x => x.word === w);
-        if (existing && !existing.allLessons.includes(lessonId)) {
-          existing.allLessons.push(lessonId);
-        }
+    if (!seen.has(key)) {
+      seen.set(key, w);
+      words.push({
+        ...w,
+        word: key,
+        firstLesson: w.lessonId,
+        allLessons: [w.lessonId]
+      });
+    } else {
+      const existing = words.find(x => x.word === key);
+      if (existing && !existing.allLessons.includes(w.lessonId)) {
+        existing.allLessons.push(w.lessonId);
       }
-    });
+    }
   });
 
   return words;
 })();
 
+// ============================================
 // 按分类分组
+// ============================================
 export const wordsByCategory = (() => {
   const groups = {};
   GLOSSARY_CATEGORIES.forEach(c => groups[c] = []);
@@ -61,7 +60,9 @@ export const wordsByCategory = (() => {
   return groups;
 })();
 
+// ============================================
 // 按讲次分组
+// ============================================
 export const wordsByLesson = (() => {
   const groups = {};
   allWords.forEach(w => {
@@ -72,7 +73,9 @@ export const wordsByLesson = (() => {
   return groups;
 })();
 
+// ============================================
 // 搜索
+// ============================================
 export function searchWords(query) {
   if (!query || !query.trim()) return allWords;
   const q = query.trim().toLowerCase();
@@ -83,10 +86,13 @@ export function searchWords(query) {
   );
 }
 
+// ============================================
 // 统计
+// ============================================
 export const glossaryStats = {
   total: allWords.length,
   byCategory: Object.fromEntries(
     GLOSSARY_CATEGORIES.map(c => [c, (wordsByCategory[c] || []).length])
-  )
+  ),
+  multiLessonCount: allWords.filter(w => w.allLessons.length > 1).length
 };

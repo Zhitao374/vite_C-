@@ -94,6 +94,10 @@ const gridClass = computed(() => {
 @media (max-width: 1400px) {
   .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
 }
+@media (max-width: 1024px) {
+  /* 3 列也降为 2 列（1024 平板/小笔记本） */
+  .grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 900px) {
   .grid-cols-2,
   .grid-cols-3,
