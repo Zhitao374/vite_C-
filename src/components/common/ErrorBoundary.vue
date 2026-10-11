@@ -25,32 +25,32 @@
 </template>
 
 <script setup>
-import { ref, onErrorCaptured } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onErrorCaptured } from "vue";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 const hasError = ref(false);
-const errorMessage = ref('');
-const errorStack = ref('');
+const errorMessage = ref("");
+const errorStack = ref("");
 const isDev = import.meta.env.DEV;
 
 onErrorCaptured((err, instance, info) => {
   hasError.value = true;
   errorMessage.value = err?.message || String(err);
-  errorStack.value = err?.stack || '';
-  console.error('[ErrorBoundary] 捕获到错误：', err, info);
+  errorStack.value = err?.stack || "";
+  console.error("[ErrorBoundary] 捕获到错误：", err, info);
   return false;
 });
 
 function retry() {
   hasError.value = false;
-  errorMessage.value = '';
-  errorStack.value = '';
+  errorMessage.value = "";
+  errorStack.value = "";
 }
 
 function goHome() {
   hasError.value = false;
-  router.push('/');
+  router.push("/");
 }
 </script>
 

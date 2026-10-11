@@ -15,17 +15,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import ExtraCard from "@/components/common/ExtraCard.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
-
 const extra = computed(() => props.slide.data?.extra);
-const slogan = computed(() => props.slide.data?.slogan || '');
+const slogan = computed(() => props.slide.data?.slogan || "");
 
 // 终章页：1 步
 useStepCount(() => 1);

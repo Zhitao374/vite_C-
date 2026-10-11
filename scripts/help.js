@@ -45,12 +45,15 @@ const COMMANDS = {
         'fix:extra:dry': { run: 'node scripts/fix-extra-desc.js --dry', desc: '预览（不写文件）' },
         'fix:html': { run: 'node scripts/fix-html-balance.js', desc: '修复 HTML div 配对' },  // ← 新增
         'fix:html:dry': { run: 'node scripts/fix-html-balance.js --dry', desc: '预览（不写文件）' },  // ← 新增
+        'fix:ids': { run: 'node scripts/check.js fix:ids', desc: '只修 slide id / total（不编译）' },
+        'fix:comments':     { run: 'node scripts/renumber-comments.js',       desc: '重排注释编号（全部）' },
+        'fix:comments:dry': { run: 'node scripts/renumber-comments.js --all --dry', desc: '预览（不写文件）' },
     },
 
     '📊 索引与生成': {
         'index': { run: 'node scripts/generate-index.js', desc: '生成 COURSE-INDEX.md' },
         'index:lessons': { run: 'node scripts/generate-lesson-index.js', desc: '生成 lesson-index.js（元数据索引）' },
-        'index:glossary': { run: 'node scripts/generate-glossary-data.js', desc: '生成 glossary-data.js（术语）' }, 
+        'index:glossary': { run: 'node scripts/generate-glossary-data.js', desc: '生成 glossary-data.js（术语）' },
     },
 
     '🔬 审计': {

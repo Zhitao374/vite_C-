@@ -8,7 +8,7 @@
 
 /* ─── Hero：页面的"主角" ─── */
 .card-hero {
-  background: linear-gradient(145deg, #FFFFFF 0%, #F4F8FF 100%);
+  background: linear-gradient(145deg, #ffffff 0%, #f4f8ff 100%);
   border: 2px solid rgba(22, 93, 255, 0.35);
   border-radius: 20px;
   box-shadow:
@@ -18,10 +18,12 @@
   position: relative;
 }
 .card-hero::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 4px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
   background: linear-gradient(90deg, var(--primary), var(--accent));
   border-radius: 20px 20px 0 0;
 }
@@ -37,7 +39,7 @@
 }
 .card-subtle:hover {
   background: var(--gray-100);
-  transform: none;   /* 取消悬停上浮 */
+  transform: none; /* 取消悬停上浮 */
 }
 
 /* ============================================
@@ -52,7 +54,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 .card:hover {
   box-shadow: var(--card-shadow-hover);
@@ -120,15 +124,29 @@
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-.badge-primary { background: var(--primary-soft); color: var(--primary); }
-.badge-accent  { background: var(--accent-soft);  color: var(--accent); }
-.badge-success { background: var(--success-soft); color: var(--success); }
-.badge-error   { background: var(--error-soft);   color: var(--error); }
+.badge-primary {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.badge-accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.badge-success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+.badge-error {
+  background: var(--error-soft);
+  color: var(--error);
+}
 
 /* ============================================
    列表
    ============================================ */
-.list { list-style: none; }
+.list {
+  list-style: none;
+}
 .list li {
   padding: 14px 0 14px 32px;
   position: relative;
@@ -136,9 +154,11 @@
   line-height: 1.85;
   color: var(--text-sub);
 }
-.list li + li { border-top: 1px solid rgba(22, 93, 255, 0.08); }
+.list li + li {
+  border-top: 1px solid rgba(22, 93, 255, 0.08);
+}
 .list li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 6px;
   color: var(--accent);
@@ -292,4 +312,115 @@ pre code {
   background: var(--gray-100);
   transform: none;
   box-shadow: none;
+}
+
+/* ============================================ */
+/* 教学文本信号（A + E 方向）                    */
+/* ============================================ */
+
+/* ─────────────────────────────────────────── */
+/* ① 强调：<b> / <strong> 自动放大 + 变色       */
+/* 效果：正文里的加粗内容自动比周围大 12%        */
+/* 数据层不需要改任何东西                        */
+/* ─────────────────────────────────────────── */
+.card-desc b,
+.card-desc strong,
+.intro-card b,
+.intro-card strong,
+.bubble b,
+.bubble strong,
+.timeline-desc b,
+.timeline-desc strong,
+.node-desc b,
+.node-desc strong,
+.signal-desc b,
+.signal-desc strong,
+.conclusion-desc b,
+.conclusion-desc strong,
+.problem-points b,
+.problem-points strong,
+.row-text b,
+.row-text strong,
+.item-desc b,
+.item-desc strong,
+.quiz-question b,
+.quiz-question strong,
+.quiz-analysis b,
+.quiz-analysis strong,
+.step-note b,
+.step-note strong {
+  font-size: 1.12em;
+  font-weight: 800;
+  color: var(--color-text-main, #1a2f4a);
+  letter-spacing: 0.2px;
+}
+
+/* ─────────────────────────────────────────── */
+/* ② 行内代码：<code> —— 定义信号                */
+/* 稍小 + 更"轻" —— 让 <b> 成为焦点              */
+/* ─────────────────────────────────────────── */
+.card-desc code,
+.bubble code,
+.timeline-desc code,
+.node-desc code,
+.signal-desc code,
+.conclusion-desc code,
+.problem-points code,
+.row-text code,
+.item-desc code,
+.quiz-question code,
+.quiz-analysis code,
+.step-note code {
+  font-size: 0.92em;
+}
+
+/* ─────────────────────────────────────────── */
+/* ③ <mark> —— 重点高亮信号（与 .keyword-mark 一致）*/
+/* 用法：<mark>必须记住</mark>                    */
+/* ─────────────────────────────────────────── */
+.card-desc mark,
+.bubble mark,
+.timeline-desc mark,
+.node-desc mark,
+.signal-desc mark,
+.conclusion-desc mark,
+.problem-points mark,
+.row-text mark,
+.item-desc mark,
+.quiz-question mark,
+.quiz-analysis mark,
+.step-note mark {
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(255, 122, 0, 0.35) 60%
+  );
+  color: inherit;
+  padding: 0 2px;
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────────────── */
+/* ④ 行高校准（D 方向）                          */
+/* 大屏一体机 2-3 米观看需要更宽行距             */
+/* ─────────────────────────────────────────── */
+.card-desc {
+  line-height: 1.85; /* 1.75 → 1.85 */
+}
+
+.timeline-desc,
+.node-desc,
+.signal-desc,
+.conclusion-desc,
+.row-text,
+.item-desc {
+  line-height: 1.75; /* 保持或略增 */
+}
+
+.step-note {
+  line-height: 1.8; /* 1.7 → 1.8 */
+}
+
+.bubble {
+  line-height: 1.8; /* 1.75 → 1.8 */
 }

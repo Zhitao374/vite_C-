@@ -1,805 +1,1026 @@
 export default {
-  title: '第 2 讲 变量与整数类型',
-  subtitle: '让程序学会记住数据',
-  total: 35,
-  category: '语法与基础算法',
+  title: "第 2 讲 变量与整数类型",
+  subtitle: "让程序学会记住数据",
+  total: 33,
+  category: "语法与基础算法",
   slides: [
-
-    /* ===== 01 封面 ===== */
+    /* ===== 1 封面 ===== */
     {
-      id: 1, type: 'cover', title: '变量与整数类型', subtitle: '让程序学会记住数据', chapterTag: false,
-      data: { accentWord: '变量', meta: ['青少年信息学竞赛 C++ 入门课程', 'CSP-J/S 冲刺 · 第 2 讲'] }
+      id: 1,
+      type: "cover",
+      title: "变量与整数类型",
+      subtitle: "让程序学会记住数据",
+      chapterTag: false,
+      data: {
+        accentWord: "变量",
+        meta: ["青少年信息学竞赛 C++ 入门课程", "CSP-J/S 冲刺 · 第 2 讲"],
+      },
     },
 
-    /* ===== 02 上节回顾 ===== */
+    /* ===== 2 上节回顾 ===== */
     {
-      id: 2, type: 'timeline', variant: 'review', title: '上节课回顾', subtitle: '从第一个程序到今天的新问题',
+      id: 2,
+      type: "timeline",
+      variant: "review",
+      title: "上节课回顾",
+      subtitle: "从第一个程序到今天的新问题",
       data: {
         items: [
-          { icon: '📤', badge: '输出', title: '第一个程序', desc: 'Hello, World! 和程序框架', points: ['头文件、命名空间', 'int main()', 'cout <<', 'return 0'] },
-          { icon: '⚙️', badge: '编译', title: '从代码到运行', desc: '.cpp → .obj → .exe', points: ['编译翻译机器码', '链接拼装成程序', '运行输出结果'] },
-          { icon: '🏆', badge: 'OJ', title: '提交与判题', desc: '注册、提交、看结果', points: ['AC 通过', 'WA 答案错', 'CE 编译错', 'TLE 超时'] },
-          { icon: '⚠️', badge: '易错', title: '四大常见错误', desc: '编译报错的主要原因', points: ['中文标点', '漏分号', '大小写错', '括号不配对'] }
+          {
+            icon: "📤",
+            badge: "输出",
+            title: "第一个程序",
+            desc: "Hello, World! 和程序框架",
+            points: ["头文件、命名空间", "int main()", "cout <<", "return 0"],
+          },
+          {
+            icon: "⚙️",
+            badge: "编译",
+            title: "从代码到运行",
+            desc: ".cpp → .obj → .exe",
+            points: ["编译翻译机器码", "链接拼装成程序", "运行输出结果"],
+          },
+          {
+            icon: "🏆",
+            badge: "OJ",
+            title: "提交与判题",
+            desc: "注册、提交、看结果",
+            points: ["AC 通过", "WA 答案错", "CE 编译错", "TLE 超时"],
+          },
+          {
+            icon: "⚠️",
+            badge: "易错",
+            title: "四大常见错误",
+            desc: "编译报错的主要原因",
+            points: ["中文标点", "漏分号", "大小写错", "括号不配对"],
+          },
         ],
-        extra: { 
-          title: '💡 今天的新问题', 
-          desc: '<div>🎉 <b>上一讲你完成了人生第一个 C++ 程序</b>——<br>还第一次在洛谷上 AC 了题目。<br>这是从"看代码"到"写代码"的跨越。</div><div>昨天的程序只会"输出"，不能"记住"任何数据。<br>如果我想让程序算"我输入的两个数的和"，它做不到——<br>因为没有地方存这两个数。</div><div>今天我们就学习<b>变量</b>——让程序学会记住数据。</div><div>🔮 <b>回收伏笔</b>：第 1 讲结尾说过"下一讲程序将学会记住数据"，今天揭晓。</div>' 
-        }
-      }
+      },
     },
 
-    /* ===== 03 本节课目标 ===== */
+    /* ===== 3 本节课目标 ===== */
     {
-      id: 3, type: 'grid', title: '本节课目标', subtitle: '四步让程序记住数据',
+      id: 3,
+      type: "grid",
+      title: "本节课目标",
+      subtitle: "四步让程序记住数据",
       data: {
         cards: [
-          { number: '01', title: '理解变量', desc: '变量是什么、为什么需要它' },
-          { number: '02', title: '输入与命名', desc: 'cin 输入数据、变量命名规则' },
-          { number: '03', title: '整数类型', desc: 'int 和 long long 的区别与选择' },
-          { number: '04', title: '常量 const', desc: '不变的值用 const 保存' }
+          { number: "01", title: "理解变量", desc: "变量是什么、为什么需要它" },
+          {
+            number: "02",
+            title: "输入与命名",
+            desc: "cin 输入数据、变量命名规则",
+          },
+          {
+            number: "03",
+            title: "整数类型",
+            desc: "int 和 long long 的区别与选择",
+          },
+          { number: "04", title: "常量 const", desc: "不变的值用 const 保存" },
         ],
-        extra: { title: '📖 知识扩展 · 变量是编程的核心', desc: '没有变量，程序只能做一次性的计算。<br>有了变量，程序才能"记住"数据、"处理"数据、"传递"数据。<br>变量是所有程序的基础——从最简单的加法，到最复杂的 AI。<br><b>掌握变量，才是真正踏入编程大门。</b>' }
-      }
+      },
     },
 
-    /* ===== 04 学习地图 ===== */
+    /* ===== 4 为什么需要变量？（origin 版） ===== */
     {
-      id: 4, type: 'timeline', variant: 'map', title: '本讲学习地图', subtitle: '四站闯关，从盒子到类型',
-      data: {
-        items: [
-          { icon: '📦', badge: '基础', title: '第一站 · 变量概念', desc: '变量 = 带名字的盒子', points: ['为什么需要变量', '变量的三要素', '变量在内存里'] },
-          { icon: '📝', badge: '核心', title: '第二站 · 定义与输入', desc: '定义、赋值、cin 输入', points: ['类型 名字 = 初值;', '命名规则', 'cin 读入数据'] },
-          { icon: '🔢', badge: '关键', title: '第三站 · 整数类型', desc: 'int 与 long long', points: ['int 约 ±21 亿', 'long long 约 ±9×10¹⁸', '大数用 long long'] },
-          { icon: '🔒', badge: '进阶', title: '第四站 · 常量 const', desc: '不变的值有专门的家', points: ['const 定义常量', '常量的好处', '竞赛常用常量'] }
-        ],
-        extra: { title: '🏆 积分规则', desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"变量大师"徽章。' }
-      }
-    },
-
-    /* ===== 05 为什么需要变量？（origin 版） ===== */
-    {
-      id: 5, type: 'origin', 
-      title: '为什么需要变量？', 
-      subtitle: '从内存地址到名字的演进',
-      chapterTag: '第 2 讲 · 概念理解',
+      id: 4,
+      type: "origin",
+      title: "为什么需要变量？",
+      subtitle: "从内存地址到名字的演进",
+      chapterTag: "第 2 讲 · 概念理解",
       data: {
         problem: {
-          title: '没有变量时，程序怎么存数据？',
+          title: "没有变量时，程序怎么存数据？",
           points: [
-            '程序员必须直接操作<b>内存地址</b>',
-            '地址是 <code>0x1000</code> 这样的十六进制数——难记、难写',
-            '换个电脑，地址可能就变了'
+            "程序员必须直接操作<b>内存地址</b>",
+            "地址是 <code>0x1000</code> 这样的十六进制数——难记、难写",
+            "换个电脑，地址可能就变了",
           ],
-          visual: '// 想存一个数，必须记住它的地址\nmov [0x1000], 3\nmov [0x1004], 5\nadd eax, [0x1000]\nadd eax, [0x1004]'
+          visual:
+            "// 想存一个数，必须记住它的地址\nmov [0x1000], 3\nmov [0x1004], 5\nadd eax, [0x1000]\nadd eax, [0x1004]",
         },
         evolution: [
-          { 
-            icon: '🔴', era: '1940s', 
-            title: '机器语言', 
-            desc: '直接写 0/1，地址全靠人脑记' 
+          {
+            icon: "🔴",
+            era: "1940s",
+            title: "机器语言",
+            desc: "直接写 0/1，地址全靠人脑记",
           },
-          { 
-            icon: '🟡', era: '1949', 
-            title: '汇编语言', 
-            desc: '用 <code>ADD</code>、<code>MOV</code> 助记符代替 0/1，但仍要记地址' 
+          {
+            icon: "🟡",
+            era: "1949",
+            title: "汇编语言",
+            desc: "用 <code>ADD</code>、<code>MOV</code> 助记符代替 0/1，但仍要记地址",
           },
-          { 
-            icon: '🟢', era: '1957', 
-            title: 'FORTRAN —— 第一个"变量"', 
-            desc: '第一次让程序员用<b>名字</b>代表地址，不用再记 0x1000' 
-          }
+          {
+            icon: "🟢",
+            era: "1957",
+            title: 'FORTRAN —— 第一个"变量"',
+            desc: "第一次让程序员用<b>名字</b>代表地址，不用再记 0x1000",
+          },
         ],
         summary: {
-          title: '今天的变量：用名字代替地址',
-          desc: '编译器帮我们管理地址——<br>程序员只需起个名字，剩下的交给编译器。',
-          code: 'int age = 11;   // 名字是 age，地址由编译器分配'
+          title: "今天的变量：用名字代替地址",
+          desc: "编译器帮我们管理地址——<br>程序员只需起个名字，剩下的交给编译器。",
+          code: "int age = 11;   // 名字是 age，地址由编译器分配",
         },
         extra: {
-          title: '📖 变量名的长度限制',
+          title: "📖 变量名的长度限制",
           desc: '<div>1957 年，FORTRAN 的变量名最多只能用 <b>6 个字符</b>——因为打孔卡一行空间有限。</div><div>今天你写 <code>student_total_score</code> 这种长名字，在当年是不可能的。</div><div>🔮 <b>伏笔</b>：仓库的"门牌号"到底是什么？其实是一串二进制数。第 22 讲揭晓。</div>',
-          variant: 'card-primary'
-        }
-      }
+          variant: "card-primary",
+        },
+      },
     },
 
-    /* ===== 06 变量 = 盒子 ===== */
+    /* ===== 5 变量 = 盒子 ===== */
     {
-      id: 6, type: 'grid', title: '变量 · 带名字的盒子', subtitle: '三要素：名字、类型、值',
+      id: 5,
+      type: "grid",
+      title: "变量 · 带名字的盒子",
+      subtitle: "三要素：名字、类型、值",
       data: {
         cards: [
-          { icon: '🏷️', title: '① 名字', desc: '变量的"标签"<br>要有意义，见名知意<br>如 <code>age</code>、<code>score</code><br><b>命名有规则</b>' },
-          { icon: '📦', title: '② 类型', desc: '变量能装什么数据<br>整数、小数、字符……<br>本讲只讲<b>整数</b><br>类型决定"盒子大小"' },
-          { icon: '🎁', title: '③ 值', desc: '变量当前存的数<br>如 <code>age = 11</code><br>值可以随时修改<br><b>这就是"变"字的含义</b>' }
+          {
+            icon: "🏷️",
+            title: "① 名字",
+            desc: '变量的"标签"<br>要有意义，见名知意<br>如 <code>age</code>、<code>score</code><br><br><b>⚠️ 命名规则</b><br>· 只能字母、数字、下划线<br>· 不能数字开头<br>· 不能用关键字',
+          },
+          {
+            icon: "📦",
+            title: "② 类型",
+            desc: '变量能装什么数据<br>整数、小数、字符……<br>本讲只讲<b>整数</b><br>类型决定"盒子大小"<br><br><b>⚠️ 类型不能改</b><br>定义 <code>int</code> 后<br>只能存整数',
+          },
+          {
+            icon: "🎁",
+            title: "③ 值",
+            desc: '变量当前存的数<br>如 <code>age = 11</code><br>值可以随时修改<br>这就是"变"字的含义<br><br><b>⚠️ 改值要同类型</b><br><code>a = 5;</code> ✅<br><code>a = "hi";</code> ❌',
+          },
         ],
-        extra: {
-          title: '⚠️ 变量的三条边界',
-          desc: '<div><b>① 类型不能改</b><br>定义 <code>int a = 3;</code> 后，a 只能存整数——<br>不能再改成小数或字符。</div><div><b>② 名字有规则</b><br>只能字母数字下划线、不能数字开头、不能用关键字——<br>下一屏详讲。</div><div><b>③ 值可以改，但要"同类型"</b><br><code>a = 5;</code> ✅　<code>a = "hello";</code> ❌</div><div>📌 <b>定义讲"是什么"，边界讲"不能做什么"</b>——<br>两条都记牢，才不会踩坑。</div>',
-          variant: 'card-glow'
-        }
-      }
+      },
     },
 
-    /* ===== 07 过渡页 ===== */
+    /* ===== 6 过渡页 ===== */
     {
-      id: 7, type: 'transition', title: '第二站 · 定义与输入', subtitle: '给盒子起名字、装数据',
-      data: { note: '接下来学习：如何定义变量、如何用 cin 读入数据' }
+      id: 6,
+      type: "transition",
+      title: "第二站 · 定义与输入",
+      subtitle: "给盒子起名字、装数据",
+      data: { note: "接下来学习：如何定义变量、如何用 cin 读入数据" },
     },
 
-    /* ===== 08 变量定义与赋值 ===== */
+    /* ===== 7 变量定义与赋值 ===== */
     {
-      id: 8, type: 'code-split', title: '变量定义与赋值', subtitle: '两步走 或 一步到位',
+      id: 7,
+      type: "code-split",
+      title: "变量定义与赋值",
+      subtitle: "两步走 或 一步到位",
       data: {
-        intro: '📖 <b>定义</b>变量 = 给盒子起名字；<b>赋值</b> = 往盒子里放数据。<br>两件事可以分两步做，也可以一步完成。',
-        codeFile: 'codes/lesson-02/var-basic.cpp',
-        snippet: 'main',
+        intro:
+          "📖 <b>定义</b>变量 = 给盒子起名字；<b>赋值</b> = 往盒子里放数据。<br>两件事可以分两步做，也可以一步完成。",
+        codeFile: "codes/lesson-02/var-basic.cpp",
+        snippet: "main",
         annotations: [
-          { line: 6, title: 'int age;', desc: '定义：声明一个整数盒子，名字叫 age' },
-          { line: 7, title: 'age = 11;', desc: '赋值：把 11 放进 age 里' },
-          { line: 9, title: 'int score = 98;', desc: '定义 + 赋值一步到位（推荐写法）' },
-          { line: 10, title: 'score = 100;', desc: '重新赋值：可以随时修改' }
+          {
+            line: 6,
+            title: "int age;",
+            desc: "定义：声明一个整数盒子，名字叫 age",
+          },
+          { line: 7, title: "age = 11;", desc: "赋值：把 11 放进 age 里" },
+          {
+            line: 9,
+            title: "int score = 98;",
+            desc: "定义 + 赋值一步到位（推荐写法）",
+          },
+          { line: 10, title: "score = 100;", desc: "重新赋值：可以随时修改" },
         ],
-        output: '11\n100',
-        extra: {
-          title: '💡 两种写法的区别',
-          desc: '<b>分两步</b>：<br><code>int age;</code>  ← 定义（盒子是空的）<br><code>age = 11;</code>  ← 赋值（放数据进去）<br><br><b>一步到位</b>：<br><code>int age = 11;</code>  ← 推荐写法<br><br>哪种更好？<br><b>推荐一步到位</b>——定义时就初始化，避免"忘了赋值"。<br>这是编程界的共识："变量定义时就应该给它一个初值。"',
-          variant: 'card-primary'
-        }
-      }
+        output: "11\n100",
+      },
     },
 
-    /* ===== 09 未初始化变量的坑 ===== */
+    /* ===== 8 未初始化变量的坑 ===== */
     {
-      id: 9, type: 'compare', title: '未初始化变量的坑', subtitle: '使用前必须赋值',
+      id: 8,
+      type: "compare",
+      title: "未初始化变量的坑",
+      subtitle: "使用前必须赋值",
       data: {
         groups: [
-          { wrong: 'int a; cout &lt;&lt; a;', right: 'int a = 0; cout &lt;&lt; a;' },
-          { wrong: '未赋值 → 输出垃圾值', right: '赋初值 → 输出 0' },
-          { wrong: '结果不可预测（看运气）', right: '结果稳定可控' }
+          {
+            wrong: "int a; cout &lt;&lt; a;",
+            right:
+              'int a = 0; cout &lt;&lt; a;<br><br><b>💡 为什么？</b><br>未赋值时，变量里是内存残留的"旧数据"——不可预测。',
+          },
+          {
+            wrong: "未赋值 → 输出垃圾值",
+            right:
+              "赋初值 → 输出 0<br><br><b>💡 为什么？</b><br>编译器不报错，但结果错——这是新手最常踩的坑。",
+          },
+          {
+            wrong: "结果不可预测（看运气）",
+            right:
+              "结果稳定可控<br><br><b>💡 口诀</b><br>定义变量，顺手给初值。<code>int sum = 0;</code> 而不是 <code>int sum;</code>",
+          },
         ],
-        extra: {
-          title: '📖 为什么会有"垃圾值"？',
-          desc: '内存里的旧数据没被清空，新变量会继承这些值。<br>编译器不会报错，但结果会错。<br>这是新手最常踩的坑——<b>程序能跑，但答案错</b>。<br>在竞赛中，未初始化变量会导致答案全错，而且很难查出来。<br><br><b>正确写法</b>：<br><code>int sum = 0;</code> 而不是 <code>int sum;</code><br><br><b>记忆口诀</b>：定义变量，顺手给初值。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 10 过渡页 ===== */
+    /* ===== 9 过渡页 ===== */
     {
-      id: 10, type: 'dialog', title: '变量命名规则', subtitle: '给盒子起个好名字', chapterTag: '第 2 讲 · 定义与输入',
+      id: 9,
+      type: "grid",
+      title: "变量命名规则",
+      subtitle: "给盒子起个好名字",
+      chapterTag: "第 2 讲 · 定义与输入",
       data: {
-        lines: [
-          { who: 'student', text: '小 C，变量名可以随便起吗？' },
-          { who: 'robot', text: '不行，有规则。<b>第一</b>，只能包含字母、数字、下划线。' },
-          { who: 'student', text: '那可以叫 1a 吗？' },
-          { who: 'robot', text: '不行。<b>第二</b>，首字符不能是数字。所以 <code>1a</code> 是错的，<code>a1</code> 才对。' },
-          { who: 'student', text: '还有别的规则吗？' },
-          { who: 'robot', text: '<b>第三</b>，不能和关键字重名，比如 <code>int</code>、<code>if</code>、<code>for</code>。<br><b>第四</b>，区分大小写，<code>Age</code> 和 <code>age</code> 是两个不同的变量。' },
-          { who: 'student', text: '那起什么名字好？' },
-          { who: 'robot', text: '见名知意。用有意义的英文单词：<code>student_name</code>、<code>game_score</code>。<br>程序是写给人看的。' },
-          { who: 'student', text: '为什么代码里经常看到 i、j、k？' },
-          { who: 'robot', text: '这是<b>循环变量的惯例</b>，来自数学——i 表示 index（索引）。<br>数学里求和用 Σ 加下标 i，程序员就把 i 沿用了下来。' }
+        cards: [
+          {
+            icon: "🔤",
+            title: "① 字母数字下划线",
+            desc: "只能含这三种字符<br>如 <code>age</code>、<code>my_name</code>、<code>score1</code><br>不能含空格或 <code>-</code>",
+          },
+          {
+            icon: "🚫",
+            title: "② 不能数字开头",
+            desc: "<code>1a</code> ❌ 错<br><code>a1</code> ✅ 对<br><b>首字符必须是字母或下划线</b>",
+          },
+          {
+            icon: "⛔",
+            title: "③ 不能用关键字",
+            desc: "如 <code>int</code>、<code>if</code>、<code>for</code><br>这些是语言保留字<br><b>编译器认不出是变量名</b>",
+          },
+          {
+            icon: "🔠",
+            title: "④ 区分大小写",
+            desc: "<code>Age</code> 和 <code>age</code><br><b>是两个不同的变量</b><br>写错了很难查",
+          },
         ],
-        extra: {
-          title: '📖 好习惯 · 见名知意 + 命名风格',
-          desc: '<b>推荐</b>用有意义的英文单词，如 <code>student_name</code>、<code>game_score</code>。<br><br><b>三种常见命名风格</b>：<br>· <b>下划线式</b>：<code>student_name</code>（C 风格）<br>· <b>驼峰式</b>：<code>studentName</code>（Java 风格）<br>· <b>短命名</b>：<code>a</code>、<code>b</code>、<code>i</code>（竞赛快速写题）<br><br>竞赛中，为了快速写题，常用的短名字有：<br><code>i</code>、<code>j</code>、<code>k</code>（循环变量）<br><code>n</code>、<code>m</code>（个数）<br><code>a</code>、<code>b</code>、<code>c</code>（任意数值）<br>这些"短名字"在数学式程序里是默契。<br><br><b>原则</b>：简单处用短名，复杂处用长名。',
-          variant: 'card-primary'
-        }
-      }
+        footer:
+          '<b>📌 好名字 vs 坏名字</b><br><br>❌ <code>a</code>、<code>b</code>、<code>temp</code>、<code>data1</code> —— 过两天不知道是什么<br>✅ <code>math_score</code>、<code>total_count</code>、<code>max_value</code>、<code>user_name</code> —— 见名知意<br><br><b>原则</b>：名字要像"自我介绍"——不用解释就能看懂。',
+      },
     },
 
-    /* ===== 11 cin 输入 ===== */
+    /* ===== 10 cin 输入 ===== */
     {
-      id: 11, type: 'code-split', title: 'cin · 让程序读入数据', subtitle: '核心语法：cin >> 变量;',
+      id: 10,
+      type: "code-split",
+      title: "cin · 让程序读入数据",
+      subtitle: "核心语法：cin >> 变量;",
       data: {
-        intro: '📖 <code>cout</code> 是"输出"，<code>cin</code> 是"输入"。<br>方向记忆：<b>cout 用 <code>&lt;&lt;</code>，数据流向屏幕；cin 用 <code>&gt;&gt;</code>，数据流向变量。</b>',
-        codeFile: 'codes/lesson-02/cin-cout.cpp',
-        snippet: 'main',
+        intro:
+          '📖 <code>cout</code> 是"输出"，<code>cin</code> 是"输入"。<br>方向记忆：<b>cout 用 <code>&lt;&lt;</code>，数据流向屏幕；cin 用 <code>&gt;&gt;</code>，数据流向变量。</b>',
+        codeFile: "codes/lesson-02/cin-cout.cpp",
+        snippet: "main",
         annotations: [
-          { line: 6, title: 'int a, b;', desc: '一次定义两个整型变量' },
-          { line: 7, title: 'cin &gt;&gt; a &gt;&gt; b;', desc: '从键盘读两个整数，空格或回车分隔' },
-          { line: 8, title: 'cout &lt;&lt; a + b;', desc: '输出两数之和' }
+          { line: 6, title: "int a, b;", desc: "一次定义两个整型变量" },
+          {
+            line: 7,
+            title: "cin &gt;&gt; a &gt;&gt; b;",
+            desc: "从键盘读两个整数，空格或回车分隔",
+          },
+          { line: 8, title: "cout &lt;&lt; a + b;", desc: "输出两数之和" },
         ],
-        output: '（输入 3 5）\n8',
-        extra: {
-          title: '📖 cin 全称与输入技巧',
-          desc: '<div><b>cin 全称</b>：character input——字符输入。</div><div><b>三个关键点</b><br>① <b>自动跳过空格</b>：<code>cin &gt;&gt; a &gt;&gt; b</code> 输入 "3 5" 或 "3\\n5" 效果一样<br>② <b>类型自动转换</b>：输入 "3" 会变成整数 3 存入 int 变量<br>③ <b>程序暂停等待</b>：cin 会等用户输入完再继续</div><div><b>陷阱</b>：cin 遇到空格就当分隔符——<br>所以输入 "Hello World" 到 string，只会读到 "Hello"。<br><b>怎么读整行？第 7 讲讲。</b></div><div><b>记忆</b>：cin 读"词"。</div>',
-          variant: 'card-primary'
-        }
-      }
+        output: "（输入 3 5）\n8",
+      },
     },
 
-    /* ===== 11.5 陷阱页 ===== */
+    /* ===== 11 陷阱页 ===== */
     {
-      id: 12, type: 'pitfall', 
-      title: 'cin 输入的三个坑', 
-      subtitle: '知道这些，才不会踩',
+      id: 11,
+      type: "pitfall",
+      title: "cin 输入的三个坑",
+      subtitle: "知道这些，才不会踩",
       data: {
         cases: [
           {
-            icon: '❌',
-            scene: '输入 abc，变量是 int 类型',
-            what: '<code>cin</code> 读取失败，变量值不确定',
+            icon: "❌",
+            scene: "输入 abc，变量是 int 类型",
+            what: "<code>cin</code> 读取失败，变量值不确定",
             why: '<code>cin</code> 期望数字，遇到字母会"卡住"',
-            fix: '竞赛题保证输入格式正确——不用担心'
+            fix: "竞赛题保证输入格式正确——不用担心",
           },
           {
-            icon: '❌',
-            scene: '输入 3.5，变量是 int 类型',
-            what: '变量读到 <code>3</code>，<code>.5</code> 留在缓冲区',
-            why: '<code>cin</code> 遇到不匹配的字符就停止读取',
-            fix: '整数变量只读整数——小数要用 <code>double</code>'
+            icon: "❌",
+            scene: "输入 3.5，变量是 int 类型",
+            what: "变量读到 <code>3</code>，<code>.5</code> 留在缓冲区",
+            why: "<code>cin</code> 遇到不匹配的字符就停止读取",
+            fix: "整数变量只读整数——小数要用 <code>double</code>",
           },
           {
-            icon: '❌',
-            scene: '输入 3 5 7，但只读两个数',
-            what: '<code>7</code> 留在缓冲区，下次 <code>cin</code> 会读到',
+            icon: "❌",
+            scene: "输入 3 5 7，但只读两个数",
+            what: "<code>7</code> 留在缓冲区，下次 <code>cin</code> 会读到",
             why: '<code>cin</code> 是"流式读取"，不读的留在流里',
-            fix: '想读几个就读几个——剩下的不读就留着'
-          }
+            fix: "想读几个就读几个——剩下的不读就留着",
+          },
         ],
-        extra: {
-          title: '📖 为什么 cin 会"卡住"',
-          desc: '<div><code>cin</code> 读取时，会尝试把输入"翻译"成目标类型。</div><div>输入 <code>abc</code>，但变量是 <code>int</code>——<br>翻译失败，<code>cin</code> 进入"失败状态"。</div><div>后续的 <code>cin</code> 调用都会立即失败——<br>直到用 <code>cin.clear()</code> 重置。</div><div>📌 <b>竞赛保证输入格式正确</b>——<br>所以不用担心这种情况。</div>',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 12 - cin 答疑 ===== */
+    /* ===== 12 过渡页 ===== */
     {
-      id: 13, type: 'dialog', title: 'cin 答疑', subtitle: '小C回答常见问题', chapterTag: '第 2 讲 · 定义与输入',
+      id: 12,
+      type: "transition",
+      title: "第三站 · 整数类型",
+      subtitle: "盒子有大小，装数要合适",
       data: {
-        lines: [
-          { who: 'student', text: '小 C，cin 和 cout 的方向为什么不一样？' },
-          { who: 'robot', text: '记住一句话：<b>箭头指向"数据要去的地方"</b>。<br><code>cout &lt;&lt; a</code>：数据从 a 流向屏幕。<br><code>cin &gt;&gt; a</code>：数据从键盘流向 a。' },
-          { who: 'student', text: '等等，我搞混了。' },
-          { who: 'robot', text: '换个记忆法：<br><b>cout &lt;&lt;</b>：想象屏幕在外面，&lt;&lt; 像"把数据发射到屏幕"<br><b>cin &gt;&gt;</b>：想象变量在里面，&gt;&gt; 像"把数据吸进变量"' },
-          { who: 'student', text: '那如果输入数据格式不对呢？' },
-          { who: 'robot', text: '比如变量是 int，但你输入 "abc"，cin 会失败，变量值不确定。<br>竞赛题目保证输入格式正确，所以不用担心。' },
-          { who: 'student', text: 'cin 一次能读几个数？' },
-          { who: 'robot', text: '想读几个读几个。<br><code>cin &gt;&gt; a;</code> 读一个<br><code>cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</code> 读三个<br>空格、回车、Tab 都会自动跳过。' }
-        ],
-        extra: {
-          title: '💡 三种常见的输入情形',
-          desc: '<b>情形 1</b>：一行一个数<br>输入：<br><code>3</code><br><code>5</code><br>程序：<code>cin &gt;&gt; a &gt;&gt; b;</code> 一样能读<br><br><b>情形 2</b>：一行多个数<br>输入：<code>3 5</code><br>程序：<code>cin &gt;&gt; a &gt;&gt; b;</code> 正好<br><br><b>情形 3</b>：多行多个数<br>输入：<br><code>3 5</code><br><code>7 9</code><br>程序：<code>cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</code><br><br><b>结论</b>：cin 不在乎空格和换行，只在乎"按顺序取数据"。',
-          variant: 'card-primary'
-        }
-      }
+        note: "接下来我们学习 C++ 最常用的两种整数类型——int 和 long long",
+      },
     },
 
-    /* ===== 13 过渡页 ===== */
+    /* ===== 13 int 类型 ===== */
     {
-      id: 14, type: 'transition', title: '第三站 · 整数类型', subtitle: '盒子有大小，装数要合适',
-      data: { note: '接下来我们学习 C++ 最常用的两种整数类型——int 和 long long' }
-    },
-
-    /* ===== 14 int 类型 ===== */
-    {
-      id: 15, type: 'code-split', title: 'int · 普通整数', subtitle: '最常用的整数类型',
+      id: 13,
+      type: "code-split",
+      title: "int · 普通整数",
+      subtitle: "最常用的整数类型",
       data: {
-        intro: '📖 <code>int</code> 是 integer（整数）的缩写，是 C++ 最常用的整数类型。<br>日常计数、求和、编号，全用它。',
-        codeFile: 'codes/lesson-02/int-type.cpp',
-        snippet: 'main',
+        intro:
+          "📖 <code>int</code> 是 integer（整数）的缩写，是 C++ 最常用的整数类型。<br>日常计数、求和、编号，全用它。<br><br><b>基本信息</b>：占 <b>4 字节</b>，范围约 <b>±21 亿</b>（-2147483648 ~ 2147483647）",
+        codeFile: "codes/lesson-02/int-type.cpp",
+        snippet: "main",
         annotations: [
-          { line: 6, title: 'int a = 100;', desc: '定义整型变量，赋值为 100' },
-          { line: 7, title: 'int b = -50;', desc: 'int 可以存负数' },
-          { line: 8, title: 'int c = a + b;', desc: 'int 之间可以运算' }
+          { line: 6, title: "int a = 100;", desc: "定义整型变量，赋值为 100" },
+          { line: 7, title: "int b = -50;", desc: "int 可以存负数" },
+          {
+            line: 8,
+            title: "int c = a + b;",
+            desc: "int 之间可以运算<br><b>🔮 伏笔</b>：21 亿到底怎么算出来的？第 22 讲从二进制讲起。",
+          },
         ],
-        output: '100\n-50\n50',
-        extra: {
-          title: '📖 int 的基本信息',
-          desc: '<b>占用空间</b>：4 字节（32 位二进制）<br><b>取值范围</b>：约 <b>±21 亿</b>（准确值 -2147483648 到 2147483647）<br><b>常用场景</b>：日常计数、数组下标、编号、一般求和<br><br><b>为什么范围是 ±21 亿？</b><br>int 用 32 位二进制存数据，正负各占一半。<br>最大正数 = 2³¹ - 1 = 2147483647。<br>这个数字在竞赛中非常重要——<b>超出这个范围就会"溢出"</b>，得到一个错误的数。<br><br>🔮 <b>伏笔</b>：21 亿到底怎么算出来的？第 22 讲从二进制讲起。',
-          variant: 'card-primary'
-        }
-      }
+        output: "100\n-50\n50",
+      },
     },
 
     /* ===== 14 - long long 类型 ===== */
     {
-      id: 16, type: 'code-split', title: 'long long · 大整数', subtitle: '存得下更大的数',
+      id: 14,
+      type: "code-split",
+      title: "long long · 大整数",
+      subtitle: "存得下更大的数",
       data: {
-        intro: '📖 <code>long long</code> 是"长整型"，占 8 字节，能存更大的整数。<br>竞赛中遇到大数运算，必须用它。',
-        codeFile: 'codes/lesson-02/longlong-type.cpp',
-        snippet: 'main',
+        intro:
+          '📖 <code>long long</code> 是"长整型"，占 <b>8 字节</b>，范围约 <b>±9×10¹⁸</b>。<br>竞赛中遇到大数运算，必须用它。<br><br><b>写法注意</b>：<code>long long</code> 是<b>两个单词</b>，中间有空格——不能写成 <code>longlong</code>。',
+        codeFile: "codes/lesson-02/longlong-type.cpp",
+        snippet: "main",
         annotations: [
-          { line: 6, title: 'long long a = 10000000000;', desc: '100 亿——int 装不下，long long 可以' },
-          { line: 7, title: 'long long b = 9999999999;', desc: '注意写法：long long 是两个单词' },
-          { line: 8, title: 'cout &lt;&lt; a + b;', desc: '大数运算不会溢出' }
+          {
+            line: 6,
+            title: "long long a = 10000000000;",
+            desc: "100 亿——int 装不下，long long 可以",
+          },
+          {
+            line: 7,
+            title: "long long b = 9999999999;",
+            desc: "注意写法：<code>long long</code> 是两个单词",
+          },
+          {
+            line: 8,
+            title: "cout &lt;&lt; a + b;",
+            desc: '大数运算不会溢出<br><b>💡 记忆</b>：int 像"中等行李箱"，long long 像"大衣柜"',
+          },
         ],
-        output: '19999999999',
-        extra: {
-          title: '📖 long long 的基本信息',
-          desc: '<b>占用空间</b>：8 字节（64 位二进制）<br><b>取值范围</b>：约 <b>±9 × 10¹⁸</b>（准确值 -9223372036854775808 到 9223372036854775807）<br><b>常用场景</b>：大数求和、阶乘、人口统计、天文数字<br><br><b>写法注意</b>：<code>long long</code> 是<b>两个单词</b>，中间有空格。<br>不能写成 <code>longlong</code> 或 <code>longLong</code>。<br><br><b>记忆技巧</b>：long long 是 int 的两倍字节，范围大约是 int 的 <b>40 亿倍</b>。<br>如果 int 像"中等行李箱"，long long 就像"大衣柜"。',
-          variant: 'card-primary'
-        }
-      }
+        output: "19999999999",
+      },
     },
 
-    /* ===== 16 int vs long long ===== */
+    /* ===== 15 int vs long long ===== */
     {
-      id: 17, type: 'compare', title: 'int vs long long', subtitle: '什么时候用哪个',
+      id: 15,
+      type: "compare",
+      title: "int vs long long",
+      subtitle: "两个整数类型，各有分工",
       data: {
         groups: [
-          { wrong: 'int：4 字节，±21 亿', right: 'long long：8 字节，±9×10¹⁸' },
-          { wrong: '适用：10⁹ 以内的数', right: '适用：超过 10⁹ 的数' },
-          { wrong: '陷阱：大数运算会溢出', right: '安全：几乎所有竞赛数据都够用' },
-          { wrong: '如果存 100 亿，会变成负数', right: '存 100 亿，正常显示' }
+          {
+            wrong: "<b>int</b><br>4 字节<br>范围约 ±21 亿",
+            right: "<b>long long</b><br>8 字节<br>范围约 ±9×10¹⁸",
+          },
+          {
+            wrong: "写法：<code>int a = 100;</code>",
+            right: "写法：<code>long long a = 100;</code>",
+          },
+          {
+            wrong: "存 100 亿 → <b>溢出</b>（变成负数）",
+            right: "存 100 亿 → 正常显示",
+          },
         ],
-        extra: {
-          title: '💡 选择建议 + 竞赛经验',
-          desc: '<b>口诀</b>：不确定时，优先用 long long。<br><br><b>为什么？</b><br>· long long 只比 int 多用 4 字节内存，几乎不影响性能<br>· 溢出后得到的错误答案，你根本看不出来<br>· "防溢出"比"省内存"重要得多<br><br><b>什么时候放心用 int？</b><br>· 计数（如 <code>n ≤ 1000</code>）<br>· 数组下标<br>· 循环变量<br>· 明确知道结果不超过 10⁹ 的场合<br><br><b>竞赛经验</b>：涉及"求和""阶乘""乘积"的题，先想"会不会超过 21 亿"，超过就用 long long。<br>这个习惯能帮你避免 90% 的溢出错误。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 16.5 决策指南 ===== */
+    /* ===== 16 决策指南 ===== */
     {
-      id: 18, type: 'decision', 
-      title: '什么时候必须用 long long？', 
-      subtitle: '看到这些信号，就要警惕溢出',
+      id: 16,
+      type: "decision",
+      title: "什么时候必须用 long long？",
+      subtitle: "看到这些信号，就要警惕溢出",
       data: {
-        intro: '📖 <b>口诀不够用</b>——"不确定用 long long"太笼统。<br>下面是<b>具体的判断信号</b>：看到这些关键词，就该想到 long long。',
+        intro:
+          '📖 <b>口诀不够用</b>——"不确定用 long long"太笼统。<br>下面是<b>具体的判断信号</b>：看到这些关键词，就该想到 long long。',
         signals: [
           {
-            icon: '➕',
-            keyword: '求和',
-            desc: 'n 个数的和可能超过 21 亿<br>例：1000 个数，每个 ≤ 10⁷'
+            icon: "➕",
+            keyword: "求和",
+            desc: "n 个数的和可能超过 21 亿<br>例：1000 个数，每个 ≤ 10⁷",
           },
           {
-            icon: '✖️',
-            keyword: '乘积',
-            desc: '<code>a × b</code> 可能溢出<br>例：a、b 都接近 10⁵，乘积就超 10⁹'
+            icon: "✖️",
+            keyword: "乘积",
+            desc: "<code>a × b</code> 可能溢出<br>例：a、b 都接近 10⁵，乘积就超 10⁹",
           },
           {
-            icon: '📉',
-            keyword: '阶乘',
-            desc: '阶乘增长极快<br>13! 就超 int 范围'
+            icon: "📉",
+            keyword: "阶乘",
+            desc: "阶乘增长极快<br>13! 就超 int 范围",
           },
           {
-            icon: '📊',
-            keyword: '数据范围 ≥ 10⁹',
-            desc: '题目直接给出<br>就明说"要用 long long"'
+            icon: "📊",
+            keyword: "数据范围 ≥ 10⁹",
+            desc: '题目直接给出<br>就明说"要用 long long"',
           },
           {
-            icon: '💰',
-            keyword: '累加 / 累计',
-            desc: '类似"总分""总价""总和"<br>都需要预判最大值'
+            icon: "💰",
+            keyword: "累加 / 累计",
+            desc: '类似"总分""总价""总和"<br>都需要预判最大值',
           },
           {
-            icon: '🔢',
-            keyword: '大数运算',
-            desc: '如天文数字、人口统计<br>先想会不会超 int'
-          }
+            icon: "🔢",
+            keyword: "大数运算",
+            desc: "如天文数字、人口统计<br>先想会不会超 int",
+          },
         ],
         conclusion: {
-          title: '判断法则',
-          desc: '看到以上任一信号——<br><b>先问自己："结果会不会超过 21 亿？"</b><br>超过就用 long long，不确定也用 long long。<br><br>📌 多花 4 字节，避免"答案全错"——<br>这笔账，永远划算。'
+          title: "判断法则",
+          desc: '看到以上任一信号——<br><b>先问自己："结果会不会超过 21 亿？"</b><br>超过就用 long long，不确定也用 long long。<br><br>📌 多花 4 字节，避免"答案全错"——<br>这笔账，永远划算。',
         },
         extra: {
-          title: '💡 反例：阿丽亚娜 5 号火箭',
+          title: "💡 反例：阿丽亚娜 5 号火箭",
           desc: '<div>1996 年，欧洲航天局的一枚火箭——<br>发射 <b>37 秒后</b>在高空解体，损失 <b>3.7 亿美元</b>。</div><div><b>事故原因</b>：火箭复用了旧软件的模块——<br>旧模块用 <b>16 位整数</b>存速度，最大值 32767。<br>火箭更快——速度超了，<b>整数溢出</b>。</div><div>程序崩溃，火箭失控。</div><div><b>教训</b>：选错类型，不是"答案错"，是"火箭炸了"。</div>',
-          variant: 'card-primary'
-        }
-      }
+          variant: "card-primary",
+        },
+      },
     },
 
     /* ===== 17 过渡页：第三站 → 第四站 ===== */
     {
-      id: 19, type: 'transition', title: '第四站 · 常量', subtitle: '有些值，永远不变',
-      data: { note: '我们学了"会变"的变量，现在看看"不变"的常量' }
+      id: 17,
+      type: "transition",
+      title: "第四站 · 常量",
+      subtitle: "有些值，永远不变",
+      data: { note: '我们学了"会变"的变量，现在看看"不变"的常量' },
     },
 
-    /* ===== 17 const 常量 ===== */
+    /* ===== 18 const 常量 ===== */
     {
-      id: 20, type: 'dialog', title: '常量 const', subtitle: '不变的值有专门的家', chapterTag: '第 2 讲 · 常量',
+      id: 18,
+      type: "dialog",
+      title: "常量 const",
+      subtitle: "不变的值有专门的家",
+      chapterTag: "第 2 讲 · 常量",
       data: {
         lines: [
-          { who: 'student', text: '小 C，如果程序里有一个值一直不变，比如圆周率 π，也要用变量吗？' },
-          { who: 'robot', text: '用<b>常量</b>。用 <code>const</code> 关键字声明，值一旦定义就不能改。' },
-          { who: 'student', text: '那和普通变量有什么区别？' },
-          { who: 'robot', text: '变量可以改，常量不能改。如果试图修改常量，<b>编译器会报错</b>。' },
-          { who: 'student', text: '什么时候用常量？' },
-          { who: 'robot', text: '比如 π、重力加速度、竞赛中的模数 1000000007——这些固定值都用 const。' },
-          { who: 'student', text: '用常量有什么好处？' },
-          { who: 'robot', text: '<b>① 可读性</b>：看到 <code>PI</code> 就知道是圆周率，比 3.14159 直观。<br><b>② 防误改</b>：编译器会拦住任何修改常量的尝试。<br><b>③ 便于维护</b>：改一处常量定义，所有使用处自动更新。' }
+          {
+            who: "student",
+            text: "小 C，如果有一个值一直不变，比如圆周率 π，也要用变量吗？",
+          },
+          {
+            who: "robot",
+            text: "用<b>常量</b>——用 <code>const</code> 关键字声明，值一旦定义就不能改。<br><br><b>三大好处</b>：<br>① <b>可读性</b>——看到 <code>PI</code> 就知道是圆周率<br>② <b>防误改</b>——编译器会拦住修改常量的尝试<br>③ <b>便于维护</b>——改一处，处处更新",
+          },
+          { who: "student", text: "什么时候用常量？" },
+          {
+            who: "robot",
+            text: '固定值——比如：<br>· <code>const double PI = 3.14159;</code> 圆周率<br>· <code>const int MAXN = 100005;</code> 数组最大长度<br>· <code>const int MOD = 1000000007;</code> 竞赛常用模数<br><br><b>看到"多次出现的固定数字"——就用 const 定义。</b>',
+          },
         ],
-        extra: {
-          title: '📖 竞赛常用常量',
-          desc: '<b>竞赛中常见的常量</b>：<br><br><code>const int MOD = 1000000007;</code><br>质数模数，用于"结果对 10⁹+7 取模"的题。<br><br><code>const int MAXN = 100005;</code><br>数组最大长度，定义在程序开头，方便统一修改。<br><br><code>const double PI = 3.141592653589793;</code><br>圆周率，用于几何题。<br><br><b>为什么用常量而不是直接写数字？</b><br>因为"魔法数字"（如 1000000007）在代码里出现多次，改起来麻烦，还容易写错。<br>用常量定义一次，处处引用，最安全。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
     /* ===== 19 const 代码演示 ===== */
     {
-      id: 21, type: 'code-split', title: 'const 常量 · 代码演示', subtitle: '定义后不可修改',
+      id: 19,
+      type: "code-split",
+      title: "const 常量 · 代码演示",
+      subtitle: "定义后不可修改",
       data: {
-        intro: '📖 <b>语法</b>：<code>const 类型 名字 = 值;</code><br>const 定义的变量，一旦赋值就不能再改——这是它和普通变量唯一的区别。',
-        codeFile: 'codes/lesson-02/const-basic.cpp',
-        snippet: 'main',
+        intro:
+          "📖 <b>语法</b>：<code>const 类型 名字 = 值;</code><br>const 定义的变量，一旦赋值就不能再改——这是它和普通变量唯一的区别。",
+        codeFile: "codes/lesson-02/const-basic.cpp",
+        snippet: "main",
         annotations: [
-          { line: 5, title: 'const double PI = 3.14159;', desc: '定义常量 PI——圆周率，永不改变' },
-          { line: 6, title: 'const int MAXN = 100005;', desc: '定义数组最大长度——统一管理' },
-          { line: 7, title: 'const int MOD = 1000000007;', desc: '竞赛常用的模数——防止"魔法数字"' },
-          { line: 10, title: 'double area = PI * r * r;', desc: '常量参与运算——和普通变量一样' }
+          {
+            line: 5,
+            title: "const double PI = 3.14159;",
+            desc: "定义常量 PI——圆周率，永不改变",
+          },
+          {
+            line: 6,
+            title: "const int MAXN = 100005;",
+            desc: "定义数组最大长度——统一管理",
+          },
+          {
+            line: 7,
+            title: "const int MOD = 1000000007;",
+            desc: '竞赛常用的模数——防止"魔法数字"',
+          },
+          {
+            line: 10,
+            title: "double area = PI * r * r;",
+            desc: "常量参与运算——和普通变量一样",
+          },
         ],
-        output: '（输入 5）\n78.5397',
-        extra: {
-          title: '📖 竞赛常用常量',
-          desc: '<div><b>① 数组最大长度</b><br><code>const int MAXN = 100005;</code><br>定义一次，全程序通用——改一处，处处更新。</div><div><b>② 模数</b><br><code>const int MOD = 1000000007;</code><br>用于"结果对 10⁹+7 取模"的题——<br>为什么用这个数？第 38 讲讲。</div><div><b>③ 圆周率</b><br><code>const double PI = 3.141592653589793;</code><br>精度写足，避免精度损失。</div><div><b>为什么不用"魔法数字"？</b><br>代码里到处写 <code>1000000007</code>——<br>① 看着乱<br>② 改起来麻烦<br>③ 容易打字打错<br>用 const 定义一次，处处引用——<b>清晰又安全</b>。</div>',
-          variant: 'card-primary'
-        }
-      }
+        output: "（输入 5）\n78.5397",
+      },
     },
 
-    /* ===== 18 初赛渗透：类型大小 ===== */
+    /* ===== 20 初赛渗透：类型大小 ===== */
     {
-      id: 22, type: 'dialog', title: '初赛小知识：类型大小', subtitle: 'CSP-J/S 初赛必考', chapterTag: '第 2 讲 · 初赛渗透',
+      id: 20,
+      type: "dialog",
+      title: "初赛小知识：类型大小",
+      subtitle: "CSP-J/S 初赛必考",
+      chapterTag: "第 2 讲 · 初赛渗透",
       data: {
         lines: [
-          { who: 'student', text: '小 C，初赛会考变量和类型吗？' },
-          { who: 'robot', text: '会，而且是<b>高频考点</b>。最常见的题型是"某个类型占几个字节"。' },
-          { who: 'student', text: '常见的类型大小是多少？' },
-          { who: 'robot', text: '<b>记忆口诀</b>：<br>· <code>int</code> = 4 字节<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br>· <code>float</code> = 4 字节' },
-          { who: 'student', text: '这些要背吗？' },
-          { who: 'robot', text: '必背。初赛每年至少考 1—2 道。<br>还有一道经典题：<code>int a[100];</code> 占多少内存？<br>答案是 100 × 4 = 400 字节。' },
-          { who: 'student', text: '还有别的考点吗？' },
-          { who: 'robot', text: '变量命名规则、int 范围、溢出判断——这些都是初赛的重点。<br>我们后面会陆续渗透。' }
+          { who: "student", text: "小 C，初赛会考变量和类型吗？" },
+          {
+            who: "robot",
+            text: '会，而且是<b>高频考点</b>。最常见的题型是"某个类型占几个字节"。',
+          },
+          { who: "student", text: "常见的类型大小是多少？" },
+          {
+            who: "robot",
+            text: "<b>记忆口诀</b>：<br>· <code>int</code> = 4 字节<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br>· <code>float</code> = 4 字节",
+          },
+          { who: "student", text: "这些要背吗？" },
+          {
+            who: "robot",
+            text: "必背。初赛每年至少考 1—2 道。<br>还有一道经典题：<code>int a[100];</code> 占多少内存？<br>答案是 100 × 4 = 400 字节。",
+          },
+          { who: "student", text: "还有别的考点吗？" },
+          {
+            who: "robot",
+            text: "变量命名规则、int 范围、溢出判断——这些都是初赛的重点。<br>我们后面会陆续渗透。",
+          },
         ],
-        extra: {
-          title: '📖 初赛类型大小速查',
-          desc: '<div><b>⚠️ 必背表格</b><br>· <code>int</code> = <b>4</b> 字节<br>· <code>long long</code> = <b>8</b> 字节<br>· <code>double</code> = <b>8</b> 字节<br>· <code>char</code> / <code>bool</code> = <b>1</b> 字节</div><div><b>📌 考试常用形式</b><br>· "int a[100] 占多少内存？" → 100 × 4 = <b>400 字节</b><br>· "下面哪个是合法变量名？" → 判断命名规则<br>· "int 能存 100 亿吗？" → 不能，会溢出</div><div><b>每年初赛至少 1 道类型题</b>——<br>送分题，必须拿下。</div>',
-          variant: 'card-glow'
-        }
-      }
+      },
     },
 
-    /* ===== 19 练习1：输出两倍 ===== */
+    /* ===== 21 练习1：输出两倍 ===== */
     {
-      id: 23, type: 'level-map', title: '课堂练习1：输出两倍', subtitle: '输入一个数，输出它的两倍', chapterTag: '第 2 讲 · 实战演练',
+      id: 21,
+      type: "level-map",
+      title: "课堂练习1：输出两倍",
+      subtitle: "输入一个数，输出它的两倍",
+      chapterTag: "第 2 讲 · 实战演练",
       data: {
         question: {
-          title: '题干',
-          desc: '输入一个整数 <code>n</code>，输出 <code>n × 2</code>。',
-          questionCode: '输入：7\n输出：14'
+          title: "题干",
+          desc: "输入一个整数 <code>n</code>，输出 <code>n × 2</code>。",
+          questionCode: "输入：7\n输出：14",
         },
         hints: [
-          '定义 <code>int n;</code>',
-          '用 <code>cin &gt;&gt; n;</code> 读入',
-          '用 <code>cout &lt;&lt; n * 2 &lt;&lt; endl;</code> 输出'
+          "定义 <code>int n;</code>",
+          "用 <code>cin &gt;&gt; n;</code> 读入",
+          "用 <code>cout &lt;&lt; n * 2 &lt;&lt; endl;</code> 输出",
         ],
-        answer: { codeFile: 'codes/lesson-02/double.cpp' },
-        analysis: { title: '📖 解析', desc: '第一次写"输入 + 计算 + 输出"的完整程序。<br>这三步是所有程序的骨架：<b>读数据 → 处理数据 → 输出结果</b>。<br>后面的题，都是在这个骨架上加变化。' },
-        extra: { title: '📖 知识扩展 · 程序的"三步走"', desc: '几乎所有程序都是这个模式：<br><b>① 输入</b>：从键盘或文件读数据<br><b>② 处理</b>：对数据做运算、判断、循环<br><b>③ 输出</b>：把结果写到屏幕或文件<br><br>今天这个程序最简单——只做了一次乘法。<br>但再复杂的程序，也只是在这个骨架上加更多步骤。<br><b>记住这个骨架，你就理解了程序的本质。</b>', variant: 'card-primary' }
-      }
-    },
-
-    /* ===== 20 练习2：交换 ===== */
-    {
-      id: 24, type: 'level-map', title: '课堂练习2：交换两个数', subtitle: '用临时变量交换值', chapterTag: '第 2 讲 · 实战演练',
-      data: {
-        question: {
-          title: '题干',
-          desc: '输入两个整数 <code>a</code> 和 <code>b</code>，交换它们的值后输出。',
-          questionCode: '输入：3 5\n输出：5 3'
-        },
-        hints: [
-          '需要一个额外的临时变量 <code>t</code>',
-          '三步走：<code>t = a; a = b; b = t;</code>',
-          '不能直接 <code>a = b; b = a;</code>（会丢失 a 的原值）',
-          'C++ 标准库也提供了现成的 <code>swap(a, b)</code> 函数'
-        ],
-        answer: { codeFile: 'codes/lesson-02/swap.cpp' },
+        answer: { codeFile: "codes/lesson-02/double.cpp" },
         analysis: {
-          title: '📖 解析',
-          desc: '为什么不能直接 <code>a = b; b = a;</code>？<br>因为执行 <code>a = b</code> 后，a 原来的值被覆盖了，<br>再执行 <code>b = a</code> 时，等于把 b 的新值又赋给 b——相当于没交换。<br><br>需要<b>临时变量 t</b> 来保存中间值。这是经典的"三杯水交换"问题。'
+          title: "📖 解析",
+          desc: '第一次写"输入 + 计算 + 输出"的完整程序。<br><br><b>📌 程序的"三步走"</b><br>几乎所有的程序都是这个模式：<br>① <b>输入</b>：从键盘或文件读数据<br>② <b>处理</b>：对数据做运算、判断、循环<br>③ <b>输出</b>：把结果写到屏幕或文件<br><br>今天这个程序最简单——只做了一次乘法。<br>但再复杂的程序，也只是在这个骨架上加更多步骤。<b>记住这个骨架，你就理解了程序的本质。</b>',
         },
-        extra: {
-          title: '📖 交叉学科 · 三杯水交换 + swap 函数',
-          desc: '<div><b>物理课上的经典问题</b><br>有两杯水，一杯红、一杯蓝——<br>如何交换两个杯子的水，但只能用第三个空杯？</div><div><b>答案</b><br>① 把红水倒进空杯<br>② 把蓝水倒进原红杯<br>③ 把空杯里的红水倒进原蓝杯</div><div><b>变量交换完全一样</b><br><code>t = a; a = b; b = t;</code></div><div><b>💡 好消息：C++ 有现成的 swap 函数</b><br>标准库提供了 <code>swap(a, b)</code> 函数——一行搞定：<br><code>#include &lt;algorithm&gt;</code><br><code>swap(a, b);</code></div><div><b>手写 vs swap</b><br>· 学习阶段：手写一遍，理解原理<br>· 竞赛阶段：直接用 swap，省时间<br><br>本讲先手写——理解交换的本质。<br>后续讲次（排序、字符串反转）直接用 swap。</div>',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 21 练习3：大数和 ===== */
+    /* ===== 22 练习2：交换 ===== */
     {
-      id: 25, type: 'level-map', title: '课堂练习3：大数求和', subtitle: '用 long long 避免溢出', chapterTag: '第 2 讲 · 实战演练',
+      id: 22,
+      type: "level-map",
+      title: "课堂练习2：交换两个数",
+      subtitle: "用临时变量交换值",
+      chapterTag: "第 2 讲 · 实战演练",
       data: {
         question: {
-          title: '题干',
-          desc: '输入 4 个大整数，输出它们的和。<br>每个数可达 <code>10¹⁰</code>。',
-          questionCode: '输入：10000000000 20000000000 30000000000 40000000000\n输出：100000000000'
+          title: "题干",
+          desc: "输入两个整数 <code>a</code> 和 <code>b</code>，交换它们的值后输出。",
+          questionCode: "输入：3 5\n输出：5 3",
         },
         hints: [
-          '每个数可能超过 21 亿，<b>必须用 long long</b>',
-          '四个数之和可能更大，也要用 long long 保存',
-          'cin 和 cout 对 long long 一样适用'
+          "需要一个额外的临时变量 <code>t</code>",
+          "三步走：<code>t = a; a = b; b = t;</code>",
+          "不能直接 <code>a = b; b = a;</code>（会丢失 a 的原值）",
+          "C++ 标准库也提供了现成的 <code>swap(a, b)</code> 函数",
         ],
-        answer: { codeFile: 'codes/lesson-02/big-sum.cpp' },
-        analysis: { title: '📖 解析', desc: '这道题的<b>考点是类型选择</b>。<br>如果用 int 存 100 亿，会溢出变成一个错误的负数。<br><br><b>判断方法</b>：<br>题目说"每个数可达 10¹⁰"，10¹⁰ > 21 亿 → <b>必须用 long long</b>。<br>四个数之和更大 → 也要用 long long 存。<br><br><b>口诀</b>：大数用 long long，不确定时优先 long long。' },
-        extra: { title: '📖 知识扩展 · 溢出事故：阿丽亚娜 5 号火箭', desc: '1996 年 6 月 4 日，欧洲航天局发射了一枚价值 <b>3.7 亿美元</b>的火箭——阿丽亚娜 5 号。<br>发射 <b>37 秒后</b>，火箭在高空解体，碎片散落在大西洋沿岸。<br><br><b>事故原因</b>：<br>火箭复用了阿丽亚娜 4 号的软件模块。<br>4 号速度慢，它的水平速度用 16 位整数存——最大只能到 32767。<br>5 号更快，水平速度超过了 32767，<b>整数溢出</b>了。<br>程序崩溃，火箭失控。<br><br><b>教训</b>：选错类型，后果可能不是"答案错"，而是"火箭炸了"。<br>这个事故成了计算机科学史上的经典案例——<b>类型选择，不是小事。</b>', variant: 'card-primary' }
-      }
+        answer: { codeFile: "codes/lesson-02/swap.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: '为什么不能直接 <code>a = b; b = a;</code>？<br>因为执行 <code>a = b</code> 后，a 原来的值被覆盖了，<br>再执行 <code>b = a</code> 时，等于把 b 的新值又赋给 b——相当于没交换。<br><br>需要<b>临时变量 t</b> 来保存中间值。这是经典的"三杯水交换"问题。',
+        },
+        extra: {
+          title: "📖 交叉学科 · 三杯水交换 + swap 函数",
+          desc: "<div><b>物理课上的经典问题</b><br>有两杯水，一杯红、一杯蓝——<br>如何交换两个杯子的水，但只能用第三个空杯？</div><div><b>答案</b><br>① 把红水倒进空杯<br>② 把蓝水倒进原红杯<br>③ 把空杯里的红水倒进原蓝杯</div><div><b>变量交换完全一样</b><br><code>t = a; a = b; b = t;</code></div><div><b>💡 好消息：C++ 有现成的 swap 函数</b><br>标准库提供了 <code>swap(a, b)</code> 函数——一行搞定：<br><code>#include &lt;algorithm&gt;</code><br><code>swap(a, b);</code></div><div><b>手写 vs swap</b><br>· 学习阶段：手写一遍，理解原理<br>· 竞赛阶段：直接用 swap，省时间<br><br>本讲先手写——理解交换的本质。<br>后续讲次（排序、字符串反转）直接用 swap。</div>",
+          variant: "card-primary",
+        },
+      },
     },
 
-    /* ===== 22 趣味扩展 ===== */
+    /* ===== 23 练习3：大数和 ===== */
     {
-      id: 26, type: 'grid', title: '🎨 难题后的放松 · 程序员的命名玄学', subtitle: '变量名背后的故事',
-      chapterTag: '第 2 讲 · 知识讲解',
+      id: 23,
+      type: "level-map",
+      title: "课堂练习3：大数求和",
+      subtitle: "用 long long 避免溢出",
+      chapterTag: "第 2 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入 4 个大整数，输出它们的和。<br>每个数可达 <code>10¹⁰</code>。",
+          questionCode:
+            "输入：10000000000 20000000000 30000000000 40000000000\n输出：100000000000",
+        },
+        hints: [
+          "每个数可能超过 21 亿，<b>必须用 long long</b>",
+          "四个数之和可能更大，也要用 long long 保存",
+          "cin 和 cout 对 long long 一样适用",
+        ],
+        answer: { codeFile: "codes/lesson-02/big-sum.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: '这道题的<b>考点是类型选择</b>。<br>如果用 int 存 100 亿，会溢出变成一个错误的负数。<br><br><b>判断方法</b>：<br>题目说"每个数可达 10¹⁰"，10¹⁰ > 21 亿 → <b>必须用 long long</b>。<br>四个数之和更大 → 也要用 long long 存。<br><br><b>口诀</b>：大数用 long long，不确定时优先 long long。',
+        },
+      },
+    },
+
+    /* ===== 24 趣味扩展 ===== */
+    {
+      id: 24,
+      type: "grid",
+      title: "🎨 难题后的放松 · 程序员的命名玄学",
+      subtitle: "变量名背后的故事",
+      chapterTag: "第 2 讲 · 知识讲解",
       data: {
         cards: [
           {
-            icon: '🔤',
-            title: '为什么用 i、j、k？',
-            desc: '数学里求和用 <b>Σ</b>，下标是 <b>i</b>。<br>1957 年 FORTRAN 规定：以 I 到 N 开头的变量名自动是整数。<br>从此 <code>i</code>、<code>j</code>、<code>k</code> 就成了循环变量的默契。<br><b>70 年过去，还在用。</b>'
+            icon: "🔤",
+            title: "为什么用 i、j、k？",
+            desc: "数学里求和用 <b>Σ</b>，下标是 <b>i</b>。<br>1957 年 FORTRAN 规定：以 I 到 N 开头的变量名自动是整数。<br>从此 <code>i</code>、<code>j</code>、<code>k</code> 就成了循环变量的默契。<br><b>70 年过去，还在用。</b>",
           },
           {
-            icon: '🍫',
-            title: '为什么用 foo、bar？',
-            desc: '<b>foo</b> 来自二战雷达术语 FU（Fouled Up，一团糟）。<br><b>bar</b> 来自 1930 年代漫画《Smokey Stover》。<br>程序员把它们当"占位符"用——<br>不重要的名字，就叫 <code>foo</code>、<code>bar</code>、<code>baz</code>。'
+            icon: "🍫",
+            title: "为什么用 foo、bar？",
+            desc: '<b>foo</b> 来自二战雷达术语 FU（Fouled Up，一团糟）。<br><b>bar</b> 来自 1930 年代漫画《Smokey Stover》。<br>程序员把它们当"占位符"用——<br>不重要的名字，就叫 <code>foo</code>、<code>bar</code>、<code>baz</code>。',
           },
           {
-            icon: '🐍',
-            title: '为什么用 snake_case？',
-            desc: '下划线式命名，如 <code>student_name</code>。<br>出自 C 语言、Python 风格。<br>优点是<b>清晰可读</b>——两个单词一眼分开。<br>Linux 内核、Python 官方代码都推荐这种风格。'
+            icon: "🐍",
+            title: "为什么用 snake_case？",
+            desc: "下划线式命名，如 <code>student_name</code>。<br>出自 C 语言、Python 风格。<br>优点是<b>清晰可读</b>——两个单词一眼分开。<br>Linux 内核、Python 官方代码都推荐这种风格。",
           },
           {
-            icon: '🐪',
-            title: '为什么用 camelCase？',
-            desc: '驼峰式命名，如 <code>studentName</code>。<br>因为单词"高低起伏"像骆驼的驼峰。<br>出自 Java、JavaScript 风格。<br>据说最早是施乐公司的程序员发明的。'
-          }
+            icon: "🐪",
+            title: "为什么用 camelCase？",
+            desc: '驼峰式命名，如 <code>studentName</code>。<br>因为单词"高低起伏"像骆驼的驼峰。<br>出自 Java、JavaScript 风格。<br>据说最早是施乐公司的程序员发明的。',
+          },
         ],
         extra: {
-          title: '📖 知识扩展 · 好名字值千金',
+          title: "📖 知识扩展 · 好名字值千金",
           desc: '编程界有句名言：<b>"计算机科学只有两件难事——缓存失效和命名。"</b><br><br>为什么命名难？<br>· 名字太长：<code>the_total_number_of_students_in_class</code>——打字累<br>· 名字太短：<code>t</code>、<code>x</code>——看不懂什么意思<br>· 名字不准确：<code>count</code> 到底是"计数"还是"总数"？<br><br><b>好的命名三原则</b>：<br>① 见名知意<br>② 长度适中<br>③ 风格统一<br><br><b>冷知识</b>：Google 内部有一份"命名规范"，长达 200 多页。<br>程序员花在"想变量名"上的时间，比你想象的多得多。',
-          variant: 'card-primary'
-        }
-      }
+          variant: "card-primary",
+        },
+      },
     },
 
-    /* ===== 23 练习小结 ===== */
+    /* ===== 25 练习小结 ===== */
     {
-      id: 27, type: 'dialog', title: '练习小结与答疑', subtitle: '小C点评三道练习', chapterTag: '第 2 讲 · 答疑',
+      id: 25,
+      type: "grid",
+      title: "练习小结",
+      subtitle: "三道题的核心要点",
       data: {
-        lines: [
-          { who: 'student', text: '小 C，练习 2 的交换我写成了 a = b; b = a;，结果不对。' },
-          { who: 'robot', text: '这是经典陷阱。<br>执行 <code>a = b</code> 后，a 原来的值<b>被覆盖</b>了，<br>再执行 <code>b = a</code> 时，两边都是 b 的原值。<br><b>必须用临时变量 t 保存中间值。</b>' },
-          { who: 'student', text: '练习 3 我用 int 写的，为什么答案错了？' },
-          { who: 'robot', text: '因为数字超过了 int 的范围——21 亿。<br>题目说"每个数可达 10¹⁰"，10¹⁰ > 21 亿，<b>必须用 long long</b>。<br>这是竞赛中最高频的失分点。' },
-          { who: 'student', text: '那怎么判断该用哪个类型？' },
-          { who: 'robot', text: '看题目数据范围。<br>· ≤ 10⁹ → int<br>· > 10⁹ → long long<br><br>口诀：<b>不确定，就 long long。</b>' },
-          { who: 'student', text: '明白了。变量定义时要注意什么？' },
-          { who: 'robot', text: '三件事：<br>① <b>起个好名字</b>——见名知意<br>② <b>顺手初始化</b>——避免垃圾值<br>③ <b>选对类型</b>——防溢出<br>做到这三条，变量就稳了。' }
+        cards: [
+          {
+            icon: "✖️",
+            title: "练习 1 · 输出两倍",
+            desc: "<b>核心</b>：程序三步走<br>输入 → 处理 → 输出<br><br><b>易错</b>：别忘 <code>cin</code> 读数据",
+          },
+          {
+            icon: "🔄",
+            title: "练习 2 · 交换两个数",
+            desc: "<b>核心</b>：用临时变量<br><code>t = a; a = b; b = t;</code><br><br><b>易错</b>：不能直接 <code>a = b; b = a;</code>",
+          },
+          {
+            icon: "🔢",
+            title: "练习 3 · 大数求和",
+            desc: "<b>核心</b>：预判范围选类型<br>大数用 <code>long long</code><br><br><b>易错</b>：<code>int</code> 会溢出",
+          },
         ],
-        extra: {
-          title: '💡 三个核心要点回顾',
-          desc: '① <b>起名</b>：见名知意，用英文单词<br>② <b>初始化</b>：定义时顺手给初值<br>③ <b>选类型</b>：大数用 long long<br><br>这三条是从新手到熟练的关键。<br>每次写代码前，先想清楚这三个问题，能避免 90% 的低级错误。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 24 课堂小测 ===== */
+    /* ===== 26 课堂小测 ===== */
     {
-      id: 28, type: 'quiz', title: '课堂小测', subtitle: '变量、输入与整数类型',
-      chapterTag: '第 2 讲 · 课堂小测',
+      id: 26,
+      type: "quiz",
+      title: "课堂小测",
+      subtitle: "变量、输入与整数类型",
+      chapterTag: "第 2 讲 · 课堂小测",
       data: {
         questions: [
           {
             id: 1,
-            type: 'single',
+            type: "single",
             difficulty: 2,
-            source: '2020 CSP-J 初赛 · 第 3 题',
-            question: '以下哪个是 C++ 合法的变量名？',
+            source: "2020 CSP-J 初赛 · 第 3 题",
+            question: "以下哪个是 C++ 合法的变量名？",
             options: [
-              { label: 'A', text: '<code>123name</code>' },
-              { label: 'B', text: '<code>my_name</code>', correct: true },
-              { label: 'C', text: '<code>my-name</code>' },
-              { label: 'D', text: '<code>my name</code>' }
+              { label: "A", text: "<code>123name</code>" },
+              { label: "B", text: "<code>my_name</code>", correct: true },
+              { label: "C", text: "<code>my-name</code>" },
+              { label: "D", text: "<code>my name</code>" },
             ],
-            analysis: 'C++ 变量名规则：<br>① 只能含字母、数字、下划线<br>② <b>不能以数字开头</b><br>③ 不能含空格或特殊符号（如 <code>-</code>）<br><br>A 以数字开头，错；B 合法；C 含 <code>-</code>，错；D 含空格，错。<br>这是本讲 slide-09"变量命名规则"的直接考查。'
+            analysis:
+              'C++ 变量名规则：<br>① 只能含字母、数字、下划线<br>② <b>不能以数字开头</b><br>③ 不能含空格或特殊符号（如 <code>-</code>）<br><br>A 以数字开头，错；B 合法；C 含 <code>-</code>，错；D 含空格，错。<br>这是本讲 slide-09"变量命名规则"的直接考查。',
           },
           {
             id: 2,
-            type: 'single',
+            type: "single",
             difficulty: 2,
-            source: 'CSP-J 初赛真题练习 · 数据类型',
-            question: '<code>int</code> 类型在常见编译器中通常占用几个字节？',
+            source: "CSP-J 初赛真题练习 · 数据类型",
+            question: "<code>int</code> 类型在常见编译器中通常占用几个字节？",
             options: [
-              { label: 'A', text: '1 字节' },
-              { label: 'B', text: '2 字节' },
-              { label: 'C', text: '4 字节', correct: true },
-              { label: 'D', text: '8 字节' }
+              { label: "A", text: "1 字节" },
+              { label: "B", text: "2 字节" },
+              { label: "C", text: "4 字节", correct: true },
+              { label: "D", text: "8 字节" },
             ],
-            analysis: '常见类型字节数：<br>· <code>int</code> = <b>4 字节</b>（32 位）<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br><br>这是初赛的高频考点，对应本讲 slide-17"初赛渗透：类型大小"。'
+            analysis:
+              '常见类型字节数：<br>· <code>int</code> = <b>4 字节</b>（32 位）<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br><br>这是初赛的高频考点，对应本讲 slide-17"初赛渗透：类型大小"。',
           },
           {
             id: 3,
-            type: 'single',
+            type: "single",
             difficulty: 3,
-            source: 'CSP-J 2021 初赛模拟题 · 变量',
-            question: '下面代码的输出是什么？',
+            source: "CSP-J 2021 初赛模拟题 · 变量",
+            question: "下面代码的输出是什么？",
             questionCode: `int a;
 cout << a << endl;`,
             options: [
-              { label: 'A', text: '0' },
-              { label: 'B', text: '1' },
-              { label: 'C', text: '垃圾值，不确定', correct: true },
-              { label: 'D', text: '编译错误' }
+              { label: "A", text: "0" },
+              { label: "B", text: "1" },
+              { label: "C", text: "垃圾值，不确定", correct: true },
+              { label: "D", text: "编译错误" },
             ],
-            analysis: '未初始化的局部变量里是<b>垃圾值</b>，不是 0。<br>它的值取决于内存中残留的旧数据，结果不可预测。<br>所以定义变量时要养成初始化的好习惯：<code>int a = 0;</code>。<br>这是本讲 slide-08"未初始化变量的坑"的直接考查。'
+            analysis:
+              '未初始化的局部变量里是<b>垃圾值</b>，不是 0。<br>它的值取决于内存中残留的旧数据，结果不可预测。<br>所以定义变量时要养成初始化的好习惯：<code>int a = 0;</code>。<br>这是本讲 slide-08"未初始化变量的坑"的直接考查。',
           },
           {
             id: 4,
-            type: 'judge',
+            type: "judge",
             difficulty: 2,
-            source: 'C++ 信息学奥赛总复习题 · 第二章',
-            question: '变量名不能以数字开头。',
+            source: "C++ 信息学奥赛总复习题 · 第二章",
+            question: "变量名不能以数字开头。",
             options: [
-              { label: 'A', text: '正确', correct: true },
-              { label: 'B', text: '错误' }
+              { label: "A", text: "正确", correct: true },
+              { label: "B", text: "错误" },
             ],
-            analysis: 'C++ 变量名规则：首字符必须是<b>字母或下划线</b>，不能是数字。<br>例如 <code>age</code>、<code>_count</code>、<code>a1</code> 都合法；<code>1a</code>、<code>123</code> 都不合法。<br>这是本讲 slide-09"变量命名规则"的核心内容。'
+            analysis:
+              'C++ 变量名规则：首字符必须是<b>字母或下划线</b>，不能是数字。<br>例如 <code>age</code>、<code>_count</code>、<code>a1</code> 都合法；<code>1a</code>、<code>123</code> 都不合法。<br>这是本讲 slide-09"变量命名规则"的核心内容。',
           },
           {
             id: 5,
-            type: 'judge',
+            type: "judge",
             difficulty: 3,
-            source: 'CSP-J 初赛真题练习 · 数据类型',
-            question: '在 C++ 中，<code>int</code> 类型能存储的最大值约为 21 亿（2147483647）。',
+            source: "CSP-J 初赛真题练习 · 数据类型",
+            question:
+              "在 C++ 中，<code>int</code> 类型能存储的最大值约为 21 亿（2147483647）。",
             options: [
-              { label: 'A', text: '正确', correct: true },
-              { label: 'B', text: '错误' }
+              { label: "A", text: "正确", correct: true },
+              { label: "B", text: "错误" },
             ],
-            analysis: 'int 占 4 字节（32 位），正负各占一半，最大正数是 <b>2³¹ - 1 = 2147483647</b>，约 21 亿。<br>超出这个范围就会"溢出"，结果变成错误的负数。<br>大数运算要用 <code>long long</code>。<br>这是本讲 slide-13"int 类型"的核心知识点。'
-          }
+            analysis:
+              'int 占 4 字节（32 位），正负各占一半，最大正数是 <b>2³¹ - 1 = 2147483647</b>，约 21 亿。<br>超出这个范围就会"溢出"，结果变成错误的负数。<br>大数运算要用 <code>long long</code>。<br>这是本讲 slide-13"int 类型"的核心知识点。',
+          },
         ],
-        extra: {
-          title: '📖 知识扩展 · 初赛数据类型四大考点',
-          desc: '<b>① 类型大小</b>：int = 4，long long = 8，char = 1<br><b>② 范围判断</b>：int 约 ±21 亿，超出要溢出<br><b>③ 命名规则</b>：字母数字下划线，不能数字开头<br><b>④ 未初始化</b>：局部变量是垃圾值，不是 0<br><br>这四类占了初赛类型题的 80%。<br><b>建议</b>：做初赛真题时，重点练这四类。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 25 今日总结 ===== */
+    /* ===== 27 今日总结 ===== */
     {
-      id: 29, type: 'quote', title: '今日总结', subtitle: '今天我们学会了',
+      id: 27,
+      type: "quote",
+      title: "今日总结",
+      subtitle: "今天我们学会了",
       data: {
-        text: '变量是带名字的盒子，类型是盒子的大小。',
-        author: '—— 变量第一课',
+        text: "变量是带名字的盒子，类型是盒子的大小。",
+        author: "—— 变量第一课",
         points: [
-          '变量 = 名字 + 类型 + 值',
-          '定义语法：类型 名字 = 初值;',
-          'cin 输入：cin >> 变量;',
-          '命名规则：字母数字下划线，不能数字开头',
-          'int：4 字节，约 ±21 亿',
-          'long long：8 字节，约 ±9×10¹⁸',
-          'const 常量：值不可改变'
+          "变量 = 名字 + 类型 + 值",
+          "定义语法：类型 名字 = 初值;",
+          "cin 输入：cin >> 变量;",
+          "命名规则：字母数字下划线，不能数字开头",
+          "int：4 字节，约 ±21 亿",
+          "long long：8 字节，约 ±9×10¹⁸",
+          "const 常量：值不可改变",
         ],
-        highlight: { title: '📌 关键口诀', desc: '变量是盒子，名字要清晰；定义先初始化，cin 读数据；整数用 int，大数 long long；常量用 const，改它编译器会拦。' },
+        highlight: {
+          title: "📌 关键口诀",
+          desc: "变量是盒子，名字要清晰；定义先初始化，cin 读数据；整数用 int，大数 long long；常量用 const，改它编译器会拦。",
+        },
         extra: {
           title: '💡 今天你让程序学会了"记忆"',
           desc: '从只会"输出"到能"记住数据"，程序的能力又上了一个台阶。<br>变量是所有程序的基础——没有变量，就没有"计算"，就没有"判断"，就没有"算法"。<br>今天你已经掌握了编程最核心的工具之一。<br><br>🔮 <b>伏笔</b>：<br>· 变量只能存<b>一个</b>数据。如果要存 100 个呢？<br>· 数据除了整数，还有小数、字符、真假。<br>· 为什么 int 最大是 21 亿？为什么会有"溢出"？<br>这些问题的答案，会在后续讲次揭晓。',
-          variant: 'card-primary'
-        }
-      }
+          variant: "card-primary",
+        },
+      },
     },
 
-    /* ===== 26 课后作业 ===== */
+    /* ===== 28 课后作业 ===== */
     {
-      id: 30, type: 'grid', title: '课后作业 · OJ 实战', subtitle: '打开洛谷，完成以下 3 道题',
+      id: 28,
+      type: "grid",
+      title: "课后作业 · OJ 实战",
+      subtitle: "打开洛谷，完成以下 3 道题",
       data: {
         cards: [
-          { icon: '🟢', title: '基础 1 · P1001', link: 'https://www.luogu.com.cn/problem/P1001', desc: '<b>A+B Problem</b><br>考察：cin、变量、加法<br>难度：★<br>目标：读两个数，输出和' },
-          { icon: '🟢', title: '基础 2 · P5703', link: 'https://www.luogu.com.cn/problem/P5703', desc: '<b>苹果采购</b><br>考察：变量、乘法<br>难度：★<br>目标：读两个数，输出乘积' },
-          { icon: '🔴', title: '挑战 · B2033', link: 'https://www.luogu.com.cn/problem/B2033', desc: '<b>A*B Problem</b><br>考察：long long、结果范围预判<br>难度：★★<br>目标：输入 ≤ 50000，乘积超 int，选对类型' }
+          {
+            icon: "🟢",
+            title: "基础 1 · P1001",
+            link: "https://www.luogu.com.cn/problem/P1001",
+            desc: "<b>A+B Problem</b><br>考察：cin、变量、加法<br>难度：★<br>目标：读两个数，输出和",
+          },
+          {
+            icon: "🟢",
+            title: "基础 2 · P5703",
+            link: "https://www.luogu.com.cn/problem/P5703",
+            desc: "<b>苹果采购</b><br>考察：变量、乘法<br>难度：★<br>目标：读两个数，输出乘积",
+          },
+          {
+            icon: "🔴",
+            title: "挑战 · B2033",
+            link: "https://www.luogu.com.cn/problem/B2033",
+            desc: "<b>A*B Problem</b><br>考察：long long、结果范围预判<br>难度：★★<br>目标：输入 ≤ 50000，乘积超 int，选对类型",
+          },
         ],
-        extra: {
-          title: '📌 提交方式',
-          desc: '打开洛谷 <code>luogu.com.cn</code>，搜索题号，提交代码，截图 AC 结果。<br>每题做完记录到错题本：题目 + 思路 + 错因。<br>下次课随机抽查 2 位同学讲解解题思路。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 27 下节预告 ===== */
+    /* ===== 29 下节预告 ===== */
     {
-      id: 31, type: 'radial', title: '下节预告', subtitle: '第 3 讲 · 小数、字符、布尔与类型转换',
+      id: 29,
+      type: "radial",
+      title: "下节预告",
+      subtitle: "第 3 讲 · 小数、字符、布尔与类型转换",
       data: {
-        center: '类型',
+        center: "类型",
         items: [
-          { text: 'double 小数' },
-          { text: 'char 字符' },
-          { text: 'bool 布尔' },
-          { text: '类型转换' }
+          { text: "double 小数" },
+          { text: "char 字符" },
+          { text: "bool 布尔" },
+          { text: "类型转换" },
         ],
-        extra: {
-          title: '💡 数据的多种面孔',
-          desc: '今天学了整数，但程序世界里的数据远不止整数——<br>温度是小数、字母是字符、判断结果是真假。<br>下一讲，我们学习<b>更多类型</b>，以及它们之间的转换。<br><br>🔮 <b>远期彩蛋</b>：为什么 0.1 + 0.2 不等于 0.3？<br>为什么字符 \'A\' 是 65？<br>这些有趣的问题，第 22 讲从二进制讲起。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 28 答疑时间 ===== */
+    /* ===== 30 答疑时间 ===== */
     {
-      id: 32, type: 'dialog', title: '答疑时间', subtitle: '有问题尽管问', chapterTag: '第 2 讲 · 答疑',
+      id: 30,
+      type: "grid",
+      title: "答疑时间",
+      subtitle: "常见问题 FAQ",
+      chapterTag: "第 2 讲 · 答疑",
       data: {
-        lines: [
-          { who: 'student', text: 'int 和 long long 到底用哪个？' },
-          { who: 'robot', text: '看数据范围。<br>≤ 10⁹ 用 int，超过就用 long long。<br>不确定时，优先 long long。' },
-          { who: 'student', text: '变量忘了初始化会怎样？' },
-          { who: 'robot', text: '里面的值是"垃圾值"——内存里残留的旧数据。<br>编译器不报错，但结果错。<br>所以定义变量就顺手给初值。' },
-          { who: 'student', text: 'cin 后面接 getline 会出问题吗？' },
-          { who: 'robot', text: '会。<code>cin</code> 读完会留下换行符，<code>getline</code> 会读到空行。<br>解决方法：cin 后加一句 <code>cin.ignore();</code>。<br>这是第 7 讲的内容。' },
-          { who: 'student', text: 'const 和普通变量到底啥区别？' },
-          { who: 'robot', text: 'const 定义后不能修改。<br>好处是：防止误改、提升可读性、便于维护。<br>固定不变的值（如 π、模数）都用 const。' },
-          { who: 'student', text: '变量名能用中文吗？' },
-          { who: 'robot', text: '理论上能（C++ 支持 Unicode），但<b>绝对不要</b>。<br>竞赛、工程、代码审查，都不允许中文变量名。<br>用英文单词，是行业的默契。' }
+        cards: [
+          {
+            icon: "🔢",
+            title: "int 还是 long long？",
+            desc: "看数据范围。<br>≤ 10⁹ 用 <code>int</code>，超过用 <code>long long</code>。<br><b>不确定时优先 long long。</b>",
+          },
+          {
+            icon: "⚠️",
+            title: "忘了初始化会怎样？",
+            desc: '里面的值是"垃圾值"——内存残留的旧数据。<br>编译器不报错，但结果错。<br><b>定义时顺手给初值。</b>',
+          },
+          {
+            icon: "📥",
+            title: "cin 后接 getline？",
+            desc: "会出问题。<code>cin</code> 读完留下换行符——<code>getline</code> 会读到空行。<br>解决：加 <code>cin.ignore();</code><br><b>第 7 讲详讲。</b>",
+          },
+          {
+            icon: "🔒",
+            title: "const vs 普通变量？",
+            desc: "const 定义后不能改。<br>好处：防误改、可读性、易维护。<br><b>固定值（π、模数）用 const。</b>",
+          },
+          {
+            icon: "🀄",
+            title: "能用中文变量名吗？",
+            desc: "理论上能（C++ 支持 Unicode），<b>但绝对不要</b>。<br>竞赛、工程、代码审查都不允许。<br><b>用英文单词，是行业默契。</b>",
+          },
+          {
+            icon: "💡",
+            title: "学习建议",
+            desc: "变量是编程的地基。<br>至少写 <b>30 道变量题</b>才能熟练。<br><b>每次问自己</b>：类型选对了吗？名字清楚吗？初始化了吗？",
+          },
         ],
-        extra: {
-          title: '📌 一个建议',
-          desc: '变量是编程的地基。<br>初学者至少要写 <b>30 道变量题</b>才能熟练。<br>练习时不要"抄一遍就过"，要问自己：<br>· 为什么用这个类型？<br>· 名字起得清楚吗？<br>· 初始化了吗？<br>这三个问题想清楚，变量就掌握了。',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 29 本讲英文单词 ===== */
+    /* ===== 31 本讲英文单词 ===== */
     {
-      id: 33, type: 'glossary', title: '本讲英文单词', subtitle: '记牢拼写，理解原意',
-      chapterTag: '第 2 讲 · 复习',
+      id: 31,
+      type: "glossary",
+      title: "本讲英文单词",
+      subtitle: "记牢拼写，理解原意",
+      chapterTag: "第 2 讲 · 复习",
       data: {
         words: [
-          { word: 'int',       cn: '整数',   pron: '/ɪnt/',        origin: 'integer 的缩写',         category: '类型' },
-          { word: 'long long', cn: '长整数', pron: '/lɒŋ lɒŋ/',    origin: 'long 重复两次表示更长',  category: '类型' },
-          { word: 'cin',       cn: '输入',   pron: '/siː ɪn/',     origin: 'character input 的缩写', category: '函数' },
-          { word: 'const',     cn: '常量',   pron: '/ˈkɒnstənt/',  origin: 'constant 的缩写',        category: '关键字' },
-          { word: 'variable',  cn: '变量',   pron: '/ˈveəriəbl/',  origin: '英文原意"可变化的量"',   category: '概念' },
-          { word: 'float',     cn: '单精度', pron: '/fləʊt/',      origin: '英文原意"浮动"',         category: '类型' }
+          {
+            word: "int",
+            cn: "整数",
+            pron: "/ɪnt/",
+            origin: "integer 的缩写",
+            category: "类型",
+          },
+          {
+            word: "long long",
+            cn: "长整数",
+            pron: "/lɒŋ lɒŋ/",
+            origin: "long 重复两次表示更长",
+            category: "类型",
+          },
+          {
+            word: "cin",
+            cn: "输入",
+            pron: "/siː ɪn/",
+            origin: "character input 的缩写",
+            category: "函数",
+          },
+          {
+            word: "const",
+            cn: "常量",
+            pron: "/ˈkɒnstənt/",
+            origin: "constant 的缩写",
+            category: "关键字",
+          },
+          {
+            word: "variable",
+            cn: "变量",
+            pron: "/ˈveəriəbl/",
+            origin: '英文原意"可变化的量"',
+            category: "概念",
+          },
+          {
+            word: "float",
+            cn: "单精度",
+            pron: "/fləʊt/",
+            origin: '英文原意"浮动"',
+            category: "类型",
+          },
         ],
-        extra: {
-          title: '💡 记忆法 · 缩写与词根',
-          desc: '<b>缩写类</b>：<br><code>int</code> = <b>int</b>eger（整数）<br><code>cin</code> = <b>c</b>haracter <b>in</b>put（字符输入）<br><code>const</code> = <b>const</b>ant（常量）<br><br><b>组合类</b>：<br><code>long long</code> = long 重复两次，表示"更长的整数"<br><br><b>原意类</b>：<br><code>variable</code> = 可变化的量（变量）<br><code>float</code> = 浮动（小数点浮动）<br><br><b>易错拼写</b>：<br>· <code>long long</code> 中间有空格<br>· <code>const</code> 不要写成 <code>constant</code><br>· <code>int</code> 不是 <code>integer</code>',
-          variant: 'card-primary'
-        }
-      }
+      },
     },
 
-    /* ===== 30 知识清单 ===== */
+    /* ===== 32 知识清单 ===== */
     {
-      id: 34, type: 'grid', title: '第 2 讲 · 知识清单', subtitle: '一页看完本讲所有重点', chapterTag: '第 2 讲 · 复习',
+      id: 32,
+      type: "grid",
+      title: "第 2 讲 · 知识清单",
+      subtitle: "一页看完本讲所有重点",
+      chapterTag: "第 2 讲 · 复习",
       data: {
         cards: [
-          { icon: '📦', title: '变量', desc: '<b>三要素</b>：名字、类型、值<br><b>定义</b>：<code>int age = 11;</code><br><b>命名</b>：字母数字下划线，不能数字开头<br><b>陷阱</b>：未初始化是垃圾值' },
-          { icon: '📥', title: '输入 cin', desc: '<b>语法</b>：<code>cin &gt;&gt; 变量;</code><br><b>方向</b>：cin 用 &gt;&gt;，cout 用 &lt;&lt;<br><b>特点</b>：自动跳过空格、回车<br><b>暂停</b>：等用户输入' },
-          { icon: '🔢', title: '整数类型', desc: '<b>int</b>：4 字节，约 ±21 亿<br><b>long long</b>：8 字节，约 ±9×10¹⁸<br><b>选择</b>：不确定用 long long<br><b>陷阱</b>：溢出得错误结果' },
-          { icon: '🔒', title: '常量 const', desc: '<b>语法</b>：<code>const int MOD = 1000000007;</code><br><b>特点</b>：定义后不能改<br><b>好处</b>：可读、防误改、易维护<br><b>常用</b>：π、模数、最大长度' }
+          {
+            icon: "📦",
+            title: "变量",
+            desc: "<b>三要素</b>：名字、类型、值<br><b>定义</b>：<code>int age = 11;</code><br><b>命名</b>：字母数字下划线，不能数字开头<br><b>陷阱</b>：未初始化是垃圾值",
+          },
+          {
+            icon: "📥",
+            title: "输入 cin",
+            desc: "<b>语法</b>：<code>cin &gt;&gt; 变量;</code><br><b>方向</b>：cin 用 &gt;&gt;，cout 用 &lt;&lt;<br><b>特点</b>：自动跳过空格、回车<br><b>暂停</b>：等用户输入",
+          },
+          {
+            icon: "🔢",
+            title: "整数类型",
+            desc: "<b>int</b>：4 字节，约 ±21 亿<br><b>long long</b>：8 字节，约 ±9×10¹⁸<br><b>选择</b>：不确定用 long long<br><b>陷阱</b>：溢出得错误结果",
+          },
+          {
+            icon: "🔒",
+            title: "常量 const",
+            desc: "<b>语法</b>：<code>const int MOD = 1000000007;</code><br><b>特点</b>：定义后不能改<br><b>好处</b>：可读、防误改、易维护<br><b>常用</b>：π、模数、最大长度",
+          },
         ],
-        extra: {
-          title: '📌 关键口诀 + 挑战题单',
-          desc: '<b>口诀</b>：变量是盒子，名字要清晰；定义先初始化，cin 读数据；整数用 int，大数 long long；常量用 const，改它编译器会拦。<br><b>四大错误</b>：① 名字起得乱 ② 忘了初始化 ③ 类型选错 ④ 命名违规。<br><br>📌 <b>挑战题单</b>：<br><b>⭐ 基础</b>：P1001 A+B Problem<br><b>⭐⭐ 进阶</b>：P5703 苹果采购<br><b>⭐⭐⭐ 挑战</b>：P5704 字母转换<br><b>🔗 延伸</b>：洛谷搜索"入门 2"，挑 3 道变量题练手。',
-          variant: 'card-glow'
-        }
-      }
+      },
     },
 
-    /* ===== 31 结束页 ===== */
+    /* ===== 33 结束页 ===== */
     {
-      id: 35, type: 'ending', title: '第二讲结束', subtitle: '点击返回目录，复习本讲内容', chapterTag: false,
+      id: 33,
+      type: "ending",
+      title: "第二讲结束",
+      subtitle: "点击返回目录，复习本讲内容",
+      chapterTag: false,
       data: {
-        slogan: '科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题',
-        extra: {
-          title: '🌟 你的程序从此有了"记忆"',
-          desc: '从只会输出，到能记住数据，你的程序能力又跨了一大步。<br>变量是所有程序的基础——有了它，程序才能"运算""判断""循环"。<br>下一讲，我们认识更多的数据类型——小数、字符、布尔。<br>数据的家族，远比你想象的丰富。',
-          variant: 'card-glow'
-        }
-      }
-    }
-
-  ]
-};  
+        slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题",
+      },
+    },
+  ],
+};

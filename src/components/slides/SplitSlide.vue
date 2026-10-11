@@ -6,11 +6,7 @@
       class="split-container"
       :class="[`cols-${cols}`, { 'has-code': hasCode }]"
     >
-      <div
-        v-for="(pane, idx) in panes"
-        :key="idx"
-        class="split-col"
-      >
+      <div v-for="(pane, idx) in panes" :key="idx" class="split-col">
         <component
           :is="stepped ? StepWrapper : 'div'"
           v-bind="stepped ? { step: idx + 1 } : {}"
@@ -36,10 +32,7 @@
 
             <!-- items 模式 -->
             <template v-else>
-              <div
-                v-if="pane.icon && !pane.title"
-                class="pane-icon-standalone"
-              >
+              <div v-if="pane.icon && !pane.title" class="pane-icon-standalone">
                 {{ pane.icon }}
               </div>
               <div
@@ -48,7 +41,11 @@
                 class="pane-item"
               >
                 <div v-if="item.title" class="item-title">{{ item.title }}</div>
-                <div v-if="item.desc" class="item-desc" v-html="item.desc"></div>
+                <div
+                  v-if="item.desc"
+                  class="item-desc"
+                  v-html="item.desc"
+                ></div>
                 <ul v-if="item.items" class="item-list">
                   <li v-for="(p, j) in item.items" :key="j" v-html="p"></li>
                 </ul>
@@ -62,17 +59,17 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import CodeBlock from '@/components/common/CodeBlock.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
-const intro = computed(() => props.slide.data?.intro || '');
+const intro = computed(() => props.slide.data?.intro || "");
 const stepped = computed(() => !!props.slide.data?.stepped);
 const panes = computed(() => props.slide.data?.panes || []);
 const extra = computed(() => props.slide.data?.extra);
@@ -89,13 +86,11 @@ const cols = computed(() => {
   return 4;
 });
 
-const hasCode = computed(() =>
-  panes.value.some(p => !!p.codeFile)
-);
+const hasCode = computed(() => panes.value.some((p) => !!p.codeFile));
 
 // 步数上报（stepped 时每个 pane 一步，否则 1 步；+extra）
-useStepCount(() =>
-  (stepped.value ? panes.value.length : 1) + (extra.value ? 1 : 0)
+useStepCount(
+  () => (stepped.value ? panes.value.length : 1) + (extra.value ? 1 : 0),
 );
 
 // 开发环境检查
@@ -104,9 +99,11 @@ if (import.meta.env.DEV) {
   if (!Array.isArray(data?.panes) || data.panes.length === 0) {
     console.warn(`[SplitSlide] 缺少 panes 数据（slide id: ${props.slide.id}）`);
   }
-  const codeCount = panes.value.filter(p => p.codeFile).length;
+  const codeCount = panes.value.filter((p) => p.codeFile).length;
   if (codeCount > 2) {
-    console.warn(`[SplitSlide] 代码模式建议不超过 2 栏（当前 ${codeCount} 栏，slide id: ${props.slide.id}）`);
+    console.warn(
+      `[SplitSlide] 代码模式建议不超过 2 栏（当前 ${codeCount} 栏，slide id: ${props.slide.id}）`,
+    );
   }
 }
 </script>
@@ -136,10 +133,18 @@ if (import.meta.env.DEV) {
   gap: var(--space-gap-md);
   align-items: stretch;
 }
-.split-container.cols-1 { grid-template-columns: 1fr; }
-.split-container.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.split-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.split-container.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.split-container.cols-1 {
+  grid-template-columns: 1fr;
+}
+.split-container.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.split-container.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.split-container.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 
 .split-col {
   min-height: 0;
@@ -192,7 +197,10 @@ if (import.meta.env.DEV) {
   line-height: 1;
   flex-shrink: 0;
 }
-.pane-title-text { flex: 1; min-width: 0; }
+.pane-title-text {
+  flex: 1;
+  min-width: 0;
+}
 .pane-icon-standalone {
   font-size: calc(32px * var(--font-scale));
   text-align: center;

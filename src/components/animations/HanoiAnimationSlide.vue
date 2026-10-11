@@ -30,7 +30,7 @@
             class="disk"
             :class="[
               disk % 2 === 1 ? 'disk-odd' : 'disk-even',
-              { 'is-active': currentMove && currentMove.disk === disk }
+              { 'is-active': currentMove && currentMove.disk === disk },
             ]"
             :style="diskStyle(disk, currentStep.state)"
           >
@@ -43,13 +43,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import AnimationFrame from './AnimationFrame.vue';
+import { computed } from "vue";
+import AnimationFrame from "./AnimationFrame.vue";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
 // 配置
-const pegs = computed(() => props.slide.data?.config?.pegs || ['A', 'B', 'C']);
+const pegs = computed(() => props.slide.data?.config?.pegs || ["A", "B", "C"]);
 const steps = computed(() => props.slide.data?.steps || []);
 const phases = computed(() => props.slide.data?.phases || []);
 
@@ -57,7 +57,7 @@ const phases = computed(() => props.slide.data?.phases || []);
 // 通过 slot 的 currentStep 拿到 state、move
 // 但 phase 需要 index，得从 state 推算——简单点：用 steps 索引
 // 由于 slot 只传了 currentStep，我们需要额外从 composable 拿 current
-import { useStep } from '@/composables/useStep';
+import { useStep } from "@/composables/useStep";
 const { current } = useStep();
 
 // 当前索引
@@ -67,19 +67,26 @@ const currentIndex = computed(() => {
 });
 
 // 当前 move
-const currentMove = computed(() => steps.value[currentIndex.value]?.move || null);
+const currentMove = computed(
+  () => steps.value[currentIndex.value]?.move || null,
+);
 
 // 当前阶段
 const currentPhase = computed(() => {
   if (!phases.value.length) return null;
-  return phases.value.find(p => currentIndex.value >= p.range[0] && currentIndex.value < p.range[1]) || null;
+  return (
+    phases.value.find(
+      (p) =>
+        currentIndex.value >= p.range[0] && currentIndex.value < p.range[1],
+    ) || null
+  );
 });
 
 // 所有盘子编号
 const allDisks = computed(() => {
   const maxDisk = Math.max(
-    ...steps.value.flatMap(s => Object.values(s.state || {}).flat()),
-    1
+    ...steps.value.flatMap((s) => Object.values(s.state || {}).flat()),
+    1,
   );
   return Array.from({ length: maxDisk }, (_, i) => i + 1);
 });
@@ -105,10 +112,10 @@ const pegPositions = computed(() => {
 function pegStyle(i) {
   const x = pegPositions.value[i];
   return {
-    left: (x - PEG_W / 2) + 'px',
-    bottom: PEG_BOTTOM + 'px',
-    width: PEG_W + 'px',
-    height: PEG_H + 'px'
+    left: x - PEG_W / 2 + "px",
+    bottom: PEG_BOTTOM + "px",
+    width: PEG_W + "px",
+    height: PEG_H + "px",
   };
 }
 
@@ -129,7 +136,7 @@ function diskStyle(disk, state = {}) {
   }
 
   if (pegIdx < 0) {
-    return { display: 'none' };
+    return { display: "none" };
   }
 
   const x = pegPositions.value[pegIdx];
@@ -137,10 +144,10 @@ function diskStyle(disk, state = {}) {
   const width = DISK_MIN_W + disk * DISK_STEP_W;
 
   return {
-    left: (x - width / 2) + 'px',
-    bottom: bottom + 'px',
-    width: width + 'px',
-    height: DISK_H + 'px'
+    left: x - width / 2 + "px",
+    bottom: bottom + "px",
+    width: width + "px",
+    height: DISK_H + "px",
   };
 }
 </script>
@@ -183,7 +190,9 @@ function diskStyle(disk, state = {}) {
 
 .phase-fade-enter-active,
 .phase-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 .phase-fade-enter-from,
 .phase-fade-leave-to {

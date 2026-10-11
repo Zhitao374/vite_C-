@@ -1,14 +1,12 @@
 <template>
   <SlideShell :slide="slide">
-    <StepWrapper
-      v-for="(line, i) in lines"
-      :key="i"
-      :step="i + 1"
-    >
+    <StepWrapper v-for="(line, i) in lines" :key="i" :step="i + 1">
       <div class="dialog-scene" :class="{ reverse: isRobot(line) }">
         <div class="dialog-avatar">{{ avatarOf(line) }}</div>
         <div class="bubble">
-          <div v-if="speakerOf(line)" class="bubble-speaker">{{ speakerOf(line) }}</div>
+          <div v-if="speakerOf(line)" class="bubble-speaker">
+            {{ speakerOf(line) }}
+          </div>
           <div v-html="line.text"></div>
         </div>
       </div>
@@ -17,14 +15,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
-import { getCharacter } from '@/config/characters';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
+import { getCharacter } from "@/config/characters";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const lines = computed(() => props.slide.data?.lines || []);
@@ -33,7 +31,7 @@ const extra = computed(() => props.slide.data?.extra);
 useStepCount(() => lines.value.length + (extra.value ? 1 : 0));
 
 function isRobot(line) {
-  return line.who === 'robot';
+  return line.who === "robot";
 }
 function avatarOf(line) {
   return line.avatar || getCharacter(line.who).avatar;
@@ -97,7 +95,7 @@ function speakerOf(line) {
   box-shadow: var(--card-shadow);
 }
 .bubble::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -12px;
   top: 24px;

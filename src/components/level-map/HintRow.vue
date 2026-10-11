@@ -5,6 +5,10 @@
       :key="i"
       :step="baseStep + i"
       class="hint-inline"
+      :class="{
+        'hint-current': isCurrent(i),
+        'hint-past': isPast(i),
+      }"
     >
       <span class="hint-icon">💡</span>
       <span class="hint-label">提示 {{ i + 1 }}</span>
@@ -14,12 +18,23 @@
 </template>
 
 <script setup>
-import StepWrapper from '@/components/common/StepWrapper.vue';
+import { computed } from "vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStep } from "@/composables/useStep";
 
-defineProps({
+const props = defineProps({
   hints: { type: Array, default: () => [] },
-  baseStep: { type: Number, default: 2 }
+  baseStep: { type: Number, default: 2 },
 });
+
+const { current } = useStep();
+
+function isCurrent(i) {
+  return current.value === props.baseStep + i;
+}
+function isPast(i) {
+  return current.value > props.baseStep + i;
+}
 </script>
 
 <style scoped>
@@ -53,5 +68,18 @@ defineProps({
   font-weight: 700;
   color: var(--accent);
   flex-shrink: 0;
+}
+.hint-inline.hint-current {
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-soft) 0%, var(--bg-card) 40%);
+  box-shadow: 0 4px 16px rgba(255, 122, 0, 0.15);
+}
+
+.hint-inline.hint-past {
+  opacity: 0.55;
+}
+
+.hint-inline.hint-past .hint-label {
+  color: var(--text-dim);
 }
 </style>

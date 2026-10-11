@@ -1,26 +1,66 @@
 <template>
   <!-- Canvas 覆盖层 -->
-  <canvas ref="canvasRef" class="marker-canvas" :style="{ pointerEvents: enabled ? 'auto' : 'none' }" />
+  <canvas
+    ref="canvasRef"
+    class="marker-canvas"
+    :style="{ pointerEvents: enabled ? 'auto' : 'none' }"
+  />
 
   <!-- 工具栏 Widget -->
-  <div ref="widgetRef" class="marker-widget" :style="widgetStyle" @click.stop @mousedown.stop @mouseup.stop
-    @pointerdown.stop @pointerup.stop>
+  <div
+    ref="widgetRef"
+    class="marker-widget"
+    :style="widgetStyle"
+    @click.stop
+    @mousedown.stop
+    @mouseup.stop
+    @pointerdown.stop
+    @pointerup.stop
+  >
     <!-- 触发按钮 -->
-    <button ref="triggerRef" class="marker-trigger" :class="{ active: panelOpen }" title="点击展开画笔工具，拖动可移动位置"
-      @pointerdown="onTriggerPointerDown" @pointermove="onPointerMove" @pointerup="onPointerUp"
-      @pointercancel="onPointerUp">
+    <button
+      ref="triggerRef"
+      class="marker-trigger"
+      :class="{ active: panelOpen }"
+      title="点击展开画笔工具，拖动可移动位置"
+      @pointerdown="onTriggerPointerDown"
+      @pointermove="onPointerMove"
+      @pointerup="onPointerUp"
+      @pointercancel="onPointerUp"
+    >
       ✏️
     </button>
 
     <!-- 展开面板 -->
-    <div v-show="panelOpen" ref="panelRef" class="marker-panel" :style="panelStyle">
-      <button class="marker-btn" :class="{ active: enabled }" title="开启/关闭画笔（P）" @click="toggleDraw">✏️</button>
+    <div
+      v-show="panelOpen"
+      ref="panelRef"
+      class="marker-panel"
+      :style="panelStyle"
+    >
+      <button
+        class="marker-btn"
+        :class="{ active: enabled }"
+        title="开启/关闭画笔（P）"
+        @click="toggleDraw"
+      >
+        ✏️
+      </button>
 
       <span class="marker-divider" />
 
-      <button v-for="c in COLORS" :key="c" class="marker-color" :class="{ active: color === c }"
-        :style="{ background: c, boxShadow: color === c ? `0 0 0 2px #fff, 0 0 0 4px ${c}` : 'none' }" title="画笔颜色"
-        @click="color = c" />
+      <button
+        v-for="c in COLORS"
+        :key="c"
+        class="marker-color"
+        :class="{ active: color === c }"
+        :style="{
+          background: c,
+          boxShadow: color === c ? `0 0 0 2px #fff, 0 0 0 4px ${c}` : 'none',
+        }"
+        title="画笔颜色"
+        @click="color = c"
+      />
 
       <span class="marker-divider" />
 
@@ -32,10 +72,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from "vue";
 
 // ==================== 常量 ====================
-const COLORS = ['#FF3B30', '#FFB400', '#00B42A', '#165DFF', '#1a2f4a'];
+const COLORS = ["#FF3B30", "#FFB400", "#00B42A", "#165DFF", "#1a2f4a"];
 const DRAG_THRESHOLD = 5;
 
 // ==================== DOM 引用 ====================
@@ -45,27 +85,27 @@ const triggerRef = ref(null);
 const panelRef = ref(null);
 
 // ==================== 状态 ====================
-const enabled = ref(false);       // 画笔开关
-const panelOpen = ref(false);     // 面板展开
-const color = ref(COLORS[0]);     // 当前颜色
-const lineWidth = ref(4);         // 线宽
+const enabled = ref(false); // 画笔开关
+const panelOpen = ref(false); // 面板展开
+const color = ref(COLORS[0]); // 当前颜色
+const lineWidth = ref(4); // 线宽
 
 // Widget 位置
-const widgetPos = ref({ left: null, top: null, transform: 'translateX(-50%)' });
+const widgetPos = ref({ left: null, top: null, transform: "translateX(-50%)" });
 const widgetStyle = computed(() => {
   const pos = widgetPos.value;
   if (pos.left == null) {
     // 默认居中
     return {
-      left: '50%',
-      top: '16px',
-      transform: 'translateX(-50%)'
+      left: "50%",
+      top: "16px",
+      transform: "translateX(-50%)",
     };
   }
   return {
-    left: pos.left + 'px',
-    top: pos.top + 'px',
-    transform: 'none'
+    left: pos.left + "px",
+    top: pos.top + "px",
+    transform: "none",
   };
 });
 
@@ -75,7 +115,8 @@ const panelStyle = ref({});
 // ==================== Canvas 上下文 ====================
 let ctx = null;
 let drawing = false;
-let lastX = 0, lastY = 0;
+let lastX = 0,
+  lastY = 0;
 const snapshots = [];
 
 // ==================== 拖拽状态 ====================
@@ -98,20 +139,22 @@ function resizeCanvas() {
   let snapshot = null;
   if (oldW > 0 && oldH > 0) {
     try {
-      snapshot = document.createElement('canvas');
+      snapshot = document.createElement("canvas");
       snapshot.width = oldW;
       snapshot.height = oldH;
-      snapshot.getContext('2d').drawImage(canvas, 0, 0);
-    } catch (_) { /* 忽略异常 */ }
+      snapshot.getContext("2d").drawImage(canvas, 0, 0);
+    } catch (_) {
+      /* 忽略异常 */
+    }
   }
 
   // 2. 改尺寸会清空，这是不可避免的
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
-  ctx = canvas.getContext('2d');
+  ctx = canvas.getContext("2d");
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
 
   // 3. 恢复旧内容（原始像素位置，不缩放）
   if (snapshot) {
@@ -151,15 +194,19 @@ function onCanvasMove(e) {
 function onCanvasUp(e) {
   if (!drawing) return;
   drawing = false;
-  try { canvasRef.value.releasePointerCapture(e.pointerId); } catch (_) { }
+  try {
+    canvasRef.value.releasePointerCapture(e.pointerId);
+  } catch (_) {}
 }
 
 // ==================== 快照 / 撤销 / 清空 ====================
 function saveSnapshot() {
   try {
-    snapshots.push(ctx.getImageData(0, 0, canvasRef.value.width, canvasRef.value.height));
+    snapshots.push(
+      ctx.getImageData(0, 0, canvasRef.value.width, canvasRef.value.height),
+    );
     if (snapshots.length > 30) snapshots.shift();
-  } catch (_) { }
+  } catch (_) {}
 }
 
 function undo() {
@@ -196,17 +243,17 @@ watch(panelOpen, async (open) => {
 
   if (centerX > window.innerWidth / 2) {
     panelStyle.value = {
-      left: 'auto',
-      right: 'calc(100% + 10px)',
-      top: '50%',
-      transform: 'translateY(-50%)'
+      left: "auto",
+      right: "calc(100% + 10px)",
+      top: "50%",
+      transform: "translateY(-50%)",
     };
   } else {
     panelStyle.value = {
-      left: 'calc(100% + 10px)',
-      right: 'auto',
-      top: '50%',
-      transform: 'translateY(-50%)'
+      left: "calc(100% + 10px)",
+      right: "auto",
+      top: "50%",
+      transform: "translateY(-50%)",
     };
   }
 });
@@ -271,22 +318,22 @@ function onPointerUp(e) {
 
 // ==================== 快捷键 ====================
 function onKeyDown(e) {
-  if (e.target.closest('input, textarea')) return;
+  if (e.target.closest("input, textarea")) return;
 
-  if (e.key === 'p' || e.key === 'P') {
+  if (e.key === "p" || e.key === "P") {
     e.preventDefault();
     if (!panelOpen.value) panelOpen.value = true;
     toggleDraw();
     return;
   }
 
-  if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z')) {
+  if ((e.ctrlKey || e.metaKey) && (e.key === "z" || e.key === "Z")) {
     e.preventDefault();
     undo();
     return;
   }
 
-  if (e.key === 'Escape' && panelOpen.value) {
+  if (e.key === "Escape" && panelOpen.value) {
     closePanel();
   }
 }
@@ -294,23 +341,23 @@ function onKeyDown(e) {
 // ==================== 生命周期 ====================
 onMounted(() => {
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener("resize", resizeCanvas);
 
   const canvas = canvasRef.value;
-  canvas.addEventListener('pointerdown', onCanvasDown);
-  canvas.addEventListener('pointermove', onCanvasMove);
-  canvas.addEventListener('pointerup', onCanvasUp);
-  canvas.addEventListener('pointercancel', onCanvasUp);
+  canvas.addEventListener("pointerdown", onCanvasDown);
+  canvas.addEventListener("pointermove", onCanvasMove);
+  canvas.addEventListener("pointerup", onCanvasUp);
+  canvas.addEventListener("pointercancel", onCanvasUp);
   // 阻止冒泡（防止触发翻页）
-  canvas.addEventListener('click', e => e.stopPropagation());
-  canvas.addEventListener('mousedown', e => e.stopPropagation());
+  canvas.addEventListener("click", (e) => e.stopPropagation());
+  canvas.addEventListener("mousedown", (e) => e.stopPropagation());
 
-  document.addEventListener('keydown', onKeyDown);
+  document.addEventListener("keydown", onKeyDown);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', resizeCanvas);
-  document.removeEventListener('keydown', onKeyDown);
+  window.removeEventListener("resize", resizeCanvas);
+  document.removeEventListener("keydown", onKeyDown);
 });
 </script>
 
@@ -353,7 +400,10 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
   touch-action: none;
 }
 
@@ -394,7 +444,9 @@ onUnmounted(() => {
   font-size: 16px;
   cursor: pointer;
   color: #165dff;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;

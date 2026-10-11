@@ -13,7 +13,7 @@
             class="queue-item"
             :class="{
               'is-head': i === 0,
-              'is-tail': i === currentStep.state.items.length - 1
+              'is-tail': i === currentStep.state.items.length - 1,
             }"
           >
             {{ item.value }}
@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import AnimationFrame from './AnimationFrame.vue';
+import AnimationFrame from "./AnimationFrame.vue";
 defineProps({ slide: { type: Object, required: true } });
 </script>
 

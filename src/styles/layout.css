@@ -44,7 +44,9 @@
   overflow-y: auto;
   padding-right: 6px;
 }
-.slide-body > * + * { margin-top: var(--space-gap-md); }
+.slide-body > * + * {
+  margin-top: var(--space-gap-md);
+}
 
 /* ============================================
    章节标签
@@ -53,7 +55,7 @@
   /* 绝对定位到右上角，脱离文档流 */
   position: absolute;
   top: 18px;
-  right: 140px;          /* 给右侧工具按钮留空间 */
+  right: 140px; /* 给右侧工具按钮留空间 */
   z-index: 10;
 
   padding: 5px 16px;
@@ -73,12 +75,29 @@
 /* ============================================
    关键词高亮（保持不变）
    ============================================ */
-.keyword { color: var(--accent); font-weight: 800; padding: 0 3px; }
-.keyword-primary { color: var(--primary); font-weight: 800; }
-.keyword-green { color: var(--success); font-weight: 800; }
-.keyword-red { color: var(--error); font-weight: 800; }
+.keyword {
+  color: var(--accent);
+  font-weight: 800;
+  padding: 0 3px;
+}
+.keyword-primary {
+  color: var(--primary);
+  font-weight: 800;
+}
+.keyword-green {
+  color: var(--success);
+  font-weight: 800;
+}
+.keyword-red {
+  color: var(--error);
+  font-weight: 800;
+}
 .keyword-mark {
-  background: linear-gradient(180deg, transparent 60%, rgba(255, 122, 0, 0.35) 60%);
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(255, 122, 0, 0.35) 60%
+  );
   font-weight: 700;
   padding: 0 2px;
 }

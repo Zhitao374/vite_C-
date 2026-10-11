@@ -7,7 +7,10 @@
           <line
             v-for="e in edges"
             :key="e.id"
-            :x1="e.x1" :y1="e.y1" :x2="e.x2" :y2="e.y2"
+            :x1="e.x1"
+            :y1="e.y1"
+            :x2="e.x2"
+            :y2="e.y2"
             :class="{ 'is-visited': e.visited }"
           />
         </svg>
@@ -21,7 +24,7 @@
             :class="{
               'is-visited': visited.has(node.id),
               'is-current': currentStep.visit === node.id,
-              'is-path': (currentStep.path || []).includes(node.id)
+              'is-path': (currentStep.path || []).includes(node.id),
             }"
             :style="nodeStyle(node)"
           >
@@ -34,10 +37,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import AnimationFrame from './AnimationFrame.vue';
-import { layoutTree, flattenTree, buildEdges } from '@/lib/tree-layout';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import AnimationFrame from "./AnimationFrame.vue";
+import { layoutTree, flattenTree, buildEdges } from "@/lib/tree-layout";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
@@ -48,7 +51,7 @@ const { current } = useStep();
 const steps = computed(() => props.slide.data?.steps || []);
 
 const currentIndex = computed(() =>
-  Math.max(0, Math.min(current.value - 1, steps.value.length - 1))
+  Math.max(0, Math.min(current.value - 1, steps.value.length - 1)),
 );
 const currentStep = computed(() => steps.value[currentIndex.value] || {});
 
@@ -56,19 +59,24 @@ const visited = computed(() => new Set(currentStep.value.visited || []));
 
 // 树布局
 const positions = computed(() =>
-  layoutTree(props.slide.data?.tree, stageW, stageH)
+  layoutTree(props.slide.data?.tree, stageW, stageH),
 );
 
 const nodes = computed(() => flattenTree(props.slide.data?.tree));
 
 const edges = computed(() =>
-  buildEdges(props.slide.data?.tree, positions.value, visited.value, currentStep.value.visit)
+  buildEdges(
+    props.slide.data?.tree,
+    positions.value,
+    visited.value,
+    currentStep.value.visit,
+  ),
 );
 
 function nodeStyle(node) {
   const p = positions.value[node.id];
-  if (!p) return { display: 'none' };
-  return { left: p.x + 'px', top: p.y + 'px' };
+  if (!p) return { display: "none" };
+  return { left: p.x + "px", top: p.y + "px" };
 }
 </script>
 
@@ -86,7 +94,9 @@ function nodeStyle(node) {
 .edges line {
   stroke: #b0c4d8;
   stroke-width: 2;
-  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  transition:
+    stroke 0.3s ease,
+    stroke-width 0.3s ease;
 }
 .edges line.is-visited {
   stroke: var(--primary);
@@ -138,7 +148,9 @@ function nodeStyle(node) {
 
 /* 进入动画 */
 .tree-node-enter-active {
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .tree-node-enter-from {
   opacity: 0;

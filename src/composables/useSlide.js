@@ -1,7 +1,7 @@
-import { computed, watch, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { loadLesson, getCachedLesson } from '@/data';
-import { provideStep } from './useStep';
+import { computed, watch, ref } from "vue";
+import { useRouter } from "vue-router";
+import { loadLesson, getCachedLesson } from "@/data";
+import { provideStep } from "./useStep";
 
 export function useSlide(props) {
   const router = useRouter();
@@ -37,10 +37,10 @@ export function useSlide(props) {
       }
 
       lessonData.value = data;
-      slide.value = data.slides.find(s => s.id === slideId.value) || null;
+      slide.value = data.slides.find((s) => s.id === slideId.value) || null;
       loaded.value = true;
     },
-    { immediate: true }
+    { immediate: true },
   );
 
   // ============================================
@@ -48,7 +48,7 @@ export function useSlide(props) {
   // ============================================
   watch(slideId, (id) => {
     if (!lessonData.value) return;
-    slide.value = lessonData.value.slides.find(s => s.id === id) || null;
+    slide.value = lessonData.value.slides.find((s) => s.id === id) || null;
   });
 
   const totalSlides = computed(() => lessonData.value?.total || 1);
@@ -87,6 +87,6 @@ export function useSlide(props) {
     current: stepCtx.current,
     max: stepCtx.max,
     next,
-    prev
+    prev,
   };
 }

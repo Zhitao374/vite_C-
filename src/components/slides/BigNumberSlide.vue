@@ -20,18 +20,18 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
-const number = computed(() => d.value.number || '');
-const unit = computed(() => d.value.unit || '');
+const number = computed(() => d.value.number || "");
+const unit = computed(() => d.value.unit || "");
 const card = computed(() => d.value.card);
 const extra = computed(() => d.value.extra);
 
@@ -62,6 +62,8 @@ useStepCount(() => 1 + (card.value ? 1 : 0) + (extra.value ? 1 : 0));
 }
 
 @media (max-width: 900px) {
-  .split-wide { grid-template-columns: 1fr; }
+  .split-wide {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

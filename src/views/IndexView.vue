@@ -3,13 +3,11 @@
     <div class="index-container">
       <h1>C++ 竞赛课程体系</h1>
       <div class="quick-links">
-        <router-link to="/glossary" class="quick-link">
-          📖 术语表
-        </router-link>
+        <router-link to="/glossary" class="quick-link"> 📖 术语表 </router-link>
       </div>
       <p class="subtitle">从 0 基础到 CSP-J/S · 一周一课 · 从零到竞赛</p>
 
-      <!-- 统计卡片 --> 
+      <!-- 统计卡片 -->
       <div class="home-stats">
         <div class="stat-card">
           <div class="stat-num">{{ publishedCount }}</div>
@@ -40,7 +38,9 @@
             >
               <div class="lesson-num">
                 <span>第 {{ lesson.id }} 讲</span>
-                <span v-if="isCurrent(lesson.id)" class="lesson-badge current">🟡 进行中</span>
+                <span v-if="isCurrent(lesson.id)" class="lesson-badge current"
+                  >🟡 进行中</span
+                >
                 <span v-else class="lesson-badge done">✅ 已发布</span>
               </div>
               <div class="lesson-title">{{ lesson.title }}</div>
@@ -64,41 +64,43 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { fullPlan, STAGE_ORDER, isGenerated } from '@/data';
+import { computed } from "vue";
+import { fullPlan, STAGE_ORDER, isGenerated } from "@/data";
 
-const CURRENT_LESSON = '02';   // 当前正在开发的讲次
+const CURRENT_LESSON = "02"; // 当前正在开发的讲次
 
-function isCurrent(id) { return id === CURRENT_LESSON; }
+function isCurrent(id) {
+  return id === CURRENT_LESSON;
+}
 
 // 按阶段分组
 const groupedPlan = computed(() => {
   const groups = {};
-  fullPlan.forEach(l => {
-    const stage = l.stage || '未分类';
+  fullPlan.forEach((l) => {
+    const stage = l.stage || "未分类";
     if (!groups[stage]) groups[stage] = { stage, items: [] };
     groups[stage].items.push(l);
   });
 
   const ordered = [];
-  STAGE_ORDER.forEach(stage => {
+  STAGE_ORDER.forEach((stage) => {
     if (groups[stage]) {
       ordered.push(groups[stage]);
       delete groups[stage];
     }
   });
-  Object.values(groups).forEach(g => ordered.push(g));
+  Object.values(groups).forEach((g) => ordered.push(g));
 
   return ordered;
 });
 
 // 统计
-const publishedCount = computed(() =>
-  fullPlan.filter(l => isGenerated(l.id)).length
+const publishedCount = computed(
+  () => fullPlan.filter((l) => isGenerated(l.id)).length,
 );
 
 const progress = computed(() =>
-  Math.round((publishedCount.value / fullPlan.length) * 100)
+  Math.round((publishedCount.value / fullPlan.length) * 100),
 );
 </script>
 
@@ -216,7 +218,10 @@ h1 {
   box-shadow: var(--card-shadow);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 
 .lesson-card:not(.is-locked):hover {

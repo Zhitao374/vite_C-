@@ -1,5 +1,8 @@
 <template>
-  <div class="extra-card" :class="[variant, descLength < 200 ? 'card-subtle' : '']">
+  <div
+    class="extra-card"
+    :class="[variant, descLength < 200 ? 'card-subtle' : '']"
+  >
     <div
       class="extra-header"
       @click.stop="toggle"
@@ -8,8 +11,8 @@
       @pointerdown.stop
       @pointerup.stop
     >
-      <span class="extra-title">{{ title || '📖 知识扩展' }}</span>
-      <span class="extra-toggle">{{ expanded ? '收起 ▲' : '展开 ▼' }}</span>
+      <span class="extra-title">{{ title || "📖 知识扩展" }}</span>
+      <span class="extra-toggle">{{ expanded ? "收起 ▲" : "展开 ▼" }}</span>
     </div>
 
     <transition name="extra-expand">
@@ -21,18 +24,18 @@
 </template>
 
 <script setup>
-import { ref, computed  } from 'vue';
+import { ref, computed } from "vue";
 
 const props = defineProps({
-  title: { type: String, default: '' },
-  desc: { type: String, default: '' },
-  variant: { type: String, default: 'card-primary' },
-  defaultExpanded: { type: Boolean, default: true }
+  title: { type: String, default: "" },
+  desc: { type: String, default: "" },
+  variant: { type: String, default: "card-primary" },
+  defaultExpanded: { type: Boolean, default: true },
 });
 
 const expanded = ref(props.defaultExpanded);
 
-const descLength = computed(() => (props.desc || '').length);
+const descLength = computed(() => (props.desc || "").length);
 
 function toggle() {
   expanded.value = !expanded.value;
@@ -95,16 +98,18 @@ function toggle() {
   font-size: var(--fs-card-desc);
   color: var(--text-sub);
   line-height: 1.85;
-  column-width: 340px;    /* 每栏至少 340px */
+  column-width: 340px; /* 每栏至少 340px */
   column-gap: 28px;
 }
 .extra-desc > * {
-  break-inside: avoid;     /* 避免段落被截断到两栏 */
+  break-inside: avoid; /* 避免段落被截断到两栏 */
 }
 
 .extra-expand-enter-active,
 .extra-expand-leave-active {
-  transition: opacity 0.25s ease, max-height 0.3s ease;
+  transition:
+    opacity 0.25s ease,
+    max-height 0.3s ease;
   overflow: hidden;
 }
 .extra-expand-enter-from,
@@ -124,7 +129,9 @@ function toggle() {
   text-decoration: none;
   border-bottom: 1px dashed var(--primary);
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
 .extra-desc :deep(.wiki-link:hover) {
   color: var(--accent);

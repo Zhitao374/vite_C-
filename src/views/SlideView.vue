@@ -16,7 +16,9 @@
     <!-- 页面未找到 -->
     <div v-else-if="!slide" class="slide-view-error">
       <h1>未找到该页</h1>
-      <router-link :to="`/lesson/${lesson}`" class="back-btn" data-no-flip>← 返回目录</router-link>
+      <router-link :to="`/lesson/${lesson}`" class="back-btn" data-no-flip
+        >← 返回目录</router-link
+      >
     </div>
 
     <!-- 正常渲染 -->
@@ -43,20 +45,36 @@
 
       <!-- 快捷键提示 -->
       <div v-if="showShortcuts" class="shortcuts-bar">
-        <span>💡 按 <kbd>空格</kbd> / <kbd>→</kbd> 下一页，<kbd>←</kbd> 上一页，<kbd>Esc</kbd> 回目录</span>
-        <button class="shortcuts-close" data-no-flip @click.stop="closeShortcuts">×</button>
+        <span
+          >💡 按 <kbd>空格</kbd> / <kbd>→</kbd> 下一页，<kbd>←</kbd>
+          上一页，<kbd>Esc</kbd> 回目录</span
+        >
+        <button
+          class="shortcuts-close"
+          data-no-flip
+          @click.stop="closeShortcuts"
+        >
+          ×
+        </button>
       </div>
 
-      <router-link :to="`/lesson/${lesson}`" class="back-btn" data-no-flip title="返回本讲目录">⌂</router-link>
+      <router-link
+        :to="`/lesson/${lesson}`"
+        class="back-btn"
+        data-no-flip
+        title="返回本讲目录"
+        >⌂</router-link
+      >
 
       <div class="step-hint">
-        {{ isLastStep ? '点击进入下一页 →' : `点击继续 · ${current}/${max}` }}
+        {{ isLastStep ? "点击进入下一页 →" : `点击继续 · ${current}/${max}` }}
       </div>
 
       <div class="slide-nav">
         <button class="nav-btn" data-no-flip @click.stop="prev">‹</button>
         <span class="page-num">
-          {{ String(slideId).padStart(2, '0') }} / {{ String(totalSlides).padStart(2, '0') }}
+          {{ String(slideId).padStart(2, "0") }} /
+          {{ String(totalSlides).padStart(2, "0") }}
         </span>
         <button class="nav-btn" data-no-flip @click.stop="next">›</button>
       </div>
@@ -68,23 +86,30 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, watch } from 'vue';
-import { slideComponents, preloadAllSlides } from '@/components/slides';
-import { useSlide } from '@/composables/useSlide';
-import { useSlideNav } from '@/composables/useSlideNav';
-import MarkerTool from '@/components/common/MarkerTool.vue';
-import FontScaler from '@/components/common/FontScaler.vue';
-import ErrorBoundary from '@/components/common/ErrorBoundary.vue';
-import { useSlideTheme } from '@/composables/useSlideTheme';
+import { computed, ref, onMounted, watch } from "vue";
+import { slideComponents, preloadAllSlides } from "@/components/slides";
+import { useSlide } from "@/composables/useSlide";
+import { useSlideNav } from "@/composables/useSlideNav";
+import MarkerTool from "@/components/common/MarkerTool.vue";
+import FontScaler from "@/components/common/FontScaler.vue";
+import ErrorBoundary from "@/components/common/ErrorBoundary.vue";
+import { useSlideTheme } from "@/composables/useSlideTheme";
 
 const props = defineProps({
   lesson: { type: String, required: true },
-  slide: { type: String, required: true }
+  slide: { type: String, required: true },
 });
 
 const {
-  slide, slideId, totalSlides, loaded,
-  stepCtx, current, max, next, prev
+  slide,
+  slideId,
+  totalSlides,
+  loaded,
+  stepCtx,
+  current,
+  max,
+  next,
+  prev,
 } = useSlide(props);
 
 const { bgVar } = useSlideTheme(slide);
@@ -93,7 +118,7 @@ const bgValue = computed(() => `var(${bgVar.value})`);
 watch(slideId, () => stepCtx.setMax(1), { immediate: false });
 
 const slideComponent = computed(() =>
-  slide.value ? slideComponents[slide.value.type] || null : null
+  slide.value ? slideComponents[slide.value.type] || null : null,
 );
 
 const isLastStep = computed(() => current.value >= max.value);
@@ -103,12 +128,12 @@ useSlideNav({
   slide: computed(() => props.slide),
   total: totalSlides,
   next,
-  prev
+  prev,
 });
 
 const showShortcuts = ref(false);
 onMounted(() => {
-  if (!localStorage.getItem('cpp-course-shortcuts-seen')) {
+  if (!localStorage.getItem("cpp-course-shortcuts-seen")) {
     showShortcuts.value = true;
   }
   preloadAllSlides();
@@ -116,7 +141,7 @@ onMounted(() => {
 
 function closeShortcuts() {
   showShortcuts.value = false;
-  localStorage.setItem('cpp-course-shortcuts-seen', '1');
+  localStorage.setItem("cpp-course-shortcuts-seen", "1");
 }
 </script>
 
@@ -210,8 +235,12 @@ function closeShortcuts() {
 }
 
 @keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* ============================================ */

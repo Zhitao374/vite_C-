@@ -5,10 +5,15 @@
  * 不再依赖 lessons 完整对象 —— 支持 lazy 加载
  */
 
-import { glossaryWords } from './glossary-data.js';
+import { glossaryWords } from "./glossary-data.js";
 
 export const GLOSSARY_CATEGORIES = [
-  '关键字', '类型', '函数', '运算符', '语句', '概念'
+  "关键字",
+  "类型",
+  "函数",
+  "运算符",
+  "语句",
+  "概念",
 ];
 
 // ============================================
@@ -20,11 +25,11 @@ export const allWords = (() => {
 
   // 按 lessonId 排序，保证"第一讲"是最早出现的
   const sorted = [...glossaryWords].sort((a, b) =>
-    a.lessonId.localeCompare(b.lessonId)
+    a.lessonId.localeCompare(b.lessonId),
   );
 
-  sorted.forEach(w => {
-    const key = (w.word || '').toLowerCase();
+  sorted.forEach((w) => {
+    const key = (w.word || "").toLowerCase();
     if (!key) return;
 
     if (!seen.has(key)) {
@@ -33,10 +38,10 @@ export const allWords = (() => {
         ...w,
         word: key,
         firstLesson: w.lessonId,
-        allLessons: [w.lessonId]
+        allLessons: [w.lessonId],
       });
     } else {
-      const existing = words.find(x => x.word === key);
+      const existing = words.find((x) => x.word === key);
       if (existing && !existing.allLessons.includes(w.lessonId)) {
         existing.allLessons.push(w.lessonId);
       }
@@ -51,9 +56,9 @@ export const allWords = (() => {
 // ============================================
 export const wordsByCategory = (() => {
   const groups = {};
-  GLOSSARY_CATEGORIES.forEach(c => groups[c] = []);
-  allWords.forEach(w => {
-    const c = w.category || '概念';
+  GLOSSARY_CATEGORIES.forEach((c) => (groups[c] = []));
+  allWords.forEach((w) => {
+    const c = w.category || "概念";
     if (!groups[c]) groups[c] = [];
     groups[c].push(w);
   });
@@ -65,7 +70,7 @@ export const wordsByCategory = (() => {
 // ============================================
 export const wordsByLesson = (() => {
   const groups = {};
-  allWords.forEach(w => {
+  allWords.forEach((w) => {
     const id = w.firstLesson;
     if (!groups[id]) groups[id] = [];
     groups[id].push(w);
@@ -79,10 +84,11 @@ export const wordsByLesson = (() => {
 export function searchWords(query) {
   if (!query || !query.trim()) return allWords;
   const q = query.trim().toLowerCase();
-  return allWords.filter(w =>
-    w.word.includes(q) ||
-    (w.cn && w.cn.includes(q)) ||
-    (w.origin && w.origin.toLowerCase().includes(q))
+  return allWords.filter(
+    (w) =>
+      w.word.includes(q) ||
+      (w.cn && w.cn.includes(q)) ||
+      (w.origin && w.origin.toLowerCase().includes(q)),
   );
 }
 
@@ -92,7 +98,7 @@ export function searchWords(query) {
 export const glossaryStats = {
   total: allWords.length,
   byCategory: Object.fromEntries(
-    GLOSSARY_CATEGORIES.map(c => [c, (wordsByCategory[c] || []).length])
+    GLOSSARY_CATEGORIES.map((c) => [c, (wordsByCategory[c] || []).length]),
   ),
-  multiLessonCount: allWords.filter(w => w.allLessons.length > 1).length
+  multiLessonCount: allWords.filter((w) => w.allLessons.length > 1).length,
 };

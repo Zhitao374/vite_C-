@@ -1,10 +1,12 @@
-import { onMounted, onUnmounted, unref } from 'vue';
-import { useRouter } from 'vue-router';
+import { onMounted, onUnmounted, unref } from "vue";
+import { useRouter } from "vue-router";
 
 export function useSlideNav({ lesson, slide, total, next, prev }) {
   const router = useRouter();
   const MOVE_THRESHOLD = 5;
-  let downX = 0, downY = 0, hasMoved = false;
+  let downX = 0,
+    downY = 0,
+    hasMoved = false;
 
   function onClick() {
     next();
@@ -21,8 +23,10 @@ export function useSlideNav({ lesson, slide, total, next, prev }) {
 
   function onMouseMove(e) {
     if (hasMoved) return;
-    if (Math.abs(e.clientX - downX) > MOVE_THRESHOLD ||
-      Math.abs(e.clientY - downY) > MOVE_THRESHOLD) {
+    if (
+      Math.abs(e.clientX - downX) > MOVE_THRESHOLD ||
+      Math.abs(e.clientY - downY) > MOVE_THRESHOLD
+    ) {
       hasMoved = true;
     }
   }
@@ -30,12 +34,24 @@ export function useSlideNav({ lesson, slide, total, next, prev }) {
   function onMouseUp(e) {
     // 用 data-no-flip 统一判定
     const interactiveSelector = [
-      'a', 'button', 'input', 'textarea', 'select',
-      '.copy-btn', '.nav-btn', '.back-btn',
-      '.font-scaler', '.marker-widget', '.marker-trigger', '.marker-panel', '.marker-canvas',
-      '.extra-header', '.shortcuts-close', '.shortcuts-bar',
-      '[data-no-flip]'
-    ].join(', ');
+      "a",
+      "button",
+      "input",
+      "textarea",
+      "select",
+      ".copy-btn",
+      ".nav-btn",
+      ".back-btn",
+      ".font-scaler",
+      ".marker-widget",
+      ".marker-trigger",
+      ".marker-panel",
+      ".marker-canvas",
+      ".extra-header",
+      ".shortcuts-close",
+      ".shortcuts-bar",
+      "[data-no-flip]",
+    ].join(", ");
     if (e.target.closest(interactiveSelector)) return;
     if (hasMoved) return;
 
@@ -46,30 +62,41 @@ export function useSlideNav({ lesson, slide, total, next, prev }) {
   }
 
   function onKeyDown(e) {
-    if (e.target.closest('input, textarea, select')) return;
+    if (e.target.closest("input, textarea, select")) return;
     switch (e.key) {
-      case 'ArrowRight': case ' ': case 'Enter': case 'PageDown':
-        e.preventDefault(); next(); break;
-      case 'ArrowLeft': case 'Backspace': case 'PageUp':
-        e.preventDefault(); prev(); break;
-      case 'Escape':
-        router.push(`/lesson/${unref(lesson)}`); break;
-      case 'Home':
-        router.push(`/slide/${unref(lesson)}/1`); break;
+      case "ArrowRight":
+      case " ":
+      case "Enter":
+      case "PageDown":
+        e.preventDefault();
+        next();
+        break;
+      case "ArrowLeft":
+      case "Backspace":
+      case "PageUp":
+        e.preventDefault();
+        prev();
+        break;
+      case "Escape":
+        router.push(`/lesson/${unref(lesson)}`);
+        break;
+      case "Home":
+        router.push(`/slide/${unref(lesson)}/1`);
+        break;
     }
   }
 
   onMounted(() => {
-    document.addEventListener('mousedown', onMouseDown);
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("keydown", onKeyDown);
   });
 
   onUnmounted(() => {
-    document.removeEventListener('mousedown', onMouseDown);
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-    document.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener("mousedown", onMouseDown);
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+    document.removeEventListener("keydown", onKeyDown);
   });
 }

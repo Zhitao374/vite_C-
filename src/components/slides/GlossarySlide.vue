@@ -20,17 +20,17 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const grouped = computed(() => {
   const groups = {};
-  (props.slide.data?.words || []).forEach(w => {
-    const c = w.category || '概念';
+  (props.slide.data?.words || []).forEach((w) => {
+    const c = w.category || "概念";
     if (!groups[c]) groups[c] = [];
     groups[c].push(w);
   });
@@ -39,14 +39,14 @@ const grouped = computed(() => {
 
 function categoryIcon(cat) {
   const map = {
-    '关键字': '🔑',
-    '类型': '📦',
-    '函数': '🔧',
-    '运算符': '➕',
-    '语句': '📝',
-    '概念': '💡'
+    关键字: "🔑",
+    类型: "📦",
+    函数: "🔧",
+    运算符: "➕",
+    语句: "📝",
+    概念: "💡",
   };
-  return map[cat] || '📌';
+  return map[cat] || "📌";
 }
 </script>
 

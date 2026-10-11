@@ -1,10 +1,6 @@
 <template>
   <SlideShell :slide="slide">
-    <div
-      v-for="(q, qi) in questions"
-      :key="qi"
-      class="quiz-item"
-    >
+    <div v-for="(q, qi) in questions" :key="qi" class="quiz-item">
       <!-- 第 1 步：题干 + 选项 -->
       <StepWrapper :step="2 * qi + 1">
         <div class="quiz-head">
@@ -40,10 +36,9 @@
               <CodeBlock :code="opt.code" density="xs" />
             </div>
 
-            <span
-              v-if="answerShown(qi) && opt.correct"
-              class="option-mark"
-            >✅</span>
+            <span v-if="answerShown(qi) && opt.correct" class="option-mark"
+              >✅</span
+            >
           </li>
         </ul>
       </StepWrapper>
@@ -60,15 +55,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import CodeBlock from '@/components/common/CodeBlock.vue';
-import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import { useStepCount } from "@/composables/useStepCount";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const questions = computed(() => props.slide.data?.questions || []);
@@ -85,7 +80,7 @@ function answerShown(qi) {
 }
 
 function starsOf(n) {
-  return '⭐'.repeat(n || 2);
+  return "⭐".repeat(n || 2);
 }
 
 /**
@@ -97,7 +92,7 @@ function starsOf(n) {
  * - 长文本（>30 字）→ vertical
  */
 function layoutOf(q) {
-  if (q.optionLayout && q.optionLayout !== 'auto') {
+  if (q.optionLayout && q.optionLayout !== "auto") {
     return q.optionLayout;
   }
 
@@ -105,28 +100,28 @@ function layoutOf(q) {
   if (import.meta.env.DEV) {
     console.warn(
       `[QuizSlide] question ${q.id} 未显式声明 optionLayout，` +
-      `正在使用启发式推断。建议在数据里补上 optionLayout 字段。`
+        `正在使用启发式推断。建议在数据里补上 optionLayout 字段。`,
     );
   }
 
   // 保留原有启发式逻辑（不变）
   const opts = q.options || [];
-  if (opts.length === 0) return 'vertical';
-  if (opts.some(o => o.code)) return 'code';
-  if (opts.length === 2) return 'two-cols';
+  if (opts.length === 0) return "vertical";
+  if (opts.some((o) => o.code)) return "code";
+  if (opts.length === 2) return "two-cols";
 
-  const hasHtml = opts.some(o => /<[^>]+>/.test(o.text || ''));
-  if (hasHtml) return 'two-cols';
+  const hasHtml = opts.some((o) => /<[^>]+>/.test(o.text || ""));
+  if (hasHtml) return "two-cols";
 
-  const maxLen = Math.max(...opts.map(o => stripHtml(o.text || '').length));
+  const maxLen = Math.max(...opts.map((o) => stripHtml(o.text || "").length));
 
-  if (maxLen <= 8) return 'horizontal';
-  if (maxLen <= 30) return 'two-cols';
-  return 'vertical';
+  if (maxLen <= 8) return "horizontal";
+  if (maxLen <= 30) return "two-cols";
+  return "vertical";
 }
 
 function stripHtml(s) {
-  return String(s).replace(/<[^>]+>/g, '');
+  return String(s).replace(/<[^>]+>/g, "");
 }
 </script>
 

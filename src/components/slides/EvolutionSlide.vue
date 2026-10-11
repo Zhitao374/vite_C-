@@ -25,7 +25,9 @@
         </div>
 
         <div class="step-progress">
-          <span class="progress-num">{{ currentIndex + 1 }} / {{ steps.length }}</span>
+          <span class="progress-num"
+            >{{ currentIndex + 1 }} / {{ steps.length }}</span
+          >
         </div>
       </div>
     </div>
@@ -33,14 +35,14 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, nextTick } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import CodeBlock from '@/components/common/CodeBlock.vue';
-import { useStep } from '@/composables/useStep';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed, ref, watch, nextTick } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import { useStep } from "@/composables/useStep";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const { current } = useStep();
@@ -49,10 +51,10 @@ const { current } = useStep();
 // 步骤数据
 // ============================================
 const steps = computed(() => props.slide.data?.steps || []);
-const intro = computed(() => props.slide.data?.intro || '');
+const intro = computed(() => props.slide.data?.intro || "");
 
 const currentIndex = computed(() =>
-  Math.max(0, Math.min(current.value - 1, steps.value.length - 1))
+  Math.max(0, Math.min(current.value - 1, steps.value.length - 1)),
 );
 
 const currentStep = computed(() => steps.value[currentIndex.value] || null);
@@ -69,14 +71,12 @@ const hiddenLines = computed(() => {
   return Array.isArray(step.hiddenLines) ? step.hiddenLines : [];
 });
 
-const placeholder = computed(() => currentStep.value?.placeholder || '');
+const placeholder = computed(() => currentStep.value?.placeholder || "");
 
 // ============================================
 // 步数上报（替代原 watch(stepTotal) 老写法）
 // ============================================
-useStepCount(() =>
-  steps.value.length + (props.slide.data?.extra ? 1 : 0)
-);
+useStepCount(() => steps.value.length + (props.slide.data?.extra ? 1 : 0));
 
 // ============================================
 // 自动滚动到高亮行
@@ -94,14 +94,14 @@ async function scrollToFocusLine() {
   const wrap = codeWrapRef.value;
   if (!wrap) return;
 
-  const scrollContainer = wrap.querySelector('.code-block pre');
+  const scrollContainer = wrap.querySelector(".code-block pre");
   if (!scrollContainer) return;
 
   const firstLine = Math.min(...focusLines.value);
 
-  const lineNodes = scrollContainer.querySelectorAll('.code-line');
-  const target = Array.from(lineNodes).find(node => {
-    const numEl = node.querySelector('.code-num');
+  const lineNodes = scrollContainer.querySelectorAll(".code-line");
+  const target = Array.from(lineNodes).find((node) => {
+    const numEl = node.querySelector(".code-num");
     return numEl && parseInt(numEl.textContent.trim(), 10) === firstLine;
   });
 
@@ -116,7 +116,7 @@ async function scrollToFocusLine() {
   if (above || below) {
     scrollContainer.scrollTo({
       top: target.offsetTop - scrollContainer.clientHeight / 3,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   }
 }

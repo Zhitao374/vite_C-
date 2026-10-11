@@ -22,10 +22,10 @@
 </template>
 
 <script setup>
-import AnimationFrame from './AnimationFrame.vue';
+import AnimationFrame from "./AnimationFrame.vue";
 
 defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 </script>
 
@@ -34,10 +34,10 @@ defineProps({
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column-reverse;   /* 数组 [0] 在底部 */
+  flex-direction: column-reverse; /* 数组 [0] 在底部 */
   justify-content: flex-start;
   align-items: center;
-  padding: 24px 24px 60px;          /* 底部留空间放底座 */
+  padding: 24px 24px 60px; /* 底部留空间放底座 */
   gap: 6px;
 }
 

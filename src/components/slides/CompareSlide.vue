@@ -1,10 +1,6 @@
 <template>
   <SlideShell :slide="slide">
-    <StepWrapper
-      v-for="(g, i) in groups"
-      :key="i"
-      :step="i + 1"
-    >
+    <StepWrapper v-for="(g, i) in groups" :key="i" :step="i + 1">
       <div class="compare">
         <div class="compare-box compare-wrong">
           <div class="compare-label">❌ 错误</div>
@@ -21,13 +17,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const groups = computed(() => props.slide.data?.groups || []);
@@ -42,7 +38,9 @@ useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
   grid-template-columns: 1fr 50px 1fr;
   align-items: stretch;
 }
-.compare + .compare { margin-top: 8px; }
+.compare + .compare {
+  margin-top: 8px;
+}
 .compare-box {
   padding: 22px 28px;
   border-radius: 14px;
@@ -81,7 +79,12 @@ useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
 }
 
 @media (max-width: 900px) {
-  .compare { grid-template-columns: 1fr; gap: 8px; }
-  .compare-arrow { transform: rotate(90deg); }
+  .compare {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .compare-arrow {
+    transform: rotate(90deg);
+  }
 }
 </style>

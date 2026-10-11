@@ -7,33 +7,86 @@
  *     现在：0 次（模块加载时完成）
  */
 
-const KEYWORDS = ['if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 'return', 'using', 'namespace', 'const', 'static', 'struct', 'class', 'void', 'true', 'false'];
-const TYPES = ['int', 'long', 'short', 'double', 'float', 'char', 'bool', 'string', 'unsigned', 'signed', 'size_t'];
-const FUNCS = ['cout', 'cin', 'endl', 'main', 'printf', 'scanf', 'sort', 'max', 'min', 'abs', 'swap', 'vector', 'map', 'set', 'queue', 'stack', 'pair'];
+const KEYWORDS = [
+  "if",
+  "else",
+  "for",
+  "while",
+  "do",
+  "switch",
+  "case",
+  "break",
+  "continue",
+  "return",
+  "using",
+  "namespace",
+  "const",
+  "static",
+  "struct",
+  "class",
+  "void",
+  "true",
+  "false",
+];
+const TYPES = [
+  "int",
+  "long",
+  "short",
+  "double",
+  "float",
+  "char",
+  "bool",
+  "string",
+  "unsigned",
+  "signed",
+  "size_t",
+];
+const FUNCS = [
+  "cout",
+  "cin",
+  "endl",
+  "main",
+  "printf",
+  "scanf",
+  "sort",
+  "max",
+  "min",
+  "abs",
+  "swap",
+  "vector",
+  "map",
+  "set",
+  "queue",
+  "stack",
+  "pair",
+];
 
 const RULES = [
-  { cls: 'tok-str',  re: /"(?:\\.|[^"\\])*"/ },
-  { cls: 'tok-com',  re: /\/\/[^\n]*/ },
-  { cls: 'tok-pre',  re: /^\s*#\s*\w+/ },
-  { cls: 'tok-num',  re: /\b\d+(?:\.\d+)?\b/ },
-  { cls: 'tok-kw',   re: new RegExp('\\b(' + KEYWORDS.join('|') + ')\\b') },
-  { cls: 'tok-type', re: new RegExp('\\b(' + TYPES.join('|') + ')\\b') },
-  { cls: 'tok-fn',   re: new RegExp('\\b(' + FUNCS.join('|') + ')\\b') },
-  { cls: 'tok-op',   re: /&lt;&lt;|&gt;&gt;|&lt;=|&gt;=|&amp;&amp;|&lt;|&gt;|==|!=|\|\||[+\-*\/%=]/ },
-  { cls: 'tok-punc', re: /[{}();,]/ }
+  { cls: "tok-str", re: /"(?:\\.|[^"\\])*"/ },
+  { cls: "tok-com", re: /\/\/[^\n]*/ },
+  { cls: "tok-pre", re: /^\s*#\s*\w+/ },
+  { cls: "tok-num", re: /\b\d+(?:\.\d+)?\b/ },
+  { cls: "tok-kw", re: new RegExp("\\b(" + KEYWORDS.join("|") + ")\\b") },
+  { cls: "tok-type", re: new RegExp("\\b(" + TYPES.join("|") + ")\\b") },
+  { cls: "tok-fn", re: new RegExp("\\b(" + FUNCS.join("|") + ")\\b") },
+  {
+    cls: "tok-op",
+    re: /&lt;&lt;|&gt;&gt;|&lt;=|&gt;=|&amp;&amp;|&lt;|&gt;|==|!=|\|\||[+\-*\/%=]/,
+  },
+  { cls: "tok-punc", re: /[{}();,]/ },
 ];
 
 // ⚡ 预编译：模块加载时执行一次
-const COMPILED_RULES = RULES.map(r => ({
+const COMPILED_RULES = RULES.map((r) => ({
   cls: r.cls,
-  re: new RegExp(r.re.source, r.re.flags.replace('g', ''))
+  re: new RegExp(r.re.source, r.re.flags.replace("g", "")),
 }));
 
 function escapeHtml(str) {
-  return String(str == null ? '' : str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+  return String(str == null ? "" : str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 /**
@@ -41,9 +94,9 @@ function escapeHtml(str) {
  * 注意：输入必须是已 HTML 转义的字符串
  */
 function highlightLine(line) {
-  if (!line) return '';
+  if (!line) return "";
   let rest = line;
-  let out = '';
+  let out = "";
   let safety = 0;
 
   while (rest.length > 0 && safety++ < 1000) {

@@ -11,12 +11,12 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { useStep } from '@/composables/useStep';
+import { computed, ref } from "vue";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({
   step: { type: Number, required: true },
-  tag: { type: String, default: 'div' }
+  tag: { type: String, default: "div" },
 });
 
 const { current } = useStep();
@@ -41,12 +41,22 @@ const rootRef = ref(null);
   animation: fadeInUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* 依次延迟 50ms，最多到第 6 个 */
-.step-wrapper.visible > *:nth-child(2) { animation-delay: 50ms; }
-.step-wrapper.visible > *:nth-child(3) { animation-delay: 100ms; }
-.step-wrapper.visible > *:nth-child(4) { animation-delay: 150ms; }
-.step-wrapper.visible > *:nth-child(5) { animation-delay: 200ms; }
-.step-wrapper.visible > *:nth-child(n+6) { animation-delay: 250ms; }
+/* 50ms → 80ms —— 大屏上"逐张出现"更明显 */
+.step-wrapper.visible > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.step-wrapper.visible > *:nth-child(3) {
+  animation-delay: 160ms;
+}
+.step-wrapper.visible > *:nth-child(4) {
+  animation-delay: 240ms;
+}
+.step-wrapper.visible > *:nth-child(5) {
+  animation-delay: 320ms;
+}
+.step-wrapper.visible > *:nth-child(n + 6) {
+  animation-delay: 400ms;
+}
 
 @keyframes fadeInUp {
   from {

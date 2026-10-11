@@ -14,7 +14,7 @@
           :to="`/slide/${cleanId}/${i}`"
           class="slide-link"
         >
-          {{ String(i).padStart(2, '0') }}
+          {{ String(i).padStart(2, "0") }}
         </router-link>
       </div>
     </div>
@@ -22,29 +22,29 @@
     <!-- 分支 2：找不到讲次 -->
     <div v-else class="index-container">
       <h1>未找到该讲</h1>
-      <p class="subtitle">讲次 ID：{{ cleanId || '(空)' }}</p>
-      <p class="subtitle">收到的参数：{{ rawLesson || '(空)' }}</p>
+      <p class="subtitle">讲次 ID：{{ cleanId || "(空)" }}</p>
+      <p class="subtitle">收到的参数：{{ rawLesson || "(空)" }}</p>
       <router-link to="/" class="back-link">← 返回系列总目录</router-link>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
-import { lessonIndex, loadLesson, getCachedLesson } from '@/data';
+import { computed, ref, watch } from "vue";
+import { lessonIndex, loadLesson, getCachedLesson } from "@/data";
 
 const props = defineProps({
-  lesson: { type: String, required: true }
+  lesson: { type: String, required: true },
 });
 
 // ============================================
 // 规整 ID —— 兼容 "02" 和 "lesson-02"
 // ============================================
-const rawLesson = computed(() => props.lesson || '');
+const rawLesson = computed(() => props.lesson || "");
 const cleanId = computed(() => {
   const raw = rawLesson.value;
-  if (!raw) return '';
-  return raw.startsWith('lesson-') ? raw.replace('lesson-', '') : raw;
+  if (!raw) return "";
+  return raw.startsWith("lesson-") ? raw.replace("lesson-", "") : raw;
 });
 
 // ============================================
@@ -67,7 +67,7 @@ watch(
     if (!data) data = await loadLesson(id);
     fullData.value = data;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 // ============================================
@@ -79,7 +79,7 @@ const lesson = computed(() => {
     return {
       title: fullData.value.title,
       subtitle: fullData.value.subtitle,
-      total: fullData.value.total
+      total: fullData.value.total,
     };
   }
   return null;

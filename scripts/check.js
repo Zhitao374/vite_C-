@@ -177,7 +177,8 @@ async function main() {
     html:     { keys: ['html'] },                        // ← 新增
     glossary: { keys: ['glossary'] },
     all:      { keys: ['code', 'ids', 'html', 'glossary'] },     // ← 加 html
-    fix:      { keys: ['code', 'ids', 'html', 'glossary'], fix: true }
+    fix:      { keys: ['code', 'ids', 'html', 'glossary'], fix: true },
+  'fix:ids': { keys: ['ids'], fix: true }
   };
 
   // 有参数：直接执行

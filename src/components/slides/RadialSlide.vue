@@ -1,10 +1,9 @@
 <template>
   <SlideShell :slide="slide">
     <div class="radial">
-      <div
-        class="radial-center"
-        :class="{ visible: current >= 1 }"
-      >{{ center }}</div>
+      <div class="radial-center" :class="{ visible: current >= 1 }">
+        {{ center }}
+      </div>
 
       <div
         v-for="(it, i) in items"
@@ -12,42 +11,44 @@
         class="radial-item"
         :class="{ visible: current >= i + 2 }"
         :style="styleOf(it, i)"
-      >{{ it.text }}</div>
+      >
+        {{ it.text }}
+      </div>
     </div>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import { useStepCount } from "@/composables/useStepCount";
+import { useStep } from "@/composables/useStep";
 
 const POS = {
-  'top-left':     'top:8%;left:8%;',
-  'top-right':    'top:8%;right:8%;',
-  'bottom-left':  'bottom:8%;left:8%;',
-  'bottom-right': 'bottom:8%;right:8%;',
-  'top':          'top:4%;left:50%;transform:translateX(-50%);',
-  'bottom':       'bottom:4%;left:50%;transform:translateX(-50%);',
-  'left':         'top:50%;left:4%;transform:translateY(-50%);',
-  'right':        'top:50%;right:4%;transform:translateY(-50%);'
+  "top-left": "top:8%;left:8%;",
+  "top-right": "top:8%;right:8%;",
+  "bottom-left": "bottom:8%;left:8%;",
+  "bottom-right": "bottom:8%;right:8%;",
+  top: "top:4%;left:50%;transform:translateX(-50%);",
+  bottom: "bottom:4%;left:50%;transform:translateX(-50%);",
+  left: "top:50%;left:4%;transform:translateY(-50%);",
+  right: "top:50%;right:4%;transform:translateY(-50%);",
 };
 
 const AUTO_POS = {
-  2: ['left', 'right'],
-  3: ['left', 'top', 'right'],
-  4: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
-  5: ['top-left', 'top-right', 'left', 'right', 'bottom'],
-  6: ['top-left', 'top-right', 'left', 'right', 'bottom-left', 'bottom-right']
+  2: ["left", "right"],
+  3: ["left", "top", "right"],
+  4: ["top-left", "top-right", "bottom-left", "bottom-right"],
+  5: ["top-left", "top-right", "left", "right", "bottom"],
+  6: ["top-left", "top-right", "left", "right", "bottom-left", "bottom-right"],
 };
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
-const center = computed(() => d.value.center || '');
+const center = computed(() => d.value.center || "");
 const items = computed(() => d.value.items || []);
 const extra = computed(() => d.value.extra);
 
@@ -57,8 +58,8 @@ const { current } = useStep();
 
 function styleOf(it, i) {
   const auto = AUTO_POS[items.value.length] || AUTO_POS[6];
-  const pos = it.pos || auto[i] || 'top-left';
-  return POS[pos] || '';
+  const pos = it.pos || auto[i] || "top-left";
+  return POS[pos] || "";
 }
 </script>
 
@@ -89,7 +90,9 @@ function styleOf(it, i) {
 
   opacity: 0;
   transform: scale(0.6);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 .radial-center.visible {
   opacity: 1;

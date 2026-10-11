@@ -11,20 +11,22 @@
 </template>
 
 <script setup>
-import StepWrapper from '@/components/common/StepWrapper.vue';
+import StepWrapper from "@/components/common/StepWrapper.vue";
 
 defineProps({
-  icon: { type: String, default: '' },
-  label: { type: String, default: '' },
+  icon: { type: String, default: "" },
+  label: { type: String, default: "" },
   active: { type: Boolean, default: false },
   done: { type: Boolean, default: false },
   step: { type: Number, default: 1 },
-  progress: { type: String, default: '' }
+  progress: { type: String, default: "" },
 });
 </script>
 
 <style scoped>
-.level-node-wrapper { display: flex; }
+.level-node-wrapper {
+  display: flex;
+}
 .level-node {
   width: 84px;
   height: 84px;
@@ -54,7 +56,9 @@ defineProps({
   color: var(--success);
   background: var(--success-soft);
 }
-.level-icon { font-size: 24px; }
+.level-icon {
+  font-size: 24px;
+}
 .level-progress {
   display: inline-block;
   margin-left: 4px;

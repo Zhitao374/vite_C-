@@ -46,10 +46,12 @@
   overflow: hidden;
 }
 .lesson-card::before {
-  content: '';
+  content: "";
   position: absolute;
-  left: 0; top: 0;
-  width: 5px; height: 100%;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
   background: linear-gradient(180deg, var(--primary), var(--accent));
 }
 .lesson-card:hover {
@@ -117,4 +119,6 @@
   font-family: var(--font-code);
   text-decoration: none;
 }
-.back-link:hover { color: var(--accent); }
+.back-link:hover {
+  color: var(--accent);
+}

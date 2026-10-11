@@ -3,7 +3,9 @@
     <div v-if="chapterTag" class="chapter-tag">{{ chapterTag }}</div>
 
     <h1 class="cover-title">
-      {{ titleParts[0] }}<span v-if="titleParts[1]" class="accent">{{ titleParts[1] }}</span>{{ titleParts[2] }}
+      {{ titleParts[0]
+      }}<span v-if="titleParts[1]" class="accent">{{ titleParts[1] }}</span
+      >{{ titleParts[2] }}
     </h1>
 
     <p v-if="slide.subtitle" class="cover-subtitle">{{ slide.subtitle }}</p>
@@ -15,13 +17,12 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
-
 
 const d = computed(() => props.slide.data || {});
 const meta = computed(() => d.value.meta || []);
@@ -31,11 +32,11 @@ const chapterTag = computed(() => props.slide.chapterTag);
 useStepCount(() => 1);
 
 const titleParts = computed(() => {
-  const title = props.slide.title || '';
+  const title = props.slide.title || "";
   const accent = d.value.accentWord;
-  if (!accent) return [title, '', ''];
+  if (!accent) return [title, "", ""];
   const idx = title.indexOf(accent);
-  if (idx < 0) return [title, '', ''];
+  if (idx < 0) return [title, "", ""];
   return [title.slice(0, idx), accent, title.slice(idx + accent.length)];
 });
 </script>
@@ -61,9 +62,11 @@ const titleParts = computed(() => {
   position: relative;
 }
 .cover-title .accent::after {
-  content: '';
+  content: "";
   position: absolute;
-  left: 0; right: 0; bottom: -8px;
+  left: 0;
+  right: 0;
+  bottom: -8px;
   height: 6px;
   background: linear-gradient(90deg, var(--accent), transparent);
   border-radius: 3px;
@@ -83,7 +86,11 @@ const titleParts = computed(() => {
 }
 
 @media (max-width: 900px) {
-  .cover-title { font-size: 56px; }
-  .cover-subtitle { font-size: 20px; }
+  .cover-title {
+    font-size: 56px;
+  }
+  .cover-subtitle {
+    font-size: 20px;
+  }
 }
 </style>

@@ -5,14 +5,10 @@
     </StepWrapper>
 
     <div class="signal-grid">
-      <StepWrapper
-        v-for="(sig, i) in signals"
-        :key="i"
-        :step="signalBase + i"
-      >
+      <StepWrapper v-for="(sig, i) in signals" :key="i" :step="signalBase + i">
         <div class="signal-card">
           <div class="signal-head">
-            <span class="signal-icon">{{ sig.icon || '🔔' }}</span>
+            <span class="signal-icon">{{ sig.icon || "🔔" }}</span>
             <span class="signal-keyword">{{ sig.keyword }}</span>
           </div>
           <div v-if="sig.desc" class="signal-desc" v-html="sig.desc"></div>
@@ -33,14 +29,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import IntroCard from '@/components/common/IntroCard.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import IntroCard from "@/components/common/IntroCard.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
@@ -70,12 +66,14 @@ useStepCount(() => {
 }
 
 .signal-card {
-  background: linear-gradient(145deg, #FFFBEB, #FFFFFF);
+  background: linear-gradient(145deg, #fffbeb, #ffffff);
   border: 2px solid rgba(255, 122, 0, 0.25);
   border-radius: var(--radius-md);
   box-shadow: 0 4px 16px rgba(255, 122, 0, 0.08);
   padding: calc(18px * var(--font-scale)) calc(22px * var(--font-scale));
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .signal-card:hover {
   transform: translateY(-2px);
@@ -118,7 +116,7 @@ useStepCount(() => {
 }
 
 .decision-conclusion {
-  background: linear-gradient(145deg, #FFFFFF, #F0FFF4);
+  background: linear-gradient(145deg, #ffffff, #f0fff4);
   border: 2px solid rgba(0, 180, 42, 0.3);
   border-radius: var(--radius-md);
   box-shadow: 0 6px 24px rgba(0, 180, 42, 0.1);
@@ -127,11 +125,13 @@ useStepCount(() => {
   overflow: hidden;
 }
 .decision-conclusion::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--success), #67E8A0);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--success), #67e8a0);
 }
 
 .conclusion-head {

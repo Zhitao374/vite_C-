@@ -1,21 +1,22 @@
 <template>
   <div class="slide transition">
     <h1 class="transition-title">{{ slide.title }}</h1>
-    <p v-if="slide.subtitle" class="transition-subtitle">{{ slide.subtitle }}</p>
+    <p v-if="slide.subtitle" class="transition-subtitle">
+      {{ slide.subtitle }}
+    </p>
     <p v-if="note" class="transition-note">{{ note }}</p>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
-
-const note = computed(() => props.slide.data?.note || '');
+const note = computed(() => props.slide.data?.note || "");
 
 // 过渡页：只有 1 步
 useStepCount(() => 1);

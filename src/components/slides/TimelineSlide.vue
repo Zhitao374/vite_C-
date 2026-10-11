@@ -1,20 +1,23 @@
 <template>
   <SlideShell :slide="slide">
     <div class="timeline" :class="timelineClass">
-      <StepWrapper
-        v-for="(it, i) in items"
-        :key="i"
-        :step="i + 1"
-      >
+      <StepWrapper v-for="(it, i) in items" :key="i" :step="i + 1">
         <div class="timeline-item">
-          <div class="timeline-card">
+          <div
+            class="timeline-card"
+            :class="{ 'timeline-card-highlight': it.highlight }"
+          >
             <div class="timeline-card-head">
-              <span class="timeline-index">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span class="timeline-index">{{
+                String(i + 1).padStart(2, "0")
+              }}</span>
               <span v-if="it.icon" class="timeline-icon">
                 <IconMap :emoji="it.icon" :size="26" />
               </span>
               <span class="timeline-title">{{ it.title }}</span>
-              <span v-if="it.badge" class="badge badge-accent">{{ it.badge }}</span>
+              <span v-if="it.badge" class="badge badge-accent">{{
+                it.badge
+              }}</span>
             </div>
             <div v-if="it.desc" class="timeline-desc" v-html="it.desc"></div>
             <ul v-if="it.points?.length" class="timeline-points">
@@ -28,22 +31,22 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import IconMap from '@/components/common/IconMap.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import IconMap from "@/components/common/IconMap.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const items = computed(() => props.slide.data?.items || []);
 const extra = computed(() => props.slide.data?.extra);
 
 const timelineClass = computed(() => ({
-  'timeline-cols': items.value.length >= 5,
-  [`timeline-${props.slide.variant}`]: !!props.slide.variant
+  "timeline-cols": items.value.length >= 5,
+  [`timeline-${props.slide.variant}`]: !!props.slide.variant,
 }));
 
 useStepCount(() => items.value.length + (extra.value ? 1 : 0));
@@ -57,9 +60,11 @@ useStepCount(() => items.value.length + (extra.value ? 1 : 0));
   padding-bottom: 4px;
 }
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
-  left: 18px; top: 10px; bottom: 10px;
+  left: 18px;
+  top: 10px;
+  bottom: 10px;
   width: 3px;
   background: linear-gradient(180deg, var(--primary), var(--accent));
   border-radius: 2px;
@@ -69,18 +74,24 @@ useStepCount(() => items.value.length + (extra.value ? 1 : 0));
   grid-template-columns: 1fr 1fr;
   gap: 14px 22px;
 }
-.timeline-cols::before { display: none; }
+.timeline-cols::before {
+  display: none;
+}
 
 .timeline-item {
   position: relative;
   padding-bottom: 10px;
 }
-.timeline-cols .timeline-item { padding-bottom: 0; }
+.timeline-cols .timeline-item {
+  padding-bottom: 0;
+}
 .timeline-item::before {
-  content: '';
+  content: "";
   position: absolute;
-  left: -34px; top: 22px;
-  width: 17px; height: 17px;
+  left: -34px;
+  top: 22px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 5px rgba(255, 122, 0, 0.18);
@@ -93,7 +104,9 @@ useStepCount(() => items.value.length + (extra.value ? 1 : 0));
   border-radius: var(--radius-md);
   padding: 20px 26px;
   box-shadow: var(--card-shadow);
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 .timeline-card:hover {
   box-shadow: var(--card-shadow-hover);
@@ -144,7 +157,7 @@ useStepCount(() => items.value.length + (extra.value ? 1 : 0));
   line-height: 1.7;
 }
 .timeline-points li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 0;
   color: var(--accent);
@@ -156,17 +169,24 @@ useStepCount(() => items.value.length + (extra.value ? 1 : 0));
   background: linear-gradient(180deg, var(--primary), var(--accent));
 }
 .timeline.timeline-review::before {
-  background: linear-gradient(180deg, #6366F1, #818CF8);
+  background: linear-gradient(180deg, #6366f1, #818cf8);
 }
 .timeline.timeline-review .timeline-item::before {
-  background: #818CF8;
+  background: #818cf8;
   box-shadow: 0 0 0 5px rgba(129, 140, 248, 0.18);
 }
 .timeline.timeline-map::before {
   background: linear-gradient(180deg, var(--primary), var(--accent));
 }
+.timeline-card-highlight {
+  border: 2px solid var(--accent);
+  background: linear-gradient(145deg, #fff7ed, #ffffff);
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.15);
+}
 
 @media (max-width: 1100px) {
-  .timeline-cols { grid-template-columns: 1fr; }
+  .timeline-cols {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

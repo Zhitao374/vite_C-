@@ -1,33 +1,39 @@
 <template>
-  <div class="font-scaler"
+  <div
+    class="font-scaler"
     @click.stop="cycle"
     @mousedown.stop
     @mouseup.stop
     @pointerdown.stop
-    @pointerup.stop>
+    @pointerup.stop
+  >
     <span class="fs-icon">Aa</span>
     <span class="fs-level">{{ scaleLabel }}</span>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { uiState } from '@/store/ui';
+import { computed } from "vue";
+import { uiState } from "@/store/ui";
 
 const SCALES = [
-  { value: 0.9,  label: '小' },
-  { value: 1.0,  label: '中' },
-  { value: 1.15, label: '大' },
-  { value: 1.3,  label: '特大' }
+  { value: 0.9, label: "小" },
+  { value: 1.0, label: "中" },
+  { value: 1.15, label: "大" },
+  { value: 1.3, label: "特大" },
 ];
 
 const scaleLabel = computed(() => {
-  const found = SCALES.find(s => Math.abs(s.value - uiState.fontScale) < 0.001);
-  return found ? found.label : '中';
+  const found = SCALES.find(
+    (s) => Math.abs(s.value - uiState.fontScale) < 0.001,
+  );
+  return found ? found.label : "中";
 });
 
 function cycle() {
-  const idx = SCALES.findIndex(s => Math.abs(s.value - uiState.fontScale) < 0.001);
+  const idx = SCALES.findIndex(
+    (s) => Math.abs(s.value - uiState.fontScale) < 0.001,
+  );
   const next = SCALES[(idx + 1) % SCALES.length];
   uiState.fontScale = next.value;
 }
@@ -37,7 +43,7 @@ function cycle() {
 .font-scaler {
   position: fixed;
   top: 16px;
-  right: 76px;               /* 画笔工具左移 */
+  right: 76px; /* 画笔工具左移 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +54,9 @@ function cycle() {
   border-radius: 50%;
   box-shadow: 0 4px 16px rgba(22, 93, 255, 0.22);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   user-select: none;
   z-index: 1002;
 }

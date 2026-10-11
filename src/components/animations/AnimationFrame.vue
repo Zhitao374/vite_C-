@@ -3,7 +3,9 @@
     <div v-if="chapterTag" class="chapter-tag">{{ chapterTag }}</div>
     <h1 class="slide-title">
       {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
+      <span v-if="slide.subtitle" class="slide-subtitle">{{
+        slide.subtitle
+      }}</span>
     </h1>
 
     <div class="slide-body anim-body">
@@ -12,7 +14,11 @@
         <StepWrapper :step="1">
           <div ref="wrapEl" class="stage-wrap">
             <div ref="stageEl" class="stage">
-              <slot name="stage" :current-step="currentStep" :current-index="currentIndex" />
+              <slot
+                name="stage"
+                :current-step="currentStep"
+                :current-index="currentIndex"
+              />
             </div>
           </div>
         </StepWrapper>
@@ -25,8 +31,12 @@
             <transition name="step-fade" mode="out-in">
               <div :key="currentIndex" class="step-content">
                 <div class="step-head">
-                  <span class="step-index">{{ currentIndex + 1 }} / {{ steps.length }}</span>
-                  <span v-if="currentStep.op" class="step-move">{{ currentStep.op }}</span>
+                  <span class="step-index"
+                    >{{ currentIndex + 1 }} / {{ steps.length }}</span
+                  >
+                  <span v-if="currentStep.op" class="step-move">{{
+                    currentStep.op
+                  }}</span>
                   <span v-else class="step-move">起始状态</span>
                 </div>
                 <div class="step-note" v-html="currentStep.note"></div>
@@ -51,11 +61,11 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
-import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
+import { computed, ref, onMounted, onUnmounted } from "vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import ExtraCard from "@/components/common/ExtraCard.vue";
+import { useStepCount } from "@/composables/useStepCount";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
@@ -71,8 +81,8 @@ const currentIndex = computed(() => {
   return Math.max(0, Math.min(idx, steps.value.length - 1));
 });
 
-const currentStep = computed(() =>
-  steps.value[currentIndex.value] || { state: {}, note: '' }
+const currentStep = computed(
+  () => steps.value[currentIndex.value] || { state: {}, note: "" },
 );
 
 const totalSteps = computed(() => steps.value.length + (extra.value ? 1 : 0));
@@ -100,11 +110,11 @@ function updateScale() {
   const scale = containerW / LOGICAL_W;
 
   // 用 zoom 代替 transform: scale（避免文字模糊）
-  stageEl.value.style.transform = '';
+  stageEl.value.style.transform = "";
   stageEl.value.style.zoom = scale;
 
   // 同步容器高度
-  wrapEl.value.style.height = (LOGICAL_H * scale) + 'px';
+  wrapEl.value.style.height = LOGICAL_H * scale + "px";
 }
 
 onMounted(() => {
@@ -234,7 +244,9 @@ onUnmounted(() => {
 /* 过渡 */
 .step-fade-enter-active,
 .step-fade-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 .step-fade-enter-from {
   opacity: 0;

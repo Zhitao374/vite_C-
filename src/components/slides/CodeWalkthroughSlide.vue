@@ -12,7 +12,9 @@
             :code-file="d.codeFile"
             :snippet="d.snippet"
             :density="d.density"
-            :highlight-lines="currentHighlightLine ? [currentHighlightLine] : []"
+            :highlight-lines="
+              currentHighlightLine ? [currentHighlightLine] : []
+            "
           />
         </StepWrapper>
       </div>
@@ -33,7 +35,7 @@
                 class="stack-frame"
                 :class="{
                   'is-current': fi === step.stack.length - 1 && !frame.done,
-                  'is-done': frame.done
+                  'is-done': frame.done,
                 }"
               >
                 <span class="frame-label" v-html="frame.label"></span>
@@ -42,12 +44,11 @@
               </div>
             </div>
 
-            <div v-if="step.vars && Object.keys(step.vars).length" class="vars-view">
-              <span
-                v-for="(val, key) in step.vars"
-                :key="key"
-                class="var-chip"
-              >
+            <div
+              v-if="step.vars && Object.keys(step.vars).length"
+              class="vars-view"
+            >
+              <span v-for="(val, key) in step.vars" :key="key" class="var-chip">
                 <b>{{ key }}</b> = <span v-html="val"></span>
               </span>
             </div>
@@ -71,19 +72,19 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import CodeBlock from '@/components/common/CodeBlock.vue';
-import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import { useStepCount } from "@/composables/useStepCount";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
-const intro = computed(() => d.value.intro || '');
+const intro = computed(() => d.value.intro || "");
 const steps = computed(() => d.value.steps || []);
 const extra = computed(() => d.value.extra);
 
@@ -100,11 +101,8 @@ const currentHighlightLine = computed(() => {
   return step && step.line ? step.line : 0;
 });
 
-useStepCount(() =>
-  (intro.value ? 1 : 0) +
-  1 +
-  steps.value.length +
-  (extra.value ? 1 : 0)
+useStepCount(
+  () => (intro.value ? 1 : 0) + 1 + steps.value.length + (extra.value ? 1 : 0),
 );
 </script>
 
@@ -237,7 +235,9 @@ useStepCount(() =>
   font-size: calc(16px * var(--font-scale));
   color: var(--text-sub);
 }
-.var-chip b { color: var(--primary); }
+.var-chip b {
+  color: var(--primary);
+}
 
 /* 通用行 */
 .lines-view {
@@ -278,6 +278,8 @@ useStepCount(() =>
 }
 
 @media (max-width: 1100px) {
-  .split { grid-template-columns: 1fr; }
+  .split {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

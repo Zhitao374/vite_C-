@@ -1,13 +1,9 @@
 <template>
   <SlideShell :slide="slide">
-    <StepWrapper
-      v-for="(c, i) in cases"
-      :key="i"
-      :step="i + 1"
-    >
+    <StepWrapper v-for="(c, i) in cases" :key="i" :step="i + 1">
       <div class="pitfall-case">
         <div class="case-head">
-          <span class="case-icon">{{ c.icon || '❌' }}</span>
+          <span class="case-icon">{{ c.icon || "❌" }}</span>
           <span class="case-scene">{{ c.scene }}</span>
         </div>
         <div class="case-body">
@@ -30,13 +26,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const cases = computed(() => props.slide.data?.cases || []);
@@ -47,7 +43,7 @@ useStepCount(() => cases.value.length + (extra.value ? 1 : 0));
 
 <style scoped>
 .pitfall-case {
-  background: linear-gradient(145deg, #FFF5F5, #FFFFFF);
+  background: linear-gradient(145deg, #fff5f5, #ffffff);
   border: 2px solid rgba(245, 63, 63, 0.25);
   border-radius: var(--radius-md);
   box-shadow: 0 4px 16px rgba(245, 63, 63, 0.08);
@@ -56,10 +52,12 @@ useStepCount(() => cases.value.length + (extra.value ? 1 : 0));
   overflow: hidden;
 }
 .pitfall-case::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 4px; height: 100%;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
   background: var(--error);
 }
 .case-head {
@@ -115,7 +113,9 @@ useStepCount(() => cases.value.length + (extra.value ? 1 : 0));
   padding-top: calc(10px * var(--font-scale));
   border-top: 1px dashed rgba(0, 180, 42, 0.25);
 }
-.case-fix .row-label { color: var(--success); }
+.case-fix .row-label {
+  color: var(--success);
+}
 .case-fix .row-text :deep(code) {
   background: var(--success-soft);
   color: #0d5f24;

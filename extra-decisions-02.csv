@@ -1,0 +1,30 @@
+lesson,slide,decision,note
+02,2,delete,合并到 line
+02,3,delete,搬 grid desc
+02,5,keep,FORTRAN 6 字符
+02,6,delete,三条边界搬正文(重要)
+02,8,delete,搬 intro
+02,9,delete,搬正文
+02,10,delete,搬 dialog
+02,11,delete,搬 dialog
+02,12,delete,搬 pitfall
+02,13,delete,搬 dialog
+02,15,delete,搬 annotations
+02,16,delete,搬 annotations
+02,17,delete,搬 compare
+02,18,keep,阿丽亚娜火箭
+02,20,delete,搬 dialog
+02,21,delete,重复
+02,22,delete,搬 dialog
+02,23,delete,搬 analysis
+02,24,keep,三杯水交换
+02,25,delete,重复
+02,26,keep,foo/bar 由来
+02,27,delete,slide-34 有
+02,28,delete,搬 quiz
+02,30,delete,搬 grid
+02,31,delete,搬 radial
+02,32,delete,搬 dialog
+02,33,delete,与 glossary 重复
+02,34,delete,总结页(保留现状)
+02,35,delete,ending 抒情

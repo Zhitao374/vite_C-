@@ -1,13 +1,12 @@
 <template>
   <SlideShell :slide="slide">
-    <div
-      v-for="(row, ri) in rows"
-      :key="ri"
-      class="flow"
-    >
+    <div v-for="(row, ri) in rows" :key="ri" class="flow">
       <template v-for="(node, i) in row" :key="i">
         <StepWrapper :step="stepOf(ri, i)" class="flow-step-node">
-          <div class="flow-node" :class="{ active: node.glow, glow: node.glow }">
+          <div
+            class="flow-node"
+            :class="{ active: node.glow, glow: node.glow }"
+          >
             <div v-if="node.icon" class="icon">
               <IconMap :emoji="node.icon" :size="36" />
             </div>
@@ -29,14 +28,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import IconMap from '@/components/common/IconMap.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import IconMap from "@/components/common/IconMap.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
@@ -51,7 +50,9 @@ useStepCount(() => {
   const data = d.value;
   const r = data.rows || (data.nodes ? [data.nodes] : []);
   let n = 0;
-  r.forEach(row => { n += row.length * 2 - 1; });
+  r.forEach((row) => {
+    n += row.length * 2 - 1;
+  });
   return n + (data.extra ? 1 : 0);
 });
 
@@ -72,7 +73,9 @@ function stepOf(ri, i) {
   flex-wrap: nowrap;
   width: 100%;
 }
-.flow + .flow { margin-top: 4px; }
+.flow + .flow {
+  margin-top: 4px;
+}
 
 .flow :deep(.flow-step-node) {
   flex: 1 1 0;
@@ -129,6 +132,8 @@ function stepOf(ri, i) {
 }
 
 @media (max-width: 900px) {
-  .flow { flex-wrap: wrap; }
+  .flow {
+    flex-wrap: wrap;
+  }
 }
 </style>

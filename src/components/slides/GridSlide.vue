@@ -1,12 +1,14 @@
 <template>
   <SlideShell :slide="slide">
     <div :class="gridClass">
-      <StepWrapper
-        v-for="(card, i) in cards"
-        :key="i"
-        :step="i + 1"
-      >
-        <div :class="['card','card-compact',cards.length === 1 ? 'card-hero' : '']">
+      <StepWrapper v-for="(card, i) in cards" :key="i" :step="i + 1">
+        <div
+          :class="[
+            'card',
+            'card-compact',
+            cards.length === 1 ? 'card-hero' : '',
+          ]"
+        >
           <div v-if="card.icon" class="big-icon">
             <IconMap :emoji="card.icon" :size="56" />
           </div>
@@ -18,39 +20,47 @@
               :href="card.link"
               target="_blank"
               rel="noopener"
-            >{{ card.title }}</component>
+              >{{ card.title }}</component
+            >
             <template v-else>{{ card.title }}</template>
           </div>
           <div v-if="card.desc" class="card-desc" v-html="card.desc"></div>
         </div>
       </StepWrapper>
     </div>
+    <!-- 【新增】footer 区 -->
+    <StepWrapper v-if="footer" :step="cards.length + 1">
+      <div class="grid-footer" v-html="footer"></div>
+    </StepWrapper>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import IconMap from '@/components/common/IconMap.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import IconMap from "@/components/common/IconMap.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
 const cards = computed(() => d.value.cards || []);
 const extra = computed(() => d.value.extra);
+const footer = computed(() => d.value.footer || "");
 
-useStepCount(() => cards.value.length + (extra.value ? 1 : 0));
+useStepCount(
+  () => cards.value.length + (footer.value ? 1 : 0) + (extra.value ? 1 : 0),
+);
 
 const gridClass = computed(() => {
   const n = cards.value.length;
-  if (n === 1) return 'grid grid-cols-1';
-  if (n === 2) return 'grid grid-cols-2';
-  if (n === 3) return 'grid grid-cols-3';
-  return 'grid grid-cols-4';
+  if (n === 1) return "grid grid-cols-1";
+  if (n === 2) return "grid grid-cols-2";
+  if (n === 3) return "grid grid-cols-3";
+  return "grid grid-cols-4";
 });
 </script>
 
@@ -60,9 +70,15 @@ const gridClass = computed(() => {
   gap: 14px;
   padding: 6px;
 }
-.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 .grid :deep(.big-icon) {
   margin-bottom: 8px;
   display: flex;
@@ -74,9 +90,15 @@ const gridClass = computed(() => {
   height: 56px;
   color: var(--primary);
 }
-.grid :deep(.big-number) { font-size: 52px; }
-.grid :deep(.card-title) { font-size: var(--fs-card-title); }
-.grid :deep(.card-desc)  { font-size: var(--fs-card-desc); }
+.grid :deep(.big-number) {
+  font-size: 52px;
+}
+.grid :deep(.card-title) {
+  font-size: var(--fs-card-title);
+}
+.grid :deep(.card-desc) {
+  font-size: var(--fs-card-desc);
+}
 .grid-cols-4 :deep(.card-compact) {
   justify-content: flex-start;
   min-height: 150px;
@@ -90,17 +112,49 @@ const gridClass = computed(() => {
   flex: 1;
   height: 100%;
 }
+.grid-footer {
+  margin-top: 16px;
+  padding: 16px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  font-size: var(--fs-card-desc);
+  line-height: 1.7;
+  color: var(--text-sub);
+}
+
+.grid-footer :deep(b) {
+  font-size: 1.12em;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.grid-footer :deep(code) {
+  background: var(--primary-soft);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-code);
+  color: var(--primary);
+  font-weight: 600;
+}
 
 @media (max-width: 1400px) {
-  .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media (max-width: 1024px) {
   /* 3 列也降为 2 列（1024 平板/小笔记本） */
-  .grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media (max-width: 900px) {
   .grid-cols-2,
   .grid-cols-3,
-  .grid-cols-4 { grid-template-columns: 1fr; }
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

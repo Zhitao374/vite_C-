@@ -11,16 +11,16 @@
  *   运行 `npm run index:lessons` 重新生成 lesson-index.js
  */
 
-import { lessonIndex } from './lesson-index.js';
-import coursePlan, { PREVIEW_LESSON, STAGE_ORDER } from './course-plan.js';
+import { lessonIndex } from "./lesson-index.js";
+import coursePlan, { PREVIEW_LESSON, STAGE_ORDER } from "./course-plan.js";
 
 // ============================================
 // 懒加载器（Vite 会为每讲生成独立 chunk）
 // ============================================
-const lessonLoaders = import.meta.glob('./lesson-[0-9]*.js');
+const lessonLoaders = import.meta.glob("./lesson-[0-9]*.js");
 
-const detailCache = new Map();   // 已加载的讲次
-const pendingLoads = new Map();  // 正在加载的 promise
+const detailCache = new Map(); // 已加载的讲次
+const pendingLoads = new Map(); // 正在加载的 promise
 
 /**
  * 异步加载某讲数据（带缓存 + 并发去重）
@@ -29,7 +29,7 @@ const pendingLoads = new Map();  // 正在加载的 promise
  */
 export async function loadLesson(key) {
   if (!key) return null;
-  const fullKey = key.startsWith('lesson-') ? key : `lesson-${key}`;
+  const fullKey = key.startsWith("lesson-") ? key : `lesson-${key}`;
 
   // 命中缓存
   if (detailCache.has(fullKey)) return detailCache.get(fullKey);
@@ -40,15 +40,17 @@ export async function loadLesson(key) {
   const loader = lessonLoaders[`./${fullKey}.js`];
   if (!loader) return null;
 
-  const promise = loader().then(mod => {
-    detailCache.set(fullKey, mod.default);
-    pendingLoads.delete(fullKey);
-    return mod.default;
-  }).catch(err => {
-    console.error(`[data] 加载 ${fullKey} 失败：`, err);
-    pendingLoads.delete(fullKey);
-    return null;
-  });
+  const promise = loader()
+    .then((mod) => {
+      detailCache.set(fullKey, mod.default);
+      pendingLoads.delete(fullKey);
+      return mod.default;
+    })
+    .catch((err) => {
+      console.error(`[data] 加载 ${fullKey} 失败：`, err);
+      pendingLoads.delete(fullKey);
+      return null;
+    });
 
   pendingLoads.set(fullKey, promise);
   return promise;
@@ -60,7 +62,7 @@ export async function loadLesson(key) {
  */
 export function getCachedLesson(key) {
   if (!key) return null;
-  const fullKey = key.startsWith('lesson-') ? key : `lesson-${key}`;
+  const fullKey = key.startsWith("lesson-") ? key : `lesson-${key}`;
   return detailCache.get(fullKey) || null;
 }
 
@@ -71,13 +73,13 @@ export const lessons = lessonIndex;
 
 export const lessonList = Object.keys(lessonIndex)
   .sort()
-  .map(id => ({
-    key:      `lesson-${id}`,
+  .map((id) => ({
+    key: `lesson-${id}`,
     id,
-    title:    lessonIndex[id].title,
+    title: lessonIndex[id].title,
     subtitle: lessonIndex[id].subtitle,
-    total:    lessonIndex[id].total,
-    category: lessonIndex[id].category
+    total: lessonIndex[id].total,
+    category: lessonIndex[id].category,
   }));
 
 // ============================================
@@ -90,18 +92,18 @@ export function getLesson(key) {
 export function getSlide(lessonKey, slideId) {
   const lesson = getCachedLesson(lessonKey);
   if (!lesson) return null;
-  return lesson.slides.find(s => s.id === slideId) || null;
+  return lesson.slides.find((s) => s.id === slideId) || null;
 }
 
 // ============================================
 // 分类配置
 // ============================================
 export const CATEGORY_ORDER = [
-  '语法与基础算法',
-  '数据结构与搜索',
-  'DP 与图论进阶',
-  '数学与字符串',
-  '竞赛冲刺'
+  "语法与基础算法",
+  "数据结构与搜索",
+  "DP 与图论进阶",
+  "数学与字符串",
+  "竞赛冲刺",
 ];
 
 // ============================================
@@ -120,9 +122,12 @@ export function isGenerated(id) {
 // dev 模式数据校验
 // ============================================
 if (import.meta.env.DEV) {
-  import('@/config/schemas').then(({ validateLesson }) => {
+  import("@/config/schemas").then(({ validateLesson }) => {
     let errorCount = 0;
-    const warn = (msg) => { console.warn(msg); errorCount++; };
+    const warn = (msg) => {
+      console.warn(msg);
+      errorCount++;
+    };
 
     // 用元数据校验（详情按需加载时再校验）
     Object.entries(lessonIndex).forEach(([id, meta]) => {

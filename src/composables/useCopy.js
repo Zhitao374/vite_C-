@@ -1,7 +1,7 @@
 /**
  * useCopy.js · 复制到剪贴板
  */
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export function useCopy() {
   const copied = ref(false);
@@ -17,20 +17,23 @@ export function useCopy() {
       setTimeout(() => (copied.value = false), 1500);
       return true;
     } catch (e) {
-      console.error('[copy] 失败', e);
+      console.error("[copy] 失败", e);
       return false;
     }
   }
 
   function fallbackCopy(text) {
-    const ta = document.createElement('textarea');
+    const ta = document.createElement("textarea");
     ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
     document.body.appendChild(ta);
     ta.select();
-    try { document.execCommand('copy'); }
-    finally { document.body.removeChild(ta); }
+    try {
+      document.execCommand("copy");
+    } finally {
+      document.body.removeChild(ta);
+    }
   }
 
   return { copyText, copied };

@@ -3,17 +3,28 @@
     <div v-if="chapterTag" class="chapter-tag">{{ chapterTag }}</div>
     <h1 class="slide-title">
       {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</span>
+      <span v-if="slide.subtitle" class="slide-subtitle">{{
+        slide.subtitle
+      }}</span>
     </h1>
 
     <div class="level-map-layout">
       <aside class="level-map-side">
         <div class="level-map">
           <template v-for="(lv, i) in levels" :key="i">
-            <LevelNode :icon="lv.icon" :label="lv.label" :active="i === 0 || (i > 0 && i < levels.length - 1)"
-              :done="i === levels.length - 1" :step="getNodeStep(i)"
-              :progress="i === 1 ? `${hintShown}/${hints.length}` : ''" />
-            <StepWrapper v-if="i < levels.length - 1" :step="getNodeStep(i + 1)" class="level-arrow-wrap">
+            <LevelNode
+              :icon="lv.icon"
+              :label="lv.label"
+              :active="i === 0 || (i > 0 && i < levels.length - 1)"
+              :done="i === levels.length - 1"
+              :step="getNodeStep(i)"
+              :progress="i === 1 ? `${hintShown}/${hints.length}` : ''"
+            />
+            <StepWrapper
+              v-if="i < levels.length - 1"
+              :step="getNodeStep(i + 1)"
+              class="level-arrow-wrap"
+            >
               <div class="level-arrow">↓</div>
             </StepWrapper>
           </template>
@@ -50,24 +61,43 @@
 
         <StepWrapper v-if="answer" :step="answerStep">
           <div class="answer-wrapper">
-            <CodeBlock v-if="!Array.isArray(answer)" :code="answer.code" :code-file="answer.codeFile"
-              :density="answer.density" title="✅ 参考代码" />
-            <div v-else class="answer-array" :class="`cols-${Math.min(answer.length, 4)}`">
-              <CodeBlock v-for="(item, i) in answer" :key="i" :code="item.code" :code-file="item.codeFile"
-                :density="item.density" :title="item.title || ''" />
+            <CodeBlock
+              v-if="!Array.isArray(answer)"
+              :code="answer.code"
+              :code-file="answer.codeFile"
+              :density="answer.density"
+              title="✅ 参考代码"
+            />
+            <div
+              v-else
+              class="answer-array"
+              :class="`cols-${Math.min(answer.length, 4)}`"
+            >
+              <CodeBlock
+                v-for="(item, i) in answer"
+                :key="i"
+                :code="item.code"
+                :code-file="item.codeFile"
+                :density="item.density"
+                :title="item.title || ''"
+              />
             </div>
           </div>
         </StepWrapper>
 
         <StepWrapper v-if="analysis" :step="analysisStep">
           <div class="card card-glow">
-            <div class="card-title">{{ analysis.title || '📖 解析' }}</div>
+            <div class="card-title">{{ analysis.title || "📖 解析" }}</div>
             <div class="card-desc" v-html="analysis.desc"></div>
           </div>
         </StepWrapper>
 
         <StepWrapper v-if="extra" :step="maxStep">
-          <ExtraCard :title="extra.title" :desc="extra.desc" :variant="extra.variant || 'card-primary'" />
+          <ExtraCard
+            :title="extra.title"
+            :desc="extra.desc"
+            :variant="extra.variant || 'card-primary'"
+          />
         </StepWrapper>
       </div>
     </div>
@@ -75,20 +105,19 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import CodeBlock from '@/components/common/CodeBlock.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
-import HintRow from '@/components/level-map/HintRow.vue';
-import LevelNode from '@/components/level-map/LevelNode.vue';
-import { useStep } from '@/composables/useStep';
-import { useStepCount } from '@/composables/useStepCount';
-import { DEFAULT_LEVELS } from '@/config/defaults';
+import { computed } from "vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import ExtraCard from "@/components/common/ExtraCard.vue";
+import HintRow from "@/components/level-map/HintRow.vue";
+import LevelNode from "@/components/level-map/LevelNode.vue";
+import { useStep } from "@/composables/useStep";
+import { useStepCount } from "@/composables/useStepCount";
+import { DEFAULT_LEVELS } from "@/config/defaults";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
-
 
 const d = computed(() => props.slide.data || {});
 const levels = computed(() => d.value.levels || DEFAULT_LEVELS);
@@ -103,7 +132,7 @@ const chapterTag = computed(() => props.slide.chapterTag);
 useStepCount(() => {
   const data = d.value;
   let n = 1;
-  n += (data.hints?.length || 0);
+  n += data.hints?.length || 0;
   n += data.answer ? 1 : 0;
   n += data.analysis ? 1 : 0;
   n += data.extra ? 1 : 0;
@@ -135,7 +164,7 @@ const timerData = computed(() => {
   // 匹配 "⏱ 限时 5 分钟" → icon="⏱", text="限时 5 分钟"
   const m = String(t).match(/^(\S+)\s+(.+)$/);
   if (m) return { icon: m[1], text: m[2] };
-  return { icon: '', text: String(t) };
+  return { icon: "", text: String(t) };
 });
 </script>
 
@@ -147,13 +176,14 @@ const timerData = computed(() => {
   margin-top: 18px;
   flex: 1;
   min-height: 0;
-  align-items: stretch;
+  align-items: start;
 }
 
 .level-map-side {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* ← 侧栏内容顶部对齐 */
+  padding-top: 12px; /* 微调与题干顶部对齐 */
 }
 
 .level-map {
@@ -203,7 +233,11 @@ const timerData = computed(() => {
   justify-content: center;
   gap: 8px;
   padding: 14px 10px;
-  background: linear-gradient(180deg, rgba(255, 122, 0, 0.15), rgba(255, 122, 0, 0.05));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 122, 0, 0.15),
+    rgba(255, 122, 0, 0.05)
+  );
   border-right: 1px solid rgba(255, 122, 0, 0.2);
   color: var(--accent);
   font-weight: 700;
@@ -233,7 +267,11 @@ const timerData = computed(() => {
 /* 顶部横向：考察点 / 限时 */
 .question-meta {
   padding: 10px 22px;
-  background: linear-gradient(90deg, rgba(245, 63, 63, 0.10), rgba(245, 63, 63, 0.03));
+  background: linear-gradient(
+    90deg,
+    rgba(245, 63, 63, 0.1),
+    rgba(245, 63, 63, 0.03)
+  );
   border-bottom: 1px solid rgba(245, 63, 63, 0.18);
   color: var(--error);
   font-weight: 600;

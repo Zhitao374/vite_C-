@@ -7,7 +7,7 @@
           class="dp-table"
           :style="{
             gridTemplateColumns: `auto repeat(${cols}, 56px)`,
-            gridTemplateRows: `auto repeat(${rows}, 48px)`
+            gridTemplateRows: `auto repeat(${rows}, 48px)`,
           }"
         >
           <!-- 表头行 -->
@@ -16,7 +16,9 @@
             v-for="(label, ci) in colLabels"
             :key="'ch-' + ci"
             class="dp-header"
-          >{{ label }}</div>
+          >
+            {{ label }}
+          </div>
 
           <!-- 数据行 -->
           <template v-for="ri in rows" :key="'r' + ri">
@@ -27,8 +29,11 @@
               class="dp-cell"
               :class="{
                 'is-filled': isFilled(ri - 1, ci - 1),
-                'is-current': currentStep.row === ri - 1 && currentStep.col === ci - 1,
-                'is-dep': (currentStep.deps || []).some(d => d.row === ri - 1 && d.col === ci - 1)
+                'is-current':
+                  currentStep.row === ri - 1 && currentStep.col === ci - 1,
+                'is-dep': (currentStep.deps || []).some(
+                  (d) => d.row === ri - 1 && d.col === ci - 1,
+                ),
               }"
             >
               {{ cellValue(ri - 1, ci - 1) }}
@@ -46,9 +51,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import AnimationFrame from './AnimationFrame.vue';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import AnimationFrame from "./AnimationFrame.vue";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
@@ -61,19 +66,24 @@ const { current } = useStep();
 const steps = computed(() => props.slide.data?.steps || []);
 
 const currentIndex = computed(() =>
-  Math.max(0, Math.min(current.value - 1, steps.value.length - 1))
+  Math.max(0, Math.min(current.value - 1, steps.value.length - 1)),
 );
 const currentStep = computed(() => steps.value[currentIndex.value] || {});
 
-const filled = computed(() => new Set((currentStep.value.filled || []).map(f => f.row + '-' + f.col)));
+const filled = computed(
+  () =>
+    new Set((currentStep.value.filled || []).map((f) => f.row + "-" + f.col)),
+);
 
 function isFilled(r, c) {
-  return filled.value.has(r + '-' + c);
+  return filled.value.has(r + "-" + c);
 }
 
 function cellValue(r, c) {
-  const cell = (currentStep.value.filled || []).find(f => f.row === r && f.col === c);
-  return cell ? cell.value : '·';
+  const cell = (currentStep.value.filled || []).find(
+    (f) => f.row === r && f.col === c,
+  );
+  return cell ? cell.value : "·";
 }
 </script>
 
@@ -103,7 +113,8 @@ function cellValue(r, c) {
   background: transparent;
 }
 
-.dp-header, .dp-row-header {
+.dp-header,
+.dp-row-header {
   display: flex;
   align-items: center;
   justify-content: center;

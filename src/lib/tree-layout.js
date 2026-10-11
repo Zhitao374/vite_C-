@@ -21,7 +21,7 @@ export function layoutTree(root, stageW, stageH) {
     calc(node.left, depth + 1);
     positions[node.id] = {
       colIdx: xCounter++,
-      depth
+      depth,
     };
     maxDepth = Math.max(maxDepth, depth);
     calc(node.right, depth + 1);
@@ -36,7 +36,7 @@ export function layoutTree(root, stageW, stageH) {
   const totalHeight = (maxDepth + 1) * NODE_H + maxDepth * (LEVEL_GAP - NODE_H);
   const offsetY = (stageH - totalHeight) / 2;
 
-  Object.values(positions).forEach(p => {
+  Object.values(positions).forEach((p) => {
     p.x = offsetX + p.colIdx * (NODE_W + NODE_GAP) + NODE_W / 2;
     p.y = offsetY + p.depth * LEVEL_GAP + NODE_H / 2;
   });
@@ -52,7 +52,13 @@ export function flattenTree(root, result = []) {
   return result;
 }
 
-export function buildEdges(root, positions, visited, currentVisit, result = []) {
+export function buildEdges(
+  root,
+  positions,
+  visited,
+  currentVisit,
+  result = [],
+) {
   if (!root) return result;
 
   function addEdge(parent, child) {
@@ -61,10 +67,12 @@ export function buildEdges(root, positions, visited, currentVisit, result = []) 
     const c = positions[child.id];
     if (!p || !c) return;
     result.push({
-      id: parent.id + '-' + child.id,
-      x1: p.x, y1: p.y,
-      x2: c.x, y2: c.y,
-      visited: visited.has(child.id) || child.id === currentVisit
+      id: parent.id + "-" + child.id,
+      x1: p.x,
+      y1: p.y,
+      x2: c.x,
+      y2: c.y,
+      visited: visited.has(child.id) || child.id === currentVisit,
     });
   }
 

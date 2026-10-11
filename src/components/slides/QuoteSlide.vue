@@ -11,20 +11,21 @@
 
       <div class="quote-right">
         <ul class="list">
-          <StepWrapper
-            v-for="(p, i) in points"
-            :key="i"
-            :step="i + 2"
-            tag="li"
-          >
+          <StepWrapper v-for="(p, i) in points" :key="i" :step="i + 2" tag="li">
             <span v-html="p"></span>
           </StepWrapper>
         </ul>
 
         <StepWrapper v-if="highlight" :step="points.length + 2">
           <div class="card card-glow">
-            <div v-if="highlight.title" class="card-title">{{ highlight.title }}</div>
-            <div v-if="highlight.desc" class="card-desc" v-html="highlight.desc"></div>
+            <div v-if="highlight.title" class="card-title">
+              {{ highlight.title }}
+            </div>
+            <div
+              v-if="highlight.desc"
+              class="card-desc"
+              v-html="highlight.desc"
+            ></div>
           </div>
         </StepWrapper>
       </div>
@@ -33,24 +34,25 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
-const text = computed(() => d.value.text || '');
-const author = computed(() => d.value.author || '');
+const text = computed(() => d.value.text || "");
+const author = computed(() => d.value.author || "");
 const points = computed(() => d.value.points || []);
 const highlight = computed(() => d.value.highlight);
 const extra = computed(() => d.value.extra);
 
-useStepCount(() =>
-  1 + points.value.length + (highlight.value ? 1 : 0) + (extra.value ? 1 : 0)
+useStepCount(
+  () =>
+    1 + points.value.length + (highlight.value ? 1 : 0) + (extra.value ? 1 : 0),
 );
 </script>
 
@@ -98,6 +100,8 @@ useStepCount(() =>
 }
 
 @media (max-width: 1100px) {
-  .quote-split { grid-template-columns: 1fr; }
+  .quote-split {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

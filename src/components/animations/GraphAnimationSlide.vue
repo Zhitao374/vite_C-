@@ -7,7 +7,10 @@
           <line
             v-for="e in edges"
             :key="e.id"
-            :x1="e.x1" :y1="e.y1" :x2="e.x2" :y2="e.y2"
+            :x1="e.x1"
+            :y1="e.y1"
+            :x2="e.x2"
+            :y2="e.y2"
             :class="{ 'is-visited': e.visited }"
           />
         </svg>
@@ -21,7 +24,7 @@
             :class="{
               'is-visited': visited.has(node.id),
               'is-current': currentStep.visit === node.id,
-              'is-in-queue': (currentStep.queue || []).includes(node.id)
+              'is-in-queue': (currentStep.queue || []).includes(node.id),
             }"
             :style="nodeStyle(node)"
           >
@@ -36,7 +39,8 @@
             v-for="qid in currentStep.queue"
             :key="qid"
             class="queue-chip"
-          >{{ labelOf(qid) }}</span>
+            >{{ labelOf(qid) }}</span
+          >
           <span v-if="!currentStep.queue.length" class="queue-empty">空</span>
         </div>
       </div>
@@ -45,9 +49,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import AnimationFrame from './AnimationFrame.vue';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import AnimationFrame from "./AnimationFrame.vue";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
@@ -58,31 +62,33 @@ const { current } = useStep();
 const steps = computed(() => props.slide.data?.steps || []);
 
 const currentIndex = computed(() =>
-  Math.max(0, Math.min(current.value - 1, steps.value.length - 1))
+  Math.max(0, Math.min(current.value - 1, steps.value.length - 1)),
 );
 const currentStep = computed(() => steps.value[currentIndex.value] || {});
 
 const visited = computed(() => new Set(currentStep.value.visited || []));
 
 function nodeStyle(node) {
-  return { left: node.x + 'px', top: node.y + 'px' };
+  return { left: node.x + "px", top: node.y + "px" };
 }
 
 function labelOf(id) {
-  return nodes.value.find(n => n.id === id)?.label ?? '?';
+  return nodes.value.find((n) => n.id === id)?.label ?? "?";
 }
 
 const edges = computed(() =>
-  rawEdges.value.map(e => {
-    const from = nodes.value.find(n => n.id === e.from);
-    const to = nodes.value.find(n => n.id === e.to);
+  rawEdges.value.map((e) => {
+    const from = nodes.value.find((n) => n.id === e.from);
+    const to = nodes.value.find((n) => n.id === e.to);
     return {
-      id: e.from + '-' + e.to,
-      x1: from.x, y1: from.y,
-      x2: to.x, y2: to.y,
-      visited: visited.value.has(to.id) && visited.value.has(from.id)
+      id: e.from + "-" + e.to,
+      x1: from.x,
+      y1: from.y,
+      x2: to.x,
+      y2: to.y,
+      visited: visited.value.has(to.id) && visited.value.has(from.id),
     };
-  })
+  }),
 );
 </script>
 
@@ -100,7 +106,9 @@ const edges = computed(() =>
 .edges line {
   stroke: #b0c4d8;
   stroke-width: 2;
-  transition: stroke 0.3s, stroke-width 0.3s;
+  transition:
+    stroke 0.3s,
+    stroke-width 0.3s;
 }
 .edges line.is-visited {
   stroke: var(--primary);
@@ -152,7 +160,9 @@ const edges = computed(() =>
 }
 
 .g-node-enter-active {
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .g-node-enter-from {
   opacity: 0;

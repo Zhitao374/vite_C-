@@ -10,7 +10,10 @@
         <ul v-if="problem.points?.length" class="problem-points">
           <li v-for="(p, i) in problem.points" :key="i" v-html="p"></li>
         </ul>
-        <pre v-if="problem.visual" class="problem-visual"><code>{{ problem.visual }}</code></pre>
+        <pre
+          v-if="problem.visual"
+          class="problem-visual"
+        ><code>{{ problem.visual }}</code></pre>
       </div>
     </StepWrapper>
 
@@ -22,7 +25,7 @@
         :step="evolutionBase + i"
       >
         <div class="evolution-node">
-          <div class="node-icon">{{ item.icon || '▶️' }}</div>
+          <div class="node-icon">{{ item.icon || "▶️" }}</div>
           <div class="node-content">
             <div class="node-head">
               <span v-if="item.era" class="node-era">{{ item.era }}</span>
@@ -41,21 +44,28 @@
           <span class="summary-icon">✅</span>
           <span class="summary-title">{{ summary.title }}</span>
         </div>
-        <div v-if="summary.desc" class="summary-desc" v-html="summary.desc"></div>
-        <pre v-if="summary.code" class="summary-code"><code>{{ summary.code }}</code></pre>
+        <div
+          v-if="summary.desc"
+          class="summary-desc"
+          v-html="summary.desc"
+        ></div>
+        <pre
+          v-if="summary.code"
+          class="summary-code"
+        ><code>{{ summary.code }}</code></pre>
       </div>
     </StepWrapper>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
@@ -65,7 +75,9 @@ const summary = computed(() => d.value.summary);
 const extra = computed(() => d.value.extra);
 
 const evolutionBase = computed(() => (problem.value ? 2 : 1));
-const summaryStep = computed(() => evolutionBase.value + evolution.value.length);
+const summaryStep = computed(
+  () => evolutionBase.value + evolution.value.length,
+);
 
 useStepCount(() => {
   let n = 0;
@@ -82,7 +94,7 @@ useStepCount(() => {
 /* ① 问题场景                                    */
 /* ============================================ */
 .origin-problem {
-  background: linear-gradient(145deg, #FFF5F5, #FFFFFF);
+  background: linear-gradient(145deg, #fff5f5, #ffffff);
   border: 2px solid rgba(245, 63, 63, 0.25);
   border-radius: var(--radius-md);
   box-shadow: 0 4px 16px rgba(245, 63, 63, 0.08);
@@ -91,11 +103,13 @@ useStepCount(() => {
   overflow: hidden;
 }
 .origin-problem::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--error), #FFA07A);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--error), #ffa07a);
 }
 .problem-head {
   display: flex;
@@ -124,7 +138,7 @@ useStepCount(() => {
   color: var(--text-sub);
 }
 .problem-points li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: calc(8px * var(--font-scale));
   color: var(--error);
@@ -168,7 +182,9 @@ useStepCount(() => {
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   box-shadow: var(--card-shadow);
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 .evolution-node:hover {
   box-shadow: var(--card-shadow-hover);
@@ -230,7 +246,7 @@ useStepCount(() => {
 /* ③ 今天的方案                                  */
 /* ============================================ */
 .origin-summary {
-  background: linear-gradient(145deg, #FFFFFF, #F0FFF4);
+  background: linear-gradient(145deg, #ffffff, #f0fff4);
   border: 2px solid rgba(0, 180, 42, 0.3);
   border-radius: var(--radius-md);
   box-shadow: 0 6px 24px rgba(0, 180, 42, 0.1);
@@ -239,11 +255,13 @@ useStepCount(() => {
   overflow: hidden;
 }
 .origin-summary::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--success), #67E8A0);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--success), #67e8a0);
 }
 .summary-head {
   display: flex;

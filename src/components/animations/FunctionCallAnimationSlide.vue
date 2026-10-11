@@ -1,66 +1,83 @@
 <template>
-    <AnimationFrame :slide="slide">
-        <template #stage="{ currentStep }">
-            <div class="fc-stage">
-                <!-- 空栈提示 -->
-                <div v-if="!currentStep.stack || !currentStep.stack.length" class="stack-empty">
-                    调用栈为空
-                </div>
-                <!-- 左侧：栈帧堆叠 -->
-                <div class="stack-view scroll-pane">
-                    <TransitionGroup name="frame" tag="div" class="stack-body">
-                        <div v-for="(frame, i) in (currentStep.stack || [])" :key="frame.id" class="stack-frame" :class="[
-                            `is-${frame.status || 'idle'}`,
-                            { 'is-top': i === (currentStep.stack || []).length - 1 }
-                        ]">
-                            <div class="frame-header">
-                                <span class="frame-icon">{{ iconOf(frame.status) }}</span>
-                                <span class="frame-name">{{ frame.name }}</span>
-                                <span v-if="frame.returns !== undefined" class="frame-return">
-                                    → {{ frame.returns }}
-                                </span>
-                            </div>
+  <AnimationFrame :slide="slide">
+    <template #stage="{ currentStep }">
+      <div class="fc-stage">
+        <!-- 空栈提示 -->
+        <div
+          v-if="!currentStep.stack || !currentStep.stack.length"
+          class="stack-empty"
+        >
+          调用栈为空
+        </div>
+        <!-- 左侧：栈帧堆叠 -->
+        <div class="stack-view scroll-pane">
+          <TransitionGroup name="frame" tag="div" class="stack-body">
+            <div
+              v-for="(frame, i) in currentStep.stack || []"
+              :key="frame.id"
+              class="stack-frame"
+              :class="[
+                `is-${frame.status || 'idle'}`,
+                { 'is-top': i === (currentStep.stack || []).length - 1 },
+              ]"
+            >
+              <div class="frame-header">
+                <span class="frame-icon">{{ iconOf(frame.status) }}</span>
+                <span class="frame-name">{{ frame.name }}</span>
+                <span v-if="frame.returns !== undefined" class="frame-return">
+                  → {{ frame.returns }}
+                </span>
+              </div>
 
-                            <div v-if="frame.vars && Object.keys(frame.vars).length" class="frame-vars">
-                                <span v-for="(v, k) in frame.vars" :key="k" class="var-item">
-                                    <b>{{ k }}</b> = {{ v }}
-                                </span>
-                            </div>
-                        </div>
-                    </TransitionGroup>
-                </div>
-
-                <!-- 底部：当前行提示 -->
-                <div class="line-hint">
-                    <div v-if="currentStep.line" class="line-badge">
-                        正在执行第 {{ currentStep.line }} 行
-                    </div>
-                    <div v-if="currentStep.code" class="code-snippet">
-                        <code>{{ currentStep.code }}</code>
-                    </div>
-                </div>
+              <div
+                v-if="frame.vars && Object.keys(frame.vars).length"
+                class="frame-vars"
+              >
+                <span v-for="(v, k) in frame.vars" :key="k" class="var-item">
+                  <b>{{ k }}</b> = {{ v }}
+                </span>
+              </div>
             </div>
-        </template>
-    </AnimationFrame>
+          </TransitionGroup>
+        </div>
+
+        <!-- 底部：当前行提示 -->
+        <div class="line-hint">
+          <div v-if="currentStep.line" class="line-badge">
+            正在执行第 {{ currentStep.line }} 行
+          </div>
+          <div v-if="currentStep.code" class="code-snippet">
+            <code>{{ currentStep.code }}</code>
+          </div>
+        </div>
+      </div>
+    </template>
+  </AnimationFrame>
 </template>
 
 <script setup>
-import AnimationFrame from './AnimationFrame.vue';
+import AnimationFrame from "./AnimationFrame.vue";
 
 defineProps({ slide: { type: Object, required: true } });
 
 function iconOf(status) {
-    switch (status) {
-        case 'running': return '▶️';
-        case 'calling': return '📞';
-        case 'returning': return '↩️';
-        case 'done': return '✅';
-        default: return '⚪';
-    }
+  switch (status) {
+    case "running":
+      return "▶️";
+    case "calling":
+      return "📞";
+    case "returning":
+      return "↩️";
+    case "done":
+      return "✅";
+    default:
+      return "⚪";
+  }
 }
 </script>
 
-<style scoped>/* ============ 主容器：flex 纵向 ============ */
+<style scoped>
+/* ============ 主容器：flex 纵向 ============ */
 .fc-stage {
   position: absolute;
   inset: 0;
@@ -81,13 +98,12 @@ function iconOf(status) {
   padding-right: 6px;
 }
 
-
 /* ============ 栈体：从顶部排列 ============ */
 .stack-body {
   display: flex;
-  flex-direction: column-reverse;   /* 数组末尾（栈顶）显示在最上方 */
-  justify-content: flex-end;         /* 内容整体贴顶 */
-  gap: 6px;                          /* 紧凑间距 */
+  flex-direction: column-reverse; /* 数组末尾（栈顶）显示在最上方 */
+  justify-content: flex-end; /* 内容整体贴顶 */
+  gap: 6px; /* 紧凑间距 */
   width: 100%;
 }
 
@@ -102,7 +118,7 @@ function iconOf(status) {
 /* ============ 单个栈帧（紧凑版） ============ */
 .stack-frame {
   position: relative;
-  padding: 8px 14px;                 /* 从 12px 18px 缩小 */
+  padding: 8px 14px; /* 从 12px 18px 缩小 */
   background: #fff;
   border: 2px solid var(--card-border);
   border-radius: 8px;
@@ -119,29 +135,29 @@ function iconOf(status) {
   background: #fff;
 }
 .stack-frame.is-calling {
-  border-color: #FF7A00;
+  border-color: #ff7a00;
   background: linear-gradient(90deg, #ffe8d1, #fff);
 }
 .stack-frame.is-running {
-  border-color: #165DFF;
+  border-color: #165dff;
   background: linear-gradient(90deg, #dbe7ff, #fff);
   box-shadow:
     0 0 0 3px rgba(22, 93, 255, 0.15),
     0 3px 10px rgba(22, 93, 255, 0.18);
 }
 .stack-frame.is-returning {
-  border-color: #FF7A00;
+  border-color: #ff7a00;
   background: linear-gradient(90deg, #ffc078, #ffe8d1);
 }
 .stack-frame.is-done {
-  border-color: #00B42A;
+  border-color: #00b42a;
   background: linear-gradient(90deg, #d9f7e2, #fff);
   opacity: 0.85;
 }
 
 /* 栈顶标记 */
 .stack-frame.is-top::after {
-  content: '← 栈顶';
+  content: "← 栈顶";
   position: absolute;
   right: -66px;
   top: 50%;
@@ -171,7 +187,7 @@ function iconOf(status) {
 }
 
 .stack-frame.is-done .frame-name {
-  color: #00B42A;
+  color: #00b42a;
 }
 
 .frame-return {
@@ -199,7 +215,7 @@ function iconOf(status) {
 
 /* ============ 底部行提示：固定不滚动 ============ */
 .line-hint {
-  flex: 0 0 auto;                    /* 不参与滚动 */
+  flex: 0 0 auto; /* 不参与滚动 */
   display: flex;
   align-items: center;
   gap: 12px;

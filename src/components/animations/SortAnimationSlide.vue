@@ -10,7 +10,7 @@
             class="sort-item"
             :class="{
               'is-active': isHighlighted(item.id, currentStep),
-              'is-done': isDone(item.id, currentStep)
+              'is-done': isDone(item.id, currentStep),
             }"
             :style="{ height: barHeight(item.value) + 'px' }"
           >
@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import AnimationFrame from './AnimationFrame.vue';
+import AnimationFrame from "./AnimationFrame.vue";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
@@ -83,8 +83,9 @@ function isDone(id, step) {
     0 2px 6px rgba(22, 93, 255, 0.15),
     inset 0 2px 0 rgba(255, 255, 255, 0.3);
   /* 位置变化由 FLIP 处理，高度变化用 CSS 过渡 */
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.3s ease;
+  transition:
+    height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s ease;
 }
 
 /* 正在比较 */

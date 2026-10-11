@@ -12,9 +12,9 @@
 
 <script setup>
 defineProps({
-  title: { type: String, default: '' },
-  variant: { type: String, default: '' },
-  compact: { type: Boolean, default: false }
+  title: { type: String, default: "" },
+  variant: { type: String, default: "" },
+  compact: { type: Boolean, default: false },
 });
 </script>
 
@@ -28,7 +28,9 @@ defineProps({
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 .card:hover {
   box-shadow: var(--card-shadow-hover);
@@ -56,7 +58,9 @@ defineProps({
   min-height: 120px;
   padding: 20px 24px;
 }
-.card-compact .card-title { justify-content: center; }
+.card-compact .card-title {
+  justify-content: center;
+}
 
 .card-glow {
   background: linear-gradient(145deg, #fff, #f4f8ff);

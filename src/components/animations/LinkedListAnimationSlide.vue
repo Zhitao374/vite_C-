@@ -13,7 +13,7 @@
               class="ll-node"
               :class="{
                 'is-highlight': isHighlighted(node.id, currentStep),
-                'is-inserted': node.id === currentStep.state.inserted
+                'is-inserted': node.id === currentStep.state.inserted,
               }"
             >
               {{ node.value }}
@@ -22,7 +22,14 @@
             <!-- 箭头（最后一个节点用 ∧ 结束符） -->
             <div v-if="i < currentStep.state.nodes.length - 1" class="ll-arrow">
               <svg viewBox="0 0 36 20" preserveAspectRatio="none">
-                <line x1="2" y1="10" x2="26" y2="10" stroke="currentColor" stroke-width="2.5" />
+                <line
+                  x1="2"
+                  y1="10"
+                  x2="26"
+                  y2="10"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                />
                 <polygon points="26,4 36,10 26,16" fill="currentColor" />
               </svg>
             </div>
@@ -35,7 +42,7 @@
 </template>
 
 <script setup>
-import AnimationFrame from './AnimationFrame.vue';
+import AnimationFrame from "./AnimationFrame.vue";
 defineProps({ slide: { type: Object, required: true } });
 
 function isHighlighted(id, step) {
@@ -103,9 +110,15 @@ function isHighlighted(id, step) {
 }
 
 @keyframes ll-pop {
-  0% { transform: scale(0.5); }
-  60% { transform: scale(1.15); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* 箭头 */

@@ -56,17 +56,17 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import CodeBlock from '@/components/common/CodeBlock.vue';
-import ExtraCard from '@/components/common/ExtraCard.vue';
-import IntroCard from '@/components/common/IntroCard.vue';
-import { useStepCount } from '@/composables/useStepCount';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import ExtraCard from "@/components/common/ExtraCard.vue";
+import IntroCard from "@/components/common/IntroCard.vue";
+import { useStepCount } from "@/composables/useStepCount";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
 const d = computed(() => props.slide.data || {});
@@ -75,12 +75,13 @@ const extra = computed(() => d.value.extra);
 
 const baseOffset = computed(() => (d.value.intro ? 2 : 1));
 
-useStepCount(() =>
-  (d.value.intro ? 1 : 0) +
-  1 +
-  annotations.value.length +
-  (d.value.output ? 1 : 0) +
-  (extra.value ? 1 : 0)
+useStepCount(
+  () =>
+    (d.value.intro ? 1 : 0) +
+    1 +
+    annotations.value.length +
+    (d.value.output ? 1 : 0) +
+    (extra.value ? 1 : 0),
 );
 
 const { max: maxStep } = useStep();
@@ -113,8 +114,12 @@ const { max: maxStep } = useStep();
   margin: 0;
 }
 
-.split .card-title { font-size: var(--fs-card-title); }
-.split .card-desc  { font-size: var(--fs-card-desc); }
+.split .card-title {
+  font-size: var(--fs-card-title);
+}
+.split .card-desc {
+  font-size: var(--fs-card-desc);
+}
 
 .annotation-card {
   padding: 12px 16px;
@@ -190,11 +195,15 @@ const { max: maxStep } = useStep();
 }
 
 @media (max-width: 1100px) {
-  .bottom-row { grid-template-columns: 1fr; }
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 900px) {
-  .split { grid-template-columns: 1fr; }
+  .split {
+    grid-template-columns: 1fr;
+  }
   .scroll-pane {
     overflow-y: visible;
     max-height: none;

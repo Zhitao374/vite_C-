@@ -16,15 +16,19 @@
             :class="{
               'is-active': i === currentStep.mid,
               'is-out': i < currentStep.left || i > currentStep.right,
-              'is-in-range': i >= currentStep.left && i <= currentStep.right
+              'is-in-range': i >= currentStep.left && i <= currentStep.right,
             }"
           >
             <div class="cell-value">{{ item.value }}</div>
             <div class="cell-index">[{{ i }}]</div>
 
             <!-- 标记 -->
-            <div v-if="i === currentStep.left" class="marker marker-left">L</div>
-            <div v-if="i === currentStep.right" class="marker marker-right">R</div>
+            <div v-if="i === currentStep.left" class="marker marker-left">
+              L
+            </div>
+            <div v-if="i === currentStep.right" class="marker marker-right">
+              R
+            </div>
             <div v-if="i === currentStep.mid" class="marker marker-mid">M</div>
           </div>
         </div>
@@ -34,9 +38,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import AnimationFrame from './AnimationFrame.vue';
-import { useStep } from '@/composables/useStep';
+import { computed } from "vue";
+import AnimationFrame from "./AnimationFrame.vue";
+import { useStep } from "@/composables/useStep";
 
 const props = defineProps({ slide: { type: Object, required: true } });
 
@@ -47,9 +51,16 @@ const { current } = useStep();
 const steps = computed(() => props.slide.data?.steps || []);
 
 const currentIndex = computed(() =>
-  Math.max(0, Math.min(current.value - 1, steps.value.length - 1))
+  Math.max(0, Math.min(current.value - 1, steps.value.length - 1)),
 );
-const currentStep = computed(() => steps.value[currentIndex.value] || { left: 0, right: items.value.length - 1, mid: -1 });
+const currentStep = computed(
+  () =>
+    steps.value[currentIndex.value] || {
+      left: 0,
+      right: items.value.length - 1,
+      mid: -1,
+    },
+);
 </script>
 
 <style scoped>
@@ -142,8 +153,14 @@ const currentStep = computed(() => steps.value[currentIndex.value] || { left: 0,
   font-weight: 800;
   letter-spacing: 1px;
 }
-.marker-left { color: #4a8bff; left: 0; }
-.marker-right { color: #4a8bff; right: 0; }
+.marker-left {
+  color: #4a8bff;
+  left: 0;
+}
+.marker-right {
+  color: #4a8bff;
+  right: 0;
+}
 .marker-mid {
   color: var(--accent);
   top: -28px;
