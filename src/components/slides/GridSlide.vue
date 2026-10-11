@@ -30,7 +30,7 @@
     </div>
     <!-- 【新增】footer 区 -->
     <StepWrapper v-if="footer" :step="cards.length + 1">
-      <div class="grid-footer" v-html="footer"></div>
+      <SlideFooter :html="footer" />
     </StepWrapper>
   </SlideShell>
 </template>
@@ -40,6 +40,7 @@ import { computed } from "vue";
 import SlideShell from "@/components/common/SlideShell.vue";
 import StepWrapper from "@/components/common/StepWrapper.vue";
 import IconMap from "@/components/common/IconMap.vue";
+import SlideFooter from '@/components/common/SlideFooter.vue';
 import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
@@ -57,10 +58,11 @@ useStepCount(
 
 const gridClass = computed(() => {
   const n = cards.value.length;
-  if (n === 1) return "grid grid-cols-1";
-  if (n === 2) return "grid grid-cols-2";
-  if (n === 3) return "grid grid-cols-3";
-  return "grid grid-cols-4";
+  if (n === 1) return 'grid grid-cols-1';
+  if (n % 4 === 0) return 'grid grid-cols-4';
+  if (n % 3 === 0) return 'grid grid-cols-3';
+  if (n === 2) return 'grid grid-cols-2';
+  return n >= 8 ? 'grid grid-cols-4' : 'grid grid-cols-3';
 });
 </script>
 
@@ -111,32 +113,6 @@ const gridClass = computed(() => {
 .grid :deep(.step-wrapper > *) {
   flex: 1;
   height: 100%;
-}
-.grid-footer {
-  margin-top: 16px;
-  padding: 16px 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--card-shadow);
-  font-size: var(--fs-card-desc);
-  line-height: 1.7;
-  color: var(--text-sub);
-}
-
-.grid-footer :deep(b) {
-  font-size: 1.12em;
-  font-weight: 800;
-  color: var(--text-main);
-}
-
-.grid-footer :deep(code) {
-  background: var(--primary-soft);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-family: var(--font-code);
-  color: var(--primary);
-  font-weight: 600;
 }
 
 @media (max-width: 1400px) {

@@ -32,10 +32,11 @@
       </div>
     </div>
 
+    <!-- 底部：output + extra 并排 -->
     <div v-if="d.output || extra" class="bottom-row">
       <StepWrapper
         v-if="d.output"
-        :step="baseOffset + annotations.length"
+        :step="outputStep"
         class="bottom-col"
       >
         <div class="card output-card">
@@ -44,7 +45,7 @@
         </div>
       </StepWrapper>
 
-      <StepWrapper v-if="extra" :step="maxStep" class="bottom-col">
+      <StepWrapper v-if="extra" :step="extraStep" class="bottom-col">
         <ExtraCard
           :title="extra.title"
           :desc="extra.desc"
@@ -52,6 +53,11 @@
         />
       </StepWrapper>
     </div>
+
+    <!-- footer：独立在最后 -->
+    <StepWrapper v-if="footer" :step="footerStep">
+      <SlideFooter :html="footer" />
+    </StepWrapper>
   </SlideShell>
 </template>
 
@@ -62,6 +68,7 @@ import StepWrapper from "@/components/common/StepWrapper.vue";
 import CodeBlock from "@/components/common/CodeBlock.vue";
 import ExtraCard from "@/components/common/ExtraCard.vue";
 import IntroCard from "@/components/common/IntroCard.vue";
+import SlideFooter from "@/components/common/SlideFooter.vue";
 import { useStepCount } from "@/composables/useStepCount";
 import { useStep } from "@/composables/useStep";
 
@@ -72,8 +79,14 @@ const props = defineProps({
 const d = computed(() => props.slide.data || {});
 const annotations = computed(() => d.value.annotations || []);
 const extra = computed(() => d.value.extra);
+const footer = computed(() => d.value.footer);
 
 const baseOffset = computed(() => (d.value.intro ? 2 : 1));
+
+// 步数位置
+const outputStep = computed(() => baseOffset.value + annotations.value.length);
+const footerStep = computed(() => outputStep.value + (d.value.output ? 1 : 0));
+const extraStep = computed(() => footerStep.value + (footer.value ? 1 : 0));
 
 useStepCount(
   () =>
@@ -81,6 +94,7 @@ useStepCount(
     1 +
     annotations.value.length +
     (d.value.output ? 1 : 0) +
+    (footer.value ? 1 : 0) +
     (extra.value ? 1 : 0),
 );
 
@@ -88,6 +102,7 @@ const { max: maxStep } = useStep();
 </script>
 
 <style scoped>
+/* 样式不变 —— 保留原样 */
 .split {
   display: grid;
   grid-template-columns: 45fr 55fr;

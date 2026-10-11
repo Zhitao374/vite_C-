@@ -91,6 +91,9 @@
             <div class="card-desc" v-html="analysis.desc"></div>
           </div>
         </StepWrapper>
+        <StepWrapper v-if="footer" :step="footerStep">
+          <SlideFooter :html="footer" />
+        </StepWrapper>
 
         <StepWrapper v-if="extra" :step="maxStep">
           <ExtraCard
@@ -111,6 +114,7 @@ import CodeBlock from "@/components/common/CodeBlock.vue";
 import ExtraCard from "@/components/common/ExtraCard.vue";
 import HintRow from "@/components/level-map/HintRow.vue";
 import LevelNode from "@/components/level-map/LevelNode.vue";
+import SlideFooter from '@/components/common/SlideFooter.vue';
 import { useStep } from "@/composables/useStep";
 import { useStepCount } from "@/composables/useStepCount";
 import { DEFAULT_LEVELS } from "@/config/defaults";
@@ -127,7 +131,12 @@ const answer = computed(() => d.value.answer);
 const analysis = computed(() => d.value.analysis);
 const extra = computed(() => d.value.extra);
 const chapterTag = computed(() => props.slide.chapterTag);
-
+const footer = computed(() => d.value.footer);
+const footerStep = computed(() => {
+  let s = analysisStep.value;
+  if (analysis.value) s += 1;
+  return s;
+});
 // 步数规则
 useStepCount(() => {
   const data = d.value;
@@ -135,6 +144,7 @@ useStepCount(() => {
   n += data.hints?.length || 0;
   n += data.answer ? 1 : 0;
   n += data.analysis ? 1 : 0;
+  n += data.footer ? 1 : 0;
   n += data.extra ? 1 : 0;
   return n;
 });

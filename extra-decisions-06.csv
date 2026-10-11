@@ -1,0 +1,28 @@
+lesson,slide,decision,note
+06,2,delete,合并到 slide-5
+06,3,delete,与 slide-5/23 重复
+06,4,delete,积分规则
+06,5,keep,从变量到数组
+06,6,delete,搬正文
+06,7,delete,搬正文
+06,8,delete,搬正文
+06,9,keep,下标从 0 开始的由来
+06,10,delete,搬正文
+06,12,delete,搬正文
+06,13,delete,搬正文
+06,14,delete,搬正文
+06,15,keep,高斯的故事
+06,16,delete,与 slide-15 重复
+06,17,delete,与 slide-24 重复
+06,18,delete,搬正文
+06,19,delete,搬正文
+06,20,delete,搬正文
+06,21,keep,结尾名言
+06,22,delete,与 slide-18 重复
+06,23,delete,抒情
+06,24,delete,提交方式
+06,25,delete,预告
+06,26,delete,建议
+06,27,delete,glossary 已有
+06,28,delete,搬 footer
+06,29,delete,ending 抒情

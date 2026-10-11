@@ -55,10 +55,6 @@ export default {
             points: ["自动转换", "强制转换", "整数除法陷阱"],
           },
         ],
-        extra: {
-          title: "💡 今天的新问题",
-          desc: '目前程序只会从头到尾执行一遍，不会"做判断"。<br>比如"成绩及格就输出及格"——这在程序里怎么写？<br>答案：用<b>运算符</b>和<b>分支结构</b>。<br><br>🔮 <b>回收伏笔</b>：第 3 讲讲过 bool 是"判断的基础"，今天就让 bool 派上用场。',
-        },
       },
     },
 
@@ -87,10 +83,6 @@ export default {
             desc: "用 if 解决奇偶、成绩、闰年问题",
           },
         ],
-        extra: {
-          title: "📖 知识扩展 · 程序的三大结构",
-          desc: '顺序、分支、循环是程序的三大基本结构。<br>前面学的都是顺序结构，本讲开始学<b>分支结构</b>。<br>学会分支，程序才能根据输入"做不同的反应"，从流水账升级为智能判断。<br><b>这是程序从"死板"变"聪明"的关键一步。</b>',
-        },
       },
     },
 
@@ -141,52 +133,52 @@ export default {
             ],
           },
         ],
-        extra: {
-          title: "🏆 积分规则",
-          desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"逻辑大师"徽章。',
-        },
       },
     },
 
     /* ===== 5 运算符与分支引入 ===== */
     {
-      id: 5,
-      type: "dialog",
+      id: 5, type: 'origin',
       title: '程序怎么"做判断"？',
-      subtitle: "运算符与分支",
-      chapterTag: "第 4 讲 · 概念理解",
+      subtitle: '运算符与分支',
+      chapterTag: '第 4 讲 · 概念理解',
       data: {
-        lines: [
-          {
-            who: "student",
-            text: '小 C，我想让程序判断"成绩及格就输出及格"，怎么写？',
-          },
-          {
-            who: "robot",
-            text: "需要两样东西：<b>运算符</b>做比较，<b>分支结构</b>做判断。",
-          },
-          { who: "student", text: "运算符是什么？" },
-          {
-            who: "robot",
-            text: '运算符就是"工具"。<br>+ 是加法工具、&gt; 是比较工具、&amp;&amp; 是连接条件的工具。',
-          },
-          { who: "student", text: "那分支结构呢？" },
-          {
-            who: "robot",
-            text: '分支就是"岔路口"。程序根据条件走不同的路——<br>条件成立走一条，不成立走另一条。',
-          },
-          { who: "student", text: "哦，那先学运算符再学分支？" },
-          {
-            who: "robot",
-            text: '对。运算符是分支的基础——<br>没有运算符，就没有"条件"。<br>先学工具，再学"用工具判断"。',
-          },
-        ],
-        extra: {
-          title: "📖 知识扩展 · 三大基本结构",
-          desc: '1966 年，计算机科学家 <b>Böhm 和 Jacopini</b> 证明了一个惊人的结论：<br>任何程序，都可以用<b>三种基本结构</b>组合出来——<br>① <b>顺序</b>：从上到下一条条执行<br>② <b>分支</b>：根据条件走不同的路<br>③ <b>循环</b>：重复执行一段代码<br><br>这个结论被称为"<b>结构化程序定理</b>"——它是现代编程的基石。<br>所有语言（C++、Python、Java）都遵循这个理论。<br>今天学的分支，就是三大结构之一。<br><br>🔮 <b>伏笔</b>：循环结构是第 5 讲的内容。学会分支+循环，程序就能解决任何问题。',
-          variant: "card-primary",
+        problem: {
+          title: '程序只会"一条路走到黑"',
+          points: [
+            '目前程序从第一行执行到最后一行——<b>不会拐弯</b>',
+            '想让它"成绩及格就输出及格"——<b>做不到</b>',
+            '怎么办？'
+          ]
         },
-      },
+        evolution: [
+          {
+            icon: '➕', era: '第一步',
+            title: '用运算符做比较',
+            desc: '<code>score &gt;= 60</code> —— 得到 <b>true</b> 或 <b>false</b>'
+          },
+          {
+            icon: '🔀', era: '第二步',
+            title: '用分支选择路径',
+            desc: '<code>if (score &gt;= 60) { 输出及格 }</code> —— 条件为真才执行'
+          },
+          {
+            icon: '🧠', era: '第三步',
+            title: '程序"活"了',
+            desc: '从此不再流水账——能根据输入<b>做不同反应</b>'
+          }
+        ],
+        summary: {
+          title: '1966 年 · 结构化程序定理',
+          desc: '计算机科学家 <b>Böhm 和 Jacopini</b> 证明：<br>任何程序都可以用三种基本结构组合出来——<br><b>顺序、分支、循环</b>。<br>今天学的<b>分支</b>，是三大结构之一。',
+          code: '// 顺序：从上到下\n// 分支：if / else / switch  ← 今天学\n// 循环：while / for      ← 第 5 讲'
+        },
+        extra: {
+          title: '📖 知识扩展 · 结构化程序定理',
+          desc: '1966 年，两位计算机科学家 <b>Böhm 和 Jacopini</b> 发表论文，证明了一个惊人的结论：<br><br><b>任何程序，都可以只用三种基本结构表达</b>——<br>顺序、分支、循环。<br><br>这个结论被称为"结构化程序定理"——它是现代编程的基石。<br>所有主流语言（C++、Python、Java）都遵循这个理论。<br><br><b>为什么重要？</b><br>它告诉我们：不需要"跳来跳去"的 goto 语句——<b>三种结构足够表达一切逻辑</b>。<br><br>🔮 <b>伏笔</b>：循环结构是第 5 讲的内容。学会分支 + 循环，程序就能解决任何问题。',
+          variant: 'card-primary'
+        }
+      }
     },
 
     /* ===== 6 运算符总览 ===== */
@@ -218,11 +210,7 @@ export default {
             desc: "<b>&amp;&amp;</b> 与（两边都真才真）<br><b>||</b> 或（一边真就真）<br><b>!</b> 非（真变假，假变真）<br>例：<code>a &gt; 0 &amp;&amp; a &lt; 10</code>",
           },
         ],
-        extra: {
-          title: "📌 竞赛高频提醒",
-          desc: "关系运算符的 <code>==</code> 容易和赋值 <code>=</code> 混淆。<br><code>if (a = 5)</code> 是赋值（永远成立），<code>if (a == 5)</code> 才是判断。<br>写错会得到意想不到的结果，而且编译器不报错。<br><br><b>记忆口诀</b>：判断相等，两个等号。<br><br>🔮 <b>伏笔</b>：除了这四类，C++ 还有第五类运算符——<b>位运算</b>。它直接操作二进制。第 21 讲揭晓。",
-          variant: "card-primary",
-        },
+        footer: '<b>⚠️ 竞赛高频提醒</b>：关系运算符的 <code>==</code> 容易和赋值 <code>=</code> 混淆。<br><code>if (a = 5)</code> 是赋值（<b>永远成立</b>），<code>if (a == 5)</code> 才是判断。<br>写错会得到意想不到的结果，而且<b>编译器不报错</b>。<br><br><b>记忆口诀</b>：判断相等，两个等号。<br><br>🔮 <b>伏笔</b>：除了这四类，C++ 还有第五类——<b>位运算</b>。第 21 讲揭晓。'
       },
     },
 
@@ -243,11 +231,7 @@ export default {
           { line: 14, title: "x += 3", desc: "简写，等价于 x = x + 3" },
         ],
         output: "13\n7\n30\n3\n1\n8",
-        extra: {
-          title: "💡 取余 % 的妙用",
-          desc: "① <b>判断奇偶</b>：<code>n % 2 == 0</code> 是偶数，<code>== 1</code> 是奇数<br>② <b>提取数位</b>：<code>n % 10</code> 得到个位数<br>③ <b>判断倍数</b>：<code>n % k == 0</code> 说明 n 是 k 的倍数<br><br>取余是竞赛中的高频运算符，一定要熟练掌握。<br><br><b>实际应用</b>：密码学、哈希函数、日期计算都用取余。",
-          variant: "card-primary",
-        },
+        footer: '<b>💡 取余 % 的妙用</b><br>① <b>判断奇偶</b>：<code>n % 2 == 0</code> 是偶数<br>② <b>提取数位</b>：<code>n % 10</code> 得到个位数<br>③ <b>判断倍数</b>：<code>n % k == 0</code> 说明 n 是 k 的倍数<br><br><b>实际应用</b>：密码学、哈希函数、日期计算都用取余。'
       },
     },
 
@@ -279,46 +263,35 @@ export default {
 
     /* ===== 9 逻辑运算符与优先级 ===== */
     {
-      id: 9,
-      type: "dialog",
-      title: "逻辑运算符与优先级",
-      subtitle: "组合多个条件",
-      chapterTag: "第 4 讲 · 概念理解",
+      id: 9, type: 'grid',
+      title: '逻辑运算符与优先级',
+      subtitle: '组合多个条件',
+      chapterTag: '第 4 讲 · 概念理解',
       data: {
-        lines: [
+        cards: [
           {
-            who: "student",
-            text: '小 C，如果我要判断"a 在 0 和 10 之间"，怎么写？',
+            icon: '🔗',
+            title: '&& 与',
+            desc: '两边都真才真<br><b>true && true = true</b><br>true && false = false<br>常用于"范围判断"<br><code>a &gt; 0 &amp;&amp; a &lt; 10</code>'
           },
           {
-            who: "robot",
-            text: "用<b>逻辑运算符</b>：<code>a &gt; 0 &amp;&amp; a &lt; 10</code>。",
-          },
-          { who: "student", text: "&amp;&amp; 是什么意思？" },
-          {
-            who: "robot",
-            text: "<b>与（and）</b>——两边都真才真。<br>还有 <b>|| 或（or）</b>——一边真就真。<br>还有 <b>! 非（not）</b>——真变假，假变真。",
+            icon: '⚡',
+            title: '|| 或',
+            desc: '一边真就真<br>false || true = true<br>false || false = false<br>常用于"任一满足"<br><code>a == 1 || a == 2</code>'
           },
           {
-            who: "student",
-            text: "那我如果写 a &gt; 0 &amp;&amp; a &lt; 10，会不会有优先级问题？",
+            icon: '🚫',
+            title: '! 非',
+            desc: '真变假，假变真<br><code>!true = false</code><br><code>!false = true</code><br>常用于"反向判断"<br><code>if (!flag)</code>'
           },
           {
-            who: "robot",
-            text: "会有。<code>&gt;</code> 比 <code>&amp;&amp;</code> 优先级高，<br>所以 <code>a &gt; 0 &amp;&amp; a &lt; 10</code> 相当于 <code>(a &gt; 0) &amp;&amp; (a &lt; 10)</code>——正好对。",
-          },
-          { who: "student", text: "那有没有可能出问题？" },
-          {
-            who: "robot",
-            text: "有。<code>a || b &amp;&amp; c</code> 因为 <code>&amp;&amp;</code> 比 <code>||</code> 优先级高，<br>实际等于 <code>a || (b &amp;&amp; c)</code>，不是你以为的 <code>(a || b) &amp;&amp; c</code>。<br><b>建议</b>：不确定就加括号。",
-          },
+            icon: '📊',
+            title: '优先级（常用 5 层）',
+            desc: '① <code>( )</code> 括号<br>② <code>! ++ --</code><br>③ <code>* / %</code><br>④ <code>+ -</code><br>⑤ <code>&gt; &lt; == &amp;&amp; ||</code>'
+          }
         ],
-        extra: {
-          title: "💡 运算符优先级（简化版）",
-          desc: 'C++ 有 18 个优先级级别，不用全背。记住常用的 5 层：<br>① <b>括号</b> <code>()</code><br>② <b>非、自增自减</b> <code>! ++ --</code><br>③ <b>乘除取余</b> <code>* / %</code><br>④ <b>加减</b> <code>+ -</code><br>⑤ <b>比较与逻辑</b> <code>&gt; &lt; == &amp;&amp; ||</code><br><br><b>实用建议</b>：<br>不确定就加括号——加括号不会错，少加括号容易错。<br>竞赛里的代码，多几个括号没人嫌，少一个括号可能就 WA。<br><br>🔮 <b>伏笔</b>：逻辑运算符 <code>&amp;&amp; || !</code>，在电路里对应的就是"与门、或门、非门"。第 22 讲从开关讲到计算机。',
-          variant: "card-primary",
-        },
-      },
+        footer: '<b>📌 口诀</b>：与（&&）严——两边都要真；或（||）宽——一边真就行；非（!）反过来。<br><br><b>不确定就加括号</b>——加括号不会错，少加括号容易错。竞赛代码多几个括号没人嫌，少一个可能就 WA。<br><br><b>🔮 伏笔</b>：逻辑运算符 <code>&amp;&amp; || !</code> 在电路里对应"与门、或门、非门"——第 22 讲从开关讲到计算机。'
+      }
     },
 
     /* ===== 10 过渡页 ===== */
@@ -332,35 +305,30 @@ export default {
 
     /* ===== 11 什么是分支 ===== */
     {
-      id: 11,
-      type: "dialog",
-      title: "什么是分支结构？",
-      subtitle: "让程序学会做判断",
-      chapterTag: "第 4 讲 · 分支结构",
+      id: 11, type: 'grid',
+      title: '什么是分支结构？',
+      subtitle: '让程序学会做判断',
+      chapterTag: '第 4 讲 · 分支结构',
       data: {
-        lines: [
-          { who: "student", text: "小 C，程序能像人一样做判断吗？" },
+        cards: [
           {
-            who: "robot",
-            text: "能。用 <b>if 语句</b>，程序可以根据条件走不同的路。",
+            icon: '➡️',
+            title: '顺序结构',
+            desc: '程序从上到下<br>一条条执行<br>像流水账<br><b>不会拐弯</b>'
           },
-          { who: "student", text: "举个例子？" },
           {
-            who: "robot",
-            text: '比如判断成绩是否及格：<br><code>if (score &gt;= 60) { 输出"及格"; }</code><br>条件成立就执行大括号里的内容，不成立就跳过。',
+            icon: '🔀',
+            title: '分支结构',
+            desc: '根据条件<br>选择执行路径<br>像十字路口<br><b>能随机应变</b>'
           },
-          { who: "student", text: "哦，那就像走岔路，根据条件选一条。" },
           {
-            who: "robot",
-            text: '对。程序从此不再是流水账，而是可以"思考"了。<br>这就是分支结构的威力。',
-          },
+            icon: '💡',
+            title: 'if 语句',
+            desc: 'C++ 的分支语法<br><code>if (score &gt;= 60) { 输出及格 }</code><br>条件成立执行<br>不成立跳过'
+          }
         ],
-        extra: {
-          title: "📖 知识扩展 · 顺序 vs 分支",
-          desc: '<b>顺序结构</b>：程序从上到下一条条执行，像流水账。<br><b>分支结构</b>：根据条件选择执行路径，像十字路口。<br><br>分支让程序"活"了起来，可以处理各种不同的输入。<br>没有分支的程序，就像机器人只会做一件事——不管输入什么，结果都一样。<br>有了分支，程序才能"随机应变"。<br><br><b>if 语句</b>是几乎所有编程语言都有的语法——<br>从 1957 年的 FORTRAN 到今天的 Python、Java，全部都有 if。<br>这是人类"做判断"思维的最自然表达。',
-          variant: "card-primary",
-        },
-      },
+        footer: '<b>📖 从顺序到分支</b>：没有分支的程序，就像一个机器人只会做一件事——<b>不管输入什么，结果都一样</b>。有了分支，程序才能根据输入"做不同的反应"。<br><br><b>if 是几乎所有编程语言都有的语法</b>——从 1957 年的 FORTRAN 到今天的 Python、Java，全部都有 if。这是人类"做判断"思维的最自然表达。'
+      }
     },
 
     /* ===== 12 if 单分支 ===== */
@@ -385,11 +353,6 @@ export default {
           { line: 12, title: "cout", desc: "无论条件真假都会执行" },
         ],
         output: "（输入 75）\n及格\n程序结束",
-        extra: {
-          title: "💡 单分支的特点",
-          desc: "条件为真 → 执行 if 里的内容；条件为假 → 跳过 if，直接执行后面的代码。<br><br><b>执行体只有一条语句时</b>，大括号可以省略。但建议始终加，方便阅读，也避免出错。<br><br><b>易错</b>：<code>if (score &gt;= 60);</code> 多了分号，后面的代码变成无条件执行。<br>这个 bug 很隐蔽，编译器也不报错。",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -416,11 +379,6 @@ export default {
           { line: 12, title: "cout", desc: "条件为假时才执行" },
         ],
         output: "（输入 45）\n不及格",
-        extra: {
-          title: "💡 双分支的意义",
-          desc: "if-else 保证两条路必走一条，不可能两条都走，也不可能都不走。<br>这就像走到岔路口，向左或者向右，总有一条会被走。<br><br><b>常见错误</b>：在 <code>else</code> 后面误加分号 <code>else;</code>，导致 else 变成空语句，逻辑全乱。",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -446,53 +404,36 @@ export default {
           { line: 15, title: "else", desc: "所有条件都不成立时执行" },
         ],
         output: "（输入 85）\nB",
-        extra: {
-          title: "⚠️ 多分支的顺序很重要",
-          desc: '从上往下依次判断，<b>一旦某个条件成立，后面不再判断</b>。<br><br>所以条件的顺序很重要！<br>如果把 <code>score &gt;= 60</code> 放在第一位，<br>那么 90 分也会被判成"C"，因为它先匹配了。<br><br><b>原则</b>：范围窄的条件放前面，范围宽的条件放后面。<br>通常是"<b>从高到低</b>"或"<b>从小到大</b>"。<br><br><b>竞赛经验</b>：多分支题，先画个表格，确定条件的先后顺序，再写代码。<br>这个习惯能避免 90% 的顺序错误。',
-          variant: "card-primary",
-        },
+        footer: '<b>⚠️ 多分支的顺序很重要</b><br>程序从上往下依次判断——<b>一旦某个条件成立，后面不再判断</b>。<br><br>所以条件的顺序很重要！<br>如果把 <code>score &gt;= 60</code> 放在第一位——<br>那么 90 分也会被判成 "C"，因为它先匹配了。<br><br><b>原则</b>：范围窄的条件放前面，范围宽的条件放后面。<br>通常"<b>从高到低</b>"或"<b>从小到大</b>"。<br><br><b>竞赛经验</b>：多分支题，先画个表格确定条件顺序，再写代码——能避免 90% 的顺序错误。'
       },
     },
 
     /* ===== 15 switch 引入 ===== */
     {
-      id: 15,
-      type: "dialog",
-      title: "switch 是什么？",
-      subtitle: "多分支的另一种写法",
-      chapterTag: "第 4 讲 · 分支结构",
+      id: 15, type: 'grid',
+      title: 'switch 是什么？',
+      subtitle: '多分支的另一种写法',
+      chapterTag: '第 4 讲 · 分支结构',
       data: {
-        lines: [
+        cards: [
           {
-            who: "student",
-            text: "小 C，如果我判断星期几，是不是要写 7 个 else if？",
+            icon: '🔢',
+            title: '① 判断什么？',
+            desc: '专门判断一个变量<br>是否等于<b>某个固定值</b><br>如 <code>day == 1</code><br>（不能判断范围）'
           },
           {
-            who: "robot",
-            text: "可以，但太啰嗦。C++ 有个专门的语法，叫 <b>switch</b>。",
+            icon: '⚡',
+            title: '② 什么时候用？',
+            desc: '固定值判断用 switch<br>范围判断用 if-else<br><b>口诀</b>：区间用 if<br>等值用 switch'
           },
-          { who: "student", text: "switch 和 if-else 有什么区别？" },
           {
-            who: "robot",
-            text: 'switch 专门判断"一个变量是否等于某个固定值"，<br>比如 <code>day == 1</code>、<code>day == 2</code>。',
-          },
-          { who: "student", text: "那什么时候用 switch，什么时候用 if？" },
-          {
-            who: "robot",
-            text: "判断固定值用 switch，判断范围（如分数段）用 if-else。",
-          },
-          { who: "student", text: "switch 有什么好处？" },
-          {
-            who: "robot",
-            text: '代码更清晰、更快。<br>编译器会把 switch 编译成一张"跳转表"——<br>直接跳到对应的 case，不用一个个比较。',
-          },
+            icon: '🚀',
+            title: '③ 有什么好处？',
+            desc: '代码更清晰<br>编译器生成<b>跳转表</b><br>一步到位——更快<br>比 if-else 链效率高'
+          }
         ],
-        extra: {
-          title: "📖 知识扩展 · switch 的由来",
-          desc: '<b>switch</b> 最早出现在 1970 年代的 C 语言中。<br>设计初衷是让"多路选择"写起来更清晰。<br><br><b>编译器的实现很有意思</b>——<br>它会把 switch 编译成一张"跳转表"，直接跳到对应的 case，<br>效率比 if-else 链更高。<br><br>这就是为什么"判断固定值"时，switch 往往比 if-else 更快。<br><b>但要注意</b>：switch 只能判断整数和字符，不能判断小数、字符串。',
-          variant: "card-primary",
-        },
-      },
+        footer: '<b>📖 switch 的由来</b>：1970 年代的 C 语言首次引入 switch——设计初衷是让"多路选择"写起来更清晰。<br><br><b>实现原理</b>：编译器把 switch 编译成一张"跳转表"，直接跳到对应的 case——效率比 if-else 链更高。<br><br><b>⚠️ 限制</b>：switch 只能判断<b>整数和字符</b>，不能判断小数、字符串。'
+      }
     },
 
     /* ===== 16 switch 语法 ===== */
@@ -515,50 +456,55 @@ export default {
           { line: 17, title: "default:", desc: "所有 case 都不匹配时执行" },
         ],
         output: "（输入 3）\n周三",
-        extra: {
-          title: "⚠️ break 的作用",
-          desc: '<code>break</code> 表示"跳出 switch"。<br><br>如果不写 break，程序会继续执行下一个 case，这叫"<b>case 穿透</b>"。<br>有时候穿透是有意为之（多个 case 共用一段代码），<br>但新手常因忘记 break 而出错。<br><br><b>建议</b>：先都加上 break，等熟练后再考虑穿透。<br><br><b>记忆</b>：写 switch，先假设每个 case 都要 break，别漏。',
-          variant: "card-primary",
-        },
+        footer: '<b>⚠️ break 的作用</b>：<br>break 表示"跳出 switch"。<br>不写 break，程序会继续执行下一个 case——这叫"<b>case 穿透</b>"。<br><br>有时候穿透是<b>有意为之</b>（多个 case 共用一段代码），<br>但新手常因忘记 break 而出错。<br><br><b>建议</b>：先都加上 break，等熟练后再考虑穿透。'
       },
     },
 
     /* ===== 17 switch vs if-else ===== */
     {
-      id: 17,
-      type: "dialog",
-      title: "switch vs if-else",
-      subtitle: "什么时候用哪个",
-      chapterTag: "第 4 讲 · 分支结构",
+      id: 17, type: 'decision',
+      title: 'switch vs if-else',
+      subtitle: '什么时候用哪个',
+      chapterTag: '第 4 讲 · 分支结构',
       data: {
-        lines: [
-          { who: "student", text: "小 C，既然两种都能做判断，怎么选？" },
+        intro: '📖 两种语法都能做判断——<b>怎么选？</b><br>看下面的判断信号。',
+        signals: [
           {
-            who: "robot",
-            text: '看判断的是"范围"还是"等值"：<br>· 判断<b>范围</b>（如 <code>score &gt;= 90</code>）→ 用 if<br>· 判断<b>固定值</b>（如 <code>day == 3</code>）→ 用 switch',
+            icon: '📏',
+            keyword: '判断范围',
+            desc: '如 <code>score &gt;= 90</code><br><b>用 if-else</b>'
           },
-          { who: "student", text: "还有别的区别吗？" },
           {
-            who: "robot",
-            text: "switch 只能判断<b>整数或字符</b>，<br>if 可以判断任何条件（包括小数、字符串）。",
+            icon: '🎯',
+            keyword: '判断固定值',
+            desc: '如 <code>day == 3</code><br><b>用 switch</b>'
           },
-          { who: "student", text: "效率上呢？" },
           {
-            who: "robot",
-            text: "switch 通常更快——编译器会生成跳转表，一步到位。<br>if-else 要一个个比较。<br>但对小规模判断，差异可以忽略。",
+            icon: '🔗',
+            keyword: '复合条件',
+            desc: '含 <code>&amp;&amp;</code> 或 <code>||</code><br><b>用 if-else</b>'
           },
-          { who: "student", text: "总结一下？" },
           {
-            who: "robot",
-            text: "<b>口诀</b>：区间用 if，等值用 switch。<br>代码清晰最重要。",
+            icon: '🔤',
+            keyword: '小数 / 字符串',
+            desc: 'switch 不支持<br><b>用 if-else</b>'
           },
+          {
+            icon: '⚡',
+            keyword: '追求效率',
+            desc: 'case 数量多时<br><b>用 switch</b>'
+          },
+          {
+            icon: '📝',
+            keyword: '可读性优先',
+            desc: '看代码清晰度<br><b>两者都行</b>'
+          }
         ],
-        extra: {
-          title: "📖 选择建议",
-          desc: "<b>用 if-else</b>：<br>· 条件涉及范围（&gt;、&lt;、&gt;=）<br>· 复合条件（&amp;&amp;、||）<br>· 非整数的判断<br><br><b>用 switch</b>：<br>· 判断一个整数或字符是否等于几个固定值<br>· 例：判断月份、星期、菜单选项<br><br><b>口诀</b>：区间用 if，等值用 switch。",
-          variant: "card-primary",
-        },
-      },
+        conclusion: {
+          title: '判断法则',
+          desc: '<b>区间用 if，等值用 switch</b><br><br>· 涉及比较符号（&gt;、&lt;、&gt;=）→ if<br>· 涉及固定值匹配（月份、菜单）→ switch<br><br>📌 <b>代码清晰最重要</b>——不确定时，优先选"看起来更好读"的那个。'
+        }
+      }
     },
 
     /* ===== 18 练习1：判断奇偶 ===== */
@@ -584,11 +530,7 @@ export default {
           title: "📖 解析",
           desc: "<code>n % 2</code> 得到 n 除以 2 的余数，只有 0 和 1 两种结果。<br>余数为 0 就是偶数，余数为 1 就是奇数。<br>这是取余运算符最典型的应用。",
         },
-        extra: {
-          title: "💡 取余的经典用法",
-          desc: "判断奇偶是取余最典型的应用。<br>同理：<br>· <code>n % 3 == 0</code> → 能被 3 整除<br>· <code>n % 5 == 0</code> → 能被 5 整除<br>· <code>n % 10</code> → 得到个位数<br>竞赛中，取余几乎无处不在。",
-          variant: "card-primary",
-        },
+        footer: '<b>💡 取余的经典用法</b>：<br>· <code>n % 3 == 0</code> → 能被 3 整除<br>· <code>n % 5 == 0</code> → 能被 5 整除<br>· <code>n % 10</code> → 得到个位数<br><br>竞赛中，取余几乎无处不在。'
       },
     },
 
@@ -615,11 +557,6 @@ export default {
         analysis: {
           title: "📖 解析",
           desc: '关键技巧是 <code>score / 10</code>——<br>把 0—100 分成 10 档，再用 switch 判断。<br><br><b>为什么用 case 穿透？</b><br><code>case 10:</code> 后面不写 <code>break</code>——<br>程序会继续执行到 <code>case 9:</code>——<br>所以 90—100 分都输出 A。<br><br>这是 <b>switch 的经典用法</b>——<br>多个 case 共用一段代码，用"穿透"实现。',
-        },
-        extra: {
-          title: "💡 多分支的顺序",
-          desc: "在多个条件里，哪个先判断决定了结果。<br>原则：<b>范围窄的、优先级高的先判断</b>。<br>例：先判断 90 以上，再判断 80 以上，以此类推。<br>这是新手最容易忽略的细节。",
-          variant: "card-primary",
         },
       },
     },
@@ -657,67 +594,77 @@ export default {
 
     /* ===== 21 常见错误 ===== */
     {
-      id: 21,
-      type: "compare",
-      title: "分支与运算符常见错误",
-      subtitle: "避开这些坑",
+      id: 21, type: 'pitfall',
+      title: '分支与运算符常见错误',
+      subtitle: '避开这些坑',
       data: {
-        groups: [
+        cases: [
           {
-            wrong: "if (a = 5) 赋值不是判断",
-            right: "if (a == 5) 两个等号判断",
+            icon: '❌',
+            scene: 'if (a = 5) —— 少写了一个等号',
+            what: '程序永远执行 if 内部代码',
+            why: '= 是赋值，表达式的值是 5（非 0 = true）<br>编译器不报错',
+            fix: '判断相等用 <code>==</code>——<code>if (a == 5)</code>'
           },
           {
-            wrong: "if (a &gt; 0 &amp;&amp; a &lt; 10) 漏括号",
-            right: "if ((a &gt; 0) &amp;&amp; (a &lt; 10)) 加括号",
+            icon: '❌',
+            scene: 'switch 里 case 后忘写 break',
+            what: '程序继续执行下一个 case',
+            why: '这叫"case 穿透"——switch 的特性<br>不写 break 会一直往下走',
+            fix: '每个 case 后加 <code>break;</code>'
           },
-          { wrong: "switch 里忘记 break", right: "每个 case 后加 break" },
-          { wrong: "多分支顺序从低到高", right: "从高到低依次判断" },
+          {
+            icon: '❌',
+            scene: '多分支条件顺序写反',
+            what: '大分数被分到低等级',
+            why: 'if 从上到下依次判断<br>一旦成立后面不再判断',
+            fix: '范围窄的放前面——通常"从高到低"'
+          },
+          {
+            icon: '❌',
+            scene: 'cout << a > b —— 忘了加括号',
+            what: '输出结果错乱',
+            why: '<code>&lt;&lt;</code> 优先级<b>高于</b> <code>&gt;</code><br>先算输出，再比较',
+            fix: '关系运算放进 cout，必须加括号——<code>cout &lt;&lt; (a &gt; b)</code>'
+          }
         ],
-        extra: {
-          title: "📖 四大错误的原因",
-          desc: "① <b>= 和 ==</b>：一个是赋值，一个是判断。编译器不报错，但结果错。<br>② <b>优先级</b>：逻辑运算符优先级低，容易搞错。<br>③ <b>break</b>：switch 里不写 break 会穿透。<br>④ <b>顺序</b>：多分支条件顺序决定结果。<br><br><b>调试方法</b>：写完分支代码，用几组典型数据测试一遍，尤其测边界情况。<br>例如闰年判断，测 1900（不是）、2000（是）、2024（是）。",
-          variant: "card-primary",
-        },
-      },
+        footer: '<b>📌 调试方法</b>：写完分支代码，用几组典型数据测试一遍——尤其测<b>边界情况</b>。<br>比如闰年判断，测 1900（不是）、2000（是）、2024（是）。<br>这个"测边界"的习惯，能帮你抓住 <b>80% 的逻辑错误</b>。'
+      }
     },
 
     /* ===== 22 初赛渗透 ===== */
     {
-      id: 22,
-      type: "dialog",
-      title: "初赛小知识：运算符与分支",
-      subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 4 讲 · 初赛渗透",
+      id: 22, type: 'split',
+      title: '初赛小知识：运算符与分支',
+      subtitle: 'CSP-J/S 初赛必考',
+      chapterTag: '第 4 讲 · 初赛渗透',
       data: {
-        lines: [
-          { who: "student", text: "小 C，初赛会考今天的运算符和分支吗？" },
+        intro: '初赛有两类高频考点——<b>运算符</b>和<b>分支结构</b>。都是送分题，必须拿下。',
+        panes: [
           {
-            who: "robot",
-            text: '会，而且是<b>高频考点</b>。最常见的题型是"读程序写结果"。',
+            title: '运算符考点',
+            icon: '➕',
+            items: [
+              { title: '整数除法', desc: '<code>7 / 2 = 3</code>（不是 3.5）' },
+              { title: '取余', desc: '<code>n % 2</code> 判奇偶' },
+              { title: '短路求值', desc: '<code>a &amp;&amp; b</code>：a 假则 b 不执行' },
+              { title: '优先级', desc: '<code>&amp;&amp;</code> 高于 <code>||</code>' },
+              { title: '逻辑真值表', desc: '&amp;&amp; || ! 的结果' }
+            ]
           },
-          { who: "student", text: "能举个例子吗？" },
           {
-            who: "robot",
-            text: '比如给一段 if-else 代码，问"输入 5 会输出什么"。<br>要你顺着条件一步步判断。',
-          },
-          { who: "student", text: "有什么技巧吗？" },
-          {
-            who: "robot",
-            text: "三个字：<b>画表格</b>。<br>把每个变量、每个条件的值写在纸上，一步步推。<br>不要心算，容易错。",
-          },
-          { who: "student", text: "还有别的考点吗？" },
-          {
-            who: "robot",
-            text: "还有：<br>· 逻辑运算真值表（&amp;&amp; || ! 的结果）<br>· 短路求值（&amp;&amp; 左边为假不执行右边）<br>· 优先级判断<br>· switch 穿透<br>这些都是送分题，一定要拿下。",
-          },
-        ],
-        extra: {
-          title: "📖 逻辑运算真值表",
-          desc: "<b>&amp;&amp; 与</b>：两边都真才真<br>· true &amp;&amp; true = true<br>· true &amp;&amp; false = false<br>· false &amp;&amp; true = false<br>· false &amp;&amp; false = false<br><br><b>|| 或</b>：一边真就真<br>· true || false = true<br>· false || true = true<br>· false || false = false<br><br><b>! 非</b>：真变假，假变真<br>· !true = false<br>· !false = true<br><br><b>短路求值</b>（重要）：<br>· <code>a &amp;&amp; b</code>：a 为假时，b <b>不执行</b><br>· <code>a || b</code>：a 为真时，b <b>不执行</b><br>这是初赛的高频考点，务必掌握。",
-          variant: "card-primary",
-        },
-      },
+            title: '分支考点',
+            icon: '🔀',
+            items: [
+              { title: 'else 悬挂', desc: 'else 跟最近的未配对 if' },
+              { title: 'switch 穿透', desc: '不写 break 会继续执行' },
+              { title: '<code>= vs ==</code>', desc: '赋值 vs 判断' },
+              { title: '读程序写结果', desc: '画表格，逐行推' },
+              { title: '边界情况', desc: '测 0、最大值、负数' }
+            ]
+          }
+        ]
+      }
     },
 
     /* ===== 23 课堂小测 ===== */
@@ -819,11 +766,6 @@ if (a > 3)
               '不写 break 会导致"<b>case 穿透</b>"：<br>程序会从匹配的 case 开始，一直往下执行所有 case，直到遇到 break 或 switch 结束。<br><br>这是特性，有时被有意使用（如多个 case 共用一段代码），但更多时候是 bug 来源。<br><b>建议</b>：写 switch 时先都加上 break，除非有明确理由不使用。',
           },
         ],
-        extra: {
-          title: "📖 知识扩展 · 初赛分支与运算符三大考点",
-          desc: "<b>① 整数除法</b>：两个 int 相除，结果还是 int<br><b>② else 悬挂</b>：else 跟最近的未配对 if 配对<br><b>③ 短路求值</b>：&amp;&amp; 左边为假则不执行右边<br><br><b>解题技巧</b>：<br>· 读程序题，把每个变量写在纸上<br>· 逐行执行，判断条件结果<br>· 不要心算，容易错<br><br>这三类占初赛分支题的 80%。",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -847,11 +789,6 @@ if (a > 3)
         highlight: {
           title: "📌 关键口诀",
           desc: "算术算数，赋值存数；关系判真假，逻辑组合条件；if 走分支，else 兜底；switch 多分支，break 别忘记。",
-        },
-        extra: {
-          title: "💡 分支让程序活了",
-          desc: '到目前为止，程序已经能计算、能存储、能做判断了。<br>下一讲，我们让程序学会"重复执行"——循环结构。<br>有了循环，程序才能处理成千上万的数据。<br><br>🔮 <b>伏笔</b>：分支只能"走一次"。如果要让程序重复做事呢？<br>第 5 讲教你循环。',
-          variant: "card-primary",
         },
       },
     },
@@ -883,11 +820,6 @@ if (a > 3)
             desc: "<b>月份天数</b><br>考察：switch / if-else<br>难度：★★<br>目标：判断每个月的天数，注意闰年",
           },
         ],
-        extra: {
-          title: "📌 提交方式",
-          desc: "打开洛谷 <code>luogu.com.cn</code>，搜索题号，提交代码，截图 AC 结果。<br>每题做完记录到错题本：题目 + 思路 + 错因。<br>下次课随机抽查 2 位同学讲解解题思路。",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -905,50 +837,49 @@ if (a > 3)
           { text: "循环嵌套" },
           { text: "break 与 continue" },
         ],
-        extra: {
-          title: "💡 让程序学会重复",
-          desc: '目前程序只能"从头到尾走一遍"。<br>如果要算 1 加到 100 呢？难道要写 100 行？<br>下一讲，程序将学会"重复"——循环结构。<br><br>🔮 <b>远期彩蛋</b>：为什么有些循环很快，有些很慢？第 36 讲教你算程序跑多久。',
-          variant: "card-primary",
-        },
       },
     },
 
     /* ===== 27 答疑时间 ===== */
     {
-      id: 27,
-      type: "dialog",
-      title: "答疑时间",
-      subtitle: "有问题尽管问",
-      chapterTag: "第 4 讲 · 答疑",
+      id: 27, type: 'grid',
+      title: '答疑时间',
+      subtitle: '常见问题 FAQ',
+      chapterTag: '第 4 讲 · 答疑',
       data: {
-        lines: [
-          { who: "student", text: "为什么 if (a = 5) 不报错？" },
+        cards: [
           {
-            who: "robot",
-            text: "因为 = 是赋值，赋完值后整个表达式等于 5，非 0 视为真，所以 if 一定成立。<br>编译器不报错，但逻辑错了。",
+            icon: '❓',
+            title: '为什么 if (a = 5) 不报错？',
+            desc: '<code>=</code> 是赋值——赋完值后表达式等于 5（非 0 = true）<br>所以 if <b>永远成立</b>。<br>编译器不报错，但逻辑错了。'
           },
-          { who: "student", text: "多分支条件的顺序怎么排？" },
           {
-            who: "robot",
-            text: '从范围最窄的条件开始，通常是"从高到低"或"从小到大"。',
+            icon: '📏',
+            title: '多分支顺序怎么排？',
+            desc: '从范围最窄的条件开始<br>通常"<b>从高到低</b>"或"<b>从小到大</b>"<br>否则大分数会被分到低等级。'
           },
-          { who: "student", text: "switch 和 if-else 用哪个更好？" },
           {
-            who: "robot",
-            text: "判断固定值（如月份、星期）用 switch，判断范围（如分数段）用 if-else。<br>口诀：<b>区间用 if，等值用 switch</b>。",
+            icon: '🔀',
+            title: 'switch 还是 if-else？',
+            desc: '判断<b>固定值</b>（月份、星期）→ switch<br>判断<b>范围</b>（分数段）→ if-else<br><b>口诀</b>：区间用 if，等值用 switch。'
           },
-          { who: "student", text: "短路求值是什么？" },
           {
-            who: "robot",
-            text: '<code>a &amp;&amp; b</code> 中，如果 a 为假，b <b>不会执行</b>。<br>这就是短路求值。<br>它有时是优化，有时是陷阱——注意别在 b 里写"必须执行"的操作。',
+            icon: '⚡',
+            title: '短路求值是什么？',
+            desc: '<code>a &amp;&amp; b</code> 中 a 为假 → b <b>不执行</b><br>这就是短路求值。<br>注意：别在 b 里写"必须执行"的操作。'
           },
-        ],
-        extra: {
-          title: "📌 一个建议",
-          desc: '分支结构的错误往往很隐蔽，编译器不会报错，但结果不对。<br>建议：写完代码后，用几个典型数据测一遍，尤其测边界情况。<br>比如判断闰年，测 1900（不是）、2000（是）、2024（是）。<br><br>这个"测边界"的习惯，能帮你抓住 80% 的逻辑错误。',
-          variant: "card-primary",
-        },
-      },
+          {
+            icon: '⚠️',
+            title: '为什么要写 break？',
+            desc: '不写 break，程序会"<b>穿透</b>"——<br>从匹配的 case 一直往下执行所有 case。<br>有时是特性，更多是 bug。'
+          },
+          {
+            icon: '💡',
+            title: '怎么避免分支错误？',
+            desc: '写完后用<b>典型数据</b>测一遍<br>尤其测<b>边界情况</b>——<br>0、最大值、负数、闰年 1900/2000。'
+          }
+        ]
+      }
     },
 
     /* ===== 28 本讲英文单词 ===== */
@@ -1017,11 +948,6 @@ if (a > 3)
             category: "运算符",
           },
         ],
-        extra: {
-          title: "💡 记忆法 · 英文直译",
-          desc: "<b>直接对应类</b>（英文原意就是中文意思）：<br><code>if</code> = 如果<br><code>else</code> = 否则<br><code>switch</code> = 开关<br><code>case</code> = 情况<br><code>break</code> = 打断<br><code>default</code> = 默认<br><br><b>概念对应类</b>：<br><code>and</code> → <code>&amp;&amp;</code>（与）<br><code>or</code> → <code>||</code>（或）<br><code>not</code> → <code>!</code>（非）<br>C++ 用符号表示，其他语言（如 Python）直接用单词。<br><br><b>易错拼写</b>：<br>· <code>else</code> 不是 <code>els</code><br>· <code>default</code> 不要写成 <code>defult</code><br>· <code>switch</code> 不要写成 <code>swich</code>",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -1055,11 +981,7 @@ if (a > 3)
             desc: "<b>① = vs ==</b>：赋值 vs 判断<br><b>② 优先级</b>：不确定就加括号<br><b>③ break</b>：switch 里别忘<br><b>④ 顺序</b>：多分支从高到低",
           },
         ],
-        extra: {
-          title: "📌 关键口诀 + 挑战题单",
-          desc: '<b>口诀</b>：算术算数，赋值存数；关系判真假，逻辑组合条件；if 走分支，else 兜底；switch 多分支，break 别忘记。<br><br>📌 <b>挑战题单</b>：<br><b>⭐ 基础</b>：P5710 数的性质<br><b>⭐⭐ 进阶</b>：P5711 闰年判断<br><b>⭐⭐⭐ 挑战</b>：P5716 月份天数<br><b>🔗 延伸</b>：洛谷搜索"入门 2"，挑 3 道分支题练手。',
-          variant: "card-glow",
-        },
+        footer: '<b>📌 关键口诀</b>：算术算数，赋值存数；关系判真假，逻辑组合条件；if 走分支，else 兜底；switch 多分支，break 别忘记。'
       },
     },
 
@@ -1072,11 +994,6 @@ if (a > 3)
       chapterTag: false,
       data: {
         slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题",
-        extra: {
-          title: "🌟 你已经让程序学会了思考",
-          desc: '程序从此不是流水账，而是能根据条件做判断的"智能体"。<br>下一讲，我们让程序学会重复——循环结构。<br>三大结构，你已经掌握了两个。<br>顺序、分支、循环——掌握全部，程序无所不能。',
-          variant: "card-glow",
-        },
       },
     },
   ],

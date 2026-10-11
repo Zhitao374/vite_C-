@@ -46,7 +46,7 @@ const COMMANDS = {
         'fix:html': { run: 'node scripts/fix-html-balance.js', desc: '修复 HTML div 配对' },  // ← 新增
         'fix:html:dry': { run: 'node scripts/fix-html-balance.js --dry', desc: '预览（不写文件）' },  // ← 新增
         'fix:ids': { run: 'node scripts/check.js fix:ids', desc: '只修 slide id / total（不编译）' },
-        'fix:comments':     { run: 'node scripts/renumber-comments.js',       desc: '重排注释编号（全部）' },
+        'fix:comments':     { run: 'node scripts/renumber-comments.js --all',       desc: '重排注释编号（全部）' },
         'fix:comments:dry': { run: 'node scripts/renumber-comments.js --all --dry', desc: '预览（不写文件）' },
     },
 

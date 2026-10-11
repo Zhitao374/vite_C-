@@ -55,10 +55,6 @@ export default {
             points: ["break 跳出", "continue 跳过"],
           },
         ],
-        extra: {
-          title: "💡 今天的新问题",
-          desc: '循环能处理海量数据，但输入 100 个数，难道要定义 100 个变量吗？<br>显然不行。今天我们就学习能"一次存很多数据"的工具——数组。<br><br>🔮 <b>回收伏笔</b>：第 5 讲讲循环时说过"数据存哪"，今天揭晓。',
-        },
       },
     },
 
@@ -87,10 +83,6 @@ export default {
           },
           { number: "04", title: "常见错误", desc: "越界、初始化、数组大小" },
         ],
-        extra: {
-          title: "📖 知识扩展 · 数组的重要性",
-          desc: '数组是第一个真正的"数据结构"。<br>没有数组，竞赛题几乎做不了。<br>后续要学的字符串、栈、队列、二叉树，底层都依赖数组。<br><b>数组是数据结构的地基。</b>',
-        },
       },
     },
 
@@ -132,10 +124,6 @@ export default {
             points: ["下标 < 长度", "sum = 0;", "按范围开大点"],
           },
         ],
-        extra: {
-          title: "🏆 积分规则",
-          desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"数组大师"徽章。',
-        },
       },
     },
 
@@ -201,11 +189,6 @@ export default {
             desc: "用 <code>a[i]</code> 取第 i 个元素<br>下标从 <b>0</b> 开始<br>长度 100 的数组<br>合法下标是 0 到 99",
           },
         ],
-        extra: {
-          title: "💡 为什么数组访问这么快？",
-          desc: '因为数组在内存里是<b>连续存放</b>的。<br>想访问 <code>a[i]</code>，计算机直接算：<b>地址 = 起点 + i × 类型大小</b>，一步定位。<br><br>这种"按下标直接跳"的能力，叫 <b>随机访问</b>。<br>不管数组多大，访问任意元素都一样快。这是数组最大的优势。<br><br><b>对比</b>：<br>· 数组：a[500] 和 a[0] 一样快<br>· 链表：找第 500 个元素要一路数过去（第 27 讲讲）<br><br>这就是"连续内存"的威力。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -239,11 +222,6 @@ export default {
           { line: 19, title: "b[0]", desc: "访问下标 0 的元素，值是 1" },
         ],
         output: "10\n50\n1",
-        extra: {
-          title: "💡 数组的三个关键点",
-          desc: '① <b>长度固定</b>：定义时就要写死，运行中不能改。<br>② <b>下标从 0 开始</b>：<code>a[5]</code> 的合法下标是 0、1、2、3、4。<br>③ <b>越界危险</b>：访问 <code>a[5]</code> 或 <code>a[-1]</code> 是越界，可能崩溃或输出垃圾值。<br><br><b>为什么从 0 开始？</b><br>因为下标本质是"偏移量"。<code>a[0]</code> 表示从数组起点偏移 0 个位置，<code>a[1]</code> 偏移 1 个位置。<br>这是 C 语言的设计，C++ 沿用至今。<br><br>下一屏用内存图详细讲。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -261,11 +239,6 @@ export default {
           { icon: "📦", label: "a[3]", sub: "地址 1012" },
           { icon: "📦", label: "a[4]", sub: "地址 1016", glow: true },
         ],
-        extra: {
-          title: "💡 为什么 int 数组元素差 4 个地址？",
-          desc: '每个 <code>int</code> 占 <b>4 个字节</b>。<br><code>a[0]</code> 占 1000—1003，<code>a[1]</code> 就从 1004 开始。<br>如果是 <code>double</code> 数组，每个元素占 8 字节，地址会差 8。<br><br><b>地址差值 = 元素类型的大小</b>。<br>这个规律是理解指针的关键（第 27 讲）。<br><br><b>为什么连续存储能"提速"？</b><br>因为计算机知道起点，也知道每个元素的大小。<br>想访问 a[i]，直接算：<code>起点 + i × 4</code>，一步到位。<br>不用像链表那样"一个个跳"。<br><br>🔮 <b>伏笔</b>：数组为什么要连续存放？如果不连续呢？第 27 讲"链表"会告诉你答案。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -329,11 +302,6 @@ export default {
             right: "a[0] 就是第一个，习惯它",
           },
         ],
-        extra: {
-          title: "💡 一句话记住",
-          desc: '<b>下标 &lt; 长度</b>。<br>长度 5 的数组，循环写 <code>i &lt; 5</code> 或 <code>i &lt;= 4</code>。<br>写成 <code>i &lt;= 5</code> 就是越界。<br><br><b>记忆口诀</b>：宁可少一次，不要越一次。<br><br><b>为什么会搞错？</b><br>因为生活中我们习惯"从 1 开始"——<br>一栋楼有 5 层，1 楼到 5 楼。<br>但数组的"楼层号"是从 0 开始的：0 楼到 4 楼。<br><br>养成习惯的方法：<br>每次看到 <code>int a[N]</code>，心里默念"下标 0 到 N-1"。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -373,11 +341,6 @@ export default {
           { line: 10, title: "cout &lt;&lt; a[i]", desc: "遍历输出所有元素" },
         ],
         output: "（输入 1 2 3 4 5）\n1 2 3 4 5",
-        extra: {
-          title: "💡 数组 + 循环 = 竞赛解题模板",
-          desc: "<b>读入模板</b>：<br><code>for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];</code><br><br><b>遍历模板</b>：<br><code>for (int i = 0; i &lt; n; i++) { /* 处理 a[i] */ }</code><br><br>几乎所有数组题都是这个套路。<br>把这两个模板记熟，一半的数组题就稳了。<br><br><b>注意</b>：循环条件写 <code>i &lt; n</code>，不是 <code>i &lt;= n</code>，否则越界。<br>这是新手最容易犯的错误。",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -430,11 +393,6 @@ export default {
             note: "✅ 输出 <b>15</b>。<br><b>5 个元素，5 次累加</b>——这就是数组求和的全过程。<br><br>🔮 关键：<code>sum</code> 必须初始化为 <b>0</b>，否则第一次加法就错了。",
           },
         ],
-        extra: {
-          title: "💡 累加 vs 累乘",
-          desc: '<b>累加</b>：<code>sum = 0;  sum += a[i];</code><br>初始值为 0（加法的"起点"）<br><br><b>累乘</b>：<code>fact = 1;  fact *= a[i];</code><br>初始值为 1（乘法的"起点"）<br><br><b>为什么初始值不同？</b><br>· 加 0 不影响结果 → 用 0 初始化<br>· 乘 1 不影响结果 → 用 1 初始化<br>· 如果累乘用 0 初始化 → 结果永远是 0<br><br>🔮 <b>伏笔</b>：这个"初始值"思想，在第 9 讲阶乘递归里会再次出现。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -468,11 +426,6 @@ export default {
             text: '需要"<b>回头看</b>"的时候。<br>比如逆序输出、排序、找第 k 大——必须存下来才能处理。',
           },
         ],
-        extra: {
-          title: "💡 存不存数组？判断标准",
-          desc: '<b>边读边处理</b>（不用数组）：<br>· 求和<br>· 找最大值 / 最小值<br>· 计数<br><br><b>必须用数组</b>：<br>· 逆序输出<br>· 排序<br>· 找第 k 大<br><br><b>口诀</b>：用到一次不用存，用到多次先存下。<br><br><b>竞赛经验</b>：<br>能用"边读边处理"就不用数组——省内存、代码短。<br>但有些题"必须回头"，那就老实用数组。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -531,11 +484,6 @@ export default {
           title: "📖 解析",
           desc: '<b>为什么 maxVal 初始值要小？</b><br>maxVal 是"当前最大值"，必须保证<b>第一个数一定能打败它</b>。<br>初始值太大，第一个数可能"打不败"，结果就错。<br><br><b>为什么用 -1e9？</b><br><code>1e9</code> 是<b>科学计数法</b>，表示 10 的 9 次方 = <b>10 亿</b>。<br>所以 <code>-1e9</code> = <b>-10 亿</b>。<br>竞赛数据范围通常在 ±10 亿以内，用 -10 亿一定安全。<br><br><b>口诀</b>：找最大值，初始值宁小勿大；找最小值，初始值宁大勿小。',
         },
-        extra: {
-          title: "💡 这道题的两种写法",
-          desc: '<b>写法 1：用数组（本讲练的）</b><br>先读完所有数到 a[]，再遍历找最大值。<br>优点：能看到"完整数据"；缺点：多用内存。<br><br><b>写法 2：不用数组（第 5 讲学的）</b><br>边读边比较，<code>cin &gt;&gt; x</code> 后立即和 maxVal 比。<br>优点：省内存、更快；缺点：数据存不下来。<br><br><b>什么时候用哪个？</b><br>· 只需要"最大值" → 不用数组<br>· 还要"逆序输出"或"找第二大" → 用数组<br><br><b>口诀</b>：用到一次不用存，用到多次先存下。<br><br><b>竞赛建议</b>：能不用数组就不用——省内存、代码短。<br>但本讲练数组，所以用数组写一遍，熟悉套路。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -561,11 +509,6 @@ export default {
         analysis: {
           title: "📖 解析",
           desc: "关键在于<b>倒着遍历</b>。<br><code>for (int i = n-1; i &gt;= 0; i--)</code><br>从最后一个下标 <code>n-1</code> 一直递减到 0。<br><br>注意 <code>i &gt;= 0</code> 用 <code>&gt;=</code>，不是 <code>&gt;</code>，否则会漏掉 <code>a[0]</code>。",
-        },
-        extra: {
-          title: "📖 知识扩展 · 洛谷 P1427 小鱼的数字游戏",
-          desc: '这道题在洛谷的编号是 <a href="https://www.luogu.com.cn/problem/P1427" target="_blank" class="wiki-link">P1427</a>，是数组入门经典题。<br>题目说小鱼在玩数字游戏，你要帮它把数字倒过来读。<br>这道题的核心就是今天学的"逆序输出"。<br><br><b>建议</b>：课后作业就做这道题，巩固逆序技巧。<br><br><b>延伸思考</b>：如果不用数组，能直接逆序输出吗？<br>答：可以，但要用到"栈"或"递归"——第 9、25 讲讲。',
-          variant: "card-primary",
         },
       },
     },
@@ -600,11 +543,6 @@ export default {
             text: '常考数组下标范围。<br>长度 100 的数组，合法下标是 0 到 99。<br>考卷经常出"下面哪个访问是越界的"这种题。',
           },
         ],
-        extra: {
-          title: "📖 数组内存速算",
-          desc: '<div><b>一维数组</b><br><code>int a[100];</code> → 100 × 4 = 400 字节</div><div><b>二维数组</b><br><code>int a[10][10];</code> → 10 × 10 × 4 = 400 字节</div><div><b>规律</b><br>所有维度相乘，再乘每个元素的字节数。</div><div><b>常用类型字节数</b>（必背）<br>· int = 4<br>· long long = 8<br>· double = 8<br>· char = 1<br>· bool = 1</div><div><b>💡 用 sizeof 查字节数</b><br>不用死记——用 <code>sizeof</code> 操作符查：<br><code>sizeof(int)</code> → 4<br><code>sizeof(double)</code> → 8<br><code>sizeof(a)</code> → 整个数组占多少字节</div><div><b>sizeof 的陷阱</b><br>对数组用 sizeof 得到"整个数组的字节数"，<br>不是"元素个数"。<br>想知道元素个数，用 <code>sizeof(a) / sizeof(a[0])</code>。<br><br>这些是初赛必背。</div>',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -633,11 +571,6 @@ export default {
             right: "下标从 0 开始：for (i=0; i&lt;n; i++)",
           },
         ],
-        extra: {
-          title: "📖 四大错误的原因",
-          desc: '① <b>越界</b>：C++ 不检查下标，越界不报错但结果错。<br>② <b>数组太小</b>：数据范围看错，答案全错。<br>③ <b>未初始化</b>：垃圾值参与运算，结果不可预测。<br>④ <b>下标从 1 开始</b>：C++ 下标从 0 起，写成 1 到 n 会越界。<br><br><b>用"储物柜"理解越界</b>：<br>数组就像一排储物柜，编号从 0 到 N-1。<br>· 打开 0 号柜 → 第一个元素<br>· 打开 N-1 号柜 → 最后一个元素<br>· 打开 N 号柜 → <b>柜子不存在</b>，打开它可能拿到别人的东西（垃圾值）或撞坏柜子（崩溃）<br><br><b>口诀</b>：<b>数组开大点，循环写 n，累加先清零，下标从 0 起</b>。<br><br><b>竞赛经验</b>：<br>· 数组多开 5—10 个空位，几乎不占内存但能避免越界<br>· "下标从 1 开始"是新手高频错误——习惯 C++ 的 0 起点<br>· 一个"忘了初始化"的 bug 可能让你调试半天',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -670,11 +603,6 @@ export default {
           },
         ],
         output: "（输入 5 / 3 1 3 2 3）\n3 出现 3 次",
-        extra: {
-          title: "💡 计数数组：竞赛技巧",
-          desc: '<b>计数数组</b>的核心思想是"用下标当数值"。<br><br><b>思路</b>：<br>· 开一个大数组 <code>cnt[N]</code><br>· 读到一个数 x，就执行 <code>cnt[x]++</code><br>· 最后 <code>cnt[k]</code> 表示"数值 k 出现了几次"<br><br><b>应用场景</b>：<br>· 统计频次<br>· 去重（<code>cnt[x] &gt; 0</code> 就是出现过）<br>· 桶排序的基础<br><br>竞赛里非常常见，一定要掌握。<br><br><b>注意</b>：数组大小要开得比"最大数值"更大。<br>比如数据范围是 0—100，就开 <code>cnt[105]</code>。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -800,11 +728,6 @@ cout << a[2] + a[4] << endl;`,
               "C 风格数组的长度在<b>定义时必须确定</b>，不能运行时改变。<br><br>例如 <code>int a[n];</code> 这种写法在标准 C++ 中<b>不允许</b>（n 是变量）。<br>要动态长度，用 <code>vector</code>（C++ STL 容器，<b>第 14 讲详讲</b>）。<br><br>竞赛中，通常按题目最大数据范围定义一个够大的数组。",
           },
         ],
-        extra: {
-          title: "📖 知识扩展 · 数组 vs vector",
-          desc: 'C++ 有两种"数组"：<br><br>① <b>C 风格数组</b>：<code>int a[100];</code> 长度固定，速度快。<br>② <b>vector</b>：<code>vector&lt;int&gt; a;</code> 长度可变，更安全。<br><br>竞赛中主要用 C 风格数组，因为速度更快、兼容性更好。<br>vector 适合长度不确定的场景。<br><br>详细的 vector 用法在"STL"讲次介绍。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -828,11 +751,6 @@ cout << a[2] + a[4] << endl;`,
         highlight: {
           title: "📌 关键口诀",
           desc: "数组一排柜，类型要统一；下标从 0 起，长度别忘记；循环遍历它，求和找最大；防越界开大点，累加先清零。",
-        },
-        extra: {
-          title: "💡 数组是数据结构的地基",
-          desc: '数组是第一个真正的数据结构。<br>后面要学的字符串、栈、队列、树、图，底层都依赖数组。<br>把数组学好，后面一马平川。<br><br>🔮 <b>伏笔</b>：<br>· 数组为什么访问快？因为它连续存放。<br>· 那如果不连续呢？第 27 讲"链表"会告诉你另一种可能。<br>· 数组是连续内存，那计算机怎么区分"数组"和"字符串"？第 7 讲揭晓。',
-          variant: "card-primary",
         },
       },
     },
@@ -864,11 +782,6 @@ cout << a[2] + a[4] << endl;`,
             desc: "<b>牛式</b><br>考察：一维数组 + 三重循环<br>难度：★★★<br>目标：统计三个骰子点数之和的频次",
           },
         ],
-        extra: {
-          title: "📌 提交方式",
-          desc: "打开洛谷 <code>luogu.com.cn</code>，搜索题号，提交代码，截图 AC 结果。<br>每题做完记录到错题本：题目 + 思路 + 错因。<br>下次课随机抽查 2 位同学讲解解题思路。",
-          variant: "card-primary",
-        },
       },
     },
 
@@ -886,11 +799,6 @@ cout << a[2] + a[4] << endl;`,
           { text: "统计与回文" },
           { text: "常见函数" },
         ],
-        extra: {
-          title: "💡 文字的存储",
-          desc: '数组能存整数，那文字呢？<br>"Hello" 这 5 个字母，怎么存？<br>下一讲，我们学习能存一串文字的"字符串"。<br>字符串是数组思想的延伸，也是竞赛中处理文本问题的核心。<br><br>🔮 <b>远期彩蛋</b>：为什么 \'A\' 是 65、\'a\' 是 97？<br>这张"字符身份证"就是 ASCII 表——第 22 讲专门讲。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -929,11 +837,6 @@ cout << a[2] + a[4] << endl;`,
             text: '一般不会有问题——竞赛题会控制数据范围。<br>如果真遇到"必须开很大数组"的题，考虑优化（后续讲）。<br>初学阶段，数组够用就行。',
           },
         ],
-        extra: {
-          title: "📌 一个建议",
-          desc: '数组是编程的基本功。<br>初学者至少要写 <b>30 道数组题</b>才能熟练。<br><br>从"读入 - 遍历 - 处理 - 输出"这个模板开始，反复练。<br>练到"看到题就知道怎么写循环"，数组就过关了。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -989,11 +892,6 @@ cout << a[2] + a[4] << endl;`,
             category: "概念",
           },
         ],
-        extra: {
-          title: "💡 记忆法 · 数组相关词汇",
-          desc: '<b>核心概念</b>：<br><code>array</code> = 数组（排列）<br><code>index</code> = 下标（索引）<br><code>element</code> = 元素（成分）<br><code>length</code> = 长度<br><code>size</code> = 大小、尺寸<br><br><b>容易混淆</b>：<br>· <code>length</code> 和 <code>size</code> 都表示"长度"<br>· 但 C++ 里 <code>string</code> 用 <code>.size()</code>，<code>vector</code> 也用 <code>.size()</code><br>· <code>strlen()</code> 用于字符数组<br><br><b>易错拼写</b>：<br>· <code>array</code> 两个 r<br>· <code>index</code> 复数形式是 <code>indexes</code> 或 <code>indices</code><br>· <code>length</code> 不是 <code>lenght</code><br><br><b>发音</b>：<code>array</code> 读 "a-ray"，重音在第二音节。',
-          variant: "card-primary",
-        },
       },
     },
 
@@ -1027,11 +925,6 @@ cout << a[2] + a[4] << endl;`,
             desc: "<b>越界</b>：下标 ≥ 长度<br><b>数组太小</b>：按数据范围开大<br><b>未初始化</b>：sum = 0;<br><b>二维语法</b>：a[i][j] 不是 a[i,j]",
           },
         ],
-        extra: {
-          title: "📌 关键口诀 + 挑战题单",
-          desc: '<b>口诀</b>：数组一排柜，类型要统一；下标从 0 起，长度别忘记；循环遍历它，求和找最大；防越界开大点，累加先清零。<br><br>📌 <b>挑战题单</b>：<br><b>⭐ 基础</b>：P1046 陶陶摘苹果<br><b>⭐⭐ 进阶</b>：P1427 小鱼的数字游戏<br><b>⭐⭐⭐ 挑战</b>：P5728 旗鼓相当的对手<br><b>🔗 延伸</b>：洛谷搜索"入门 4"，挑 3 道数组题练手。<br><br><b>小 C 彩蛋</b>：数组是计算机最基础的数据结构。<br>你手机里的联系人列表、微信聊天记录、游戏背包，底层都是数组。<br>学会数组，你就理解了计算机"批量处理数据"的核心秘密。',
-          variant: "card-glow",
-        },
       },
     },
 
@@ -1044,11 +937,6 @@ cout << a[2] + a[4] << endl;`,
       chapterTag: false,
       data: {
         slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题",
-        extra: {
-          title: "🌟 你已经掌握了批量数据的工具",
-          desc: "数组是数据结构的地基。<br>从下一讲开始，我们用它来处理文字——字符串。<br><br>数组 + 字符串 + 循环 + 分支，你就能解决绝大多数基础题了。<br>编程的世界，正在向你展开。",
-          variant: "card-glow",
-        },
       },
     },
   ],

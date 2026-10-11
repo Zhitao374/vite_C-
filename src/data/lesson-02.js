@@ -386,26 +386,28 @@ export default {
 
     /* ===== 15 int vs long long ===== */
     {
-      id: 15,
-      type: "compare",
-      title: "int vs long long",
-      subtitle: "两个整数类型，各有分工",
+      id: 15, type: 'compare',
+      title: 'int vs long long',
+      subtitle: '两个整数类型，各有分工',
       data: {
+        neutral: true,
+        leftLabel: '📦 int',
+        rightLabel: '🗄️ long long',
         groups: [
           {
-            wrong: "<b>int</b><br>4 字节<br>范围约 ±21 亿",
-            right: "<b>long long</b><br>8 字节<br>范围约 ±9×10¹⁸",
+            wrong: '4 字节<br>范围约 ±21 亿',
+            right: '8 字节<br>范围约 ±9×10¹⁸'
           },
           {
-            wrong: "写法：<code>int a = 100;</code>",
-            right: "写法：<code>long long a = 100;</code>",
+            wrong: '写法：<code>int a = 100;</code>',
+            right: '写法：<code>long long a = 100;</code>'
           },
           {
-            wrong: "存 100 亿 → <b>溢出</b>（变成负数）",
-            right: "存 100 亿 → 正常显示",
-          },
-        ],
-      },
+            wrong: '存 100 亿 → <b>溢出</b>（变成负数）',
+            right: '存 100 亿 → 正常显示'
+          }
+        ]
+      }
     },
 
     /* ===== 16 决策指南 ===== */
@@ -542,26 +544,10 @@ export default {
       chapterTag: "第 2 讲 · 初赛渗透",
       data: {
         lines: [
-          { who: "student", text: "小 C，初赛会考变量和类型吗？" },
-          {
-            who: "robot",
-            text: '会，而且是<b>高频考点</b>。最常见的题型是"某个类型占几个字节"。',
-          },
-          { who: "student", text: "常见的类型大小是多少？" },
-          {
-            who: "robot",
-            text: "<b>记忆口诀</b>：<br>· <code>int</code> = 4 字节<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br>· <code>float</code> = 4 字节",
-          },
-          { who: "student", text: "这些要背吗？" },
-          {
-            who: "robot",
-            text: "必背。初赛每年至少考 1—2 道。<br>还有一道经典题：<code>int a[100];</code> 占多少内存？<br>答案是 100 × 4 = 400 字节。",
-          },
-          { who: "student", text: "还有别的考点吗？" },
-          {
-            who: "robot",
-            text: "变量命名规则、int 范围、溢出判断——这些都是初赛的重点。<br>我们后面会陆续渗透。",
-          },
+          { who: 'student', text: '小 C，初赛会考变量和类型吗？' },
+          { who: 'robot', text: '会，而且是<b>高频考点</b>。最常见的是"某个类型占几个字节"。<br><br><b>必背口诀</b>：<br>· <code>int</code> = 4 字节<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节' },
+          { who: 'student', text: '还有别的考点吗？' },
+          { who: 'robot', text: '还有经典题：<code>int a[100];</code> 占多少内存？<br>答案：100 × 4 = <b>400 字节</b>。<br><br>还有变量命名规则、int 范围、溢出判断——后面陆续渗透。' }
         ],
       },
     },
@@ -753,7 +739,7 @@ export default {
               { label: "D", text: "8 字节" },
             ],
             analysis:
-              '常见类型字节数：<br>· <code>int</code> = <b>4 字节</b>（32 位）<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br><br>这是初赛的高频考点，对应本讲 slide-17"初赛渗透：类型大小"。',
+              '常见类型字节数：<br>· <code>int</code> = <b>4 字节</b>（32 位）<br>· <code>long long</code> = 8 字节<br>· <code>double</code> = 8 字节<br>· <code>char</code> / <code>bool</code> = 1 字节<br><br>这是初赛的高频考点，对应本讲 slide-20"初赛渗透：类型大小"。',
           },
           {
             id: 3,

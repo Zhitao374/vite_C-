@@ -1,35 +1,54 @@
 <template>
   <SlideShell :slide="slide">
-    <StepWrapper v-for="(g, i) in groups" :key="i" :step="i + 1">
-      <div class="compare">
+    <StepWrapper
+      v-for="(g, i) in groups"
+      :key="i"
+      :step="i + 1"
+    >
+      <div class="compare" :class="{ 'compare-neutral': isNeutral }">
         <div class="compare-box compare-wrong">
-          <div class="compare-label">❌ 错误</div>
+          <div class="compare-label">{{ g.leftLabel || leftLabel || '❌ 错误' }}</div>
           <div v-html="g.wrong"></div>
         </div>
-        <div class="compare-arrow">→</div>
+        <div class="compare-arrow">{{ arrow }}</div>
         <div class="compare-box compare-right">
-          <div class="compare-label">✅ 正确</div>
+          <div class="compare-label">{{ g.rightLabel || rightLabel || '✅ 正确' }}</div>
           <div v-html="g.right"></div>
         </div>
       </div>
+    </StepWrapper>
+
+    <StepWrapper v-if="footer" :step="footerStep">
+      <SlideFooter :html="footer" />
     </StepWrapper>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import SlideShell from "@/components/common/SlideShell.vue";
-import StepWrapper from "@/components/common/StepWrapper.vue";
-import { useStepCount } from "@/composables/useStepCount";
+import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
+import StepWrapper from '@/components/common/StepWrapper.vue';
+import SlideFooter from '@/components/common/SlideFooter.vue';
+import { useStepCount } from '@/composables/useStepCount';
 
 const props = defineProps({
-  slide: { type: Object, required: true },
+  slide: { type: Object, required: true }
 });
 
 const groups = computed(() => props.slide.data?.groups || []);
 const extra = computed(() => props.slide.data?.extra);
+const footer = computed(() => props.slide.data?.footer);
 
-useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
+const leftLabel = computed(() => props.slide.data?.leftLabel);
+const rightLabel = computed(() => props.slide.data?.rightLabel);
+const isNeutral = computed(() => !!props.slide.data?.neutral);
+const arrow = computed(() => props.slide.data?.arrow || '→');
+
+const footerStep = computed(() => groups.value.length + 1);
+
+useStepCount(() =>
+  groups.value.length + (extra.value ? 1 : 0) + (footer.value ? 1 : 0)
+);
 </script>
 
 <style scoped>
@@ -38,9 +57,8 @@ useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
   grid-template-columns: 1fr 50px 1fr;
   align-items: stretch;
 }
-.compare + .compare {
-  margin-top: 8px;
-}
+.compare + .compare { margin-top: 8px; }
+
 .compare-box {
   padding: 22px 28px;
   border-radius: 14px;
@@ -51,6 +69,8 @@ useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
   flex-direction: column;
   justify-content: center;
 }
+
+/* 默认：错/对配色 */
 .compare-wrong {
   background: var(--error-soft);
   border: 2px solid rgba(245, 63, 63, 0.35);
@@ -78,13 +98,30 @@ useStepCount(() => groups.value.length + (extra.value ? 1 : 0));
   opacity: 0.75;
 }
 
+/* 中性模式：蓝紫配色 */
+.compare-neutral .compare-wrong {
+  background: linear-gradient(145deg, #EFF6FF, #F5F9FF);
+  border: 2px solid rgba(22, 93, 255, 0.25);
+  color: var(--text-main);
+}
+.compare-neutral .compare-right {
+  background: linear-gradient(145deg, #F5F3FF, #FAF8FF);
+  border: 2px solid rgba(139, 92, 246, 0.25);
+  color: var(--text-main);
+}
+.compare-neutral .compare-arrow {
+  color: var(--text-dim);
+}
+.compare-neutral .compare-label {
+  opacity: 1;
+  color: var(--primary);
+}
+.compare-neutral .compare-right .compare-label {
+  color: #8B5CF6;
+}
+
 @media (max-width: 900px) {
-  .compare {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .compare-arrow {
-    transform: rotate(90deg);
-  }
+  .compare { grid-template-columns: 1fr; gap: 8px; }
+  .compare-arrow { transform: rotate(90deg); }
 }
 </style>
