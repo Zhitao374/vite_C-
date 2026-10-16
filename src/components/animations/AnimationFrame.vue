@@ -47,12 +47,7 @@
 
         <div v-if="extra" class="extra-area scroll-pane">
           <StepWrapper :step="totalSteps">
-            <ExtraCard
-              :title="extra.title"
-              :desc="extra.desc"
-              :variant="extra.variant || 'card-primary'"
-              :default-expanded="true"
-            />
+            <ExtraCard v-bind="extra" :default-expanded="true" />
           </StepWrapper>
         </div>
       </div>

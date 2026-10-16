@@ -5,8 +5,7 @@
 
     <ExtraCard
       v-if="extra"
-      :title="extra.title"
-      :desc="extra.desc"
+      v-bind="extra"
       :variant="extra.variant || 'card-glow'"
     />
 

@@ -4,7 +4,7 @@
 
     <div
       class="split-container"
-      :class="[`cols-${cols}`, { 'has-code': hasCode }]"
+      :class="[`cols-${cols}`, { 'has-code': hasCode, 'has-image': hasImage }]"
     >
       <div
         v-for="(pane, idx) in panes"
@@ -22,7 +22,18 @@
               <span class="pane-title-text">{{ pane.title }}</span>
             </h3>
 
-            <template v-if="pane.codeFile">
+            <template v-if="pane.image">
+              <ImageCard
+                :src="pane.image"
+                :alt="pane.imageAlt"
+                :caption="pane.imageCaption"
+                :source="pane.imageSource"
+                :layout="pane.imageLayout || 'block'"
+                :size="pane.imageSize || 'lg'"
+              />
+            </template>
+
+            <template v-else-if="pane.codeFile">
               <div class="pane-code">
                 <CodeBlock
                   :code-file="pane.codeFile"
@@ -68,6 +79,7 @@ import { computed } from 'vue';
 import SlideShell from '@/components/common/SlideShell.vue';
 import CodeBlock from '@/components/common/CodeBlock.vue';
 import StepWrapper from '@/components/common/StepWrapper.vue';
+import ImageCard from '@/components/common/ImageCard.vue';
 import SlideFooter from '@/components/common/SlideFooter.vue';
 import { useStepCount } from '@/composables/useStepCount';
 
@@ -81,6 +93,10 @@ const panes = computed(() => props.slide.data?.panes || []);
 const extra = computed(() => props.slide.data?.extra);
 const footer = computed(() => props.slide.data?.footer);
 
+/**
+ * 栏数：优先 data.cols，否则 = panes.length
+ * 限制在 1—4
+ */
 const cols = computed(() => {
   const c = props.slide.data?.cols;
   const n = panes.value.length;
@@ -90,7 +106,14 @@ const cols = computed(() => {
   return 4;
 });
 
-const hasCode = computed(() => panes.value.some(p => !!p.codeFile));
+const hasCode = computed(() =>
+  !panes.value.some(p => !!p.image) &&
+  panes.value.some(p => !!p.codeFile)
+);
+
+const hasImage = computed(() =>
+  panes.value.some(p => !!p.image)
+);
 
 const footerStep = computed(() =>
   (stepped.value ? panes.value.length : 1) + 1
@@ -113,3 +136,175 @@ if (import.meta.env.DEV) {
   }
 }
 </script>
+
+<style scoped>
+/* ============================================ */
+/* 顶部引入                                      */
+/* ============================================ */
+.split-intro {
+  font-size: var(--fs-card-desc);
+  color: var(--text-sub);
+  line-height: 1.6;
+  padding: calc(12px * var(--font-scale)) calc(16px * var(--font-scale));
+  background: var(--primary-soft);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+}
+.split-intro :deep(b) {
+  color: var(--text-main);
+}
+
+/* ============================================ */
+/* 分栏网格                                      */
+/* ============================================ */
+.split-container {
+  display: grid;
+  gap: var(--space-gap-md);
+  align-items: stretch;
+}
+.split-container.cols-1 { grid-template-columns: 1fr; }
+.split-container.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.split-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.split-container.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.split-col {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.split-col-inner {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================ */
+/* 单栏卡片                                      */
+/* ============================================ */
+.split-pane {
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  padding: var(--space-card-padding-y) var(--space-card-padding-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-md);
+  min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* 栏数多时缩小内边距 */
+.cols-3 .split-pane,
+.cols-4 .split-pane {
+  padding: calc(16px * var(--font-scale)) calc(20px * var(--font-scale));
+}
+
+/* 栏标题 */
+.pane-title {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--font-scale));
+  font-size: var(--fs-card-title);
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0;
+  padding-bottom: calc(8px * var(--font-scale));
+  border-bottom: 2px solid var(--primary-soft);
+  line-height: 1.3;
+}
+.pane-icon {
+  font-size: var(--fs-card-title);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.pane-title-text { flex: 1; min-width: 0; }
+.pane-icon-standalone {
+  font-size: calc(32px * var(--font-scale));
+  text-align: center;
+  margin-bottom: calc(4px * var(--font-scale));
+}
+
+/* 代码区 */
+.pane-code {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pane-code :deep(.code-block) {
+  flex: 1;
+  min-height: 0;
+}
+
+/* 底部说明 */
+.pane-note {
+  font-size: var(--fs-card-desc);
+  color: var(--text-sub);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* items 模式 */
+.pane-item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--font-scale));
+}
+.item-title {
+  font-size: var(--fs-card-title);
+  font-weight: 700;
+  color: var(--text-main);
+}
+.item-desc {
+  font-size: var(--fs-card-desc);
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+.item-list {
+  margin: 0;
+  padding-left: calc(20px * var(--font-scale));
+  font-size: var(--fs-card-desc);
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* ============================================ */
+/* 图片模式 —— 让图占满 pane                     */
+/* ============================================ */
+.split-container.has-image .split-pane {
+  justify-content: center;
+  align-items: center;
+}
+
+.split-container.has-image .split-pane > * {
+  width: 100%;
+}
+
+/* ============================================ */
+/* 响应式                                        */
+/* ============================================ */
+@media (max-width: 1280px) {
+  .split-container.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .split-container.cols-3,
+  .split-container.cols-4 {
+    grid-template-columns: 1fr;
+  }
+  .split-container.cols-2:not(.has-code) {
+    grid-template-columns: 1fr;
+  }
+  .split-container.has-code {
+    gap: calc(8px * var(--font-scale));
+  }
+  .split-container.has-code .split-pane {
+    padding: calc(12px * var(--font-scale)) calc(14px * var(--font-scale));
+  }
+}
+</style>

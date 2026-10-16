@@ -1,7 +1,7 @@
 export default {
   title: "第 1 讲 初识 C++",
   subtitle: "第一个程序与 OJ 提交",
-  total: 30,
+  total: 34,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -38,10 +38,6 @@ export default {
           },
           { icon: "🎓", title: "升学助力", desc: "科技特长生重要参考" },
         ],
-        extra: {
-          title: "💡 冷知识 · C++ 为什么叫 C++",
-          desc: '<div>1979 年，<a href="https://baike.baidu.com/item/贝尔实验室" target="_blank" class="wiki-link">贝尔实验室</a>的<a href="https://baike.baidu.com/item/本贾尼·斯特劳斯特鲁普" target="_blank" class="wiki-link">本贾尼·斯特劳斯特鲁普</a>想让 C 语言"更好用一点"，最初把新语言叫 <b>"C with Classes"</b>。</div><div>后来有人开玩笑说：C 语言里的 <code>++</code> 是自增运算符，那"比 C 更强"的语言，就叫 <b>C++</b> 吧。所以 C++ 的字面意思是"<b>C 加一</b>"。</div><div>那 <b>C#</b> 呢？那个 <code>#</code> 是四个 <code>+</code> 叠起来，理论上应该读作"C 四个加"，但官方读法是"C Sharp"。</div>',
-        },
       },
     },
 
@@ -70,10 +66,6 @@ export default {
             desc: "注册、提交、看懂判题结果",
           },
         ],
-        extra: {
-          title: "📖 知识扩展 · Hello World 的起源",
-          desc: '<div>1972 年，<a href="https://baike.baidu.com/item/贝尔实验室" target="_blank" class="wiki-link">贝尔实验室</a>的<a href="https://baike.baidu.com/item/布莱恩·克尼汉" target="_blank" class="wiki-link">布莱恩·克尼汉</a>在《B 语言入门》中第一次写下 <code>"Hello, World!"</code>。</div><div>当时他和<a href="https://baike.baidu.com/item/丹尼斯·里奇" target="_blank" class="wiki-link">丹尼斯·里奇</a>（C 语言之父）正在开发 <a href="https://baike.baidu.com/item/Unix" target="_blank" class="wiki-link">Unix</a>。为了让初学者<b>第一次运行就能看到结果</b>，他们设计了这句最简单的输出。</div><div>没想到，<b>50 多年后</b>，全世界 <b>700 多种编程语言</b>的第一课都是它。<a href="https://baike.baidu.com/item/Python" target="_blank" class="wiki-link">Python</a>、<a href="https://baike.baidu.com/item/Java" target="_blank" class="wiki-link">Java</a>、Rust——所有语言的第一个程序永远是 <code>Hello, World!</code>。</div><div><b>今天，你也将完成这个仪式。</b></div>',
-        },
       },
     },
 
@@ -179,6 +171,15 @@ export default {
 
         extra: {
           title: "📖 知识扩展 · 冯·诺依曼结构",
+          image: {
+            src: "static/images/people/von-neumann.jpg",
+            alt: "约翰·冯·诺依曼",
+            caption: "约翰·冯·诺依曼（1903—1957）",
+            source: "美国能源部 / Public Domain",
+            layout: "float-right",
+            size: "sm",
+            zoomable: true
+          },
           desc: '1945 年，数学家冯·诺依曼提出了"<b>存储程序</b>"概念：把指令和数据一起存进内存，让计算机自动执行。<br><br>在这之前，改变计算任务要 <b>重新接线</b> —— 就像今天想换一个 App，你得换一台手机。<br><br>这个想法彻底改变了计算机。<br>今天你用的手机、电脑、服务器，<b>全都是冯·诺依曼结构</b>。',
         },
       },
@@ -264,13 +265,73 @@ export default {
             highlight: true,
             points: ["① Python", "② C", "③ C++", "④ Java", "⑤ C#"],
           },
-        ],
+        ]
       },
     },
 
-    /* ===== 7 过渡页 ===== */
+    /* ===== 7 1946 · ENIAC 诞生 ===== */
     {
-      id: 7,
+      id: 7, type: "split",
+      title: "1946 · ENIAC 诞生",
+      subtitle: "第一台通用电子计算机",
+      chapterTag: "第 1 讲 · 概念理解",
+      data: {
+        intro: '它是"编程语言 70 年"的起点 —— <b>人类第一台自动计算的机器</b>。<br>它的诞生，宣告了"计算机时代"的到来。',
+        panes: [
+          {
+            image: "static/images/events/eniac-1946.webp",
+            imageAlt: "ENIAC 第一台通用电子计算机",
+            imageCaption: "ENIAC（1946）· 占地 167 平方米，重 30 吨",
+            imageSource: "百度百科",
+            imageLayout: "block",
+            imageSize: "full",
+            zoomable: true
+          },
+          {
+            title: "关键数据",
+            items: [
+
+              { title: "📊 规模", desc: "<b>18000</b> 个电子管<br>耗电 <b>150 kW</b>（够一个小镇）<br>占地 <b>167 ㎡</b> / 重 <b>30 吨</b>" },   // ← 合并体积
+              { title: "👥 人物", desc: "设计：<b>莫奇利 + 埃克特</b><br>编程：<b>6 位女程序员</b>" },
+              { title: "⚡ 性能", desc: "每秒 <b>5000</b> 次加法<br>今天手机比它快 <b>100 万倍</b>" },
+              { title: "🎯 用途", desc: "原本算<b>炮弹弹道</b><br>后来算<b>氢弹 / 天气预报</b>" },
+              { title: "🐛 Bug 起源", desc: "1947 年飞蛾飞入继电器<br>被贴进日志 —— \"<b>第一个 Bug</b>\"" }
+            ]
+          }
+        ]
+      }
+    },
+    /* ===== 8 编程环境 ===== */
+    {
+      id: 8, type: "grid",
+      title: "编程环境 · 在哪写代码？",
+      subtitle: "三个选择，一个推荐",
+      chapterTag: "第 1 讲 · 动手准备",
+      data: {
+        cards: [
+          {
+            icon: "🛠️",
+            title: "Dev-C++",
+            desc: "<b>竞赛标配</b><br>轻量、简单<br>一键编译运行<br>界面朴素但够用<br><br><b>⭐ 推荐初学者</b>"
+          },
+          {
+            icon: "💻",
+            title: "VS Code",
+            desc: "<b>现代编辑器</b><br>界面漂亮、插件丰富<br>需装 C++ 插件<br>配置稍复杂<br><br><b>进阶选择</b>"
+          },
+          {
+            icon: "🌐",
+            title: "在线 IDE",
+            desc: "<b>免安装</b><br>洛谷 IDE / CodeSandbox<br>打开浏览器就能写<br>需要网络<br><br><b>备用方案</b>"
+          }
+        ],
+        footer: '<b>📌 建议</b>：初学者用 <b>Dev-C++</b> —— 简单，能跑就行。<br>等熟练后再换 VS Code 或 VS 2022 —— <b>工具是次要的，能写出正确代码才是关键</b>。<br><br><b>🔗 下载地址</b><br>Dev-C++：<code>sourceforge.net/projects/orwelldevcpp/</code><br>VS Code：<code>code.visualstudio.com</code><br>洛谷在线 IDE：<code>luogu.com.cn/ide</code>'
+      }
+    },
+
+    /* ===== 9 过渡页 ===== */
+    {
+      id: 9,
       type: "transition",
       title: "第二站 · 开始写代码",
       subtitle: "从 Hello World 到输出进阶",
@@ -279,9 +340,9 @@ export default {
       },
     },
 
-    /* ===== 8 Hello World ===== */
+    /* ===== 10 Hello World ===== */
     {
-      id: 8,
+      id: 10,
       type: "code-split",
       title: "第一个程序：Hello, World!",
       subtitle: "逐行拆解，理解每一行的使命",
@@ -312,9 +373,40 @@ export default {
       },
     },
 
-    /* ===== 9 第一次编译报错 ===== */
+    /* ===== 11 Dev-C++ 上手 ===== */
     {
-      id: 9,
+      id: 11, type: "split",
+      title: "Dev-C++ · 5 步跑出第一个程序",
+      subtitle: "从打开到运行，5 分钟搞定",
+      chapterTag: "第 1 讲 · 动手实践",
+      data: {
+        panes: [
+          {
+            image: "static/images/tools/devcpp-interface.png",
+            imageAlt: "Dev-C++ 界面",
+            imageCaption: "Dev-C++ 界面（含代码区 + 编译日志）",
+            imageLayout: "block",
+            imageSize: "full",
+            zoomable: true
+          },
+          {
+            title: "5 步操作",
+            items: [
+              { title: "① 新建", desc: "<code>Ctrl + N</code> 新建文件" },
+              { title: "② 写代码", desc: "粘贴 Hello World" },
+              { title: "③ 保存", desc: "<code>Ctrl + S</code> 存为 <code>.cpp</code>" },
+              { title: "④ 编译运行", desc: "按 <code>F11</code>" },
+              { title: "⑤ 看结果", desc: "黑窗口显示 <code>Hello, World!</code>" },
+              { title: "⌨️ 快捷键", desc: "<code>F9</code> 编译 · <code>F10</code> 运行 · <code>F11</code> 一键" }
+            ]
+          }
+        ]
+      }
+    },
+
+    /* ===== 12 第一次编译报错 ===== */
+    {
+      id: 12,
       type: "dialog",
       title: "第一次编译报错怎么办？",
       subtitle: "小C教你读错误信息",
@@ -353,9 +445,9 @@ export default {
       },
     },
 
-    /* ===== 10 常见错误盘点 ===== */
+    /* ===== 13 常见错误盘点 ===== */
     {
-      id: 10,
+      id: 13,
       type: "compare",
       title: "常见错误大盘点",
       subtitle: "4 个新手必踩的坑",
@@ -385,9 +477,9 @@ export default {
       },
     },
 
-    /* ===== 11 输出进阶 ===== */
+    /* ===== 14 输出进阶 ===== */
     {
-      id: 11,
+      id: 14,
       type: "code-split",
       title: "输出进阶：多个内容与换行",
       subtitle: "灵活使用 cout",
@@ -405,16 +497,12 @@ export default {
           { line: 7, title: "输出单行", desc: "输出 * 后换行" },
           { line: 8, title: "输出多字符", desc: "输出 *** 后换行" },
         ],
-        extra: {
-          title: "💡 endl 的来历",
-          desc: '<div><code>endl</code> 是英文 "<b>end line</b>" 的缩写，意思是"<b>结束这一行</b>"。</div><div>它做两件事：换行 + <b>刷新缓冲区</b>。缓冲区就像"待发送的信件"，<code>endl</code> 相当于喊了一声"快递员，走起！"</div><div>但这也让 <code>endl</code> 比 <code>"\\n"</code> <b>慢一点</b>。因为每次都要"叫快递员"。</div><div>所以竞赛中大量输出时，选手都用 <code>"\\n"</code> 而不是 <code>endl</code>。这就是 C++ 的"细节决定快慢"——<b>一个字符的差别，可能是 TLE 和 AC 的差别</b>。</div><div></div><div>🔮 <b>伏笔</b>：<code>endl</code> 和 <code>"\\n"</code> 明明都是换行，为什么速度不一样？第 22 讲从二进制讲起。</div>',
-        },
       },
     },
 
-    /* ===== 12 从代码到运行（合并原 10 + 11） ===== */
+    /* ===== 15 从代码到运行（合并原 10 + 11） ===== */
     {
-      id: 12,
+      id: 15,
       type: "grid",
       title: "从代码到运行",
       subtitle: "源程序如何变成可执行程序",
@@ -444,10 +532,9 @@ export default {
       },
     },
 
-    /* ===== 13 初赛渗透：编译器 ===== */
+    /* ===== 16 初赛渗透：编译器 ===== */
     {
-      id: 13,
-      type: "dialog",
+      id: 16, type: "dialog",
       title: "初赛小知识：编译器",
       subtitle: "CSP-J 初赛必考",
       chapterTag: "第 1 讲 · 初赛渗透",
@@ -458,30 +545,20 @@ export default {
           { who: "student", text: "一般怎么考？" },
           {
             who: "robot",
-            text: '最常见的是问"编译器的主要功能是什么"。<br>答案是：<b>把源程序翻译成机器指令代码</b>。',
+            text: '最常见的是问"编译器的主要功能是什么"。<br>答案：<b>把源程序翻译成机器指令代码</b>。',
           },
-          { who: "student", text: "有没有其他类似的题？" },
+          { who: "student", text: "还有别的考点吗？" },
           {
             who: "robot",
-            text: "还有：编译和解释的区别、高级语言和低级语言、C++ 源程序文件的扩展名（.cpp）。",
-          },
-          { who: "student", text: "那难吗？" },
-          {
-            who: "robot",
-            text: "不难，但是送分题，一定要拿下。<br>初赛常考的概念，我们在每讲都会渗透一点。",
-          },
-          { who: "student", text: "那编译型和解释型有什么区别？" },
-          {
-            who: "robot",
-            text: "问得好——<br><br><b>编译型</b>：C++、C、Rust<br>源代码 → 编译 → 机器码 → 执行<br>特点：<b>一次编译，多次运行，速度快</b><br><br><b>解释型</b>：Python、JavaScript<br>源代码 → 解释器逐行翻译 → 执行<br>特点：<b>边翻译边执行，跨平台好，速度稍慢</b><br><br>竞赛用 C++，就是因为<b>速度快 10—100 倍</b>。",
+            text: "还有：编译和解释的区别、高级语言和低级语言、C++ 源程序扩展名（.cpp）。<br><br>这些都是送分题，一定要拿下。",
           },
         ],
       },
     },
 
-    /* ===== 14 答疑：关于程序的疑问 ===== */
+    /* ===== 17 答疑：关于程序的疑问 ===== */
     {
-      id: 14,
+      id: 17,
       type: "dialog",
       title: "答疑：关于程序的疑问",
       subtitle: "小C回答常见问题",
@@ -512,9 +589,50 @@ export default {
       },
     },
 
-    /* ===== 15 练习1：Hello World ===== */
+    /* ===== 18 环境常见问题 ===== */
     {
-      id: 15,
+      id: 18, type: "pitfall",
+      title: "环境搭不好？常见问题",
+      subtitle: "四个坑，提前避",
+      chapterTag: "第 1 讲 · 动手准备",
+      data: {
+        cases: [
+          {
+            icon: "❌",
+            scene: "编译报错：'g++' 不是内部或外部命令",
+            what: "按 F11 后弹出一行红字，编译失败",
+            why: "Dev-C++ 安装不完整，或环境变量没配好",
+            fix: "重装 Dev-C++（选默认路径）<br>或手动添加 g++ 到系统 PATH"
+          },
+          {
+            icon: "❌",
+            scene: "程序一闪而过，看不到输出",
+            what: "黑窗口开了又关，来不及看结果",
+            why: "程序跑完立刻退出，窗口跟着关闭",
+            fix: "① 在 <code>return 0;</code> 前加 <code>system(\"pause\");</code><br>② 或从命令行运行 <code>.exe</code>"
+          },
+          {
+            icon: "❌",
+            scene: "中文输出变成乱码",
+            what: "输出\"你好\"显示成一堆奇怪符号",
+            why: "编码不一致（GBK vs UTF-8）",
+            fix: "① 竞赛建议用英文输出<br>② 或把文件编码改成 UTF-8"
+          },
+          {
+            icon: "❌",
+            scene: "找不到 .exe 文件",
+            what: "编译成功但不知道程序在哪",
+            why: "默认保存在源文件同目录",
+            fix: "按 <code>F11</code> 后，同目录下会生成 <code>hello.exe</code><br>或在 Dev-C++ 里点\"运行\"直接看结果"
+          }
+        ],
+        footer: '<b>📌 环境问题的通用思路</b><br>① <b>重装</b> —— 90% 的问题重装能解决<br>② <b>查错</b> —— 看报错信息的第一行<br>③ <b>搜索</b> —— 把报错原文贴到 Bing 搜索<br>④ <b>求助</b> —— 找同学 / 老师 / 洛谷社区<br><br><b>🔮 别让环境问题挡住你</b>：很多人第一次装环境就放弃了。其实这一步过了，后面全是"写代码"——比装环境简单得多。'
+      }
+    },
+
+    /* ===== 19 练习1：Hello World ===== */
+    {
+      id: 19,
       type: "level-map",
       title: "课堂练习1：Hello World",
       subtitle: "独立完成第一个输出程序",
@@ -537,14 +655,23 @@ export default {
         },
         extra: {
           title: "📖 知识扩展 · 第一位程序员",
-          desc: '<div>1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。</div><div>她原本只是在翻译一篇意大利论文，却忍不住加了 <b>7 篇注释</b>，总长度是原文的 <b>3 倍</b>。其中一篇注释详细描述了如何用机器一步步计算伯努利数。<b>这就是人类第一个计算机算法</b>。</div><div>她还第一次意识到：<b>机器不只是算数，还能处理符号</b>。她写道："分析机编织代数图案，就像提花机编织花朵和叶子。"</div><div>她的父亲是诗人<a href="https://baike.baidu.com/item/拜伦" target="_blank" class="wiki-link">拜伦</a>，但她走的不是文学路，而是数学与机器的交叉路。100 年后，<a href="https://baike.baidu.com/item/美国国防部" target="_blank" class="wiki-link">美国国防部</a>用一种编程语言纪念她——<b>语言的名字叫 <a href="https://baike.baidu.com/item/Ada" target="_blank" class="wiki-link">Ada</a></b>。</div>',
+          image: {
+            src: "static/images/people/ada-lovelace.webp",
+            alt: "阿达·洛芙莱斯",
+            caption: "阿达·洛芙莱斯（1815—1852）",
+            source: "Public Domain",
+            layout: "float-right",
+            size: "sm",
+            zoomable: true
+          },
+          desc: '1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。<br><br>（原内容不变）',
         },
       },
     },
 
-    /* ===== 16 练习2：输出图形 ===== */
+    /* ===== 20 练习2：输出图形 ===== */
     {
-      id: 16,
+      id: 20,
       type: "level-map",
       title: "课堂练习2：输出图形",
       subtitle: "巩固输出与换行",
@@ -569,9 +696,9 @@ export default {
       },
     },
 
-    /* ===== 17 练习3：输出菱形 ===== */
+    /* ===== 21 练习3：输出菱形 ===== */
     {
-      id: 17,
+      id: 21,
       type: "level-map",
       title: "课堂练习3：输出菱形",
       subtitle: "灵活运用 cout 和 endl",
@@ -601,9 +728,9 @@ export default {
       },
     },
 
-    /* ===== 18 难题后的放松：ASCII 艺术画廊 ===== */
+    /* ===== 22 难题后的放松：ASCII 艺术画廊 ===== */
     {
-      id: 18,
+      id: 22,
       type: "grid",
       title: "🎨 难题后的放松 · 字符画画廊",
       subtitle: "用字符拼出的可爱图像",
@@ -619,42 +746,42 @@ export default {
       },
     },
 
-    /* ===== 19 OJ 是什么 ===== */
+    /* ===== 23 OJ 是什么 ===== */
     {
-      id: 19,
-      type: "dialog",
+      id: 23, type: "grid",
       title: "OJ 是什么？",
       subtitle: "Online Judge 在线判题系统",
       chapterTag: "第 1 讲 · OJ 实战",
       data: {
-        lines: [
-          { who: "student", text: "我提交代码后，谁在检查对不对？" },
+        cards: [
           {
-            who: "robot",
-            text: "OJ，全称 Online Judge，在线判题系统。它就像一位严格又公正的裁判。",
+            icon: "⚖️",
+            title: "OJ = 在线裁判",
+            desc: "<b>Online Judge</b><br>在线判题系统<br>像一位严格又公正的裁判",
           },
-          { who: "student", text: "它怎么判断我的答案对不对？" },
           {
-            who: "robot",
-            text: "它会用预先准备好的测试数据运行你的程序，然后对比输出结果。",
+            icon: "🔬",
+            title: "怎么判题？",
+            desc: "用预先准备的<b>测试数据</b><br>运行你的程序<br>对比输出结果",
           },
-          { who: "student", text: "如果结果一样呢？" },
           {
-            who: "robot",
-            text: "那就给你 <b>AC</b>，表示答案正确。如果不一样，就是 <b>WA</b>，答案错误。",
+            icon: "✅",
+            title: "结果一样 → AC",
+            desc: "<b>AC</b> = Accepted<br>答案正确<br>通过！",
           },
-          { who: "student", text: "那哪个 OJ 适合我？" },
           {
-            who: "robot",
-            text: "推荐几个——<br><br>· <b>洛谷</b>（luogu.com.cn）—— 中国最大，题目丰富，CSP-J/S 首选<br>· <b>一本通</b>—— 配套教材，按章节刷题<br>· <b>AcWing</b>—— 课程 + 题库，零基础友好<br>· <b>Codeforces</b>—— 国际平台，每周比赛<br><br>入门用<b>洛谷 + 一本通</b>，进阶用 <b>Codeforces</b>。",
+            icon: "❌",
+            title: "结果不一样 → WA",
+            desc: "<b>WA</b> = Wrong Answer<br>答案错误<br>需要改进",
           },
         ],
+        footer: '<b>📌 常用 OJ 平台推荐</b><br>· <b>洛谷</b>（luogu.com.cn）—— 中国最大，题目丰富，CSP-J/S 首选<br>· <b>一本通</b>—— 配套教材，按章节刷题，系统训练<br>· <b>AcWing</b>—— 课程 + 题库，零基础友好<br>· <b>Codeforces</b>—— 国际平台，每周比赛，提高段位<br><br>入门用<b>洛谷 + 一本通</b>，进阶用 <b>Codeforces</b>。',
       },
     },
 
-    /* ===== 20 OJ 提交步骤 ===== */
+    /* ===== 24 OJ 提交步骤 ===== */
     {
-      id: 20,
+      id: 24,
       type: "flow",
       title: "OJ 提交步骤",
       subtitle: "手把手教你提交代码",
@@ -680,25 +807,36 @@ export default {
       },
     },
 
-    /* ===== 21 判题结果 ===== */
+    /* ===== 25 判题结果 ===== */
     {
-      id: 21,
-      type: "compare",
+      id: 25, type: "compare",
       title: "OJ 判题结果解读",
       subtitle: "看懂反馈，快速改进",
       data: {
         groups: [
-          { wrong: "❌ WA 答案错误", right: "✅ AC 答案正确" },
-          { wrong: "❌ CE 编译错误", right: "✅ 检查语法、标点、拼写" },
-          { wrong: "❌ RE 运行时错误", right: "✅ 检查数组越界、除零" },
-          { wrong: "❌ TLE 超时", right: "✅ 优化算法" },
+          {
+            wrong: "❌ <b>WA</b> · 答案错误",
+            right: "✅ <b>AC</b> · 答案正确<br><br>输出格式和预期一致",
+          },
+          {
+            wrong: "❌ <b>CE</b> · 编译错误",
+            right: "✅ 检查语法<br><br>标点、拼写、大小写、括号",
+          },
+          {
+            wrong: "❌ <b>RE</b> · 运行时错误",
+            right: "✅ 检查代码逻辑<br><br>数组越界、除零、递归太深",
+          },
+          {
+            wrong: "❌ <b>TLE</b> · 超时",
+            right: "✅ 优化算法<br><br>减少循环次数、换更优算法",
+          },
         ],
       },
     },
 
-    /* ===== 22 从 WA 到 AC ===== */
+    /* ===== 26 从 WA 到 AC ===== */
     {
-      id: 22,
+      id: 26,
       type: "dialog",
       title: "从 WA 到 AC 的心路历程",
       subtitle: '小C与同学聊"改错"',
@@ -729,9 +867,9 @@ export default {
       },
     },
 
-    /* ===== 23 课堂小测 ===== */
+    /* ===== 27 课堂小测 ===== */
     {
-      id: 23,
+      id: 27,
       type: "quiz",
       title: "课堂小测",
       subtitle: "编译器、程序结构与输出",
@@ -828,9 +966,9 @@ export default {
       },
     },
 
-    /* ===== 24 今日总结 ===== */
+    /* ===== 28 今日总结 ===== */
     {
-      id: 24,
+      id: 28,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -852,9 +990,9 @@ export default {
       },
     },
 
-    /* ===== 25 课后作业 ===== */
+    /* ===== 29 课后作业 ===== */
     {
-      id: 25,
+      id: 29,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -882,9 +1020,9 @@ export default {
       },
     },
 
-    /* ===== 26 下节预告 ===== */
+    /* ===== 30 下节预告 ===== */
     {
-      id: 26,
+      id: 30,
       type: "radial",
       title: "下节预告",
       subtitle: "第 2 讲 · 变量与整数类型",
@@ -899,42 +1037,51 @@ export default {
       },
     },
 
-    /* ===== 27 答疑时间 ===== */
+    /* ===== 31 答疑时间 ===== */
     {
-      id: 27,
-      type: "dialog",
+      id: 31, type: "grid",
       title: "答疑时间",
-      subtitle: "有问题尽管问",
+      subtitle: "常见问题 FAQ",
       chapterTag: "第 1 讲 · 答疑",
       data: {
-        lines: [
-          { who: "student", text: "为什么我的程序编译不通过？" },
+        cards: [
           {
-            who: "robot",
-            text: "先看第一行报错，通常是标点或分号。编译器会告诉你出错的行号。",
+            icon: "🔴",
+            title: "编译不通过？",
+            desc: "先看<b>第一行报错</b><br>通常是标点或分号<br>编译器会告诉你行号<br><br>对照四大错误找",
           },
-          { who: "student", text: "OJ 提交后显示 WA 怎么办？" },
           {
-            who: "robot",
-            text: "检查输出格式和边界情况。有时候多一个空格就会被判 WA。",
+            icon: "❌",
+            title: "WA 怎么办？",
+            desc: "检查<b>输出格式</b><br>空格、换行、标点<br>有时候多一个空格<br>就被判 WA",
           },
-          { who: "student", text: "程序运行结果不对，怎么调试？" },
           {
-            who: "robot",
-            text: '在关键位置加 cout 输出中间变量，看看哪一步开始出错。<br>这个方法叫"打印调试"，是竞赛常用技巧。',
+            icon: "🐛",
+            title: "怎么调试？",
+            desc: "在关键位置加 <code>cout</code><br>输出中间变量<br>看哪一步开始出错<br><br>这叫<b>打印调试</b>",
           },
-          { who: "student", text: "endl 和 \\n 到底用哪个？" },
           {
-            who: "robot",
-            text: "初学者用 endl 就好，更直观。<br>等到了竞赛阶段，大数据输出时换成 \\n 会更快。",
+            icon: "🔀",
+            title: "endl 还是 \\n？",
+            desc: "初学用 <code>endl</code><br>更直观<br>竞赛大数据输出<br>换成 <code>\\n</code> 更快",
+          },
+          {
+            icon: "📁",
+            title: "程序保存成什么？",
+            desc: "必须存成 <code>.cpp</code> 文件<br>编译器才能读<br>就像作文要写在纸上",
+          },
+          {
+            icon: "❓",
+            title: "中文变量名行吗？",
+            desc: "理论上能<br><b>但绝对不要</b><br>竞赛、工程、审查<br>都不允许",
           },
         ],
       },
     },
 
-    /* ===== 28 本讲英文单词 ===== */
+    /* ===== 32 本讲英文单词 ===== */
     {
-      id: 28,
+      id: 32,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -994,9 +1141,9 @@ export default {
       },
     },
 
-    /* ===== 29 知识清单 ===== */
+    /* ===== 33 知识清单 ===== */
     {
-      id: 29,
+      id: 33,
       type: "grid",
       title: "第 1 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
@@ -1032,9 +1179,9 @@ export default {
       },
     },
 
-    /* ===== 30 结束页 ===== */
+    /* ===== 34 结束页 ===== */
     {
-      id: 30,
+      id: 34,
       type: "ending",
       title: "第一讲结束",
       subtitle: "点击返回目录，复习本讲内容",

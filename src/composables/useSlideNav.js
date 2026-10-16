@@ -32,6 +32,8 @@ export function useSlideNav({ lesson, slide, total, next, prev }) {
   }
 
   function onMouseUp(e) {
+    // 灯箱 —— 优先级最高
+    if (e.target.closest('.image-zoom-overlay')) return;
     // 用 data-no-flip 统一判定
     const interactiveSelector = [
       "a",

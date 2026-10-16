@@ -130,39 +130,47 @@ export default {
     /* ===== 5 为什么要数组 ===== */
     {
       id: 5,
-      type: "dialog",
-      title: "为什么要数组？",
-      subtitle: "一百个数据，一百个变量？",
-      chapterTag: "第 6 讲 · 概念理解",
+      type: "origin",
+      title: '为什么要数组？',
+      subtitle: '一百个数据，一百个变量？',
+      chapterTag: '第 6 讲 · 概念理解',
       data: {
-        lines: [
+        problem: {
+          title: '存 100 个同学的成绩，难道定义 100 个变量？',
+          points: [
+            '写 100 行 <code>int s1, s2, s3, ...</code> —— <b>又长又乱</b>',
+            '想求和？—— 要写 100 次加法 —— <b>累死</b>',
+            '想找最大值？—— 要写 100 次比较 —— <b>不可能</b>'
+          ]
+        },
+        evolution: [
           {
-            who: "student",
-            text: "小 C，如果我要存 100 个同学的成绩，难道要定义 100 个变量？",
+            icon: '📦', era: '变量',
+            title: '一个盒子',
+            desc: '一个变量只能存一个数据 —— <b>存 100 个要 100 个变量</b>'
           },
-          { who: "robot", text: "不用。用数组，一次就能定义 100 个格子。" },
-          { who: "student", text: "数组是什么？" },
           {
-            who: "robot",
-            text: "数组就像一排储物柜。柜子有编号，你可以按编号存东西、取东西。",
+            icon: '🗄️', era: '数组',
+            title: '一排柜子',
+            desc: '一次定义，批量存 —— <b>3 行搞定 100 个</b>'
           },
-          { who: "student", text: "那每个柜子可以存不同类型的东西吗？" },
           {
-            who: "robot",
-            text: "不行，同一排柜子只能存同一种类型。<br>整型数组就存整数，不能混装小数。",
-          },
-          { who: "student", text: "为什么？" },
-          {
-            who: "robot",
-            text: "因为每个柜子大小一样，计算机按固定大小找位置。<br><b>类型统一，查找才快</b>。这也是数组最大的特点。",
-          },
+            icon: '🚀', era: '能力',
+            title: '批量处理',
+            desc: '数组 + 循环 = <b>处理海量数据的黄金组合</b>'
+          }
         ],
+        summary: {
+          title: '数组 = 一排连续的储物柜',
+          desc: '每个柜子有编号（下标），可以按编号快速存取。<br><b>同类型、连续存放、下标访问</b> —— 这是数组的三大特点。<br><br>数组是第一个真正的"数据结构"——<br>后续的字符串、栈、队列、二叉树，底层都依赖数组。',
+          code: '// 不用数组（100 行）\nint s1, s2, s3, ...;\n\n// 用数组（3 行）\nint a[100];\nfor (int i = 0; i &lt; 100; i++)\n    cin &gt;&gt; a[i];'
+        },
         extra: {
           title: '📖 知识扩展 · 从"变量"到"数组"',
           desc: '变量是"一个盒子"，数组是"一排盒子"。<br>盒子多了，就能存更多数据。<br><br>数组的英文是 <b>array</b>，意思是"排列、阵列"。<br>它的核心思想是：<b>把相同类型的数据连续放在内存里，用下标快速访问</b>。<br><br>这个思想是后来<b>所有数据结构</b>的基础——栈、队列、树、图，底层都是数组。<br><br>🔮 <b>伏笔</b>：数组为什么访问快？因为它是连续内存。<br>如果不连续呢？第 27 讲"链表"会告诉你另一种可能。',
-          variant: "card-primary",
-        },
-      },
+          variant: 'card-primary'
+        }
+      }
     },
 
     /* ===== 6 数组三大特点 ===== */
@@ -189,6 +197,7 @@ export default {
             desc: "用 <code>a[i]</code> 取第 i 个元素<br>下标从 <b>0</b> 开始<br>长度 100 的数组<br>合法下标是 0 到 99",
           },
         ],
+        footer: '<b>💡 为什么数组访问这么快？</b><br>因为数组在内存里是<b>连续存放</b>的。<br>想访问 <code>a[i]</code>，计算机直接算：<b>地址 = 起点 + i × 类型大小</b>——一步定位。<br><br>这种"按下标直接跳"的能力，叫 <b>随机访问</b>。<br>不管数组多大，访问任意元素都一样快。'
       },
     },
 
@@ -222,6 +231,7 @@ export default {
           { line: 19, title: "b[0]", desc: "访问下标 0 的元素，值是 1" },
         ],
         output: "10\n50\n1",
+        footer: '<b>💡 数组的三个关键点</b><br>① <b>长度固定</b>：定义时写死，运行中不能改<br>② <b>下标从 0 开始</b>：<code>a[5]</code> 的合法下标是 0—4<br>③ <b>越界危险</b>：<code>a[5]</code> / <code>a[-1]</code> 可能崩溃或输出垃圾值<br><br><b>为什么从 0 开始？</b><br>下标本质是"偏移量"——<code>a[0]</code> 偏移 0 步，就是起点。'
       },
     },
 
@@ -239,48 +249,54 @@ export default {
           { icon: "📦", label: "a[3]", sub: "地址 1012" },
           { icon: "📦", label: "a[4]", sub: "地址 1016", glow: true },
         ],
+        footer: '<b>💡 为什么 int 数组元素差 4 个地址？</b><br>每个 <code>int</code> 占 <b>4 字节</b>。<br><code>a[0]</code> 占 1000—1003，<code>a[1]</code> 就从 1004 开始。<br><br><b>地址差值 = 元素类型的大小</b>。<br>double 数组差 8，char 数组差 1。<br><br><b>🔮 伏笔</b>：如果内存不连续呢？第 27 讲"链表"告诉你答案。'
       },
     },
 
     /* ===== 9 为什么下标从 0 开始 ===== */
     {
       id: 9,
-      type: "dialog",
-      title: "为什么下标从 0 开始？",
-      subtitle: "这是最容易搞错的细节",
-      chapterTag: "第 6 讲 · 概念理解",
+      type: "origin",
+      title: '为什么下标从 0 开始？',
+      subtitle: '这是最容易搞错的细节',
+      chapterTag: '第 6 讲 · 概念理解',
       data: {
-        lines: [
-          {
-            who: "student",
-            text: "小 C，为什么数组下标要从 0 开始？从 1 开始不是更自然吗？",
-          },
-          {
-            who: "robot",
-            text: '这是个好问题。你想想，如果 a 是数组起点，那"第 0 个元素"是什么意思？',
-          },
-          { who: "student", text: "嗯……从起点开始偏移 0 个位置？" },
-          {
-            who: "robot",
-            text: '对！下标本质是"<b>偏移量</b>"。<br>a[0] 表示偏移 0 个位置，a[1] 偏移 1 个位置。',
-          },
-          { who: "student", text: "所以 a[5] 是第 6 个元素？" },
-          {
-            who: "robot",
-            text: "对。长度 5 的数组，合法下标是 0 到 4，不是 1 到 5。<br>这是初学者最容易搞错的地方。",
-          },
-          { who: "student", text: "怎么避免搞错？" },
-          {
-            who: "robot",
-            text: "一句话记牢：<b>下标 &lt; 长度</b>。<br>循环写 <code>i &lt; n</code>，而不是 <code>i &lt;= n</code>。",
-          },
-        ],
-        extra: {
-          title: "💡 下标是偏移量，不是序号",
-          desc: '很多人以为 <code>a[1]</code> 是"第一个元素"，其实它是"从起点偏移 1 个位置的元素"。<br>所以 <b><code>a[0]</code> 才是第一个</b>。<br><br>这个设计来自 C 语言，本质是"指针运算"的语法糖。<br>写成 <code>a[i]</code> 相当于 <code>*(a + i)</code>——"从 a 出发，走 i 步，取那个位置的值"。<br><br><b>历史原因</b>：<br>1972 年，C 语言之父丹尼斯·里奇设计数组时，选择了"0 开始"——因为他要让 <code>a[i]</code> 直接对应"偏移 i 步"。<br>这个设计被 C++、Java、Python 全部沿用。<br><b>50 多年过去，还在用。</b><br><br><b>记忆</b>：下标 0 就是起点。',
-          variant: "card-primary",
+        problem: {
+          title: '生活中从 1 开始，为什么数组从 0 开始？',
+          points: [
+            '一栋楼有 5 层 —— 1 楼到 5 楼',
+            '一个班级 30 人 —— 1 号到 30 号',
+            '为什么数组偏偏要从 <b>0</b> 开始？'
+          ]
         },
-      },
+        evolution: [
+          {
+            icon: '🤔', era: '疑问',
+            title: '为什么不是 1 到 5？',
+            desc: '从 1 开始更符合直觉 —— <b>但设计者不这么想</b>'
+          },
+          {
+            icon: '💡', era: '关键',
+            title: '下标本质是"偏移量"',
+            desc: '<code>a[0]</code> = 偏移 0 步<br><code>a[1]</code> = 偏移 1 步<br><b>从起点算的"距离"</b>'
+          },
+          {
+            icon: '⚙️', era: '实现',
+            title: '计算机一步定位',
+            desc: '地址 = <b>起点 + i × 类型大小</b><br>i 就是"偏移几个元素"<br><b>0 是自然的起点</b>'
+          }
+        ],
+        summary: {
+          title: '下标是"距离"，不是"序号"',
+          desc: '<code>a[0]</code> 是<b>第一个元素</b> —— 因为它距起点 <b>0 步</b>。<br><code>a[5]</code> 是<b>第六个元素</b> —— 距起点 5 步。<br><br>长度 5 的数组，合法下标是 <b>0 到 4</b>。<br><b>口诀</b>：下标 &lt; 长度 —— 循环写 <code>i &lt; n</code>，不是 <code>i &lt;= n</code>。',
+          code: 'int a[5];   // 合法下标 0, 1, 2, 3, 4\na[0] = 10;  // 第一个元素\na[4] = 50;  // 最后一个元素\na[5] = 60;  // ❌ 越界！'
+        },
+        extra: {
+          title: '💡 丹尼斯·里奇的设计选择',
+          desc: '很多人以为 <code>a[1]</code> 是"第一个元素"，其实它是"从起点偏移 1 个位置的元素"。<br>所以 <b><code>a[0]</code> 才是第一个</b>。<br><br>这个设计来自 C 语言，本质是"指针运算"的语法糖。<br>写成 <code>a[i]</code> 相当于 <code>*(a + i)</code>——"从 a 出发，走 i 步，取那个位置的值"。<br><br><b>历史原因</b>：<br>1972 年，C 语言之父<a href="https://baike.baidu.com/item/丹尼斯·里奇" target="_blank" class="wiki-link">丹尼斯·里奇</a>设计数组时，选择了"0 开始"——因为他要让 <code>a[i]</code> 直接对应"偏移 i 步"。<br>这个设计被 C++、Java、Python 全部沿用。<br><b>50 多年过去，还在用。</b><br><br><b>记忆</b>：下标 0 就是起点。',
+          variant: 'card-primary'
+        },
+      }
     },
 
     /* ===== 10 从 0 开始的常见错误 ===== */
@@ -302,6 +318,7 @@ export default {
             right: "a[0] 就是第一个，习惯它",
           },
         ],
+        footer: '<b>📌 一句话记住</b>：<b>下标 &lt; 长度</b>。<br>长度 5 的数组，循环写 <code>i &lt; 5</code>，不是 <code>i &lt;= 5</code>。<br><br><b>记忆口诀</b>：宁可少一次，不要越一次。<br><br>看到 <code>int a[N]</code>，心里默念"下标 0 到 N-1"。'
       },
     },
 
@@ -341,6 +358,7 @@ export default {
           { line: 10, title: "cout &lt;&lt; a[i]", desc: "遍历输出所有元素" },
         ],
         output: "（输入 1 2 3 4 5）\n1 2 3 4 5",
+        footer: '<b>📌 数组 + 循环 = 竞赛解题模板</b><br><b>读入模板</b>：<br><code>for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];</code><br><br><b>遍历模板</b>：<br><code>for (int i = 0; i &lt; n; i++) { /* 处理 a[i] */ }</code><br><br>把这两个模板练到条件反射——一半的数组题就稳了。<br><b>注意</b>：循环条件写 <code>i &lt; n</code>，不是 <code>i &lt;= n</code>——否则越界。'
       },
     },
 
@@ -393,40 +411,50 @@ export default {
             note: "✅ 输出 <b>15</b>。<br><b>5 个元素，5 次累加</b>——这就是数组求和的全过程。<br><br>🔮 关键：<code>sum</code> 必须初始化为 <b>0</b>，否则第一次加法就错了。",
           },
         ],
+        footer: '<b>💡 累加 vs 累乘</b><br><b>累加</b>：<code>sum = 0; sum += a[i];</code><br>初始值 0（加法的"起点"）<br><br><b>累乘</b>：<code>fact = 1; fact *= a[i];</code><br>初始值 1（乘法的"起点"）<br><br><b>为什么初始值不同？</b><br>· 加 0 不影响结果 → 用 0<br>· 乘 1 不影响结果 → 用 1<br>· 累乘用 0 → 结果永远是 0<br><br>🔮 <b>伏笔</b>：这个"初始值"思想，在第 9 讲阶乘递归里会再次出现。'
       },
     },
 
     /* ===== 14 数组实战答疑 ===== */
     {
       id: 14,
-      type: "dialog",
-      title: "数组实战答疑",
-      subtitle: "小C与同学聊遍历技巧",
-      chapterTag: "第 6 讲 · 概念理解",
+      type: "decision",
+      title: '存不存数组？',
+      subtitle: '什么时候用数组，什么时候不用',
+      chapterTag: '第 6 讲 · 概念理解',
       data: {
-        lines: [
-          { who: "student", text: "小 C，遍历数组一定要用 for 吗？" },
+        intro: '📖 有些题要"先存后处理"，有些题可以"边读边算"。<br>看下面的判断信号——',
+        signals: [
           {
-            who: "robot",
-            text: "大多数时候是。因为数组长度已知，for 最适合计数循环。",
+            icon: '➕', keyword: '求和 / 计数',
+            desc: '读一个加一个<br><b>不用数组</b>'
           },
-          { who: "student", text: "那什么时候用 while？" },
           {
-            who: "robot",
-            text: '比如"一直读直到输入 0"，长度未知，就用 while。',
+            icon: '📈', keyword: '找最大值 / 最小值',
+            desc: '边读边比较<br><b>不用数组</b>'
           },
-          { who: "student", text: "读入的时候能不能直接处理，不存数组？" },
           {
-            who: "robot",
-            text: "能！如果只用一次，比如求和、找最大值，可以边读边算。<br>这样处理 100 万个数也不占内存。",
+            icon: '🔄', keyword: '逆序输出',
+            desc: '必须回头读<br><b>用数组</b>'
           },
-          { who: "student", text: "那什么时候一定要用数组？" },
           {
-            who: "robot",
-            text: '需要"<b>回头看</b>"的时候。<br>比如逆序输出、排序、找第 k 大——必须存下来才能处理。',
+            icon: '📊', keyword: '排序 / 找第 k 大',
+            desc: '需要比较全部数据<br><b>用数组</b>'
           },
+          {
+            icon: '🎯', keyword: '一次遍历完成',
+            desc: '读完就丢<br><b>不用数组</b>'
+          },
+          {
+            icon: '🔍', keyword: '回头查 / 回头比',
+            desc: '需要多轮访问<br><b>用数组</b>'
+          }
         ],
-      },
+        conclusion: {
+          title: '判断法则',
+          desc: '<b>用到一次不用存，用到多次先存下</b>。<br><br>· 只需要一个数（求和、最大值）→ 边读边算，不用数组<br>· 需要"回头看"（逆序、排序、找第 k 大）→ 先存数组<br><br>📌 <b>竞赛经验</b>：能不用数组就不用——省内存、代码短。<br>但本讲练数组，所以每道题都用数组写一遍。'
+        }
+      }
     },
 
     /* ===== 15 练习1：求和 ===== */
@@ -516,34 +544,40 @@ export default {
     /* ===== 18 初赛渗透 ===== */
     {
       id: 18,
-      type: "dialog",
-      title: "初赛小知识：数组内存",
-      subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 6 讲 · 初赛渗透",
+      type: "split",
+      title: '初赛小知识：数组内存',
+      subtitle: 'CSP-J/S 初赛必考',
+      chapterTag: '第 6 讲 · 初赛渗透',
       data: {
-        lines: [
-          { who: "student", text: "小 C，初赛会考数组吗？" },
+        intro: '初赛常考——<b>数组占多少内存</b>、<b>下标范围</b>、<b>能不能越界</b>。都是送分题，必须拿下。',
+        panes: [
           {
-            who: "robot",
-            text: "会。常考的是：数组占多少内存、下标范围、能不能越界。",
+            title: '内存速算',
+            icon: '💾',
+            items: [
+              { title: 'int a[100]', desc: '100 × 4 = <b>400 字节</b>' },
+              { title: 'long long a[100]', desc: '100 × 8 = 800 字节' },
+              { title: 'double a[100]', desc: '100 × 8 = 800 字节' },
+              { title: 'char a[100]', desc: '100 × 1 = 100 字节' },
+              { title: 'int a[10][10]', desc: '10 × 10 × 4 = 400 字节' },
+              { title: '规律', desc: '所有维度相乘 × 元素大小' }
+            ]
           },
-          { who: "student", text: "比如 int a[100] 占多少内存？" },
           {
-            who: "robot",
-            text: "int 占 4 字节，100 个就是 <b>400 字节</b>。<br>如果是 long long，每个占 8 字节，100 个就是 800 字节。",
-          },
-          { who: "student", text: "二维数组呢？" },
-          {
-            who: "robot",
-            text: "<code>int a[10][10]</code> 是 100 个 int，占 400 字节。<br>算内存就把所有维度乘起来，再乘每个类型的字节数。",
-          },
-          { who: "student", text: "还有什么考点？" },
-          {
-            who: "robot",
-            text: '常考数组下标范围。<br>长度 100 的数组，合法下标是 0 到 99。<br>考卷经常出"下面哪个访问是越界的"这种题。',
-          },
+            title: '常见陷阱',
+            icon: '⚠️',
+            items: [
+              { title: '下标范围', desc: '长度 100 → 0 到 99' },
+              { title: '越界访问', desc: '不报错但结果错' },
+              { title: 'sizeof(a)', desc: '得整个数组字节数' },
+              { title: 'sizeof(a[0])', desc: '得单个元素字节数' },
+              { title: '元素个数', desc: 'sizeof(a) / sizeof(a[0])' },
+              { title: '类型大小', desc: 'int=4, ll=8, double=8, char=1' }
+            ]
+          }
         ],
-      },
+        footer: '<b>📌 必背类型大小</b>：int = 4 / long long = 8 / double = 8 / char = 1 / bool = 1<br><br><b>💡 用 sizeof 查</b>：<br><code>sizeof(int)</code> → 4<br><code>sizeof(a)</code> → 整个数组字节数（不是元素个数！）<br><br><b>⚠️ 陷阱</b>：想知道元素个数，用 <code>sizeof(a) / sizeof(a[0])</code>——不能直接 <code>sizeof(a)</code>。'
+      }
     },
 
     /* ===== 19 数组常见错误 ===== */
@@ -571,6 +605,7 @@ export default {
             right: "下标从 0 开始：for (i=0; i&lt;n; i++)",
           },
         ],
+        footer: '<b>🛠️ 用"储物柜"理解越界</b><br>数组就像一排储物柜，编号 0 到 N-1。<br>· 打开 0 号柜 → 第一个元素<br>· 打开 N 号柜 → <b>柜子不存在</b>——可能撞坏或拿到别人的东西<br><br><b>口诀</b>：数组开大点，循环写 n，累加先清零，下标从 0 起。<br><br><b>竞赛经验</b>：<br>· 数组多开 5—10 个空位，几乎不占内存<br>· "下标从 1 开始"是高频错误——习惯 0 起点'
       },
     },
 
@@ -603,45 +638,38 @@ export default {
           },
         ],
         output: "（输入 5 / 3 1 3 2 3）\n3 出现 3 次",
+        footer: '<b>💡 计数数组 · 竞赛技巧</b><br>核心思想：<b>用下标当数值</b>。<br><br><b>思路</b>：<br>· 开大数组 <code>cnt[N]</code><br>· 读到 x → <code>cnt[x]++</code><br>· <code>cnt[k]</code> 表示"数值 k 出现了几次"<br><br><b>应用</b>：统计频次、去重、桶排序基础。<br><br><b>注意</b>：数组大小要比"最大数值"更大——0—100 的数据就开 <code>cnt[105]</code>。'
       },
     },
 
     /* ===== 21 数组方法总结 ===== */
     {
       id: 21,
-      type: "dialog",
-      title: "数组方法总结",
-      subtitle: "小C带同学复盘",
-      chapterTag: "第 6 讲 · 概念理解",
+      type: "grid",
+      title: '数组方法总结',
+      subtitle: '四个核心要点',
+      chapterTag: '第 6 讲 · 概念理解',
       data: {
-        lines: [
-          { who: "robot", text: "同学，我们来回看一下今天学的数组。" },
-          { who: "student", text: "好！" },
-          { who: "robot", text: "数组定义用什么语法？" },
+        cards: [
           {
-            who: "student",
-            text: "<code>int a[100];</code>——类型 名字[长度];",
+            icon: '📝', title: '① 定义',
+            desc: '<code>int a[100];</code><br>类型 名字[长度];<br><br><b>长度固定</b><br>运行时不能改'
           },
-          { who: "robot", text: "下标从几开始？合法范围？" },
           {
-            who: "student",
-            text: "从 0 开始，长度 100 的数组，合法下标是 0 到 99。",
+            icon: '📍', title: '② 访问',
+            desc: '<code>a[i]</code><br><b>下标从 0 开始</b><br>合法范围 0 到 长度-1<br><br><b>口诀</b>：下标 &lt; 长度'
           },
-          { who: "robot", text: "遍历数组用什么？" },
           {
-            who: "student",
-            text: "<code>for (int i = 0; i &lt; n; i++)</code> 遍历。",
+            icon: '🔄', title: '③ 遍历',
+            desc: '<code>for (int i = 0; i &lt; n; i++)</code><br>用循环变量当下标<br>逐个读入 / 处理<br><br><b>模板</b>必须记熟'
           },
-          { who: "robot", text: "数组最常见的错误？" },
-          { who: "student", text: "越界！所以数组宁可开大一点。" },
-          { who: "robot", text: "非常好。你已经掌握了数组的核心了。" },
+          {
+            icon: '⚠️', title: '④ 防越界',
+            desc: '数组<b>宁开大一点</b><br>如 1005 / 10005<br>不报错但结果错<br><br><b>口诀</b>：宁可浪费几字节'
+          }
         ],
-        extra: {
-          title: "💡 四个核心要点",
-          desc: '① <b>定义</b>：<code>类型 名字[长度];</code><br>② <b>访问</b>：<code>a[i]</code>，下标从 0 开始<br>③ <b>遍历</b>：<code>for (i = 0; i &lt; n; i++)</code><br>④ <b>防越界</b>：数组宁开大一点<br><br>这四条是数组的地基。<br><br><b>从今天起，你写的代码会越来越像"真正的程序"</b>——<br>从"处理一个数"，到"处理一批数"，这是编程能力的跃迁。',
-          variant: "card-primary",
-        },
-      },
+        footer: '<b>📌 从今天起，你写的代码会越来越像"真正的程序"</b>——<br>从"处理一个数"到"处理一批数"，这是编程能力的跃迁。<br><br>数组 + 循环 = 竞赛解题的黄金组合。<br>把"读入 - 遍历 - 处理 - 输出"这套模板练到条件反射，数组就过关了。'
+      }
     },
 
     /* ===== 22 课堂小测 ===== */
@@ -805,39 +833,38 @@ cout << a[2] + a[4] << endl;`,
     /* ===== 26 答疑时间 ===== */
     {
       id: 26,
-      type: "dialog",
-      title: "答疑时间",
-      subtitle: "有问题尽管问",
-      chapterTag: "第 6 讲 · 答疑",
+      type: "grid",
+      title: '答疑时间',
+      subtitle: '常见问题 FAQ',
+      chapterTag: '第 6 讲 · 答疑',
       data: {
-        lines: [
-          { who: "student", text: "数组长度可以运行时确定吗？" },
+        cards: [
           {
-            who: "robot",
-            text: "C 风格数组不行，长度必须是编译期常量。<br>如果长度要动态确定，后面会学 vector。",
+            icon: '📏', title: '数组长度能变吗？',
+            desc: 'C 风格数组<b>不行</b>——长度必须是编译期常量。<br>要动态长度，用 <code>vector</code>（第 14 讲）。'
           },
-          { who: "student", text: "为什么数组从 0 开始编号？" },
           {
-            who: "robot",
-            text: '因为下标本质是"偏移量"。a[0] 偏移 0，a[1] 偏移 1。<br>习惯就好，竞赛里所有数组都从 0 开始。',
+            icon: '0️⃣', title: '为什么从 0 开始？',
+            desc: '下标本质是"<b>偏移量</b>"。<br><code>a[0]</code> 偏移 0 步——就是起点。<br>习惯就好。'
           },
-          { who: "student", text: "数组开多大合适？" },
           {
-            who: "robot",
-            text: "看题目数据范围，在此基础上多开 5 到 10 个空位。<br>宁可浪费几字节，也别越界。",
+            icon: '📐', title: '数组开多大合适？',
+            desc: '按题目数据范围<b>多开 5—10 个空位</b>。<br>宁可浪费几字节，也别越界。'
           },
-          { who: "student", text: "什么时候用数组？" },
           {
-            who: "robot",
-            text: '需要"回头看"的时候。<br>逆序、排序、找第 k 大，都要先存下来。',
+            icon: '🎯', title: '什么时候用数组？',
+            desc: '需要"<b>回头看</b>"的时候——<br>逆序、排序、找第 k 大。<br>边读边算的题不用数组。'
           },
-          { who: "student", text: "数组内存不够怎么办？" },
           {
-            who: "robot",
-            text: '一般不会有问题——竞赛题会控制数据范围。<br>如果真遇到"必须开很大数组"的题，考虑优化（后续讲）。<br>初学阶段，数组够用就行。',
+            icon: '🚀', title: '数组内存不够？',
+            desc: '初学阶段不会遇到。<br>竞赛题会控制数据范围。<br>真遇到"大数组"问题，后续学优化。'
           },
-        ],
-      },
+          {
+            icon: '💡', title: '怎么练数组？',
+            desc: '至少写 <b>30 道数组题</b>。<br>从"读入 - 遍历 - 处理 - 输出"模板开始。<br>练到条件反射为止。'
+          }
+        ]
+      }
     },
 
     /* ===== 27 本讲英文单词 ===== */
@@ -925,6 +952,7 @@ cout << a[2] + a[4] << endl;`,
             desc: "<b>越界</b>：下标 ≥ 长度<br><b>数组太小</b>：按数据范围开大<br><b>未初始化</b>：sum = 0;<br><b>二维语法</b>：a[i][j] 不是 a[i,j]",
           },
         ],
+        footer: '<b>📌 关键口诀</b>：数组一排柜，类型要统一；下标从 0 起，长度别忘记；循环遍历它，求和找最大；防越界开大点，累加先清零。<br><br><b>📌 挑战题单</b><br>⭐ 基础：P1046 陶陶摘苹果<br>⭐⭐ 进阶：P1427 小鱼的数字游戏<br>⭐⭐⭐ 挑战：P5728 旗鼓相当的对手<br><br><b>小 C 彩蛋</b>：数组是计算机最基础的数据结构——手机联系人、微信聊天、游戏背包，底层都是数组。'
       },
     },
 

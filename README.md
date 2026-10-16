@@ -1,62 +1,107 @@
-# C++ 课程课件系统
+# C++ 竞赛课程幻灯片系统
 
-面向 6 年级—初二的 C++ 竞赛教学课件（Vue 3 + Vite）。
+> 基于 Vue 3 + Vite 的交互式教学演示项目。
+> 一套 C++ 竞赛入门课程，从零基础到 CSP-J/S。
+
+---
+
+## 这是什么
+
+**不是普通网站** —— 是"逐页展示 + 分步动画 + 可画笔记"的**课堂演示工具**。
+
+- 57 讲完整课程蓝图（已完成 19 讲）
+- 21 种幻灯片版式
+- 支持分步展示、字号缩放、画笔批注
+- 数据驱动 —— 内容在 `src/data/lesson-XX.js`，渲染在 `src/components/slides/`
+
+---
 
 ## 快速开始
 
 ```bash
+# 安装
 npm install
+
+# 开发
 npm run dev
+# 打开 http://localhost:5173
+
+# 构建
+npm run build
+
+# 命令中心（推荐）
+npm run help
 ```
-
-浏览器打开 http://localhost:4000/
-
-## 项目结构
-
-```
-src/
-├── components/
-│   ├── common/        # 公共 UI（CodeBlock / ExtraCard / IntroCard 等）
-│   ├── slides/        # 16 种版式组件（自动注册）
-│   ├── animations/    # 10 种动画组件
-│   └── level-map/     # 练习页子组件
-├── composables/       # 组合式函数（useStep / useSlide 等）
-├── config/            # 角色 / 颜色 / 默认值
-├── data/              # 课程数据（lesson-00 ~ lesson-48）
-├── lib/               # 工具函数（如 tree-layout）
-├── styles/            # 主题 / 布局 / 组件样式
-└── views/             # 页面视图
-
-public/codes/          # 各讲的 .cpp 示例文件
-```
-
-## 常用命令
-
-| 命令 | 用途 |
-|---|---|
-| `npm run dev` | 开发模式 |
-| `npm run build` | 构建生产包 |
-| `npm run preview` | 预览构建产物 |
-| `node verify-codes.js --check` | 验证 .cpp 编译 + 引用完整性 |
-
-## 文档
-
-| 文档 | 用途 |
-|---|---|
-| [docs/GUIDE.md](docs/GUIDE.md) | **写讲次必看**：数据格式、组件字段、内容规则、大纲 |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | **改组件必看**：技术栈、目录、动画系统、样式约定 |
-| [docs/CHANGELOG.md](docs/CHANGELOG.md) | **查进度看**：版本记录、已完成讲次、伏笔清单 |
-
-## 课程进度
-
-- ✅ lesson-00：动画合集预览
-- ✅ lesson-01 ~ lesson-08：C++ 语法核心 + 递归
-- ⏳ lesson-09 ~ lesson-48：待生成
-
-## 技术栈
-
-Vue 3 · Vite · Vue Router · CSS 变量主题 · 数据驱动渲染
 
 ---
 
-科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题
+## 项目结构（简化）
+
+```
+src/
+  data/          课程数据（lesson-XX.js）
+  components/
+    slides/      21 种版式组件
+    common/      公共组件（CodeBlock / ImageCard / ExtraCard...）
+  composables/   组合式函数（useStep / useSlide...）
+  views/         页面（Index / Lesson / Slide / Glossary）
+  styles/        CSS（theme / layout / components...）
+  router/        路由
+
+public/
+  codes/         .cpp 代码文件（按讲次分目录）
+  static/        静态资源（images / ascii-art）
+
+scripts/         工具脚本（检查 / 生成 / 打包）
+docs/            项目文档
+```
+
+---
+
+## 核心概念
+
+| 概念 | 说明 |
+|---|---|
+| **slide** | 一页幻灯片 —— `{ id, type, title, data }` |
+| **type** | 版式 —— `cover` / `grid` / `dialog` / `code-split`... |
+| **step** | 分步 —— 点一次显示一步 |
+| **extra** | 折叠的"知识扩展"卡 |
+| **footer** | 页面底部的"补充说明" |
+
+---
+
+## 写一讲的大致流程
+
+1. 在 `src/data/` 新建 `lesson-XX.js`
+2. 按数据格式填 slides
+3. 放 `.cpp` 文件到 `public/codes/lesson-XX/`
+4. 跑 `npm run dev` 预览
+5. 跑 `npm run help` → `check:all` 检查
+
+**详细流程** → 见 `docs/GUIDE.md`
+
+---
+
+## 文档导航
+
+| 想了解 | 看 |
+|---|---|
+| 项目架构 | `docs/ARCHITECTURE.md` |
+| 怎么开发 | `docs/GUIDE.md` |
+| 什么场景用什么组件 | `docs/PATTERNS.md` |
+| 内容优化流程 | `docs/LESSON-SOP.md` |
+| 课程设计 | `docs/COURSE-DESIGN.md` |
+| 每讲逐页清单 | `docs/COURSE-INDEX.md` |
+| 当前待办 | `docs/TODO.md` |
+
+---
+
+## 常用命令
+
+```bash
+npm run dev              # 开发
+npm run help             # 交互式命令中心
+node scripts/help.js check:all    # 全部检查
+node scripts/help.js fix:ids      # 修 id
+node scripts/help.js pack         # 打包给 AI
+```

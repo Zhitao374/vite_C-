@@ -96,11 +96,7 @@
         </StepWrapper>
 
         <StepWrapper v-if="extra" :step="maxStep">
-          <ExtraCard
-            :title="extra.title"
-            :desc="extra.desc"
-            :variant="extra.variant || 'card-primary'"
-          />
+          <ExtraCard v-bind="extra" />
         </StepWrapper>
       </div>
     </div>

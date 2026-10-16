@@ -12,11 +12,7 @@
 
       <!-- 关键：autoExtra 为 false 时不渲染 -->
       <StepWrapper v-if="autoExtra && extra" :step="maxStep">
-        <ExtraCard
-          :title="extra.title"
-          :desc="extra.desc"
-          :variant="extra.variant || 'card-primary'"
-        />
+        <ExtraCard v-bind="extra" />
       </StepWrapper>
     </div>
   </div>

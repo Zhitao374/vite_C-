@@ -24,6 +24,10 @@
         </StepWrapper>
       </template>
     </div>
+
+    <StepWrapper v-if="footer" :step="footerStep">
+      <SlideFooter :html="footer" />
+    </StepWrapper>
   </SlideShell>
 </template>
 
@@ -32,6 +36,7 @@ import { computed } from "vue";
 import SlideShell from "@/components/common/SlideShell.vue";
 import StepWrapper from "@/components/common/StepWrapper.vue";
 import IconMap from "@/components/common/IconMap.vue";
+import SlideFooter from "@/components/common/SlideFooter.vue";
 import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
@@ -44,8 +49,26 @@ const rows = computed(() => {
   if (d.value.nodes) return [d.value.nodes];
   return [];
 });
+const footer = computed(() => d.value.footer);
 
-// 步数：每个节点 2 步（节点+箭头），最后一个节点 1 步
+// ============================================
+// 节点总步数（节点 + 箭头）
+// ============================================
+const totalNodeSteps = computed(() => {
+  const r = d.value.rows || (d.value.nodes ? [d.value.nodes] : []);
+  let n = 0;
+  r.forEach((row) => {
+    n += row.length * 2 - 1;
+  });
+  return n;
+});
+
+// footer 在节点之后
+const footerStep = computed(() => totalNodeSteps.value + 1);
+
+// ============================================
+// 步数上报：节点 + footer + extra
+// ============================================
 useStepCount(() => {
   const data = d.value;
   const r = data.rows || (data.nodes ? [data.nodes] : []);
@@ -53,7 +76,7 @@ useStepCount(() => {
   r.forEach((row) => {
     n += row.length * 2 - 1;
   });
-  return n + (data.extra ? 1 : 0);
+  return n + (data.footer ? 1 : 0) + (data.extra ? 1 : 0);
 });
 
 function stepOf(ri, i) {
