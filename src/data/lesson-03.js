@@ -1,7 +1,7 @@
 export default {
   title: "第 3 讲 小数、字符、布尔与类型转换",
   subtitle: "数据的多种面孔",
-  total: 31,
+  total: 30,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -228,9 +228,35 @@ export default {
       },
     },
 
-    /* ===== 8 char 字符 ===== */
+    /* ===== 8 练习1：圆的面积 ===== */
     {
       id: 8,
+      type: "level-map",
+      title: "课堂练习1：圆的面积",
+      subtitle: "用 double 和 const 计算",
+      chapterTag: "第 3 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入圆的半径 <code>r</code>，输出圆的面积（保留 2 位小数）。<br>公式：<code>面积 = π × r²</code>，π 取 3.14159。<br>输入样例：<code>5</code>　输出样例：<code>78.5398</code>",
+          timer: "⏱ 限时 6 分钟",
+        },
+        hints: [
+          "用 <code>const double PI = 3.14159;</code>",
+          "半径用 <code>double</code>",
+          "面积 = <code>PI * r * r</code>",
+        ],
+        answer: { codeFile: "codes/lesson-03/circle.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: "这是 <code>const</code> 和 <code>double</code> 的典型用法。<br>用常量定义 π，用 double 存小数。<br>计算过程都是 double，不需要额外转换。",
+        },
+      },
+    },
+
+    /* ===== 9 char 字符 ===== */
+    {
+      id: 9,
       type: "code-split",
       title: "char · 单个字符的家",
       subtitle: "单引号，1 字节",
@@ -254,11 +280,12 @@ export default {
     },
 
     {
-      id: 9,  // 新 id，后面的页 +1
+      id: 10,  // 新 id，后面的页 +1
       type: 'compare',
       title: '单引号 vs 双引号',
       subtitle: '新手最常搞混的两个符号',
       data: {
+        splitStep: true,
         groups: [
           {
             wrong: "<code>'A'</code> —— 单引号<br>是 <b>char</b>（字符）<br>1 字节",
@@ -277,9 +304,9 @@ export default {
       }
     },
 
-    /* ===== 10 char 与 ASCII ===== */
+    /* ===== 11 char 与 ASCII ===== */
     {
-      id: 10, type: 'grid',
+      id: 11, type: 'grid',
       title: 'char 与 ASCII',
       subtitle: '字符背后的数字',
       chapterTag: '第 3 讲 · 概念理解',
@@ -310,9 +337,9 @@ export default {
       }
     },
 
-    /* ===== 11 bool 布尔 ===== */
+    /* ===== 12 bool 布尔 ===== */
     {
-      id: 11,
+      id: 12,
       type: "code-split",
       title: "bool · 只有真和假",
       subtitle: "判断的基础",
@@ -348,56 +375,37 @@ export default {
       },
     },
 
-    /* ===== 12 过渡页 ===== */
+    /* ===== 13 过渡页 ===== */
     {
-      id: 12,
+      id: 13,
       type: "transition",
       title: "第四站 · 类型转换",
       subtitle: "不同类型之间怎么转换",
       data: {
-        note: '接下来学习本讲最重要的内容——类型转换，以及新手最容易踩的"整数除法陷阱"',
+        previous: "double、char、bool —— 数据的多种面孔",
+        note: "接下来学习本讲最重要的内容——类型之间怎么互相转换"
       },
     },
 
-    /* ===== 13 类型转换答疑 ===== */
+    /* ===== 14 类型转换答疑 ===== */
     {
-      id: 13,
-      type: "dialog",
+      id: 14, type: "grid",
       title: "类型转换答疑",
       subtitle: "小C回答常见问题",
       chapterTag: "第 3 讲 · 类型转换",
       data: {
-        lines: [
-          {
-            who: "student",
-            text: "小 C，如果我把 int 赋值给 double，会出错吗？",
-          },
-          {
-            who: "robot",
-            text: "不会。这叫<b>自动转换</b>——小类型自动升级为大类型。<br><code>double d = 5;</code> 等价于 <code>double d = 5.0;</code>",
-          },
-          { who: "student", text: "反过来呢？double 赋值给 int？" },
-          {
-            who: "robot",
-            text: "可以，但会<b>丢掉小数部分</b>。<br><code>int a = 3.99;</code> 结果是 3，不是 4。",
-          },
-          { who: "student", text: "那什么时候需要强制转换？" },
-          {
-            who: "robot",
-            text: "比如 <code>int a = 5, b = 2;</code>，我想算 <code>a / b</code> 得 2.5。<br>如果直接写 <code>a / b</code>，因为两边都是 int，结果是 2（整数除法）。<br>要得到 2.5，必须<b>强制转换</b>：<code>(double)a / b</code>。",
-          },
-          { who: "student", text: '所以强制转换就是"手动指定类型"？' },
-          {
-            who: "robot",
-            text: "对。语法是 <code>(类型)变量</code>，比如 <code>(double)a</code>。<br>这是竞赛中<b>最常用</b>的技巧之一。",
-          },
-        ],
-      },
+        cards: [
+          { icon: "📥", title: "int 赋值给 double？", desc: "不会出错。这叫<b>自动转换</b>——小类型自动升级为大类型。<br><code>double d = 5;</code> 等价于 <code>5.0</code>" },
+          { icon: "✂️", title: "double 赋值给 int？", desc: "可以，但会<b>丢掉小数部分</b>。<br><code>int a = 3.99;</code> 结果是 3，不是 4。" },
+          { icon: "🛠️", title: "何时需要强制转换？", desc: "比如算 <code>5 / 2</code> 想要 2.5。直接写结果是 2。必须用 <code>(double)5 / 2</code>。" },
+          { icon: "💡", title: "本质是什么？", desc: "强制转换就是“手动指定类型”。<br>语法：<code>(类型)变量</code>，如 <code>(double)a</code>。这是竞赛最常用技巧。" }
+        ]
+      }
     },
 
-    /* ===== 14 自动转换 ===== */
+    /* ===== 15 自动转换 ===== */
     {
-      id: 14,
+      id: 15,
       type: "code-split",
       title: "自动转换 · 小类型自动升级",
       subtitle: "编译器帮你完成",
@@ -419,9 +427,9 @@ export default {
       },
     },
 
-    /* ===== 15 强制转换 ===== */
+    /* ===== 16 强制转换 ===== */
     {
-      id: 15,
+      id: 16,
       type: "code-split",
       title: "强制转换 · 手动指定类型",
       subtitle: "语法：(类型)变量",
@@ -443,13 +451,14 @@ export default {
       },
     },
 
-    /* ===== 16 整数除法陷阱 ===== */
+    /* ===== 17 整数除法陷阱 ===== */
     {
-      id: 16,
+      id: 17,
       type: "compare",
       title: "整数除法陷阱",
       subtitle: "竞赛新手最容易踩的坑",
       data: {
+        splitStep: true,
         groups: [
           {
             wrong: "5 / 2 = 2（丢小数）",
@@ -468,114 +477,9 @@ export default {
       },
     },
 
-    /* ===== 17 类型转换小结 ===== */
-    {
-      id: 17,
-      type: "dialog",
-      title: "类型转换小结",
-      subtitle: "小C带同学复盘",
-      chapterTag: "第 3 讲 · 类型转换",
-      data: {
-        lines: [
-          { who: "robot", text: "同学，我们来回看一下类型转换。" },
-          { who: "student", text: "好！" },
-          { who: "robot", text: "int 赋值给 double，是自动还是强制？" },
-          { who: "student", text: "自动。小类型升级大类型。" },
-          { who: "robot", text: "double 赋值给 int 呢？" },
-          { who: "student", text: "需要强制转换。会丢掉小数部分。" },
-          { who: "robot", text: "5 / 2 的结果？" },
-          {
-            who: "student",
-            text: "2！整数除法丢小数。要得 2.5 得写 5.0 / 2 或 (double)5 / 2。",
-          },
-          { who: "robot", text: "非常好。你已经掌握了类型转换的核心了。" },
-        ],
-      },
-    },
-
-    /* ===== 18 常见错误 ===== */
+    /* ===== 18 练习3：整数除法 ===== */
     {
       id: 18,
-      type: "compare",
-      title: "类型相关常见错误",
-      subtitle: "避开这些坑",
-      data: {
-        groups: [
-          {
-            wrong: 'char c = "A";（双引号）',
-            right: "char c = 'A';（单引号）<br><br><b>原因</b>：<code>char</code> 是单个字符——用<b>单引号</b>；双引号是 <code>string</code>（字符串），类型不匹配。",
-          },
-          {
-            wrong: "int a = 3.99; 得到 3",
-            right: "double a = 3.99; 或 (int)3.99<br><br><b>原因</b>：int 装不下小数——赋值时<b>自动截断</b>小数部分。要存小数，用 double。",
-          },
-          {
-            wrong: "5 / 2 得到 2",
-            right: "(double)5 / 2 得到 2.5<br><br><b>原因</b>：两个 int 相除，结果还是 int——这就是整数除法陷阱。",
-          },
-          {
-            wrong: "bool b = 2;（非 0 也可）",
-            right: "bool b = true;（用 true / false）<br><br><b>原因</b>：C++ 允许非 0 值转 bool（都变 true），但<b>用 true/false 更清晰</b>。",
-          },
-        ],
-      },
-    },
-
-    /* ===== 19 练习1：圆的面积 ===== */
-    {
-      id: 19,
-      type: "level-map",
-      title: "课堂练习1：圆的面积",
-      subtitle: "用 double 和 const 计算",
-      chapterTag: "第 3 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入圆的半径 <code>r</code>，输出圆的面积（保留 2 位小数）。<br>公式：<code>面积 = π × r²</code>，π 取 3.14159。<br>输入样例：<code>5</code>　输出样例：<code>78.5398</code>",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          "用 <code>const double PI = 3.14159;</code>",
-          "半径用 <code>double</code>",
-          "面积 = <code>PI * r * r</code>",
-        ],
-        answer: { codeFile: "codes/lesson-03/circle.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: "这是 <code>const</code> 和 <code>double</code> 的典型用法。<br>用常量定义 π，用 double 存小数。<br>计算过程都是 double，不需要额外转换。",
-        },
-      },
-    },
-
-    /* ===== 20 练习2：温度转换 ===== */
-    {
-      id: 20,
-      type: "level-map",
-      title: "课堂练习2：温度转换",
-      subtitle: "摄氏温度转华氏温度",
-      chapterTag: "第 3 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入摄氏温度 <code>C</code>（可以是小数），输出对应的华氏温度。<br>公式：<code>F = C × 9.0 / 5.0 + 32</code><br>输入样例：<code>100</code>　输出样例：<code>212</code>",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          "用 <code>double</code> 存温度",
-          "公式里要写 <code>9.0 / 5.0</code> 而不是 <code>9 / 5</code>",
-          "<code>9 / 5</code> 会得到 1（整数除法陷阱）",
-        ],
-        answer: { codeFile: "codes/lesson-03/temperature.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: "必须写 <code>9.0 / 5.0</code>。<br>如果写 <code>9 / 5</code>，两个都是 int，结果是 1，<br>那 100°C 会算成 100 × 1 + 32 = 132°F（错的）。<br><br>正确公式：100 × 1.8 + 32 = 212°F。<br><b>整数除法陷阱的经典案例。</b>",
-        },
-      },
-    },
-
-    /* ===== 21 练习3：整数除法 ===== */
-    {
-      id: 21,
       type: "level-map",
       title: "课堂练习3：浮点除法",
       subtitle: "用强制转换避免整数除法",
@@ -604,9 +508,65 @@ export default {
       },
     },
 
-    /* ===== 22 练习小结 ===== */
+    /* ===== 19 常见错误 ===== */
     {
-      id: 22, type: 'grid',
+      id: 19, type: "compare", title: "类型相关常见错误", subtitle: "避开这些坑",
+      data: {
+        splitStep: true, // 开启先错后对
+        groups: [
+          {
+            // 复习：单引号 vs 双引号
+            wrong: 'char c = "A";（双引号）',
+            right: "char c = 'A';（单引号）<br><br><b>原因</b>：双引号是 string 字符串，单引号才是 char 字符，类型必须匹配。"
+          },
+          {
+            // 新坑：精度丢失
+            wrong: "int a = 3.99; 得到 3",
+            right: "double a = 3.99; 或 (int)3.99<br><br><b>原因</b>：double 赋值给 int 会直接<b>截断小数</b>，不会四舍五入。"
+          },
+          {
+            // 复习：整数除法陷阱
+            wrong: "5 / 2 得到 2",
+            right: "(double)5 / 2 得到 2.5<br><br><b>原因</b>：两个 int 相除，结果还是 int。需要强制转换。"
+          },
+          {
+            // 新坑：bool 的误用
+            wrong: "bool b = 2;（把数字当真假）",
+            right: "bool b = true;（规范写法）<br><br><b>原因</b>：C++ 允许非 0 值转 bool（都变 true），但直接用 true/false 可读性最好。"
+          }
+        ]
+      }
+    },
+
+    /* ===== 20 练习2：温度转换 ===== */
+    {
+      id: 20,
+      type: "level-map",
+      title: "课堂练习2：温度转换",
+      subtitle: "摄氏温度转华氏温度",
+      chapterTag: "第 3 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入摄氏温度 <code>C</code>（可以是小数），输出对应的华氏温度。<br>公式：<code>F = C × 9.0 / 5.0 + 32</code><br>输入样例：<code>100</code>　输出样例：<code>212</code>",
+          timer: "⏱ 限时 6 分钟",
+        },
+        hints: [
+          "用 <code>double</code> 存温度",
+          "公式里要写 <code>9.0 / 5.0</code> 而不是 <code>9 / 5</code>",
+          "<code>9 / 5</code> 会得到 1（整数除法陷阱）",
+        ],
+        answer: { codeFile: "codes/lesson-03/temperature.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: "必须写 <code>9.0 / 5.0</code>。<br>如果写 <code>9 / 5</code>，两个都是 int，结果是 1，<br>那 100°C 会算成 100 × 1 + 32 = 132°F（错的）。<br><br>正确公式：100 × 1.8 + 32 = 212°F。<br><b>整数除法陷阱的经典案例。</b>",
+        },
+      },
+    },
+
+    /* ===== 21 练习小结 ===== */
+    {
+      id: 21, type: 'grid',
       title: '练习小结',
       subtitle: '三道题的核心要点',
       chapterTag: '第 3 讲 · 答疑',
@@ -632,44 +592,43 @@ export default {
       }
     },
 
-    /* ===== 23 初赛渗透 ===== */
+    /* ===== 22 初赛渗透 ===== */
     {
-      id: 23, type: 'split',
-      title: '初赛小知识：类型与 ASCII',
-      subtitle: 'CSP-J/S 初赛必考',
-      chapterTag: '第 3 讲 · 初赛渗透',
+      id: 22, type: "split",
+      title: "初赛小知识：类型与 ASCII",
+      subtitle: "CSP-J/S 初赛常考",
+      chapterTag: "第 3 讲 · 初赛渗透",
       data: {
-        intro: '初赛有两类高频考点——<b>类型大小</b>和 <b>ASCII 码</b>。都是送分题，必须拿下。',
+        intro: "初赛有两类高频考点——<b>类型大小</b>和 <b>ASCII 码</b>。<br>这些数字看起来很多，但<b>不用死记硬背，找规律就行</b>。",
         panes: [
           {
             title: '类型大小',
             icon: '📏',
             items: [
-              { title: 'int', desc: '4 字节' },
-              { title: 'long long', desc: '8 字节' },
-              { title: 'double', desc: '8 字节' },
-              { title: 'float', desc: '4 字节' },
-              { title: 'char / bool', desc: '1 字节' }
+              { title: 'int = 4 字节', desc: 'long long = 8 字节' },
+              { title: 'double = 8 字节', desc: 'float = 4 字节' },
+              { title: 'char / bool = 1 字节', desc: '' },
+              { title: '💡 随时用 sizeof 验证', desc: '<code>sizeof(int)</code> 就会告诉你答案' }
             ]
           },
           {
-            title: 'ASCII 必背',
+            title: 'ASCII 记忆法',
             icon: '🔤',
             items: [
-              { title: "'A' = 65", desc: "'Z' = 90" },
-              { title: "'a' = 97", desc: "'z' = 122" },
-              { title: "'0' = 48", desc: "'9' = 57" },
-              { title: '空格 = 32', desc: '' },
-              { title: '大小写差 = 32', desc: '' }
+              { title: "'A' = 65", desc: "只需记起点，B 就是 66" },
+              { title: "'a' = 97", desc: "小写起点比大写大 32" },
+              { title: "'0' = 48", desc: "数字字符的起点" },
+              { title: "空格 = 32", desc: "" }
             ]
           }
-        ]
+        ],
+        footer: '<b>💡 怎么考？</b><br>初赛常考：给你一个字母，问你它的 ASCII 码。或者给两个字母相减，问差值。<br><br><b>📌 终极捷径</b>：只要记住 <b>\'A\'=65, \'a\'=97, \'0\'=48</b> 这三个起点。遇到别的字母（比如 \'C\'），用起点往上加（65 + 2 = 67）。大写和小写之间，永远差 <b>32</b>。'
       }
     },
 
-    /* ===== 24 课堂小测 ===== */
+    /* ===== 23 课堂小测 ===== */
     {
-      id: 24,
+      id: 23,
       type: "quiz",
       title: "课堂小测",
       subtitle: "小数、字符、布尔与类型转换",
@@ -760,9 +719,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 25 今日总结 ===== */
+    /* ===== 24 今日总结 ===== */
     {
-      id: 25,
+      id: 24,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -784,9 +743,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 26 课后作业 ===== */
+    /* ===== 25 课后作业 ===== */
     {
-      id: 26,
+      id: 25,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -814,9 +773,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 27 下节预告 ===== */
+    /* ===== 26 下节预告 ===== */
     {
-      id: 27,
+      id: 26,
       type: "radial",
       title: "下节预告",
       subtitle: "第 4 讲 · 运算符与分支",
@@ -831,27 +790,31 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 28 答疑时间 ===== */
+    /* ===== 27 答疑时间 ===== */
     {
-      id: 28, type: 'grid',
-      title: '答疑时间',
-      subtitle: '常见问题 FAQ',
-      chapterTag: '第 3 讲 · 答疑',
+      id: 27, type: "quote",
+      title: "自由提问时间",
+      subtitle: "把你不懂的问题，大声说出来",
+      chapterTag: "第 3 讲 · 互动",
       data: {
-        cards: [
-          { icon: '📐', title: 'double 还是 float？', desc: '竞赛几乎总是 <code>double</code>。<br>float 精度低，只在内存紧张时用。' },
-          { icon: '🀄', title: 'char 能存中文吗？', desc: '不能。char 只 1 字节。<br>中文用 <code>string</code>——第 7 讲讲。' },
-          { icon: '💡', title: 'bool 为什么输出 1/0？', desc: '底层就是整数。<br>true=1，false=0。<br>可强制转换：<code>(int)true</code>。' },
-          { icon: '✂️', title: '(int)3.99 为什么是 3？', desc: '强制转换是"<b>截断</b>"，不是四舍五入。<br>要四舍五入：<code>round()</code>。' },
-          { icon: '➗', title: '怎么避免整数除法陷阱？', desc: '除法前问自己："要小数吗？"<br>要 → 至少一个写小数（<code>5.0</code>）。' },
-          { icon: '📚', title: '初赛还有哪些必考？', desc: '类型大小、ASCII、整数除法、强制转换——都是送分题。' }
-        ]
+        text: "学编程，没有“愚蠢的问题”，只有“不敢问的问题”。",
+        author: "—— 课堂互动环节",
+        points: [
+          "关于 double 和 float 的精度，有疑问吗？",
+          "关于 char 和 ASCII 码，有疑问吗？",
+          "关于 bool 的判断，有疑问吗？",
+          "关于类型转换（尤其是整数除法），有疑问吗？"
+        ],
+        highlight: {
+          title: "💡 提问的三个层次",
+          desc: "① 问“是什么”：查资料能解决。<br>② 问“为什么”：理解原理的钥匙。<br>③ 问“怎么办”：代码报错卡住了。<br><br><b>大胆开口！</b>"
+        }
       }
     },
 
-    /* ===== 29 本讲英文单词 ===== */
+    /* ===== 28 本讲英文单词 ===== */
     {
-      id: 29,
+      id: 28,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -911,9 +874,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 30 知识清单 ===== */
+    /* ===== 29 知识清单 ===== */
     {
-      id: 30,
+      id: 29,
       type: "grid",
       title: "第 3 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
@@ -944,9 +907,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 31 结束页 ===== */
+    /* ===== 30 结束页 ===== */
     {
-      id: 31,
+      id: 30,
       type: "ending",
       title: "第三讲结束",
       subtitle: "点击返回目录，复习本讲内容",

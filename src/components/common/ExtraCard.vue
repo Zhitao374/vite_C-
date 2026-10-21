@@ -113,6 +113,9 @@ function toggle() {
   line-height: 1.85;
   column-width: 340px;
   column-gap: 28px;
+  /* 【新增】防止超长英文/代码撑破栏宽 */
+  overflow-wrap: break-word; 
+  word-break: break-word;
 }
 .extra-desc > * {
   break-inside: avoid;
@@ -145,5 +148,13 @@ function toggle() {
   color: var(--accent);
   border-bottom-color: var(--accent);
   border-bottom-style: solid;
+}
+/* ============================================ */
+/* 大字模式下的 ExtraCard 适配                    */
+/* ============================================ */
+body.is-big-screen .extra-desc {
+  /* 强制变成单栏，从上到下顺着读，绝不重叠 */
+  column-width: auto; 
+  column-count: 2;
 }
 </style>

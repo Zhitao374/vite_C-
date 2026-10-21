@@ -1,7 +1,7 @@
 export default {
   title: "第 1 讲 初识 C++",
   subtitle: "第一个程序与 OJ 提交",
-  total: 34,
+  total: 36,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -17,56 +17,39 @@ export default {
       },
     },
 
-    /* ===== 2 为什么要学 C++ ===== */
+    /* ===== 2 先看个东西（三声哇 · 第一声） ===== */
     {
-      id: 2,
-      type: "grid",
-      title: "为什么要学 C++？",
-      subtitle: "竞赛官方语言，高手的第一选择",
+      id: 2, type: "code-split",
+      title: "先看个东西",
+      subtitle: "3 行代码，画出一个三角形",
+      chapterTag: "第 1 讲 · 开场",
       data: {
-        cards: [
-          {
-            icon: "🏆",
-            title: "竞赛官方语言",
-            desc: "CSP-J/S、NOIP、NOI 均支持",
-          },
-          { icon: "⚡", title: "运行速度快", desc: "适合大规模计算" },
-          {
-            icon: "🧰",
-            title: "STL 强大",
-            desc: "现成数据结构与算法<br><b>（STL = C++ 标准库，第 14 讲详讲）</b>",
-          },
-          { icon: "🎓", title: "升学助力", desc: "科技特长生重要参考" },
+        intro: "这是 C++ 能做的事 —— 你写几行代码，它帮你画出图案。<br>不信？看下面。",
+        codeFile: "codes/lesson-01/demo-triangle.cpp",
+        annotations: [
+          { line: 1, title: "for 循环", desc: "重复 5 次" },
+          { line: 2, title: "cout", desc: "输出一行" },
+          { line: 3, title: "换行", desc: "end" }
         ],
-      },
+        output: "    *\n   ***\n  *****\n *******\n*********",
+        footer: '<b>📌 这就是编程</b>：<br>你写 3 行"指令"，计算机执行上亿次操作 —— <b>最后变成你看到的图案</b>。<br><br>后面 45 分钟，你也能写出这样的代码 —— <b>甚至更酷的</b>。'
+      }
     },
 
     /* ===== 3 本节课目标 ===== */
     {
-      id: 3,
-      type: "grid",
+      id: 3, type: "grid",
       title: "本节课目标",
-      subtitle: "四步进入编程世界",
+      subtitle: "从“只会用电脑”到“能让电脑听懂你”",
       data: {
         cards: [
-          {
-            number: "01",
-            title: "认识程序",
-            desc: "理解程序是什么、计算机如何运行",
-          },
-          {
-            number: "02",
-            title: "第一个程序",
-            desc: "写出并运行 Hello, World!",
-          },
-          { number: "03", title: "编译与运行", desc: "看懂编译过程、学会运行" },
-          {
-            number: "04",
-            title: "提交到 OJ",
-            desc: "注册、提交、看懂判题结果",
-          },
+          { number: "01", title: "写出第一个程序", desc: "Hello, World! —— 5 分钟跑起来" },
+          { number: "02", title: "装好环境", desc: "Dev-C++ —— 你写代码的地方" },
+          { number: "03", title: "提交到 OJ", desc: "洛谷 —— 让系统评判你的代码" },
+          { number: "04", title: "看懂报错", desc: "报错不可怕 —— 学会读它" }
         ],
-      },
+        footer: '<b>📌 一句话</b>：<br>今天你就能写出人生第一个 C++ 程序。<br><b>不需要"先学懂原理再动手"</b> —— <b>先动手，再理解</b>，这是学编程的正确顺序。'
+      }
     },
 
     /* ===== 4 学习地图 ===== */
@@ -125,224 +108,9 @@ export default {
       },
     },
 
-    /* ===== 5 什么是程序 + 什么是 C++（合并原 05 + 06） ===== */
+    /* ===== 5 Hello World（提前） ===== */
     {
       id: 5,
-      type: "origin",
-      title: "什么是程序？什么是 C++？",
-      subtitle: "程序 = 指令 + 数据，C++ = 翻译官",
-      chapterTag: "第 1 讲 · 概念理解",
-      data: {
-        problem: {
-          title: "你写的代码，计算机能懂吗？",
-          points: [
-            '你写 <code>cout &lt;&lt; "Hello";</code> —— 计算机能直接读懂吗？',
-            "不能。<b>计算机只认识 0 和 1</b>——一串二进制机器码",
-            '那它到底是怎么"听懂"你的话的？',
-          ],
-        },
-
-        evolution: [
-          {
-            icon: "✍️",
-            era: "第一层",
-            title: "你写代码（人类语言）",
-            desc: '<code>cout &lt;&lt; "Hello";</code><br>用 C++ 语法写的——接近英语，<b>人容易写、容易读</b>',
-          },
-          {
-            icon: "🔧",
-            era: "第二层",
-            title: "编译器翻译（翻译官）",
-            desc: "把 C++ 一行行翻译成<b>机器码</b>——生成 <code>.obj</code> 文件<br>这个过程叫 <b>编译</b>",
-          },
-          {
-            icon: "⚙️",
-            era: "第三层",
-            title: "计算机执行（机器语言）",
-            desc: "CPU 读机器码（0 和 1）——按指令执行——输出 <code>Hello</code>",
-          },
-        ],
-
-        summary: {
-          title: "程序 = 指令 + 数据",
-          desc: '指令告诉计算机"<b>做什么</b>"，数据告诉它"<b>处理什么</b>"。<br>比如 <code>cout &lt;&lt; "Hello"</code> —— "输出"是指令，"Hello"是数据。<br><br><b>C++ 的角色</b>：它是"人"和"机器"之间的 <b>翻译官</b> ——<br>你写人话，它翻译成机器话，计算机才听得懂。',
-          code: 'cout << "Hello";       // 你写人话\n   ↓ ↓ 编译器翻译 ↓ ↓\n10110001 01001111 ...  // 机器话',
-        },
-
-        extra: {
-          title: "📖 知识扩展 · 冯·诺依曼结构",
-          image: {
-            src: "static/images/people/von-neumann.jpg",
-            alt: "约翰·冯·诺依曼",
-            caption: "约翰·冯·诺依曼（1903—1957）",
-            source: "美国能源部 / Public Domain",
-            layout: "float-right",
-            size: "sm",
-            zoomable: true
-          },
-          desc: '1945 年，数学家冯·诺依曼提出了"<b>存储程序</b>"概念：把指令和数据一起存进内存，让计算机自动执行。<br><br>在这之前，改变计算任务要 <b>重新接线</b> —— 就像今天想换一个 App，你得换一台手机。<br><br>这个想法彻底改变了计算机。<br>今天你用的手机、电脑、服务器，<b>全都是冯·诺依曼结构</b>。',
-        },
-      },
-    },
-
-    /* ===== 6 编程语言 70 年（合并原 07 + 08 + 09） ===== */
-    {
-      id: 6,
-      type: "timeline",
-      variant: "history",
-      title: "编程语言 70 年",
-      subtitle: "从 0/1 到现代百花齐放",
-      data: {
-        items: [
-          {
-            icon: "🔌",
-            badge: "1940s",
-            title: "机器语言",
-            desc: "0/1 直接写",
-            points: ["打孔卡输入", "换个任务就重写"],
-          },
-          {
-            icon: "📝",
-            badge: "1949",
-            title: "汇编语言",
-            desc: "用助记符代替 0/1",
-            points: ["ADD / MOV", "仍需懂硬件"],
-          },
-          {
-            icon: "📐",
-            badge: "1957",
-            title: "FORTRAN",
-            desc: "第一门高级语言",
-            points: ["科学计算", "约翰·巴克斯"],
-          },
-          {
-            icon: "⚙️",
-            badge: "1972",
-            title: "C 语言",
-            desc: "现代语言之母",
-            points: ["丹尼斯·里奇", "为 Unix 而生"],
-          },
-          {
-            icon: "🚀",
-            badge: "1983",
-            title: "C++",
-            desc: "C + 面向对象",
-            points: ["本贾尼设计", "竞赛官方语言"],
-          },
-          {
-            icon: "🐍",
-            badge: "1991",
-            title: "Python",
-            desc: "简洁优雅",
-            points: ["AI / 数据科学", "TIOBE 第 1"],
-          },
-          {
-            icon: "☕",
-            badge: "1995",
-            title: "Java",
-            desc: "跨平台企业级",
-            points: ["安卓开发", "TIOBE 第 4"],
-          },
-          {
-            icon: "🌐",
-            badge: "1995",
-            title: "JavaScript",
-            desc: "让网页动起来",
-            points: ["前端霸主", "Node.js 后端"],
-          },
-          {
-            icon: "🐹",
-            badge: "2009",
-            title: "Go",
-            desc: "云原生语言",
-            points: ["Google 出品", "高并发"],
-          },
-          {
-            icon: "📊",
-            badge: "2026",
-            title: "当今 · 五大热门",
-            desc: "C++ 稳居全球前三",
-            highlight: true,
-            points: ["① Python", "② C", "③ C++", "④ Java", "⑤ C#"],
-          },
-        ]
-      },
-    },
-
-    /* ===== 7 1946 · ENIAC 诞生 ===== */
-    {
-      id: 7, type: "split",
-      title: "1946 · ENIAC 诞生",
-      subtitle: "第一台通用电子计算机",
-      chapterTag: "第 1 讲 · 概念理解",
-      data: {
-        intro: '它是"编程语言 70 年"的起点 —— <b>人类第一台自动计算的机器</b>。<br>它的诞生，宣告了"计算机时代"的到来。',
-        panes: [
-          {
-            image: "static/images/events/eniac-1946.webp",
-            imageAlt: "ENIAC 第一台通用电子计算机",
-            imageCaption: "ENIAC（1946）· 占地 167 平方米，重 30 吨",
-            imageSource: "百度百科",
-            imageLayout: "block",
-            imageSize: "full",
-            zoomable: true
-          },
-          {
-            title: "关键数据",
-            items: [
-
-              { title: "📊 规模", desc: "<b>18000</b> 个电子管<br>耗电 <b>150 kW</b>（够一个小镇）<br>占地 <b>167 ㎡</b> / 重 <b>30 吨</b>" },   // ← 合并体积
-              { title: "👥 人物", desc: "设计：<b>莫奇利 + 埃克特</b><br>编程：<b>6 位女程序员</b>" },
-              { title: "⚡ 性能", desc: "每秒 <b>5000</b> 次加法<br>今天手机比它快 <b>100 万倍</b>" },
-              { title: "🎯 用途", desc: "原本算<b>炮弹弹道</b><br>后来算<b>氢弹 / 天气预报</b>" },
-              { title: "🐛 Bug 起源", desc: "1947 年飞蛾飞入继电器<br>被贴进日志 —— \"<b>第一个 Bug</b>\"" }
-            ]
-          }
-        ]
-      }
-    },
-    /* ===== 8 编程环境 ===== */
-    {
-      id: 8, type: "grid",
-      title: "编程环境 · 在哪写代码？",
-      subtitle: "三个选择，一个推荐",
-      chapterTag: "第 1 讲 · 动手准备",
-      data: {
-        cards: [
-          {
-            icon: "🛠️",
-            title: "Dev-C++",
-            desc: "<b>竞赛标配</b><br>轻量、简单<br>一键编译运行<br>界面朴素但够用<br><br><b>⭐ 推荐初学者</b>"
-          },
-          {
-            icon: "💻",
-            title: "VS Code",
-            desc: "<b>现代编辑器</b><br>界面漂亮、插件丰富<br>需装 C++ 插件<br>配置稍复杂<br><br><b>进阶选择</b>"
-          },
-          {
-            icon: "🌐",
-            title: "在线 IDE",
-            desc: "<b>免安装</b><br>洛谷 IDE / CodeSandbox<br>打开浏览器就能写<br>需要网络<br><br><b>备用方案</b>"
-          }
-        ],
-        footer: '<b>📌 建议</b>：初学者用 <b>Dev-C++</b> —— 简单，能跑就行。<br>等熟练后再换 VS Code 或 VS 2022 —— <b>工具是次要的，能写出正确代码才是关键</b>。<br><br><b>🔗 下载地址</b><br>Dev-C++：<code>sourceforge.net/projects/orwelldevcpp/</code><br>VS Code：<code>code.visualstudio.com</code><br>洛谷在线 IDE：<code>luogu.com.cn/ide</code>'
-      }
-    },
-
-    /* ===== 9 过渡页 ===== */
-    {
-      id: 9,
-      type: "transition",
-      title: "第二站 · 开始写代码",
-      subtitle: "从 Hello World 到输出进阶",
-      data: {
-        note: "接下来你将写出人生第一个 C++ 程序，并学会让程序与屏幕对话",
-      },
-    },
-
-    /* ===== 10 Hello World ===== */
-    {
-      id: 10,
       type: "code-split",
       title: "第一个程序：Hello, World!",
       subtitle: "逐行拆解，理解每一行的使命",
@@ -373,9 +141,9 @@ export default {
       },
     },
 
-    /* ===== 11 Dev-C++ 上手 ===== */
+    /* ===== 6 Dev-C++ 上手（提前） ===== */
     {
-      id: 11, type: "split",
+      id: 6, type: "split",
       title: "Dev-C++ · 5 步跑出第一个程序",
       subtitle: "从打开到运行，5 分钟搞定",
       chapterTag: "第 1 讲 · 动手实践",
@@ -404,9 +172,50 @@ export default {
       }
     },
 
-    /* ===== 12 第一次编译报错 ===== */
+    /* ===== 7 练习1：Hello World ===== */
     {
-      id: 12,
+      id: 7,
+      type: "level-map",
+      title: "课堂练习1：Hello World",
+      subtitle: "独立完成第一个输出程序",
+      chapterTag: "第 1 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输出 <code>Hello, World!</code>。要求：用 <code>cout</code>，英文双引号，末尾分号。",
+          timer: "⏱ 限时 5 分钟",
+        },
+        hints: [
+          "用 <code>cout</code> 输出",
+          "字符串用英文双引号",
+          "语句末尾有分号",
+        ],
+        answer: { codeFile: "codes/lesson-01/hello-world.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: '<code>cout</code> 输出 · <code>endl</code> 换行 · <code>return 0</code> 正常结束。<br>跨学科：输出的文字就像广播里的"一句话"，要用引号"打包"好才能送出去。',
+        },
+        extra: {
+          title: "📖 知识扩展 · 第一位程序员",
+          image: {
+            src: "static/images/people/ada-lovelace.webp",
+            alt: "阿达·洛芙莱斯",
+            caption: "阿达·洛芙莱斯（1815—1852）",
+            source: "Public Domain",
+            layout: "float-right",
+            size: "sm",
+            zoomable: true
+          },
+          desc: '1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。<br><br>（原内容不变）',
+        },
+      },
+    },
+
+    
+
+    /* ===== 8 第一次编译报错 ===== */
+    {
+      id: 8,
       type: "dialog",
       title: "第一次编译报错怎么办？",
       subtitle: "小C教你读错误信息",
@@ -431,11 +240,6 @@ export default {
             who: "robot",
             text: "新手最常见的四种：<br>① 中文标点<br>② 漏分号<br>③ 大小写错<br>④ 括号不配对。",
           },
-          { who: "student", text: "如果我找不到错呢？" },
-          {
-            who: "robot",
-            text: "可以对照第一行报错的位置，看那一行有没有这四个问题。<br><b>90% 的编译错误都是这四种。</b>",
-          },
           { who: "student", text: "能给我看个真实的例子吗？" },
           {
             who: "robot",
@@ -445,9 +249,9 @@ export default {
       },
     },
 
-    /* ===== 13 常见错误盘点 ===== */
+    /* ===== 9 常见错误盘点 ===== */
     {
-      id: 13,
+      id: 9,
       type: "compare",
       title: "常见错误大盘点",
       subtitle: "4 个新手必踩的坑",
@@ -477,9 +281,233 @@ export default {
       },
     },
 
-    /* ===== 14 输出进阶 ===== */
+    /* ===== 10 🎉 跑起来了（三声哇 · 第二声） ===== */
     {
-      id: 14,
+      id: 10, type: "big-number",
+      title: "🎉 你的第一个程序跑起来了！",
+      subtitle: "Hello, World!",
+      data: {
+        number: "🎉",
+        unit: "",
+        card: {
+          title: "Hello, World!",
+          desc: '<b>1972 年</b>，第一个 Hello World 程序诞生。<br><b>今天你也写了一个。</b><br><br>这是编程之路的起点。<br>从今天起，你不再是"电脑的使用者" —— <b>你是"电脑的指挥者"</b>。'
+        },
+        footer: '<b>📌 接下来我们回头看</b>：<br>刚才那 5 行代码，到底怎么变成屏幕上的 "Hello, World!"？<br>计算机为什么能"读懂"你写的话？'
+      },
+    },
+
+    /* ===== 11 什么是程序（抽象后置） ===== */
+    {
+      id: 11,
+      type: "origin",
+      title: "什么是程序？什么是 C++？",
+      subtitle: "程序 = 指令 + 数据，C++ = 翻译官",
+      chapterTag: "第 1 讲 · 概念理解",
+      data: {
+        problem: {
+          title: "你写的代码，计算机能懂吗？",
+          points: [
+            '你写 <code>cout &lt;&lt; "Hello";</code> —— 计算机能直接读懂吗？',
+            "不能。<b>计算机只认识 0 和 1</b>——一串二进制机器码",
+            '那它到底是怎么"听懂"你的话的？',
+          ],
+        },
+        evolution: [
+          {
+            icon: "✍️",
+            era: "第一层",
+            title: "你写代码（人类语言）",
+            desc: '<code>cout &lt;&lt; "Hello";</code><br>用 C++ 语法写的——接近英语，<b>人容易写、容易读</b>',
+          },
+          {
+            icon: "🔧",
+            era: "第二层",
+            title: "编译器翻译（翻译官）",
+            desc: "把 C++ 一行行翻译成<b>机器码</b>——生成 <code>.obj</code> 文件<br>这个过程叫 <b>编译</b>",
+          },
+          {
+            icon: "⚙️",
+            era: "第三层",
+            title: "计算机执行（机器语言）",
+            desc: "CPU 读机器码（0 和 1）——按指令执行——输出 <code>Hello</code>",
+          },
+        ],
+        summary: {
+          title: "程序 = 指令 + 数据",
+          desc: '指令告诉计算机"<b>做什么</b>"，数据告诉它"<b>处理什么</b>"。<br>比如 <code>cout &lt;&lt; "Hello"</code> —— "输出"是指令，"Hello"是数据。<br><br><b>C++ 的角色</b>：它是"人"和"机器"之间的 <b>翻译官</b> ——<br>你写人话，它翻译成机器话，计算机才听得懂。',
+          code: 'cout << "Hello";       // 你写人话\n   ↓ ↓ 编译器翻译 ↓ ↓\n10110001 01001111 ...  // 机器话',
+        },
+        extra: {
+          title: "📖 知识扩展 · 冯·诺依曼结构",
+          image: {
+            src: "static/images/people/von-neumann.jpg",
+            alt: "约翰·冯·诺依曼",
+            caption: "约翰·冯·诺依曼（1903—1957）",
+            source: "美国能源部 / Public Domain",
+            layout: "float-right",
+            size: "sm",
+            zoomable: true
+          },
+          desc: '1945 年，数学家冯·诺依曼提出了"<b>存储程序</b>"概念：把指令和数据一起存进内存，让计算机自动执行。<br><br>在这之前，改变计算任务要 <b>重新接线</b> —— 就像今天想换一个 App，你得换一台手机。<br><br>这个想法彻底改变了计算机。<br>今天你用的手机、电脑、服务器，<b>全都是冯·诺依曼结构</b>。',
+        },
+      },
+    },
+
+    /* ===== 12 为什么要学 C++（动机后置） ===== */
+    {
+      id: 12,
+      type: "grid",
+      title: "为什么要学 C++？",
+      subtitle: "你已经跑过第一个程序 —— 现在讲“为什么选 C++”",
+      data: {
+        cards: [
+          {
+            icon: "🏆",
+            title: "竞赛官方语言",
+            desc: "CSP-J/S、NOIP、NOI 均支持",
+          },
+          { icon: "⚡", title: "运行速度快", desc: "适合大规模计算" },
+          {
+            icon: "🧰",
+            title: "STL 强大",
+            desc: "现成数据结构与算法<br><b>（STL = C++ 标准库，第 14 讲详讲）</b>",
+          },
+          { icon: "🎓", title: "升学助力", desc: "科技特长生重要参考" },
+        ],
+      },
+    },
+
+    /* ===== 13 编程语言 70 年（精简） ===== */
+    {
+      id: 13,
+      type: "timeline",
+      variant: "history",
+      title: "编程语言 70 年",
+      subtitle: "从 0/1 到现代百花齐放",
+      data: {
+        items: [
+          {
+            icon: "🔌",
+            badge: "1940s",
+            title: "机器语言",
+            desc: "0/1 直接写",
+            points: ["打孔卡输入"],
+          },
+          {
+            icon: "⚙️",
+            badge: "1972",
+            title: "C 语言",
+            desc: "现代语言之母",
+            points: ["丹尼斯·里奇", "为 Unix 而生"],
+          },
+          {
+            icon: "🚀",
+            badge: "1983",
+            title: "C++",
+            desc: "C + 面向对象",
+            points: ["本贾尼设计", "竞赛官方语言"],
+            highlight: true,
+          },
+          {
+            icon: "🐍",
+            badge: "1991",
+            title: "Python",
+            desc: "简洁优雅",
+            points: ["AI / 数据科学"],
+          },
+          {
+            icon: "☕",
+            badge: "1995",
+            title: "Java",
+            desc: "跨平台企业级",
+            points: ["安卓开发"],
+          },
+          {
+            icon: "📊",
+            badge: "2026",
+            title: "当今 · 五大热门",
+            desc: "C++ 稳居全球前三",
+            points: ["① Python", "② C", "③ C++", "④ Java", "⑤ C#"],
+          },
+        ]
+      },
+    },
+
+    /* ===== 14 1946 · ENIAC 诞生 ===== */
+    {
+      id: 14, type: "split",
+      title: "1946 · ENIAC 诞生",
+      subtitle: "第一台通用电子计算机",
+      chapterTag: "第 1 讲 · 概念理解",
+      data: {
+        intro: '它是"编程语言 70 年"的起点 —— <b>人类第一台自动计算的机器</b>。<br>它的诞生，宣告了"计算机时代"的到来。',
+        panes: [
+          {
+            image: "static/images/events/eniac-1946.webp",
+            imageAlt: "ENIAC 第一台通用电子计算机",
+            imageCaption: "ENIAC（1946）· 占地 167 平方米，重 30 吨",
+            imageSource: "百度百科",
+            imageLayout: "block",
+            imageSize: "full",
+            zoomable: true
+          },
+          {
+            title: "关键数据",
+            items: [
+              { title: "📊 规模", desc: "<b>18000</b> 个电子管<br>耗电 <b>150 kW</b>（够一个小镇）<br>占地 <b>167 ㎡</b> / 重 <b>30 吨</b>" },
+              { title: "👥 人物", desc: "设计：<b>莫奇利 + 埃克特</b><br>编程：<b>6 位女程序员</b>" },
+              { title: "⚡ 性能", desc: "每秒 <b>5000</b> 次加法<br>今天手机比它快 <b>100 万倍</b>" },
+              { title: "🎯 用途", desc: "原本算<b>炮弹弹道</b><br>后来算<b>氢弹 / 天气预报</b>" },
+              { title: "🐛 Bug 起源", desc: "1947 年飞蛾飞入继电器<br>被贴进日志 —— \"<b>第一个 Bug</b>\"" }
+            ]
+          }
+        ]
+      }
+    },
+
+    /* ===== 15 编程环境 ===== */
+    {
+      id: 15, type: "grid",
+      title: "编程环境 · 在哪写代码？",
+      subtitle: "三个选择，一个推荐",
+      chapterTag: "第 1 讲 · 动手准备",
+      data: {
+        cards: [
+          {
+            icon: "🛠️",
+            title: "Dev-C++",
+            desc: "<b>竞赛标配</b><br>轻量、简单<br>一键编译运行<br>界面朴素但够用<br><br><b>⭐ 推荐初学者</b>"
+          },
+          {
+            icon: "💻",
+            title: "VS Code",
+            desc: "<b>现代编辑器</b><br>界面漂亮、插件丰富<br>需装 C++ 插件<br>配置稍复杂<br><br><b>进阶选择</b>"
+          },
+          {
+            icon: "🌐",
+            title: "在线 IDE",
+            desc: "<b>免安装</b><br>洛谷 IDE / CodeSandbox<br>打开浏览器就能写<br>需要网络<br><br><b>备用方案</b>"
+          }
+        ],
+        footer: '<b>📌 建议</b>：初学者用 <b>Dev-C++</b> —— 简单，能跑就行。<br>等熟练后再换 VS Code 或 VS 2022 —— <b>工具是次要的，能写出正确代码才是关键</b>。<br><br><b>🔗 下载地址</b><br>Dev-C++：<code>sourceforge.net/projects/orwelldevcpp/</code><br>VS Code：<code>code.visualstudio.com</code><br>洛谷在线 IDE：<code>luogu.com.cn/ide</code>'
+      }
+    },
+
+    /* ===== 16 过渡页 ===== */
+    {
+      id: 16,
+      type: "transition",
+      title: "第三站 · 编译与运行",
+      subtitle: "从源码到程序",
+      data: {
+        note: "接下来，你将看懂程序是怎么变成可执行文件的",
+      },
+    },
+
+    /* ===== 17 输出进阶 ===== */
+    {
+      id: 17,
       type: "code-split",
       title: "输出进阶：多个内容与换行",
       subtitle: "灵活使用 cout",
@@ -500,9 +528,9 @@ export default {
       },
     },
 
-    /* ===== 15 从代码到运行（合并原 10 + 11） ===== */
+    /* ===== 18 从代码到运行 ===== */
     {
-      id: 15,
+      id: 18,
       type: "grid",
       title: "从代码到运行",
       subtitle: "源程序如何变成可执行程序",
@@ -532,9 +560,9 @@ export default {
       },
     },
 
-    /* ===== 16 初赛渗透：编译器 ===== */
+    /* ===== 19 初赛渗透：编译器 ===== */
     {
-      id: 16, type: "dialog",
+      id: 19, type: "dialog",
       title: "初赛小知识：编译器",
       subtitle: "CSP-J 初赛必考",
       chapterTag: "第 1 讲 · 初赛渗透",
@@ -556,9 +584,9 @@ export default {
       },
     },
 
-    /* ===== 17 答疑：关于程序的疑问 ===== */
+    /* ===== 20 答疑：关于程序的疑问 ===== */
     {
-      id: 17,
+      id: 20,
       type: "dialog",
       title: "答疑：关于程序的疑问",
       subtitle: "小C回答常见问题",
@@ -589,9 +617,9 @@ export default {
       },
     },
 
-    /* ===== 18 环境常见问题 ===== */
+    /* ===== 21 环境常见问题 ===== */
     {
-      id: 18, type: "pitfall",
+      id: 21, type: "pitfall",
       title: "环境搭不好？常见问题",
       subtitle: "四个坑，提前避",
       chapterTag: "第 1 讲 · 动手准备",
@@ -630,48 +658,9 @@ export default {
       }
     },
 
-    /* ===== 19 练习1：Hello World ===== */
+    /* ===== 22 练习2：输出图形 ===== */
     {
-      id: 19,
-      type: "level-map",
-      title: "课堂练习1：Hello World",
-      subtitle: "独立完成第一个输出程序",
-      chapterTag: "第 1 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输出 <code>Hello, World!</code>。要求：用 <code>cout</code>，英文双引号，末尾分号。",
-          timer: "⏱ 限时 5 分钟",
-        },
-        hints: [
-          "用 <code>cout</code> 输出",
-          "字符串用英文双引号",
-          "语句末尾有分号",
-        ],
-        answer: { codeFile: "codes/lesson-01/hello-world.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: '<code>cout</code> 输出 · <code>endl</code> 换行 · <code>return 0</code> 正常结束。<br>跨学科：输出的文字就像广播里的"一句话"，要用引号"打包"好才能送出去。',
-        },
-        extra: {
-          title: "📖 知识扩展 · 第一位程序员",
-          image: {
-            src: "static/images/people/ada-lovelace.webp",
-            alt: "阿达·洛芙莱斯",
-            caption: "阿达·洛芙莱斯（1815—1852）",
-            source: "Public Domain",
-            layout: "float-right",
-            size: "sm",
-            zoomable: true
-          },
-          desc: '1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。<br><br>（原内容不变）',
-        },
-      },
-    },
-
-    /* ===== 20 练习2：输出图形 ===== */
-    {
-      id: 20,
+      id: 22,
       type: "level-map",
       title: "课堂练习2：输出图形",
       subtitle: "巩固输出与换行",
@@ -696,9 +685,9 @@ export default {
       },
     },
 
-    /* ===== 21 练习3：输出菱形 ===== */
+    /* ===== 23 练习3：输出菱形 ===== */
     {
-      id: 21,
+      id: 23,
       type: "level-map",
       title: "课堂练习3：输出菱形",
       subtitle: "灵活运用 cout 和 endl",
@@ -728,9 +717,9 @@ export default {
       },
     },
 
-    /* ===== 22 难题后的放松：ASCII 艺术画廊 ===== */
+    /* ===== 24 难题后的放松：ASCII 艺术画廊 ===== */
     {
-      id: 22,
+      id: 24,
       type: "grid",
       title: "🎨 难题后的放松 · 字符画画廊",
       subtitle: "用字符拼出的可爱图像",
@@ -746,9 +735,9 @@ export default {
       },
     },
 
-    /* ===== 23 OJ 是什么 ===== */
+    /* ===== 25 OJ 是什么 ===== */
     {
-      id: 23, type: "grid",
+      id: 25, type: "grid",
       title: "OJ 是什么？",
       subtitle: "Online Judge 在线判题系统",
       chapterTag: "第 1 讲 · OJ 实战",
@@ -779,9 +768,9 @@ export default {
       },
     },
 
-    /* ===== 24 OJ 提交步骤 ===== */
+    /* ===== 26 OJ 提交步骤 ===== */
     {
-      id: 24,
+      id: 26,
       type: "flow",
       title: "OJ 提交步骤",
       subtitle: "手把手教你提交代码",
@@ -807,9 +796,9 @@ export default {
       },
     },
 
-    /* ===== 25 判题结果 ===== */
+    /* ===== 27 判题结果 ===== */
     {
-      id: 25, type: "compare",
+      id: 27, type: "compare",
       title: "OJ 判题结果解读",
       subtitle: "看懂反馈，快速改进",
       data: {
@@ -834,9 +823,9 @@ export default {
       },
     },
 
-    /* ===== 26 从 WA 到 AC ===== */
+    /* ===== 28 从 WA 到 AC ===== */
     {
-      id: 26,
+      id: 28,
       type: "dialog",
       title: "从 WA 到 AC 的心路历程",
       subtitle: '小C与同学聊"改错"',
@@ -867,9 +856,9 @@ export default {
       },
     },
 
-    /* ===== 27 课堂小测 ===== */
+    /* ===== 29 课堂小测 ===== */
     {
-      id: 27,
+      id: 29,
       type: "quiz",
       title: "课堂小测",
       subtitle: "编译器、程序结构与输出",
@@ -889,7 +878,7 @@ export default {
               { label: "D", text: "将一种高级语言翻译成另一种高级语言" },
             ],
             analysis:
-              '编译器的作用是把高级语言编写的<b>源程序</b>整体翻译成等价的<b>机器指令代码</b>。选项 C 方向反了；选项 D 是"转译器"的功能。这正是本讲 slide-12"从代码到运行"的核心知识点。',
+              '编译器的作用是把高级语言编写的<b>源程序</b>整体翻译成等价的<b>机器指令代码</b>。选项 C 方向反了；选项 D 是"转译器"的功能。这正是本讲 "从代码到运行"的核心知识点。',
           },
           {
             id: 2,
@@ -905,7 +894,7 @@ export default {
               { label: "D", text: "<code>algorithm</code>" },
             ],
             analysis:
-              '<code>cin</code> 和 <code>cout</code> 定义在标准输入输出流库中，对应头文件 <code>&lt;iostream&gt;</code>。这是本讲 slide-08"Hello, World!"中 <code>#include &lt;iostream&gt;</code> 的直接考查。',
+              '<code>cin</code> 和 <code>cout</code> 定义在标准输入输出流库中，对应头文件 <code>&lt;iostream&gt;</code>。这是本讲 slide-05"Hello, World!"中 <code>#include &lt;iostream&gt;</code> 的直接考查。',
           },
           {
             id: 3,
@@ -920,7 +909,7 @@ export default {
               { label: "D", text: "<code>.txt</code>" },
             ],
             analysis:
-              'C++ 源程序文件用 <code>.cpp</code> 扩展名。<br>· <code>.cpp</code> 是源程序（人类可读）<br>· <code>.obj</code> 是编译后的目标文件<br>· <code>.exe</code> 是链接后的可执行文件<br>这是初赛高频考点，对应本讲 slide-12 的"从代码到运行"。',
+              'C++ 源程序文件用 <code>.cpp</code> 扩展名。<br>· <code>.cpp</code> 是源程序（人类可读）<br>· <code>.obj</code> 是编译后的目标文件<br>· <code>.exe</code> 是链接后的可执行文件<br>这是初赛高频考点，对应本讲 slide-17 的"从代码到运行"。',
           },
           {
             id: 4,
@@ -934,7 +923,7 @@ export default {
               { label: "B", text: "错误", correct: true },
             ],
             analysis:
-              'CPU 只能直接执行<b>机器指令</b>（0/1 序列）。高级语言（C++、Python）和图形化语言（Scratch）都需要经过<b>编译或解释</b>，转换成机器码后才能被 CPU 执行。这正是本讲 slide-12"从代码到运行"的核心知识点。',
+              'CPU 只能直接执行<b>机器指令</b>（0/1 序列）。高级语言（C++、Python）和图形化语言（Scratch）都需要经过<b>编译或解释</b>，转换成机器码后才能被 CPU 执行。这正是本讲 slide-17"从代码到运行"的核心知识点。',
           },
           {
             id: 5,
@@ -947,7 +936,7 @@ export default {
               { label: "B", text: "错误", correct: true },
             ],
             analysis:
-              '<code>main</code> 函数是 C++ 程序的<b>唯一入口</b>。每个可执行程序<b>有且只有一个</b> <code>main</code> 函数，程序从 <code>main</code> 的第一条语句开始执行。没有 <code>main</code>，编译器无法确定程序从哪里开始运行，会报链接错误。这是本讲 slide-08 extra"为什么 main 是入口"的核心内容。',
+              '<code>main</code> 函数是 C++ 程序的<b>唯一入口</b>。每个可执行程序<b>有且只有一个</b> <code>main</code> 函数，程序从 <code>main</code> 的第一条语句开始执行。没有 <code>main</code>，编译器无法确定程序从哪里开始运行，会报链接错误。这是本讲 slide-05 extra"为什么 main 是入口"的核心内容。',
           },
           {
             id: 6,
@@ -966,9 +955,9 @@ export default {
       },
     },
 
-    /* ===== 28 今日总结 ===== */
+    /* ===== 30 今日总结 ===== */
     {
-      id: 28,
+      id: 30,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -990,9 +979,9 @@ export default {
       },
     },
 
-    /* ===== 29 课后作业 ===== */
+    /* ===== 31 课后作业 ===== */
     {
-      id: 29,
+      id: 31,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -1020,9 +1009,9 @@ export default {
       },
     },
 
-    /* ===== 30 下节预告 ===== */
+    /* ===== 32 下节预告 ===== */
     {
-      id: 30,
+      id: 32,
       type: "radial",
       title: "下节预告",
       subtitle: "第 2 讲 · 变量与整数类型",
@@ -1037,9 +1026,9 @@ export default {
       },
     },
 
-    /* ===== 31 答疑时间 ===== */
+    /* ===== 33 答疑时间 ===== */
     {
-      id: 31, type: "grid",
+      id: 33, type: "grid",
       title: "答疑时间",
       subtitle: "常见问题 FAQ",
       chapterTag: "第 1 讲 · 答疑",
@@ -1079,9 +1068,9 @@ export default {
       },
     },
 
-    /* ===== 32 本讲英文单词 ===== */
+    /* ===== 34 本讲英文单词 ===== */
     {
-      id: 32,
+      id: 34,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -1141,9 +1130,9 @@ export default {
       },
     },
 
-    /* ===== 33 知识清单 ===== */
+    /* ===== 35 知识清单 ===== */
     {
-      id: 33,
+      id: 35,
       type: "grid",
       title: "第 1 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
@@ -1179,9 +1168,9 @@ export default {
       },
     },
 
-    /* ===== 34 结束页 ===== */
+    /* ===== 36 结束页 ===== */
     {
-      id: 34,
+      id: 36,
       type: "ending",
       title: "第一讲结束",
       subtitle: "点击返回目录，复习本讲内容",

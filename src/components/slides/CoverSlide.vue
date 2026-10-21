@@ -51,7 +51,7 @@ const titleParts = computed(() => {
   padding: 0 80px;
 }
 .cover-title {
-  font-size: 80px;
+  font-size: calc(80px * var(--font-scale));
   font-weight: 900;
   letter-spacing: 4px;
   color: var(--primary);
@@ -72,7 +72,7 @@ const titleParts = computed(() => {
   border-radius: 3px;
 }
 .cover-subtitle {
-  font-size: 26px;
+  font-size: calc(26px * var(--font-scale));
   color: var(--text-sub);
   margin-top: 28px;
   letter-spacing: 2px;

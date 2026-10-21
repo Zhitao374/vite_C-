@@ -7,7 +7,7 @@
 export default {
   title: "动画布局合集",
   subtitle: "预览所有 visual-step 布局",
-  total: 18,
+  total: 20,
   category: "演示工具",
   slides: [
     /* ===== 1 封面 ===== */
@@ -806,9 +806,64 @@ export default {
       },
     },
 
-    /* ===== 16 展示方式汇总 ===== */
     {
-      id: 16,
+      id: 16, 
+      type: "code-split",
+      title: "版式演示：CodeSplit 多代码块",
+      subtitle: "支持左侧上下排布多段代码",
+      data: {
+        intro: "📖 <b>多段代码演示</b>：左侧代码区可以同时展示多段代码，各自独立排版，右侧注释正常对应。",
+        codes: [
+          {
+            title: "❌ 错误写法",
+            code: "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5, b = 2;\n    cout << a / b << endl; // 结果是 2\n    return 0;\n}"
+          },
+          {
+            title: "✅ 正确写法",
+            code: "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5, b = 2;\n    cout << (double)a / b << endl; // 结果是 2.5\n    return 0;\n}"
+          }
+        ],
+        annotations: [
+          { line: 6, title: "整数除法", desc: "两个 int 相除，结果还是 int，小数被截断。" },
+          { line: 6, title: "强制转换", desc: "把 a 转换为 double 后，结果变成浮点数。" }
+        ],
+        output: "2\n2.5"
+      }
+    },
+
+        {
+      id: 17, 
+      type: "level-map",
+      title: "版式演示：LevelMap 多栏代码",
+      subtitle: "支持右侧/下方并排展示多段代码",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入两个整数，输出它们的和。<br>请分别用 <b>cin/cout</b> 和 <b>scanf/printf</b> 两种方式实现。",
+          timer: "⏱ 限时 5 分钟"
+        },
+        hints: ["两种写法功能一致", "注意头文件引入"],
+        // answer 传入数组，组件会自动变为多栏
+        answer: [
+          { 
+            title: "解法 1：cin/cout", 
+            code: "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b;\n    return 0;\n}" 
+          },
+          { 
+            title: "解法 2：scanf/printf", 
+            code: "#include <cstdio>\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\", a + b);\n    return 0;\n}" 
+          }
+        ],
+        analysis: {
+          title: "📖 解析",
+          desc: "两种输入输出方式都可以。在数据量极大时，<code>scanf/printf</code> 的速度通常比 <code>cin/cout</code> 稍快。"
+        }
+      }
+    },
+
+    /* ===== 18 展示方式汇总 ===== */
+    {
+      id: 18,
       type: "grid",
       title: "代码展示方式 · 一览表",
       subtitle: "5 种方式，各有用途",
@@ -854,9 +909,9 @@ export default {
       },
     },
 
-    /* ===== 17 三栏并列 ===== */
+    /* ===== 19 三栏并列 ===== */
     {
-      id: 17,
+      id: 19,
       type: "split",
       title: "展示方式 ④ · 多栏并列",
       subtitle: "3 栏同时对比",
@@ -902,9 +957,9 @@ export default {
       },
     },
 
-    /* ===== 18 结束页 ===== */
+    /* ===== 20 结束页 ===== */
     {
-      id: 18,
+      id: 20,
       type: "ending",
       title: "预览结束",
       subtitle: "所有布局演示完毕",

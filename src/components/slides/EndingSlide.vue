@@ -39,13 +39,13 @@ useStepCount(() => 1);
   background: linear-gradient(135deg, #e6efff 0%, #f5f9ff 60%, #fff5e8 100%);
 }
 .transition-title {
-  font-size: 60px;
+  font-size: calc(60px * var(--font-scale));
   font-weight: 900;
   letter-spacing: 3px;
   color: var(--primary);
 }
 .ending-subtitle {
-  font-size: 22px;
+  font-size: calc(22px * var(--font-scale));
   color: var(--text-sub);
   margin-top: 20px;
   letter-spacing: 1.5px;

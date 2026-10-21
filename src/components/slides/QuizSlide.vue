@@ -1,12 +1,28 @@
 <template>
   <SlideShell :slide="slide">
-    <div v-for="(q, qi) in questions" :key="qi" class="quiz-item">
+    <div 
+      v-for="(q, qi) in questions" 
+      :key="qi" 
+      class="quiz-item"
+      :class="{ 'quiz-item--past': isPast(qi) && !expanded[qi] }"
+    >
       <!-- 第 1 步：题干 + 选项 -->
       <StepWrapper :step="2 * qi + 1">
-        <div class="quiz-head">
+        <!-- 题头：支持点击展开/收起 -->
+        <div 
+          class="quiz-head" 
+          data-no-flip
+          :style="{ cursor: isPast(qi) ? 'pointer' : 'default' }"
+          @click="isPast(qi) && toggleExpand(qi)"
+        >
           <span class="quiz-index">第 {{ qi + 1 }} 题</span>
           <span class="quiz-difficulty">{{ starsOf(q.difficulty) }}</span>
           <span v-if="q.source" class="quiz-source">📖 {{ q.source }}</span>
+          
+          <!-- 展开/收起提示（只在讲过的题上显示） -->
+          <span v-if="isPast(qi)" class="expand-hint" data-no-flip>
+            {{ expanded[qi] ? '收起 ▲' : '展开 ▼' }}
+          </span>
         </div>
 
         <div v-if="q.question" class="quiz-question" v-html="q.question"></div>
@@ -55,7 +71,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import SlideShell from "@/components/common/SlideShell.vue";
 import StepWrapper from "@/components/common/StepWrapper.vue";
 import CodeBlock from "@/components/common/CodeBlock.vue";
@@ -72,9 +88,25 @@ const extra = computed(() => props.slide.data?.extra);
 // 每题 2 步（题干 + 解析）+ extra
 useStepCount(() => questions.value.length * 2 + (extra.value ? 1 : 0));
 
-// answerShown 需要 current
+// 获取当前步数
 const { current } = useStep();
 
+// ============================================
+// 折叠与展开逻辑
+// ============================================
+// 记录哪些已经讲完的题目被老师手动展开了
+const expanded = ref({});
+
+function toggleExpand(qi) {
+  expanded.value[qi] = !expanded.value[qi];
+}
+
+// 该题是否已经讲完（当前步数超过了它的解析步）
+function isPast(qi) {
+  return current.value > 2 * qi + 2;
+}
+
+// 该题的答案是否已经揭晓
 function answerShown(qi) {
   return current.value >= 2 * qi + 2;
 }
@@ -96,7 +128,7 @@ function layoutOf(q) {
     return q.optionLayout;
   }
 
-  // 【新增】dev 模式警告
+  // dev 模式警告
   if (import.meta.env.DEV) {
     console.warn(
       `[QuizSlide] question ${q.id} 未显式声明 optionLayout，` +
@@ -297,6 +329,29 @@ function stripHtml(s) {
 .quiz-analysis .card-desc {
   font-size: var(--fs-quiz-analysis);
   line-height: 1.75;
+}
+
+/* 讲完的题目：收起选项和解析，只留一个题目头，节省空间 */
+.quiz-item--past .quiz-options,
+.quiz-item--past .quiz-analysis {
+  display: none !important;
+}
+
+.quiz-item--past .quiz-question {
+  font-size: calc(18px * var(--font-scale));
+  color: var(--text-dim);
+  background: transparent;
+  border-left: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+/* 给折叠后的题目加个边框，表示“已讲完” */
+.quiz-item--past {
+  opacity: 0.6;
+  border-bottom: 1px dashed var(--card-border);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 /* ============================================

@@ -79,7 +79,8 @@
         <button class="nav-btn" data-no-flip @click.stop="next">›</button>
       </div>
 
-      <FontScaler />
+      <TeacherToolbar />
+      <!-- <FontScaler /> -->
       <MarkerTool />
     </div>
   </ErrorBoundary>
@@ -93,6 +94,7 @@ import { useSlideNav } from "@/composables/useSlideNav";
 import MarkerTool from "@/components/common/MarkerTool.vue";
 import FontScaler from "@/components/common/FontScaler.vue";
 import ErrorBoundary from "@/components/common/ErrorBoundary.vue";
+import TeacherToolbar from "@/components/common/TeacherToolbar.vue";
 import { useSlideTheme } from "@/composables/useSlideTheme";
 
 const props = defineProps({

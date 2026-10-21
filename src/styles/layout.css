@@ -26,6 +26,7 @@
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .slide-title .slide-subtitle,
 .slide-subtitle {
   font-size: var(--fs-slide-subtitle);
@@ -44,7 +45,8 @@
   overflow-y: auto;
   padding-right: 6px;
 }
-.slide-body > * + * {
+
+.slide-body>*+* {
   margin-top: var(--space-gap-md);
 }
 
@@ -55,7 +57,8 @@
   /* 绝对定位到右上角，脱离文档流 */
   position: absolute;
   top: 18px;
-  right: 140px; /* 给右侧工具按钮留空间 */
+  right: 140px;
+  /* 给右侧工具按钮留空间 */
   z-index: 10;
 
   padding: 5px 16px;
@@ -67,6 +70,7 @@
   letter-spacing: 1px;
   /* 无 margin-bottom */
 }
+
 .chapter-tag.accent {
   background: var(--accent-soft);
   color: var(--accent);
@@ -80,24 +84,26 @@
   font-weight: 800;
   padding: 0 3px;
 }
+
 .keyword-primary {
   color: var(--primary);
   font-weight: 800;
 }
+
 .keyword-green {
   color: var(--success);
   font-weight: 800;
 }
+
 .keyword-red {
   color: var(--error);
   font-weight: 800;
 }
+
 .keyword-mark {
-  background: linear-gradient(
-    180deg,
-    transparent 60%,
-    rgba(255, 122, 0, 0.35) 60%
-  );
+  background: linear-gradient(180deg,
+      transparent 60%,
+      rgba(255, 122, 0, 0.35) 60%);
   font-weight: 700;
   padding: 0 2px;
 }
@@ -105,7 +111,7 @@
 /* ============================================
    行内代码
    ============================================ */
-:not(pre) > code {
+:not(pre)>code {
   background: var(--primary-soft);
   padding: 3px 10px;
   border-radius: 6px;
@@ -140,4 +146,52 @@
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
+}
+
+/* ============================================ */
+/* 全新的流式幻灯片容器骨架                      */
+/* ============================================ */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  padding: 16px 56px 56px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  /* 外层绝对不能滚 */
+  transition: background 0.4s ease;
+  padding-bottom: 80px;
+  /* 给底部工具栏留出安全距离 */
+}
+
+.slide-body {
+  flex: 1;
+  min-height: 0;
+  /* 关键：允许 flex 子项在溢出时滚动 */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-md);
+
+  /* 核心：统一在这里处理滚动，隐藏丑陋的滚动条 */
+  overflow-y: auto;
+  padding-right: 8px;
+  /* 给滚动条留点视觉空间 */
+}
+
+/* 美化全局滚动条 */
+.slide-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.slide-body::-webkit-scrollbar-thumb {
+  background: rgba(22, 93, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* 保护所有卡片、解析、描述里的超长英文/代码不撑破排版 */
+.card-desc, .extra-desc, .quiz-analysis, .node-desc {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }

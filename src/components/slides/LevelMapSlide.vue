@@ -1,14 +1,7 @@
 <template>
-  <div class="slide">
-    <div v-if="chapterTag" class="chapter-tag">{{ chapterTag }}</div>
-    <h1 class="slide-title">
-      {{ slide.title }}
-      <span v-if="slide.subtitle" class="slide-subtitle">{{
-        slide.subtitle
-      }}</span>
-    </h1>
-
+  <SlideShell :slide="slide">
     <div class="level-map-layout">
+      <!-- 左侧：极简进度指示（垂直居中） -->
       <aside class="level-map-side">
         <div class="level-map">
           <template v-for="(lv, i) in levels" :key="i">
@@ -31,86 +24,97 @@
         </div>
       </aside>
 
-      <div class="slide-body slide-body--level-map">
-        <div class="level-map-top">
-          <StepWrapper v-if="question" :step="1">
-            <div class="card card-primary question-card">
-              <!-- 左栏：竖排"题干" -->
-              <div class="question-label">
-                <span class="label-icon">🎯</span>
-                <span class="label-text">题干</span>
-              </div>
-
-              <!-- 右侧区域 -->
-              <div class="question-main">
-                <!-- 顶部横向：考察点 / 限时 -->
-                <div v-if="question.timer" class="question-meta">
-                  <span class="meta-text" v-html="question.timer"></span>
+      <!-- 主体内容 -->
+      <div class="level-map-main">
+        
+        <!-- 上半部分：题干 + 提示 -->
+        <div class="top-section">
+          <!-- 题干：固定高度，不滚动 -->
+          <div class="question-pane">
+            <StepWrapper v-if="question" :step="1">
+              <div class="card card-primary question-card">
+                <div class="question-label">
+                  <span class="label-icon">🎯</span>
+                  <span class="label-text">题干</span>
                 </div>
-
-                <!-- 内容 -->
-                <div class="question-content">
-                  <div class="card-desc" v-html="question.desc"></div>
+                <div class="question-main">
+                  <div v-if="question.timer" class="question-meta">
+                    <span class="meta-text" v-html="question.timer"></span>
+                  </div>
+                  <div class="question-content">
+                    <div class="card-desc" v-html="question.desc"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </StepWrapper>
-
-          <HintRow v-if="hints.length" :hints="hints" :base-step="2" />
+            </StepWrapper>
+          </div>
+          
+          <!-- 提示：同行优先，放不下折行，内部独立滚动防溢出 -->
+          <div class="hint-pane scroll-pane">
+            <HintRow v-if="hints.length" :hints="hints" :base-step="2" />
+          </div>
         </div>
 
-        <StepWrapper v-if="answer" :step="answerStep">
-          <div class="answer-wrapper">
-            <CodeBlock
-              v-if="!Array.isArray(answer)"
-              :code="answer.code"
-              :code-file="answer.codeFile"
-              :density="answer.density"
-              title="✅ 参考代码"
-            />
-            <div
-              v-else
-              class="answer-array"
-              :class="`cols-${Math.min(answer.length, 4)}`"
-            >
-              <CodeBlock
-                v-for="(item, i) in answer"
-                :key="i"
-                :code="item.code"
-                :code-file="item.codeFile"
-                :density="item.density"
-                :title="item.title || ''"
-              />
-            </div>
+        <!-- 下半部分：代码 + 解析 -->
+        <div class="bottom-section">
+          <!-- 代码区：独立滚动 -->
+          <div class="code-pane scroll-pane">
+            <StepWrapper v-if="answer" :step="answerStep">
+              <div class="answer-wrapper">
+                <CodeBlock
+                  v-if="!Array.isArray(answer)"
+                  :code="answer.code"
+                  :code-file="answer.codeFile"
+                  :density="answer.density"
+                  title="✅ 参考代码"
+                />
+                <div v-else class="answer-array" :class="`cols-${Math.min(answer.length, 4)}`">
+                  <CodeBlock
+                    v-for="(item, i) in answer"
+                    :key="i"
+                    :code="item.code"
+                    :code-file="item.codeFile"
+                    :density="item.density"
+                    :title="item.title || ''"
+                  />
+                </div>
+              </div>
+            </StepWrapper>
           </div>
-        </StepWrapper>
 
-        <StepWrapper v-if="analysis" :step="analysisStep">
-          <div class="card card-glow">
-            <div class="card-title">{{ analysis.title || "📖 解析" }}</div>
-            <div class="card-desc" v-html="analysis.desc"></div>
+          <!-- 解析区：独立滚动 -->
+          <div class="analysis-pane scroll-pane">
+            <StepWrapper v-if="analysis" :step="analysisStep">
+              <div class="card card-glow">
+                <div class="card-title">{{ analysis.title || "📖 解析" }}</div>
+                <div class="card-desc" v-html="analysis.desc"></div>
+              </div>
+            </StepWrapper>
+            
+            <StepWrapper v-if="footer" :step="footerStep">
+              <SlideFooter :html="footer" />
+            </StepWrapper>
+            
+            <StepWrapper v-if="extra" :step="extraStep">
+              <ExtraCard v-bind="extra" />
+            </StepWrapper>
           </div>
-        </StepWrapper>
-        <StepWrapper v-if="footer" :step="footerStep">
-          <SlideFooter :html="footer" />
-        </StepWrapper>
+        </div>
 
-        <StepWrapper v-if="extra" :step="maxStep">
-          <ExtraCard v-bind="extra" />
-        </StepWrapper>
       </div>
     </div>
-  </div>
+  </SlideShell>
 </template>
 
 <script setup>
 import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
 import StepWrapper from "@/components/common/StepWrapper.vue";
 import CodeBlock from "@/components/common/CodeBlock.vue";
 import ExtraCard from "@/components/common/ExtraCard.vue";
+import SlideFooter from "@/components/common/SlideFooter.vue";
 import HintRow from "@/components/level-map/HintRow.vue";
 import LevelNode from "@/components/level-map/LevelNode.vue";
-import SlideFooter from '@/components/common/SlideFooter.vue';
 import { useStep } from "@/composables/useStep";
 import { useStepCount } from "@/composables/useStepCount";
 import { DEFAULT_LEVELS } from "@/config/defaults";
@@ -119,21 +123,15 @@ const props = defineProps({
   slide: { type: Object, required: true },
 });
 
-const d = computed(() => props.slide.data || {});
+const d = computed(() => props.slide?.data || {});
 const levels = computed(() => d.value.levels || DEFAULT_LEVELS);
 const question = computed(() => d.value.question);
 const hints = computed(() => d.value.hints || []);
 const answer = computed(() => d.value.answer);
 const analysis = computed(() => d.value.analysis);
 const extra = computed(() => d.value.extra);
-const chapterTag = computed(() => props.slide.chapterTag);
 const footer = computed(() => d.value.footer);
-const footerStep = computed(() => {
-  let s = analysisStep.value;
-  if (analysis.value) s += 1;
-  return s;
-});
-// 步数规则
+
 useStepCount(() => {
   const data = d.value;
   let n = 1;
@@ -147,11 +145,11 @@ useStepCount(() => {
 
 const { current, max: maxStep } = useStep();
 
-// 关键 step 位置
 const answerStep = computed(() => hints.value.length + 2);
-const analysisStep = computed(() => answerStep.value + 1);
+const analysisStep = computed(() => answerStep.value + (answer.value ? 1 : 0));
+const footerStep = computed(() => analysisStep.value + (analysis.value ? 1 : 0));
+const extraStep = computed(() => footerStep.value + (footer.value ? 1 : 0));
 
-// 提示进度
 const hintShown = computed(() => {
   const n = current.value - 1;
   return Math.max(0, Math.min(n, hints.value.length));
@@ -162,75 +160,90 @@ function getNodeStep(i) {
   if (i === levels.value.length - 1) return answerStep.value;
   return 2;
 }
-
-// 拆分 timer 的 emoji 和文字
-const timerData = computed(() => {
-  const t = question.value?.timer;
-  if (!t) return null;
-  // 匹配 "⏱ 限时 5 分钟" → icon="⏱", text="限时 5 分钟"
-  const m = String(t).match(/^(\S+)\s+(.+)$/);
-  if (m) return { icon: m[1], text: m[2] };
-  return { icon: "", text: String(t) };
-});
 </script>
 
 <style scoped>
+/* ============================================ */
+/* 整体布局（水平居中，高度锁死）                 */
+/* ============================================ */
 .level-map-layout {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 18px;
-  margin-top: 18px;
-  flex: 1;
+  display: flex;
+  height: 100%;
   min-height: 0;
-  align-items: start;
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
 }
 
+/* ============================================ */
+/* 左侧：垂直居中                               */
+/* ============================================ */
 .level-map-side {
+  flex: 0 0 56px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* ← 侧栏内容顶部对齐 */
-  padding-top: 12px; /* 微调与题干顶部对齐 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 核心：垂直居中 */
+  padding-bottom: 20px;    /* 视觉微调，略偏上 */
 }
 
 .level-map {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
 }
 
+.level-arrow-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .level-arrow {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-light);
 }
 
-.slide-body--level-map {
-  margin-top: 0;
-  max-height: 100%;
+/* ============================================ */
+/* 右侧主体                                     */
+/* ============================================ */
+.level-map-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  overflow-y: auto;
-}
-.level-map-layout .level-map-top :deep(.hint-inline) {
-  padding: 8px 14px;
-  font-size: var(--fs-hint);
+  gap: 16px;
+  min-height: 0;
+  min-width: 0;
 }
 
-/* ============================================
-   题干卡片：左竖排标签 + 右上顶部横条 + 内容
-   ============================================ */
-.question-card {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: stretch !important;
-  padding: 0 !important;
-  gap: 0 !important;
-  overflow: hidden;
+/* 上下分块布局 */
+.top-section {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.bottom-section {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+  flex: 1;
   min-height: 0;
 }
 
-/* 左栏：竖排"题干" */
+/* 题干区 */
+.question-pane { min-width: 0; }
+
+.question-card {
+  display: flex;
+  flex-direction: row;
+  padding: 0 !important;
+  gap: 0 !important;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
 .question-label {
   flex: 0 0 auto;
   display: flex;
@@ -239,142 +252,77 @@ const timerData = computed(() => {
   justify-content: center;
   gap: 8px;
   padding: 14px 10px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 122, 0, 0.15),
-    rgba(255, 122, 0, 0.05)
-  );
+  background: linear-gradient(180deg, rgba(255, 122, 0, 0.15), rgba(255, 122, 0, 0.05));
   border-right: 1px solid rgba(255, 122, 0, 0.2);
   color: var(--accent);
   font-weight: 700;
 }
 
-.question-label .label-icon {
-  font-size: 28px;
-  line-height: 1;
-}
-
+.question-label .label-icon { font-size: 28px; line-height: 1; }
 .question-label .label-text {
   writing-mode: vertical-rl;
   text-orientation: upright;
   letter-spacing: 8px;
   font-size: calc(16px * var(--font-scale));
-  line-height: 1;
 }
 
-/* 右侧区域：上下结构 */
-.question-main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 顶部横向：考察点 / 限时 */
+.question-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .question-meta {
   padding: 10px 22px;
-  background: linear-gradient(
-    90deg,
-    rgba(245, 63, 63, 0.1),
-    rgba(245, 63, 63, 0.03)
-  );
+  background: linear-gradient(90deg, rgba(245, 63, 63, 0.10), rgba(245, 63, 63, 0.03));
   border-bottom: 1px solid rgba(245, 63, 63, 0.18);
   color: var(--error);
   font-weight: 600;
   font-size: calc(18px * var(--font-scale));
-  line-height: 1.6;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px;
 }
+.question-content { flex: 1; padding: 14px 18px; }
 
-.question-meta .meta-text {
-  flex: 1;
+/* 提示区：独立滚动 */
+.hint-pane {
   min-width: 0;
-}
-
-.question-meta .meta-text code,
-.question-meta .meta-text b {
-  color: var(--error);
-}
-
-/* 内容 */
-.question-content {
-  flex: 1;
-  padding: 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+  max-height: 250px; /* 防止提示过多撑破布局 */
+  overflow-y: auto;
 }
 
-.question-content .card-desc {
-  font-size: var(--fs-card-desc);
-  line-height: 1.8;
-  color: var(--text-sub);
-}
-
-/* ============================================
-   level-map 顶部：题干 + 提示左右并排
-   ============================================ */
-.level-map-layout .level-map-top {
-  display: grid !important;
-  grid-template-columns: 1.2fr 1fr !important;
-  gap: 14px;
-  align-items: start;
-}
-
-/* 提示竖排 */
-.level-map-layout .level-map-top :deep(.hint-row) {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 6px;
-}
-
-/* 提示卡片紧凑 */
-.level-map-layout .level-map-top :deep(.hint-inline) {
-  flex: 0 0 auto !important;
-  min-width: 0 !important;
-  width: 100%;
-  padding: 8px 14px;
-  font-size: var(--fs-hint);
-}
-
-.answer-array {
-  display: grid;
-  gap: 14px;
-}
-
-.answer-array.cols-2 {
-  grid-template-columns: 1fr 1fr;
-}
-
-.answer-array.cols-3 {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.answer-array.cols-4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-/* 箭头包裹层：让 StepWrapper 在竖排 flex 里正确显示 */
-.level-arrow-wrap {
+/* 强制提示行垂直排列 */
+:deep(.hint-row) {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
-.level-arrow-wrap:not(.visible) {
-  display: none;
+:deep(.hint-inline) {
+  width: 100%;
+  flex: none;
+  min-width: auto;
 }
 
-@media (max-width: 900px) {
-  .level-map-layout {
-    grid-template-columns: 100px 1fr;
-    gap: 12px;
-  }
+/* ============================================ */
+/* 底部：代码与解析（各自独立滚动）                 */
+/* ============================================ */
+.code-pane {
+  min-height: 200px;
+  overflow-y: auto;
+}
+.analysis-pane {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
 
-  .level-map-top {
+/* ============================================ */
+/* 响应式适配（极窄屏才降维，大字模式保持原样）      */
+/* ============================================ */
+@media (max-width: 1024px) {
+  .top-section, .bottom-section {
     grid-template-columns: 1fr;
+  }
+  .level-map-side {
+    display: none;
   }
 }
 </style>

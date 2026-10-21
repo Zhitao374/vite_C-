@@ -300,7 +300,10 @@ export default {
       type: "transition",
       title: "第二站 · 条件分支",
       subtitle: "让程序学会做判断",
-      data: { note: '接下来你将学会用 if 语句让程序"走不同的路"' },
+      data: {
+        previous: "四类运算符（算术、赋值、关系、逻辑）",
+        note: "接下来你将学会用 if 语句让程序走不同的路"
+      },
     },
 
     /* ===== 11 什么是分支 ===== */
@@ -382,9 +385,36 @@ export default {
       },
     },
 
-    /* ===== 14 if-else if 多分支 ===== */
+    /* ===== 14 练习1：判断奇偶 ===== */
     {
       id: 14,
+      type: "level-map",
+      title: "课堂练习1：判断奇偶",
+      subtitle: "用取余判断一个数的奇偶性",
+      chapterTag: "第 4 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入一个整数 <code>n</code>，如果 n 是偶数输出 <code>even</code>，如果是奇数输出 <code>odd</code>。<br>输入样例：<code>7</code>　输出样例：<code>odd</code>",
+          timer: "⏱ 限时 5 分钟",
+        },
+        hints: [
+          "用 <code>n % 2</code> 判断",
+          "<code>n % 2 == 0</code> 是偶数",
+          "用 <code>if-else</code> 走两条路",
+        ],
+        answer: { codeFile: "codes/lesson-04/even-odd.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: "<code>n % 2</code> 得到 n 除以 2 的余数，只有 0 和 1 两种结果。<br>余数为 0 就是偶数，余数为 1 就是奇数。<br>这是取余运算符最典型的应用。",
+        },
+        footer: '<b>💡 取余的经典用法</b>：<br>· <code>n % 3 == 0</code> → 能被 3 整除<br>· <code>n % 5 == 0</code> → 能被 5 整除<br>· <code>n % 10</code> → 得到个位数<br><br>竞赛中，取余几乎无处不在。'
+      },
+    },
+
+    /* ===== 15 if-else if 多分支 ===== */
+    {
+      id: 15,
       type: "code-split",
       title: "if-else if-else 多分支",
       subtitle: "多条路，只走一条",
@@ -408,9 +438,36 @@ export default {
       },
     },
 
-    /* ===== 15 switch 引入 ===== */
+    /* ===== 16 练习2：成绩等级 ===== */
     {
-      id: 15, type: 'grid',
+      id: 16,
+      type: "level-map",
+      title: "课堂练习2：成绩等级",
+      subtitle: "用多分支判断分数等级",
+      chapterTag: "第 4 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入一个分数 <code>score</code>（0—100），按下面规则输出等级：<br>≥90 → <code>A</code>　≥80 → <code>B</code>　≥60 → <code>C</code>　其他 → <code>D</code><br><br><b>要求</b>：把分数除以 10 得到整数部分，用 <code>switch</code> 判断等级。",
+          timer: "⏱ 限时 8 分钟",
+        },
+        hints: [
+          "先算 <code>int level = score / 10;</code>（整数除法）",
+          "用 <code>switch (level)</code> 判断 level 的值",
+          "case 10 和 9：A；case 8：B；case 7 和 6：C；default：D",
+          '利用"case 穿透"——多个 case 共用一段代码',
+        ],
+        answer: { codeFile: "codes/lesson-04/score-level.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: '关键技巧是 <code>score / 10</code>——<br>把 0—100 分成 10 档，再用 switch 判断。<br><br><b>为什么用 case 穿透？</b><br><code>case 10:</code> 后面不写 <code>break</code>——<br>程序会继续执行到 <code>case 9:</code>——<br>所以 90—100 分都输出 A。<br><br>这是 <b>switch 的经典用法</b>——<br>多个 case 共用一段代码，用"穿透"实现。',
+        },
+      },
+    },
+
+    /* ===== 17 switch 引入 ===== */
+    {
+      id: 17, type: 'grid',
       title: 'switch 是什么？',
       subtitle: '多分支的另一种写法',
       chapterTag: '第 4 讲 · 分支结构',
@@ -436,9 +493,9 @@ export default {
       }
     },
 
-    /* ===== 16 switch 语法 ===== */
+    /* ===== 18 switch 语法 ===== */
     {
-      id: 16,
+      id: 18,
       type: "code-split",
       title: "switch 多分支",
       subtitle: "根据变量的值选择路径",
@@ -460,9 +517,9 @@ export default {
       },
     },
 
-    /* ===== 17 switch vs if-else ===== */
+    /* ===== 19 switch vs if-else ===== */
     {
-      id: 17, type: 'decision',
+      id: 19, type: 'decision',
       title: 'switch vs if-else',
       subtitle: '什么时候用哪个',
       chapterTag: '第 4 讲 · 分支结构',
@@ -505,60 +562,6 @@ export default {
           desc: '<b>区间用 if，等值用 switch</b><br><br>· 涉及比较符号（&gt;、&lt;、&gt;=）→ if<br>· 涉及固定值匹配（月份、菜单）→ switch<br><br>📌 <b>代码清晰最重要</b>——不确定时，优先选"看起来更好读"的那个。'
         }
       }
-    },
-
-    /* ===== 18 练习1：判断奇偶 ===== */
-    {
-      id: 18,
-      type: "level-map",
-      title: "课堂练习1：判断奇偶",
-      subtitle: "用取余判断一个数的奇偶性",
-      chapterTag: "第 4 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入一个整数 <code>n</code>，如果 n 是偶数输出 <code>even</code>，如果是奇数输出 <code>odd</code>。<br>输入样例：<code>7</code>　输出样例：<code>odd</code>",
-          timer: "⏱ 限时 5 分钟",
-        },
-        hints: [
-          "用 <code>n % 2</code> 判断",
-          "<code>n % 2 == 0</code> 是偶数",
-          "用 <code>if-else</code> 走两条路",
-        ],
-        answer: { codeFile: "codes/lesson-04/even-odd.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: "<code>n % 2</code> 得到 n 除以 2 的余数，只有 0 和 1 两种结果。<br>余数为 0 就是偶数，余数为 1 就是奇数。<br>这是取余运算符最典型的应用。",
-        },
-        footer: '<b>💡 取余的经典用法</b>：<br>· <code>n % 3 == 0</code> → 能被 3 整除<br>· <code>n % 5 == 0</code> → 能被 5 整除<br>· <code>n % 10</code> → 得到个位数<br><br>竞赛中，取余几乎无处不在。'
-      },
-    },
-
-    /* ===== 19 练习2：成绩等级 ===== */
-    {
-      id: 19,
-      type: "level-map",
-      title: "课堂练习2：成绩等级",
-      subtitle: "用多分支判断分数等级",
-      chapterTag: "第 4 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入一个分数 <code>score</code>（0—100），按下面规则输出等级：<br>≥90 → <code>A</code>　≥80 → <code>B</code>　≥60 → <code>C</code>　其他 → <code>D</code><br><br><b>要求</b>：把分数除以 10 得到整数部分，用 <code>switch</code> 判断等级。",
-          timer: "⏱ 限时 8 分钟",
-        },
-        hints: [
-          "先算 <code>int level = score / 10;</code>（整数除法）",
-          "用 <code>switch (level)</code> 判断 level 的值",
-          "case 10 和 9：A；case 8：B；case 7 和 6：C；default：D",
-          '利用"case 穿透"——多个 case 共用一段代码',
-        ],
-        answer: { codeFile: "codes/lesson-04/score-level.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: '关键技巧是 <code>score / 10</code>——<br>把 0—100 分成 10 档，再用 switch 判断。<br><br><b>为什么用 case 穿透？</b><br><code>case 10:</code> 后面不写 <code>break</code>——<br>程序会继续执行到 <code>case 9:</code>——<br>所以 90—100 分都输出 A。<br><br>这是 <b>switch 的经典用法</b>——<br>多个 case 共用一段代码，用"穿透"实现。',
-        },
-      },
     },
 
     /* ===== 20 练习3：闰年判断 ===== */

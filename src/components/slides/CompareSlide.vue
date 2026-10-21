@@ -1,127 +1,122 @@
 <template>
-  <SlideShell :slide="slide">
-    <StepWrapper
-      v-for="(g, i) in groups"
-      :key="i"
-      :step="i + 1"
-    >
-      <div class="compare" :class="{ 'compare-neutral': isNeutral }">
-        <div class="compare-box compare-wrong">
-          <div class="compare-label">{{ g.leftLabel || leftLabel || '❌ 错误' }}</div>
-          <div v-html="g.wrong"></div>
+  <SlideShell :slide="slide" body-class="code-split-body" :auto-extra="false">
+    <div v-if="d.intro" class="intro-card" v-html="d.intro"></div>
+
+    <div class="code-split-layout">
+      <!-- 左侧：代码区（独立滚动） -->
+      <div class="left-code-pane scroll-pane">
+        <StepWrapper :step="baseOffset" class="h-full-wrapper">
+          <CodeBlock :code="d.code" :code-file="d.codeFile" :snippet="d.snippet" />
+        </StepWrapper>
+      </div>
+
+      <!-- 右侧：信息区 -->
+      <div class="right-info-pane">
+        <!-- 1. 顶部固定区：运行结果 -->
+        <div v-if="d.output" class="info-top-group">
+          <StepWrapper :step="baseOffset + annotations.length">
+            <div class="card output-card">
+              <div class="card-title" style="font-size: calc(16px * var(--font-scale));">🖥️ 运行结果</div>
+              <pre><code>{{ d.output }}</code></pre>
+            </div>
+          </StepWrapper>
         </div>
-        <div class="compare-arrow">{{ arrow }}</div>
-        <div class="compare-box compare-right">
-          <div class="compare-label">{{ g.rightLabel || rightLabel || '✅ 正确' }}</div>
-          <div v-html="g.right"></div>
+
+        <!-- 2. 底部独立滚动区：注释 / Extra / Footer -->
+        <div class="info-bottom-group scroll-pane">
+          <StepWrapper
+            v-for="(a, i) in annotations"
+            :key="i"
+            :step="baseOffset + i"
+          >
+            <div class="card annotation-card">
+              <div class="annotation-content">
+                <div class="annotation-title-wrap">
+                  <span class="badge badge-primary">第 {{ a.line }} 行</span>
+                  <span class="annotation-title" v-html="a.title"></span>
+                </div>
+                <div v-if="a.desc" class="annotation-desc" v-html="a.desc"></div>
+              </div>
+            </div>
+          </StepWrapper>
+
+          <StepWrapper v-if="extra" :step="extraStep">
+            <ExtraCard v-bind="extra" />
+          </StepWrapper>
+          
+          <StepWrapper v-if="footer" :step="footerStep">
+            <SlideFooter :html="footer" />
+          </StepWrapper>
         </div>
       </div>
-    </StepWrapper>
-
-    <StepWrapper v-if="footer" :step="footerStep">
-      <SlideFooter :html="footer" />
-    </StepWrapper>
+    </div>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import SlideShell from '@/components/common/SlideShell.vue';
-import StepWrapper from '@/components/common/StepWrapper.vue';
-import SlideFooter from '@/components/common/SlideFooter.vue';
-import { useStepCount } from '@/composables/useStepCount';
+import { computed } from "vue";
+import SlideShell from "@/components/common/SlideShell.vue";
+import StepWrapper from "@/components/common/StepWrapper.vue";
+import CodeBlock from "@/components/common/CodeBlock.vue";
+import ExtraCard from "@/components/common/ExtraCard.vue";
+import SlideFooter from "@/components/common/SlideFooter.vue";
+import { useStepCount } from "@/composables/useStepCount";
 
 const props = defineProps({
-  slide: { type: Object, required: true }
+  slide: { type: Object, required: true },
 });
 
-const groups = computed(() => props.slide.data?.groups || []);
-const extra = computed(() => props.slide.data?.extra);
-const footer = computed(() => props.slide.data?.footer);
+const d = computed(() => props.slide?.data || {});
+const annotations = computed(() => d.value.annotations || []);
+const extra = computed(() => d.value.extra);
+const footer = computed(() => d.value.footer);
 
-const leftLabel = computed(() => props.slide.data?.leftLabel);
-const rightLabel = computed(() => props.slide.data?.rightLabel);
-const isNeutral = computed(() => !!props.slide.data?.neutral);
-const arrow = computed(() => props.slide.data?.arrow || '→');
+const baseOffset = computed(() => (d.value.intro ? 2 : 1));
 
-const footerStep = computed(() => groups.value.length + 1);
+// 核心修复：判断内容是否真的存在，避免空对象导致多出一步
+const hasExtra = computed(() => extra.value && Object.keys(extra.value).length > 0);
+const hasFooter = computed(() => footer.value && footer.value.length > 0);
+
+const extraStep = computed(() => baseOffset.value + annotations.value.length + (d.value.output ? 1 : 0));
+const footerStep = computed(() => extraStep.value + (hasExtra.value ? 1 : 0));
 
 useStepCount(() =>
-  groups.value.length + (extra.value ? 1 : 0) + (footer.value ? 1 : 0)
+  (d.value.intro ? 1 : 0) +
+  1 +
+  annotations.value.length +
+  (d.value.output ? 1 : 0) +
+  (hasExtra.value ? 1 : 0) +
+  (hasFooter.value ? 1 : 0)
 );
 </script>
 
 <style scoped>
-.compare {
-  display: grid;
-  grid-template-columns: 1fr 50px 1fr;
-  align-items: stretch;
+.code-split-body { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
+.intro-card {
+  padding: 8px 14px; background: linear-gradient(135deg, var(--primary-soft), #fff);
+  border-left: 4px solid var(--primary); border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: calc(16px * var(--font-scale)); line-height: 1.5; color: var(--text-sub);
+  margin-bottom: 12px; flex-shrink: 0;
 }
-.compare + .compare { margin-top: 8px; }
-
-.compare-box {
-  padding: 22px 28px;
-  border-radius: 14px;
-  font-family: var(--font-code);
-  font-size: calc(20px * var(--font-scale));
-  line-height: 1.75;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.code-split-layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
+.left-code-pane {
+  flex: 0 0 55%; height: 100%; overflow-y: auto;
+  display: flex; flex-direction: column; padding-right: 4px;
 }
-
-/* 默认：错/对配色 */
-.compare-wrong {
-  background: var(--error-soft);
-  border: 2px solid rgba(245, 63, 63, 0.35);
-  color: #8a1f1f;
+.h-full-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.h-full-wrapper :deep(.code-block) { flex: 1; height: 100%; }
+.right-info-pane { flex: 1; display: flex; flex-direction: column; gap: 12px; height: 100%; min-height: 0; }
+.info-top-group { flex-shrink: 0; }
+.output-card { padding: 10px 14px; }
+.output-card pre {
+  margin: 0; background: var(--code-bg); color: var(--code-text);
+  border-radius: var(--radius-sm); padding: 10px 14px; font-family: var(--font-code);
+  font-size: calc(15px * var(--font-scale)); line-height: 1.4; overflow-x: auto;
 }
-.compare-right {
-  background: var(--success-soft);
-  border: 2px solid rgba(0, 180, 42, 0.35);
-  color: #0d5f24;
-}
-.compare-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  color: var(--accent);
-  font-weight: 700;
-}
-.compare-label {
-  font-family: var(--font-base);
-  font-size: calc(16px * var(--font-scale));
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  opacity: 0.75;
-}
-
-/* 中性模式：蓝紫配色 */
-.compare-neutral .compare-wrong {
-  background: linear-gradient(145deg, #EFF6FF, #F5F9FF);
-  border: 2px solid rgba(22, 93, 255, 0.25);
-  color: var(--text-main);
-}
-.compare-neutral .compare-right {
-  background: linear-gradient(145deg, #F5F3FF, #FAF8FF);
-  border: 2px solid rgba(139, 92, 246, 0.25);
-  color: var(--text-main);
-}
-.compare-neutral .compare-arrow {
-  color: var(--text-dim);
-}
-.compare-neutral .compare-label {
-  opacity: 1;
-  color: var(--primary);
-}
-.compare-neutral .compare-right .compare-label {
-  color: #8B5CF6;
-}
-
-@media (max-width: 900px) {
-  .compare { grid-template-columns: 1fr; gap: 8px; }
-  .compare-arrow { transform: rotate(90deg); }
-}
+.info-bottom-group { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
+.annotation-card { padding: 10px 14px; }
+.annotation-content { display: flex; flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.annotation-title-wrap { display: flex; align-items: baseline; gap: 8px; flex-shrink: 0; }
+.annotation-title { font-size: calc(18px * var(--font-scale)); font-weight: 700; color: var(--text-main); white-space: nowrap; }
+.annotation-desc { flex: 1; min-width: 200px; font-size: calc(16px * var(--font-scale)); color: var(--text-sub); line-height: 1.5; }
 </style>

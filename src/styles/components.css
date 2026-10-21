@@ -424,3 +424,77 @@ pre code {
 .bubble {
   line-height: 1.8; /* 1.75 → 1.8 */
 }
+/* ============================================ */
+/* 高对比度模式（针对后排近视学生）               */
+/* ============================================ */
+html.high-contrast {
+  /* 让浅灰色字变深 */
+  --text-sub: #1a2f4a !important;
+  --text-dim: #3d5878 !important;
+  --text-light: #6b84a3 !important;
+  
+  /* 卡片边界加深 */
+  --card-border: rgba(22, 93, 255, 0.35) !important;
+  
+  /* 背景变白，增强锐度 */
+  --bg-card: #ffffff !important;
+}
+
+/* 高对比度下，代码块注释变亮 */
+html.high-contrast .code-comment,
+html.high-contrast .tok-com {
+  color: rgba(230, 241, 255, 0.5) !important; 
+}
+
+/* 高对比度下，所有弱化的边框加深 */
+html.high-contrast .card {
+  border-width: 2px !important;
+}
+
+/* ============================================ */
+/* 大屏演示减负模式（全局版）                     */
+/* ============================================ */
+
+/* 1. 允许全局纵向滚动，防止大字撑爆屏幕 */
+body.is-big-screen .slide-body {
+  overflow-y: auto !important;
+  /* 隐藏丑陋的浏览器滚动条，保持画面干净 */
+  scrollbar-width: none; 
+}
+body.is-big-screen .slide-body::-webkit-scrollbar {
+  display: none; 
+}
+
+/* 2. 清理干扰项，把空间让给内容 */
+body.is-big-screen .level-map-side {
+  display: none; /* 隐藏代码页左侧的进度树 */
+}
+body.is-big-screen .chapter-tag {
+  opacity: 0.5; /* 弱化右上角标签 */
+}
+
+/* 3. 自动折行：大屏下，所有的左右双栏都变成上下单栏 */
+body.is-big-screen .split-container,
+body.is-big-screen .answer-split-layout,
+body.is-big-screen .level-map-top {
+  grid-template-columns: 1fr !important;
+}
+
+/* 4. 代码页/分栏页的高度限制解除 */
+body.is-big-screen .level-map-layout {
+  grid-template-columns: 1fr; /* 取消左侧边距 */
+}
+body.is-big-screen .answer-wrapper {
+  max-width: 100%; /* 宽屏代码不再缩窄 */
+}
+
+/* 5. 对话页（Dialog）适配：取消气泡最大宽度限制，让其撑满 */
+body.is-big-screen .bubble {
+  max-width: 100%;
+}
+
+/* 6. 网格（Grid）适配：自动减少列数，放大卡片 */
+body.is-big-screen .grid-cols-3,
+body.is-big-screen .grid-cols-4 {
+  grid-template-columns: repeat(2, 1fr) !important;
+}

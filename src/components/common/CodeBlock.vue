@@ -291,10 +291,10 @@ async function handleCopy() {
 /* 代码主体                                      */
 /* ============================================ */
 pre {
-  padding: 16px 0;
+  padding: 12px 0;
   font-family: var(--font-code);
   font-size: var(--fs-code);
-  line-height: 1.7;
+  line-height: 1.4;
   color: var(--code-text);
   overflow-x: auto;
   overflow-y: auto;
@@ -325,7 +325,6 @@ pre code {
 .code-line {
   display: flex;
   align-items: flex-start;
-  min-height: 1.55em;
   /* 左侧预留 8px 出血区（背景可从行号左侧开始） */
   padding: 0 20px 0 8px;
   margin-left: -8px;

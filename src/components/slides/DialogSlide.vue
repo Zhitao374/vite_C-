@@ -93,6 +93,9 @@ function speakerOf(line) {
   line-height: 1.75;
   color: var(--text-sub);
   box-shadow: var(--card-shadow);
+  /* 防止长英文单词撑爆气泡 */
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .bubble::before {
   content: "";
@@ -116,6 +119,31 @@ function speakerOf(line) {
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 6px;
+}
+
+/* ============================================ */
+/* 大字模式下的对话框视觉增强                      */
+/* ============================================ */
+body.is-big-screen .bubble {
+  /* 1. 限制最大宽度，不要把屏幕撑满，留出对话的空间感 */
+  max-width: 85%;
+  
+  /* 2. 加更明显的边框和阴影，让气泡浮起来 */
+  border: 2px solid rgba(22, 93, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(22, 93, 255, 0.1);
+}
+
+/* 3. 区分“同学”和“小 C”的气泡颜色，增强对话感 */
+body.is-big-screen .dialog-scene:not(.reverse) .bubble {
+  background: linear-gradient(145deg, #ffffff, #f4f8ff); /* 同学：偏蓝白 */
+}
+body.is-big-screen .dialog-scene.reverse .bubble {
+  background: linear-gradient(145deg, #ffffff, #fffbf5); /* 小C：偏橙白 */
+}
+
+/* 4. 大字模式下，头像居中更协调 */
+body.is-big-screen .dialog-scene {
+  align-items: center; 
 }
 
 /* ============================================
