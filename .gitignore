@@ -37,3 +37,10 @@ pnpm-debug.log*
 # 缓存
 .cache/
 .vite/
+
+# Electron 打包输出目录
+release/
+dist_electron/
+
+# 本地编译器（体积太大，绝不入库）
+resources/compiler/

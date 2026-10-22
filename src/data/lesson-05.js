@@ -1,7 +1,7 @@
 export default {
   title: "第 5 讲 循环结构",
   subtitle: "让程序学会重复",
-  total: 30,
+  total: 28,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -59,65 +59,42 @@ export default {
     },
 
     /* ===== 3 本节课目标 ===== */
+    /* ===== 3 本节目标（图文视觉版） ===== */
     {
-      id: 3,
-      type: "grid",
+      id: 3, type: "split",
       title: "本节课目标",
-      subtitle: "四步让程序学会重复",
+      subtitle: "赋予程序“重复”的超能力",
       data: {
-        cards: [
-          { number: "01", title: "while 循环", desc: "条件为真就重复执行" },
-          { number: "02", title: "for 循环", desc: "最常用的循环结构" },
-          { number: "03", title: "循环嵌套", desc: "循环里面还有循环" },
-          { number: "04", title: "break 与 continue", desc: "提前跳出或跳过" },
+        panes: [
+          {
+            // 如果你有齿轮或莫比乌斯环的图片，取消下面两行的注释并填入路径：
+            // image: "static/images/concepts/loop-gear.png",
+            // imageCaption: "循环 = 自动化重复",
+            
+            // 如果没有图片，用这个超帅的纯 CSS 动效占位
+            title: "无限循环",
+            icon: "♾️",
+            items: [
+              { title: "无休止的重复", desc: "这是计算机最擅长、人类最讨厌的事。" }
+            ]
+          },
+          {
+            title: "四大挑战",
+            items: [
+              { title: "01. 告别复制粘贴", desc: "用 <code>while</code> 和 <code>for</code> 自动重复一万次。" },
+              { title: "02. 一秒算完加法", desc: "让电脑瞬间算出 1 加到 100 的和。" },
+              { title: "03. 画出复杂图案", desc: "用<code>循环嵌套</code>打印金字塔和九九表。" },
+              { title: "04. 精准掌控流程", desc: "用 <code>break</code> 和 <code>continue</code> 随时叫停。" }
+            ]
+          }
         ],
-      },
+        footer: '<b>📌 有了循环，程序才真正拥有了“大规模处理”的能力。</b>'
+      }
     },
 
-    /* ===== 4 学习地图 ===== */
+    /* ===== 4 为什么需要循环 ===== */
     {
       id: 4,
-      type: "timeline",
-      variant: "map",
-      title: "本讲学习地图",
-      subtitle: "四站闯关，从重复到嵌套",
-      data: {
-        items: [
-          {
-            icon: "🔁",
-            badge: "基础",
-            title: "第一站 · while 循环",
-            desc: "条件为真就重复执行",
-            points: ["while (条件)", "循环三要素", "防止死循环"],
-          },
-          {
-            icon: "🔂",
-            badge: "核心",
-            title: "第二站 · for 循环",
-            desc: "最常用、最紧凑的循环结构",
-            points: ["for (初始; 条件; 更新)", "计数循环", "和 while 的选择"],
-          },
-          {
-            icon: "🔄",
-            badge: "进阶",
-            title: "第三站 · 循环嵌套",
-            desc: "循环里面还有循环",
-            points: ["外层 + 内层", "九九乘法表", "总次数 = 外 × 内"],
-          },
-          {
-            icon: "⚡",
-            badge: "实战",
-            title: "第四站 · break 与 continue",
-            desc: "提前跳出或跳过某次循环",
-            points: ["break 跳出循环", "continue 跳过本次", "常用场景"],
-          },
-        ],
-      },
-    },
-
-    /* ===== 5 为什么需要循环 ===== */
-    {
-      id: 5,
       type: "origin",
       title: '为什么要循环？',
       subtitle: '让程序自动重复做事',
@@ -164,9 +141,9 @@ export default {
       }
     },
 
-    /* ===== 6 while 循环 i 怎么变 ===== */
+    /* ===== 5 while 循环 i 怎么变 ===== */
     {
-      id: 6,
+      id: 5,
       type: "evolution",
       title: "while 循环：i 一步步长大",
       subtitle: "循环三要素：初始、条件、更新",
@@ -223,9 +200,9 @@ export default {
       },
     },
 
-    /* ===== 7 for 循环 ===== */
+    /* ===== 6 for 循环 ===== */
     {
-      id: 7,
+      id: 6,
       type: "code-split",
       title: "for 循环 · 三要素写在一行",
       subtitle: "最常用、最紧凑的循环",
@@ -249,13 +226,14 @@ export default {
       },
     },
 
-    /* ===== 8 while vs for ===== */
+    /* ===== 7 while vs for ===== */
     {
-      id: 8,
+      id: 7,
       type: "compare",
       title: "while vs for",
       subtitle: "什么时候用哪个",
       data: {
+        splitStep: true,
         neutral: true,
         leftLabel: 'for 循环',
         rightLabel: 'while 循环',
@@ -282,9 +260,9 @@ export default {
       }
     },
 
-    /* ===== 9 for 循环答疑 ===== */
+    /* ===== 8 for 循环答疑 ===== */
     {
-      id: 9,
+      id: 8,
       type: "grid",
       title: 'for 循环的 4 个细节',
       subtitle: '答疑 & 常见疑问',
@@ -316,20 +294,79 @@ export default {
       }
     },
 
-    /* ===== 10 过渡页 ===== */
+    /* ===== 9 练习1：求和 ===== */
+    {
+      id: 9,
+      type: "level-map",
+      title: "课堂练习1：求和",
+      subtitle: "用循环计算 1 + 2 + ... + n",
+      chapterTag: "第 5 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入一个正整数 <code>n</code>，计算 1 + 2 + ... + n 的和。<br>输入样例：<code>100</code>　输出样例：<code>5050</code>",
+          timer: "⏱ 限时 6 分钟",
+        },
+        hints: [
+          "用一个变量 <code>sum</code> 累加",
+          "sum 初始化为 0",
+          "循环变量 i 从 1 到 n",
+        ],
+        answer: { codeFile: "codes/lesson-05/sum.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: 'sum 就像一个<b>累加器</b>，每次循环把当前的 i 加进去。<br>初始 sum = 0，循环结束后 sum 就是 1+2+...+n。<br><br><b>为什么初始化为 0？</b><br>因为 0 加任何数都不变，是"加法的起点"。',
+        },
+        extra: {
+          title: "📖 知识扩展 · 高斯的故事",
+          desc: '200 多年前，数学家<a href="https://baike.baidu.com/item/高斯" target="_blank" class="wiki-link">高斯</a> 9 岁时，老师让算 1 加到 100。<br>其他孩子都在埋头苦算。小高斯发现 1+100 = 101，2+99 = 101……共 50 对，所以答案 = 50 × 101 = 5050。<br>这就是等差数列求和公式。<br><br><b>但计算机不用想捷径</b>——它直接循环 100 次，一样得出 5050。<br>计算机的优势不是聪明，而是<b>快</b>。<br><br><b>算法的价值</b>：<br>高斯的方法 1 步算出，O(1)；<br>循环的方法跑 100 步，O(n)。<br>数据越大，"聪明算法"越值钱。',
+          variant: "card-primary",
+        },
+      },
+    },
+
+    /* ===== 10 练习2：阶乘 ===== */
     {
       id: 10,
+      type: "level-map",
+      title: "课堂练习2：阶乘",
+      subtitle: "计算 n! = 1 × 2 × ... × n",
+      chapterTag: "第 5 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入一个正整数 <code>n</code>，输出 n 的阶乘 <code>n!</code>。<br>输入样例：<code>5</code>　输出样例：<code>120</code>",
+          timer: "⏱ 限时 6 分钟",
+        },
+        hints: [
+          "用一个变量 <code>fact</code> 累乘",
+          "fact 初始化为 1（不能是 0）",
+          "循环变量 i 从 1 到 n",
+          "n 可能会大，用 <code>long long</code>",
+        ],
+        answer: { codeFile: "codes/lesson-05/factorial.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: "累乘和累加思路一样，只是初始值不同。<br><b>累加</b>：初始 0，因为加 0 不影响。<br><b>累乘</b>：初始 1，因为乘 1 不影响。<br>如果 fact = 0，结果永远是 0。<br><br><b>为什么用 long long？</b><br>阶乘增长极快：13! 就超过 int 范围（21 亿）。<br>用 long long 能撑到 20!。<br><br><b>📈 阶乘的增长速度</b><br>· 5! = 120<br>· 10! = 362 万<br>· 13! = 62 亿（超过 int）<br>· 20! = 2.4 × 10¹⁸（long long 上限）<br>· 100! ≈ 9.3 × 10¹⁵⁷（天文数字）<br><br>n 很大时要用\"取模\"技巧——第 40 讲讲。",
+        },
+      },
+    },
+
+    /* ===== 11 过渡页 ===== */
+    {
+      id: 11,
       type: "transition",
       title: "第三站 · 循环进阶",
       subtitle: "嵌套、break、continue",
       data: {
-        note: "接下来你将学会循环嵌套、break 与 continue，以及循环的实战应用",
-      },
+        previous: "while 与 for 循环的基础语法",
+        note: "接下来你将学会循环嵌套、break 与 continue，以及循环的实战应用"
+      }
     },
 
-    /* ===== 11 循环嵌套 ===== */
+    /* ===== 12 循环嵌套 ===== */
     {
-      id: 11,
+      id: 12,
       type: "code-split",
       title: "循环嵌套 · 循环里还有循环",
       subtitle: "外层走一步，内层走完整圈",
@@ -349,9 +386,9 @@ export default {
       },
     },
 
-    /* ===== 12 九九乘法表 ===== */
+    /* ===== 13 九九乘法表 ===== */
     {
-      id: 12,
+      id: 13,
       type: "code-split",
       title: "循环嵌套实例 · 九九乘法表",
       subtitle: "两个 for 画出三角形",
@@ -370,9 +407,9 @@ export default {
       },
     },
 
-    /* ===== 13 嵌套答疑 ===== */
+    /* ===== 14 嵌套答疑 ===== */
     {
-      id: 13,
+      id: 14,
       type: "grid",
       title: '循环嵌套 · 三种常见形态',
       subtitle: '外层走一步，内层走一圈',
@@ -399,14 +436,45 @@ export default {
       }
     },
 
-    /* ===== 14 break 与 continue ===== */
+    /* ===== 15 练习3：找最大值 ===== */
     {
-      id: 14,
+      id: 15,
+      type: "level-map",
+      title: "课堂练习3：打印直角三角形",
+      subtitle: "用嵌套循环画图案",
+      chapterTag: "第 5 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入一个正整数 <code>n</code>，输出一个 <code>n</code> 行的直角三角形：<br>第 1 行 1 个 <code>*</code>，第 2 行 2 个，……，第 n 行 n 个。<br><br><b>输入样例</b>：<code>4</code><br><b>输出样例</b>：<br><code>*</code><br><code>**</code><br><code>***</code><br><code>****</code>",
+          timer: "⏱ 限时 10 分钟",
+        },
+        hints: [
+          "外层循环 i 控制行号（1 到 n）",
+          "内层循环 j 控制每行的 <code>*</code> 数（1 到 i）",
+          "内层循环结束后输出 <code>endl</code> 换行",
+          "关键：内层循环的<b>上界是 i</b>，不是 n",
+        ],
+        answer: {
+          codeFile: "codes/lesson-05/print_max.cpp",
+        },
+        analysis: {
+          title: "📖 解析",
+          desc: '关键点：<b>内层循环的上界是 <code>i</code>，不是 <code>n</code></b>。<br><br>· 第 1 行 i=1：内层循环 1 次 → 1 个 *<br>· 第 2 行 i=2：内层循环 2 次 → 2 个 *<br>· 第 3 行 i=3：内层循环 3 次 → 3 个 *<br>……<br><br>这种"内层次数随外层变化"的模式，是<b>图案打印的核心</b>。<br>改一个上界，就能画出各种图案。',
+        },
+        footer: '<b>💡 图案打印的三种模式</b><br>① <b>直角三角形</b>：内层 <code>j &lt;= i</code>（每行变长）<br>② <b>倒三角形</b>：内层 <code>j &lt;= n - i + 1</code>（每行变短）<br>③ <b>矩形</b>：内层 <code>j &lt;= m</code>（每行一样）<br><br><b>核心</b>：外层控制行，内层控制列。<br>改变内层的"上界"或"初始值"——就能画出不同图案。'
+      },
+    },
+
+    /* ===== 16 break 与 continue ===== */
+    {
+      id: 16,
       type: "compare",
       title: "break 与 continue",
       subtitle: "跳出整圈 vs 跳过本次",
       data: {
         neutral: true,
+        splitStep: true,
         leftLabel: 'break',
         rightLabel: 'continue',
         arrow: 'vs',
@@ -432,13 +500,14 @@ export default {
       }
     },
 
-    /* ===== 15 常见错误 ===== */
+    /* ===== 17 常见错误 ===== */
     {
-      id: 15,
+      id: 17,
       type: "compare",
       title: "循环常见错误",
       subtitle: "避开这些坑",
       data: {
+        splitStep: true,
         groups: [
           { wrong: "忘写 i++，死循环", right: "每次循环更新 i" },
           { wrong: "for 里用逗号分隔", right: "for 里用分号分隔" },
@@ -449,9 +518,9 @@ export default {
       },
     },
 
-    /* ===== 16 初赛渗透 ===== */
+    /* ===== 18 初赛渗透 ===== */
     {
-      id: 16,
+      id: 18,
       type: "split",
       title: '初赛小知识：循环次数',
       subtitle: 'CSP-J/S 初赛必考',
@@ -488,126 +557,34 @@ export default {
       }
     },
 
-    /* ===== 17 练习1：求和 ===== */
+    /* ===== 19 练习小结 ===== */
     {
-      id: 17,
-      type: "level-map",
-      title: "课堂练习1：求和",
-      subtitle: "用循环计算 1 + 2 + ... + n",
-      chapterTag: "第 5 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入一个正整数 <code>n</code>，计算 1 + 2 + ... + n 的和。<br>输入样例：<code>100</code>　输出样例：<code>5050</code>",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          "用一个变量 <code>sum</code> 累加",
-          "sum 初始化为 0",
-          "循环变量 i 从 1 到 n",
-        ],
-        answer: { codeFile: "codes/lesson-05/sum.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: 'sum 就像一个<b>累加器</b>，每次循环把当前的 i 加进去。<br>初始 sum = 0，循环结束后 sum 就是 1+2+...+n。<br><br><b>为什么初始化为 0？</b><br>因为 0 加任何数都不变，是"加法的起点"。',
-        },
-        extra: {
-          title: "📖 知识扩展 · 高斯的故事",
-          desc: '200 多年前，数学家<a href="https://baike.baidu.com/item/高斯" target="_blank" class="wiki-link">高斯</a> 9 岁时，老师让算 1 加到 100。<br>其他孩子都在埋头苦算。小高斯发现 1+100 = 101，2+99 = 101……共 50 对，所以答案 = 50 × 101 = 5050。<br>这就是等差数列求和公式。<br><br><b>但计算机不用想捷径</b>——它直接循环 100 次，一样得出 5050。<br>计算机的优势不是聪明，而是<b>快</b>。<br><br><b>算法的价值</b>：<br>高斯的方法 1 步算出，O(1)；<br>循环的方法跑 100 步，O(n)。<br>数据越大，"聪明算法"越值钱。',
-          variant: "card-primary",
-        },
-      },
-    },
-
-    /* ===== 18 练习2：阶乘 ===== */
-    {
-      id: 18,
-      type: "level-map",
-      title: "课堂练习2：阶乘",
-      subtitle: "计算 n! = 1 × 2 × ... × n",
-      chapterTag: "第 5 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入一个正整数 <code>n</code>，输出 n 的阶乘 <code>n!</code>。<br>输入样例：<code>5</code>　输出样例：<code>120</code>",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          "用一个变量 <code>fact</code> 累乘",
-          "fact 初始化为 1（不能是 0）",
-          "循环变量 i 从 1 到 n",
-          "n 可能会大，用 <code>long long</code>",
-        ],
-        answer: { codeFile: "codes/lesson-05/factorial.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: "累乘和累加思路一样，只是初始值不同。<br><b>累加</b>：初始 0，因为加 0 不影响。<br><b>累乘</b>：初始 1，因为乘 1 不影响。<br>如果 fact = 0，结果永远是 0。<br><br><b>为什么用 long long？</b><br>阶乘增长极快：13! 就超过 int 范围（21 亿）。<br>用 long long 能撑到 20!。<br><br><b>📈 阶乘的增长速度</b><br>· 5! = 120<br>· 10! = 362 万<br>· 13! = 62 亿（超过 int）<br>· 20! = 2.4 × 10¹⁸（long long 上限）<br>· 100! ≈ 9.3 × 10¹⁵⁷（天文数字）<br><br>n 很大时要用\"取模\"技巧——第 40 讲讲。",
-        },
-      },
-    },
-
-    /* ===== 19 练习3：找最大值 ===== */
-    {
-      id: 19,
-      type: "level-map",
-      title: "课堂练习3：打印直角三角形",
-      subtitle: "用嵌套循环画图案",
-      chapterTag: "第 5 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入一个正整数 <code>n</code>，输出一个 <code>n</code> 行的直角三角形：<br>第 1 行 1 个 <code>*</code>，第 2 行 2 个，……，第 n 行 n 个。<br><br><b>输入样例</b>：<code>4</code><br><b>输出样例</b>：<br><code>*</code><br><code>**</code><br><code>***</code><br><code>****</code>",
-          timer: "⏱ 限时 10 分钟",
-        },
-        hints: [
-          "外层循环 i 控制行号（1 到 n）",
-          "内层循环 j 控制每行的 <code>*</code> 数（1 到 i）",
-          "内层循环结束后输出 <code>endl</code> 换行",
-          "关键：内层循环的<b>上界是 i</b>，不是 n",
-        ],
-        answer: {
-          codeFile: "codes/lesson-05/print_max.cpp",
-        },
-        analysis: {
-          title: "📖 解析",
-          desc: '关键点：<b>内层循环的上界是 <code>i</code>，不是 <code>n</code></b>。<br><br>· 第 1 行 i=1：内层循环 1 次 → 1 个 *<br>· 第 2 行 i=2：内层循环 2 次 → 2 个 *<br>· 第 3 行 i=3：内层循环 3 次 → 3 个 *<br>……<br><br>这种"内层次数随外层变化"的模式，是<b>图案打印的核心</b>。<br>改一个上界，就能画出各种图案。',
-        },
-        footer: '<b>💡 图案打印的三种模式</b><br>① <b>直角三角形</b>：内层 <code>j &lt;= i</code>（每行变长）<br>② <b>倒三角形</b>：内层 <code>j &lt;= n - i + 1</code>（每行变短）<br>③ <b>矩形</b>：内层 <code>j &lt;= m</code>（每行一样）<br><br><b>核心</b>：外层控制行，内层控制列。<br>改变内层的"上界"或"初始值"——就能画出不同图案。'
-      },
-    },
-
-    /* ===== 20 练习小结 ===== */
-    {
-      id: 20,
-      type: "grid",
-      title: '练习小结',
-      subtitle: '三道题的核心模式',
-      chapterTag: '第 5 讲 · 答疑',
+      id: 19, type: "grid", title: "练习小结", subtitle: "循环的三大核心模式",
       data: {
         cards: [
           {
-            icon: '➕',
-            title: '练习 1 · 求和',
-            desc: '<b>核心</b>：累加器模式<br><code>sum = 0; sum += i;</code><br><br><b>易错</b>：忘了初始化 sum = 0'
+            icon: "➕",
+            title: "模式 1：累加器",
+            desc: "<b>求总和</b><br><code>sum = 0;</code><br><code>for (...) sum += x;</code><br><br><b>易错</b>：忘了初始化为 0。"
           },
           {
-            icon: '✖️',
-            title: '练习 2 · 阶乘',
-            desc: '<b>核心</b>：累乘器模式<br><code>fact = 1; fact *= i;</code><br><br><b>易错</b>：初始值必须是 1（不是 0）'
+            icon: "✖️",
+            title: "模式 2：累乘器",
+            desc: "<b>求阶乘 / 乘积</b><br><code>fact = 1;</code><br><code>for (...) fact *= x;</code><br><br><b>易错</b>：初始值必须是 1。"
           },
           {
-            icon: '⭐',
-            title: '练习 3 · 图案',
-            desc: '<b>核心</b>：嵌套循环<br>内层上界 = 外层变量 <code>i</code><br><br><b>易错</b>：内层写 <code>j &lt;= n</code>（变成矩形）'
+            icon: "🪜",
+            title: "模式 3：嵌套循环",
+            desc: "<b>打印图案 / 二维表</b><br>外层控行，内层控列<br><code>for(i...) { for(j<=i...) }</code><br><br><b>易错</b>：内层边界随外层变。"
           }
         ],
-        footer: '<b>📌 三个核心模式（必须记熟）</b><br>① <b>累加</b>：<code>sum = 0; for (...) sum += x;</code><br>② <b>累乘</b>：<code>fact = 1; for (...) fact *= x;</code><br>③ <b>极值</b>：<code>mx = -1e9; for (...) if (x &gt; mx) mx = x;</code><br><br>这三个模式覆盖 80% 的循环题——<b>看到"求和/求积/求最值"就套公式</b>。'
+        footer: '<b>📌 万变不离其宗</b>：<br>不管循环题怎么变，底层都是这三个模式。把这三套代码练成肌肉记忆，以后遇到难题，先想“它是求和，还是求积，还是画图？”'
       }
     },
 
-    /* ===== 21 趣味扩展 ===== */
+    /* ===== 20 趣味扩展 ===== */
     {
-      id: 21,
+      id: 20,
       type: "grid",
       title: "🎨 难题后的放松 · 循环的真实应用",
       subtitle: "循环无处不在",
@@ -643,9 +620,9 @@ export default {
       },
     },
 
-    /* ===== 22 课堂小测 ===== */
+    /* ===== 21 课堂小测 ===== */
     {
-      id: 22,
+      id: 21,
       type: "quiz",
       title: "课堂小测",
       subtitle: "循环结构与次数",
@@ -741,9 +718,9 @@ while (i < 5) {
       },
     },
 
-    /* ===== 23 今日总结 ===== */
+    /* ===== 22 今日总结 ===== */
     {
-      id: 23,
+      id: 22,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -765,9 +742,9 @@ while (i < 5) {
       },
     },
 
-    /* ===== 24 课后作业 ===== */
+    /* ===== 23 课后作业 ===== */
     {
-      id: 24,
+      id: 23,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -795,9 +772,9 @@ while (i < 5) {
       },
     },
 
-    /* ===== 25 下节预告 ===== */
+    /* ===== 24 下节预告 ===== */
     {
-      id: 25,
+      id: 24,
       type: "radial",
       title: "下节预告",
       subtitle: "第 6 讲 · 一维数组",
@@ -812,9 +789,9 @@ while (i < 5) {
       },
     },
 
-    /* ===== 26 答疑时间 ===== */
+    /* ===== 25 答疑时间 ===== */
     {
-      id: 26,
+      id: 25,
       type: "grid",
       title: '答疑时间',
       subtitle: '常见问题 FAQ',
@@ -855,9 +832,9 @@ while (i < 5) {
       }
     },
 
-    /* ===== 27 本讲英文单词 ===== */
+    /* ===== 26 本讲英文单词 ===== */
     {
-      id: 27,
+      id: 26,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -910,9 +887,9 @@ while (i < 5) {
       },
     },
 
-    /* ===== 28 知识清单 ===== */
+    /* ===== 27 知识清单 ===== */
     {
-      id: 28,
+      id: 27,
       type: "grid",
       title: "第 5 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
@@ -944,18 +921,9 @@ while (i < 5) {
       },
     },
 
-    /* ===== 29 小结过渡 ===== */
+    /* ===== 28 结束页 ===== */
     {
-      id: 29,
-      type: "transition",
-      title: "循环结构 · 小结",
-      subtitle: "你已经让程序学会重复",
-      data: { note: "下一讲，我们将学习批量存储数据的工具——数组" },
-    },
-
-    /* ===== 30 结束页 ===== */
-    {
-      id: 30,
+      id: 28,
       type: "ending",
       title: "第五讲结束",
       subtitle: "点击返回目录，复习本讲内容",

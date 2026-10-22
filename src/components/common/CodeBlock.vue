@@ -7,6 +7,7 @@
         <span v-if="title && fileName" class="code-sep">·</span>
         <span v-if="fileName" class="code-filename">{{ fileName }}</span>
       </div>
+      <button class="run-btn" @click="runCode">▶️ 运行</button>
       <button
         class="copy-btn"
         data-no-flip
@@ -61,6 +62,35 @@ import { ref, computed, watchEffect } from "vue";
 import { useCodeLoader } from "@/composables/useCodeLoader";
 import { useHighlight } from "@/composables/useHighlight";
 import { useCopy } from "@/composables/useCopy";
+
+const runOutput = ref('');
+const showTerminal = ref(false);
+const isRunning = ref(false);
+
+async function handleRun() {
+  if (isRunning.value) return;
+  isRunning.value = true;
+  showTerminal.value = true;
+  runOutput.value = '⏳ 本地编译运行中...';
+
+  // 获取当前代码块的全部代码
+  const codeToRun = lines.value.join('\n');
+
+  try {
+    // 【核心修改】如果存在 electronAPI，直接走本地通信
+    if (window.electronAPI && window.electronAPI.runCode) {
+      const res = await window.electronAPI.runCode(codeToRun);
+      runOutput.value = res.output || '（程序无输出）';
+    } else {
+      // 如果是普通浏览器环境打开（非 Electron），给出提示
+      runOutput.value = '❌ 请在 Electron 桌面端运行此功能\n浏览器环境无法直接调用本地 C++ 编译器。';
+    }
+  } catch (error) {
+    runOutput.value = '❌ 运行出错：' + error.message;
+  } finally {
+    isRunning.value = false;
+  }
+}
 
 const props = defineProps({
   code: { type: String, default: "" },

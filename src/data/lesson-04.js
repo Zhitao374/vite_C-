@@ -1,7 +1,7 @@
 export default {
   title: "第 4 讲 运算符与分支",
   subtitle: "让程序学会判断",
-  total: 30,
+  total: 29,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -86,59 +86,9 @@ export default {
       },
     },
 
-    /* ===== 4 学习地图 ===== */
+    /* ===== 4 运算符与分支引入 ===== */
     {
-      id: 4,
-      type: "timeline",
-      variant: "map",
-      title: "本讲学习地图",
-      subtitle: "四站闯关，学会判断",
-      data: {
-        items: [
-          {
-            icon: "➕",
-            badge: "基础",
-            title: "第一站 · 运算符",
-            desc: "算术、赋值、关系、逻辑四类",
-            points: ["+ - * / %", "= += -= *= /=", "> < == !=", "&& || !"],
-          },
-          {
-            icon: "🔀",
-            badge: "核心",
-            title: "第二站 · if 家族",
-            desc: "单分支、双分支、多分支",
-            points: ["if 单分支", "if-else 双分支", "if-else if 多分支"],
-          },
-          {
-            icon: "🔢",
-            badge: "进阶",
-            title: "第三站 · switch",
-            desc: "多分支的另一种写法",
-            points: [
-              "switch (变量)",
-              "case 常量",
-              "break 跳出",
-              "default 兜底",
-            ],
-          },
-          {
-            icon: "🏆",
-            badge: "实战",
-            title: "第四站 · 综合练习",
-            desc: "奇偶、成绩、闰年",
-            points: [
-              "% 判断奇偶",
-              "if-else if 多级判断",
-              "闰年条件：4、100、400",
-            ],
-          },
-        ],
-      },
-    },
-
-    /* ===== 5 运算符与分支引入 ===== */
-    {
-      id: 5, type: 'origin',
+      id: 4, type: 'origin',
       title: '程序怎么"做判断"？',
       subtitle: '运算符与分支',
       chapterTag: '第 4 讲 · 概念理解',
@@ -181,9 +131,9 @@ export default {
       }
     },
 
-    /* ===== 6 运算符总览 ===== */
+    /* ===== 5 运算符总览 ===== */
     {
-      id: 6,
+      id: 5,
       type: "grid",
       title: "C++ 四类常用运算符",
       subtitle: "4 大类，覆盖程序的所有判断",
@@ -214,9 +164,9 @@ export default {
       },
     },
 
-    /* ===== 7 算术与赋值运算符 ===== */
+    /* ===== 6 算术与赋值运算符 ===== */
     {
-      id: 7,
+      id: 6,
       type: "code-split",
       title: "算术与赋值运算符",
       subtitle: "五大算术 + 复合赋值",
@@ -235,9 +185,9 @@ export default {
       },
     },
 
-    /* ===== 8 关系运算符 ===== */
+    /* ===== 7 关系运算符 ===== */
     {
-      id: 8,
+      id: 7,
       type: "code-split",
       title: "关系运算符 · 判断大小与相等",
       subtitle: "结果只有真或假",
@@ -261,9 +211,9 @@ export default {
       },
     },
 
-    /* ===== 9 逻辑运算符与优先级 ===== */
+    /* ===== 8 逻辑运算符与优先级 ===== */
     {
-      id: 9, type: 'grid',
+      id: 8, type: 'grid',
       title: '逻辑运算符与优先级',
       subtitle: '组合多个条件',
       chapterTag: '第 4 讲 · 概念理解',
@@ -294,9 +244,9 @@ export default {
       }
     },
 
-    /* ===== 10 过渡页 ===== */
+    /* ===== 9 过渡页 ===== */
     {
-      id: 10,
+      id: 9,
       type: "transition",
       title: "第二站 · 条件分支",
       subtitle: "让程序学会做判断",
@@ -306,9 +256,9 @@ export default {
       },
     },
 
-    /* ===== 11 什么是分支 ===== */
+    /* ===== 10 什么是分支 ===== */
     {
-      id: 11, type: 'grid',
+      id: 10, type: 'grid',
       title: '什么是分支结构？',
       subtitle: '让程序学会做判断',
       chapterTag: '第 4 讲 · 分支结构',
@@ -334,9 +284,9 @@ export default {
       }
     },
 
-    /* ===== 12 if 单分支 ===== */
+    /* ===== 11 if 单分支 ===== */
     {
-      id: 12,
+      id: 11,
       type: "code-split",
       title: "if 单分支",
       subtitle: "条件为真就执行",
@@ -359,9 +309,9 @@ export default {
       },
     },
 
-    /* ===== 13 if-else 双分支 ===== */
+    /* ===== 12 if-else 双分支 ===== */
     {
-      id: 13,
+      id: 12,
       type: "code-split",
       title: "if-else 双分支",
       subtitle: "两条路，必走一条",
@@ -385,9 +335,9 @@ export default {
       },
     },
 
-    /* ===== 14 练习1：判断奇偶 ===== */
+    /* ===== 13 练习1：判断奇偶 ===== */
     {
-      id: 14,
+      id: 13,
       type: "level-map",
       title: "课堂练习1：判断奇偶",
       subtitle: "用取余判断一个数的奇偶性",
@@ -412,9 +362,9 @@ export default {
       },
     },
 
-    /* ===== 15 if-else if 多分支 ===== */
+    /* ===== 14 if-else if 多分支 ===== */
     {
-      id: 15,
+      id: 14,
       type: "code-split",
       title: "if-else if-else 多分支",
       subtitle: "多条路，只走一条",
@@ -438,9 +388,9 @@ export default {
       },
     },
 
-    /* ===== 16 练习2：成绩等级 ===== */
+    /* ===== 15 练习2：成绩等级 ===== */
     {
-      id: 16,
+      id: 15,
       type: "level-map",
       title: "课堂练习2：成绩等级",
       subtitle: "用多分支判断分数等级",
@@ -465,9 +415,9 @@ export default {
       },
     },
 
-    /* ===== 17 switch 引入 ===== */
+    /* ===== 16 switch 引入 ===== */
     {
-      id: 17, type: 'grid',
+      id: 16, type: 'grid',
       title: 'switch 是什么？',
       subtitle: '多分支的另一种写法',
       chapterTag: '第 4 讲 · 分支结构',
@@ -493,9 +443,9 @@ export default {
       }
     },
 
-    /* ===== 18 switch 语法 ===== */
+    /* ===== 17 switch 语法 ===== */
     {
-      id: 18,
+      id: 17,
       type: "code-split",
       title: "switch 多分支",
       subtitle: "根据变量的值选择路径",
@@ -517,9 +467,9 @@ export default {
       },
     },
 
-    /* ===== 19 switch vs if-else ===== */
+    /* ===== 18 switch vs if-else ===== */
     {
-      id: 19, type: 'decision',
+      id: 18, type: 'decision',
       title: 'switch vs if-else',
       subtitle: '什么时候用哪个',
       chapterTag: '第 4 讲 · 分支结构',
@@ -564,9 +514,9 @@ export default {
       }
     },
 
-    /* ===== 20 练习3：闰年判断 ===== */
+    /* ===== 19 练习3：闰年判断 ===== */
     {
-      id: 20,
+      id: 19,
       type: "level-map",
       title: "课堂练习3：闰年判断",
       subtitle: "用逻辑运算符组合条件",
@@ -595,9 +545,9 @@ export default {
       },
     },
 
-    /* ===== 21 常见错误 ===== */
+    /* ===== 20 常见错误 ===== */
     {
-      id: 21, type: 'pitfall',
+      id: 20, type: 'pitfall',
       title: '分支与运算符常见错误',
       subtitle: '避开这些坑',
       data: {
@@ -635,9 +585,9 @@ export default {
       }
     },
 
-    /* ===== 22 初赛渗透 ===== */
+    /* ===== 21 初赛渗透 ===== */
     {
-      id: 22, type: 'split',
+      id: 21, type: 'split',
       title: '初赛小知识：运算符与分支',
       subtitle: 'CSP-J/S 初赛必考',
       chapterTag: '第 4 讲 · 初赛渗透',
@@ -670,9 +620,9 @@ export default {
       }
     },
 
-    /* ===== 23 课堂小测 ===== */
+    /* ===== 22 课堂小测 ===== */
     {
-      id: 23,
+      id: 22,
       type: "quiz",
       title: "课堂小测",
       subtitle: "运算符与分支结构",
@@ -772,9 +722,9 @@ if (a > 3)
       },
     },
 
-    /* ===== 24 今日总结 ===== */
+    /* ===== 23 今日总结 ===== */
     {
-      id: 24,
+      id: 23,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -796,9 +746,9 @@ if (a > 3)
       },
     },
 
-    /* ===== 25 课后作业 ===== */
+    /* ===== 24 课后作业 ===== */
     {
-      id: 25,
+      id: 24,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -826,9 +776,9 @@ if (a > 3)
       },
     },
 
-    /* ===== 26 下节预告 ===== */
+    /* ===== 25 下节预告 ===== */
     {
-      id: 26,
+      id: 25,
       type: "radial",
       title: "下节预告",
       subtitle: "第 5 讲 · 循环结构",
@@ -843,9 +793,9 @@ if (a > 3)
       },
     },
 
-    /* ===== 27 答疑时间 ===== */
+    /* ===== 26 答疑时间 ===== */
     {
-      id: 27, type: 'grid',
+      id: 26, type: 'grid',
       title: '答疑时间',
       subtitle: '常见问题 FAQ',
       chapterTag: '第 4 讲 · 答疑',
@@ -885,9 +835,9 @@ if (a > 3)
       }
     },
 
-    /* ===== 28 本讲英文单词 ===== */
+    /* ===== 27 本讲英文单词 ===== */
     {
-      id: 28,
+      id: 27,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -954,9 +904,9 @@ if (a > 3)
       },
     },
 
-    /* ===== 29 知识清单 ===== */
+    /* ===== 28 知识清单 ===== */
     {
-      id: 29,
+      id: 28,
       type: "grid",
       title: "第 4 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
@@ -988,9 +938,9 @@ if (a > 3)
       },
     },
 
-    /* ===== 30 结束页 ===== */
+    /* ===== 29 结束页 ===== */
     {
-      id: 30,
+      id: 29,
       type: "ending",
       title: "第四讲结束",
       subtitle: "点击返回目录，复习本讲内容",

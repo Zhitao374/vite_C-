@@ -1,7 +1,7 @@
 export default {
   title: "第 3 讲 小数、字符、布尔与类型转换",
   subtitle: "数据的多种面孔",
-  total: 30,
+  total: 29,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -82,50 +82,9 @@ export default {
       },
     },
 
-    /* ===== 4 学习地图 ===== */
+    /* ===== 4 为什么要这么多类型 ===== */
     {
-      id: 4,
-      type: "timeline",
-      variant: "map",
-      title: "本讲学习地图",
-      subtitle: "四站闯关，认识数据的多种面孔",
-      data: {
-        items: [
-          {
-            icon: "📐",
-            badge: "小数",
-            title: "第一站 · double / float",
-            desc: "小数数据的家",
-            points: ["double 精度高", "float 精度低", "竞赛首选 double"],
-          },
-          {
-            icon: "🔤",
-            badge: "字符",
-            title: "第二站 · char",
-            desc: "单个字符的家",
-            points: ["单引号 'A'", "本质是 ASCII 码", "可转整数"],
-          },
-          {
-            icon: "💡",
-            badge: "布尔",
-            title: "第三站 · bool",
-            desc: "真假两个值",
-            points: ["true = 1", "false = 0", "判断的基础"],
-          },
-          {
-            icon: "🔄",
-            badge: "难点",
-            title: "第四站 · 类型转换",
-            desc: "不同类型之间转换",
-            points: ["自动转换", "强制转换", "整数除法陷阱"],
-          },
-        ],
-      },
-    },
-
-    /* ===== 5 为什么要这么多类型 ===== */
-    {
-      id: 5, type: 'origin',
+      id: 4, type: 'origin',
       title: '为什么要这么多类型？',
       subtitle: '不同数据住不同的家',
       chapterTag: '第 3 讲 · 概念理解',
@@ -163,9 +122,9 @@ export default {
       }
     },
 
-    /* ===== 6 类型总览 ===== */
+    /* ===== 5 类型总览 ===== */
     {
-      id: 6,
+      id: 5,
       type: "grid",
       title: "C++ 常用数据类型总览",
       subtitle: "本讲学习 4 种，凑齐基础类型",
@@ -196,9 +155,9 @@ export default {
       },
     },
 
-    /* ===== 7 double 小数 ===== */
+    /* ===== 6 double 小数 ===== */
     {
-      id: 7,
+      id: 6,
       type: "code-split",
       title: "double · 小数的家",
       subtitle: "小数点带来的精度",
@@ -228,9 +187,9 @@ export default {
       },
     },
 
-    /* ===== 8 练习1：圆的面积 ===== */
+    /* ===== 7 练习1：圆的面积 ===== */
     {
-      id: 8,
+      id: 7,
       type: "level-map",
       title: "课堂练习1：圆的面积",
       subtitle: "用 double 和 const 计算",
@@ -254,9 +213,9 @@ export default {
       },
     },
 
-    /* ===== 9 char 字符 ===== */
+    /* ===== 8 char 字符 ===== */
     {
-      id: 9,
+      id: 8,
       type: "code-split",
       title: "char · 单个字符的家",
       subtitle: "单引号，1 字节",
@@ -280,7 +239,7 @@ export default {
     },
 
     {
-      id: 10,  // 新 id，后面的页 +1
+      id: 9,  // 新 id，后面的页 +1
       type: 'compare',
       title: '单引号 vs 双引号',
       subtitle: '新手最常搞混的两个符号',
@@ -304,9 +263,9 @@ export default {
       }
     },
 
-    /* ===== 11 char 与 ASCII ===== */
+    /* ===== 10 char 与 ASCII ===== */
     {
-      id: 11, type: 'grid',
+      id: 10, type: 'grid',
       title: 'char 与 ASCII',
       subtitle: '字符背后的数字',
       chapterTag: '第 3 讲 · 概念理解',
@@ -337,9 +296,9 @@ export default {
       }
     },
 
-    /* ===== 12 bool 布尔 ===== */
+    /* ===== 11 bool 布尔 ===== */
     {
-      id: 12,
+      id: 11,
       type: "code-split",
       title: "bool · 只有真和假",
       subtitle: "判断的基础",
@@ -375,9 +334,9 @@ export default {
       },
     },
 
-    /* ===== 13 过渡页 ===== */
+    /* ===== 12 过渡页 ===== */
     {
-      id: 13,
+      id: 12,
       type: "transition",
       title: "第四站 · 类型转换",
       subtitle: "不同类型之间怎么转换",
@@ -387,9 +346,9 @@ export default {
       },
     },
 
-    /* ===== 14 类型转换答疑 ===== */
+    /* ===== 13 类型转换答疑 ===== */
     {
-      id: 14, type: "grid",
+      id: 13, type: "grid",
       title: "类型转换答疑",
       subtitle: "小C回答常见问题",
       chapterTag: "第 3 讲 · 类型转换",
@@ -403,9 +362,9 @@ export default {
       }
     },
 
-    /* ===== 15 自动转换 ===== */
+    /* ===== 14 自动转换 ===== */
     {
-      id: 15,
+      id: 14,
       type: "code-split",
       title: "自动转换 · 小类型自动升级",
       subtitle: "编译器帮你完成",
@@ -427,9 +386,9 @@ export default {
       },
     },
 
-    /* ===== 16 强制转换 ===== */
+    /* ===== 15 强制转换 ===== */
     {
-      id: 16,
+      id: 15,
       type: "code-split",
       title: "强制转换 · 手动指定类型",
       subtitle: "语法：(类型)变量",
@@ -451,9 +410,9 @@ export default {
       },
     },
 
-    /* ===== 17 整数除法陷阱 ===== */
+    /* ===== 16 整数除法陷阱 ===== */
     {
-      id: 17,
+      id: 16,
       type: "compare",
       title: "整数除法陷阱",
       subtitle: "竞赛新手最容易踩的坑",
@@ -477,9 +436,9 @@ export default {
       },
     },
 
-    /* ===== 18 练习3：整数除法 ===== */
+    /* ===== 17 练习3：整数除法 ===== */
     {
-      id: 18,
+      id: 17,
       type: "level-map",
       title: "课堂练习3：浮点除法",
       subtitle: "用强制转换避免整数除法",
@@ -508,9 +467,9 @@ export default {
       },
     },
 
-    /* ===== 19 常见错误 ===== */
+    /* ===== 18 常见错误 ===== */
     {
-      id: 19, type: "compare", title: "类型相关常见错误", subtitle: "避开这些坑",
+      id: 18, type: "compare", title: "类型相关常见错误", subtitle: "避开这些坑",
       data: {
         splitStep: true, // 开启先错后对
         groups: [
@@ -538,9 +497,9 @@ export default {
       }
     },
 
-    /* ===== 20 练习2：温度转换 ===== */
+    /* ===== 19 练习2：温度转换 ===== */
     {
-      id: 20,
+      id: 19,
       type: "level-map",
       title: "课堂练习2：温度转换",
       subtitle: "摄氏温度转华氏温度",
@@ -564,9 +523,9 @@ export default {
       },
     },
 
-    /* ===== 21 练习小结 ===== */
+    /* ===== 20 练习小结 ===== */
     {
-      id: 21, type: 'grid',
+      id: 20, type: 'grid',
       title: '练习小结',
       subtitle: '三道题的核心要点',
       chapterTag: '第 3 讲 · 答疑',
@@ -592,9 +551,9 @@ export default {
       }
     },
 
-    /* ===== 22 初赛渗透 ===== */
+    /* ===== 21 初赛渗透 ===== */
     {
-      id: 22, type: "split",
+      id: 21, type: "split",
       title: "初赛小知识：类型与 ASCII",
       subtitle: "CSP-J/S 初赛常考",
       chapterTag: "第 3 讲 · 初赛渗透",
@@ -626,9 +585,9 @@ export default {
       }
     },
 
-    /* ===== 23 课堂小测 ===== */
+    /* ===== 22 课堂小测 ===== */
     {
-      id: 23,
+      id: 22,
       type: "quiz",
       title: "课堂小测",
       subtitle: "小数、字符、布尔与类型转换",
@@ -719,9 +678,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 24 今日总结 ===== */
+    /* ===== 23 今日总结 ===== */
     {
-      id: 24,
+      id: 23,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -743,9 +702,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 25 课后作业 ===== */
+    /* ===== 24 课后作业 ===== */
     {
-      id: 25,
+      id: 24,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -773,9 +732,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 26 下节预告 ===== */
+    /* ===== 25 下节预告 ===== */
     {
-      id: 26,
+      id: 25,
       type: "radial",
       title: "下节预告",
       subtitle: "第 4 讲 · 运算符与分支",
@@ -790,9 +749,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 27 答疑时间 ===== */
+    /* ===== 26 答疑时间 ===== */
     {
-      id: 27, type: "quote",
+      id: 26, type: "quote",
       title: "自由提问时间",
       subtitle: "把你不懂的问题，大声说出来",
       chapterTag: "第 3 讲 · 互动",
@@ -812,9 +771,9 @@ cout << c << endl;`,
       }
     },
 
-    /* ===== 28 本讲英文单词 ===== */
+    /* ===== 27 本讲英文单词 ===== */
     {
-      id: 28,
+      id: 27,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -874,9 +833,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 29 知识清单 ===== */
+    /* ===== 28 知识清单 ===== */
     {
-      id: 29,
+      id: 28,
       type: "grid",
       title: "第 3 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
@@ -907,9 +866,9 @@ cout << c << endl;`,
       },
     },
 
-    /* ===== 30 结束页 ===== */
+    /* ===== 29 结束页 ===== */
     {
-      id: 30,
+      id: 29,
       type: "ending",
       title: "第三讲结束",
       subtitle: "点击返回目录，复习本讲内容",
