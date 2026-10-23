@@ -194,7 +194,7 @@ function build01() {
     // 四、已完成讲次（从数据文件实时扫描）
     // ─────────────────────────────────────
     parts.push('\n## 四、已完成讲次（实时扫描）\n');
-    const lessonFiles = listDir('src/data', '.js').filter(f => f.startsWith('lesson-'));
+    const lessonFiles = listDir('src/data', '.js').filter(f => /^lesson-\d+\.js$/.test(f));
     parts.push(`**共 ${lessonFiles.length} 讲**\n\n`);
     parts.push('| 讲次 | 标题 | 副标题 | 页数 |\n|---|---|---|---|\n');
 

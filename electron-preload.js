@@ -1,7 +1,6 @@
-// electron-preload.js
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  // 暴露一个 runCode 方法给前端
-  runCode: (code) => ipcRenderer.invoke('compile-cpp', code)
+  // 这里的 'compile-cpp' 就是报错里提到的通道名
+  runCode: (code) => ipcRenderer.invoke('compile-cpp', code) 
 });

@@ -565,11 +565,10 @@ export default {
         output: "（输入 5）\n78.5397",
       },
     },
-    /* ===== const 练习 ===== */
     /* ===== 23 练习：圆的面积 ===== */
     {
       id: 23, type: "level-map",
-      title: "课堂练习3：圆的面积",
+      title: "课堂练习4：圆的面积",
       subtitle: "用 const 和 double",
       chapterTag: "第 2 讲 · 实战演练",
       data: {
@@ -594,7 +593,7 @@ export default {
     /* ===== 24 练习：交换两个数 ===== */
     {
       id: 24, type: "level-map",
-      title: "课堂练习4：交换两个数",
+      title: "课堂练习5：交换两个数",
       subtitle: "用临时变量交换值",
       chapterTag: "第 2 讲 · 实战演练",
       data: {
@@ -681,31 +680,41 @@ export default {
     },
 
     /* ===== 27 练习小结 ===== */
-    {
-      id: 27,
-      type: "grid",
-      title: "练习小结",
-      subtitle: "三道题的核心要点",
-      data: {
-        cards: [
-          {
-            icon: "✖️",
-            title: "练习 1 · 输出两倍",
-            desc: "<b>核心</b>：程序三步走<br>输入 → 处理 → 输出<br><br><b>易错</b>：别忘 <code>cin</code> 读数据",
-          },
-          {
-            icon: "🔄",
-            title: "练习 2 · 交换两个数",
-            desc: "<b>核心</b>：用临时变量<br><code>t = a; a = b; b = t;</code><br><br><b>易错</b>：不能直接 <code>a = b; b = a;</code>",
-          },
-          {
-            icon: "🔢",
-            title: "练习 3 · 大数求和",
-            desc: "<b>核心</b>：预判范围选类型<br>大数用 <code>long long</code><br><br><b>易错</b>：<code>int</code> 会溢出",
-          },
-        ],
+{
+  id: 27,
+  type: "grid",
+  title: "练习小结",
+  subtitle: "五道题的核心要点",
+  data: {
+    cards: [
+      {
+        icon: "📦",
+        title: "练习 1 · 定义变量",
+        desc: "<b>核心</b>：定义 + 赋值<br><code>int age = 11;</code><br><br><b>易错</b>：未初始化是垃圾值",
       },
-    },
+      {
+        icon: "📥",
+        title: "练习 2 · cin 读入",
+        desc: "<b>核心</b>：三步走<br>输入 → 处理 → 输出<br><br><b>易错</b>：别忘 <code>cin</code> 读数据",
+      },
+      {
+        icon: "🔢",
+        title: "练习 3 · 大数求和",
+        desc: "<b>核心</b>：预判范围选类型<br>大数用 <code>long long</code><br><br><b>易错</b>：<code>int</code> 会溢出",
+      },
+      {
+        icon: "⚪",
+        title: "练习 4 · 圆的面积",
+        desc: "<b>核心</b>：const + double<br><code>const double PI = 3.14159;</code><br><br><b>易错</b>：忘记 const 或类型用错",
+      },
+      {
+        icon: "🔄",
+        title: "练习 5 · 交换两个数",
+        desc: "<b>核心</b>：用临时变量<br><code>t = a; a = b; b = t;</code><br><br><b>易错</b>：不能直接 <code>a = b; b = a;</code>",
+      },
+    ],
+  },
+},
 
     /* ===== 28 课堂小测 ===== */
     {

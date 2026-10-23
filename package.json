@@ -4,6 +4,7 @@
   "type": "module",
   "main": "electron-main.js",
   "scripts": {
+    "start": "npm run dev",
     "dev:vite": "vite",
     "dev:electron": "electron .",
     "dev": "concurrently \"npm run dev:vite\" \"wait-on http://localhost:5173 && npm run dev:electron\"",

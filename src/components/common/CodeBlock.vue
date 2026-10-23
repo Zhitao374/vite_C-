@@ -7,34 +7,20 @@
         <span v-if="title && fileName" class="code-sep">·</span>
         <span v-if="fileName" class="code-filename">{{ fileName }}</span>
       </div>
-      <button class="run-btn" @click="runCode">▶️ 运行</button>
-      <button
-        class="copy-btn"
-        data-no-flip
-        :class="{ 'copy-success': copied }"
-        @click="handleCopy"
-        title="复制代码"
-      >
-        <svg viewBox="0 0 24 24" width="15" height="15">
-          <rect
-            x="9"
-            y="9"
-            width="13"
-            height="13"
-            rx="2"
-            ry="2"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          />
-          <path
-            d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          />
-        </svg>
-      </button>
+      <div class="code-header-actions">
+        <!-- 运行按钮 -->
+        <button class="run-btn" data-no-flip :disabled="isRunning" @click.stop="handleRun">
+          <Loader2 v-if="isRunning" :size="14" class="spin-icon" />
+          <Play v-else :size="14" />
+          <span>{{ isRunning ? '运行中...' : '运行' }}</span>
+        </button>
+        
+        <!-- 复制按钮 -->
+        <button class="copy-btn" data-no-flip :class="{ 'copy-success': copied }" @click="handleCopy" title="复制代码">
+          <Check v-if="copied" :size="16" />
+          <Copy v-else :size="16" />
+        </button>
+      </div>
     </div>
 
     <pre :class="densityClass"><code>
@@ -54,11 +40,32 @@
         ></span>
       </span>
     </code></pre>
+    
+    <!-- 终端输出区 -->
+    <div v-if="showTerminal" class="code-terminal" data-no-flip>
+      <div class="terminal-header">
+        <span class="terminal-title">
+          <Terminal :size="14" /> 终端输出
+        </span>
+        <button class="terminal-close" @click.stop="showTerminal = false">
+          <X :size="16" />
+        </button>
+      </div>
+      
+      <!-- 标准输入框 -->
+      <div class="terminal-input-wrap">
+        <span class="terminal-prompt">输入数据 (stdin):</span>
+        <input v-model="stdinText" class="terminal-input" placeholder="如果代码有 cin，请在这里填写数据（如：3 5）" />
+      </div>
+
+      <pre class="terminal-output">{{ runOutput }}</pre>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watchEffect } from "vue";
+import { Play, Copy, Check, Terminal, Loader2, X } from 'lucide-vue-next';
 import { useCodeLoader } from "@/composables/useCodeLoader";
 import { useHighlight } from "@/composables/useHighlight";
 import { useCopy } from "@/composables/useCopy";
@@ -66,6 +73,7 @@ import { useCopy } from "@/composables/useCopy";
 const runOutput = ref('');
 const showTerminal = ref(false);
 const isRunning = ref(false);
+const stdinText = ref(''); // 绑定输入框内容
 
 async function handleRun() {
   if (isRunning.value) return;
@@ -73,16 +81,13 @@ async function handleRun() {
   showTerminal.value = true;
   runOutput.value = '⏳ 本地编译运行中...';
 
-  // 获取当前代码块的全部代码
-  const codeToRun = lines.value.join('\n');
+  const codeToRun = rawCode.value; 
 
   try {
-    // 【核心修改】如果存在 electronAPI，直接走本地通信
     if (window.electronAPI && window.electronAPI.runCode) {
-      const res = await window.electronAPI.runCode(codeToRun);
+      const res = await window.electronAPI.runCode(codeToRun, stdinText.value);
       runOutput.value = res.output || '（程序无输出）';
     } else {
-      // 如果是普通浏览器环境打开（非 Electron），给出提示
       runOutput.value = '❌ 请在 Electron 桌面端运行此功能\n浏览器环境无法直接调用本地 C++ 编译器。';
     }
   } catch (error) {
@@ -141,11 +146,6 @@ const lines = computed(() => {
   return code.split("\n");
 });
 
-/**
- * 渲染行列表：
- * - 跳过 hiddenLines 中的行
- * - 在第一个隐藏行位置插入 placeholder（如果配置了）
- */
 const renderedLines = computed(() => {
   const hiddenSet = new Set(props.hiddenLines);
   const result = [];
@@ -154,7 +154,6 @@ const renderedLines = computed(() => {
   lines.value.forEach((line, i) => {
     const lineNumber = i + startLine.value;
 
-    // 隐藏行：跳过，但第一个隐藏位置插入占位符
     if (hiddenSet.has(lineNumber)) {
       if (!placeholderInserted && props.placeholder) {
         result.push({
@@ -168,7 +167,6 @@ const renderedLines = computed(() => {
       return;
     }
 
-    // 正常行
     result.push({
       num: lineNumber,
       text: line,
@@ -180,9 +178,6 @@ const renderedLines = computed(() => {
   return result;
 });
 
-// ============================================
-// snippet 提取
-// ============================================
 function extractSnippet(code, name) {
   const startTag = `// @snippet-start ${name}`;
   const endTag = `// @snippet-end ${name}`;
@@ -198,27 +193,18 @@ function extractSnippet(code, name) {
 
   return {
     code: codeLines.slice(startIdx + 1, endIdx).join("\n"),
-    startLine: startIdx + 2, // 内容从 startIdx+1 行开始（0-based），显示行号 = startIdx + 2
+    startLine: startIdx + 2,
   };
 }
 
-// ============================================
-// 判断某行是否应该高亮
-// ============================================
 function isLineHighlighted(lineNumber) {
   if (!lineNumber) return false;
-  if (
-    !Array.isArray(props.highlightLines) ||
-    props.highlightLines.length === 0
-  ) {
+  if (!Array.isArray(props.highlightLines) || props.highlightLines.length === 0) {
     return false;
   }
   return props.highlightLines.includes(lineNumber);
 }
 
-// ============================================
-// 文件名 / 密度
-// ============================================
 const fileName = computed(() => {
   if (!props.codeFile) return "";
   const parts = props.codeFile.split("/");
@@ -234,9 +220,6 @@ const densityClass = computed(() => {
   return "code-xs";
 });
 
-// ============================================
-// 语法高亮 + 复制
-// ============================================
 function safeHighlight(line) {
   return syntaxHighlight(escapeHtml(line));
 }
@@ -267,7 +250,7 @@ async function handleCopy() {
   align-items: center;
   gap: 12px;
   min-height: 36px;
-  padding: 6px 48px 6px 14px;
+  padding: 6px 14px;
   background: var(--code-header-bg);
   border-bottom: 1px solid var(--code-border);
 }
@@ -277,22 +260,19 @@ async function handleCopy() {
   gap: 6px;
   flex-shrink: 0;
 }
+
 .code-dots span {
   width: 11px;
   height: 11px;
   border-radius: 50%;
 }
-.code-dots span:nth-child(1) {
-  background: #ff5f57;
-}
-.code-dots span:nth-child(2) {
-  background: #febc2e;
-}
-.code-dots span:nth-child(3) {
-  background: #28c840;
-}
+
+.code-dots span:nth-child(1) { background: #ff5f57; }
+.code-dots span:nth-child(2) { background: #febc2e; }
+.code-dots span:nth-child(3) { background: #28c840; }
 
 .code-header-title {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -302,19 +282,29 @@ async function handleCopy() {
   text-overflow: ellipsis;
   min-width: 0;
 }
+
 .code-title {
   color: var(--code-title);
   font-size: calc(16px * var(--font-scale));
   font-weight: 600;
 }
+
 .code-filename {
   color: var(--code-filename);
   font-family: var(--font-code);
   font-size: calc(15px * var(--font-scale));
 }
+
 .code-sep {
   color: rgba(230, 241, 255, 0.4);
   margin: 0 2px;
+}
+
+.code-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 /* ============================================ */
@@ -333,39 +323,24 @@ pre {
   tab-size: 4;
   margin: 0;
 }
-pre.code-md {
-  font-size: calc(var(--fs-code) * 0.95);
-  line-height: 1.55;
-}
-pre.code-sm {
-  font-size: calc(var(--fs-code) * 0.9);
-  line-height: 1.5;
-}
-pre.code-xs {
-  font-size: calc(var(--fs-code) * 0.85);
-  line-height: 1.45;
-}
-pre code {
-  display: block;
-}
+
+pre.code-md { font-size: calc(var(--fs-code) * 0.95); line-height: 1.55; }
+pre.code-sm { font-size: calc(var(--fs-code) * 0.9); line-height: 1.5; }
+pre.code-xs { font-size: calc(var(--fs-code) * 0.85); line-height: 1.45; }
+pre code { display: block; }
 
 /* ============================================ */
-/* 代码行 —— hover 高亮                          */
+/* 代码行                                        */
 /* ============================================ */
 .code-line {
   display: flex;
   align-items: flex-start;
-  /* 左侧预留 8px 出血区（背景可从行号左侧开始） */
   padding: 0 20px 0 8px;
   margin-left: -8px;
-  /* 预留 border-left 占位，避免 highlighted 切换时抖动 */
   border-left: 3px solid transparent;
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-/* hover 高亮 —— 比 is-highlighted 更弱 */
 .code-line:hover:not(.is-highlighted) {
   background: rgba(255, 255, 255, 0.05);
 }
@@ -375,7 +350,6 @@ pre code {
   font-weight: 700;
 }
 
-/* 高亮行（由 highlightLines prop 控制） */
 .code-line.is-highlighted {
   background: rgba(255, 122, 0, 0.15);
   border-left-color: var(--accent);
@@ -386,9 +360,6 @@ pre code {
   font-weight: 700;
 }
 
-/* ============================================ */
-/* 行号                                          */
-/* ============================================ */
 .code-num {
   flex: 0 0 3.2em;
   text-align: right;
@@ -400,23 +371,21 @@ pre code {
   transition: color 0.15s ease;
 }
 
-/* ============================================ */
-/* 代码文本                                      */
-/* ============================================ */
 .code-text {
   flex: 1;
   min-width: 0;
   white-space: pre;
 }
 
+.code-line.is-placeholder .code-text {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
 /* ============================================ */
-/* 复制按钮                                      */
+/* 按钮与图标                                     */
 /* ============================================ */
 .copy-btn {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
   width: 28px;
   height: 28px;
   padding: 0;
@@ -429,31 +398,118 @@ pre code {
   cursor: pointer;
   color: rgba(230, 241, 255, 0.5);
   transition: all 0.2s;
-  z-index: 2;
 }
-.code-block:hover .copy-btn {
-  color: rgba(230, 241, 255, 0.9);
+.code-block:hover .copy-btn { color: rgba(230, 241, 255, 0.9); }
+.copy-btn:hover { background: rgba(255, 255, 255, 0.1); }
+.copy-btn.copy-success { color: #67e8a0; }
+.copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.run-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(0, 180, 42, 0.15);
+  border: 1px solid rgba(0, 180, 42, 0.4);
+  border-radius: 6px;
+  color: #67e8a0;
+  font-size: calc(13px * var(--font-scale));
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
-.copy-btn:hover {
+.run-btn:hover:not(:disabled) { background: rgba(0, 180, 42, 0.3); }
+.run-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* 旋转加载动画 */
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================ */
+/* 终端输出区域                                    */
+/* ============================================ */
+.code-terminal {
+  border-top: 1px solid var(--code-border);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 14px 10px;
+}
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  color: rgba(230, 241, 255, 0.6);
+  font-size: calc(13px * var(--font-scale));
+}
+.terminal-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.terminal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: rgba(230, 241, 255, 0.6);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.terminal-close:hover { 
+  color: #fff;
   background: rgba(255, 255, 255, 0.1);
 }
-.copy-btn.copy-success {
-  color: #00b42a;
+
+/* 输入框样式 */
+.terminal-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(230, 241, 255, 0.2);
+}
+.terminal-prompt {
+  font-size: calc(13px * var(--font-scale));
+  color: #67e8a0;
+  flex-shrink: 0;
+}
+.terminal-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(230, 241, 255, 0.3);
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--font-code);
+  font-size: calc(13px * var(--font-scale));
+  padding: 4px 8px;
+  outline: none;
+}
+.terminal-input:focus {
+  border-color: #67e8a0;
 }
 
-/* ============================================ */
-/* 占位行                                        */
-/* ============================================ */
-.code-line.is-placeholder .code-text {
-  color: var(--code-comment);
-  font-style: italic;
-}
-
-/* ============================================ */
-/* 复制按钮无障碍 + data-no-flip                  */
-/* ============================================ */
-.copy-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.code-terminal pre.terminal-output {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-code);
+  font-size: calc(14px * var(--font-scale));
+  line-height: 1.5;
+  color: #e6f1ff;
+  background: transparent;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
 }
 </style>

@@ -455,10 +455,10 @@ html.high-contrast .card {
 /* 大屏演示减负模式（全局版）                     */
 /* ============================================ */
 
-/* 1. 允许全局纵向滚动，防止大字撑爆屏幕 */
+/* 1. 允许全局纵向滚动，防止整页内容撑爆屏幕 */
 body.is-big-screen .slide-body {
   overflow-y: auto !important;
-  /* 隐藏丑陋的浏览器滚动条，保持画面干净 */
+  /* 隐藏丑陋的浏览器全局滚动条，保持画面干净 */
   scrollbar-width: none; 
 }
 body.is-big-screen .slide-body::-webkit-scrollbar {
@@ -473,28 +473,59 @@ body.is-big-screen .chapter-tag {
   opacity: 0.5; /* 弱化右上角标签 */
 }
 
-/* 3. 自动折行：大屏下，所有的左右双栏都变成上下单栏 */
-body.is-big-screen .split-container,
-body.is-big-screen .answer-split-layout,
-body.is-big-screen .level-map-top {
-  grid-template-columns: 1fr !important;
+/* 3. ⚡ 核心修改：取消强制折行，保持原来的网格/分栏列数！ */
+/* (删除了之前导致变为单栏的 .split-container 等强制 1fr 设定) */
+
+/* 4. 🌟 布局不变，给溢出容器增加独立滚动条 */
+/* 为多栏布局（split）的每一栏、网格布局（grid）的卡片、通用卡片增加滚动能力 */
+body.is-big-screen .split-pane,
+body.is-big-screen .card-compact,
+body.is-big-screen .card {
+  overflow-y: auto;
+  /* 防止内容过多时撑破父容器高度 */
+  max-height: 100%; 
+  /* 细滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(22, 93, 255, 0.4) transparent;
 }
 
-/* 4. 代码页/分栏页的高度限制解除 */
-body.is-big-screen .level-map-layout {
-  grid-template-columns: 1fr; /* 取消左侧边距 */
-}
-body.is-big-screen .answer-wrapper {
-  max-width: 100%; /* 宽屏代码不再缩窄 */
+/* 5. 美化这些内部 div 的滚动条（Webkit 内核） */
+body.is-big-screen .split-pane::-webkit-scrollbar,
+body.is-big-screen .card-compact::-webkit-scrollbar,
+body.is-big-screen .card::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* 5. 对话页（Dialog）适配：取消气泡最大宽度限制，让其撑满 */
+body.is-big-screen .split-pane::-webkit-scrollbar-thumb,
+body.is-big-screen .card-compact::-webkit-scrollbar-thumb,
+body.is-big-screen .card::-webkit-scrollbar-thumb {
+  background: rgba(22, 93, 255, 0.25);
+  border-radius: 3px;
+}
+
+body.is-big-screen .split-pane::-webkit-scrollbar-thumb:hover,
+body.is-big-screen .card-compact::-webkit-scrollbar-thumb:hover,
+body.is-big-screen .card::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 93, 255, 0.5);
+}
+
+/* 6. 代码页（CodeSplit）在大字模式下，让右侧信息栏独立滚动 */
+body.is-big-screen .right-info-pane {
+  overflow: hidden;
+}
+body.is-big-screen .info-bottom-group {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+body.is-big-screen .info-bottom-group::-webkit-scrollbar {
+  width: 6px;
+}
+body.is-big-screen .info-bottom-group::-webkit-scrollbar-thumb {
+  background: rgba(22, 93, 255, 0.25);
+  border-radius: 3px;
+}
+
+/* 7. 对话气泡自适应 */
 body.is-big-screen .bubble {
   max-width: 100%;
-}
-
-/* 6. 网格（Grid）适配：自动减少列数，放大卡片 */
-body.is-big-screen .grid-cols-3,
-body.is-big-screen .grid-cols-4 {
-  grid-template-columns: repeat(2, 1fr) !important;
 }

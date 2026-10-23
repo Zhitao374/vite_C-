@@ -39,7 +39,7 @@
         
         <!-- 顶部固定区：运行结果 -->
         <div v-if="d.output" class="info-top-group">
-          <StepWrapper :step="baseOffset + (d.annotations ? d.annotations.length : 0)">
+          <StepWrapper :step="outputStep">
             <div class="card output-card">
               <div class="card-title" style="font-size: calc(16px * var(--font-scale));">🖥️ 运行结果</div>
               <pre><code>{{ d.output }}</code></pre>
@@ -52,7 +52,7 @@
           <StepWrapper
             v-for="(a, i) in (d.annotations || [])"
             :key="i"
-            :step="baseOffset + i"
+            :step="baseOffset + i + 1"
           >
             <div class="card annotation-card">
               <div class="annotation-content">
@@ -102,8 +102,9 @@ const baseOffset = computed(() => (d.value.intro ? 2 : 1));
 const hasExtra = computed(() => extra.value && Object.keys(extra.value).length > 0);
 const hasFooter = computed(() => footer.value && footer.value.length > 0);
 
-const extraStep = computed(() => baseOffset.value + annotations.value.length + (d.value.output ? 1 : 0));
-const footerStep = computed(() => extraStep.value + (hasExtra.value ? 1 : 0));
+const outputStep = computed(() => baseOffset.value + annotations.value.length + 1);
+const extraStep  = computed(() => outputStep.value + (d.value.output ? 1 : 0));
+const footerStep = computed(() => extraStep.value  + (hasExtra.value  ? 1 : 0));
 
 useStepCount(() =>
   (d.value.intro ? 1 : 0) +

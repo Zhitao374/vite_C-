@@ -135,8 +135,8 @@ export default {
         ],
         output: "Hello, World!",
         extra: {
-          title: "💡 为什么 main 是入口",
-          desc: '<div><code>main</code> 是英文"<b>主要的</b>"的意思。计算机运行程序时，第一件事就是<b>找到 main</b>，从那里开始执行。</div><div>没有 main，程序就不知道从哪里出发。这是 C++ 标准的规定，<b>所有编译器都遵守</b>。</div><div>那能不能不叫 main？不行。<b>每个程序有且只有一个 main</b>。名字必须小写。写成 <code>Main</code> 会编译失败。</div><div>有意思的是，其他语言也有类似规定：<a href="https://baike.baidu.com/item/Java" target="_blank" class="wiki-link">Java</a> 是 <code>public static void main</code>，<a href="https://baike.baidu.com/item/Python" target="_blank" class="wiki-link">Python</a> 是 <code>if __name__ == \'__main__\'</code>。所有语言的"入口"都叫 main——这算是程序员之间的默契。</div><div></div><div>🔮 <b>伏笔</b>：你写的 "H"、"e"、"l"，在计算机里其实都是 <b>数字</b>。第 22 讲揭晓。</div>',
+          title: "💡 为什么所有语言的第一课都是它？",
+          desc: '<div><b>1. 为什么 main 是入口？</b><br><code>main</code> 是英文"<b>主要的</b>"的意思。计算机运行程序时，第一件事就是<b>找到 main</b>，从那里开始执行。</div><div>没有 main，程序就不知道从哪里出发。这是 C++ 标准的规定，<b>所有编译器都遵守</b>。</div><div><b>2. Hello World 的浪漫</b><br>1972 年，贝尔实验室的 Brian Kernighan 在教程里写下了第一句 <code>Hello World</code>。<br>半个世纪过去了，全世界所有程序员的第一行代码，几乎都是这句问候。这是我们向计算机世界打的第一个招呼。</div><div><b>3. 那能不能不叫 main？</b><br>不行。每个程序有且只有一个 main，且名字必须小写。写成 <code>Main</code> 会报错。<br>有趣的是，其他语言也是：<a href="https://baike.baidu.com/item/Java" target="_blank" class="wiki-link">Java</a> 是 <code>public static void main</code>，<a href="https://baike.baidu.com/item/Python" target="_blank" class="wiki-link">Python</a> 是 <code>if __name__ == \'__main__\'</code>。</div><div>🔮 <b>伏笔</b>：你写的 "H"、"e"、"l"，在计算机里其实都是 <b>数字</b>。第 22 讲揭晓。</div>',
         },
       },
     },
@@ -172,31 +172,34 @@ export default {
       }
     },
 
-    /* ===== 7 练习1：Hello World ===== */
+        /* ===== 7 练习1：Hello C++ ===== */
     {
       id: 7,
       type: "level-map",
-      title: "课堂练习1：Hello World",
-      subtitle: "独立完成第一个输出程序",
+      title: "课堂练习1：Hello, C++!",
+      subtitle: "动手修改你的第一个程序",
       chapterTag: "第 1 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
-          desc: "输出 <code>Hello, World!</code>。要求：用 <code>cout</code>，英文双引号，末尾分号。",
-          timer: "⏱ 限时 5 分钟",
+          desc: "不要直接抄上一页！请修改刚才的代码，让屏幕输出：<br><code>Hello, C++!</code><br><br>要求：注意<b>大小写</b>，结尾是<b>英文感叹号</b>，别忘了分号。",
+          timer: "⏱ 限时 3 分钟",
         },
         hints: [
           "用 <code>cout</code> 输出",
-          "字符串用英文双引号",
-          "语句末尾有分号",
+          "仔细看引号里的内容，把 <code>World</code> 换成 <code>C++</code>",
+          "感叹号 <code>!</code> 必须在英文双引号 <code>\" \"</code> 里面",
+          "整句代码以英文分号 <code>;</code> 结尾",
         ],
-        answer: { codeFile: "codes/lesson-01/hello-world.cpp" },
+        answer: {
+          code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello, C++!" << endl;\n    return 0;\n}',
+        },
         analysis: {
           title: "📖 解析",
-          desc: '<code>cout</code> 输出 · <code>endl</code> 换行 · <code>return 0</code> 正常结束。<br>跨学科：输出的文字就像广播里的"一句话"，要用引号"打包"好才能送出去。',
+          desc: '这道题考的是<b>代码修改</b>与<b>标点符号</b>。<br>很多同学会不小心把感叹号写到引号外面，变成 <code>"Hello, C++"!</code>，这是典型的语法错误。<br><br>输出的文字就像广播里的"一句话"，<b>标点符号也是这句话的一部分</b>，必须用引号"打包"好才能送出去。',
         },
         extra: {
-          title: "📖 知识扩展 · 第一位程序员",
+          title: "📖 知识扩展 · 第一位程序员与第一个 Bug",
           image: {
             src: "static/images/people/ada-lovelace.webp",
             alt: "阿达·洛芙莱斯",
@@ -206,7 +209,7 @@ export default {
             size: "sm",
             zoomable: true
           },
-          desc: '1843 年，<a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>为<a href="https://baike.baidu.com/item/分析机" target="_blank" class="wiki-link">分析机</a>写下了<b>第一个算法——计算<a href="https://baike.baidu.com/item/伯努利数" target="_blank" class="wiki-link">伯努利数</a></b>。<br><br>（原内容不变）',
+          desc: '<div><b>第一位程序员</b></div><div>1843 年，英国诗人拜伦的女儿 <a href="https://baike.baidu.com/item/阿达·洛芙莱斯" target="_blank" class="wiki-link">阿达·洛芙莱斯</a>，为查尔斯·巴贝奇设计的"分析机"写下了计算伯努利数的算法。<br>她比计算机的诞生早了整整 100 年。为了纪念她，美国国防部将一种编程语言命名为 <b>Ada</b>。</div><div><b>历史上第一个 Bug</b></div><div>1947 年，哈佛大学的 Mark II 计算机出了故障。工程师打开机箱，发现一只飞蛾卡在了继电器里。<br>他们把这只飞蛾贴在了日志本上，并写下："First actual case of bug being found"（第一次发现真实的虫子）。<br>从此，程序出错就被称为 <b>Bug</b>，找错就成了 <b>Debug</b>。</div>',
         },
       },
     },
