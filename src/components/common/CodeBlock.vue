@@ -236,10 +236,14 @@ async function handleCopy() {
 .code-block {
   position: relative;
   border-radius: 10px;
-  overflow: hidden;
+  /* 用 flex 垂直排列 header / pre / terminal */
+  display: flex;
+  flex-direction: column;
   background: var(--code-bg);
   border: 1px solid var(--code-border);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  max-height: 75vh; /* 避免无限撑高 */
+  overflow: hidden;
 }
 
 /* ============================================ */
@@ -318,7 +322,8 @@ pre {
   color: var(--code-text);
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 72vh;
+  flex: 1; /* 自动填充剩余高度 */
+  min-height: 120px; 
   white-space: normal;
   tab-size: 4;
   margin: 0;
@@ -434,9 +439,52 @@ pre code { display: block; }
 /* 终端输出区域                                    */
 /* ============================================ */
 .code-terminal {
+  flex-shrink: 0;
   border-top: 1px solid var(--code-border);
   background: rgba(0, 0, 0, 0.3);
-  padding: 8px 14px 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  max-height: 40vh; /* 终端最高占屏幕 40% */
+}
+
+/* 终端输入框 */
+.terminal-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(230, 241, 255, 0.2);
+  flex-shrink: 0;
+}
+
+/* 终端内容 */
+.code-terminal pre.terminal-output {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-code);
+  font-size: calc(14px * var(--font-scale));
+  line-height: 1.5;
+  color: #e6f1ff;
+  background: transparent;
+  white-space: pre-wrap;
+  word-break: break-all;
+  flex: 1; /* 自动撑满剩余空间 */
+  min-height: 80px;
+  overflow-y: auto;
+}
+
+/* ⚡ 让终端滚动条更明显 */
+.code-terminal pre.terminal-output::-webkit-scrollbar {
+  width: 8px;
+}
+.code-terminal pre.terminal-output::-webkit-scrollbar-thumb {
+  background: rgba(103, 232, 160, 0.4); /* 绿色滚动条 */
+  border-radius: 4px;
+}
+.code-terminal pre.terminal-output::-webkit-scrollbar-thumb:hover {
+  background: rgba(103, 232, 160, 0.8);
 }
 .terminal-header {
   display: flex;
@@ -470,15 +518,6 @@ pre code { display: block; }
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* 输入框样式 */
-.terminal-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed rgba(230, 241, 255, 0.2);
-}
 .terminal-prompt {
   font-size: calc(13px * var(--font-scale));
   color: #67e8a0;
@@ -497,19 +536,5 @@ pre code { display: block; }
 }
 .terminal-input:focus {
   border-color: #67e8a0;
-}
-
-.code-terminal pre.terminal-output {
-  padding: 0;
-  margin: 0;
-  font-family: var(--font-code);
-  font-size: calc(14px * var(--font-scale));
-  line-height: 1.5;
-  color: #e6f1ff;
-  background: transparent;
-  white-space: pre-wrap;
-  word-break: break-all;
-  max-height: 200px;
-  overflow-y: auto;
 }
 </style>

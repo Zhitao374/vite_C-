@@ -168,35 +168,61 @@ function resizeCanvas() {
 // ==================== 绘制 ====================
 function onCanvasDown(e) {
   if (!enabled.value) return;
+  // ⚡ 核心：只处理主指针，忽略多点触控
+  if (e.isPrimary === false) return; 
+  
   drawing = true;
   saveSnapshot();
   const r = canvasRef.value.getBoundingClientRect();
   lastX = e.clientX - r.left;
   lastY = e.clientY - r.top;
-  canvasRef.value.setPointerCapture(e.pointerId);
-}
-
-function onCanvasMove(e) {
-  if (!enabled.value || !drawing) return;
-  const r = canvasRef.value.getBoundingClientRect();
-  const x = e.clientX - r.left;
-  const y = e.clientY - r.top;
-  ctx.strokeStyle = color.value;
-  ctx.lineWidth = lineWidth.value;
+  
+  // 画一个起始圆点
   ctx.beginPath();
-  ctx.moveTo(lastX, lastY);
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  lastX = x;
-  lastY = y;
+  ctx.arc(lastX, lastY, lineWidth.value / 2, 0, Math.PI * 2);
+  ctx.fillStyle = color.value;
+  ctx.fill();
+  
+  canvasRef.value.setPointerCapture(e.pointerId);
 }
 
 function onCanvasUp(e) {
   if (!drawing) return;
+  if (e.isPrimary === false) return; // ⚡ 增加判断
+
   drawing = false;
   try {
     canvasRef.value.releasePointerCapture(e.pointerId);
   } catch (_) {}
+}
+
+function onCanvasMove(e) {
+  if (!enabled.value || !drawing) return;
+  
+  // 只处理主指针（排除手掌误触）
+  if (e.isPrimary === false) return;
+
+  const r = canvasRef.value.getBoundingClientRect();
+  
+  // ⚡ 核心：获取这段时间内合并的所有高精度采样点
+  const events = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+  
+  ctx.strokeStyle = color.value;
+  ctx.lineWidth = lineWidth.value;
+  
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  
+  // 把中间遗漏的点全部连起来
+  for (const ev of events) {
+    const x = ev.clientX - r.left;
+    const y = ev.clientY - r.top;
+    ctx.lineTo(x, y);
+    lastX = x;
+    lastY = y;
+  }
+  
+  ctx.stroke();
 }
 
 // ==================== 快照 / 撤销 / 清空 ====================
@@ -373,6 +399,7 @@ onUnmounted(() => {
   height: 100vh;
   z-index: 900;
   cursor: crosshair;
+  touch-action: none; 
 }
 
 /* ============================================

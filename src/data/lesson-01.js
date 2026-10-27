@@ -141,34 +141,37 @@ export default {
       },
     },
 
-    /* ===== 6 Dev-C++ 上手（提前） ===== */
+    /* ===== 6 Dev-C++ 上手与配置 ===== */
     {
-      id: 6, type: "split",
+      id: 6,
+      type: "grid",
       title: "Dev-C++ · 5 步跑出第一个程序",
-      subtitle: "从打开到运行，5 分钟搞定",
+      subtitle: "从打开到运行，再到新手必改配置",
       chapterTag: "第 1 讲 · 动手实践",
       data: {
-        panes: [
+        cards: [
           {
-            image: "static/images/tools/devcpp-interface.png",
-            imageAlt: "Dev-C++ 界面",
-            imageCaption: "Dev-C++ 界面（含代码区 + 编译日志）",
-            imageLayout: "block",
-            imageSize: "full",
-            zoomable: true
+            icon: "⚡",
+            title: "① 基础操作（5 步走）",
+            desc: "<b>新建</b>：<code>Ctrl + N</code><br><b>保存</b>：<code>Ctrl + S</code> 存为 <code>.cpp</code><br><b>编译</b>：<code>F9</code><br><b>运行</b>：<code>F10</code><br><b>一键编译+运行</b>：<code>F11</code>（最常用）"
           },
           {
-            title: "5 步操作",
-            items: [
-              { title: "① 新建", desc: "<code>Ctrl + N</code> 新建文件" },
-              { title: "② 写代码", desc: "粘贴 Hello World" },
-              { title: "③ 保存", desc: "<code>Ctrl + S</code> 存为 <code>.cpp</code>" },
-              { title: "④ 编译运行", desc: "按 <code>F11</code>" },
-              { title: "⑤ 看结果", desc: "黑窗口显示 <code>Hello, World!</code>" },
-              { title: "⌨️ 快捷键", desc: "<code>F9</code> 编译 · <code>F10</code> 运行 · <code>F11</code> 一键" }
-            ]
+            icon: "⚙️",
+            title: "② 必改配置：C++11",
+            desc: "竞赛默认要求 C++11 以上。<br><b>路径</b>：工具 → 编译选项 → 勾选“编译时加入以下命令” → 填入：<br><code>-std=c++11</code><br><br><b>⚠️ 如果不改，</b>后续学到的 <code>long long</code> 等语法可能会报错！"
+          },
+          {
+            icon: "✨",
+            title: "③ 手感优化：代码补全",
+            desc: "默认没有自动补全，打字很累。<br><b>路径</b>：工具 → 编辑器选项 → 代码补全 → <b>勾选“允许代码补全”</b>。<br><br><b>💡 建议同时勾选</b>“自动添加括号”，它会帮你自动闭合 <code>{}</code> 和 <code>()</code>，防止括号不配对。"
+          },
+          {
+            icon: "📝",
+            title: "④ 一劳永逸：代码模板",
+            desc: "每次新建都要敲几行太麻烦。<br><b>路径</b>：工具 → 编辑器选项 → 代码模板 → 默认源。<br>填入基础框架：<br><code>#include &lt;iostream&gt;</code><br><code>using namespace std;</code><br><code>int main() {</code><br><code>&nbsp;&nbsp;return 0;</code><br><code>}</code>"
           }
-        ]
+        ],
+        footer: '<b>📌 其他好用的小设置</b><br>· <b>显示行号</b>：工具 → 编辑器选项 → 显示 → 勾选“显示行号”（查报错必备）<br>· <b>护眼背景</b>：工具 → 编辑器选项 → 颜色 → 选择“Classic”或自定义深色背景<br>· <b>字体大小</b>：工具 → 编辑器选项 → 显示 → 调整字体大小（大屏演示建议 16-18 号）<br><br>💡 <b>口诀</b>：快捷键要记牢，C++11 不能少，代码补全调出来，写起代码快又好。'
       }
     },
 
