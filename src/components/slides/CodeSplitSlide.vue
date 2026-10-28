@@ -117,12 +117,12 @@ useStepCount(() =>
 </script>
 
 <style scoped>
-.code-split-body { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
+.code-split-body { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; gap: 8px !important;}
 .intro-card {
   padding: 8px 14px; background: linear-gradient(135deg, var(--primary-soft), #fff);
   border-left: 4px solid var(--primary); border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-size: calc(16px * var(--font-scale)); line-height: 1.5; color: var(--text-sub);
-  margin-bottom: 12px; flex-shrink: 0;
+  flex-shrink: 0;
 }
 .code-split-layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
 .left-code-pane { flex: 0 0 55%; height: 100%; overflow-y: auto; display: flex; flex-direction: column; padding-right: 4px; }

@@ -7,16 +7,14 @@
         <span v-if="title && fileName" class="code-sep">·</span>
         <span v-if="fileName" class="code-filename">{{ fileName }}</span>
       </div>
+      
       <div class="code-header-actions">
-        <!-- 运行按钮 -->
-        <button class="run-btn" data-no-flip :disabled="isRunning" @click.stop="handleRun">
-          <Loader2 v-if="isRunning" :size="14" class="spin-icon" />
-          <Play v-else :size="14" />
-          <span>{{ isRunning ? '运行中...' : '运行' }}</span>
+        <!-- 新增：在沙盒中运行 -->
+        <button class="run-btn" @click="openInSandbox" title="在沙盒中打开此代码">
+          <Play :size="14" /> 演示运行
         </button>
-        
-        <!-- 复制按钮 -->
-        <button class="copy-btn" data-no-flip :class="{ 'copy-success': copied }" @click="handleCopy" title="复制代码">
+        <!-- 复制按钮保持原样 -->
+        <button class="copy-btn" :class="{ 'copy-success': copied }" @click="handleCopy" title="复制代码">
           <Check v-if="copied" :size="16" />
           <Copy v-else :size="16" />
         </button>
@@ -24,78 +22,24 @@
     </div>
 
     <pre :class="densityClass"><code>
-      <span
-        v-for="item in renderedLines"
-        :key="item.key"
-        class="code-line"
-        :class="{
-          'is-highlighted': !item.isPlaceholder && isLineHighlighted(item.num),
-          'is-placeholder': item.isPlaceholder
-        }"
-      >
+      <span v-for="item in renderedLines" :key="item.key" class="code-line" :class="{
+        'is-highlighted': !item.isPlaceholder && isLineHighlighted(item.num),
+        'is-placeholder': item.isPlaceholder
+      }">
         <span class="code-num">{{ item.num }}</span>
-        <span
-          class="code-text"
-          v-html="item.isPlaceholder ? escapeHtml(item.text) : safeHighlight(item.text)"
-        ></span>
+        <span class="code-text" v-html="item.isPlaceholder ? escapeHtml(item.text) : safeHighlight(item.text)"></span>
       </span>
     </code></pre>
-    
-    <!-- 终端输出区 -->
-    <div v-if="showTerminal" class="code-terminal" data-no-flip>
-      <div class="terminal-header">
-        <span class="terminal-title">
-          <Terminal :size="14" /> 终端输出
-        </span>
-        <button class="terminal-close" @click.stop="showTerminal = false">
-          <X :size="16" />
-        </button>
-      </div>
-      
-      <!-- 标准输入框 -->
-      <div class="terminal-input-wrap">
-        <span class="terminal-prompt">输入数据 (stdin):</span>
-        <input v-model="stdinText" class="terminal-input" placeholder="如果代码有 cin，请在这里填写数据（如：3 5）" />
-      </div>
 
-      <pre class="terminal-output">{{ runOutput }}</pre>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watchEffect } from "vue";
-import { Play, Copy, Check, Terminal, Loader2, X } from 'lucide-vue-next';
+import { Play, Copy, Check } from 'lucide-vue-next';
 import { useCodeLoader } from "@/composables/useCodeLoader";
 import { useHighlight } from "@/composables/useHighlight";
 import { useCopy } from "@/composables/useCopy";
-
-const runOutput = ref('');
-const showTerminal = ref(false);
-const isRunning = ref(false);
-const stdinText = ref(''); // 绑定输入框内容
-
-async function handleRun() {
-  if (isRunning.value) return;
-  isRunning.value = true;
-  showTerminal.value = true;
-  runOutput.value = '⏳ 本地编译运行中...';
-
-  const codeToRun = rawCode.value; 
-
-  try {
-    if (window.electronAPI && window.electronAPI.runCode) {
-      const res = await window.electronAPI.runCode(codeToRun, stdinText.value);
-      runOutput.value = res.output || '（程序无输出）';
-    } else {
-      runOutput.value = '❌ 请在 Electron 桌面端运行此功能\n浏览器环境无法直接调用本地 C++ 编译器。';
-    }
-  } catch (error) {
-    runOutput.value = '❌ 运行出错：' + error.message;
-  } finally {
-    isRunning.value = false;
-  }
-}
 
 const props = defineProps({
   code: { type: String, default: "" },
@@ -112,19 +56,12 @@ const { load } = useCodeLoader();
 const { highlightLine: syntaxHighlight, escapeHtml } = useHighlight();
 const { copyText, copied } = useCopy();
 
-// ============================================
-// 原始代码加载
-// ============================================
 const rawCode = ref("");
 
 watchEffect(async () => {
-  if (props.code) {
-    rawCode.value = props.code;
-  } else if (props.codeFile) {
-    rawCode.value = await load(props.codeFile);
-  } else {
-    rawCode.value = "";
-  }
+  if (props.code) rawCode.value = props.code;
+  else if (props.codeFile) rawCode.value = await load(props.codeFile);
+  else rawCode.value = "";
 });
 
 // ============================================
@@ -210,6 +147,20 @@ const fileName = computed(() => {
   const parts = props.codeFile.split("/");
   return parts[parts.length - 1];
 });
+
+function openInSandbox() {
+  // 如果文件还在加载，直接拦截
+  if (!rawCode.value) {
+    console.warn('代码还没加载完，无法演示');
+    return;
+  }
+  
+  console.log('🚀 准备发送代码到沙盒:', rawCode.value.slice(0, 50) + '...');
+  
+  window.dispatchEvent(new CustomEvent('open-sandbox', { 
+    detail: { code: rawCode.value } 
+  }));
+}
 
 const densityClass = computed(() => {
   if (props.density) return `code-${props.density}`;
@@ -433,108 +384,5 @@ pre code { display: block; }
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
-
-/* ============================================ */
-/* 终端输出区域                                    */
-/* ============================================ */
-.code-terminal {
-  flex-shrink: 0;
-  border-top: 1px solid var(--code-border);
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  max-height: 40vh; /* 终端最高占屏幕 40% */
-}
-
-/* 终端输入框 */
-.terminal-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed rgba(230, 241, 255, 0.2);
-  flex-shrink: 0;
-}
-
-/* 终端内容 */
-.code-terminal pre.terminal-output {
-  padding: 0;
-  margin: 0;
-  font-family: var(--font-code);
-  font-size: calc(14px * var(--font-scale));
-  line-height: 1.5;
-  color: #e6f1ff;
-  background: transparent;
-  white-space: pre-wrap;
-  word-break: break-all;
-  flex: 1; /* 自动撑满剩余空间 */
-  min-height: 80px;
-  overflow-y: auto;
-}
-
-/* ⚡ 让终端滚动条更明显 */
-.code-terminal pre.terminal-output::-webkit-scrollbar {
-  width: 8px;
-}
-.code-terminal pre.terminal-output::-webkit-scrollbar-thumb {
-  background: rgba(103, 232, 160, 0.4); /* 绿色滚动条 */
-  border-radius: 4px;
-}
-.code-terminal pre.terminal-output::-webkit-scrollbar-thumb:hover {
-  background: rgba(103, 232, 160, 0.8);
-}
-.terminal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-  color: rgba(230, 241, 255, 0.6);
-  font-size: calc(13px * var(--font-scale));
-}
-.terminal-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-.terminal-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  color: rgba(230, 241, 255, 0.6);
-  cursor: pointer;
-  padding: 2px;
-  border-radius: 4px;
-  transition: all 0.2s;
-}
-.terminal-close:hover { 
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.terminal-prompt {
-  font-size: calc(13px * var(--font-scale));
-  color: #67e8a0;
-  flex-shrink: 0;
-}
-.terminal-input {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(230, 241, 255, 0.3);
-  border-radius: 4px;
-  color: #fff;
-  font-family: var(--font-code);
-  font-size: calc(13px * var(--font-scale));
-  padding: 4px 8px;
-  outline: none;
-}
-.terminal-input:focus {
-  border-color: #67e8a0;
 }
 </style>

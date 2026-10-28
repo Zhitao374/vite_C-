@@ -92,8 +92,9 @@ export default {
         problem: {
           title: '只有 int，程序会怎样？',
           points: [
-            '存温度 <code>36.5</code> → 变成 <code>36</code>（小数丢了）',
-            '存字母 <code>\'A\'</code> → 变成 <code>65</code>（语义丢了）',
+            '存温度 <code>36.5</code> → 变成 <code>36</code>（小数被截断）',
+            '存字母 <code>int a = \'A\';</code> → 变成 <code>65</code>（字母变数字了）',
+            '如果用 <code>cin >> a</code> 输入字母 → <b>直接读取失败，输出垃圾值</b>',
             '存真假 → 只能用 0/1，<b>可读性差</b>'
           ]
         },
@@ -118,7 +119,12 @@ export default {
           title: '不同类型的意义',
           desc: '<b>不是"多此一举"——是"各司其职"</b>：<br>· 每个类型<b>占的内存不同</b>——省空间<br>· 每个类型<b>能做的事不同</b>——语义清晰<br>· 每个类型<b>可读性更好</b>——见名知义<br><br>选对类型，是编程的基本功。',
           code: 'int age = 11;           // 整数——计数\ndouble temp = 36.5;     // 小数——温度\nchar grade = \'A\';        // 字符——字母\nbool is_pass = true;    // 布尔——真假'
-        }
+        },
+        extra: {
+          title: "📖 知识扩展 · 为什么 int 存不了字母？",
+          desc: '<div>这涉及 C++ 的<b>强类型检查</b>。当你写下 <code>int a = \'A\';</code> 时，编译器看到你硬要把一个字符塞进整数盒子里，它会帮你做一次“隐式转换”，查 ASCII 码表，把 \'A\' 变成 65 存进去。</div><div>但当你用 <code>cin >> a</code> 从键盘接收输入时，<code>cin</code> 非常死板。它看到 <code>a</code> 是 <code>int</code>，就只准备接收数字字符（0-9）。如果你敲了字母 A，<code>cin</code> 会直接罢工（读取失败），<code>a</code> 根本没被赋值，打印出来就是你上次残留的垃圾值。</div><div>💡 <b>马上试试</b>：打开你左下角的“代码沙盒”，写一段 <code>int a; cin >> a; cout << a;</code>，在 stdin 里输入 65，看看结果；再输入 A，看看结果有什么不同。</div>',
+          variant: "card-primary",
+        },
       }
     },
 
@@ -239,27 +245,34 @@ export default {
     },
 
     {
-      id: 9,  // 新 id，后面的页 +1
+      id: 9,
       type: 'compare',
       title: '单引号 vs 双引号',
       subtitle: '新手最常搞混的两个符号',
       data: {
+        neutral: true,
         splitStep: true,
         groups: [
           {
-            wrong: "<code>'A'</code> —— 单引号<br>是 <b>char</b>（字符）<br>1 字节",
-            right: '<code>"A"</code> —— 双引号<br>是 <b>string</b>（字符串）<br>多个字节'
+            leftLabel: '🔤 单引号',
+            rightLabel: '📝 双引号',
+            wrong: "<code>'A'</code> —— <b>char</b>（1 字节）",
+            right: "<code>\"A\"</code> —— <b>string</b>（多字节）"
           },
           {
-            wrong: "<code>char c = \"A\";</code> ❌",
-            right: "<code>char c = 'A';</code> ✅"
+            leftLabel: '❌ 错误写法',
+            rightLabel: '✅ 正确写法',
+            wrong: "<code>char c = \"A\";</code><br><span style='font-size:0.9em; color:#888'>双引号是字符串</span>",
+            right: "<code>char c = 'A';</code><br><span style='font-size:0.9em; color:#888'>单引号才是字符</span>"
           },
           {
-            wrong: "<code>'hello'</code> ❌（char 装不下）",
-            right: '<code>"hello"</code> ✅（string 可以）'
+            leftLabel: '❌ 错误写法',
+            rightLabel: '✅ 正确写法',
+            wrong: "<code>'hello'</code><br><span style='font-size:0.9em; color:#888'>char 装不下</span>",
+            right: "<code>\"hello\"</code><br><span style='font-size:0.9em; color:#888'>string 可以</span>"
           }
         ],
-        footer: '<b>📌 记忆口诀</b>：<br>· 单引号 → 一个字符（char）<br>· 双引号 → 一串字符（string）<br><br>写 char 用单引号，写 string 用双引号——<b>类型匹配，编译器才认</b>。'
+        footer: '<b>📌 记忆口诀</b>：单引号 → 一个字符（char）；双引号 → 一串字符（string）。<br>写 char 用单引号，写 string 用双引号——<b>类型匹配，编译器才认</b>。'
       }
     },
 
@@ -358,7 +371,12 @@ export default {
           { icon: "✂️", title: "double 赋值给 int？", desc: "可以，但会<b>丢掉小数部分</b>。<br><code>int a = 3.99;</code> 结果是 3，不是 4。" },
           { icon: "🛠️", title: "何时需要强制转换？", desc: "比如算 <code>5 / 2</code> 想要 2.5。直接写结果是 2。必须用 <code>(double)5 / 2</code>。" },
           { icon: "💡", title: "本质是什么？", desc: "强制转换就是“手动指定类型”。<br>语法：<code>(类型)变量</code>，如 <code>(double)a</code>。这是竞赛最常用技巧。" }
-        ]
+        ],
+        extra: {
+          title: "💡 什么时候会发生“意外截断”？",
+          desc: '<div>不仅是 <code>double</code> 转 <code>int</code> 会截断，大类型转小类型都可能出问题。</div><div>比如把 <code>long long</code>（8字节）强行转成 <code>int</code>（4字节）：<br><code>long long big = 5000000000; // 50亿</code><br><code>int a = (int)big; // 发生溢出，a变成负数</code></div><div><b>经验法则</b>：<br>1. 小转大（int 转 double）通常安全。<br>2. 大转小（double 转 int）极大概率丢精度。<br>3. 如果必须转，最好提前想清楚数据范围！</div>',
+          variant: "card-primary",
+        }
       }
     },
 
@@ -433,12 +451,69 @@ export default {
           },
         ],
         footer: '<b>📌 口诀</b>：要小数，先转 double——<br>· 写法 1：<code>(double)a / b</code><br>· 写法 2：<code>a * 1.0 / b</code><br>· 写法 3：<code>a / (double)b</code><br>本质都一样：让至少一个操作数是小数。',
+        extra: {
+          title: "💡 为什么不直接用 1.0 乘？",
+          desc: '<div>你可能会发现，写成 <code>a * 1.0 / b</code> 也能得到正确结果。这没问题，因为 <code>a</code> 先和 <code>1.0</code>（double）相乘，结果变成了小数，再除以 <code>b</code>，就变成了浮点数除法。</div><div><b>但为什么推荐写 <code>(double)a / b</code>？</b></div><div>1. <b>意图更清晰</b>：别人一眼看出你是在做“类型转换”。<br>2. <b>避免优先级问题</b>：如果写成 <code>a / b * 1.0</code>，那先算除法（结果已经是整数2了），再乘 1.0 得到 2.0，已经晚了！</div><div>所以，最稳妥的写法永远是：<code>(double)a / b</code>。</div>',
+          variant: "card-primary",
+        }
       },
     },
 
-    /* ===== 17 练习3：整数除法 ===== */
+    /* ===== 17 练习2：温度转换（调整了顺序和编号） ===== */
     {
       id: 17,
+      type: "level-map",
+      title: "课堂练习2：温度转换",
+      subtitle: "摄氏温度转华氏温度",
+      chapterTag: "第 3 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入摄氏温度 <code>C</code>（可以是小数），输出对应的华氏温度。<br>公式：<code>F = C × 9.0 / 5.0 + 32</code><br>输入样例：<code>100</code>　输出样例：<code>212</code>",
+          timer: "⏱ 限时 6 分钟",
+        },
+        hints: [
+          "用 <code>double</code> 存温度",
+          "公式里要写 <code>9.0 / 5.0</code> 而不是 <code>9 / 5</code>",
+          "<code>9 / 5</code> 会得到 1（整数除法陷阱）",
+        ],
+        answer: { codeFile: "codes/lesson-03/temperature.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: "必须写 <code>9.0 / 5.0</code>。<br>如果写 <code>9 / 5</code>，两个都是 int，结果是 1，<br>那 100°C 会算成 100 × 1 + 32 = 132°F（错的）。<br><br>正确公式：100 × 1.8 + 32 = 212°F。<br><b>整数除法陷阱的经典案例。</b>",
+        },
+      },
+    },
+
+    /* ===== 18 常见错误（新增了 cin 输入错误的坑） ===== */
+    {
+      id: 18, type: "compare", title: "类型相关常见错误", subtitle: "避开这些坑",
+      data: {
+        splitStep: true,
+        groups: [
+          {
+            wrong: 'char c = "A";（双引号）',
+            right: "char c = 'A';（单引号）<br><br><b>原因</b>：双引号是 string 字符串，单引号才是 char 字符，类型必须匹配。"
+          },
+          {
+            wrong: "int a = 3.99; 得到 3",
+            right: "double a = 3.99; 或 (int)3.99<br><br><b>原因</b>：double 赋值给 int 会直接<b>截断小数</b>，不会四舍五入。"
+          },
+          {
+            wrong: "int a; cin >> a; 输入 A",
+            right: "int a; cin >> a; 输入 65<br><br><b>原因</b>：<code>cin</code> 读入类型不匹配。输入字母会导致读取失败，a 会变成垃圾值。"
+          },
+          {
+            wrong: "bool b = 2;（把数字当真假）",
+            right: "bool b = true;（规范写法）<br><br><b>原因</b>：C++ 允许非 0 值转 bool（都变 true），但直接用 true/false 可读性最好。"
+          }
+        ]
+      }
+    },
+
+    /* ===== 19 练习3：浮点除法（调整了顺序和编号） ===== */
+    {
+      id: 19,
       type: "level-map",
       title: "课堂练习3：浮点除法",
       subtitle: "用强制转换避免整数除法",
@@ -467,63 +542,7 @@ export default {
       },
     },
 
-    /* ===== 18 常见错误 ===== */
-    {
-      id: 18, type: "compare", title: "类型相关常见错误", subtitle: "避开这些坑",
-      data: {
-        splitStep: true, // 开启先错后对
-        groups: [
-          {
-            // 复习：单引号 vs 双引号
-            wrong: 'char c = "A";（双引号）',
-            right: "char c = 'A';（单引号）<br><br><b>原因</b>：双引号是 string 字符串，单引号才是 char 字符，类型必须匹配。"
-          },
-          {
-            // 新坑：精度丢失
-            wrong: "int a = 3.99; 得到 3",
-            right: "double a = 3.99; 或 (int)3.99<br><br><b>原因</b>：double 赋值给 int 会直接<b>截断小数</b>，不会四舍五入。"
-          },
-          {
-            // 复习：整数除法陷阱
-            wrong: "5 / 2 得到 2",
-            right: "(double)5 / 2 得到 2.5<br><br><b>原因</b>：两个 int 相除，结果还是 int。需要强制转换。"
-          },
-          {
-            // 新坑：bool 的误用
-            wrong: "bool b = 2;（把数字当真假）",
-            right: "bool b = true;（规范写法）<br><br><b>原因</b>：C++ 允许非 0 值转 bool（都变 true），但直接用 true/false 可读性最好。"
-          }
-        ]
-      }
-    },
-
-    /* ===== 19 练习2：温度转换 ===== */
-    {
-      id: 19,
-      type: "level-map",
-      title: "课堂练习2：温度转换",
-      subtitle: "摄氏温度转华氏温度",
-      chapterTag: "第 3 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输入摄氏温度 <code>C</code>（可以是小数），输出对应的华氏温度。<br>公式：<code>F = C × 9.0 / 5.0 + 32</code><br>输入样例：<code>100</code>　输出样例：<code>212</code>",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          "用 <code>double</code> 存温度",
-          "公式里要写 <code>9.0 / 5.0</code> 而不是 <code>9 / 5</code>",
-          "<code>9 / 5</code> 会得到 1（整数除法陷阱）",
-        ],
-        answer: { codeFile: "codes/lesson-03/temperature.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: "必须写 <code>9.0 / 5.0</code>。<br>如果写 <code>9 / 5</code>，两个都是 int，结果是 1，<br>那 100°C 会算成 100 × 1 + 32 = 132°F（错的）。<br><br>正确公式：100 × 1.8 + 32 = 212°F。<br><b>整数除法陷阱的经典案例。</b>",
-        },
-      },
-    },
-
-    /* ===== 20 练习小结 ===== */
+    /* ===== 20 练习小结（同步了顺序） ===== */
     {
       id: 20, type: 'grid',
       title: '练习小结',

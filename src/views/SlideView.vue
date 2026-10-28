@@ -79,9 +79,7 @@
         <button class="nav-btn" data-no-flip @click.stop="next">›</button>
       </div>
 
-      <TeacherToolbar />
-      <!-- <FontScaler /> -->
-      <MarkerTool />
+      <FloatingTools />
     </div>
   </ErrorBoundary>
 </template>
@@ -91,11 +89,9 @@ import { computed, ref, onMounted, watch } from "vue";
 import { slideComponents, preloadAllSlides } from "@/components/slides";
 import { useSlide } from "@/composables/useSlide";
 import { useSlideNav } from "@/composables/useSlideNav";
-import MarkerTool from "@/components/common/MarkerTool.vue";
-import FontScaler from "@/components/common/FontScaler.vue";
 import ErrorBoundary from "@/components/common/ErrorBoundary.vue";
-import TeacherToolbar from "@/components/common/TeacherToolbar.vue";
 import { useSlideTheme } from "@/composables/useSlideTheme";
+import FloatingTools from "@/components/common/FloatingTools.vue";
 
 const props = defineProps({
   lesson: { type: String, required: true },

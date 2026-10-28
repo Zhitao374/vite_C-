@@ -49,7 +49,7 @@ function runCppCode(code, input = '') {
 
       // 4. 运行程序 (使用 spawn 流式处理)
       // 加上 shell: true 以便在 Windows 上正确执行带引号的路径
-      const child = spawn(`"${exePath}"`, { shell: true });
+      const child = spawn(exePath, []); 
       let runOutput = '';
       
       // 5. 喂入标准输入并立即关闭流（防止 cin 死等）

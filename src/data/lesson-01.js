@@ -1,10 +1,10 @@
 export default {
   title: "第 1 讲 初识 C++",
   subtitle: "第一个程序与 OJ 提交",
-  total: 36,
+  total: 34,
   category: "语法与基础算法",
   slides: [
-    /* ===== 1 封面 ===== */
+    /* ===== 01 封面 ===== */
     {
       id: 1,
       type: "cover",
@@ -17,11 +17,11 @@ export default {
       },
     },
 
-    /* ===== 2 先看个东西（三声哇 · 第一声） ===== */
+    /* ===== 02 开场钩子：3 行代码画三角形 ===== */
     {
       id: 2, type: "code-split",
-      title: "先看个东西",
-      subtitle: "3 行代码，画出一个三角形",
+      title: "3 行代码，画出三角形",
+      subtitle: "开场：先看个东西",
       chapterTag: "第 1 讲 · 开场",
       data: {
         intro: "这是 C++ 能做的事 —— 你写几行代码，它帮你画出图案。<br>不信？看下面。",
@@ -36,7 +36,7 @@ export default {
       }
     },
 
-    /* ===== 3 本节课目标 ===== */
+    /* ===== 03 本节课目标 ===== */
     {
       id: 3, type: "grid",
       title: "本节课目标",
@@ -48,69 +48,82 @@ export default {
           { number: "03", title: "提交到 OJ", desc: "洛谷 —— 让系统评判你的代码" },
           { number: "04", title: "看懂报错", desc: "报错不可怕 —— 学会读它" }
         ],
-        footer: '<b>📌 一句话</b>：<br>今天你就能写出人生第一个 C++ 程序。<br><b>不需要"先学懂原理再动手"</b> —— <b>先动手，再理解</b>，这是学编程的正确顺序。'
+        footer: '<b>📌 今天的路线</b>：装环境 → 写代码 → 编译运行 → 提交 OJ → 闯关成功<br><b>先动手，再理解</b>——这是学编程的正确顺序。'
       }
     },
 
-    /* ===== 4 学习地图 ===== */
+    /* ===== 04 编程环境 ===== */
     {
-      id: 4,
-      type: "timeline",
-      variant: "map",
-      title: "本讲学习地图",
-      subtitle: "四站闯关，从零到提交",
+      id: 4, type: "grid",
+      title: "编程环境 · 在哪写代码？",
+      subtitle: "三个选择，一个推荐",
+      chapterTag: "第 1 讲 · 动手准备",
       data: {
-        items: [
+        cards: [
           {
-            icon: "🧠",
-            badge: "基础",
-            title: "第一站 · 概念理解",
-            desc: "程序、C++、编译过程",
-            points: [
-              "程序 = 指令 + 数据",
-              "C++ 是编译型语言",
-              ".cpp → .obj → .exe",
-              "冯·诺依曼存储程序",
-            ],
+            icon: "🛠️",
+            title: "Dev-C++",
+            desc: "<b>竞赛标配</b><br>轻量、简单<br>一键编译运行<br>界面朴素但够用<br><br><b>⭐ 推荐初学者</b>"
           },
           {
             icon: "💻",
-            badge: "核心",
-            title: "第二站 · 第一个程序",
-            desc: "Hello, World! 逐行拆解",
-            points: [
-              "程序框架四件套",
-              "cout 输出与 endl 换行",
-              "中文标点会报错",
-              "大小写敏感",
-            ],
+            title: "VS Code",
+            desc: "<b>现代编辑器</b><br>界面漂亮、插件丰富<br>需装 C++ 插件<br>配置稍复杂<br><br><b>进阶选择</b>"
           },
           {
-            icon: "🔧",
-            badge: "关键",
-            title: "第三站 · 编译与运行",
-            desc: "让代码变成程序",
-            points: ["编译 → 链接 → 运行", "看懂报错信息", "四大常见错误"],
-          },
-          {
-            icon: "🏆",
-            badge: "实战",
-            title: "第四站 · OJ 实战",
-            desc: "提交、判题、闯关",
-            points: [
-              "注册 → 找题 → 提交",
-              "AC 通过 · WA 答案错",
-              "CE 编译错 · TLE 超时",
-              "三题闯关拿积分",
-            ],
-          },
+            icon: "🌐",
+            title: "在线 IDE",
+            desc: "<b>免安装</b><br>洛谷 IDE / CodeSandbox<br>打开浏览器就能写<br>需要网络<br><br><b>备用方案</b>"
+          }
         ],
-      },
+        footer: '<b>📌 建议</b>：初学者用 <b>Dev-C++</b> —— 简单，能跑就行。<br>等熟练后再换 VS Code 或 VS 2022 —— <b>工具是次要的，能写出正确代码才是关键</b>。<br><br><b>🔗 下载地址</b><br>Dev-C++：<code>sourceforge.net/projects/orwelldevcpp/</code><br>VS Code：<code>code.visualstudio.com</code><br>洛谷在线 IDE：<code>luogu.com.cn/ide</code>'
+      }
     },
 
-    /* ===== 5 Hello World（提前） ===== */
+    /* ===== 05 Dev-C++ 5 步跑起来 ===== */
     {
-      id: 5,
+      id: 5, type: "grid",
+      title: "Dev-C++ · 5 步跑出第一个程序",
+      subtitle: "打开软件，键盘不离手",
+      chapterTag: "第 1 讲 · 动手实践",
+      data: {
+        cards: [
+          {
+            icon: "⚡",
+            title: "5 步走 · 快捷键是效率",
+            desc: "<b>① 新建</b>：<code>Ctrl + N</code><br><b>② 保存</b>：<code>Ctrl + S</code> 存为 <code>.cpp</code> 文件<br><b>③ 编译</b>：<code>F9</code> —— 只检查代码有没有错<br><b>④ 运行</b>：<code>F10</code> —— 执行上一次编译好的程序<br><b>⑤ 一键编译+运行</b>：<code>F11</code>（最常用）<br><br><b>💡 为什么 F11 最常用？</b><br>因为它把 ③④ 合并成一步 —— 你改一次代码就按一次 F11，省去反复切按键。"
+          }
+        ],
+        footer: '<b>📌 口诀</b>：<br>新建 <code>Ctrl+N</code> · 保存 <code>Ctrl+S</code> · 编译 <code>F9</code> · 运行 <code>F10</code> · 一键 <code>F11</code><br><br>今天就靠这 5 个键走完全程。'
+      }
+    },
+
+    /* ===== 06 Dev-C++ 两个必改设置 ===== */
+    {
+      id: 6, type: "grid",
+      title: "Dev-C++ · 两个必改设置",
+      subtitle: "不改，后面会报错",
+      chapterTag: "第 1 讲 · 动手实践",
+      data: {
+        cards: [
+          {
+            icon: "⚙️",
+            title: "① 必改：C++11 标准",
+            desc: "竞赛默认要求 C++11 以上。<br><b>路径</b>：工具 → 编译选项 → 勾选“编译时加入以下命令” → 填入：<br><code>-std=c++11</code><br><br><b>⚠️ 如果不改，</b>后续学到的 <code>long long</code> 等语法可能会报错！"
+          },
+          {
+            icon: "📝",
+            title: "② 一劳永逸：代码模板",
+            desc: "每次新建都要敲几行太麻烦。<br><b>路径</b>：工具 → 编辑器选项 → 代码模板 → 默认源。<br>填入基础框架：<br><code>#include &lt;iostream&gt;</code><br><code>using namespace std;</code><br><code>int main() {</code><br><code>&nbsp;&nbsp;return 0;</code><br><code>}</code>"
+          }
+        ],
+        footer: '<b>📌 其他选修设置（建议但不必须）</b><br>· <b>代码补全</b>：工具 → 编辑器选项 → 代码补全 → 勾选"允许代码补全"<br>· <b>自动括号</b>：同上 → 勾选"自动添加括号"<br>· <b>显示行号</b>：工具 → 编辑器选项 → 显示 → 勾选"显示行号"<br>· <b>字体大小</b>：工具 → 编辑器选项 → 显示 → 调整到 16—18 号<br><br>💡 <b>口诀</b>：C++11 不能少，代码模板写好后，写起代码快又好。'
+      }
+    },
+
+    /* ===== 07 Hello World ===== */
+    {
+      id: 7,
       type: "code-split",
       title: "第一个程序：Hello, World!",
       subtitle: "逐行拆解，理解每一行的使命",
@@ -141,43 +154,9 @@ export default {
       },
     },
 
-    /* ===== 6 Dev-C++ 上手与配置 ===== */
+    /* ===== 08 练习1：Hello C++ ===== */
     {
-      id: 6,
-      type: "grid",
-      title: "Dev-C++ · 5 步跑出第一个程序",
-      subtitle: "从打开到运行，再到新手必改配置",
-      chapterTag: "第 1 讲 · 动手实践",
-      data: {
-        cards: [
-          {
-            icon: "⚡",
-            title: "① 基础操作（5 步走）",
-            desc: "<b>新建</b>：<code>Ctrl + N</code><br><b>保存</b>：<code>Ctrl + S</code> 存为 <code>.cpp</code><br><b>编译</b>：<code>F9</code><br><b>运行</b>：<code>F10</code><br><b>一键编译+运行</b>：<code>F11</code>（最常用）"
-          },
-          {
-            icon: "⚙️",
-            title: "② 必改配置：C++11",
-            desc: "竞赛默认要求 C++11 以上。<br><b>路径</b>：工具 → 编译选项 → 勾选“编译时加入以下命令” → 填入：<br><code>-std=c++11</code><br><br><b>⚠️ 如果不改，</b>后续学到的 <code>long long</code> 等语法可能会报错！"
-          },
-          {
-            icon: "✨",
-            title: "③ 手感优化：代码补全",
-            desc: "默认没有自动补全，打字很累。<br><b>路径</b>：工具 → 编辑器选项 → 代码补全 → <b>勾选“允许代码补全”</b>。<br><br><b>💡 建议同时勾选</b>“自动添加括号”，它会帮你自动闭合 <code>{}</code> 和 <code>()</code>，防止括号不配对。"
-          },
-          {
-            icon: "📝",
-            title: "④ 一劳永逸：代码模板",
-            desc: "每次新建都要敲几行太麻烦。<br><b>路径</b>：工具 → 编辑器选项 → 代码模板 → 默认源。<br>填入基础框架：<br><code>#include &lt;iostream&gt;</code><br><code>using namespace std;</code><br><code>int main() {</code><br><code>&nbsp;&nbsp;return 0;</code><br><code>}</code>"
-          }
-        ],
-        footer: '<b>📌 其他好用的小设置</b><br>· <b>显示行号</b>：工具 → 编辑器选项 → 显示 → 勾选“显示行号”（查报错必备）<br>· <b>护眼背景</b>：工具 → 编辑器选项 → 颜色 → 选择“Classic”或自定义深色背景<br>· <b>字体大小</b>：工具 → 编辑器选项 → 显示 → 调整字体大小（大屏演示建议 16-18 号）<br><br>💡 <b>口诀</b>：快捷键要记牢，C++11 不能少，代码补全调出来，写起代码快又好。'
-      }
-    },
-
-        /* ===== 7 练习1：Hello C++ ===== */
-    {
-      id: 7,
+      id: 8,
       type: "level-map",
       title: "课堂练习1：Hello, C++!",
       subtitle: "动手修改你的第一个程序",
@@ -217,79 +196,9 @@ export default {
       },
     },
 
-    
-
-    /* ===== 8 第一次编译报错 ===== */
+    /* ===== 09 🎉 跑起来了 ===== */
     {
-      id: 8,
-      type: "dialog",
-      title: "第一次编译报错怎么办？",
-      subtitle: "小C教你读错误信息",
-      chapterTag: "第 1 讲 · 概念理解",
-      data: {
-        lines: [
-          {
-            who: "student",
-            text: "小 C，我点了编译，屏幕上跳出一大段红色文字，好吓人！",
-          },
-          {
-            who: "robot",
-            text: "别怕，红色文字是<b>编译器在帮你</b>。它告诉你哪里有问题，就像医生诊断。",
-          },
-          { who: "student", text: "那怎么读呢？" },
-          {
-            who: "robot",
-            text: '看<b>第一行</b>就够了。它会说"第几行、什么错"。后面的细节可以先忽略。',
-          },
-          { who: "student", text: "常见的错误有哪些？" },
-          {
-            who: "robot",
-            text: "新手最常见的四种：<br>① 中文标点<br>② 漏分号<br>③ 大小写错<br>④ 括号不配对。",
-          },
-          { who: "student", text: "能给我看个真实的例子吗？" },
-          {
-            who: "robot",
-            text: "看这个——<br><br><code>hello.cpp:5:10: error: expected ';' before 'return'</code><br><br><b>三段读法</b>：<br>① <b>hello.cpp</b> —— 哪个文件出错<br>② <b>5:10</b> —— 第 5 行第 10 列<br>③ <b>expected ';'</b> —— 缺少分号<br><br>看这三段就够了——不用怕那些看不懂的细节。",
-          },
-        ],
-      },
-    },
-
-    /* ===== 9 常见错误盘点 ===== */
-    {
-      id: 9,
-      type: "compare",
-      title: "常见错误大盘点",
-      subtitle: "4 个新手必踩的坑",
-      data: {
-        groups: [
-          {
-            wrong: 'cout &lt;&lt; "Hello"；',
-            right:
-              'cout &lt;&lt; "Hello";<br><br><b>原因</b>：中文分号和英文分号编码不同，编译器认不出中文分号',
-          },
-          {
-            wrong: 'cout &lt;&lt; "Hello"',
-            right:
-              'cout &lt;&lt; "Hello";<br><br><b>原因</b>：分号是语句结束的标志，漏了编译器就以为语句没写完',
-          },
-          {
-            wrong: "Main()  count",
-            right:
-              "int main()  cout<br><br><b>原因</b>：C++ 区分大小写——Main ≠ main，cout ≠ count",
-          },
-          {
-            wrong: "少一个大括号",
-            right:
-              "大括号必须成对<br><br><b>原因</b>：每个 <code>{</code> 必须有对应的 <code>}</code>，不然编译器不知道代码块在哪结束",
-          },
-        ],
-      },
-    },
-
-    /* ===== 10 🎉 跑起来了（三声哇 · 第二声） ===== */
-    {
-      id: 10, type: "big-number",
+      id: 9, type: "big-number",
       title: "🎉 你的第一个程序跑起来了！",
       subtitle: "Hello, World!",
       data: {
@@ -303,9 +212,9 @@ export default {
       },
     },
 
-    /* ===== 11 什么是程序（抽象后置） ===== */
+    /* ===== 10 什么是程序 ===== */
     {
-      id: 11,
+      id: 10,
       type: "origin",
       title: "什么是程序？什么是 C++？",
       subtitle: "程序 = 指令 + 数据，C++ = 翻译官",
@@ -341,7 +250,7 @@ export default {
         ],
         summary: {
           title: "程序 = 指令 + 数据",
-          desc: '指令告诉计算机"<b>做什么</b>"，数据告诉它"<b>处理什么</b>"。<br>比如 <code>cout &lt;&lt; "Hello"</code> —— "输出"是指令，"Hello"是数据。<br><br><b>C++ 的角色</b>：它是"人"和"机器"之间的 <b>翻译官</b> ——<br>你写人话，它翻译成机器话，计算机才听得懂。',
+          desc: '指令告诉计算机"<b>做什么</b>"，数据告诉它"<b>处理什么</b>"。<br>比如 <code>cout &lt;&lt; "Hello"</code> —— "输出"是指令，"Hello"是数据。<br><br><b>一个快递比喻</b>：<br>· 你写订单（<code>cout &lt;&lt; "Hello"</code>）<br>· 快递员翻译成地址码（编译器翻译成机器码）<br>· 快递系统按地址码配送（CPU 按机器码执行）<br>· <b>0/1 就是那个"地址码"</b>——机器才看得懂。<br><br><b>C++ 的角色</b>：它是"人"和"机器"之间的 <b>翻译官</b> ——<br>你写人话，它翻译成机器话，计算机才听得懂。',
           code: 'cout << "Hello";       // 你写人话\n   ↓ ↓ 编译器翻译 ↓ ↓\n10110001 01001111 ...  // 机器话',
         },
         extra: {
@@ -360,9 +269,9 @@ export default {
       },
     },
 
-    /* ===== 12 为什么要学 C++（动机后置） ===== */
+    /* ===== 11 为什么要学 C++ ===== */
     {
-      id: 12,
+      id: 11,
       type: "grid",
       title: "为什么要学 C++？",
       subtitle: "你已经跑过第一个程序 —— 现在讲“为什么选 C++”",
@@ -384,9 +293,9 @@ export default {
       },
     },
 
-    /* ===== 13 编程语言 70 年（精简） ===== */
+    /* ===== 12 编程语言 70 年 ===== */
     {
-      id: 13,
+      id: 12,
       type: "timeline",
       variant: "history",
       title: "编程语言 70 年",
@@ -440,9 +349,9 @@ export default {
       },
     },
 
-    /* ===== 14 1946 · ENIAC 诞生 ===== */
+    /* ===== 13 1946 · ENIAC 诞生 ===== */
     {
-      id: 14, type: "split",
+      id: 13, type: "split",
       title: "1946 · ENIAC 诞生",
       subtitle: "第一台通用电子计算机",
       chapterTag: "第 1 讲 · 概念理解",
@@ -472,71 +381,9 @@ export default {
       }
     },
 
-    /* ===== 15 编程环境 ===== */
+    /* ===== 14 从代码到运行 ===== */
     {
-      id: 15, type: "grid",
-      title: "编程环境 · 在哪写代码？",
-      subtitle: "三个选择，一个推荐",
-      chapterTag: "第 1 讲 · 动手准备",
-      data: {
-        cards: [
-          {
-            icon: "🛠️",
-            title: "Dev-C++",
-            desc: "<b>竞赛标配</b><br>轻量、简单<br>一键编译运行<br>界面朴素但够用<br><br><b>⭐ 推荐初学者</b>"
-          },
-          {
-            icon: "💻",
-            title: "VS Code",
-            desc: "<b>现代编辑器</b><br>界面漂亮、插件丰富<br>需装 C++ 插件<br>配置稍复杂<br><br><b>进阶选择</b>"
-          },
-          {
-            icon: "🌐",
-            title: "在线 IDE",
-            desc: "<b>免安装</b><br>洛谷 IDE / CodeSandbox<br>打开浏览器就能写<br>需要网络<br><br><b>备用方案</b>"
-          }
-        ],
-        footer: '<b>📌 建议</b>：初学者用 <b>Dev-C++</b> —— 简单，能跑就行。<br>等熟练后再换 VS Code 或 VS 2022 —— <b>工具是次要的，能写出正确代码才是关键</b>。<br><br><b>🔗 下载地址</b><br>Dev-C++：<code>sourceforge.net/projects/orwelldevcpp/</code><br>VS Code：<code>code.visualstudio.com</code><br>洛谷在线 IDE：<code>luogu.com.cn/ide</code>'
-      }
-    },
-
-    /* ===== 16 过渡页 ===== */
-    {
-      id: 16,
-      type: "transition",
-      title: "第三站 · 编译与运行",
-      subtitle: "从源码到程序",
-      data: {
-        note: "接下来，你将看懂程序是怎么变成可执行文件的",
-      },
-    },
-
-    /* ===== 17 输出进阶 ===== */
-    {
-      id: 17,
-      type: "code-split",
-      title: "输出进阶：多个内容与换行",
-      subtitle: "灵活使用 cout",
-      data: {
-        intro:
-          "📖 <code>cout</code> 可以一次输出多个内容，用 <code>&lt;&lt;</code> 连接；<code>endl</code> 表示换行。",
-        codeFile: "codes/lesson-01/output-advanced.cpp",
-        annotations: [
-          {
-            line: 5,
-            title: "连续输出",
-            desc: "用 &lt;&lt; 连接多个内容，输出 AB",
-          },
-          { line: 6, title: "文字 + 结果", desc: "先算 1+2，再输出 1 + 2 = 3" },
-          { line: 7, title: "输出单行", desc: "输出 * 后换行" },
-          { line: 8, title: "输出多字符", desc: "输出 *** 后换行" },
-        ],
-      },
-    },
-
-    /* ===== 18 从代码到运行 ===== */
-    {
-      id: 18,
+      id: 14,
       type: "grid",
       title: "从代码到运行",
       subtitle: "源程序如何变成可执行程序",
@@ -566,66 +413,70 @@ export default {
       },
     },
 
-    /* ===== 19 初赛渗透：编译器 ===== */
+    /* ===== 15 编译报错 · 三段读法 ===== */
     {
-      id: 19, type: "dialog",
-      title: "初赛小知识：编译器",
-      subtitle: "CSP-J 初赛必考",
-      chapterTag: "第 1 讲 · 初赛渗透",
+      id: 15,
+      type: "grid",
+      title: "第一次编译报错怎么办？",
+      subtitle: "小 C 教你三段读法",
+      chapterTag: "第 1 讲 · 概念理解",
       data: {
-        lines: [
-          { who: "student", text: "小 C，初赛会考编译器吗？" },
-          { who: "robot", text: "会，而且是<b>高频考点</b>。" },
-          { who: "student", text: "一般怎么考？" },
+        cards: [
           {
-            who: "robot",
-            text: '最常见的是问"编译器的主要功能是什么"。<br>答案：<b>把源程序翻译成机器指令代码</b>。',
+            icon: "📄",
+            title: "① 文件名",
+            desc: "<code>hello.cpp</code><br><br><b>哪个文件出错？</b><br>多个文件时，先定位到出错的那个<br>单文件程序通常只有一个"
           },
-          { who: "student", text: "还有别的考点吗？" },
           {
-            who: "robot",
-            text: "还有：编译和解释的区别、高级语言和低级语言、C++ 源程序扩展名（.cpp）。<br><br>这些都是送分题，一定要拿下。",
+            icon: "📍",
+            title: "② 行号列号",
+            desc: "<code>5:10</code><br><br><b>第 5 行第 10 列</b><br>打开对应的行号去查看<br>（记得把行号显示打开）"
+          },
+          {
+            icon: "🔍",
+            title: "③ 错误类型",
+            desc: "<code>expected ';'</code><br><br><b>缺什么？</b><br>这里是缺分号<br>编译器会告诉你缺什么"
+          }
+        ],
+        footer: '<b>📌 完整的错误信息</b><br><code>hello.cpp:5:10: error: expected \';\' before \'return\'</code><br><br><b>三段读法</b>：<br>① <b>hello.cpp</b> —— 哪个文件出错<br>② <b>5:10</b> —— 第 5 行第 10 列<br>③ <b>expected \';\'</b> —— 缺少分号<br><br>看这三段就够了 —— 后面的细节可以先忽略。<b>红色文字不是灾难，是编译器在帮你</b>。'
+      }
+    },
+
+    /* ===== 16 常见错误盘点 ===== */
+    {
+      id: 16,
+      type: "compare",
+      title: "常见错误大盘点",
+      subtitle: "4 个新手必踩的坑",
+      data: {
+        groups: [
+          {
+            wrong: 'cout &lt;&lt; "Hello"；',
+            right:
+              'cout &lt;&lt; "Hello";<br><br><b>原因</b>：中文分号和英文分号编码不同，编译器认不出中文分号',
+          },
+          {
+            wrong: 'cout &lt;&lt; "Hello"',
+            right:
+              'cout &lt;&lt; "Hello";<br><br><b>原因</b>：分号是语句结束的标志，漏了编译器就以为语句没写完',
+          },
+          {
+            wrong: "Main()  count",
+            right:
+              "int main()  cout<br><br><b>原因</b>：C++ 区分大小写——Main ≠ main，cout ≠ count",
+          },
+          {
+            wrong: "少一个大括号",
+            right:
+              "大括号必须成对<br><br><b>原因</b>：每个 <code>{</code> 必须有对应的 <code>}</code>，不然编译器不知道代码块在哪结束",
           },
         ],
       },
     },
 
-    /* ===== 20 答疑：关于程序的疑问 ===== */
+    /* ===== 17 环境问题 ===== */
     {
-      id: 20,
-      type: "dialog",
-      title: "答疑：关于程序的疑问",
-      subtitle: "小C回答常见问题",
-      chapterTag: "第 1 讲 · 答疑",
-      data: {
-        lines: [
-          { who: "student", text: "程序一定要写在文件里吗？" },
-          {
-            who: "robot",
-            text: "是的。程序必须保存成文件（.cpp），编译器才能读它。<br>就像写作文要写在纸上，编译器才看得到。",
-          },
-          { who: "student", text: "一个 .cpp 文件能写几个程序？" },
-          {
-            who: "robot",
-            text: "一个文件只能有一个 <code>main</code> 函数，也就是一个可执行程序。<br>但可以写很多函数，被 main 调用。函数是第 8 讲的内容。",
-          },
-          { who: "student", text: "中文能当变量名吗？" },
-          {
-            who: "robot",
-            text: "理论上能，但竞赛和工程都不用。<br>变量名用英文字母和下划线，是行业的默契。",
-          },
-          { who: "student", text: "为什么程序结尾一定要 return 0？" },
-          {
-            who: "robot",
-            text: '<code>return 0</code> 是告诉操作系统"程序正常结束"。<br>不写也行，C++ 会自动加，但写出来更清楚。',
-          },
-        ],
-      },
-    },
-
-    /* ===== 21 环境常见问题 ===== */
-    {
-      id: 21, type: "pitfall",
+      id: 17, type: "pitfall",
       title: "环境搭不好？常见问题",
       subtitle: "四个坑，提前避",
       chapterTag: "第 1 讲 · 动手准备",
@@ -664,86 +515,9 @@ export default {
       }
     },
 
-    /* ===== 22 练习2：输出图形 ===== */
+    /* ===== 18 OJ 是什么 ===== */
     {
-      id: 22,
-      type: "level-map",
-      title: "课堂练习2：输出图形",
-      subtitle: "巩固输出与换行",
-      chapterTag: "第 1 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输出下面图形：<br><code>*<br>***<br>*****</code><br>要求：使用 <code>cout</code> 和 <code>endl</code>，每行独立输出。",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          '第一行输出 <code>"*"</code>',
-          '第二行输出 <code>"***"</code>',
-          '第三行输出 <code>"*****"</code>',
-          "每行末尾加 <code>endl</code> 换行",
-        ],
-        answer: { codeFile: "codes/lesson-01/pattern.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: '每行一个 <code>cout</code> 语句；<code>endl</code> 控制换行；字符串必须用英文双引号。<br><br><b>⚠️ 输出格式三条铁律</b><br>① <b>空格</b>不能多不能少——OJ 是"字符级"对比，多一个空格 = WA<br>② <b>换行</b>不能漏不能多——最后一行是否要换行？看题目描述或样例<br>③ <b>标点</b>是隐形陷阱——中文引号" "和英文引号" "看起来一样，实际完全不同',
-        },
-      },
-    },
-
-    /* ===== 23 练习3：输出菱形 ===== */
-    {
-      id: 23,
-      type: "level-map",
-      title: "课堂练习3：输出菱形",
-      subtitle: "灵活运用 cout 和 endl",
-      chapterTag: "第 1 讲 · 实战演练",
-      data: {
-        question: {
-          title: "题干",
-          desc: "输出下面 5 行菱形图案（用 <code>*</code> 组成）：<br>要求：每一行是一个 <code>cout</code> 语句，空格也要输出。",
-          questionCode: "  *\n ***\n*****\n ***\n  *",
-        },
-        hints: [
-          "第一行：2 个空格 + <code>*</code>",
-          "第二行：1 个空格 + <code>***</code>",
-          "第三行：<code>*****</code>",
-          "第四、五行与第一、二行对称",
-          "空格也是字符，要写在双引号里",
-        ],
-        answer: { codeFile: "codes/lesson-01/diamond.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: '菱形的核心是"<b>空格 + 星号</b>"的组合。<br>每一行都是一个字符串，空格必须写在双引号里。<br>这道题考的是对 <code>cout</code> 和格式的灵活运用，为后面"循环打印图案"（第 5 讲）打基础。',
-        },
-        extra: {
-          title: "📖 知识扩展 · ASCII 艺术",
-          desc: '<div><b>ASCII 艺术</b>就是用字符拼出图像。</div><div>1960 年代，打印机只能打字符，人们就用 <code>*</code>、<code>#</code>、<code>@</code> 拼出 LOGO、动物、人像。</div><div>今天你看到的很多"字符画"（比如终端里的企鹅、笑脸），都是 ASCII 艺术。</div><div><b>这是最早的"计算机艺术"形式之一。</b></div><div>今天你用 5 行代码，也画了一幅 ASCII 艺术。</div>',
-        },
-      },
-    },
-
-    /* ===== 24 难题后的放松：ASCII 艺术画廊 ===== */
-    {
-      id: 24,
-      type: "grid",
-      title: "🎨 难题后的放松 · 字符画画廊",
-      subtitle: "用字符拼出的可爱图像",
-      chapterTag: "第 1 讲 · 知识讲解",
-      data: {
-        cards: [
-          {
-            icon: "🙏",
-            title: "佛祖保佑 · 永无 BUG",
-            desc: '<img src="static/ascii-art/buddha-blessing.svg" alt="佛祖保佑 永无BUG" style="display:block;margin:0 auto;max-width:340px;width:100%;">',
-          },
-        ],
-      },
-    },
-
-    /* ===== 25 OJ 是什么 ===== */
-    {
-      id: 25, type: "grid",
+      id: 18, type: "grid",
       title: "OJ 是什么？",
       subtitle: "Online Judge 在线判题系统",
       chapterTag: "第 1 讲 · OJ 实战",
@@ -774,9 +548,9 @@ export default {
       },
     },
 
-    /* ===== 26 OJ 提交步骤 ===== */
+    /* ===== 19 OJ 提交步骤 ===== */
     {
-      id: 26,
+      id: 19,
       type: "flow",
       title: "OJ 提交步骤",
       subtitle: "手把手教你提交代码",
@@ -802,9 +576,9 @@ export default {
       },
     },
 
-    /* ===== 27 判题结果 ===== */
+    /* ===== 20 判题结果 ===== */
     {
-      id: 27, type: "compare",
+      id: 20, type: "compare",
       title: "OJ 判题结果解读",
       subtitle: "看懂反馈，快速改进",
       data: {
@@ -829,45 +603,206 @@ export default {
       },
     },
 
-    /* ===== 28 从 WA 到 AC ===== */
+    /* ===== 21 WA → AC 的心路历程 ===== */
     {
-      id: 28,
-      type: "dialog",
-      title: "从 WA 到 AC 的心路历程",
-      subtitle: '小C与同学聊"改错"',
+      id: 21,
+      type: "quote",
+      title: "从 WA 到 AC",
+      subtitle: '小 C 的改错哲学',
       chapterTag: "第 1 讲 · OJ 实战",
       data: {
-        lines: [
-          { who: "student", text: "小 C，我提交了 3 次，都是 WA，好沮丧。" },
+        text: "AC 是礼物，WA 是老师。",
+        author: "—— 小 C",
+        points: [
+          "<b>第一步</b>：用题目给的样例测一遍，看看输出对不对",
+          "<b>第二步</b>：对比输出格式：多空格？少换行？中文标点？",
+          "<b>第三步</b>：检查常见错误：大小写、括号配对、分号缺失",
+          "<b>隐藏测试点</b>：样例过了还 WA —— 更常见，检查边界（如多空行、末尾换行）",
+        ],
+        highlight: {
+          title: "📌 记住这句话",
+          desc: "每次 WA 都不是失败，是<b>信息</b> —— 它在告诉你"哪里不对"。<br><br>当年带出世界第一的学生，也是从第一次 WA 开始改起的。"
+        }
+      }
+    },
+
+    /* ===== 22 过渡页：第三站 ===== */
+    {
+      id: 22,
+      type: "transition",
+      title: "第三站 · 编译与运行",
+      subtitle: "从源码到程序",
+      data: {
+        previous: "OJ 提交与判题",
+        note: "接下来，你将看懂程序是怎么变成可执行文件的",
+      },
+    },
+
+    /* ===== 23 输出进阶 ===== */
+    {
+      id: 23,
+      type: "code-split",
+      title: "输出进阶：多个内容与换行",
+      subtitle: "灵活使用 cout",
+      data: {
+        intro:
+          "📖 <code>cout</code> 可以一次输出多个内容，用 <code>&lt;&lt;</code> 连接；<code>endl</code> 表示换行。",
+        codeFile: "codes/lesson-01/output-advanced.cpp",
+        annotations: [
           {
-            who: "robot",
-            text: '这是每个竞赛选手都走过的路。<b>WA 不是失败，是信息</b>——它告诉你"哪里不对"。',
+            line: 5,
+            title: "连续输出",
+            desc: "用 &lt;&lt; 连接多个内容，输出 AB",
           },
-          { who: "student", text: "那我怎么找到不对的地方？" },
-          {
-            who: "robot",
-            text: "三步走：<br>① 用题目给的样例测一遍，看看输出对不对<br>② 对比输出格式：多空格？少换行？<br>③ 检查常见错误：中文标点、大小写",
-          },
-          { who: "student", text: "样例过了还 WA 呢？" },
-          {
-            who: "robot",
-            text: '那更常见——是<b>隐藏测试点</b>的问题。<br>比如题目要求输出末尾不能有空行，你的程序多输出了一行。<br>这类问题，后面学"输出格式"时会专门讲。',
-          },
-          { who: "student", text: "原来如此。" },
-          {
-            who: "robot",
-            text: '记住这句话：<b>"AC 是礼物，WA 是老师。"</b><br>每次 WA 都让你更接近正确答案。',
-          },
+          { line: 6, title: "文字 + 结果", desc: "先算 1+2，再输出 1 + 2 = 3" },
+          { line: 7, title: "输出单行", desc: "输出 * 后换行" },
+          { line: 8, title: "输出多字符", desc: "输出 *** 后换行" },
         ],
       },
     },
 
-    /* ===== 29 课堂小测 ===== */
+    /* ===== 24 练习2：输出图形 ===== */
     {
-      id: 29,
+      id: 24,
+      type: "level-map",
+      title: "课堂练习2：输出图形",
+      subtitle: "巩固输出与换行",
+      chapterTag: "第 1 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输出下面图形：<br><code>*<br>***<br>*****</code><br>要求：使用 <code>cout</code> 和 <code>endl</code>，每行独立输出。",
+          timer: "⏱ 限时 6 分钟",
+        },
+        hints: [
+          '第一行输出 <code>"*"</code>',
+          '第二行输出 <code>"***"</code>',
+          '第三行输出 <code>"*****"</code>',
+          "每行末尾加 <code>endl</code> 换行",
+        ],
+        answer: { codeFile: "codes/lesson-01/pattern.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: '每行一个 <code>cout</code> 语句；<code>endl</code> 控制换行；字符串必须用英文双引号。<br><br><b>⚠️ 输出格式三条铁律</b><br>① <b>空格</b>不能多不能少——OJ 是"字符级"对比，多一个空格 = WA<br>② <b>换行</b>不能漏不能多——最后一行是否要换行？看题目描述或样例<br>③ <b>标点</b>是隐形陷阱——中文引号" "和英文引号" "看起来一样，实际完全不同',
+        },
+      },
+    },
+
+    /* ===== 25 练习3：输出菱形 ===== */
+    {
+      id: 25,
+      type: "level-map",
+      title: "课堂练习3：输出菱形",
+      subtitle: "灵活运用 cout 和 endl",
+      chapterTag: "第 1 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输出下面 5 行菱形图案（用 <code>*</code> 组成）：<br>要求：每一行是一个 <code>cout</code> 语句，空格也要输出。",
+          questionCode: "  *\n ***\n*****\n ***\n  *",
+        },
+        hints: [
+          "第一行：2 个空格 + <code>*</code>",
+          "第二行：1 个空格 + <code>***</code>",
+          "第三行：<code>*****</code>",
+          "第四、五行与第一、二行对称",
+          "空格也是字符，要写在双引号里",
+        ],
+        answer: { codeFile: "codes/lesson-01/diamond.cpp" },
+        analysis: {
+          title: "📖 解析",
+          desc: '菱形的核心是"<b>空格 + 星号</b>"的组合。<br>每一行都是一个字符串，空格必须写在双引号里。<br>这道题考的是对 <code>cout</code> 和格式的灵活运用，为后面"循环打印图案"（第 5 讲）打基础。',
+        },
+        extra: {
+          title: "📖 知识扩展 · ASCII 艺术",
+          desc: '<div><b>ASCII 艺术</b>就是用字符拼出图像。</div><div>1960 年代，打印机只能打字符，人们就用 <code>*</code>、<code>#</code>、<code>@</code> 拼出 LOGO、动物、人像。</div><div>今天你看到的很多"字符画"（比如终端里的企鹅、笑脸），都是 ASCII 艺术。</div><div><b>这是最早的"计算机艺术"形式之一。</b></div><div>今天你用 5 行代码，也画了一幅 ASCII 艺术。</div>',
+        },
+      },
+    },
+
+    /* ===== 26 ASCII 艺术画廊（放松页） ===== */
+    {
+      id: 26,
+      type: "split",
+      title: "🎨 难题后的放松 · 字符画画廊",
+      subtitle: "用字符拼出的可爱图像",
+      chapterTag: "第 1 讲 · 知识讲解",
+      data: {
+        intro: "刚才练习 3 的菱形，是最简单的字符画。<br>真正的字符画能有多惊艳？看看这张——",
+        panes: [
+          {
+            image: "static/ascii-art/buddha-blessing.svg",
+            imageAlt: "佛祖保佑 永无BUG 字符画",
+            imageCaption: "佛祖保佑 · 永无 BUG",
+            imageLayout: "block",
+            imageSize: "full",
+            zoomable: true
+          },
+          {
+            title: "字符画简史",
+            items: [
+              {
+                title: "1960s · 打印机时代",
+                desc: "打印机只能打字符<br>程序员开始用 <code>*</code> <code>#</code> <code>@</code> 拼图案"
+              },
+              {
+                title: "1980s · BBS 时代",
+                desc: "网络慢，图片发不了<br>字符画成了社交语言"
+              },
+              {
+                title: "今天 · 文化符号",
+                desc: "终端企鹅、笑脸、LOGO<br>都是 ASCII 艺术"
+              },
+              {
+                title: "🎯 你能画什么？",
+                desc: "只要会 <code>cout</code>，你就能画<br>试试看：拼一个笑脸？"
+              }
+            ]
+          }
+        ]
+      }
+    },
+
+    /* ===== 27 初赛高频考点（合并原 p19+p20） ===== */
+    {
+      id: 27,
+      type: "grid",
+      title: "初赛高频考点 · 竞赛启蒙",
+      subtitle: "这四个考点，初赛年年考",
+      chapterTag: "第 1 讲 · 初赛渗透",
+      data: {
+        cards: [
+          {
+            icon: "⚙️",
+            title: "① 编译器功能",
+            desc: "<b>源程序 → 机器指令</b><br><br>编译器的作用是：<br>把高级语言编写的源程序<br>整体翻译成等价的机器指令代码<br><br><b>⚠️ 方向不要反</b>"
+          },
+          {
+            icon: "🔍",
+            title: "② 编译 vs 解释",
+            desc: "<b>编译</b>：一次性翻译全部<br>（C++ / C）<br><br><b>解释</b>：逐行翻译执行<br>（Python / JavaScript）<br><br><b>C++ 是编译型语言</b>"
+          },
+          {
+            icon: "📄",
+            title: "③ .cpp 扩展名",
+            desc: "<code>.cpp</code> = 源程序（人可读）<br><code>.obj</code> = 目标文件（编译后）<br><code>.exe</code> = 可执行文件（链接后）<br><br><b>必背：源程序是 .cpp</b>"
+          },
+          {
+            icon: "🔌",
+            title: "④ 高级 vs 低级语言",
+            desc: "<b>低级语言</b>：机器语言 / 汇编<br><b>高级语言</b>：C++ / Python / Java<br><br>CPU 只能直接执行<b>机器语言</b><br>高级语言必须编译/解释"
+          }
+        ],
+        footer: '<b>📌 记住这四个点，初赛送分题拿下</b><br>· 编译器 = 把源程序翻译成机器指令<br>· 编译型（C++）vs 解释型（Python）<br>· 源程序扩展名 = <code>.cpp</code><br>· 高级语言不能直接被 CPU 执行<br><br>这 4 题在 CSP-J 初赛里至少考 2 道，<b>送分不能丢</b>。'
+      }
+    },
+
+    /* ===== 28 课堂小测（4 题） ===== */
+    {
+      id: 28,
       type: "quiz",
       title: "课堂小测",
-      subtitle: "编译器、程序结构与输出",
+      subtitle: "编译器、程序结构与执行",
       chapterTag: "第 1 讲 · 课堂小测",
       data: {
         questions: [
@@ -876,6 +811,7 @@ export default {
             type: "single",
             difficulty: 3,
             source: "2020 CSP-J 初赛 · 第 2 题",
+            optionLayout: "vertical",
             question: "编译器的主要功能是（　）。",
             options: [
               { label: "A", text: "将源程序翻译成机器指令代码", correct: true },
@@ -889,24 +825,9 @@ export default {
           {
             id: 2,
             type: "single",
-            difficulty: 3,
-            source: "CSP-J 2026 初赛模拟卷一 · 第 5 题",
-            question:
-              "C++ 中使用 <code>cin</code> 和 <code>cout</code>，需要包含哪个头文件？",
-            options: [
-              { label: "A", text: "<code>iostream</code>", correct: true },
-              { label: "B", text: "<code>cmath</code>" },
-              { label: "C", text: "<code>cstdio</code>" },
-              { label: "D", text: "<code>algorithm</code>" },
-            ],
-            analysis:
-              '<code>cin</code> 和 <code>cout</code> 定义在标准输入输出流库中，对应头文件 <code>&lt;iostream&gt;</code>。这是本讲 slide-05"Hello, World!"中 <code>#include &lt;iostream&gt;</code> 的直接考查。',
-          },
-          {
-            id: 3,
-            type: "single",
             difficulty: 2,
             source: "C++ 信息学奥赛总复习题 · 第一章",
+            optionLayout: "horizontal",
             question: "下面哪个是 C++ 源程序文件的标准扩展名？",
             options: [
               { label: "A", text: "<code>.exe</code>" },
@@ -915,13 +836,14 @@ export default {
               { label: "D", text: "<code>.txt</code>" },
             ],
             analysis:
-              'C++ 源程序文件用 <code>.cpp</code> 扩展名。<br>· <code>.cpp</code> 是源程序（人类可读）<br>· <code>.obj</code> 是编译后的目标文件<br>· <code>.exe</code> 是链接后的可执行文件<br>这是初赛高频考点，对应本讲 slide-17 的"从代码到运行"。',
+              'C++ 源程序文件用 <code>.cpp</code> 扩展名。<br>· <code>.cpp</code> 是源程序（人类可读）<br>· <code>.obj</code> 是编译后的目标文件<br>· <code>.exe</code> 是链接后的可执行文件<br>这是初赛高频考点，对应本讲"从代码到运行"。',
           },
           {
-            id: 4,
+            id: 3,
             type: "judge",
             difficulty: 2,
             source: "CSP-J 初赛真题练习 · C++ 语法",
+            optionLayout: "two-cols",
             question:
               "程序员用 C、C++、Python、Scratch 等编写的程序能在 CPU 上直接执行。",
             options: [
@@ -929,41 +851,29 @@ export default {
               { label: "B", text: "错误", correct: true },
             ],
             analysis:
-              'CPU 只能直接执行<b>机器指令</b>（0/1 序列）。高级语言（C++、Python）和图形化语言（Scratch）都需要经过<b>编译或解释</b>，转换成机器码后才能被 CPU 执行。这正是本讲 slide-17"从代码到运行"的核心知识点。',
+              'CPU 只能直接执行<b>机器指令</b>（0/1 序列）。高级语言（C++、Python）和图形化语言（Scratch）都需要经过<b>编译或解释</b>，转换成机器码后才能被 CPU 执行。这正是本讲"从代码到运行"的核心知识点。',
           },
           {
-            id: 5,
+            id: 4,
             type: "judge",
             difficulty: 2,
             source: "C++ 信息学奥赛总复习题 · 第一章",
+            optionLayout: "two-cols",
             question: "一个 C++ 程序可以没有 <code>main</code> 函数。",
             options: [
               { label: "A", text: "正确" },
               { label: "B", text: "错误", correct: true },
             ],
             analysis:
-              '<code>main</code> 函数是 C++ 程序的<b>唯一入口</b>。每个可执行程序<b>有且只有一个</b> <code>main</code> 函数，程序从 <code>main</code> 的第一条语句开始执行。没有 <code>main</code>，编译器无法确定程序从哪里开始运行，会报链接错误。这是本讲 slide-05 extra"为什么 main 是入口"的核心内容。',
-          },
-          {
-            id: 6,
-            type: "judge",
-            difficulty: 2,
-            source: "CSP-J 初赛真题练习 · 考试规则",
-            question: "CSP-J 通过初赛才能参加复赛，初赛淘汰率大约 60%—70%。",
-            options: [
-              { label: "A", text: "正确", correct: true },
-              { label: "B", text: "错误" },
-            ],
-            analysis:
-              "<b>CSP-J 分初赛和复赛两轮</b>：<br>· <b>初赛</b>：笔试（近年改为机试），考计算机基础、进制转换、逻辑运算、读程序写结果<br>· <b>复赛</b>：上机编程，4 道题，3.5 小时<br><br>初赛通过才能参加复赛，<b>淘汰率约 60%—70%</b>。<br>很多高手因为初赛没过，连复赛的门都进不去——<b>初赛不能忽视</b>。",
+              '<code>main</code> 函数是 C++ 程序的<b>唯一入口</b>。每个可执行程序<b>有且只有一个</b> <code>main</code> 函数，程序从 <code>main</code> 的第一条语句开始执行。没有 <code>main</code>，编译器无法确定程序从哪里开始运行，会报链接错误。这是本讲 Hello World extra"为什么 main 是入口"的核心内容。',
           },
         ],
       },
     },
 
-    /* ===== 30 今日总结 ===== */
+    /* ===== 29 今日总结 ===== */
     {
-      id: 30,
+      id: 29,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
@@ -980,14 +890,14 @@ export default {
         ],
         highlight: {
           title: "📌 关键口诀",
-          desc: "主函数是入口，return 0 结束；cout 输出用 &lt;&lt;，换行用 endl；英文标点要记牢，分号千万别漏掉。",
-        },
+          desc: "主函数是入口，return 0 结束；<br>cout 输出用 &lt;&lt;，换行用 endl；<br>英文标点要记牢，分号千万别漏掉。"
+        }
       },
     },
 
-    /* ===== 31 课后作业 ===== */
+    /* ===== 30 课后作业 ===== */
     {
-      id: 31,
+      id: 30,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -1015,9 +925,9 @@ export default {
       },
     },
 
-    /* ===== 32 下节预告 ===== */
+    /* ===== 31 下节预告 ===== */
     {
-      id: 32,
+      id: 31,
       type: "radial",
       title: "下节预告",
       subtitle: "第 2 讲 · 变量与整数类型",
@@ -1032,51 +942,42 @@ export default {
       },
     },
 
-    /* ===== 33 答疑时间 ===== */
+    /* ===== 32 答疑时间（4 卡） ===== */
     {
-      id: 33, type: "grid",
+      id: 32, type: "grid",
       title: "答疑时间",
-      subtitle: "常见问题 FAQ",
+      subtitle: "4 个最常被问到的问题",
       chapterTag: "第 1 讲 · 答疑",
       data: {
         cards: [
           {
             icon: "🔴",
             title: "编译不通过？",
-            desc: "先看<b>第一行报错</b><br>通常是标点或分号<br>编译器会告诉你行号<br><br>对照四大错误找",
+            desc: "先看<b>第一行报错</b><br>通常是标点或分号<br>编译器会告诉你行号<br><br>对照四大错误找"
           },
           {
             icon: "❌",
             title: "WA 怎么办？",
-            desc: "检查<b>输出格式</b><br>空格、换行、标点<br>有时候多一个空格<br>就被判 WA",
+            desc: "检查<b>输出格式</b><br>空格、换行、标点<br>有时候多一个空格<br>就被判 WA"
           },
           {
             icon: "🐛",
             title: "怎么调试？",
-            desc: "在关键位置加 <code>cout</code><br>输出中间变量<br>看哪一步开始出错<br><br>这叫<b>打印调试</b>",
+            desc: "在关键位置加 <code>cout</code><br>输出中间变量<br>看哪一步开始出错<br><br>这叫<b>打印调试</b>"
           },
           {
             icon: "🔀",
             title: "endl 还是 \\n？",
-            desc: "初学用 <code>endl</code><br>更直观<br>竞赛大数据输出<br>换成 <code>\\n</code> 更快",
-          },
-          {
-            icon: "📁",
-            title: "程序保存成什么？",
-            desc: "必须存成 <code>.cpp</code> 文件<br>编译器才能读<br>就像作文要写在纸上",
-          },
-          {
-            icon: "❓",
-            title: "中文变量名行吗？",
-            desc: "理论上能<br><b>但绝对不要</b><br>竞赛、工程、审查<br>都不允许",
-          },
+            desc: "初学用 <code>endl</code><br>更直观<br>竞赛大数据输出<br>换成 <code>\\n</code> 更快"
+          }
         ],
-      },
+        footer: '<b>📌 更多问题</b>：程序保存成什么？<code>.cpp</code> 文件（第 3 页已讲）。中文变量名行吗？理论上能，但<b>竞赛绝对不用</b>。'
+      }
     },
 
-    /* ===== 34 本讲英文单词 ===== */
+    /* ===== 33 本讲英文单词 ===== */
     {
-      id: 34,
+      id: 33,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
@@ -1136,47 +1037,9 @@ export default {
       },
     },
 
-    /* ===== 35 知识清单 ===== */
+    /* ===== 34 结束页 ===== */
     {
-      id: 35,
-      type: "grid",
-      title: "第 1 讲 · 知识清单",
-      subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 1 讲 · 复习",
-      data: {
-        cards: [
-          {
-            icon: "📄",
-            title: "程序结构",
-            desc: "<b>头文件</b> #include &lt;iostream&gt;<br><b>命名空间</b> using namespace std;<br><b>主函数</b> int main() { }<br><b>返回</b> return 0;",
-          },
-          {
-            icon: "📤",
-            title: "输出 cout",
-            desc: '用 <code>&lt;&lt;</code> 输出内容<br>可连续输出多个内容<br><code>endl</code> 换行并刷新<br><code>"\\n"</code> 换行更快',
-          },
-          {
-            icon: "⚙️",
-            title: "编译过程",
-            desc: ".cpp → .obj → .exe<br><b>编译</b>：翻译成机器码<br><b>链接</b>：拼装成 .exe<br><b>运行</b>：CPU 执行",
-          },
-          {
-            icon: "🏆",
-            title: "OJ 提交与判题",
-            desc: "注册 → 找题 → 粘贴 → 提交<br><b>AC</b> 通过 · <b>WA</b> 答案错<br><b>CE</b> 编译错 · <b>RE</b> 运行错<br><b>TLE</b> 超时 · <b>MLE</b> 内存超",
-          },
-          {
-            icon: "📌",
-            title: "本讲口诀",
-            desc: "程序框架不能少，<br>头文件加命名空间。<br>主函数是入口，<br>return 0 结束；<br>cout 输出用 <code>&lt;&lt;</code>，<br>换行用 <code>endl</code>。<br><br><b>四大错误要记牢</b>：<br>中文标点、漏分号、大小写、括号不配对。",
-          },
-        ],
-      },
-    },
-
-    /* ===== 36 结束页 ===== */
-    {
-      id: 36,
+      id: 34,
       type: "ending",
       title: "第一讲结束",
       subtitle: "点击返回目录，复习本讲内容",
