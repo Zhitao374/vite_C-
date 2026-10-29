@@ -329,21 +329,25 @@ function build01() {
     parts.push('```\n');
 
     // ─────────────────────────────────────
-    // 十、旧 MD 文档（附录）
+    // 十、全部 MD 文档（附录）
     // ─────────────────────────────────────
     parts.push('\n---\n');
-    parts.push('\n## 附录：项目里的旧 MD 文档\n');
-    parts.push('\n> ⚠️ **以下文档可能已过期**——真实状态以本文档上半部分为准。\n');
+    parts.push('\n## 附录：项目 `docs/` 目录下的所有文档\n');
 
-    const docs = ['GUIDE.md', 'COURSE-DESIGN.md', 'ARCHITECTURE.md', 'CHANGELOG.md'];
+    const docsDir = path.join(ROOT, 'docs');
+    let docs = [];
+    if (fs.existsSync(docsDir)) {
+        // 动态读取 docs 下所有 .md 文件
+        docs = fs.readdirSync(docsDir).filter(f => f.endsWith('.md')).sort();
+    }
+
     docs.forEach(doc => {
-        const fullPath = path.join(ROOT, doc);
-        if (!fs.existsSync(fullPath)) return;
+        const fullPath = path.join(docsDir, doc);
         const stat = fs.statSync(fullPath);
         const mtime = stat.mtime.toISOString().slice(0, 10);
-        const content = readFile(doc);
-        parts.push(`\n### \`${doc}\`（最后修改 ${mtime}）\n`);
-        parts.push(`\n<details>\n<summary>展开查看（可能过期）</summary>\n\n`);
+        const content = fs.readFileSync(fullPath, 'utf8');
+        parts.push(`\n### \`docs/${doc}\`（最后修改 ${mtime}）\n`);
+        parts.push(`\n<details>\n<summary>展开查看</summary>\n\n`);
         parts.push('````markdown\n');
         parts.push(content);
         parts.push('\n````\n\n</details>\n');

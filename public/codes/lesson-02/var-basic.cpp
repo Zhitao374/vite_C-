@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    // @snippet-start main
+// @snippet-start main
     int age;
     age = 11;
 
@@ -11,6 +11,6 @@ int main() {
 
     cout << age << endl;
     cout << score << endl;
-    // @snippet-end main
+// @snippet-end main
     return 0;
 }

@@ -1,5 +1,5 @@
 <template>
-  <SlideShell :slide="slide">
+  <SlideShell :slide="slide" :auto-extra="false">
     <div class="level-map-layout">
       <!-- 左侧：极简进度指示（垂直居中） -->
       <aside class="level-map-side">

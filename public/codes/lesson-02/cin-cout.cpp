@@ -2,13 +2,10 @@
 using namespace std;
 
 int main() {
-    // @snippet-start main
+// @snippet-start main
     int a, b;
-    cin >> a >> b;         // 读两个整数
-    cout << a + b << endl; // 输出和
+    cin >> a >> b;
+    cout << a + b;
+// @snippet-end main
     return 0;
-    // @snippet-end main
 }
-
-// 输入：3 5
-// 输出：8
