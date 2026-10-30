@@ -1,8 +1,9 @@
 #include <iostream>
 using namespace std;
 
-bool is_prime(int n) {
-    if (n < 2) return false;
+// @snippet-start main
+bool isPrime(int n) {
+    if (n <= 1) return false;
     for (int i = 2; i * i <= n; i++) {
         if (n % i == 0) return false;
     }
@@ -10,9 +11,10 @@ bool is_prime(int n) {
 }
 
 int main() {
-    int n;
-    cin >> n;
-    if (is_prime(n)) cout << "yes" << endl;
-    else cout << "no" << endl;
+    int num;
+    cin >> num;
+    if (isPrime(num)) cout << "Yes";
+    else cout << "No";
     return 0;
 }
+// @snippet-end main

@@ -2,19 +2,19 @@
 using namespace std;
 
 int main() {
-    // @snippet-start main
+// @snippet-start main
     int score;
     cin >> score;
-
+    
     if (score >= 90) {
-        cout << "A" << endl;
+        cout << "A";
     } else if (score >= 80) {
-        cout << "B" << endl;
+        cout << "B";
     } else if (score >= 60) {
-        cout << "C" << endl;
+        cout << "C";
     } else {
-        cout << "D" << endl;
+        cout << "D";
     }
-    // @snippet-end main
+// @snippet-end main
     return 0;
 }

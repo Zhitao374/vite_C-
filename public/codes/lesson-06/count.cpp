@@ -2,24 +2,20 @@
 using namespace std;
 
 int main() {
-    // @snippet-start main
-    int cnt[105] = {0};        // 计数数组，全部初始化为 0
-    int n;
+// @snippet-start main
+    int n, x;
     cin >> n;
+    int count[10] = {0}; // 桶，初始化为0
+    
     for (int i = 0; i < n; i++) {
-        int x;
         cin >> x;
-        cnt[x]++;              // 数值 x 出现一次，计数加 1
+        count[x]++; // 把 x 作为下标，统计出现次数
     }
-
-    int maxCnt = 0, maxNum = 0;
-    for (int i = 0; i < 105; i++) {
-        if (cnt[i] > maxCnt) {
-            maxCnt = cnt[i];
-            maxNum = i;
-        }
+    
+    for (int i = 0; i < 10; i++) {
+        if (count[i] > 0)
+            cout << i << "出现了" << count[i] << "次" << endl;
     }
-    cout << maxNum << " 出现 " << maxCnt << " 次" << endl;
-    // @snippet-end main
+// @snippet-end main
     return 0;
 }

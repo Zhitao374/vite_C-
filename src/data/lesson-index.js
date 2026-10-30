@@ -11,43 +11,43 @@ export const lessonIndex = {
   "01": {
     title:    "第 1 讲 初识 C++",
     subtitle: "第一个程序与 OJ 提交",
-    total:    36,
+    total:    27,
     category: "语法与基础算法"
   },
   "02": {
     title:    "第 2 讲 变量与整数类型",
     subtitle: "让程序学会记住数据",
-    total:    35,
+    total:    30,
     category: "语法与基础算法"
   },
   "03": {
     title:    "第 3 讲 小数、字符、布尔与类型转换",
     subtitle: "数据的多种面孔",
-    total:    29,
+    total:    28,
     category: "语法与基础算法"
   },
   "04": {
     title:    "第 4 讲 运算符与分支",
     subtitle: "让程序学会判断",
-    total:    29,
+    total:    24,
     category: "语法与基础算法"
   },
   "05": {
     title:    "第 5 讲 循环结构",
     subtitle: "让程序学会重复",
-    total:    28,
+    total:    24,
     category: "语法与基础算法"
   },
   "06": {
     title:    "第 6 讲 一维数组",
     subtitle: "一排储物柜，批量装数据",
-    total:    29,
+    total:    23,
     category: "语法与基础算法"
   },
   "07": {
     title:    "第 7 讲 字符串基础",
     subtitle: "一串字符的容器",
-    total:    31,
+    total:    28,
     category: "语法与基础算法"
   },
   "08": {

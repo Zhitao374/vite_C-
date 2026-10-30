@@ -2,11 +2,10 @@
 using namespace std;
 
 int main() {
-    // @snippet-start main
-    for (int i = 1; i <= 10; i++) {
+// @snippet-start main
+    for (int i = 1; i <= 5; i++) {
         cout << i << " ";
     }
-    cout << endl;
-    // @snippet-end main
+// @snippet-end main
     return 0;
 }

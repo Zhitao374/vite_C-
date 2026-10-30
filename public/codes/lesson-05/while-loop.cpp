@@ -2,13 +2,12 @@
 using namespace std;
 
 int main() {
-    // @snippet-start main
+// @snippet-start main
     int i = 1;
-    while (i <= 10) {
+    while (i <= 5) {
         cout << i << " ";
         i++;
     }
-    cout << endl;
-    // @snippet-end main
+// @snippet-end main
     return 0;
 }

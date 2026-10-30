@@ -1,7 +1,7 @@
 export default {
   title: "第 2 讲 变量与整数类型",
   subtitle: "让程序学会记住数据",
-  total: 30,
+  total: 29,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -43,11 +43,7 @@ export default {
 
     /* ===== 3 上节回顾 ===== */
     {
-      id: 3,
-      type: "timeline",
-      variant: "review",
-      title: "上节课回顾",
-      subtitle: "从第一个程序到今天的新问题",
+      id: 3, type: "timeline", variant: "review", title: "上节课回顾", subtitle: "从第一个程序到今天的新问题",
       data: {
         items: [
           { icon: "📤", badge: "输出", title: "第一个程序", desc: "Hello, World! 和程序框架", points: ["头文件、命名空间", "int main()", "cout <<", "return 0"] },
@@ -58,40 +54,22 @@ export default {
       },
     },
 
-    /* ===== 4 本节课目标 ===== */
+    /* ===== 4 本讲作战地图（合并原目标与地图） ===== */
     {
-      id: 4, type: "grid", title: "本节课目标", subtitle: "四步让程序记住数据",
-      data: {
-        cards: [
-          { number: "01", title: "理解变量", desc: "变量 = 酒店房间" },
-          { number: "02", title: "输入与命名", desc: "用 cin 接收数据" },
-          { number: "03", title: "整数类型", desc: "int 与 long long 的边界" },
-          { number: "04", title: "常量 const", desc: "锁定不可变的数据" },
-        ],
-        footer: '<b>📌 今天的路线</b>：建房间（变量） → 迎客（cin 输入） → 换大房（long long） → 焊死门（const）。'
-      },
-    },
-
-    /* ===== 5 学习地图 ===== */
-    {
-      id: 5,
-      type: "timeline",
-      variant: "map",
-      title: "本讲学习地图",
-      subtitle: "四站闯关，从零到防坑",
+      id: 4, type: "timeline", variant: "map", title: "本讲作战地图", subtitle: "四站闯关，让程序记住数据",
       data: {
         items: [
-          { icon: "🧠", badge: "基础", title: "第一站 · 变量与输入", desc: "房间与迎客", points: ["变量三要素", "cin 读入数据", "黑窗口输入格式"] },
-          { icon: "💥", badge: "冲突", title: "第二站 · 内存限制", desc: "int 的天花板", points: ["21亿视觉冲击", "符号位溢出", "long long 解药"] },
-          { icon: "🔒", badge: "进阶", title: "第三站 · 常量", desc: "焊死的保险箱", points: ["const 语法", "防止手滑修改"] },
-          { icon: "🏆", badge: "实战", title: "第四站 · 避坑", desc: "初赛与机房排雷", points: ["类型大小记忆", "机房实操急救"] },
+          { icon: "🏨", badge: "第一站", title: "开房间", desc: "变量与输入", points: ["变量三要素", "cin 读入数据", "机房输入急救"] },
+          { icon: "💥", badge: "第二站", title: "看天花板", desc: "整数的极限", points: ["int 的 21 亿", "亲眼见证溢出", "long long 救场"] },
+          { icon: "🔒", badge: "第三站", title: "焊死门", desc: "常量 const", points: ["不可修改", "const 语法"] },
+          { icon: "🏆", badge: "第四站", title: "避坑", desc: "初赛与实战", points: ["类型大小记忆", "大数求和"] },
         ],
       },
     },
 
-    /* ===== 6 为什么需要变量 ===== */
+    /* ===== 5 为什么需要变量 ===== */
     {
-      id: 6, type: "origin", title: "为什么需要变量？", subtitle: "从内存地址到名字的演进", chapterTag: "第 2 讲 · 概念理解",
+      id: 5, type: "origin", title: "为什么需要变量？", subtitle: "从内存地址到名字的演进", chapterTag: "第 2 讲 · 概念理解",
       data: {
         problem: {
           title: "没有变量时，程序怎么存数据？",
@@ -116,9 +94,9 @@ export default {
       },
     },
 
-    /* ===== 7 变量定义与赋值 ===== */
+    /* ===== 6 变量定义与赋值 ===== */
     {
-      id: 7, type: "code-split", title: "变量定义与赋值", subtitle: "两步走 或 一步到位",
+      id: 6, type: "code-split", title: "变量定义与赋值", subtitle: "两步走 或 一步到位",
       data: {
         intro: '📖 <b>定义</b>变量 = 给盒子起名字；<b>赋值</b> = 往盒子里放数据。<br>两件事可以分两步做，也可以一步完成。',
         codeFile: 'codes/lesson-02/var-basic.cpp', snippet: 'main',
@@ -133,14 +111,26 @@ export default {
       }
     },
 
-    /* ===== 8 练习1：定义变量 ===== */
+    /* ===== 7 练习1：定义变量 ===== */
     {
-      id: 8, type: "level-map", title: "课堂练习1：定义变量", subtitle: "定义 3 个变量并输出", chapterTag: "第 2 讲 · 实战演练",
+      id: 7, type: "level-map", title: "课堂练习1：定义变量", subtitle: "定义 3 个变量并输出", chapterTag: "第 2 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "定义三个变量：<code>age = 11</code>、<code>score = 98</code>、<code>year = 2026</code>，分三行输出。", timer: "⏱ 限时 5 分钟" },
         hints: ["用 <code>int</code> 定义", "一步定义 + 赋值：<code>int age = 11;</code>", "每行一个 <code>cout</code> 加 <code>endl</code>"],
         answer: { codeFile: "codes/lesson-02/var-practice.cpp" },
         analysis: { title: "📖 解析", desc: "<b>定义变量 + 赋值</b>是编程的第一步。<br>推荐一步写：<code>int age = 11;</code> —— 避免忘了赋值。" }
+      }
+    },
+
+    /* ===== 8 难题后的放松·命名玄学 ===== */
+    {
+      id: 8, type: "grid", title: "🎨 命名玄学", subtitle: "为什么循环总用 i、j、k？", chapterTag: "第 2 讲 · 知识讲解",
+      data: {
+        cards: [
+          { icon: "🔤", title: "为什么用 i、j、k？", desc: "数学里求和用 <b>Σ</b>，下标是 <b>i</b>。<br>1957 年 FORTRAN 规定：以 I 到 N 开头的变量名自动是整数。<br>从此 <code>i</code>、<code>j</code>、<code>k</code> 就成了循环变量的默契。<br><b>70 年过去，还在用。</b>" },
+          { icon: "🍫", title: "为什么用 foo、bar？", desc: '<b>foo</b> 来自二战雷达术语 FU（Fouled Up，一团糟）。<br><b>bar</b> 来自 1930 年代漫画《Smokey Stover》。<br>程序员把它们当"占位符"用——<br>不重要的名字，就叫 <code>foo</code>、<code>bar</code>、<code>baz</code>。' },
+        ],
+        footer: '<b>📌 好名字值千金</b><br>编程界有句名言：<b>"计算机科学只有两件难事——缓存失效和命名。"</b><br><br>❌ <code>a</code>、<code>b</code>、<code>temp</code> —— 过两天不知道是什么<br>✅ <code>math_score</code>、<code>total_count</code> —— 见名知意<br><br><b>原则</b>：名字要像"自我介绍"——不用解释就能看懂。'
       }
     },
 
@@ -236,21 +226,9 @@ export default {
       }
     },
 
-    /* ===== 14 难题后的放松·命名玄学 ===== */
+    /* ===== 14 int 类型的极限 ===== */
     {
-      id: 14, type: "grid", title: "🎨 命名玄学", subtitle: "为什么循环总用 i、j、k？", chapterTag: "第 2 讲 · 知识讲解",
-      data: {
-        cards: [
-          { icon: "🔤", title: "为什么用 i、j、k？", desc: "数学里求和用 <b>Σ</b>，下标是 <b>i</b>。<br>1957 年 FORTRAN 规定：以 I 到 N 开头的变量名自动是整数。<br>从此 <code>i</code>、<code>j</code>、<code>k</code> 就成了循环变量的默契。<br><b>70 年过去，还在用。</b>" },
-          { icon: "🍫", title: "为什么用 foo、bar？", desc: '<b>foo</b> 来自二战雷达术语 FU（Fouled Up，一团糟）。<br><b>bar</b> 来自 1930 年代漫画《Smokey Stover》。<br>程序员把它们当"占位符"用——<br>不重要的名字，就叫 <code>foo</code>、<code>bar</code>、<code>baz</code>。' },
-        ],
-        footer: '<b>📌 好名字值千金</b><br>编程界有句名言：<b>"计算机科学只有两件难事——缓存失效和命名。"</b><br><br>❌ <code>a</code>、<code>b</code>、<code>temp</code> —— 过两天不知道是什么<br>✅ <code>math_score</code>、<code>total_count</code> —— 见名知意<br><br><b>原则</b>：名字要像"自我介绍"——不用解释就能看懂。'
-      }
-    },
-
-    /* ===== 15 int 类型的极限 ===== */
-    {
-      id: 15, type: "big-number", title: "int · 普通整数", subtitle: "最常用的整数类型，但它的极限在哪里？",
+      id: 14, type: "big-number", title: "int · 普通整数", subtitle: "最常用的整数类型，但它的极限在哪里？",
       data: {
         number: "2147483647", unit: "约 21 亿",
         card: { title: "这就是 int 的“天花板”", desc: "int 占 4 字节，正数最大只能存到 <b>2147483647</b>。<br><br>记住这个数字——它经常在初赛题和竞赛题里坑人。" },
@@ -258,24 +236,29 @@ export default {
       },
     },
 
-    /* ===== 16 long long 类型 ===== */
+    /* ===== 15 long long 类型 ===== */
     {
-      id: 16, type: "code-split", title: "long long · 大整数", subtitle: "存得下更大的数",
+      id: 15, type: "code-split", title: "long long · 大整数", subtitle: "存得下更大的数",
       data: {
-        intro: '📖 既然 int 会溢出，我们就需要更大的盒子。<code>long long</code> 是"长整型"，占 <b>8 字节</b>，范围约 <b>±9×10¹⁸</b>。<br>竞赛中遇到大数运算，必须用它。<br><br><b>写法注意</b>：<code>long long</code> 是<b>两个单词</b>，中间有空格——不能写成 <code>longlong</code>。',
+        intro: '📖 既然 int 会溢出，我们就需要更大的盒子。<code>long long</code> 是"长整型"，占 <b>8 字节</b>，范围约 <b>±9×10¹⁸</b>。<br>竞赛中遇到大数运算，必须用它。<br><br><b>写法注意</b>：<code>long long</code> 是<b>两个单词</b>，中间有空格。',
         codeFile: "codes/lesson-02/longlong-type.cpp", snippet: "main",
         annotations: [
           { line: 6, title: "long long a = 10000000000;", desc: "100 亿——int 装不下，long long 可以" },
           { line: 7, title: "long long b = 9999999999;", desc: "注意写法：<code>long long</code> 是两个单词" },
-          { line: 8, title: "cout &lt;&lt; a + b;", desc: '大数运算不会溢出<br><b>💡 记忆</b>：int 像"中等行李箱"，long long 像"大衣柜"' },
+          { line: 8, title: "cout &lt;&lt; a + b;", desc: '大数运算不会溢出' },
         ],
         output: "19999999999",
+        extra: {
+          title: "💡 记忆法",
+          desc: "int 像'中等行李箱'，long long 像'大衣柜'。<br>如果题目数据范围超过 21 亿，无脑用 long long！",
+          variant: "card-primary"
+        }
       },
     },
 
-    /* ===== 17 决策指南 ===== */
+    /* ===== 16 决策指南 ===== */
     {
-      id: 17, type: "decision", title: "什么时候必须用 long long？", subtitle: "看到这些信号，就要警惕溢出",
+      id: 16, type: "decision", title: "什么时候必须用 long long？", subtitle: "看到这些信号，就要警惕溢出",
       data: {
         intro: '📖 <b>口诀不够用</b>——"不确定用 long long"太笼统。<br>下面是<b>具体的判断信号</b>：看到这些关键词，就该想到 long long。',
         signals: [
@@ -291,9 +274,9 @@ export default {
       },
     },
 
-    /* ===== 18 练习2：大数求和 ===== */
+    /* ===== 17 练习2：大数求和 ===== */
     {
-      id: 18, type: "level-map", title: "课堂练习2：大数求和", subtitle: "用 long long 避免溢出", chapterTag: "第 2 讲 · 实战演练",
+      id: 17, type: "level-map", title: "课堂练习2：大数求和", subtitle: "用 long long 避免溢出", chapterTag: "第 2 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入 4 个大整数（每个可达 10¹⁰），输出它们的和。<br>输入样例：<code>10000000000 20000000000 30000000000 40000000000</code><br>输出样例：<code>100000000000</code>", timer: "⏱ 限时 8 分钟" },
         hints: ["每个数可能超过 21 亿，<b>必须用 long long</b>", "四个数之和可能更大，也要用 long long 保存", "cin 和 cout 对 long long 一样适用"],
@@ -302,15 +285,15 @@ export default {
       }
     },
 
-    /* ===== 19 过渡页 ===== */
+    /* ===== 18 过渡页 ===== */
     {
-      id: 19, type: "transition", title: "第四站 · 常量", subtitle: "有些值，永远不变",
+      id: 18, type: "transition", title: "第四站 · 常量", subtitle: "有些值，永远不变",
       data: { note: '我们学了"会变"的变量，现在看看"不变"的常量' },
     },
 
-    /* ===== 20 常量 const ===== */
+    /* ===== 19 常量 const ===== */
     {
-      id: 20, type: "dialog", title: "常量 const", subtitle: "不变的值有专门的家", chapterTag: "第 2 讲 · 常量",
+      id: 19, type: "dialog", title: "常量 const", subtitle: "不变的值有专门的家", chapterTag: "第 2 讲 · 常量",
       data: {
         lines: [
           { who: "student", text: "小 C，我写算圆面积的程序，π 就是写 3.14159 对吧？" },
@@ -324,9 +307,9 @@ export default {
       },
     },
 
-    /* ===== 21 const 代码演示 ===== */
+    /* ===== 20 const 代码演示 ===== */
     {
-      id: 21, type: "code-split", title: "const 常量 · 代码演示", subtitle: "定义后不可修改",
+      id: 20, type: "code-split", title: "const 常量 · 代码演示", subtitle: "定义后不可修改",
       data: {
         intro: "📖 <b>语法</b>：<code>const 类型 名字 = 值;</code><br>const 定义的变量，一旦赋值就不能再改——这是它和普通变量唯一的区别。",
         codeFile: "codes/lesson-02/const-basic.cpp", snippet: "main",
@@ -339,9 +322,9 @@ export default {
       },
     },
 
-    /* ===== 22 练习3：圆的面积 ===== */
+    /* ===== 21 练习3：圆的面积 ===== */
     {
-      id: 22, type: "level-map", title: "课堂练习3：圆的面积", subtitle: "用 const 和 double", chapterTag: "第 2 讲 · 实战演练",
+      id: 21, type: "level-map", title: "课堂练习3：圆的面积", subtitle: "用 const 和 double", chapterTag: "第 2 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入圆的半径 <code>r</code>，输出圆的面积。<br>要求：定义常量 <code>const double PI = 3.14159;</code>。<br>输入样例：<code>5</code>　输出样例：<code>78.5397</code>", timer: "⏱ 限时 5 分钟" },
         hints: ["用 <code>const double PI = 3.14159;</code> 定义圆周率", "用 <code>double</code> 存半径", "面积 = <code>PI * r * r</code>"],
@@ -350,9 +333,9 @@ export default {
       }
     },
 
-    /* ===== 23 初赛渗透 ===== */
+    /* ===== 22 初赛渗透 ===== */
     {
-      id: 23, type: "grid", title: "初赛小知识：类型大小", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 2 讲 · 初赛渗透",
+      id: 22, type: "grid", title: "初赛小知识：类型大小", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 2 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "🔢", title: "常见类型字节数", desc: "这是初赛每年的<b>送分题</b>，必须死记：<br>· <code>int</code> = <b>4 字节</b><br>· <code>long long</code> = <b>8 字节</b><br>· <code>double</code> = <b>8 字节</b><br>· <code>char</code> / <code>bool</code> = <b>1 字节</b>" },
@@ -363,9 +346,9 @@ export default {
       }
     },
 
-    /* ===== 24 课堂小测 ===== */
+    /* ===== 23 课堂小测 ===== */
     {
-      id: 24, type: "quiz", title: "课堂小测", subtitle: "变量、输入与整数类型", chapterTag: "第 2 讲 · 课堂小测",
+      id: 23, type: "quiz", title: "课堂小测", subtitle: "变量、输入与整数类型", chapterTag: "第 2 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "2020 CSP-J 初赛 · 第 3 题", optionLayout: "horizontal", question: "以下哪个是 C++ 合法的变量名？", options: [ { label: "A", text: "<code>123name</code>" }, { label: "B", text: "<code>my_name</code>", correct: true }, { label: "C", text: "<code>my-name</code>" }, { label: "D", text: "<code>my name</code>" } ], analysis: 'C++ 变量名规则：<br>① 只能含字母、数字、下划线<br>② <b>不能以数字开头</b><br>③ 不能含空格或特殊符号（如 <code>-</code>）<br><br>A 以数字开头，错；B 合法；C 含 <code>-</code>，错；D 含空格，错。<br>这是本讲"变量命名规则"的直接考查。' },
@@ -377,9 +360,9 @@ export default {
       },
     },
 
-    /* ===== 25 今日总结 ===== */
+    /* ===== 24 今日总结 ===== */
     {
-      id: 25, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
+      id: 24, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
       data: {
         text: "变量是带名字的盒子，类型是盒子的大小。", author: "—— 变量第一课",
         points: [ "变量 = 名字 + 类型 + 值", "定义语法：类型 名字 = 初值;", "cin 输入：cin >> 变量;", "命名规则：字母数字下划线，不能数字开头", "int：4 字节，约 ±21 亿", "long long：8 字节，约 ±9×10¹⁸", "const 常量：值不可改变" ],
@@ -388,9 +371,9 @@ export default {
       },
     },
 
-    /* ===== 26 课后作业 ===== */
+    /* ===== 25 课后作业 ===== */
     {
-      id: 26, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
+      id: 25, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
       data: {
         cards: [
           { icon: "🟢", title: "基础 1 · P1001", link: "https://www.luogu.com.cn/problem/P1001", desc: "<b>A+B Problem</b><br>考察：cin、变量、加法<br>难度：★<br>目标：读两个数，输出和" },
@@ -400,18 +383,18 @@ export default {
       },
     },
 
-    /* ===== 27 下节预告 ===== */
+    /* ===== 26 下节预告 ===== */
     {
-      id: 27, type: "radial", title: "下节预告", subtitle: "第 3 讲 · 小数、字符、布尔与类型转换",
+      id: 26, type: "radial", title: "下节预告", subtitle: "第 3 讲 · 小数、字符、布尔与类型转换",
       data: {
         center: "类型",
         items: [ { text: "double 小数" }, { text: "char 字符" }, { text: "bool 布尔" }, { text: "类型转换" } ],
       },
     },
 
-    /* ===== 28 答疑时间 ===== */
+    /* ===== 27 答疑时间 ===== */
     {
-      id: 28, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 2 讲 · 互动",
+      id: 27, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 2 讲 · 互动",
       data: {
         cards: [
           { icon: "📦", title: "关于变量", desc: "名字、类型、初值<br>为什么未初始化是垃圾值？" },
@@ -423,9 +406,9 @@ export default {
       }
     },
 
-    /* ===== 29 本讲英文单词 ===== */
+    /* ===== 28 本讲英文单词 ===== */
     {
-      id: 29, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 2 讲 · 复习",
+      id: 28, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 2 讲 · 复习",
       data: {
         words: [
           { word: "variable", cn: "变量", pron: "/ˈveəriəbl/", origin: "vary (变化) + able (可以) = 可变化的", category: "概念" },
@@ -438,9 +421,9 @@ export default {
       },
     },
 
-    /* ===== 30 结束页 ===== */
+    /* ===== 29 结束页 ===== */
     {
-      id: 30, type: "ending", title: "第二讲结束", subtitle: "点击返回目录，复习本讲内容", chapterTag: false,
+      id: 29, type: "ending", title: "第二讲结束", subtitle: "点击返回目录，复习本讲内容", chapterTag: false,
       data: { slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题" },
     },
   ],

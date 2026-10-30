@@ -1,18 +1,20 @@
 #include <iostream>
 using namespace std;
 
+// @snippet-start main
 int gcd(int a, int b) {
     while (b != 0) {
-        int t = a % b;
+        int r = a % b;
         a = b;
-        b = t;
+        b = r;
     }
     return a;
 }
 
 int main() {
-    int a, b;
-    cin >> a >> b;
-    cout << gcd(a, b) << endl;
+    int x, y;
+    cin >> x >> y;
+    cout << gcd(x, y);
     return 0;
 }
+// @snippet-end main

@@ -65,6 +65,7 @@
                   v-if="!Array.isArray(answer)"
                   :code="answer.code"
                   :code-file="answer.codeFile"
+                  :snippet="answer.snippet"
                   :density="answer.density"
                   title="✅ 参考代码"
                 />

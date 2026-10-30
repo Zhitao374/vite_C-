@@ -1,12 +1,15 @@
 #include <iostream>
 using namespace std;
 
-int add(int a, int b) {
-    return a + b;
+// @snippet-start main
+int square(int x) {
+    return x * x;
 }
 
 int main() {
-    int result = add(3, 5);
-    cout << result << endl;
+    int a = 5;
+    int result = square(a); // a 是实参
+    cout << result;
     return 0;
 }
+// @snippet-end main
