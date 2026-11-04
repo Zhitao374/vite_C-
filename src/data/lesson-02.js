@@ -291,17 +291,17 @@ export default {
       data: { note: '我们学了"会变"的变量，现在看看"不变"的常量' },
     },
 
-    /* ===== 19 常量 const ===== */
+        /* ===== 19 常量 const ===== */
     {
       id: 19, type: "dialog", title: "常量 const", subtitle: "不变的值有专门的家", chapterTag: "第 2 讲 · 常量",
       data: {
         lines: [
-          { who: "student", text: "小 C，我写算圆面积的程序，π 就是写 3.14159 对吧？" },
-          { who: "robot", text: "可以，但想象一个场景：你写了 <b>2000 行代码</b>，到处都是 3.14159。" },
+          { who: "student", text: "小 C，如果我要在代码里用到一个固定的数字，比如全班 50 个人，每次都要写 50 吗？" },
+          { who: "robot", text: "可以写，但想象一个场景：你写了 <b>2000 行代码</b>，到处都写了 50。" },
           { who: "student", text: "然后呢？" },
-          { who: "robot", text: "后来老师说 π 的精度要提高到 3.1415926。你是不是得把 2000 行里的数字全改一遍？一不小心改漏一个，答案就错了。" },
+          { who: "robot", text: "后来转学了 2 个人，全班变成 52 个人。你是不是得把 2000 行里的数字全改一遍？一不小心改漏一个，答案就错了。" },
           { who: "student", text: "那怎么办？" },
-          { who: "robot", text: "用<b>常量</b>！在开头定义一次：<code>const double PI = 3.1415926;</code>，下面全用 <code>PI</code>。<br>以后要改，改上面这一行就行了。<br>而且如果你不小心写了 <code>PI = 3.14;</code>，编译器会直接报错拦住你！" },
+          { who: "robot", text: "用<b>常量</b>！在开头定义一次：<code>const int N = 50;</code>，下面全用 <code>N</code>。<br>以后要改，改上面这一行就行了。<br>而且如果你不小心写了 <code>N = 52;</code>，编译器会直接报错拦住你！" },
           { who: "student", text: "原来 const 是为了省事和防错！" }
         ]
       },
@@ -314,22 +314,22 @@ export default {
         intro: "📖 <b>语法</b>：<code>const 类型 名字 = 值;</code><br>const 定义的变量，一旦赋值就不能再改——这是它和普通变量唯一的区别。",
         codeFile: "codes/lesson-02/const-basic.cpp", snippet: "main",
         annotations: [
-          { line: 5, title: "const double PI = 3.14159;", desc: "定义常量 PI——圆周率，永不改变" },
-          { line: 6, title: "const int MAXN = 100005;", desc: "定义数组最大长度——统一管理" },
-          { line: 10, title: "double area = PI * r * r;", desc: "常量参与运算——和普通变量一样" },
+          { line: 6, title: "const int N = 50;", desc: "定义常量 N——代表全班人数" },
+          { line: 7, title: "const int MAXN = 100005;", desc: "定义数组最大长度——统一管理" },
+          { line: 11, title: "int sum = N * 2;", desc: "常量参与运算——和普通变量一样" },
         ],
-        output: "（输入 5）\n78.5397",
+        output: "100",
       },
     },
 
-    /* ===== 21 练习3：圆的面积 ===== */
+    /* ===== 21 练习3：长方形面积 ===== */
     {
-      id: 21, type: "level-map", title: "课堂练习3：圆的面积", subtitle: "用 const 和 double", chapterTag: "第 2 讲 · 实战演练",
+      id: 21, type: "level-map", title: "课堂练习3：长方形面积", subtitle: "用 const 定义固定系数", chapterTag: "第 2 讲 · 实战演练",
       data: {
-        question: { title: "题干", desc: "输入圆的半径 <code>r</code>，输出圆的面积。<br>要求：定义常量 <code>const double PI = 3.14159;</code>。<br>输入样例：<code>5</code>　输出样例：<code>78.5397</code>", timer: "⏱ 限时 5 分钟" },
-        hints: ["用 <code>const double PI = 3.14159;</code> 定义圆周率", "用 <code>double</code> 存半径", "面积 = <code>PI * r * r</code>"],
-        answer: { codeFile: "codes/lesson-02/circle.cpp" },
-        analysis: { title: "📖 解析", desc: "<b>const 的经典用法</b>——把圆周率固定死，防止后面手滑改掉。<br>定义：<code>const 类型 名字 = 值;</code>。" }
+        question: { title: "题干", desc: "输入长方形的长 <code>a</code> 和 宽 <code>b</code>，输出它的面积。<br>要求：定义常量 <code>const int K = 2;</code>，输出 <code>a * b * K</code>（假装算的是两面的面积）。", timer: "⏱ 限时 5 分钟" },
+        hints: ["用 <code>const int K = 2;</code> 定义常量", "用 <code>int</code> 存长和宽", "面积 = <code>a * b * K</code>"],
+        answer: { codeFile: "codes/lesson-02/rect-area.cpp" },
+        analysis: { title: "📖 解析", desc: "<b>const 的经典用法</b>——把固定的系数锁死，防止后面手滑改掉。<br>定义：<code>const 类型 名字 = 值;</code>。<br>（注：我们在本讲只学了整数，所以先用整数做例子。下一讲学了小数，大家就可以把常量用在圆周率上了。）" }
       }
     },
 

@@ -83,7 +83,7 @@ defineExpose({ handleRun });
 .terminal-body { padding: 8px 14px; display: flex; flex-direction: column; }
 .stdin-row { display: flex; gap: 8px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #333; }
 .stdin-row input { flex: 1; background: #111; border: 1px solid #333; color: #fff; padding: 4px; outline: none; }
-.output-box { margin: 0; color: #e6f1ff; font-family: monospace; white-space: pre-wrap; max-height: 200px; overflow-y: auto; }
+.output-box { margin: 0; color: #e6f1ff; font-family: monospace; white-space: pre-wrap; flex: 1; overflow-y: auto; }
 .stdin-row {
   display: flex;
   align-items: flex-start;

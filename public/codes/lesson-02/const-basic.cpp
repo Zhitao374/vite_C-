@@ -1,16 +1,13 @@
 #include <iostream>
 using namespace std;
 
-// @snippet-start main
-const double PI = 3.14159;
-const int MAXN = 100005;
-
 int main() {
-    double r;
-    cin >> r;
+// @snippet-start main
+    const int N = 50; 
+    const int MAXN = 100005; 
     
-    double area = PI * r * r;
-    cout << area;
+    int sum = N * 2; 
+    cout << sum;
     return 0;
 }
 // @snippet-end main

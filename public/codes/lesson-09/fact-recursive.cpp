@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-long long factorial(int n) {
-    if (n <= 1) return 1;
-    return n * factorial(n - 1);
+// @snippet-start main
+int f(int n) {
+    if (n == 1) return 1; // 边界
+    return n * f(n - 1);  // 递归公式
 }
 
 int main() {
-    int n;
-    cin >> n;
-    cout << factorial(n) << endl;
+    cout << f(5);
     return 0;
 }
+// @snippet-end main

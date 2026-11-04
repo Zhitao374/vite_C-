@@ -88,4 +88,10 @@ function close() {
   transition: color 0.2s;
 }
 .modal-close:hover { color: #fff; }
+.modal-body {
+  flex: 1; /* 核心：占满剩余高度 */
+  min-height: 0; /* 核心：允许内部滚动/缩放 */
+  position: relative;
+  overflow: hidden;
+}
 </style>

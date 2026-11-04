@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
-    // 故意演示：开 5 个空间，但塞了 5 个字母 + 隐形的 \0
-    char s[5] = "Hello"; 
+int main() {
+    // 故意用列表初始化，不带 \0。注意：实际开发中千万别这么写！
+    char s[5] = {'H', 'e', 'l', 'l', 'o'}; 
     cout << s << endl;
-// @snippet-end main
     return 0;
 }
+// @snippet-end main

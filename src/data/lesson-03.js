@@ -1,7 +1,7 @@
 export default {
   title: "第 3 讲 小数、字符、布尔与类型转换",
   subtitle: "数据的多种面孔",
-  total: 27,
+  total: 28,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -38,7 +38,7 @@ export default {
       },
     },
 
-    /* ===== 4 本讲作战地图（合并目标与地图） ===== */
+    /* ===== 4 本讲作战地图 ===== */
     {
       id: 4, type: "timeline", variant: "map", title: "本讲作战地图", subtitle: "四站闯关，打破数学直觉",
       data: {
@@ -143,7 +143,7 @@ export default {
       },
     },
 
-    /* ===== 10 练习1：温度转换（趁热打铁） ===== */
+    /* ===== 10 练习1：温度转换 ===== */
     {
       id: 10, type: "level-map", title: "课堂练习1：温度转换", subtitle: "摄氏温度转华氏温度", chapterTag: "第 3 讲 · 实战演练",
       data: {
@@ -152,11 +152,32 @@ export default {
         answer: { codeFile: "codes/lesson-03/temperature.cpp", snippet: "main" },
         analysis: { title: "📖 解析", desc: "必须写 <code>9.0 / 5.0</code>。<br>如果写 <code>9 / 5</code>，两个都是 int，结果是 1，<br>那 100°C 会算成 100 × 1 + 32 = 132°F（错的）。<br><br>正确公式：100 × 1.8 + 32 = 212°F。<br><b>整数除法陷阱的经典案例。</b>" },
       },
+    },    
+    
+    /* ===== 11 拓展：float 的精度暴击 ===== */
+    {
+      id: 11, type: "code-split", title: "拓展：float 的精度暴击", subtitle: "为什么竞赛只用 double？",
+      data: {
+        intro: "📖 其实在 C++ 里，存小数有两个盒子：<code>float</code>（单精度，4字节）和 <code>double</code>（双精度，8字节）。<br>刚才我们一直用 <code>double</code>，那 <code>float</code> 用起来有区别吗？我们跑一段代码看看：",
+        codeFile: "codes/lesson-03/float-vs-double.cpp", snippet: "main",
+        annotations: [
+          { line: 4, title: "float f = 3.141592653589793;", desc: "定义 float，存一个高精度小数" },
+          { line: 5, title: "double d = 3.141592653589793;", desc: "定义 double，存同样的小数" },
+          { line: 8, title: "printf(\"float: %.10f\\n\", f);", desc: "强行打印 10 位小数" },
+          { line: 9, title: "printf(\"double: %.10f\\n\", d);", desc: "强行打印 10 位小数" },
+        ],
+        output: "float: 3.1415927410\ndouble: 3.1415926536",
+        extra: {
+          title: "💡 为什么 float 的尾巴错乱了？",
+          desc: "<div><code>float</code> 只有 4 个字节（32 个 0/1），留给有效数字（尾数）的空间太少了，所以最多只能精确到前 <b>6-7 位</b>有效数字。后面的数字全是瞎猜的。</div><div>而 <code>double</code> 有 8 个字节（64 个 0/1），能精确到 <b>15-17 位</b>。</div><div><b>什么时候才会用 float？</b><br>当你要处理海量的 3D 图形坐标，且对小数点后五六位的误差不在乎时，用 float 可以节省一半的空间。但在信奥竞赛中，<b>精度大于一切，请无脑用 double。</b></div>",
+          variant: "card-primary"
+        }
+      },
     },
 
-    /* ===== 11 冲突②：眼见为实：0.1+0.2 ===== */
+    /* ===== 12 冲突②：眼见为实：0.1+0.2 ===== */
     {
-      id: 11, type: "code-walkthrough", title: "眼见为实：0.1+0.2", subtitle: "计算机里的实数集，漏风了", chapterTag: "第 3 讲 · 概念理解",
+      id: 12, type: "code-walkthrough", title: "眼见为实：0.1+0.2", subtitle: "计算机里的实数集，漏风了", chapterTag: "第 3 讲 · 概念理解",
       data: {
         intro: "既然有了实数集，那计算小数肯定没问题了吧？<br>我们跑个看似弱智的加法，然后用两种方式打印结果：",
         codeFile: "codes/lesson-03/float-precision.cpp", snippet: "main",
@@ -173,9 +194,9 @@ export default {
       }
     },
 
-    /* ===== 12 计算机坏了吗 ===== */
+    /* ===== 13 计算机坏了吗 ===== */
     {
-      id: 12, type: "dialog", title: "计算机坏了吗？", subtitle: "理解离散与截断", chapterTag: "第 3 讲 · 概念理解",
+      id: 13, type: "dialog", title: "计算机坏了吗？", subtitle: "理解离散与截断", chapterTag: "第 3 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，计算机连 0.1+0.2 都算不对，它是不是坏了？" },
@@ -196,15 +217,15 @@ export default {
       }
     },
 
-    /* ===== 13 过渡页 ===== */
+    /* ===== 14 过渡页 ===== */
     {
-      id: 13, type: "transition", title: "第三站 · 字符与布尔", subtitle: "披着外皮的数字",
+      id: 14, type: "transition", title: "第三站 · 字符与布尔", subtitle: "披着外皮的数字",
       data: { previous: "实数集与运算封闭性", note: "接下来你将学会存字母和真假，它们是计算机的‘摩斯密码’" }
     },
 
-    /* ===== 14 char 字符 ===== */
+    /* ===== 15 char 字符 ===== */
     {
-      id: 14, type: "code-split", title: "char · 披着外皮的数字", subtitle: "单引号，1 字节",
+      id: 15, type: "code-split", title: "char · 披着外皮的数字", subtitle: "单引号，1 字节",
       data: {
         intro: "📖 <code>char</code> 是 character（字符）的缩写。<br>用<b>单引号</b>包裹一个字符，如 <code>'A'</code>。<br>字符本质上是整数映射——在 ASCII 字典里，'A' 的页码是 65。",
         codeFile: "codes/lesson-03/char-type.cpp", snippet: "main",
@@ -218,9 +239,9 @@ export default {
       },
     },
 
-    /* ===== 15 单引号 vs 双引号 ===== */
+    /* ===== 16 单引号 vs 双引号 ===== */
     {
-      id: 15, type: "compare", title: "单引号 vs 双引号", subtitle: "新手最常搞混的两个符号",
+      id: 16, type: "compare", title: "单引号 vs 双引号", subtitle: "新手最常搞混的两个符号",
       data: {
         neutral: true, splitStep: true,
         groups: [
@@ -232,9 +253,9 @@ export default {
       }
     },
 
-    /* ===== 16 练习2：大小写转换（趁热打铁） ===== */
+    /* ===== 17 练习2：大小写转换 ===== */
     {
-      id: 16, type: "level-map", title: "课堂练习2：大小写转换", subtitle: "利用 ASCII 字典", chapterTag: "第 3 讲 · 实战演练",
+      id: 17, type: "level-map", title: "课堂练习2：大小写转换", subtitle: "利用 ASCII 字典", chapterTag: "第 3 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入一个小写字母，输出对应的大写字母。<br>输入样例：<code>a</code>　输出样例：<code>A</code>", timer: "⏱ 限时 5 分钟" },
         hints: ["大写字母的 ASCII 码比小写字母小 32", "输入用 <code>char</code> 接", "输出可以写 <code>char(c - 32)</code>"],
@@ -243,9 +264,9 @@ export default {
       }
     },
 
-    /* ===== 17 bool 布尔 ===== */
+    /* ===== 18 bool 布尔 ===== */
     {
-      id: 17, type: "code-split", title: "bool · 逻辑与开关", subtitle: "只有真和假",
+      id: 18, type: "code-split", title: "bool · 逻辑与开关", subtitle: "只有真和假",
       data: {
         intro: "📖 <code>bool</code> 是 boolean（布尔）的缩写，只有两个值：<code>true</code> 和 <code>false</code>。<br>它是物理电路的开关：<code>true = 1</code>，<code>false = 0</code>。",
         codeFile: "codes/lesson-03/bool-type.cpp", snippet: "main",
@@ -259,9 +280,9 @@ export default {
       },
     },
 
-    /* ===== 18 练习3：圆的面积（综合巩固） ===== */
+    /* ===== 19 练习3：圆的面积 ===== */
     {
-      id: 18, type: "level-map", title: "课堂练习3：圆的面积", subtitle: "用 double 和 const 计算", chapterTag: "第 3 讲 · 实战演练",
+      id: 19, type: "level-map", title: "课堂练习3：圆的面积", subtitle: "用 double 和 const 计算", chapterTag: "第 3 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入圆的半径 <code>r</code>，输出圆的面积（保留 2 位小数）。<br>公式：<code>面积 = π × r²</code>，π 取 3.14159。<br>输入样例：<code>5</code>　输出样例：<code>78.5398</code>", timer: "⏱ 限时 6 分钟" },
         hints: ["用 <code>const double PI = 3.14159;</code>", "半径和面积都要用 <code>double</code> 存", "直接套用公式 <code>PI * r * r</code> 即可"],
@@ -270,9 +291,9 @@ export default {
       },
     },
 
-    /* ===== 19 初赛渗透 ===== */
+    /* ===== 20 初赛渗透 ===== */
     {
-      id: 19, type: "grid", title: "初赛小知识：类型与编码", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 3 讲 · 初赛渗透",
+      id: 20, type: "grid", title: "初赛小知识：类型与编码", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 3 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "📏", title: "类型大小", desc: "<code>int</code> = 4 字节<br><code>long long</code> = 8 字节<br><code>double</code> = 8 字节<br><code>char</code> / <code>bool</code> = 1 字节" },
@@ -283,23 +304,23 @@ export default {
       }
     },
 
-    /* ===== 20 课堂小测 ===== */
+    /* ===== 21 课堂小测 ===== */
     {
-      id: 20, type: "quiz", title: "课堂小测", subtitle: "小数、字符、布尔与类型转换", chapterTag: "第 3 讲 · 课堂小测",
+      id: 21, type: "quiz", title: "课堂小测", subtitle: "小数、字符、布尔与类型转换", chapterTag: "第 3 讲 · 课堂小测",
       data: {
         questions: [
-          { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 数据类型", optionLayout: "horizontal", question: "<code>double</code> 类型在常见编译器中占用几个字节？", options: [ { label: "A", text: "1 字节" }, { label: "B", text: "4 字节" }, { label: "C", text: "8 字节", correct: true }, { label: "D", text: "16 字节" } ], analysis: '常见类型字节数：<br>· <code>int</code> = 4<br>· <code>long long</code> = 8<br>· <code>double</code> = <b>8</b><br>· <code>float</code> = 4<br>· <code>char</code> / <code>bool</code> = 1<br><br>这是本讲 slide-05"类型总览"的直接考查。' },
-          { id: 2, type: "single", difficulty: 2, source: "C++ 信息学奥赛总复习题 · 第二章", optionLayout: "horizontal", question: "字符 <code>'A'</code> 的 ASCII 码值是多少？", options: [ { label: "A", text: "60" }, { label: "B", text: "65", correct: true }, { label: "C", text: "80" }, { label: "D", text: "97" } ], analysis: "常用 ASCII 码：<br>· <code>'A'</code> = <b>65</b>，<code>'Z'</code> = 90<br>· <code>'a'</code> = 97，<code>'z'</code> = 122<br>· <code>'0'</code> = 48，<code>'9'</code> = 57<br>· 空格 = 32<br><br>大小写字母相差 <b>32</b>。这是本讲 slide-11\"char 与 ASCII\"的核心内容。" },
-          { id: 3, type: "single", difficulty: 3, source: "CSP-J 2021 初赛模拟题 · 类型转换", optionLayout: "two-cols", question: "下面代码的输出是什么？", questionCode: `int a = 5, b = 2;\ndouble c = a / b;\ncout << c << endl;`, options: [ { label: "A", text: "2.5" }, { label: "B", text: "2", correct: true }, { label: "C", text: "3" }, { label: "D", text: "编译错误" } ], analysis: '关键：<code>a / b</code> 是<b>整数除法</b>——a 和 b 都是 int，结果是 2（不是 2.5）。<br>然后再把 2 赋给 double c，c 就是 2.0。<br><br>要得到 2.5，必须写 <code>(double)a / b</code>。<br>这是本讲 slide-17"整数除法陷阱"的核心知识点。' },
-          { id: 4, type: "judge", difficulty: 2, source: "C++ 信息学奥赛总复习题 · 第二章", optionLayout: "two-cols", question: "在 C++ 中，<code>bool</code> 类型只有 <code>true</code> 和 <code>false</code> 两个值。", options: [ { label: "A", text: "正确", correct: true }, { label: "B", text: "错误" } ], analysis: 'bool 类型的设计就是"真/假"二值。<br>从整数角度看，<code>true</code> = 1，<code>false</code> = 0。<br>虽然 C++ 允许 <code>bool b = 2;</code>（非 0 都算 true），但<b>推荐用 true/false</b>，更清晰。<br>这是本讲 slide-12"bool 布尔"的核心内容。' },
-          { id: 5, type: "judge", difficulty: 3, source: "CSP-J 初赛真题练习 · 类型转换", optionLayout: "two-cols", question: "<code>(int)3.99</code> 的结果是 4。", options: [ { label: "A", text: "正确" }, { label: "B", text: "错误", correct: true } ], analysis: '强制转换 double → int 是<b>截断小数部分</b>，不是四舍五入。<br><code>(int)3.99</code> = <b>3</b>，不是 4。<br>要四舍五入，需要 <code>(int)(3.99 + 0.5)</code> 或 <code>round(3.99)</code>。<br>这是本讲 slide-19"类型常见错误"的核心知识点。' },
+          { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 数据类型", optionLayout: "horizontal", question: "<code>double</code> 类型在常见编译器中占用几个字节？", options: [ { label: "A", text: "1 字节" }, { label: "B", text: "4 字节" }, { label: "C", text: "8 字节", correct: true }, { label: "D", text: "16 字节" } ], analysis: '常见类型字节数：<br>· <code>int</code> = 4<br>· <code>long long</code> = 8<br>· <code>double</code> = <b>8</b><br>· <code>float</code> = 4<br>· <code>char</code> / <code>bool</code> = 1<br><br>这是本讲 slide-06"double 小数"的直接考查。' },
+          { id: 2, type: "single", difficulty: 2, source: "C++ 信息学奥赛总复习题 · 第二章", optionLayout: "horizontal", question: "字符 <code>'A'</code> 的 ASCII 码值是多少？", options: [ { label: "A", text: "60" }, { label: "B", text: "65", correct: true }, { label: "C", text: "80" }, { label: "D", text: "97" } ], analysis: "常用 ASCII 码：<br>· <code>'A'</code> = <b>65</b>，<code>'Z'</code> = 90<br>· <code>'a'</code> = 97，<code>'z'</code> = 122<br>· <code>'0'</code> = 48，<code>'9'</code> = 57<br>· 空格 = 32<br><br>大小写字母相差 <b>32</b>。这是本讲 slide-15\"char 与 ASCII\"的核心内容。" },
+          { id: 3, type: "single", difficulty: 3, source: "CSP-J 2021 初赛模拟题 · 类型转换", optionLayout: "two-cols", question: "下面代码的输出是什么？", questionCode: `int a = 5, b = 2;\ndouble c = a / b;\ncout << c << endl;`, options: [ { label: "A", text: "2.5" }, { label: "B", text: "2", correct: true }, { label: "C", text: "3" }, { label: "D", text: "编译错误" } ], analysis: '关键：<code>a / b</code> 是<b>整数除法</b>——a 和 b 都是 int，结果是 2（不是 2.5）。<br>然后再把 2 赋给 double c，c 就是 2.0。<br><br>要得到 2.5，必须写 <code>(double)a / b</code>。<br>这是本讲 slide-07"眼见为实：小数去哪了"的核心知识点。' },
+          { id: 4, type: "judge", difficulty: 2, source: "C++ 信息学奥赛总复习题 · 第二章", optionLayout: "two-cols", question: "在 C++ 中，<code>bool</code> 类型只有 <code>true</code> 和 <code>false</code> 两个值。", options: [ { label: "A", text: "正确", correct: true }, { label: "B", text: "错误" } ], analysis: 'bool 类型的设计就是"真/假"二值。<br>从整数角度看，<code>true</code> = 1，<code>false</code> = 0。<br>虽然 C++ 允许 <code>bool b = 2;</code>（非 0 都算 true），但<b>推荐用 true/false</b>，更清晰。<br>这是本讲 slide-18"bool 布尔"的核心内容。' },
+          { id: 5, type: "judge", difficulty: 3, source: "CSP-J 初赛真题练习 · 类型转换", optionLayout: "two-cols", question: "<code>(int)3.99</code> 的结果是 4。", options: [ { label: "A", text: "正确" }, { label: "B", text: "错误", correct: true } ], analysis: '强制转换 double → int 是<b>截断小数部分</b>，不是四舍五入。<br><code>(int)3.99</code> = <b>3</b>，不是 4。<br>要四舍五入，需要 <code>(int)(3.99 + 0.5)</code> 或 <code>round(3.99)</code>。<br>这是本讲 slide-20"初赛渗透"的核心知识点。' },
         ],
       },
     },
 
-    /* ===== 21 今日总结 ===== */
+    /* ===== 22 今日总结 ===== */
     {
-      id: 21, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
+      id: 22, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
       data: {
         text: "选对类型，数据才能住得舒服。", author: "—— 数据类型第二课",
         points: [ "double 存小数，8 字节，精度 15—17 位", "char 存单个字符，本质是 ASCII 码", "bool 存真假，true = 1，false = 0", "自动转换：小类型 → 大类型", "强制转换：(类型)变量，如 (double)a", "整数除法陷阱：要小数先转 double" ],
@@ -307,9 +328,9 @@ export default {
       },
     },
 
-    /* ===== 22 课后作业 ===== */
+    /* ===== 23 课后作业 ===== */
     {
-      id: 22, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
+      id: 23, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
       data: {
         cards: [
           { icon: "🟢", title: "基础 1 · P5708", link: "https://www.luogu.com.cn/problem/P5708", desc: "<b>三角形面积</b><br>考察：double、海伦公式<br>难度：★★<br>目标：读三边长，输出面积" },
@@ -319,18 +340,18 @@ export default {
       },
     },
 
-    /* ===== 23 下节预告 ===== */
+    /* ===== 24 下节预告 ===== */
     {
-      id: 23, type: "radial", title: "下节预告", subtitle: "第 4 讲 · 运算符与分支",
+      id: 24, type: "radial", title: "下节预告", subtitle: "第 4 讲 · 运算符与分支",
       data: { center: "分支", items: [ { text: "算术运算符" }, { text: "关系运算符" }, { text: "逻辑运算符" }, { text: "if / else" } ] },
     },
 
-    /* ===== 24 答疑时间 ===== */
+    /* ===== 25 答疑时间 ===== */
     {
-      id: 24, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 3 讲 · 互动",
+      id: 25, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 3 讲 · 互动",
       data: {
         cards: [
-          { icon: "📐", title: "关于 double / float", desc: "精度到底是什么？<br>为什么计算机会算错小数？" },
+          { icon: "📐", title: "关于 double / float", desc: "精度到底是什么？<br>什么时候必须用 float？" },
           { icon: "🔤", title: "关于 char 和 ASCII", desc: "为什么 A 是 65？<br>大写转小写要怎么做？" },
           { icon: "💡", title: "关于 bool", desc: "除了 true/false，其他数字能存吗？<br>在代码里怎么用？" },
           { icon: "🔄", title: "关于类型转换", desc: "什么时候会丢掉数据？<br>怎么避免整数除法陷阱？" }
@@ -339,9 +360,9 @@ export default {
       }
     },
 
-    /* ===== 25 本讲英文单词 ===== */
+    /* ===== 26 本讲英文单词 ===== */
     {
-      id: 25, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 3 讲 · 复习",
+      id: 26, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 3 讲 · 复习",
       data: {
         words: [
           { word: "double", cn: "双精度小数", pron: "/ˈdʌbl/", origin: "double precision 的缩写", category: "类型" },
@@ -354,9 +375,9 @@ export default {
       },
     },
 
-    /* ===== 26 知识清单 ===== */
+    /* ===== 27 知识清单 ===== */
     {
-      id: 26, type: "grid", title: "第 3 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 3 讲 · 复习",
+      id: 27, type: "grid", title: "第 3 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 3 讲 · 复习",
       data: {
         cards: [
           { icon: "📐", title: "小数类型", desc: "<b>double</b>：8 字节，精度 15—17 位<br><b>float</b>：4 字节，精度 6—7 位<br><b>推荐</b>：竞赛首选 double<br><b>陷阱</b>：0.1 + 0.2 ≠ 0.3" },
@@ -367,9 +388,9 @@ export default {
       },
     },
 
-    /* ===== 27 结束页 ===== */
+    /* ===== 28 结束页 ===== */
     {
-      id: 27, type: "ending", title: "第三讲结束", subtitle: "点击返回目录，复习本讲内容", chapterTag: false,
+      id: 28, type: "ending", title: "第三讲结束", subtitle: "点击返回目录，复习本讲内容", chapterTag: false,
       data: { slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题" },
     },
   ],
