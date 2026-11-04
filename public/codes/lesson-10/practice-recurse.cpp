@@ -21,9 +21,7 @@ void dfs(int idx, int cnt, int sum) {
     }
     if (idx >= n) return;
     
-    // 选第 idx 个数
     dfs(idx + 1, cnt + 1, sum + a[idx]);
-    // 不选第 idx 个数
     dfs(idx + 1, cnt, sum);
 }
 

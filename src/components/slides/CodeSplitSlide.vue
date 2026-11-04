@@ -24,6 +24,7 @@
             :code-file="d.codeFile" 
             :snippet="d.snippet" 
             :density="d.density"
+            :highlight-lines="currentHighlightLines" 
           />
 
           <!-- 规则 3：如果什么都没有，显示占位提示，防止白屏 -->
@@ -87,6 +88,7 @@ import CodeBlock from "@/components/common/CodeBlock.vue";
 import ExtraCard from "@/components/common/ExtraCard.vue";
 import SlideFooter from "@/components/common/SlideFooter.vue";
 import { useStepCount } from "@/composables/useStepCount";
+import { useStep } from "@/composables/useStep"; // 👈 新增引入
 
 const props = defineProps({
   slide: { type: Object, required: true },
@@ -98,6 +100,22 @@ const extra = computed(() => d.value.extra);
 const footer = computed(() => d.value.footer);
 
 const baseOffset = computed(() => (d.value.intro ? 2 : 1));
+
+// 👇 新增：获取当前步数并计算高亮行
+const { current } = useStep();
+const currentHighlightLines = computed(() => {
+  // 找出当前已经显示的注解
+  const shownAnnotations = annotations.value.filter((a, i) => {
+    const step = baseOffset.value + i + 1;
+    return current.value >= step;
+  });
+  
+  if (shownAnnotations.length === 0) return [];
+  
+  // 取最后一个已经展示的注解的行号
+  const lastAnn = shownAnnotations[shownAnnotations.length - 1];
+  return lastAnn.line ? [lastAnn.line] : [];
+});
 
 const hasExtra = computed(() => extra.value && Object.keys(extra.value).length > 0);
 const hasFooter = computed(() => footer.value && footer.value.length > 0);

@@ -1,17 +1,14 @@
 #include <iostream>
 using namespace std;
 
+// @snippet-start main
 int main() {
-    // @snippet-start main
-    int a[3][4];        // 3 行 4 列的二维数组
-
-    a[0][0] = 1;
-    a[1][2] = 5;
-    a[2][3] = 9;
-
-    cout << a[0][0] << endl;
-    cout << a[1][2] << endl;
-    cout << a[2][3] << endl;
-    // @snippet-end main
+    // 3 行 4 列的矩阵
+    int a[3][4]; 
+    
+    a[1][2] = 99; // 给第 1 行第 2 列赋值
+    
+    cout << a[1][2];
     return 0;
 }
+// @snippet-end main
