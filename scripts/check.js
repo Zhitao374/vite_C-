@@ -48,30 +48,13 @@ async function runChecks(keys, filter, fix = false) {
     if (fix && key === 'ids') args.push('--fix');
     if (filter) args.push(filter);
 
-    // 这里的 args[0] 是 'verify-codes.js' 或 'scripts/xxx.js'，args[1] 是参数
-    // 为了配合上面的 process.execPath 处理，我们需要改造一下
-    const finalArgs = [args[0], ...args.slice(1)];
-    
-    // 如果指定了 node，则直接用 process.execPath
-    let execCmd = check.cmd;
-    if (check.cmd === 'node') {
-      execCmd = process.execPath;
+    // ⚡ 修复点 1：如果是代码检查且带了 --ref，强制让底层走 --check 逻辑，避免走默认的纯编译逻辑
+    if (key === 'code' && process.argv.includes('--ref')) {
+      if (!args.includes('--check')) args.push('--check');
+      args.push('--ref-only');
     }
 
-    const child = spawn(execCmd, finalArgs, {
-      cwd: ROOT,
-      stdio: 'inherit',
-      shell: false
-    });
-
-    const result = await new Promise((resolve) => {
-      child.on('close', (code) => resolve({ code, label: check.name }));
-      child.on('error', (err) => {
-        console.error(`❌ 启动失败：${err.message}`);
-        resolve({ code: 1, label: check.name });
-      });
-    });
-
+    const result = await run(check.cmd, args, check.name);
     results.push(result);
   }
   return results;

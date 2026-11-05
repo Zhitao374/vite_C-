@@ -44,3 +44,7 @@ dist_electron/
 
 # 本地编译器（体积太大，绝不入库）
 resources/compiler/
+
+# 忽略本地物理外挂引擎
+my-electron/
+release/

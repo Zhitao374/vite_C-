@@ -33,9 +33,10 @@ const COMMANDS = {
     '✅ 检查': {
         'check': { run: 'node scripts/check.js', desc: '检查（默认 all）' },
         'check:code': { run: 'node scripts/check.js code', desc: '代码编译 + 引用检查' },
+        'check:ref': { run: 'node scripts/check.js code --ref', desc: '仅检查引用（跳过编译，超快）' }, // ⚡ 新增这一行
         'check:ids': { run: 'node scripts/check.js ids', desc: 'slide id 连续性检查' },
         'check:glossary': { run: 'node scripts/check.js glossary', desc: '术语表检查' },
-        'check:html': { run: 'node scripts/check-html.js', desc: 'HTML div 配对检查' },   // ← 新增
+        'check:html': { run: 'node scripts/check-html.js', desc: 'HTML div 配对检查' },
         'check:all': { run: 'node scripts/check.js all', desc: '运行全部检查' },
         'check:fix': { run: 'node scripts/check.js fix', desc: '检查并自动修复' },
     },

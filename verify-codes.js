@@ -44,7 +44,8 @@ const flags = {
   yes: args.includes('--yes'),
   dry: args.includes('--dry'),
   help: args.includes('--help') || args.includes('-h'),
-  lesson: args.find(a => /^lesson-\d+$/.test(a))
+  lesson: args.find(a => /^lesson-\d+$/.test(a)),
+  refOnly: args.includes('--ref-only'),
 };
 
 // 是否只做编译验证
@@ -442,16 +443,23 @@ async function main() {
   let analysis = { lessons: {}, totalMissing: 0, totalExtra: 0 };
 
   // 任务 1：编译
-  if (compileOnly) {
+  // ⚡ 如果带了 --ref-only，即使只跑编译也不执行
+  if (compileOnly && !flags.refOnly) {
     compileResult = runCompile();
   }
 
   // 任务 2 + 3：检查 + 询问删除
   if (flags.check) {
-    // 先编译
-    compileResult = runCompile();
-    // 再检查
+    // ⚡ 核心修改：如果带了 --ref-only 参数，直接跳过编译阶段
+    if (flags.refOnly) {
+      title('引用检查（已跳过编译）');
+    } else {
+      compileResult = runCompile();
+    }
+    
+    // 再检查引用
     analysis = runCheck();
+    
     // 发现多余 → 询问删除
     if (analysis.totalExtra > 0) {
       await promptDelete(analysis);

@@ -1,11 +1,12 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
+int main() {
     for (int i = 1; i <= 5; i++) {
         cout << i << " ";
     }
-// @snippet-end main
+    cout << endl;
     return 0;
 }
+// @snippet-end main

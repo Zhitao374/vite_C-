@@ -1,15 +1,17 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
+int main() {
     int n;
     cin >> n;
-    int sum = 0;
+    
+    int sum = 0; // 累加器初始为 0
     for (int i = 1; i <= n; i++) {
-        sum += i;
+        sum = sum + i;
     }
-    cout << sum;
-// @snippet-end main
+    
+    cout << sum << endl;
     return 0;
 }
+// @snippet-end main

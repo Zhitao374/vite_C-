@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
+int main() {
     int n;
     cin >> n;
     for (int i = 1; i <= n; i++) {
@@ -11,6 +11,6 @@ int main() {
         }
         cout << endl;
     }
-// @snippet-end main
     return 0;
 }
+// @snippet-end main

@@ -20,7 +20,7 @@
     </div>
 
     <!-- 编辑器主体（自动填满剩余高度） -->
-    <div class="editor-wrapper">
+    <div class="editor-wrapper" :style="{ '--code-font-size': fontSize + 'px' }">
       <Codemirror
         v-model="code"
         :style="{ height: '100%' }"
@@ -176,13 +176,38 @@ onUnmounted(() => {
 }
 .reset-btn:hover { background: #555; color: #fff; }
 
-/* 编辑器主体 */
+/* ========================================= */
+/* 修复版：编辑器与行号对齐 CSS */
+/* ========================================= */
 .editor-wrapper { 
   flex: 1; 
   min-height: 0; 
   overflow: hidden; 
+  /* 在父容器统一字号，让子元素继承 */
+  font-size: var(--code-font-size); 
 }
-:deep(.cm-editor) { height: 100%; font-size: var(--code-font-size); }
+
+:deep(.cm-editor) { 
+  height: 100%; 
+  font-size: inherit; /* 继承父级字号 */
+}
+
+:deep(.cm-scroller) {
+  font-size: inherit;
+  line-height: 1.5 !important; /* 统一行高倍数 */
+}
+
+/* 清理所有的 padding 强制覆盖，让 CodeMirror 自己去算 */
+:deep(.cm-line),
+:deep(.cm-gutterElement) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 如果左侧行号还是没有对齐，加上这句强制重置 */
+:deep(.cm-gutter) {
+  line-height: 1.5 !important;
+}
 
 /* 拖拽条 */
 .resizer {
@@ -197,7 +222,7 @@ onUnmounted(() => {
   flex: 0 0 12px;
   z-index: 10;
   position: relative;
-  touch-action: none; /* 禁用浏览器默认触摸手势，确保拖动流畅 */
+  touch-action: none;
 }
 .resizer:hover { background: #3e3e3e; }
 .resizer-line {

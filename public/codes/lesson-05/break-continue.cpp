@@ -1,13 +1,21 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
-    for (int i = 1; i <= 10; i++) {
-        if (i == 3) continue; // 跳过 3
-        if (i == 6) break;    // 遇到 6 停止
+int main() {
+    // 演示 break
+    for (int i = 1; i <= 5; i++) {
+        if (i == 3) break;
         cout << i << " ";
     }
-// @snippet-end main
+    cout << endl;
+    
+    // 演示 continue
+    for (int i = 1; i <= 5; i++) {
+        if (i == 3) continue;
+        cout << i << " ";
+    }
+    cout << endl;
     return 0;
 }
+// @snippet-end main

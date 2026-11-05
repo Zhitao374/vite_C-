@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
+int main() {
     int n;
     cin >> n;
-    long long fact = 1;
+    long long ans = 1; // 累乘器初始为 1
     for (int i = 1; i <= n; i++) {
-        fact *= i;
+        ans = ans * i;
     }
-    cout << fact;
-// @snippet-end main
+    cout << ans << endl;
     return 0;
 }
+// @snippet-end main

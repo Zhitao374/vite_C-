@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev:vite": "vite",
-    "dev:electron": "electron .",
+    "dev:electron": ".\\my-electron\\electron.exe .",
     "dev": "concurrently \"npm run dev:vite\" \"wait-on http://localhost:5173 && npm run dev:electron\"",
     "build:vite": "vite build",
     "build": "npm run build:vite && electron-builder",
@@ -15,9 +15,15 @@
     "format": "prettier --write src",
     "help": "node scripts/help.js"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "build": {
     "appId": "com.cpp.course",
     "productName": "CppCourse",
+    "electronDist": "my-electron",
     "directories": {
       "output": "release"
     },
@@ -46,7 +52,6 @@
     "@vitejs/plugin-vue": "^5.0.0",
     "concurrently": "^10.0.6",
     "cross-env": "^10.1.0",
-    "electron": "^30.5.1",
     "electron-builder": "^26.15.3",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.20.0",

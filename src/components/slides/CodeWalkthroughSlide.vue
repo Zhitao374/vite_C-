@@ -92,7 +92,7 @@ const { current } = useStep();
 
 const currentStepIndex = computed(() => {
   const baseOffset = intro.value ? 2 : 1;
-  const idx = current.value - baseOffset - 1;
+  const idx = current.value - baseOffset;
   return Math.max(0, Math.min(idx, steps.value.length - 1));
 });
 
