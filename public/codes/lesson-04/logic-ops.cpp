@@ -11,7 +11,6 @@ int main() {
 
     a = 5;
     cout << !(a > 0) << endl;
-
     return 0;
 }
 // @snippet-end main

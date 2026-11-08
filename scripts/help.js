@@ -1,12 +1,6 @@
 #!/usr/bin/env node
 /**
  * help.js · 项目命令中心（交互式）
- *
- * 用法：
- *   node scripts/help.js              交互菜单（推荐）
- *   node scripts/help.js --list       只列菜单，不交互
- *   node scripts/help.js check:all    直接执行某命令
- *   node scripts/help.js 7            直接执行编号 7
  */
 
 import fs from 'node:fs';
@@ -19,7 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
 // ============================================
-// 命令清单（唯一维护点）
+// 命令清单（保留了你所有的命令和 dry 分支）
 // ============================================
 const COMMANDS = {
     '🚀 开发': {
@@ -33,7 +27,7 @@ const COMMANDS = {
     '✅ 检查': {
         'check': { run: 'node scripts/check.js', desc: '检查（默认 all）' },
         'check:code': { run: 'node scripts/check.js code', desc: '代码编译 + 引用检查' },
-        'check:ref': { run: 'node scripts/check.js code --ref', desc: '仅检查引用（跳过编译，超快）' }, // ⚡ 新增这一行
+        'check:ref': { run: 'node scripts/check.js code --ref', desc: '仅检查引用（跳过编译，超快）' },
         'check:ids': { run: 'node scripts/check.js ids', desc: 'slide id 连续性检查' },
         'check:glossary': { run: 'node scripts/check.js glossary', desc: '术语表检查' },
         'check:html': { run: 'node scripts/check-html.js', desc: 'HTML div 配对检查' },
@@ -44,11 +38,17 @@ const COMMANDS = {
     '🔧 修复 / 重构': {
         'fix:extra': { run: 'node scripts/fix-extra-desc.js', desc: '修复 Extra 多栏分段' },
         'fix:extra:dry': { run: 'node scripts/fix-extra-desc.js --dry', desc: '预览（不写文件）' },
-        'fix:html': { run: 'node scripts/fix-html-balance.js', desc: '修复 HTML div 配对' },  // ← 新增
-        'fix:html:dry': { run: 'node scripts/fix-html-balance.js --dry', desc: '预览（不写文件）' },  // ← 新增
+        'fix:html': { run: 'node scripts/fix-html-balance.js', desc: '修复 HTML div 配对' },
+        'fix:html:dry': { run: 'node scripts/fix-html-balance.js --dry', desc: '预览（不写文件）' },
         'fix:ids': { run: 'node scripts/check.js fix:ids', desc: '只修 slide id / total（不编译）' },
-        'fix:comments':     { run: 'node scripts/renumber-comments.js --all',       desc: '重排注释编号（全部）' },
+        'fix:comments': { run: 'node scripts/renumber-comments.js --all', desc: '重排注释编号（全部）' },
         'fix:comments:dry': { run: 'node scripts/renumber-comments.js --all --dry', desc: '预览（不写文件）' },
+        'shift:lessons': { 
+            run: 'node scripts/shift-lessons.js', 
+            desc: '⚠️ 插入新讲次，批量顺延后续课程', 
+            requireInput: true, 
+            prompt: '请输入从哪一讲开始顺延 (如 05): ' 
+        },
     },
 
     '📊 索引与生成': {
@@ -95,7 +95,15 @@ function flattenCommands() {
     let idx = 1;
     Object.entries(COMMANDS).forEach(([groupName, group]) => {
         Object.entries(group).forEach(([name, info]) => {
-            list.push({ no: idx++, group: groupName, name, run: info.run, desc: info.desc });
+            list.push({ 
+                no: idx++, 
+                group: groupName, 
+                name, 
+                run: info.run, 
+                desc: info.desc,
+                requireInput: info.requireInput,
+                prompt: info.prompt
+            });
         });
     });
     return list;
@@ -126,7 +134,7 @@ function printMenu(list) {
 }
 
 // ============================================
-// 单次提问（每次创建新的 rl，避免和子进程抢 stdin）
+// 单次提问
 // ============================================
 function prompt(question) {
     return new Promise(resolve => {
@@ -142,12 +150,14 @@ function prompt(question) {
 }
 
 // ============================================
-// 执行命令
+// 执行命令（核心修复：接收 extraArg 参数）
 // ============================================
-function runCommand(runStr) {
-    const parts = runStr.split(' ');
+function runCommand(runStr, extraArg = '') {
+    const finalCmd = extraArg ? `${runStr} ${extraArg}` : runStr;
+    const parts = finalCmd.split(' ');
+    
     console.log('');
-    console.log(C.gray(`  ▶ 执行：${runStr}`));
+    console.log(C.gray(`  ▶ 执行：${finalCmd}`));
     console.log('');
 
     return new Promise(resolve => {
@@ -192,8 +202,19 @@ async function interactive() {
             continue;
         }
 
+        let extraArg = '';
+        if (cmd.requireInput) {
+            extraArg = await prompt(C.yellow(`  ${cmd.prompt}`));
+            if (!extraArg.trim()) {
+                console.log(C.red(`\n  ❌ 已取消：必须输入参数\n`));
+                await prompt(C.gray('\n  按 Enter 返回菜单...'));
+                printMenu(list);
+                continue;
+            }
+        }
+
         // 执行
-        await runCommand(cmd.run);
+        await runCommand(cmd.run, extraArg.trim());
 
         // 执行完等一个回车，再重画菜单
         await prompt(C.gray('\n  按 Enter 返回菜单...'));
@@ -228,6 +249,7 @@ if (args.length === 0) {
         process.exit(1);
     }
 
-    runCommand(cmd.run + (rest.length ? ' ' + rest.join(' ') : ''))
-        .then(code => process.exit(code));
+    // 支持直接传入参数（比如 node scripts/help.js shift:lessons 05）
+    const extraArg = rest.join(' ');
+    runCommand(cmd.run, extraArg).then(code => process.exit(code));
 }

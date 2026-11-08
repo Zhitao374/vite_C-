@@ -1,6 +1,6 @@
 export default {
-  title: "第 17 讲 递推",
-  subtitle: "递推 = 多米诺",
+  title: "第 16 讲 枚举与模拟",
+  subtitle: "暴力也是一种算法",
   total: 30,
   category: "语法与基础算法",
   slides: [
@@ -8,12 +8,12 @@ export default {
     {
       id: 1,
       type: "cover",
-      title: "递推",
-      subtitle: "递推 = 多米诺",
+      title: "枚举与模拟",
+      subtitle: "暴力也是一种算法",
       chapterTag: false,
       data: {
-        accentWord: "递推",
-        meta: ["青少年信息学竞赛 C++ 入门课程", "CSP-J/S 冲刺 · 第 17 讲"],
+        accentWord: "枚举",
+        meta: ["青少年信息学竞赛 C++ 入门课程", "CSP-J/S 冲刺 · 第 16 讲"],
       },
     },
 
@@ -23,41 +23,41 @@ export default {
       type: "timeline",
       variant: "review",
       title: "上节课回顾",
-      subtitle: "枚举与模拟",
+      subtitle: "查找与二分",
       data: {
         items: [
           {
-            icon: "🔨",
+            icon: "➡️",
             badge: "基础",
-            title: "枚举思想",
-            desc: "一个个试",
-            points: ["简单可靠", "范围 + 判定"],
+            title: "顺序查找",
+            desc: "一个个比较",
+            points: ["O(n)", "不要求有序"],
           },
           {
-            icon: "⚡",
-            badge: "优化",
-            title: "枚举优化",
-            desc: "让暴力更快",
-            points: ["缩小范围", "提前 break", "数学剪枝"],
+            icon: "📖",
+            badge: "核心",
+            title: "二分查找",
+            desc: "翻字典的艺术",
+            points: ["O(log n)", "必须有序"],
           },
           {
-            icon: "🎭",
+            icon: "🎯",
             badge: "进阶",
-            title: "模拟题",
-            desc: "规则翻译成代码",
-            points: ["读题→规则", "按步执行", "处理边界"],
+            title: "二分答案",
+            desc: "求解 → 判定",
+            points: ["check 函数", "范围 + 二分"],
           },
           {
-            icon: "🏆",
-            badge: "实战",
-            title: "经典应用",
-            desc: "因数 / 质数 / 日期",
-            points: ["多场景实战"],
+            icon: "🛠️",
+            badge: "工具",
+            title: "STL 二分",
+            desc: "lower_bound",
+            points: ["一行代码", "需有序"],
           },
         ],
         extra: {
           title: "💡 今天的新问题",
-          desc: '<div>枚举是"一个个试"——<br>但如果"每个结果都能从上一个推出来"呢？<br>那就不需要枚举了。</div><div>比如斐波那契——<br><code>f(n) = f(n-1) + f(n-2)</code>——<br>从前往后"推"——<br>O(n) 就算完。</div><div>这就是<b>递推</b>——<br>用"已知"推"未知"。</div><div>今天我们就来学这个"多米诺骨牌"式的算法。</div><div>🔮 <b>回收伏笔</b>：第 16 讲练习 2 用过"级数求和"——<br>那其实就是一种递推。</div>',
+          desc: '<div>上一讲学了二分——一种"聪明"的算法——<br>每次砍掉一半，快得惊人。</div><div>但有些问题——<b>没有更聪明的办法</b>——<br>只能一个个试。</div><div>这种"一个个试"的方法——<br>叫<b>枚举</b>。</div><div>它看起来"笨"——<br>但很多竞赛题，它就是最好的办法。</div><div>今天我们就来学"暴力"的智慧——<br><b>枚举与模拟</b>。</div>',
         },
       },
     },
@@ -67,29 +67,21 @@ export default {
       id: 3,
       type: "grid",
       title: "本节课目标",
-      subtitle: "四步掌握递推思维",
+      subtitle: "四步掌握暴力思维",
       data: {
         cards: [
-          {
-            number: "01",
-            title: "理解递推",
-            desc: '从"已知"推"未知"——多米诺比喻',
-          },
+          { number: "01", title: "枚举思想", desc: "一个个试——最简单也最可靠" },
           {
             number: "02",
-            title: "递推三要素",
-            desc: "初始值、递推关系、递推顺序",
+            title: "枚举技巧",
+            desc: "缩小范围、提前 break、剪枝",
           },
-          {
-            number: "03",
-            title: "经典例题",
-            desc: "斐波那契、杨辉三角、爬楼梯",
-          },
-          { number: "04", title: "递推 vs 递归", desc: "两种思想，两种效率" },
+          { number: "03", title: "模拟题", desc: '把"现实规则"翻译成代码' },
+          { number: "04", title: "实战应用", desc: "因数、质数、水仙花、日期" },
         ],
         extra: {
-          title: "📖 知识扩展 · 递推的重要性",
-          desc: '<div>递推是算法世界最基础的思想之一——<br>几乎所有"动态规划（DP）"都建立在递推上。</div><div><b>数学中的递推</b>：<br>· 斐波那契数列<br>· 帕斯卡三角形（杨辉三角）<br>· 阶乘</div><div><b>生活中的递推</b>：<br>· 复利计算——今年 = 去年 × (1+r)<br>· 楼梯问题——到第 n 层 = 到 n-1 层 + 到 n-2 层<br>· 病毒传播——今天 = 昨天 + 新增</div><div><b>掌握递推，就掌握了 DP 的入门。</b></div>',
+          title: "📖 知识扩展 · 暴力也是算法",
+          desc: '<div>很多初学者觉得"暴力 = 笨"——<br>其实不是。</div><div><b>枚举</b>是一种<b>算法思想</b>——<br>和二分、贪心、DP 一样。</div><div>它的优势：<br>· <b>正确性容易保证</b>——一个个试，不会漏<br>· <b>代码简单</b>——几个 for 循环<br>· <b>适合小数据</b>——n ≤ 1000 时常常够用</div><div>它的劣势：<br>· 数据大时会超时（TLE）</div><div><b>竞赛策略</b>：<br>能枚举就枚举——<br>枚举能过就用枚举——<br>枚举过不了，再想优化。</div>',
         },
       },
     },
@@ -100,845 +92,819 @@ export default {
       type: "timeline",
       variant: "map",
       title: "本讲学习地图",
-      subtitle: "四站闯关，从多米诺到 DP",
+      subtitle: "四站闯关，从暴力到巧思",
       data: {
         items: [
           {
-            icon: "🎯",
+            icon: "🔨",
             badge: "基础",
-            title: "第一站 · 递推思想",
-            desc: "用已知推未知",
-            points: ["多米诺比喻", "递推三要素", "和枚举的区别"],
+            title: "第一站 · 枚举入门",
+            desc: "一个个试",
+            points: ["单层 for", "多重 for", "边界确定"],
           },
           {
-            icon: "🔢",
+            icon: "⚡",
             badge: "核心",
-            title: "第二站 · 斐波那契",
-            desc: "最经典的递推",
-            points: ["递推公式", "迭代实现", "和递归对比"],
+            title: "第二站 · 枚举优化",
+            desc: "让暴力更快",
+            points: ["缩小范围", "提前 break", "数学优化"],
           },
           {
-            icon: "📐",
+            icon: "🎭",
             badge: "进阶",
-            title: "第三站 · 杨辉三角",
-            desc: "二维递推",
-            points: ["二维数组", "递推关系", "组合数学"],
+            title: "第三站 · 模拟题",
+            desc: "规则翻译成代码",
+            points: ["读题→规则", "按步执行", "处理边界"],
           },
           {
-            icon: "🪜",
+            icon: "🏆",
             badge: "实战",
-            title: "第四站 · 爬楼梯",
-            desc: "递推的经典应用",
-            points: ["问题建模", "递推公式", "实战演练"],
+            title: "第四站 · 综合练习",
+            desc: "因数 / 质数 / 日期",
+            points: ["多场景实战"],
           },
         ],
         extra: {
           title: "🏆 积分规则",
-          desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"递推大师"徽章。',
+          desc: '每通过一关 +10 分，全部通过额外 +10 分。全部通关解锁"暴力大师"徽章。',
         },
       },
     },
 
-    /* ===== 5 什么是递推 ===== */
+    /* ===== 5 什么是枚举 ===== */
     {
       id: 5,
       type: "dialog",
-      title: "什么是递推？",
-      subtitle: "多米诺骨牌",
-      chapterTag: "第 17 讲 · 概念理解",
+      title: "什么是枚举？",
+      subtitle: "一个个试",
+      chapterTag: "第 16 讲 · 概念理解",
       data: {
         lines: [
-          { who: "student", text: "小 C，什么是递推？" },
+          { who: "student", text: "小 C，什么是枚举？" },
           {
             who: "robot",
-            text: "你玩过多米诺骨牌吗？<br>推倒第一张——第二张倒——第三张倒……<br>一直倒下去。",
-          },
-          { who: "student", text: "玩过！每张牌倒下，下一张就跟着倒。" },
-          {
-            who: "robot",
-            text: '对。<b>递推</b>就是这种"一步推一步"的思想——<br>用"已知的值"推出"下一个值"。',
-          },
-          { who: "student", text: "那和枚举有什么不同？" },
-          {
-            who: "robot",
-            text: '枚举是"一个个试"——<br>每个答案独立算。<br><br>递推是"用前面的结果"——<br>不用从头算，直接推。',
+            text: '枚举就是——<b>把"可能的答案"一个个试过去</b>。<br>试到符合条件的就是答案。',
           },
           { who: "student", text: "举个例子？" },
           {
             who: "robot",
-            text: "斐波那契数列——<br><code>1, 1, 2, 3, 5, 8, 13, 21, ...</code><br>每项 = 前两项之和。<br><br>用递推——<br>从第 1、2 项开始——<br>一步步往后推——<br>O(n) 就能算到第 n 项。",
+            text: '比如，找 <code>1 到 100</code> 里的质数——<br>你不会"猜"，就是 <b>2、3、4、5…… 一个个判断</b>。<br>是质数就输出，不是就跳过。',
           },
-          { who: "student", text: '所以递推就是"用公式算下一项"？' },
+          { who: "student", text: '这不就是"笨办法"吗？' },
           {
             who: "robot",
-            text: "对。<b>递推关系就是那个公式</b>——<br>比如 <code>f(n) = f(n-1) + f(n-2)</code>。<br>有了公式——<br>从初始值开始——<br>逐项计算即可。",
+            text: "看起来笨——但它有三个优势：<br>① <b>正确性容易保证</b>——不漏不重<br>② <b>代码简单</b>——几个 for 循环<br>③ <b>适合小数据</b>——n ≤ 1000 时够用<br><br>竞赛中，<b>能枚举就枚举</b>。",
+          },
+          { who: "student", text: "那什么时候枚举不行？" },
+          {
+            who: "robot",
+            text: '数据大时——<br>比如 n = 10⁹，枚举要跑 10 亿次——<br><b>超时（TLE）</b>。<br>这时才需要二分、DP 等"聪明"算法。',
+          },
+          { who: "student", text: '所以枚举是"基础款"？' },
+          {
+            who: "robot",
+            text: '对。它是最基础的算法——<br>也是"兜底方案"——<br>想不到更好方法时，先枚举试试。<br><br><b>很多竞赛题，暴力枚举就能过。</b>',
           },
         ],
         extra: {
-          title: "💡 递推的三个关键",
-          desc: '<div><b>① 初始值</b><br>递推的"起点"——<br>比如 f(1) = 1, f(2) = 1。<br>没有初始值——递推无法开始。</div><div><b>② 递推关系</b><br>"从旧值算新值"的公式——<br>如 f(n) = f(n-1) + f(n-2)。<br>这是递推的核心。</div><div><b>③ 递推顺序</b><br>从前往后——<br>先算 f(1)、f(2)——<br>再算 f(3)、f(4)……<br><b>顺序不能乱</b>——<br>因为每个值依赖前面的值。</div><div><b>📖 递推 vs 递归</b><br>· 递推：从前往后，迭代实现<br>· 递归：从后往前，函数自调<br>结果一样——但效率差别大。</div>',
+          title: "💡 枚举的三个要素",
+          desc: '<div><b>① 枚举对象</b>——枚举什么？<br>· 枚举数值（1 到 n）<br>· 枚举位置（数组下标）<br>· 枚举组合（选几个）</div><div><b>② 枚举范围</b>——从多少到多少？<br>· 范围太大 → 超时<br>· 范围太小 → 漏解<br>· 根据题目确定</div><div><b>③ 判定条件</b>——什么算"符合答案"？<br>· 是质数<br>· 是平方数<br>· 满足某个方程</div><div><b>📖 枚举的英文</b><br><code>enumerate</code>——来自拉丁语<br>"e（出）+ numerus（数）"——<br>本意"数出来、列出来"。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 6 递推三要素 ===== */
+    /* ===== 6 枚举入门：找因数 ===== */
     {
       id: 6,
-      type: "grid",
-      title: "递推的三要素",
-      subtitle: "缺一不可",
-      data: {
-        cards: [
-          {
-            icon: "🎯",
-            title: "① 初始值",
-            desc: "递推的起点<br>最基础、不用推的值<br>如 <code>f(1) = 1, f(2) = 1</code><br><b>没有它无法开始</b>",
-          },
-          {
-            icon: "🔗",
-            title: "② 递推关系",
-            desc: "用旧值算新值的公式<br>如 <code>f(n) = f(n-1) + f(n-2)</code><br>这是递推的核心<br><b>决定怎么推</b>",
-          },
-          {
-            icon: "➡️",
-            title: "③ 递推顺序",
-            desc: "从前往后推<br>先算小的、再算大的<br>如 <code>i 从 3 到 n</code><br><b>保证依赖的值已算好</b>",
-          },
-        ],
-        extra: {
-          title: "💡 三要素的记忆口诀",
-          desc: '<div><b>递推三要素</b>：<br>① 起点——从哪开始<br>② 公式——怎么推<br>③ 顺序——按什么次序推</div><div><b>类比</b>：<br>· 起点 = 多米诺的第一张牌<br>· 公式 = 每张牌推倒下一张的规律<br>· 顺序 = 一排牌从左到右倒下</div><div><b>写递推的思维顺序</b><br>① 先找"最小的、能直接算出的值"——<br>&nbsp;&nbsp;作为初始值<br>② 观察"每一项和前几项的关系"——<br>&nbsp;&nbsp;写出递推公式<br>③ 决定"从哪个值开始、推到哪个值"——<br>&nbsp;&nbsp;确定循环范围</div><div><b>🔮 伏笔</b><br>DP 的状态转移方程——<br>本质就是"递推关系"——<br>第 20 讲会详讲。</div>',
-          variant: "card-primary",
-        },
-      },
-    },
-
-    /* ===== 7 斐波那契引入 ===== */
-    {
-      id: 7,
-      type: "dialog",
-      title: "经典递推 · 斐波那契",
-      subtitle: "从兔子问题说起",
-      chapterTag: "第 17 讲 · 经典例题",
-      data: {
-        lines: [
-          { who: "student", text: "小 C，斐波那契数列是什么？" },
-          {
-            who: "robot",
-            text: "数列 <code>1, 1, 2, 3, 5, 8, 13, 21, 34, ...</code><br>从第 3 项开始——<br>每项 = 前两项之和。",
-          },
-          { who: "student", text: "有什么故事吗？" },
-          {
-            who: "robot",
-            text: '有。<b>1202 年</b>，意大利数学家<a href="https://baike.baidu.com/item/斐波那契" target="_blank" class="wiki-link">斐波那契</a>研究兔子繁殖——<br>提出一个问题：<br>"一对兔子每月生一对，小兔一个月后成熟。<br>一年后有多少对兔子？"',
-          },
-          { who: "student", text: "答案是？" },
-          {
-            who: "robot",
-            text: "答案就是斐波那契数列：<br><code>1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144</code>。<br><br>这就是递推——<br>本月 = 上月 + 上上月。",
-          },
-          { who: "student", text: "那怎么用代码算第 n 项？" },
-          {
-            who: "robot",
-            text: "<b>递推法</b>：<br>① 初始：<code>f(1) = 1, f(2) = 1</code><br>② 递推：<code>f(n) = f(n-1) + f(n-2)</code><br>③ 顺序：从 3 到 n<br><br>用循环逐项计算——<br>O(n) 时间——<br>下一屏看代码。",
-          },
-        ],
-        extra: {
-          title: "📖 知识扩展 · 斐波那契与黄金分割",
-          desc: '<div><b>斐波那契数列</b><br>1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...<br>从第 3 项起，每项 = 前两项之和。</div><div><b>神奇的性质</b><br>相邻两项的比值趋近于黄金分割比 <b>1.618</b>：<br>· 13/8 = 1.625<br>· 21/13 ≈ 1.615<br>· 34/21 ≈ 1.619<br>· ...</div><div><b>斐波那契在自然界</b><br>· 向日葵种子排列<br>· 松果鳞片<br>· 海螺螺旋<br>· 树枝分叉<br>都遵循斐波那契数列。</div><div><b>为什么这么多应用？</b><br>科学家至今没有完全解释——<br>但斐波那契数列是"最优化生长"的数学表达——<br>自然界用它达到最高效率。</div><div><b>🔮 伏笔</b><br>斐波那契也是"递归"的经典例子——<br>但递归效率极低（会重复计算）——<br>下一屏会讲。</div>',
-          variant: "card-primary",
-        },
-      },
-    },
-
-    /* ===== 8 斐波那契递推代码 ===== */
-    {
-      id: 8,
       type: "code-split",
-      title: "斐波那契 · 递推实现",
-      subtitle: "从前往后逐项推",
+      title: "枚举入门 · 找因数",
+      subtitle: "从 1 到 n 逐个试",
       data: {
         intro:
-          "📖 <b>递推三要素</b>：<br>① 初始值：<code>f0 = 0, f1 = 1</code><br>② 递推关系：<code>f2 = f0 + f1</code><br>③ 顺序：<code>i 从 2 到 n</code><br><br>用一个变量 <code>f2</code> 保存新值——<br>更新 <code>f0</code>、<code>f1</code>——滚动前进。",
-        codeFile: "codes/lesson-17/fib-iteration.cpp",
+          '📖 <b>问题</b>：输入 n，输出它的所有因数。<br><b>思路</b>：枚举 1 到 n——<br>每个数试一下"n 能不能被它整除"。',
+        codeFile: "codes/lesson-17/divisors.cpp",
         snippet: "main",
         annotations: [
-          { line: 6, title: "int n;", desc: "求第 n 项" },
+          { line: 5, title: "int main() {", desc: "主函数开始" },
+          { line: 6, title: "int n;", desc: "读入 n" },
           {
             line: 9,
-            title: "long long f0 = 0, f1 = 1;",
-            desc: "初始值——第 0 项和第 1 项",
+            title: "for (int i = 1; i &lt;= n; i++)",
+            desc: "枚举 1 到 n",
           },
-          { line: 10, title: "if (n == 0) ...", desc: "特判——n = 0 直接输出" },
+          { line: 10, title: "if (n % i == 0)", desc: "i 能整除 n——就是因数" },
           {
-            line: 16,
-            title: "for (int i = 2; i &lt;= n; i++)",
-            desc: "递推顺序——从 2 到 n",
+            line: 11,
+            title: 'cout &lt;&lt; i &lt;&lt; " ";',
+            desc: "输出这个因数",
           },
-          {
-            line: 17,
-            title: "long long f2 = f0 + f1;",
-            desc: "<b>递推关系</b>——新值 = 前两项之和",
-          },
-          { line: 18, title: "f0 = f1;", desc: "滚动——前一项变成新的前两项" },
-          { line: 19, title: "f1 = f2;", desc: "当前项进入窗口" },
-          { line: 21, title: "cout &lt;&lt; f1;", desc: "输出第 n 项" },
         ],
-        output: "（输入 10）\n55",
+        output: "（输入 12）\n1 2 3 4 6 12",
         extra: {
-          title: "💡 斐波那契递推的三个细节",
-          desc: '<div><b>① 为什么用 long long？</b><br>斐波那契增长很快——<br>f(46) ≈ 18 亿，超过 int 范围。<br>f(92) ≈ 7.5×10¹⁸，超过 long long。<br>所以通常 n ≤ 90——<br>long long 够用。</div><div><b>② 滚动变量优化空间</b><br>不需要数组——<br>只保存 f0、f1、f2 三个值——<br>空间 O(1)。</div><div><b>③ 为什么叫"递推"？</b><br>"递"是"传递"——<br>"推"是"推进"——<br>像多米诺骨牌一样，<br>从一个推到下一个。</div><div><b>🔮 优化方向</b><br>n 很大时（如 10⁹）——<br>用"矩阵快速幂"——<br>O(log n) 算完。<br>第 38 讲讲。</div>',
+          title: "💡 枚举模板",
+          desc: "<div><b>核心模板</b><br><code>for (int i = 1; i &lt;= n; i++) {</code><br><code>&nbsp;&nbsp;if (条件) {</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;// 处理答案</code><br><code>&nbsp;&nbsp;}</code><br><code>}</code></div><div><b>三个关键</b><br>① <b>范围</b>：1 到 n——不能少不能多<br>② <b>条件</b>：<code>n % i == 0</code>——整除判断<br>③ <b>处理</b>：输出 i</div><div><b>复杂度 O(n)</b><br>枚举 n 次——<br>n = 100 万时 1 秒左右——<br>再大就要优化。</div><div><b>🔮 优化方向</b><br>· 因数总是成对出现——<br>&nbsp;&nbsp;枚举到 √n 就够<br>· 下个练习会讲</div>",
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 9 斐波那契演示 ===== */
+    /* ===== 7 枚举优化：找质数 ===== */
     {
-      id: 9,
-      type: "evolution",
-      title: "斐波那契 · 递推一步步展开",
-      subtitle: "看变量怎么滚动",
-      chapterTag: "第 17 讲 · 过程演示",
+      id: 7,
+      type: "code-split",
+      title: "枚举优化 · 判断质数",
+      subtitle: "只用试到 √n",
       data: {
         intro:
-          '📖 <b>递推的核心是"滚动"</b>——<br>三个变量像传送带一样往前挪。<br>看每一步变量怎么变。',
-        codeFile: "codes/lesson-17/fib-iteration.cpp",
+          "📖 <b>问题</b>：判断 n 是不是质数。<br><b>朴素枚举</b>：从 2 试到 n-1——O(n)。<br><b>优化枚举</b>：只用试到 <code>√n</code>——O(√n)。<br><br><b>为什么？</b>如果 n = a × b，a 和 b 必有一个 ≤ √n。",
+        codeFile: "codes/lesson-17/prime-check.cpp",
         snippet: "main",
-        steps: [
+        annotations: [
+          { line: 6, title: "int n;", desc: "读入 n" },
           {
-            focusLines: [9],
-            expression: "i = 2<br>f0 = 0, f1 = 1",
-            note: "<b>初始状态</b>：<br>· f0 = 0（第 0 项）<br>· f1 = 1（第 1 项）<br><br>要算第 2 项——<br>f2 = f0 + f1 = 0 + 1 = 1。",
+            line: 8,
+            title: "bool isPrime = (n &gt;= 2);",
+            desc: "先假设 n ≥ 2 是质数；n &lt; 2 不是",
           },
           {
-            focusLines: [17, 18, 19],
-            expression: "i = 2<br>f2 = 0 + 1 = 1<br>滚动：f0 = 1, f1 = 1",
-            note: '<b>第 1 步</b>：<br>· <code>f2 = f0 + f1 = 1</code>（第 2 项）<br>· <code>f0 = f1 = 1</code>（f0 挪到 f1 的位置）<br>· <code>f1 = f2 = 1</code>（f1 挪到 f2 的位置）<br><br>三个变量往前"滚动"一格。',
+            line: 9,
+            title: "for (int i = 2; i * i &lt;= n; i++)",
+            desc: "<b>关键</b>：i × i ≤ n 等价 i ≤ √n",
           },
-          {
-            focusLines: [17, 18, 19],
-            expression: "i = 3<br>f2 = 1 + 1 = 2<br>滚动：f0 = 1, f1 = 2",
-            note: "<b>第 2 步</b>：<br>· <code>f2 = 1 + 1 = 2</code>（第 3 项）<br>· 滚动后 f0 = 1, f1 = 2<br><br>继续往前推。",
-          },
-          {
-            focusLines: [17, 18, 19],
-            expression: "i = 4<br>f2 = 1 + 2 = 3<br>滚动：f0 = 2, f1 = 3",
-            note: "<b>第 3 步</b>：<br>· <code>f2 = 1 + 2 = 3</code>（第 4 项）<br>· f0 = 2, f1 = 3<br><br>数列：1, 1, 2, 3 ——<br>已经推出前 4 项。",
-          },
-          {
-            focusLines: [17, 18, 19],
-            expression: "i = 5, 6, 7, 8, 9, 10<br>继续推进……",
-            note: "每一步都做同样的操作：<br>① 算 f2 = f0 + f1<br>② 滚动 f0、f1<br><br>一直推到 i = n。",
-          },
-          {
-            focusLines: [21],
-            expression: "i = 10，输出 f1 = 55",
-            note: "✅ <b>完成</b>！<br>第 10 项 f1 = 55。<br><br><b>关键观察</b>：<br>· 每个值只用 O(1) 时间算出<br>· 总共 O(n) 时间<br>· 空间只用 3 个变量 O(1)<br><br>比递归快无数倍！",
-          },
+          { line: 10, title: "if (n % i == 0)", desc: "找到因数——不是质数" },
+          { line: 11, title: "isPrime = false;", desc: "标记为假" },
+          { line: 12, title: "break;", desc: "立即跳出——不用继续试" },
         ],
+        output: "（输入 17）\nyes\n（输入 21）\nno",
         extra: {
-          title: '💡 递推的"滚动窗口"思想',
-          desc: '<div><b>核心</b>：<br>斐波那契每项只需要"前两项"——<br>所以不需要保存全部历史。<br>用两个变量"记住前两项"——<br>算出新值——<br>然后滚动——<br>丢弃最老的——<br>变成下一个"前两项"。</div><div><b>类比</b>：<br>像是"传送带"——<br>三个变量在传送带上：<br>· f0 最老——准备被丢弃<br>· f1 中间<br>· f2 最新的——即将成为 f1<br>每分钟滚动一次。</div><div><b>空间优化</b><br>如果不优化——<br>用数组 <code>f[n]</code> 保存全部——<br>空间 O(n)。<br><br>用滚动变量——<br>空间 O(1)。</div><div><b>🔮 伏笔</b><br>滚动数组优化是 DP 的常用技巧——<br>第 24 讲讲 01 背包时会用到。</div>',
+          title: "💡 枚举优化的三个技巧",
+          desc: "<div><b>① 缩小范围</b><br>判断质数只试到 √n——<br>从 O(n) 降到 O(√n)。<br>n = 10⁶ 时：<br>· 朴素 100 万次<br>· 优化 1000 次<br><b>快 1000 倍。</b></div><div><b>② 提前 break</b><br>找到一个因数就 <code>break</code>——<br>不用继续试。<br>合数通常很快被排除。</div><div><b>③ 用 <code>i * i &lt;= n</code> 代替 <code>i &lt;= sqrt(n)</code></b><br>避免调用浮点函数——<br>精度更高、速度更快。</div><div><b>口诀</b><br>判断质数试到根号 n——<br>找到因数立即停。</div><div><b>🔮 伏笔</b><br>质数筛法（埃氏筛）——<br>能 O(n log log n) 求出 n 以内所有质数——<br>第 38 讲讲。</div>",
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 10 递推 vs 递归 ===== */
+    /* ===== 8 枚举 vs 聪明算法 ===== */
     {
-      id: 10,
+      id: 8,
       type: "compare",
-      title: "递推 vs 递归",
-      subtitle: "结果一样，效率不同",
+      title: "枚举 vs 聪明算法",
+      subtitle: "什么时候用哪个",
       data: {
         groups: [
           {
-            wrong: "递归：从后往前，函数自调",
-            right: "递推：从前往后，循环计算",
+            wrong: "枚举：简单直观，容易写对",
+            right: "聪明算法：逻辑复杂，容易写错",
           },
           {
-            wrong: "递归 f(n)：调 f(n-1)、f(n-2)",
-            right: "递推：先算 f(1)、f(2)……",
+            wrong: "枚举：O(n) / O(n²) / O(n³)",
+            right: "二分 O(log n)，DP O(n)",
           },
-          {
-            wrong: "递归太慢——重复计算 O(2ⁿ)",
-            right: "递推很快——只算一次 O(n)",
-          },
-          { wrong: "递归占空间（栈帧）", right: "递推只占 O(1) 空间" },
+          { wrong: "枚举：n ≤ 1000 时够用", right: "聪明算法：n 很大时也能过" },
+          { wrong: "枚举：兜底方案", right: '聪明算法：需要"想到"' },
         ],
         extra: {
-          title: "📖 为什么递归这么慢？",
-          desc: '<div><b>看 f(5) 的递归树</b><br><code>f(5) → f(4), f(3)</code><br><code>f(4) → f(3), f(2)</code><br><code>f(3) → f(2), f(1)</code><br>……<br><br>注意：<code>f(3)</code> 被算了 <b>2 次</b>！<br><code>f(2)</code> 被算了 <b>3 次</b>！</div><div><b>复杂度分析</b><br>· 递推：O(n)——每项算一次<br>· 递归：O(2ⁿ)——每项重复算多次<br><br>n = 40 时：<br>· 递推：40 次<br>· 递归：约 3 亿次——<b>慢 800 万倍</b>！</div><div><b>为什么还要学递归？</b><br>递归写起来更直观——<br>有些问题"天然递归"（如树遍历）——<br>递推写法反而复杂。</div><div><b>选择建议</b><br>· 斐波那契这类"线性递推"——用递推<br>· 树、图这类"递归结构"——用递归<br>· 有时两者结合——如递归 + 记忆化 = DP</div><div><b>🔮 伏笔</b><br>"记忆化搜索"就是给递归加缓存——<br>把递归的 O(2ⁿ) 降到 O(n)——<br>第 20 讲 DP 会讲。</div>',
+          title: "💡 竞赛策略 · 暴力优先",
+          desc: '<div><b>第一步：想暴力</b><br>先想"怎么枚举"——<br>哪怕 O(n²)——<br>至少能写出来、能过小数据。</div><div><b>第二步：估算复杂度</b><br>看题目数据范围：<br>· n ≤ 100 → O(n³) 可以（10⁶ 次）<br>· n ≤ 1000 → O(n²) 可以（10⁶ 次）<br>· n ≤ 10⁵ → O(n log n) 需要<br>· n ≤ 10⁹ → O(log n) 需要</div><div><b>第三步：优化</b><br>暴力过不了——再想优化：<br>· 缩小枚举范围<br>· 剪枝（提前排除不可能）<br>· 换成二分 / DP / 贪心</div><div><b>竞赛黄金法则</b><br><b>暴力不一定错，</b><br><b>但一定要先写暴力。</b><br>很多高手都是从暴力开始的。</div><div><b>📖 经验数字</b><br>1 秒能跑约 10⁸ 次操作（C++）。<br>所以：<br>· O(n²) 支持 n ≤ 10⁴<br>· O(n³) 支持 n ≤ 400<br>· O(2ⁿ) 支持 n ≤ 25</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 11 过渡页 ===== */
+    /* ===== 9 过渡页 ===== */
     {
-      id: 11,
+      id: 9,
       type: "transition",
-      title: "第二站 · 二维递推",
-      subtitle: "杨辉三角",
-      data: { note: '接下来学习"二维递推"——每一行都从上一行推出来' },
+      title: "第二站 · 枚举进阶",
+      subtitle: "多重循环与数学优化",
+      data: { note: "接下来学习嵌套枚举——多个变量一起试" },
     },
 
-    /* ===== 12 杨辉三角引入 ===== */
+    /* ===== 10 水仙花数 ===== */
     {
-      id: 12,
-      type: "dialog",
-      title: "二维递推 · 杨辉三角",
-      subtitle: "每行都从上一行推",
-      chapterTag: "第 17 讲 · 经典例题",
-      data: {
-        lines: [
-          {
-            who: "student",
-            text: '小 C，刚才的递推都是"一维"的——<br>有没有"二维递推"？',
-          },
-          {
-            who: "robot",
-            text: "有——<b>杨辉三角</b>就是二维递推。<br>看它长什么样：",
-          },
-          {
-            who: "student",
-            text: "<code>1</code><br><code>1 1</code><br><code>1 2 1</code><br><code>1 3 3 1</code><br><code>1 4 6 4 1</code>",
-          },
-          {
-            who: "robot",
-            text: '每个数 = 它"左上方" + "右上方"。<br>比如第 3 行（从 0 开始数）的 3——<br>= 上面的 1 + 2。',
-          },
-          { who: "student", text: "那怎么用代码算？" },
-          {
-            who: "robot",
-            text: '<b>用二维数组</b>：<br><code>a[i][j] = a[i-1][j-1] + a[i-1][j]</code><br><br>这就是"二维递推"——<br>每个位置的值从"上一行"两个位置推出。',
-          },
-          { who: "student", text: "边界怎么处理？" },
-          {
-            who: "robot",
-            text: "第一列全填 1，对角线全填 1：<br>· <code>a[i][0] = 1</code><br>· <code>a[i][i] = 1</code><br><br>其余位置用递推公式。",
-          },
-          { who: "student", text: "那杨辉三角有什么用？" },
-          {
-            who: "robot",
-            text: '它是"组合数"的表格——<br><code>a[i][j]</code> 就是 C(i, j)。<br>排列组合、概率计算、二项式定理——<br>都要用它。<br><br>第 40 讲"排列组合"会详讲。',
-          },
-        ],
-        extra: {
-          title: "📖 知识扩展 · 杨辉三角的历史",
-          desc: '<div><b>中国：贾宪与杨辉</b><br>北宋数学家<b>贾宪</b>（约 1050 年）最早记录了这个三角形。<br>南宋数学家<b>杨辉</b>（1261 年）在《详解九章算法》中转引——<br>所以中文叫"杨辉三角"。</div><div><b>欧洲：帕斯卡</b><br>1653 年，法国数学家<b>帕斯卡</b>发表论文——<br>所以欧洲叫"帕斯卡三角形"。</div><div><b>谁先发明？</b><br>中国比欧洲早了 <b>400 多年</b>。<br>而印度、波斯数学家在更早就知道这个规律。</div><div><b>数学价值</b><br>· 组合数 C(n, k) 的表格<br>· 二项式展开系数<br>· 斐波那契数列也藏在里面<br>（对角线和 = 斐波那契数）</div><div><b>🔮 伏笔</b><br>杨辉三角 = 二维 DP 的入门——<br>第 20 讲 DP 会从它讲起。</div>',
-          variant: "card-primary",
-        },
-      },
-    },
-
-    /* ===== 13 杨辉三角代码 ===== */
-    {
-      id: 13,
+      id: 10,
       type: "code-split",
-      title: "杨辉三角 · 代码实现",
-      subtitle: "二维递推",
+      title: "枚举进阶 · 水仙花数",
+      subtitle: "枚举三位数",
       data: {
         intro:
-          "📖 <b>两步走</b>：<br>① 填边界——第一列和对角线全为 1<br>② 填内部——<code>a[i][j] = a[i-1][j-1] + a[i-1][j]</code>",
-        codeFile: "codes/lesson-17/yanghui.cpp",
+          "📖 <b>水仙花数</b>：三位数，各位数字的立方和等于它本身。<br>比如 <code>153</code> = 1³ + 5³ + 3³。<br><b>思路</b>：枚举 100 到 999——<br>每个数拆成三位，验证。",
+        codeFile: "codes/lesson-17/narcissistic.cpp",
         snippet: "main",
         annotations: [
-          { line: 8, title: "int n;", desc: "输出 n 行" },
           {
-            line: 11,
-            title: "long long a[MAXN][MAXN] = {0};",
-            desc: "二维数组——全初始化为 0",
+            line: 5,
+            title: "for (int n = 100; n &lt;= 999; n++)",
+            desc: "枚举所有三位数",
           },
-          { line: 14, title: "for (int i = 0; i &lt; n; i++)", desc: "填边界" },
-          { line: 15, title: "a[i][0] = 1;", desc: "第一列 = 1" },
-          { line: 16, title: "a[i][i] = 1;", desc: "对角线 = 1" },
+          { line: 6, title: "int a = n / 100;", desc: "百位——n 除以 100" },
           {
-            line: 20,
-            title: "for (int i = 2; i &lt; n; i++)",
-            desc: "从第 2 行开始推",
+            line: 7,
+            title: "int b = n / 10 % 10;",
+            desc: "十位——先除 10 再取个位",
           },
+          { line: 8, title: "int c = n % 10;", desc: "个位——n 对 10 取余" },
           {
-            line: 22,
-            title: "a[i][j] = a[i-1][j-1] + a[i-1][j];",
-            desc: "<b>二维递推公式</b>",
+            line: 9,
+            title: "if (a*a*a + b*b*b + c*c*c == n)",
+            desc: "验证立方和",
           },
         ],
-        output: "（输入 5）\n1\n1 1\n1 2 1\n1 3 3 1\n1 4 6 4 1",
+        output: "153 370 371 407",
         extra: {
-          title: "💡 二维递推的两个细节",
-          desc: '<div><b>① 为什么 <code>{0}</code> 初始化？</b><br><code>long long a[MAXN][MAXN] = {0};</code>——<br>把所有元素初始化为 0。<br>这样"未填的位置"就是 0——<br>不会影响递推计算。</div><div><b>② 为什么用 long long？</b><br>杨辉三角增长很快——<br>n=30 时中间值约 1.5×10⁸——<br>n=60 时就超过 long long。<br>题目通常限制 n ≤ 25。</div><div><b>复杂度</b><br>· 时间 O(n²)——<br>&nbsp;&nbsp;两层循环<br>· 空间 O(n²)——<br>&nbsp;&nbsp;二维数组</div><div><b>🔮 优化</b><br>若只需要某一行——<br>用"滚动数组"优化空间到 O(n)——<br>第 20 讲 DP 会讲。</div>',
+          title: "💡 三位数拆分的三种技巧",
+          desc: '<div><b>技巧 1：除以对应的位</b><br>· 百位：<code>n / 100</code><br>· 十位：<code>n / 10 % 10</code><br>· 个位：<code>n % 10</code></div><div><b>技巧 2：连续取余</b><br><code>int t = n;</code><br><code>int c = t % 10; t /= 10;</code>  // 个位<br><code>int b = t % 10; t /= 10;</code>  // 十位<br><code>int a = t % 10;</code>  // 百位<br>适合任意位数。</div><div><b>技巧 3：字符串处理</b><br>把数字转字符串——<br>用 <code>s[i] - \'0\'</code> 得到每一位。<br>适合位数很多的场景。</div><div><b>水仙花数的英文</b><br>Narcissistic Number——<br>直译"自恋数"——<br>因为它"只爱自己的各位数字"。</div><div><b>🔮 冷知识</b><br>四位数也有类似性质——<br>叫"四叶玫瑰数"——如 1634。<br>n 位数叫"n 位自幂数"。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 14 爬楼梯 ===== */
+    /* ===== 11 嵌套枚举 ===== */
+    {
+      id: 11,
+      type: "code-split",
+      title: "嵌套枚举 · 勾股数",
+      subtitle: "三个变量一起试",
+      data: {
+        intro:
+          "📖 <b>勾股数</b>：满足 <code>a² + b² = c²</code> 的三个正整数。<br><b>思路</b>：三重循环枚举 a、b、c——<br>验证等式。<br><br><b>优化</b>：让 <code>a ≤ b ≤ c</code>——避免重复。",
+        codeFile: "codes/lesson-17/pythagorean.cpp",
+        snippet: "main",
+        annotations: [
+          { line: 5, title: "int n;", desc: "枚举范围 1 到 n" },
+          { line: 7, title: "for (int a = 1; a &lt;= n; a++)", desc: "枚举 a" },
+          {
+            line: 8,
+            title: "for (int b = a; b &lt;= n; b++)",
+            desc: "枚举 b——从 a 开始避免重复",
+          },
+          {
+            line: 9,
+            title: "for (int c = b; c &lt;= n; c++)",
+            desc: "枚举 c——从 b 开始",
+          },
+          { line: 10, title: "if (a*a + b*b == c*c)", desc: "验证勾股定理" },
+          { line: 11, title: "count++;", desc: "计数" },
+        ],
+        output: "（输入 10）\n1 组——3 4 5",
+        extra: {
+          title: "💡 嵌套枚举的两个关键",
+          desc: "<div><b>① 内层从外层开始——避免重复</b><br>因为 3×4 和 4×3 是同一组——<br>让 <code>b ≥ a</code>，<code>c ≥ b</code>——<br>只算一次。</div><div><b>② 复杂度指数增长</b><br>· 1 层 for：O(n)<br>· 2 层 for：O(n²)<br>· 3 层 for：O(n³)<br>· 4 层 for：O(n⁴)<br><br>n = 100 时：<br>· 3 层：10⁶ 次——可以<br>· 4 层：10⁸ 次——危险<br>· 5 层：10¹⁰ 次——超时</div><div><b>经验值</b>（1 秒内）<br>· 2 层：n ≤ 10⁴<br>· 3 层：n ≤ 400<br>· 4 层：n ≤ 100</div><div><b>🔮 优化方向</b><br>枚举 a、b 后——<br>c = √(a² + b²) 直接算——<br>不用第三层循环。<br>从 O(n³) 降到 O(n²)。</div>",
+          variant: "card-primary",
+        },
+      },
+    },
+
+    /* ===== 12 过渡页 ===== */
+    {
+      id: 12,
+      type: "transition",
+      title: "第三站 · 模拟题",
+      subtitle: "把现实规则翻译成代码",
+      data: {
+        note: '模拟 = 用代码复现一个过程。接下来学习怎么"读题 → 建模 → 编码"',
+      },
+    },
+
+    /* ===== 13 什么是模拟 ===== */
+    {
+      id: 13,
+      type: "dialog",
+      title: "什么是模拟？",
+      subtitle: '用代码"复现"过程',
+      chapterTag: "第 16 讲 · 概念理解",
+      data: {
+        lines: [
+          { who: "student", text: "小 C，模拟题又是什么？" },
+          {
+            who: "robot",
+            text: '模拟题——<b>按题目描述的规则，一步步执行</b>。<br>像是"用代码演一遍题目里的故事"。',
+          },
+          { who: "student", text: "举个例子？" },
+          {
+            who: "robot",
+            text: '比如题目说：<br>"今天是 2026 年 9 月 24 日，明天是几号？"<br><br>你要模拟"日期变化"——<br>① 日 +1<br>② 如果超过本月天数——月 +1，日 = 1<br>③ 如果超过 12 月——年 +1，月 = 1',
+          },
+          { who: "student", text: "那和枚举有什么关系？" },
+          {
+            who: "robot",
+            text: '模拟里经常用枚举——<br>· 枚举天数、枚举月份<br>· 枚举操作步骤<br>· 枚举所有可能情况<br><br><b>枚举是"试数"，模拟是"试过程"</b>——<br>两者经常配合。',
+          },
+          { who: "student", text: "那模拟题难吗？" },
+          {
+            who: "robot",
+            text: '<b>难度在"读题"</b>——<br>把题目规则一字不差地翻译成代码。<br>规则里常藏"边界情况"——<br>比如闰年 2 月 29 天、跨年、数组越界……<br><br>模拟题不需要"聪明的算法"——<br>但需要<b>细致的耐心</b>。',
+          },
+        ],
+        extra: {
+          title: "💡 模拟题的三步法",
+          desc: '<div><b>① 读题——提取规则</b><br>把题目里的"人话"翻译成"步骤"：<br>· 输入是什么？<br>· 输出是什么？<br>· 中间要执行什么操作？<br>· 有没有"特殊情况"？</div><div><b>② 建模——确定状态</b><br>用一个或多个变量表示"当前状态"：<br>· 时间类：年、月、日<br>· 队列类：队头、队尾、队列元素<br>· 坐标类：x、y、方向</div><div><b>③ 编码——按步执行</b><br>用循环或递归——<br>每一步更新状态——<br>最后输出结果。</div><div><b>📖 常见模拟题类型</b><br>· 日期问题（星期几、下一天）<br>· 游戏模拟（棋类、卡片）<br>· 队列模拟（约瑟夫环、排队）<br>· 物理模拟（小球碰撞、匀速运动）</div><div><b>🔮 伏笔</b><br>模拟题的进阶——<br>状态模拟 + 搜索——<br>第 43/44 讲讲。</div>',
+          variant: "card-primary",
+        },
+      },
+    },
+
+    /* ===== 14 日期模拟 ===== */
     {
       id: 14,
       type: "code-split",
-      title: "递推的应用 · 爬楼梯",
-      subtitle: "经典递推题",
+      title: "模拟实战 · 日期加一天",
+      subtitle: "经典模拟题",
       data: {
         intro:
-          "📖 <b>问题</b>：楼梯有 n 级台阶，每次可以爬 1 级或 2 级。<br>问爬到第 n 级有几种方法？<br><br><b>分析</b>：到第 n 级——<br>· 从第 n-1 级爬 1 级<br>· 或从第 n-2 级爬 2 级<br>所以 <code>f(n) = f(n-1) + f(n-2)</code>——斐波那契！",
-        codeFile: "codes/lesson-17/climb-stairs.cpp",
+          "📖 <b>问题</b>：输入年月日，输出它的下一天。<br><b>关键规则</b>：<br>· 每月天数不同（2 月平年 28 天、闰年 29 天）<br>· 月末 +1 天 → 下月 1 日<br>· 12 月末 +1 天 → 次年 1 月 1 日",
+        codeFile: "codes/lesson-17/date-sim.cpp",
         snippet: "main",
         annotations: [
-          { line: 6, title: "int n;", desc: "n 级台阶" },
+          { line: 6, title: "int y, m, d;", desc: "读入年月日" },
           {
             line: 8,
-            title: "if (n &lt;= 2) ...",
-            desc: "边界——1 级 1 种，2 级 2 种",
+            title: "daysInMonth[13] = {...}",
+            desc: "每月天数——用数组记录",
           },
-          { line: 13, title: "long long f1 = 1, f2 = 2;", desc: "初始值" },
           {
-            line: 14,
-            title: "for (int i = 3; i &lt;= n; i++)",
-            desc: "从第 3 级开始推",
+            line: 10,
+            title: "if ((y % 4 == 0 ...) || y % 400 == 0)",
+            desc: "判断闰年",
           },
-          { line: 15, title: "long long f3 = f1 + f2;", desc: "递推关系" },
-          { line: 16, title: "f1 = f2; f2 = f3;", desc: "滚动" },
+          { line: 11, title: "daysInMonth[2] = 29;", desc: "闰年 2 月 29 天" },
+          { line: 14, title: "d++;", desc: "日加 1" },
+          {
+            line: 15,
+            title: "if (d &gt; daysInMonth[m])",
+            desc: "超过本月天数——月进位",
+          },
+          { line: 16, title: "d = 1; m++;", desc: "日归 1，月加 1" },
+          { line: 17, title: "if (m &gt; 12)", desc: "超过 12 月——年进位" },
         ],
-        output: "（输入 5）\n8",
+        output: "（输入 2026 9 24）\n2026 9 25\n（输入 2024 2 28）\n2024 2 29",
         extra: {
-          title: '📖 知识扩展 · 爬楼梯的"变形"',
-          desc: '<div><b>斐波那契的另一种形式</b><br>爬楼梯问题的答案——<br>其实是"偏移一位"的斐波那契：<br>· 1 级 → 1 种<br>· 2 级 → 2 种<br>· 3 级 → 3 种<br>· 4 级 → 5 种<br>· 5 级 → 8 种<br>正是 1, 2, 3, 5, 8, ...</div><div><b>变形 1：每次爬 1—m 级</b><br><code>f(n) = f(n-1) + f(n-2) + ... + f(n-m)</code><br>用前缀和优化——O(n)。</div><div><b>变形 2：某些台阶不能踩</b><br>跳过的台阶 <code>f(i) = 0</code>——<br>递推时设为 0。</div><div><b>变形 3：求最少步数</b><br>改成 <code>min</code>——<br>从"计数"变成"最优化"——<br>就是 DP 的雏形。</div><div><b>🔮 伏笔</b><br>爬楼梯是 DP 入门题——<br>第 20 讲 DP 会以它为例。</div>',
+          title: "💡 日期模拟的三个关键",
+          desc: '<div><b>① 闰年判断</b><br><code>(y % 4 == 0 &amp;&amp; y % 100 != 0) || y % 400 == 0</code><br>四年一闰，百年不闰，四百年再闰。</div><div><b>② 用数组表示每月天数</b><br><code>daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</code><br>下标从 1 开始——<br>避免"下标 = 月份"时的偏移错误。</div><div><b>③ 逐级进位</b><br>· 日 → 月<br>· 月 → 年<br>顺序不能反。</div><div><b>📖 常见日期题</b><br>· 日期加/减 n 天<br>· 计算两个日期差几天<br>· 星期几推算<br>· 打印日历<br>都是模拟题的经典类型。</div><div><b>🔮 伏笔</b><br>闰年判断在第 4 讲练习里出现过——<br>这里是"再次使用"——<br>巩固复习。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 15 过渡页 ===== */
+    /* ===== 15 常见错误 ===== */
     {
       id: 15,
-      type: "transition",
-      title: "第三站 · 实战演练",
-      subtitle: "三道练习，检验递推",
-      data: { note: "接下来通过三道练习，把递推用起来" },
-    },
-
-    /* ===== 16 练习1：爬楼梯 ===== */
-    {
-      id: 16,
-      type: "level-map",
-      title: "课堂练习1：爬楼梯",
-      subtitle: "经典递推入门",
-      chapterTag: "第 17 讲 · 实战演练",
+      type: "compare",
+      title: "枚举与模拟常见错误",
+      subtitle: "避开这些坑",
       data: {
-        question: {
-          title: "题干",
-          desc: "输入正整数 <code>n</code>，输出爬到第 n 级台阶的方法数。<br>每次可爬 1 级或 2 级。<br><br><b>输入样例</b>：<code>5</code><br><b>输出样例</b>：<code>8</code>",
-          timer: "⏱ 限时 6 分钟",
-        },
-        hints: [
-          "观察规律——1 级有 1 种，2 级有 2 种",
-          "到第 n 级 = 从第 n-1 级爬 1 级 + 从第 n-2 级爬 2 级",
-          "递推公式：<code>f(n) = f(n-1) + f(n-2)</code>",
-          "用滚动变量——空间 O(1)",
+        groups: [
+          { wrong: "枚举范围写错——漏解或多试", right: "根据题目精确确定范围" },
+          {
+            wrong: "嵌套枚举内层从 1 开始——重复计数",
+            right: "内层从外层开始——避免重复",
+          },
+          {
+            wrong: "判断质数试到 n-1——太慢",
+            right: "试到 <code>i * i &lt;= n</code>——快得多",
+          },
+          { wrong: "日期模拟忘判闰年", right: "先判断闰年——再填每月天数" },
         ],
-        answer: { codeFile: "codes/lesson-17/climb-stairs.cpp" },
-        analysis: {
-          title: "📖 解析",
-          desc: "<b>递推三要素</b>：<br>① 初始值：<code>f(1) = 1, f(2) = 2</code><br>② 递推关系：<code>f(n) = f(n-1) + f(n-2)</code><br>③ 顺序：从 3 到 n<br><br><b>为什么是 f(n-1) + f(n-2)？</b><br>最后一次可能是：<br>· 爬 1 级——那之前在第 n-1 级<br>· 爬 2 级——那之前在第 n-2 级<br><br>两种可能相加——就是总数。",
-        },
         extra: {
-          title: '💡 "最后一步分析法"',
-          desc: '<div><b>递推题的通用思路</b>：<br>分析"最后一步"可能是什么——<br>然后把"所有最后一步的情况"加起来。</div><div><b>爬楼梯的最后一步</b><br>· 走 1 级（前一步在第 n-1 级）<br>· 走 2 级（前一步在第 n-2 级）</div><div><b>字母 A + 字母 B 的最后一步</b><br>· 走 A（前一步在 n-A）<br>· 走 B（前一步在 n-B）<br>→ f(n) = f(n-A) + f(n-B)</div><div><b>核心</b><br>"最后一步分析法"是推导递推公式的万能钥匙——<br>遇到递推题——<br>先问："最后一步可能是什么？"</div><div><b>🔮 伏笔</b><br>这种思维方式——<br>就是 DP 的"状态转移"——<br>第 20 讲会详讲。</div>',
+          title: "📖 四大错误的原因",
+          desc: '<div><b>① 范围错</b><br>· 范围小 → 漏解<br>· 范围大 → 浪费<br>仔细读题——确定边界。</div><div><b>② 重复计数</b><br>组合类枚举——<br>让内层 ≥ 外层——<br>保证"每种组合只算一次"。</div><div><b>③ 性能差</b><br>质数判断——<br>朴素 O(n)，优化 O(√n)。<br>数据大时差别巨大。</div><div><b>④ 忘边界</b><br>日期模拟——<br>闰年、月末、年末——<br>三个边界都要处理。</div><div><b>口诀</b><br>范围要精确，内层要从上；<br>质数试到根，日期判闰年。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 17 练习2：杨辉三角 ===== */
+    /* ===== 16 过渡页 ===== */
+    {
+      id: 16,
+      type: "transition",
+      title: "第四站 · 实战演练",
+      subtitle: "三道练习，检验枚举",
+      data: { note: "接下来通过三道练习，把枚举与模拟用起来" },
+    },
+
+    /* ===== 17 练习1：因数个数 ===== */
     {
       id: 17,
       type: "level-map",
-      title: "课堂练习2：杨辉三角",
-      subtitle: "输出前 n 行",
-      chapterTag: "第 17 讲 · 实战演练",
+      title: "课堂练习1：因数个数",
+      subtitle: "用优化枚举",
+      chapterTag: "第 16 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
-          desc: "输入正整数 <code>n</code>，输出杨辉三角的前 n 行。<br>每行末尾无多余空格。<br><br><b>输入样例</b>：<code>5</code><br><b>输出样例</b>：<br><code>1</code><br><code>1 1</code><br><code>1 2 1</code><br><code>1 3 3 1</code><br><code>1 4 6 4 1</code>",
-          timer: "⏱ 限时 10 分钟",
+          desc: "输入正整数 <code>n</code>，输出它的因数个数。<br><br><b>输入样例</b>：<code>12</code><br><b>输出样例</b>：<code>6</code>（1、2、3、4、6、12 共 6 个）",
+          timer: "⏱ 限时 6 分钟",
         },
         hints: [
-          "用二维数组 <code>long long a[MAXN][MAXN]</code>",
-          "边界：<code>a[i][0] = 1</code>，<code>a[i][i] = 1</code>",
-          "递推：<code>a[i][j] = a[i-1][j-1] + a[i-1][j]</code>",
-          "从第 2 行（i=2）开始推",
+          "枚举 <code>i</code> 从 1 到 <code>√n</code>——用 <code>i * i &lt;= n</code>",
+          "如果 <code>n % i == 0</code>——i 是一个因数",
+          "<code>n / i</code> 也一定是因数——但要注意 <code>i == n / i</code> 时只能算一次",
+          "计数加一（或加二）",
         ],
-        answer: { codeFile: "codes/lesson-17/yanghui.cpp" },
+        answer: { codeFile: "codes/lesson-17/practice-divisor.cpp" },
         analysis: {
           title: "📖 解析",
-          desc: '<b>核心</b>：<br>① 先填边界——第一列、对角线 = 1<br>② 再填内部——用递推公式<br>③ 输出——按行输出<br><br><b>为什么从 i=2 开始？</b><br>第 0 行只有 1 个数——<br>第 1 行两个数都是 1——<br>第 2 行开始才有"内部"数需要递推。',
+          desc: "<b>因数成对出现</b>：<br>如果 i 是 n 的因数——<br>那么 <code>n / i</code> 也是 n 的因数。<br><br>所以只用枚举到 √n——<br>找到 i 时，同时找到 <code>n / i</code>——<br>一次找两个。<br><br><b>特殊处理</b>：<br>当 <code>i == n / i</code>（即 n 是完全平方数）时——<br>只算一次。<br>比如 n = 16，<code>i = 4</code> 时，<code>n / i = 4</code>——<br>只算 1 个因数。",
         },
         extra: {
-          title: "📖 知识扩展 · 杨辉三角与组合数",
-          desc: '<div><b>关键结论</b><br><code>a[n][k] = C(n, k)</code><br>即"从 n 个里选 k 个"的组合数。</div><div><b>验证</b><br>第 4 行：1, 4, 6, 4, 1<br>· C(4,0) = 1<br>· C(4,1) = 4<br>· C(4,2) = 6<br>· C(4,3) = 4<br>· C(4,4) = 1<br>✅ 完全一致</div><div><b>为什么？</b><br>从 n 个里选 k 个——<br>看最后一个选不选：<br>· 选——从 n-1 里再选 k-1 → C(n-1, k-1)<br>· 不选——从 n-1 里选 k → C(n-1, k)<br>两者相加——C(n, k) = C(n-1, k-1) + C(n-1, k)<br>这正是杨辉三角的递推公式！</div><div><b>🔮 伏笔</b><br>杨辉三角是"组合数学"的基础工具——<br>第 40 讲讲排列组合时会深入。</div>',
+          title: "💡 因数成对的证明",
+          desc: '<div><b>定理</b><br>如果 a 是 n 的因数——<br>那么 n / a 也是 n 的因数。</div><div><b>证明</b><br>a 是 n 的因数 → n = a × b（b 是整数）<br>→ b = n / a 也是整数<br>→ b 也是 n 的因数。</div><div><b>推论</b><br>因数总是"成对出现"——<br>a 和 n / a 一对。</div><div><b>边界</b><br>当 a = n / a 时——<br>a² = n——<br>n 是完全平方数——<br>此时 a 和自身配对——<br>只算一个。</div><div><b>复杂度</b><br>从 O(n) 降到 O(√n)。<br>n = 10⁶ 时：<br>· 朴素 100 万次<br>· 优化 1000 次</div><div><b>🔮 应用</b><br>"求 n 的因数个数"是数论基础题——<br>第 33 讲讲数论时会用到。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 18 练习3：数字三角形 ===== */
+    /* ===== 18 练习2：输出 e ===== */
     {
       id: 18,
       type: "level-map",
-      title: "课堂练习3：数字三角形",
-      subtitle: "递推入门 DP",
-      chapterTag: "第 17 讲 · 实战演练",
+      title: "课堂练习2：输出 e 的近似值",
+      subtitle: "模拟级数求和",
+      chapterTag: "第 16 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
-          desc: '输入一个数字三角形（n 行，第 i 行 i 个数）。<br>从顶部往下走，每步可走"左下方"或"右下方"。<br>求从顶到底的路径上数字之和的最大值。<br><br><b>输入样例</b>：<br><code>5</code><br><code>7</code><br><code>3 8</code><br><code>8 1 0</code><br><code>2 7 4 4</code><br><code>4 5 2 6 5</code><br><b>输出样例</b>：<code>30</code>',
-          timer: "⏱ 限时 15 分钟",
+          desc: "用级数 <code>e = 1 + 1/1! + 1/2! + 1/3! + ...</code> 计算 e 的近似值（保留 15 位小数）。<br><br><b>提示</b>：<br>· 累加到某一项足够小为止<br>· 每项 = 上一项 ÷ k<br>· 用 <code>double</code> 存结果",
+          timer: "⏱ 限时 10 分钟",
         },
         hints: [
-          "定义 <code>dp[i][j]</code>——从顶走到 (i,j) 的最大和",
-          "递推：<code>dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + a[i][j]</code>",
-          "先填边界——<code>dp[1][1] = a[1][1]</code>",
-          "最后答案 = 最后一行的最大值",
+          "用 <code>double e = 1.0;</code> 初始化",
+          "用 <code>double term = 1.0;</code> 保存当前项",
+          "循环 <code>for (int k = 1; ; k++)</code>——<br><code>term /= k;</code>——<code>e += term;</code>",
+          "当 <code>term &lt; 1e-18</code> 时跳出",
+          "输出 <code>cout &lt;&lt; fixed &lt;&lt; setprecision(15) &lt;&lt; e;</code>",
+        ],
+        answer: {
+          code: `#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double e = 1.0;
+    double term = 1.0;
+    for (int k = 1; ; k++) {
+        term /= k;
+        e += term;
+        if (term < 1e-18) break;
+    }
+    cout << fixed << setprecision(15) << e << endl;
+    return 0;
+}`,
+        },
+        analysis: {
+          title: "📖 解析",
+          desc: '<b>核心</b>：每次除以 k，就得到下一项。<br>· term<sub>1</sub> = 1 / 1! = 1<br>· term<sub>2</sub> = 1 / 2! = 1/2<br>· term<sub>3</sub> = 1 / 6 ≈ 0.1666<br>· ……<br><br><b>累加直到 term 足够小</b>——<br>再往后精度没意义了。<br><br><b>为什么要用 <code>k++</code> 无上限循环？</b><br>因为不知道"要加到第几项"——<br>用"term 是否足够小"作为终止条件。<br>这是"无限循环 + 内部 break"的经典模式。',
+        },
+        extra: {
+          title: "📖 知识扩展 · 自然常数 e",
+          desc: '<div><b>e ≈ 2.718281828459045</b><br>和 π 一样，是数学中最重要的常数之一。</div><div><b>e 的来历</b><br>17 世纪，瑞士数学家<b>欧拉</b>在研究复利时发现——<br>当复利周期趋近无穷小时——<br>结果趋近于一个常数。<br>他命名它为 e。</div><div><b>e 的应用</b><br>· 自然对数 ln<br>· 指数函数 eˣ<br>· 复利计算<br>· 概率论（正态分布）</div><div><b>有趣的推导</b><br><code>e = lim(n→∞) (1 + 1/n)ⁿ</code><br>当 n 越大，越接近 e。</div><div><b>级数公式</b>（本题）<br><code>e = Σ (1/k!)</code><br>k 从 0 到 ∞——<br>收敛很快——<br>10 项就精确到 10⁻⁷。</div><div><b>🔮 伏笔</b><br>级数求和是"递推"的经典应用——<br>第 17 讲讲递推。</div>',
+          variant: "card-primary",
+        },
+      },
+    },
+
+    /* ===== 19 练习3：勾股数 ===== */
+    {
+      id: 19,
+      type: "level-map",
+      title: "课堂练习3：勾股数",
+      subtitle: "嵌套枚举 + 优化",
+      chapterTag: "第 16 讲 · 实战演练",
+      data: {
+        question: {
+          title: "题干",
+          desc: "输入正整数 <code>n</code>，输出满足 <code>a ≤ b ≤ c ≤ n</code> 且 <code>a² + b² = c²</code> 的整数三元组个数。<br><br><b>输入样例</b>：<code>20</code><br><b>输出样例</b>：<code>4</code><br>（3,4,5）（5,12,13）（6,8,10）（8,15,17）",
+          timer: "⏱ 限时 12 分钟",
+        },
+        hints: [
+          "三重循环枚举 <code>a</code>、<code>b</code>、<code>c</code>",
+          "<code>b</code> 从 <code>a</code> 开始——<code>c</code> 从 <code>b</code> 开始——避免重复",
+          "验证 <code>a*a + b*b == c*c</code>",
+          "<b>优化</b>：只枚举 <code>a</code>、<code>b</code>——<br><code>c = sqrt(a*a + b*b)</code> 直接算出来",
         ],
         answer: { codeFile: "codes/lesson-17/practice-triangle.cpp" },
         analysis: {
           title: "📖 解析",
-          desc: '<b>核心思路</b>：<br>从顶往下递推——<br><code>dp[i][j]</code> = 从顶到 (i,j) 的最大路径和。<br><br><b>递推公式</b>：<br><code>dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + a[i][j]</code><br><br>到 (i,j) 只能从"左上方"或"正上方"来——<br>取两者较大的——加上当前值。<br><br><b>答案</b>：最后一行 dp[n][j] 中的最大值。',
+          desc: "<b>朴素做法 O(n³)</b>：<br>三重循环——n = 100 时约 10⁶ 次——可以。<br>n = 1000 时约 10⁹ 次——超时。<br><br><b>优化做法 O(n²)</b>：<br>枚举 a、b——<br><code>int s = a*a + b*b;</code><br><code>int c = (int)sqrt(s);</code><br>检查 <code>c*c == s &amp;&amp; c &lt;= n</code>——<br>避免第三层循环。<br><br><b>n = 1000 时</b>——<br>O(n²) 只有 10⁶ 次——轻松过。",
         },
         extra: {
-          title: "📖 知识扩展 · 数字三角形与 DP",
-          desc: '<div><b>这道题的意义</b><br>它是"动态规划（DP）"的入门题——<br>几乎所有 DP 教程都用它做第一个例子。</div><div><b>为什么它叫 DP？</b><br>DP（Dynamic Programming，动态规划）——<br>核心是"用子问题的解构造原问题的解"。<br><br>本题中——<br>· 子问题：从顶到 (i,j) 的最大路径<br>· 原问题：从顶到最后一行的最大路径<br>· 递推：子问题 + 当前值 = 更大的子问题</div><div><b>DP vs 递推</b><br>· 递推：只有一层，一维<br>· DP：多为二维甚至多维<br>· 本质一样——都是"用已知推未知"</div><div><b>🔮 伏笔</b><br>数字三角形是 DP 的"第一课"——<br>第 20 讲 DP 会正式展开。</div>',
+          title: "📖 知识扩展 · 勾股数公式",
+          desc: '<div><b>古希腊公式</b><br>公元前 1000 年，古巴比伦人已经知道：<br><code>a = m² - n²</code><br><code>b = 2mn</code><br><code>c = m² + n²</code><br>（m &gt; n 是正整数）<br><br>任意 m、n 都能生成一组勾股数。</div><div><b>验证</b><br>m=2, n=1：<br>a = 4-1 = 3<br>b = 4<br>c = 5<br>→ 3-4-5 ✅</div><div><b>勾股数的性质</b><br>· 无数多组<br>· 有"原始勾股数"（互质）和"倍数勾股数"<br>· 3-4-5、5-12-13、8-15-17 是原始<br>· 6-8-10 是 3-4-5 的 2 倍</div><div><b>🔮 竞赛应用</b><br>勾股数题常考"最大公约数"和"质数"——<br>第 33 讲数论会深入。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 19 挑战题思路 ===== */
+    /* ===== 20 挑战题思路 ===== */
     {
-      id: 19,
+      id: 20,
       type: "dialog",
-      title: '挑战题思路 · 数字三角形的"状态设计"',
-      subtitle: "怎么定义 dp 数组",
-      chapterTag: "第 17 讲 · 解题思路",
+      title: '挑战题思路 · 枚举的"剪枝"',
+      subtitle: "让暴力更快",
+      chapterTag: "第 16 讲 · 解题思路",
       data: {
         lines: [
           {
             who: "student",
-            text: '小 C，数字三角形那道题——<br>我知道要"从顶往下推"——<br>但 dp 数组怎么定义？',
+            text: "小 C，勾股数那道题我写了个 O(n³) 的版本——n=1000 时超时了。",
           },
           {
             who: "robot",
-            text: "好问题。<b>dp 的定义决定一切</b>——<br>定义对了——递推自然出来。",
+            text: "很正常。<b>O(n³) 的瓶颈</b>——<br>n=1000 时约 10⁹ 次——<br>超出 1 秒能跑的范围。",
           },
-          { who: "student", text: "那怎么定义？" },
+          { who: "student", text: "那怎么优化？" },
           {
             who: "robot",
-            text: '关键问自己：<b>子问题是什么？</b><br>本题要"从顶到底的最大路径和"——<br>那子问题就是"从顶到某个位置的最大路径和"。<br><br>所以 <code>dp[i][j]</code> = 从顶走到 (i,j) 的最大路径和。',
+            text: "三招：<br>① <b>利用等式关系</b>——<br>&nbsp;&nbsp;枚举 a、b 后——<br>&nbsp;&nbsp;<code>c = √(a² + b²)</code> 直接算——<br>&nbsp;&nbsp;省掉第三层循环——O(n³) → O(n²)。<br>② <b>剪枝</b>——<br>&nbsp;&nbsp;如果 <code>a² + b² &gt; n²</code>——<br>&nbsp;&nbsp;c 超范围——<code>break</code>。<br>③ <b>缩小范围</b>——<br>&nbsp;&nbsp;<code>a ≤ b ≤ c ≤ n</code>——<br>&nbsp;&nbsp;内层从外层开始。",
           },
-          { who: "student", text: "那递推公式呢？" },
+          { who: "student", text: "剪枝是什么？" },
           {
             who: "robot",
-            text: '问" (i,j) 能从哪里来？"——<br>· 左上方 (i-1, j-1)<br>· 正上方 (i-1, j)<br><br>所以 <code>dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + a[i][j]</code>。<br><br>最后答案——<br>最后一行 dp 的最大值。',
+            text: "<b>剪枝 = 提前排除不可能的枚举</b>。<br>比如勾股数里——<br>如果 a² + b² 已经 &gt; n²——<br>后面的 b 只会更大——<br>全部不可能——<code>break</code> 跳出。<br><br>剪枝能大幅减少枚举次数——<br>有时能让 O(n³) 实际跑得比 O(n²) 还快。",
           },
-          {
-            who: "student",
-            text: '那为什么不是 <code>dp[i][j]</code> = "从 (i,j) 到底部"的最大和？',
-          },
+          { who: "student", text: '所以剪枝是"用数学提前排除"？' },
           {
             who: "robot",
-            text: '也可以——<br>从下往上推——<br>dp[i][j] = a[i][j] + max(dp[i+1][j], dp[i+1][j+1])。<br><br>两种定义都对——<br>但"从顶往下"更符合"逐步构建"的直觉——<br>也更简单（不用处理边界）。',
+            text: '对。<b>剪枝 = 数学 + 暴力</b>——<br>保留暴力的简单——<br>加上数学的聪明。<br><br>竞赛中剪枝是必备技能——<br>第 45 讲"搜索与剪枝"会详讲。',
           },
-          { who: "student", text: "所以 dp 的定义很灵活？" },
+          { who: "student", text: "那这道题用哪招？" },
           {
             who: "robot",
-            text: '对。<b>不同定义，不同复杂度，不同难度</b>——<br>找"最自然、最简单"的定义——<br>是 DP 的核心技能。<br><br>下一屏看动画演示。',
+            text: "① + ③——<br>O(n³) 变 O(n²)——<br>n=1000 时 10⁶ 次——<br>轻松过。<br><br>下一屏用动画演示优化过程。",
           },
         ],
         extra: {
-          title: '💡 dp 定义的"三问"',
-          desc: '<div><b>① 子问题是什么？</b><br>把原问题拆成同类的小问题——<br>通常带"从哪到哪"的方向。</div><div><b>② 值是什么？</b><br>· 最大/最小？<br>· 计数？<br>· 可行性（是/否）？</div><div><b>③ 状态用什么维度？</b><br>· 一维：只跟"位置"有关<br>· 二维：跟"两个变量"有关<br>· 三维：更复杂</div><div><b>例：数字三角形</b><br>① 子问题：从顶到 (i,j) 的路径<br>② 值：路径上的数字和——取最大<br>③ 维度：(i,j) ——二维</div><div><b>📖 通用思路</b><br>dp 定义 = "子问题的答案"<br>递推公式 = "子问题之间的转移"<br>初始值 = "最小的子问题"</div><div><b>🔮 伏笔</b><br>数字三角形 dp 定义好后——<br>其他 DP 题（背包、LIS、LCS）都是同样的思路——<br>第 20 讲会详讲。</div>',
+          title: '💡 枚举优化的"四个方向"',
+          desc: "<div><b>① 利用等式关系</b><br>枚举 a、b——c 直接算——<br>省掉一层循环。</div><div><b>② 缩小枚举范围</b><br>内层从外层开始——<br>避免重复组合。</div><div><b>③ 提前 break</b><br>发现不可能立即跳出——<br>不继续浪费。</div><div><b>④ 数学剪枝</b><br>用数学性质提前排除——<br>如奇偶性、质数性质、整除性质。</div><div><b>📖 优化效果对比</b><br>勾股数问题：<br>· 朴素 O(n³)：n=1000 → 10⁹ 次<br>· 优化 O(n²)：n=1000 → 10⁶ 次<br>· 加剪枝：实际可能只要 10⁵ 次<br><b>快 10000 倍。</b></div><div><b>🔮 伏笔</b><br>剪枝的进阶——<br>DFS 剪枝、A* 搜索——<br>第 45 讲讲。</div>",
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 20 挑战题演示 ===== */
+    /* ===== 21 挑战题演示 ===== */
     {
-      id: 20,
+      id: 21,
       type: "evolution",
-      title: "挑战题演示 · 数字三角形一步步填表",
-      subtitle: "从边界到答案",
-      chapterTag: "第 17 讲 · 过程演示",
+      title: "挑战题演示 · 优化代码一步步长成",
+      subtitle: "从三重循环到两重 + 剪枝",
+      chapterTag: "第 16 讲 · 过程演示",
       data: {
         intro:
-          '📖 <b>dp 数组不是"一次填满"</b>——<br>而是从边界开始——<br>一行一行往下推。<br>看代码如何逐步填满。',
+          '📖 <b>优化不是"一次到位"</b>——<br>而是从"能跑的朴素版"——<br>逐步优化到"更快的版本"。<br>看代码如何一步步生长。',
         codeFile: "codes/lesson-17/practice-triangle.cpp",
         snippet: "main",
         steps: [
           {
-            hiddenLines: [20, 21, 22, 23, 24, 25],
-            placeholder: "        // 还没填",
-            focusLines: [16, 17, 18, 19],
-            expression: "第一步 · 读入数字三角形",
-            note: '先把输入读入 <code>a[i][j]</code>——<br>这是"原始数据"。<br>dp 数组还没填。',
+            hiddenLines: [10, 11, 12, 13, 14],
+            placeholder: "        // 后面逐步添加",
+            focusLines: [9],
+            expression: "第一步 · 外层枚举 a",
+            note: "先搭最外层——<br><code>for (int a = 1; a &lt;= n; a++)</code>——<br>枚举 a 从 1 到 n。",
           },
           {
-            hiddenLines: [21, 22, 23, 24, 25],
-            placeholder: "        // 还没填",
-            focusLines: [20],
-            expression: "第二步 · dp 边界",
-            note: '<code>dp[1][1] = a[1][1]</code>——<br>顶点只能"从顶到自己"。<br><br>这是递推的起点——<br>所有其他 dp[i][j] 都从它开始推。',
+            hiddenLines: [11, 12, 13, 14],
+            placeholder: "            // 后面逐步添加",
+            focusLines: [10],
+            expression: "第二步 · 内层枚举 b",
+            note: "<code>for (int b = a; b &lt;= n; b++)</code><br><b>从 a 开始</b>——<br>避免重复组合（3,4）和（4,3）。",
           },
           {
-            hiddenLines: [22, 23, 24, 25],
-            placeholder: "        // 还没填",
-            focusLines: [21],
-            expression: "第三步 · 逐行往下推",
-            note: "<code>for (int i = 1; i &lt;= n; i++)</code>——<br>从上往下——<br>一行一行推。",
-          },
-          {
-            hiddenLines: [23, 24, 25],
-            placeholder: "            // 还没填",
-            focusLines: [22],
-            expression: "第四步 · 递推公式",
-            note: '<code>dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + a[i][j];</code><br><br><b>核心</b>：<br>从"左上方"或"正上方"取最大值——<br>加上当前数字。<br><br>每填一个格子——<br>就有一个"从顶到它的最大和"。',
+            hiddenLines: [12, 13, 14],
+            placeholder: "            // 优化：c 不用枚举",
+            focusLines: [11],
+            expression: "第三步 · 优化：c 不用枚举",
+            note: "<b>关键优化</b>：<br>由 a² + b² = c²——<br><code>c = √(a² + b²)</code>——<br><b>直接算出来</b>，不用第三层循环。<br><br>O(n³) → O(n²)。",
           },
           {
             hiddenLines: [],
             placeholder: "",
-            focusLines: [27, 28, 29],
-            expression: "第五步 · 输出答案",
-            note: "<code>for (int j = 1; j &lt;= n; j++) ans = max(ans, dp[n][j]);</code><br><br>遍历最后一行——<br>取最大值——<br>就是从顶到底的最大路径和。<br><br><b>完整代码！</b>",
+            focusLines: [13],
+            expression: "第四步 · 验证 + 边界检查",
+            note: "<code>if (c * c == s &amp;&amp; c &lt;= n) count++;</code><br><br>两个条件：<br>① c 是整数（c² = a² + b²）<br>② c 不超范围（≤ n）<br><br><b>完整代码！</b>",
           },
         ],
         extra: {
-          title: '💡 数字三角形的"两个关键"',
-          desc: '<div><b>① 方向：从顶往下</b><br>为什么不是"从下往上"？<br>· 从顶往下——每个格子只依赖"上一行"<br>· 从下往上——每个格子依赖"下一行"<br>两者都对——但从顶往下更符合直觉。</div><div><b>② 递推顺序：按行填</b><br>第 i 行填完后——<br>才填第 i+1 行。<br>因为第 i+1 行需要第 i 行的结果。</div><div><b>📖 "填表法"</b><br>这种"一行一行填满二维数组"的方法——<br>叫<b>填表法</b>——<br>是 DP 最常用的实现方式。</div><div><b>对照代码看动画</b><br>每一步对应代码的哪一行？<br>下一屏的"代码生长"会展示。</div><div><b>🔮 伏笔</b><br>DP 表格填充动画（dp-table-animation）——<br>第 20 讲会正式用。</div>',
+          title: '💡 优化的"三个层次"',
+          desc: "<div><b>层次 1：能跑就行</b><br>先写朴素版——<br>哪怕 O(n³)——<br>先让代码正确。</div><div><b>层次 2：找到瓶颈</b><br>哪一层最耗时？<br>· 内层循环——优先优化<br>· 重复计算——用缓存</div><div><b>层次 3：数学/数据结构优化</b><br>· 用等式代替循环<br>· 用数学性质剪枝<br>· 用哈希表加速查找</div><div><b>核心态度</b><br><b>先正确，再快速。</b><br>先写出能过小数据的版本——<br>再想怎么优化大数据。</div><div><b>🔮 一句话</b><br>能用 O(n³) 解决的——<br>先用 O(n³) 写出来——<br>过不了再优化。</div>",
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 21 练习小结 ===== */
+    /* ===== 22 练习小结 ===== */
     {
-      id: 21,
+      id: 22,
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 17 讲 · 答疑",
+      chapterTag: "第 16 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题都做完了。" },
-          { who: "robot", text: "说说你的感受。" },
+          { who: "robot", text: "说说你的收获。" },
           {
             who: "student",
-            text: '练习 1 爬楼梯——<br>一开始没想到"最后一步分析"——<br>直接猜的 <code>f(n) = f(n-1) + f(n-2)</code>。',
+            text: '练习 1 因数成对——一次找两个——<br>感觉是"用数学优化枚举"。',
           },
           {
             who: "robot",
-            text: '猜也行——但<b>理解"最后一步分析"更重要</b>——<br>它是推导递推公式的通用方法。<br>遇到新题——<br>先问"最后一步可能是什么"。',
-          },
-          {
-            who: "student",
-            text: "练习 2 杨辉三角——<br>二维递推第一次写——<br>边界处理挺烦的。",
-          },
-          {
-            who: "robot",
-            text: '对。<b>二维递推的难点是"边界"</b>——<br>第一列和对角线要单独处理。<br>你画一下图就清楚了：<br>· 左边界的"左上方"不存在<br>· 右边界的"右上方"不存在<br>所以要手动填。',
+            text: '对。<b>因数是数论最基本的性质</b>——<br>掌握"成对出现"——<br>以后很多数论题都能用。',
           },
           {
             who: "student",
-            text: '练习 3 数字三角形——<br>一开始我定义 <code>dp[i][j]</code> = "从 (i,j) 到底部"的最大和——<br>结果写得挺复杂。',
+            text: '练习 2 用"无限循环 + break"——<br>我第一次写这种结构。',
           },
           {
             who: "robot",
-            text: '从下往上也能做——<br>但确实更复杂。<br><br><b>dp 定义的选择</b>——<br>是 DP 的核心技能。<br>同一个问题——<br>定义不同——<br>代码复杂度差很多。<br><br>建议：<br>· 优先"从顶往下"（如果可能）<br>· 边界简单、思路直接',
+            text: '这是<b>级数求和的经典模式</b>——<br>不知道"加多少项"——<br>用"误差足够小"作为停止条件。<br><br>数值计算里经常用。',
           },
-          { who: "student", text: "感觉 DP 和递推挺像的。" },
+          {
+            who: "student",
+            text: "练习 3 从 O(n³) 优化到 O(n²)——<br>感觉优化挺有成就感。",
+          },
           {
             who: "robot",
-            text: '对——<b>DP = 递推 + 状态设计</b>。<br>递推是"一个变量从前往后推"——<br>DP 是"多个维度一起推"。<br><br>下一讲 DP 会从今天的基础展开。',
+            text: '对。<b>优化 = 让代码跑得更快</b>——<br>也是竞赛的核心技能。<br><br>你学会的"三步走"：<br>① 先写朴素版<br>② 找瓶颈<br>③ 用数学/数据结构优化<br><br>这个思路比具体的算法更重要。',
+          },
+          { who: "student", text: "那以后遇到枚举题——我都试试优化？" },
+          {
+            who: "robot",
+            text: "看数据范围：<br>· n ≤ 1000 → 朴素枚举就行<br>· n ≤ 10⁵ → 需要 O(n log n) 或 O(n²)<br>· n ≥ 10⁶ → 必须 O(n log n) 以下<br><br><b>先看数据，再决定要不要优化。</b>",
           },
         ],
         extra: {
           title: "💡 三道练习的核心",
-          desc: '<div><b>练习 1（爬楼梯）</b><br>"最后一步分析"——<br>推导递推公式的万能钥匙。</div><div><b>练习 2（杨辉三角）</b><br>二维递推——<br>边界单独处理。</div><div><b>练习 3（数字三角形）</b><br>dp 定义选择——<br>从顶往下 vs 从下往上。</div><div><b>通用套路</b><br>① 找子问题<br>② 定 dp 数组<br>③ 写递推公式<br>④ 处理边界<br>⑤ 输出答案</div>',
+          desc: "<div><b>练习 1（因数个数）</b><br>因数成对——<br>枚举到 √n 就够。</div><div><b>练习 2（e 的近似）</b><br>级数求和——<br>无限循环 + break 模式。</div><div><b>练习 3（勾股数）</b><br>枚举优化——<br>等式关系代替第三层循环。</div><div><b>通用套路</b><br>① 先想枚举范围<br>② 再想判定条件<br>③ 最后想优化方向</div>",
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 22 初赛渗透 ===== */
+    /* ===== 23 初赛渗透 ===== */
     {
-      id: 22,
+      id: 23,
       type: "dialog",
-      title: "初赛小知识：递推与数列",
+      title: "初赛小知识：循环次数的估算",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 17 讲 · 初赛渗透",
+      chapterTag: "第 16 讲 · 初赛渗透",
       data: {
         lines: [
-          { who: "student", text: "小 C，初赛会考递推吗？" },
+          { who: "student", text: "小 C，初赛会考枚举吗？" },
           {
             who: "robot",
-            text: '会。常考"<b>递推数列</b>"——<br>给递推关系——<br>求第 n 项的值。',
+            text: '会。常考"循环执行次数"——<br>和"算法效率判断"。',
           },
-          { who: "student", text: "怎么算？" },
+          { who: "student", text: "怎么算次数？" },
           {
             who: "robot",
-            text: '两种方法：<br>① <b>手推</b>——从前几项开始，逐项算<br>② <b>公式</b>——如果知道通项公式，直接代<br><br>初赛通常用"手推"——<br>给递推关系，让你推前几项。',
+            text: "· <b>单层 for</b>：n 次<br>· <b>两层嵌套</b>：n × n = n² 次<br>· <b>三层嵌套</b>：n³ 次<br>· <b>除法下降</b>：n + n/2 + n/4 + ... ≈ 2n<br>· <b>根号循环</b>：√n 次",
           },
-          { who: "student", text: "有经典例子吗？" },
+          { who: "student", text: "那效率判断呢？" },
           {
             who: "robot",
-            text: "有。几个必背：<br>· <b>斐波那契</b>：1, 1, 2, 3, 5, 8, 13, 21, ...<br>· <b>等差数列</b>：a(n) = a(n-1) + d<br>· <b>等比数列</b>：a(n) = a(n-1) × q<br>· <b>汉诺塔</b>：H(n) = 2H(n-1) + 1<br>· <b>卡特兰数</b>：C(n) = C(n-1) × (4n-2) / (n+1)",
+            text: "看数字对应：<br>· 10⁶ 次 → 没问题（&lt; 0.01 秒）<br>· 10⁷ 次 → 还行（0.1 秒）<br>· 10⁸ 次 → 接近 1 秒<br>· 10⁹ 次 → 超时（TLE）<br><br>所以看到 n ≤ 10³ 的题——O(n³) 能过。<br>n ≤ 10⁵ 的题——必须 O(n log n) 以下。",
           },
-          { who: "student", text: "那还有别的考点吗？" },
+          { who: "student", text: "有什么陷阱？" },
           {
             who: "robot",
-            text: '还有"递推 vs 递归"的对比——<br>· 递推：从前往后、循环实现<br>· 递归：从后往前、函数自调<br><br>以及"递推复杂度"——<br>大多数递推是 O(n) 时间。<br><br>这些初赛都常考。',
-          },
-          { who: "student", text: "那我怎么练？" },
-          {
-            who: "robot",
-            text: '做初赛真题里"递推数列"的题——<br>把前 5—10 项手推一遍——<br>找规律——<br>记常见数列。',
+            text: '有。<br>· <code>for (i = 1; i * i &lt;= n; i++)</code>——次数是 √n 不是 n<br>· <code>for (i = 1; i &lt;= n; i *= 2)</code>——次数是 log₂ n<br>· 双重循环 + 内层次数变化——要逐层求和<br><br>这些"非标准循环"是初赛重点。',
           },
         ],
         extra: {
-          title: "📖 初赛常见递推数列",
-          desc: '<div><b>必背数列</b></div><div><b>① 斐波那契</b><br>1, 1, 2, 3, 5, 8, 13, 21, 34, 55<br>a(n) = a(n-1) + a(n-2)</div><div><b>② 汉诺塔移动次数</b><br>1, 3, 7, 15, 31, 63<br>H(n) = 2H(n-1) + 1<br>通项：H(n) = 2ⁿ - 1</div><div><b>③ 卡特兰数</b><br>1, 1, 2, 5, 14, 42, 132<br>应用：合法括号数、二叉树形态数<br>递推：C(n) = Σ C(i) × C(n-1-i)</div><div><b>④ 等差数列</b><br>a(n) = a(1) + (n-1)d<br>前 n 项和 = n(a1+an)/2</div><div><b>⑤ 等比数列</b><br>a(n) = a(1) × q^(n-1)<br>前 n 项和 = a1(1-qⁿ)/(1-q)</div><div><b>🔮 伏笔</b><br>卡特兰数在第 40 讲"排列组合"会详讲——<br>汉诺塔在第 9 讲递归里讲过。</div>',
+          title: "📖 初赛循环次数速查",
+          desc: '<div><b>标准循环</b><br><code>for (i=0; i&lt;n; i++)</code> → n 次<br><code>for (i=1; i&lt;=n; i++)</code> → n 次<br><code>for (i=1; i&lt;n; i++)</code> → n-1 次</div><div><b>非标准循环</b><br><code>for (i=1; i*i&lt;=n; i++)</code> → √n 次<br><code>for (i=1; i&lt;=n; i*=2)</code> → ⌈log₂n⌉ 次<br><code>for (i=n; i&gt;=1; i/=2)</code> → ⌈log₂n⌉ 次</div><div><b>嵌套循环</b><br>外层 n 次 + 内层 n 次 → n² 次<br>外层 n 次 + 内层 i 次（i 从 1 到 n）→ n(n+1)/2 次</div><div><b>估算 1 秒能跑多少次</b><br>C++ 约 10⁸ 次/秒<br>所以：<br>· 10⁶ 次 → 0.01 秒<br>· 10⁷ 次 → 0.1 秒<br>· 10⁸ 次 → 1 秒<br>· 10⁹ 次 → 10 秒（超时）</div><div><b>🔮 伏笔</b><br>复杂度分析是第 36 讲的主题——<br>今天先建立"估算"的直觉。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 23 课堂小测 ===== */
+    /* ===== 24 课堂小测 ===== */
     {
-      id: 23,
+      id: 24,
       type: "quiz",
       title: "课堂小测",
-      subtitle: "递推、斐波那契与杨辉三角",
-      chapterTag: "第 17 讲 · 课堂小测",
+      subtitle: "枚举、模拟与循环次数",
+      chapterTag: "第 16 讲 · 课堂小测",
       data: {
         questions: [
           {
             id: 1,
             type: "single",
             difficulty: 2,
-            source: "CSP-J 初赛真题练习 · 递推",
-            question:
-              "斐波那契数列的第 10 项是多少？<br>（f(1) = 1, f(2) = 1, f(n) = f(n-1) + f(n-2)）",
+            source: "CSP-J 初赛真题练习 · 枚举",
+            question: "下面代码的执行次数是？",
+            questionCode: `for (int i = 1; i <= n; i++)
+    for (int j = 1; j <= n; j++)
+        sum++;`,
             options: [
-              { label: "A", text: "34" },
-              { label: "B", text: "55", correct: true },
-              { label: "C", text: "89" },
-              { label: "D", text: "144" },
+              { label: "A", text: "n 次" },
+              { label: "B", text: "n² 次", correct: true },
+              { label: "C", text: "2n 次" },
+              { label: "D", text: "n/2 次" },
             ],
             analysis:
-              "逐项推：<br>1, 1, 2, 3, 5, 8, 13, 21, <b>34, 55</b><br>第 10 项 = <b>55</b>。<br><br>初赛常考——<br>记住前 10 项就能秒答。",
+              '两层嵌套——<br>外层 n 次 × 内层 n 次 = <b>n² 次</b>。<br><br>这是最基础的"嵌套循环次数"题。',
           },
           {
             id: 2,
             type: "single",
-            difficulty: 3,
-            source: "C++ 信息学奥赛总复习题 · 递推",
-            question: "递推解斐波那契 vs 递归解斐波那契，哪个更快？",
+            difficulty: 2,
+            source: "C++ 信息学奥赛总复习题 · 枚举",
+            question: "判断质数时，只需枚举到多少就能判断？",
             options: [
-              { label: "A", text: "递归更快" },
-              { label: "B", text: "递推更快", correct: true },
-              { label: "C", text: "一样快" },
-              { label: "D", text: "看情况" },
+              { label: "A", text: "n" },
+              { label: "B", text: "n/2" },
+              { label: "C", text: "√n", correct: true },
+              { label: "D", text: "log n" },
             ],
             analysis:
-              "· <b>递推</b>：O(n)——每项只算一次<br>· <b>递归</b>：O(2ⁿ)——每项重复算多次<br><br>n = 40 时：<br>· 递推：40 次<br>· 递归：约 3 亿次——<b>慢 800 万倍</b>！",
+              '如果 n = a × b（a ≤ b）——<br>那么 a ≤ √n——<br>所以只需试到 √n。<br><br>这是"枚举优化"的经典例子——<br>O(n) → O(√n)。',
           },
           {
             id: 3,
             type: "single",
             difficulty: 3,
-            source: "CSP-J 2021 初赛模拟题 · 递推",
-            question:
-              "爬楼梯问题：n 级台阶，每次爬 1 级或 2 级。<br>爬到第 4 级有几种方法？",
+            source: "CSP-J 2021 初赛模拟题 · 循环次数",
+            question: "下面代码的执行次数约为？",
+            questionCode: `for (int i = 1; i * i <= n; i++)
+    cout << i;`,
             options: [
-              { label: "A", text: "3" },
-              { label: "B", text: "5", correct: true },
-              { label: "C", text: "8" },
-              { label: "D", text: "13" },
+              { label: "A", text: "n 次" },
+              { label: "B", text: "√n 次", correct: true },
+              { label: "C", text: "n² 次" },
+              { label: "D", text: "log n 次" },
             ],
             analysis:
-              '手推：<br>· 第 1 级：1 种<br>· 第 2 级：2 种（1+1、2）<br>· 第 3 级：3 种<br>· 第 4 级：<b>5 种</b><br><br>规律：<code>f(n) = f(n-1) + f(n-2)</code>——<br>就是"偏移一位"的斐波那契。<br><br>第 4 级 = 3 + 2 = 5。',
+              "<code>i * i &lt;= n</code> 等价于 <code>i &lt;= √n</code>——<br>所以 i 从 1 到 √n——<br>共 <b>√n 次</b>。<br><br>初赛高频题型。",
           },
           {
             id: 4,
-            type: "single",
-            difficulty: 3,
-            source: "CSP-J 初赛真题练习 · 递推",
-            question: "汉诺塔问题：n 个盘子从 A 移到 C，最少移动多少次？",
-            options: [
-              { label: "A", text: "n" },
-              { label: "B", text: "2n" },
-              { label: "C", text: "2ⁿ - 1", correct: true },
-              { label: "D", text: "n²" },
-            ],
-            analysis:
-              '递推关系：<br><code>H(n) = 2H(n-1) + 1</code>，<code>H(1) = 1</code><br><br>展开：<br>H(1) = 1 = 2¹ - 1<br>H(2) = 3 = 2² - 1<br>H(3) = 7 = 2³ - 1<br>...<br>H(n) = <b>2ⁿ - 1</b><br><br>这是第 9 讲"汉诺塔"的递推形式。',
-          },
-          {
-            id: 5,
             type: "judge",
             difficulty: 2,
-            source: "CSP-J 初赛真题练习 · 递推",
-            question: "递推和递归的结果总是相同的。",
+            source: "CSP-J 初赛真题练习 · 枚举",
+            question: "枚举法一定能保证找到正确答案，但可能很慢。",
             options: [
               { label: "A", text: "正确", correct: true },
               { label: "B", text: "错误" },
             ],
             analysis:
-              '递推和递归是"同一问题的两种实现"——<br>结果相同——<br>但效率、空间、写法不同。<br><br>递推通常快得多——<br>但有些问题（如树遍历）<br>递归写法更自然。<br><br><b>选择</b>：<br>· 线性递推 → 递推<br>· 递归结构 → 递归',
+              '枚举法会"遍历所有可能"——<br>所以<b>正确性容易保证</b>——<br>不会漏解。<br><br>但枚举次数多时——<br>可能超时（TLE）。<br><br>这是"暴力"的"优点"和"缺点"。',
+          },
+          {
+            id: 5,
+            type: "judge",
+            difficulty: 3,
+            source: "CSP-J 初赛真题练习 · 复杂度",
+            question: "C++ 程序 1 秒通常能执行约 10⁸ 次基本操作。",
+            options: [
+              { label: "A", text: "正确", correct: true },
+              { label: "B", text: "错误" },
+            ],
+            analysis:
+              "现代 CPU 每秒能执行约 <b>10⁸—10⁹</b> 次简单操作。<br>竞赛中通常按 <b>10⁸</b> 估算——<br>保守估计更安全。<br><br><b>应用</b>：<br>· n = 10³ 时 O(n³) = 10⁹ 次——超时<br>· n = 10⁴ 时 O(n²) = 10⁸ 次——边缘<br>· n = 10⁵ 时 O(n log n) ≈ 1.7 × 10⁶ 次——安全",
           },
         ],
         extra: {
-          title: '📖 知识扩展 · 递推与"数学归纳法"',
-          desc: '<div><b>数学归纳法</b>：<br>① 证明 n=1 成立（基础）<br>② 假设 n=k 成立，证明 n=k+1 也成立（递推）<br>③ 结论：所有 n 都成立</div><div><b>递推的"数学基础"</b><br>递推就是"数学归纳法"的计算机实现——<br>· 初始值 = 基础<br>· 递推关系 = 递推步<br>· 循环计算 = 从基础到 n</div><div><b>📖 学以致用</b><br>做递推题时——<br>先想"数学归纳法"：<br>· 最基础的情况是什么？<br>· 从 k 到 k+1 怎么变？</div><div><b>🔮 伏笔</b><br>数学归纳法的"递推步"——<br>就是 DP 的"状态转移"——<br>第 20 讲 DP 会详讲。</div>',
+          title: "📖 知识扩展 · 枚举与搜索的关系",
+          desc: '<div><b>枚举</b>：遍历所有"可能的答案"——<br>是一种"试答案"的方法。</div><div><b>搜索（DFS/BFS）</b>：遍历所有"可能的路径"——<br>是一种"试路径"的方法。</div><div><b>关系</b>：<br>· 搜索是"枚举"的一种——<br>&nbsp;&nbsp;枚举"状态空间"<br>· 枚举适合"独立变量"——<br>&nbsp;&nbsp;如 a、b、c 三个数<br>· 搜索适合"递进决策"——<br>&nbsp;&nbsp;如"选或不选"、"走左或走右"</div><div><b>例子对比</b><br>· 枚举"三个数的组合"——<br>&nbsp;&nbsp;三重 for 循环<br>· 搜索"从 n 个数选 k 个"——<br>&nbsp;&nbsp;DFS 递归</div><div><b>🔮 伏笔</b><br>搜索进阶——<br>第 43/44/45 讲讲。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 24 今日总结 ===== */
+    /* ===== 25 今日总结 ===== */
     {
-      id: 24,
+      id: 25,
       type: "quote",
       title: "今日总结",
       subtitle: "今天我们学会了",
       data: {
-        text: '递推是用"已知"推"未知"——像多米诺骨牌。',
-        author: "—— 递推第一课",
+        text: "暴力也是一种算法——先能枚举，再想优化。",
+        author: "—— 枚举第一课",
         points: [
-          "递推 = 用前面的值算后面的值",
-          "递推三要素：初始值、递推关系、顺序",
-          "斐波那契：f(n) = f(n-1) + f(n-2)",
-          "递推比递归快得多（O(n) vs O(2ⁿ)）",
-          "杨辉三角：二维递推",
-          "爬楼梯：最后一步分析",
+          "枚举 = 一个个试——简单可靠",
+          "枚举三要素：对象、范围、判定",
+          "优化枚举：缩小范围、提前 break、数学剪枝",
+          "模拟 = 把规则翻译成代码",
+          "日期模拟：闰年 + 逐级进位",
+          "复杂度估算：10⁸ 次/秒",
         ],
         highlight: {
           title: "📌 关键口诀",
-          desc: "递推三要素，一个不能少；初始值打底，递推公式算；顺序从前往后，滚动省空间；递推快递归慢，能递推就递推。",
+          desc: "枚举不怕笨，正确是第一；范围要精确，内层要从上；质数试到根，优化省时间；模拟靠细心，边界要记清。",
         },
         extra: {
-          title: "💡 递推：DP 的入门",
-          desc: '<div>今天你学会了"用已知推未知"——<br>这是算法世界最重要的思想之一。</div><div><b>递推的应用</b><br>· 斐波那契、杨辉三角<br>· 爬楼梯、数字三角形<br>· 排列组合计数<br>· 概率计算</div><div><b>递推的哲学</b><br>不是"从零开始"——<br>而是"站在前人的肩上"。<br>每一步都基于前面的结果——<br>这就是"递推"的智慧。</div><div>🔮 <b>伏笔</b>：<br>· 简单 DP（01 背包）——第 20 讲<br>· 数学归纳法——数学课<br>· 卡特兰数——第 40 讲</div>',
+          title: "💡 暴力思维的哲学",
+          desc: '<div><b>暴力不是"笨"</b>——<br>它是"最可靠"的方法。</div><div><b>暴力 vs 聪明算法</b><br>· 暴力：正确性高、代码简单、数据小时够用<br>· 聪明算法：性能好、但需要"想到"</div><div><b>竞赛策略</b><br>先想暴力——<br>暴力过了——收工；<br>暴力过不了——再想优化。</div><div><b>📖 数学家的名言</b><br>"先猜想，再证明。"——<br>算法世界对应：<br>"先暴力，再优化。"</div><div>🔮 <b>伏笔</b>：<br>· 递推——第 17 讲<br>· 贪心——第 18 讲<br>· 搜索与剪枝——第 45 讲<br>· 复杂度分析——第 36 讲</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 25 课后作业 ===== */
+    /* ===== 26 课后作业 ===== */
     {
-      id: 25,
+      id: 26,
       type: "grid",
       title: "课后作业 · OJ 实战",
       subtitle: "打开洛谷，完成以下 3 道题",
@@ -946,21 +912,21 @@ export default {
         cards: [
           {
             icon: "🟢",
-            title: "基础 1 · P1255",
-            link: "https://www.luogu.com.cn/problem/P1255",
-            desc: "<b>数楼梯</b><br>考察：递推 + 高精度<br>难度：★★★<br>目标：爬楼梯的加强版",
+            title: "基础 1 · B2070",
+            link: "https://www.luogu.com.cn/problem/B2070",
+            desc: "<b>计算分数加减表达式的值</b><br>考察：模拟计算<br>难度：★<br>目标：按规则累加分数",
           },
           {
             icon: "🟢",
-            title: "基础 2 · P1002",
-            link: "https://www.luogu.com.cn/problem/P1002",
-            desc: "<b>过河卒</b><br>考察：二维递推 + 计数<br>难度：★★★<br>目标：统计从起点到终点的路径数",
+            title: "基础 2 · B2078",
+            link: "https://www.luogu.com.cn/problem/B2078",
+            desc: "<b>含 k 个 3 的数</b><br>考察：枚举 + 数位拆分<br>难度：★★<br>目标：枚举 1 到 n，统计含有 k 个 3 的数",
           },
           {
             icon: "🔴",
-            title: "挑战 · P1216",
-            link: "https://www.luogu.com.cn/problem/P1216",
-            desc: "<b>数字三角形 Number Triangles</b><br>考察：DP 入门<br>难度：★★★<br>目标：数字三角形最大值",
+            title: "挑战 · B2109",
+            link: "https://www.luogu.com.cn/problem/B2109",
+            desc: "<b>统计数字字符个数</b><br>考察：枚举 + 字符判断<br>难度：★★<br>目标：读入一行，统计数字字符数量",
           },
         ],
         extra: {
@@ -971,165 +937,127 @@ export default {
       },
     },
 
-    /* ===== 26 下节预告 ===== */
+    /* ===== 27 下节预告 ===== */
     {
-      id: 26,
+      id: 27,
       type: "radial",
       title: "下节预告",
-      subtitle: "第 18 讲 · 贪心入门",
+      subtitle: "第 17 讲 · 递推",
       data: {
-        center: "贪心",
+        center: "递推",
         items: [
-          { text: "贪心思想" },
-          { text: "区间调度" },
-          { text: "排序贪心" },
-          { text: "正确性证明" },
+          { text: "递推关系" },
+          { text: "杨辉三角" },
+          { text: "递推 vs 递归" },
+          { text: "斐波那契优化" },
         ],
         extra: {
-          title: "💡 每次都选最好",
-          desc: '<div>递推是"用前面的推后面的"——<br>但如果每步都能"选最好的"呢？<br>那就不需要推所有可能。</div><div>比如"看电影"——<br>同一时间段有很多电影——<br>怎么选最多的场次？<br>答案是"每次选结束最早的"——<br>这就是<b>贪心</b>。</div><div>下一讲，我们学习贪心——<br>用"局部最优"达到"全局最优"。</div><div>🔮 <b>远期彩蛋</b>：<br>贪心不是万能的——<br>有些题"贪心会错"——<br>需要 DP 才能解。</div>',
+          title: "💡 一步一步往前走",
+          desc: '<div>枚举是"一个个试"——<br>但如果"每个结果都能从上一个推出来"呢？<br>那就不需要枚举了。</div><div>比如斐波那契——<br>f(n) = f(n-1) + f(n-2)——<br>从前往后"递推"——<br>O(n) 就算完。</div><div>下一讲，我们学习<b>递推</b>——<br>用"已知"推"未知"。</div><div>🔮 <b>远期彩蛋</b>：<br>递推的进阶就是 DP——<br>第 20 讲讲。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 27 答疑时间 ===== */
+    /* ===== 28 答疑时间 ===== */
     {
-      id: 27,
+      id: 28,
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 17 讲 · 答疑",
+      chapterTag: "第 16 讲 · 答疑",
       data: {
         lines: [
-          { who: "student", text: "递推和 DP 有什么区别？" },
+          { who: "student", text: "枚举什么时候会超时？" },
           {
             who: "robot",
-            text: '递推是"一维的从前往后推"——<br>DP 是"多维的、有状态设计的推"。<br><br>递推是 DP 的基础——<br>DP 是递推的进阶。',
+            text: "看枚举次数——<br>超过 10⁸ 次基本就危险了。<br><br>估算方法：<br>· 单层 O(n)——n ≤ 10⁷ 安全<br>· 两层 O(n²)——n ≤ 10⁴ 安全<br>· 三层 O(n³)——n ≤ 400 安全<br><br>不够就优化。",
           },
-          { who: "student", text: "那什么时候用递推？" },
+          { who: "student", text: "那怎么知道要不要优化？" },
           {
             who: "robot",
-            text: '看到"每项能从前面算出来"——<br>就用递推。<br><br>判断标准：<br>· 有明确的"前驱"关系<br>· 不需要枚举所有可能<br>· 只需要"一步步往前推"',
+            text: '① 看题目数据范围<br>② 算枚举次数<br>③ 超过 10⁸ 就优化<br><br>不要"还没试就优化"——<br>先写朴素版，跑一下小数据。<br>有可能朴素版就过了。',
           },
-          { who: "student", text: "那什么时候用递归？" },
+          { who: "student", text: "模拟题有什么技巧？" },
           {
             who: "robot",
-            text: '结构本身是"嵌套的"——<br>比如树、图——<br>递归写起来更自然。<br><br>但纯线性问题（如斐波那契）——<br>用递推更快。',
+            text: '三个：<br>① <b>先用伪代码列步骤</b>——<br>把题目翻译成"1、2、3……"<br>② <b>枚举边界情况</b>——<br>月末、年末、负数、0<br>③ <b>用小数据手工测试</b>——<br>样例必过',
           },
-          { who: "student", text: "那 memory 化的递归和递推一样吗？" },
+          { who: "student", text: "剪枝很难吗？" },
           {
             who: "robot",
-            text: "结果一样——但实现方式不同：<br>· 记忆化递归：从后往前——<br>&nbsp;&nbsp;遇到算过的直接取<br>· 递推：从前往后——<br>&nbsp;&nbsp;按顺序算所有<br><br>两者都是 O(n) 时间——<br>但递归有栈开销——<br>递推更省内存。",
+            text: '不难——但需要"想到"。<br>剪枝的核心是"用数学排除不可能"。<br>比如勾股数里——<br>a 越来越大后——<br>a² 超过 n² 后就没必要继续——<br>break。<br><br>多做几道题——<br>你就能"看到题目就想到怎么剪枝"。',
           },
-          { who: "student", text: "那有些题只能用递归？" },
+          { who: "student", text: "枚举和搜索有什么区别？" },
           {
             who: "robot",
-            text: '对——比如：<br>· 树遍历<br>· 图的 DFS<br>· 分治算法<br><br>这些"天然递归"的问题——<br>用递归最自然。<br>强行改成递推反而复杂。',
+            text: '枚举：遍历"答案"——<br>如三重 for 枚举 a、b、c。<br><br>搜索：遍历"决策路径"——<br>如 DFS 选或不选。<br><br>搜索是"枚举状态空间"的更高级形式——<br>第 43 讲讲。',
           },
         ],
         extra: {
           title: "📌 一个建议",
-          desc: '<div>递推是算法的基础——<br>至少要写 <b>15 道递推题</b>才能熟练。</div><div><b>练习建议</b>：<br>· 先练 5 道"线性递推"（斐波那契类）<br>· 再练 5 道"二维递推"（杨辉三角、数字三角形）<br>· 最后练 5 道"递推计数"（爬楼梯、过河卒）</div><div><b>15 道练下来</b>——<br>递推就内化了。<br>下一步就能学 DP。</div>',
+          desc: '<div>枚举是竞赛的"<b>保底技能</b>"——<br>至少写 <b>20 道枚举题</b>。</div><div><b>练习建议</b>：<br>· 先练 5 道基础枚举<br>· 再练 5 道嵌套枚举<br>· 再练 5 道模拟题<br>· 最后练 5 道"枚举 + 优化"</div><div><b>20 道练下来</b>——<br>枚举就内化了。</div>',
           variant: "card-primary",
         },
       },
     },
 
-    /* ===== 28 本讲英文单词 ===== */
+    /* ===== 29 本讲英文单词 ===== */
     {
-      id: 28,
+      id: 29,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 17 讲 · 复习",
+      chapterTag: "第 16 讲 · 复习",
       data: {
         words: [
           {
-            word: "recursion",
-            cn: "递归",
-            pron: "/rɪˈkɜːrʒn/",
-            origin: '英文原意"跑回来"',
+            word: "enumerate",
+            cn: "枚举",
+            pron: "/ɪˈnjuːməreɪt/",
+            origin: 'e（出）+ numerus（数）——"数出来"',
             category: "概念",
           },
           {
-            word: "iteration",
-            cn: "迭代",
-            pron: "/ˌɪtəˈreɪʃn/",
-            origin: '英文原意"重复"',
+            word: "brute force",
+            cn: "暴力",
+            pron: "/bruːt fɔːrs/",
+            origin: "brute（蛮力）+ force（力量）",
             category: "概念",
           },
           {
-            word: "sequence",
-            cn: "序列",
-            pron: "/ˈsiːkwəns/",
-            origin: '英文原意"连续、顺序"',
+            word: "simulation",
+            cn: "模拟",
+            pron: "/ˌsɪmjuˈleɪʃn/",
+            origin: '英文原意"模仿、假装"',
             category: "概念",
           },
           {
-            word: "Fibonacci",
-            cn: "斐波那契",
-            pron: "/ˌfiːbəˈnɑːtʃi/",
-            origin: "意大利数学家名字",
+            word: "divisor",
+            cn: "因数",
+            pron: "/dɪˈvaɪzər/",
+            origin: 'divide（除）+ or——"能除的数"',
             category: "概念",
           },
           {
-            word: "triangle",
-            cn: "三角形",
-            pron: "/ˈtraɪæŋɡl/",
-            origin: "tri（三）+ angle（角）",
+            word: "prime",
+            cn: "质数",
+            pron: "/praɪm/",
+            origin: '英文原意"最初的、基本的"',
             category: "概念",
           },
           {
-            word: "pascal",
-            cn: "帕斯卡",
-            pron: "/pæˈskæl/",
-            origin: "法国数学家名字",
+            word: "narcissistic",
+            cn: "水仙花的",
+            pron: "/ˌnɑːrsɪˈsɪstɪk/",
+            origin: '希腊神话"自恋"——Narcissus',
             category: "概念",
           },
         ],
         extra: {
-          title: "💡 记忆法 · 递推相关词汇",
-          desc: '<div><b>核心概念</b><br><code>recursion</code> = 递归（函数自调）<br><code>iteration</code> = 迭代（循环推进）<br><code>sequence</code> = 序列（递推的对象）</div><div><b>人名</b><br><code>Fibonacci</code> = 斐波那契<br><code>Pascal</code> = 帕斯卡</div><div><b>其他</b><br><code>triangle</code> = 三角形<br>（杨辉三角 = Pascal\'s Triangle）</div><div><b>易错拼写</b><br>· <code>recursion</code>——r-e-c-u-r-s-i-o-n<br>· <code>iteration</code>——i-t-e-r-a-t-i-o-n<br>· <code>sequence</code>——s-e-q-u-e-n-c-e</div><div><b>发音提示</b><br><code>Fibonacci</code> 重音在第三音节——"fee-buh-NAH-chee"。<br><code>Pascal</code> 读"pas-KAL"，注意重音在后。</div>',
+          title: "💡 记忆法 · 枚举相关词汇",
+          desc: '<div><b>核心概念</b><br><code>enumerate</code> = 枚举<br><code>brute force</code> = 暴力<br><code>simulation</code> = 模拟</div><div><b>数学概念</b><br><code>divisor</code> = 因数<br><code>prime</code> = 质数</div><div><b>文化词</b><br><code>narcissistic</code> = 水仙花的<br>来自希腊神话 Narcissus——<br>一位爱上自己倒影的少年。<br>水仙花数（自恋数）= 只爱自己各位数字的数。</div><div><b>易错拼写</b><br>· <code>enumerate</code> 不是 "enumarate"<br>· <code>simulation</code> 中间是 "mu" 不是 "um"<br>· <code>narcissistic</code> 两个 s、两个 c</div><div><b>发音提示</b><br><code>enumerate</code> 重音在第二音节——"ih-NOO-muh-rayt"。</div>',
           variant: "card-primary",
-        },
-      },
-    },
-
-    /* ===== 29 知识清单 ===== */
-    {
-      id: 29,
-      type: "grid",
-      title: "第 17 讲 · 知识清单",
-      subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 17 讲 · 复习",
-      data: {
-        cards: [
-          {
-            icon: "🎯",
-            title: "递推思想",
-            desc: "<b>本质</b>：用已知推未知<br><b>比喻</b>：多米诺骨牌<br><b>三要素</b>：初始值、递推公式、顺序<br><b>对比</b>：递推快，递归慢",
-          },
-          {
-            icon: "🔢",
-            title: "斐波那契",
-            desc: "<b>公式</b>：f(n) = f(n-1) + f(n-2)<br><b>初始</b>：f(1)=1, f(2)=1<br><b>数列</b>：1,1,2,3,5,8,13,21...<br><b>应用</b>：爬楼梯、过河卒",
-          },
-          {
-            icon: "📐",
-            title: "杨辉三角",
-            desc: "<b>公式</b>：a[i][j] = a[i-1][j-1] + a[i-1][j]<br><b>边界</b>：第一列、对角线 = 1<br><b>本质</b>：组合数 C(n,k)<br><b>应用</b>：排列组合",
-          },
-          {
-            icon: "🪜",
-            title: "递推应用",
-            desc: "<b>爬楼梯</b>：最后一步分析<br><b>数字三角形</b>：从顶往下推<br><b>数列求和</b>：级数累加<br><b>核心</b>：找前驱 + 写公式",
-          },
-        ],
-        extra: {
-          title: "📌 关键口诀 + 挑战题单",
-          desc: '<div><b>口诀</b><br>递推三要素，一个不能少；<br>初始值打底，递推公式算；<br>顺序从前往后，滚动省空间；<br>递推快递归慢，能递推就递推。</div><div><b>📌 挑战题单</b><br>⭐ 基础：P1255 数楼梯<br>⭐⭐ 进阶：P1002 过河卒<br>⭐⭐⭐ 挑战：P1216 数字三角形 Number Triangles<br>🔗 延伸：洛谷搜索"递推"，挑 3 道入门题练手。</div><div><b>小 C 彩蛋</b><br>递推数列的研究可以追溯到 <b>1202 年</b>——<br>斐波那契在《计算之书》里提出了兔子问题。<br>800 多年后，这个数列还在启发数学家——<br>它甚至出现在电影《达芬奇密码》里。<br><b>你学的递推，延续着 800 年的数学智慧。</b></div>',
-          variant: "card-glow",
         },
       },
     },
@@ -1138,14 +1066,14 @@ export default {
     {
       id: 30,
       type: "ending",
-      title: "第十七讲结束",
+      title: "第十六讲结束",
       subtitle: "点击返回目录，复习本讲内容",
       chapterTag: false,
       data: {
         slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题",
         extra: {
-          title: '🌟 你学会了"多米诺"思维',
-          desc: '<div>从"一个个试"到"用已知推未知"——<br>你的算法思维又前进了一大步。</div><div><b>递推是 DP 的入门</b>——<br>掌握它，你就能学"动态规划"了。</div><div>下一讲，我们学习"贪心"——<br>用"局部最优"达到"全局最优"。</div><div><b>算法世界，越来越精彩。</b></div>',
+          title: '🌟 你学会了"暴力"的智慧',
+          desc: '<div>枚举看似"笨"——<br>但它是最可靠、最基础的方法。</div><div>从今天起——<br>遇到问题先想"能不能枚举"——<br>再想"怎么优化"。</div><div><b>先暴力，再优化</b>——<br>这是竞赛的黄金法则。</div><div>下一讲，我们学习"递推"——<br>用"已知"推"未知"。</div>',
           variant: "card-glow",
         },
       },

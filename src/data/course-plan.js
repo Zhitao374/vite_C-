@@ -54,7 +54,7 @@ export default [
   },
 
   {
-    id: "05",
+    id: "06",
     stage: "编程基础",
     title: "循环结构",
     subtitle: "让程序学会重复",
@@ -66,7 +66,7 @@ export default [
   },
 
   {
-    id: "06",
+    id: "07",
     stage: "编程基础",
     title: "一维数组",
     subtitle: "一排储物柜，批量装数据",
@@ -78,7 +78,7 @@ export default [
   },
 
   {
-    id: "07",
+    id: "08",
     stage: "编程基础",
     title: "字符串基础",
     subtitle: "一串字符的容器",
@@ -90,7 +90,7 @@ export default [
   },
 
   {
-    id: "08",
+    id: "09",
     stage: "编程基础",
     title: "函数",
     subtitle: "让代码可以复用",
@@ -102,7 +102,7 @@ export default [
   },
 
   {
-    id: "09",
+    id: "10",
     stage: "编程基础",
     title: "递归",
     subtitle: "函数调用自己",
@@ -114,7 +114,7 @@ export default [
   },
 
   {
-    id: "10",
+    id: "11",
     stage: "编程基础",
     title: "阶段实战",
     subtitle: "第一阶段模拟赛",
@@ -127,7 +127,7 @@ export default [
 
   /* ========== 阶段二：算法入门（11—24） ========== */
   {
-    id: "11",
+    id: "12",
     stage: "算法入门",
     title: "二维数组",
     subtitle: "数组的数组，表格的世界",
@@ -139,7 +139,7 @@ export default [
   },
 
   {
-    id: "12",
+    id: "13",
     stage: "算法入门",
     title: "字符串进阶",
     subtitle: "打开字符串的工具箱",
@@ -151,7 +151,7 @@ export default [
   },
 
   {
-    id: "13",
+    id: "14",
     stage: "算法入门",
     title: "排序基础",
     subtitle: "让数据排好队",
@@ -163,7 +163,7 @@ export default [
   },
 
   {
-    id: "14",
+    id: "15",
     stage: "算法入门",
     title: "排序进阶与 STL",
     subtitle: "一行代码的排序",
@@ -175,7 +175,7 @@ export default [
   },
 
   {
-    id: "15",
+    id: "16",
     stage: "算法入门",
     title: "查找与二分",
     subtitle: "二分 = 翻字典",
@@ -187,7 +187,7 @@ export default [
   },
 
   {
-    id: "16",
+    id: "17",
     stage: "算法入门",
     title: "枚举与模拟",
     subtitle: "枚举 = 逐个试",
@@ -199,7 +199,7 @@ export default [
   },
 
   {
-    id: "17",
+    id: "18",
     stage: "算法入门",
     title: "递推",
     subtitle: "递推 = 多米诺",
@@ -211,7 +211,7 @@ export default [
   },
 
   {
-    id: "18",
+    id: "19",
     stage: "算法入门",
     title: "贪心入门",
     subtitle: "贪心 = 每次选最好",

@@ -16,8 +16,11 @@ export default defineConfig({
     port: 5173,
     open: true
   },
+  // ⚡ 核心保命配置：彻底禁用 esbuild
+  esbuild: false, 
   build: {
     outDir: 'dist',
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    minify: false // ⚡ 关闭代码压缩
   }
 });

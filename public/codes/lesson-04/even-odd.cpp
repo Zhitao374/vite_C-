@@ -1,16 +1,15 @@
 #include <iostream>
 using namespace std;
 
-int main() {
 // @snippet-start main
+int main() {
     int n;
     cin >> n;
-    
     if (n % 2 == 0) {
-        cout << "even";
+        cout << "even" << endl;
     } else {
-        cout << "odd";
+        cout << "odd" << endl;
     }
-// @snippet-end main
     return 0;
 }
+// @snippet-end main
