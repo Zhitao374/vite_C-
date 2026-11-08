@@ -54,6 +54,18 @@ export default [
   },
 
   {
+    id: "05",
+    stage: "编程基础",
+    title: "多分支与 switch",
+    subtitle: "让判断更加精准",
+    core: "分支进阶",
+    points: ["if-else if", "switch 语句", "break 穿透"],
+    difficulty: "⭐⭐⭐",
+    anim: "—",
+    fore: "—",
+  },
+
+  {
     id: "06",
     stage: "编程基础",
     title: "循环结构",

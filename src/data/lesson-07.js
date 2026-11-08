@@ -1,5 +1,5 @@
 export default {
-  title: "第 6 讲 一维数组",
+  title: "第 7 讲 一维数组",
   subtitle: "一排储物柜，批量装数据",
   total: 23,
   category: "语法与基础算法",
@@ -12,7 +12,7 @@ export default {
 
     /* ===== 2 钩子：50 个变量的噩梦 ===== */
     {
-      id: 2, type: "dialog", title: "50 个变量的噩梦", subtitle: "变量只能存一个，那一批数据怎么办？", chapterTag: "第 6 讲 · 开场",
+      id: 2, type: "dialog", title: "50 个变量的噩梦", subtitle: "变量只能存一个，那一批数据怎么办？", chapterTag: "第 7 讲 · 开场",
       data: {
         lines: [
           { who: "student", text: "小 C，老师让我写个程序，输入全班 50 个人的成绩，然后倒序输出。" },
@@ -40,7 +40,7 @@ export default {
 
     /* ===== 4 为什么需要数组 ===== */
     {
-      id: 4, type: "origin", title: "为什么需要数组？", subtitle: "从离散变量到连续数列", chapterTag: "第 6 讲 · 概念理解",
+      id: 4, type: "origin", title: "为什么需要数组？", subtitle: "从离散变量到连续数列", chapterTag: "第 7 讲 · 概念理解",
       data: {
         problem: {
           title: "变量是“单间”，数组是“大平层”",
@@ -77,7 +77,7 @@ export default {
 
     /* ===== 6 练习1：试错遍历（故意踩坑） ===== */
     {
-      id: 6, type: "level-map", title: "课堂练习1：试错遍历", subtitle: "输入 5 个数，再原样输出", chapterTag: "第 6 讲 · 实战演练",
+      id: 6, type: "level-map", title: "课堂练习1：试错遍历", subtitle: "输入 5 个数，再原样输出", chapterTag: "第 7 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "定义大小为 5 的数组，用循环读入 5 个数，然后再用循环输出这 5 个数。<br>输入样例：<code>1 2 3 4 5</code>　输出样例：<code>1 2 3 4 5</code>", timer: "⏱ 限时 5 分钟" },
         hints: ["定义 <code>int a[5];</code>", "用 <code>for</code> 循环控制下标", "**注意下标从哪里开始，到哪里结束**"],
@@ -88,7 +88,7 @@ export default {
 
     /* ===== 7 冲突①：眼见为实：数组越界 ===== */
     {
-      id: 7, type: "code-walkthrough", title: "眼见为实：数组越界", subtitle: "为什么多出了乱码？", chapterTag: "第 6 讲 · 概念理解",
+      id: 7, type: "code-walkthrough", title: "眼见为实：数组越界", subtitle: "为什么多出了乱码？", chapterTag: "第 7 讲 · 概念理解",
       data: {
         intro: "如果你刚才把下标写成了 1 到 5，运行结果可能会多出一串乱码。<br>我们来看看为什么：",
         codeFile: "codes/lesson-07/_error-bound.cpp", snippet: "main",
@@ -108,7 +108,7 @@ export default {
 
     /* ===== 8 为什么下标从 0 开始 ===== */
     {
-      id: 8, type: "grid", title: "为什么下标从 0 开始", subtitle: "数学与程序的认知差异", chapterTag: "第 6 讲 · 概念理解",
+      id: 8, type: "grid", title: "为什么下标从 0 开始", subtitle: "数学与程序的认知差异", chapterTag: "第 7 讲 · 概念理解",
       data: {
         cards: [
           { icon: "📏", title: "偏移量原理", desc: "数组的本质是内存地址的<b>偏移量</b>。<br>你找第 0 个，就是原地不动（偏移 0）。<br>找第 1 个，就是往后偏移 1 格。" },
@@ -141,7 +141,7 @@ export default {
 
     /* ===== 10 练习2：找最大值 ===== */
     {
-      id: 10, type: "level-map", title: "课堂练习2：找最大值", subtitle: "打擂台算法", chapterTag: "第 6 讲 · 实战演练",
+      id: 10, type: "level-map", title: "课堂练习2：找最大值", subtitle: "打擂台算法", chapterTag: "第 7 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入一个整数 n，再输入 n 个整数，输出其中的最大值。", timer: "⏱ 限时 6 分钟" },
         hints: ["用变量 <code>max_val</code> 记录最大值", "初始值设为 <code>a[0]</code>，不要设为 0", "遍历后面的数，不断更新 max_val"],
@@ -152,7 +152,7 @@ export default {
 
     /* ===== 11 冲突②：黑窗口一闪而过 ===== */
     {
-      id: 11, type: "pitfall", title: "黑窗口一闪而过", subtitle: "机房最绝望的报错：RE", chapterTag: "第 6 讲 · 概念理解",
+      id: 11, type: "pitfall", title: "黑窗口一闪而过", subtitle: "机房最绝望的报错：RE", chapterTag: "第 7 讲 · 概念理解",
       data: {
         intro: "为什么在 <code>main</code> 里面开大数组会闪退？<br>因为 <code>main</code> 函数的内存（栈）很小，只有几兆。你一口气要了 10 万个座位，栈装不下，直接爆了（RE 运行错误）。",
         cases: [
@@ -182,7 +182,7 @@ export default {
 
     /* ===== 13 练习3：逆序输出 ===== */
     {
-      id: 13, type: "level-map", title: "课堂练习3：逆序输出", subtitle: "正着存，倒着取", chapterTag: "第 6 讲 · 实战演练",
+      id: 13, type: "level-map", title: "课堂练习3：逆序输出", subtitle: "正着存，倒着取", chapterTag: "第 7 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入 n 个数，将它们逆序输出。<br>输入样例：<code>5\n1 2 3 4 5</code>　输出样例：<code>5 4 3 2 1</code>", timer: "⏱ 限时 6 分钟" },
         hints: ["数组必须先定义在全局", "正序读入：<code>for(i=0; i&lt;n; i++)</code>", "逆序输出：<code>for(i=n-1; i&gt;=0; i--)</code>"],
@@ -213,7 +213,7 @@ export default {
 
     /* ===== 15 初赛小知识 ===== */
     {
-      id: 15, type: "grid", title: "初赛小知识：数组内存", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 6 讲 · 初赛渗透",
+      id: 15, type: "grid", title: "初赛小知识：数组内存", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 7 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "📦", title: "连续存储", desc: "数组元素在内存中是<b>连续</b>存放的。<br>这是数组能通过下标瞬间找到元素的原因。" },
@@ -225,7 +225,7 @@ export default {
 
     /* ===== 16 课堂小测 ===== */
     {
-      id: 16, type: "quiz", title: "课堂小测", subtitle: "数组基础与越界", chapterTag: "第 6 讲 · 课堂小测",
+      id: 16, type: "quiz", title: "课堂小测", subtitle: "数组基础与越界", chapterTag: "第 7 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 数组", optionLayout: "horizontal", question: "定义 <code>int a[10];</code> 后，合法的下标范围是？", options: [ { label: "A", text: "1 到 10" }, { label: "B", text: "0 到 10" }, { label: "C", text: "0 到 9", correct: true }, { label: "D", text: "1 到 9" } ], analysis: '大小为 10 的数组，下标从 0 开始，最大下标是 10-1=9。' },
@@ -266,7 +266,7 @@ export default {
 
     /* ===== 20 答疑时间 ===== */
     {
-      id: 20, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 6 讲 · 答疑",
+      id: 20, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 7 讲 · 答疑",
       data: {
         cards: [
           { icon: "❓", title: "为什么下标是 0？", desc: "底层原因是内存偏移量，计算机从 0 开始数最快。" },
@@ -278,7 +278,7 @@ export default {
 
     /* ===== 21 本讲英文单词 ===== */
     {
-      id: 21, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 6 讲 · 复习",
+      id: 21, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 7 讲 · 复习",
       data: {
         words: [
           { word: "array", cn: "数组", pron: "/əˈreɪ/", origin: "英文原意“阵列”", category: "概念" },
@@ -291,7 +291,7 @@ export default {
 
     /* ===== 22 知识清单 ===== */
     {
-      id: 22, type: "grid", title: "第 6 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 6 讲 · 复习",
+      id: 22, type: "grid", title: "第 6 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 7 讲 · 复习",
       data: {
         cards: [
           { icon: "📦", title: "定义与访问", desc: "<code>int a[100];</code> 开空间<br>通过 <code>a[i]</code> 访问<br><b>下标只能 0 到 99</b>" },

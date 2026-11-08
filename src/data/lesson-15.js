@@ -1,5 +1,5 @@
 export default {
-  title: "第 14 讲 排序进阶与 STL",
+  title: "第 15 讲 排序进阶与 STL",
   subtitle: "一行代码的排序",
   total: 32,
   category: "语法与基础算法",
@@ -141,7 +141,7 @@ export default {
       type: "dialog",
       title: "为什么要用 sort？",
       subtitle: "自己写 vs 用现成的",
-      chapterTag: "第 14 讲 · 概念理解",
+      chapterTag: "第 15 讲 · 概念理解",
       data: {
         lines: [
           {
@@ -249,7 +249,7 @@ export default {
       type: "dialog",
       title: "cmp · 自定义比较函数",
       subtitle: "想怎么排，就怎么排",
-      chapterTag: "第 14 讲 · 概念理解",
+      chapterTag: "第 15 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，如果我想"按绝对值大小排"——怎么办？' },
@@ -328,7 +328,7 @@ export default {
       type: "dialog",
       title: "结构体排序 · 引入",
       subtitle: '把"一整个学生"当一个元素',
-      chapterTag: "第 14 讲 · 概念理解",
+      chapterTag: "第 15 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，如果想按"分数"排一堆学生——怎么办？' },
@@ -414,7 +414,7 @@ export default {
       type: "dialog",
       title: "多关键字排序",
       subtitle: "分数相同，再看语文",
-      chapterTag: "第 14 讲 · 概念理解",
+      chapterTag: "第 15 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，如果两个学生分数相同——怎么排？" },
@@ -496,7 +496,7 @@ export default {
       type: "dialog",
       title: "unique · 去重",
       subtitle: '把重复的"剔除"',
-      chapterTag: "第 14 讲 · 概念理解",
+      chapterTag: "第 15 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，如果数组里有重复的数——怎么去重？" },
@@ -615,7 +615,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：大数组排序",
       subtitle: "用 sort 排序 10 万个数",
-      chapterTag: "第 14 讲 · 实战演练",
+      chapterTag: "第 15 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -647,7 +647,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：按绝对值排序",
       subtitle: "自定义 cmp 实战",
-      chapterTag: "第 14 讲 · 实战演练",
+      chapterTag: "第 15 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -678,7 +678,7 @@ export default {
       type: "level-map",
       title: "课堂练习3：奖学金",
       subtitle: "多关键字排序",
-      chapterTag: "第 14 讲 · 实战演练",
+      chapterTag: "第 15 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -710,7 +710,7 @@ export default {
       type: "dialog",
       title: '挑战题思路 · 从"多关键字"到"自定义规则"',
       subtitle: "怎么把任意规则翻译成 cmp",
-      chapterTag: "第 14 讲 · 解题思路",
+      chapterTag: "第 15 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -753,7 +753,7 @@ export default {
       type: "evolution",
       title: "挑战题演示 · cmp 代码一步步长成",
       subtitle: "从单关键字到多关键字",
-      chapterTag: "第 14 讲 · 过程演示",
+      chapterTag: "第 15 讲 · 过程演示",
       data: {
         intro:
           '📖 <b>cmp 不是"一次写完"的</b>——<br>而是从"单关键字"逐步扩展成"多关键字"。<br>看代码如何一步步生长。',
@@ -803,7 +803,7 @@ export default {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 14 讲 · 答疑",
+      chapterTag: "第 15 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题都做完了。" },
@@ -849,7 +849,7 @@ export default {
       type: "dialog",
       title: "初赛小知识：sort 与稳定性",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 14 讲 · 初赛渗透",
+      chapterTag: "第 15 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考 sort 吗？" },
@@ -889,7 +889,7 @@ export default {
       type: "quiz",
       title: "课堂小测",
       subtitle: "sort、cmp 与结构体排序",
-      chapterTag: "第 14 讲 · 课堂小测",
+      chapterTag: "第 15 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -1070,7 +1070,7 @@ export default {
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 14 讲 · 答疑",
+      chapterTag: "第 15 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: 'sort 用多了会不会"不学无术"？' },
@@ -1113,7 +1113,7 @@ export default {
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 14 讲 · 复习",
+      chapterTag: "第 15 讲 · 复习",
       data: {
         words: [
           {
@@ -1180,7 +1180,7 @@ export default {
       type: "grid",
       title: "第 14 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 14 讲 · 复习",
+      chapterTag: "第 15 讲 · 复习",
       data: {
         cards: [
           {

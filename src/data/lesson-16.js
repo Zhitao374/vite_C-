@@ -1,5 +1,5 @@
 export default {
-  title: "第 15 讲 查找与二分",
+  title: "第 16 讲 查找与二分",
   subtitle: "二分 = 翻字典",
   total: 30,
   category: "语法与基础算法",
@@ -145,7 +145,7 @@ export default {
       type: "dialog",
       title: "查找问题 · 引入",
       subtitle: "在数据里找目标",
-      chapterTag: "第 15 讲 · 概念理解",
+      chapterTag: "第 16 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，"查找"是什么意思？' },
@@ -241,7 +241,7 @@ export default {
       type: "dialog",
       title: "二分查找 · 翻字典的艺术",
       subtitle: "每次砍掉一半",
-      chapterTag: "第 15 讲 · 概念理解",
+      chapterTag: "第 16 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，翻字典找字的原理是什么？" },
@@ -284,7 +284,7 @@ export default {
       type: "binary-search-animation",
       title: "二分查找 · 先看过程",
       subtitle: "在 [2, 3, 5, 7, 9, 11, 13] 里找 11",
-      chapterTag: "第 15 讲 · 过程演示",
+      chapterTag: "第 16 讲 · 过程演示",
       data: {
         target: 11,
         items: [
@@ -336,7 +336,7 @@ export default {
       type: "evolution",
       title: "二分查找 · 代码一步步长成",
       subtitle: "从骨架到完整",
-      chapterTag: "第 15 讲 · 代码拆解",
+      chapterTag: "第 16 讲 · 代码拆解",
       data: {
         intro:
           '📖 <b>代码不是"一次写完"的</b>——<br>而是从骨架逐步长成完整。<br>每一步加一点，理解在加深。<br><br>配合上一屏动画看——<br>每一步对应动画里的某个操作。',
@@ -427,7 +427,7 @@ export default {
       type: "dialog",
       title: "二分答案 · 引入",
       subtitle: '怎么"猜"出答案',
-      chapterTag: "第 15 讲 · 概念理解",
+      chapterTag: "第 16 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，"二分答案"是什么？听起来很玄。' },
@@ -553,7 +553,7 @@ export default {
       type: "dialog",
       title: "初赛小知识：二分查找的复杂度",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 15 讲 · 初赛渗透",
+      chapterTag: "第 16 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考二分吗？" },
@@ -593,7 +593,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：顺序查找",
       subtitle: "基础查找练习",
-      chapterTag: "第 15 讲 · 实战演练",
+      chapterTag: "第 16 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -625,7 +625,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：整数平方根",
       subtitle: "用二分答案找最大值",
-      chapterTag: "第 15 讲 · 实战演练",
+      chapterTag: "第 16 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -657,7 +657,7 @@ export default {
       type: "level-map",
       title: "课堂练习3：分割数组",
       subtitle: "二分答案的经典应用",
-      chapterTag: "第 15 讲 · 实战演练",
+      chapterTag: "第 16 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -689,7 +689,7 @@ export default {
       type: "dialog",
       title: '挑战题思路 · 二分答案的"三步推导"',
       subtitle: "怎么从问题到代码",
-      chapterTag: "第 15 讲 · 解题思路",
+      chapterTag: "第 16 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -735,7 +735,7 @@ export default {
       type: "evolution",
       title: "挑战题演示 · check 函数一步步长成",
       subtitle: "从骨架到完整",
-      chapterTag: "第 15 讲 · 过程演示",
+      chapterTag: "第 16 讲 · 过程演示",
       data: {
         intro:
           '📖 <b>check 函数不是"一次写完"的</b>——<br>而是从"函数骨架"到"贪心判定"逐步扩展。<br>看代码如何一步步生长。',
@@ -806,7 +806,7 @@ export default {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 15 讲 · 答疑",
+      chapterTag: "第 16 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题都做完了。" },
@@ -852,7 +852,7 @@ export default {
       type: "quiz",
       title: "课堂小测",
       subtitle: "二分查找与二分答案",
-      chapterTag: "第 15 讲 · 课堂小测",
+      chapterTag: "第 16 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -1038,7 +1038,7 @@ export default {
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 15 讲 · 答疑",
+      chapterTag: "第 16 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: '二分查找为什么要"有序"？' },
@@ -1081,7 +1081,7 @@ export default {
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 15 讲 · 复习",
+      chapterTag: "第 16 讲 · 复习",
       data: {
         words: [
           {
@@ -1141,7 +1141,7 @@ export default {
       type: "grid",
       title: "第 15 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 15 讲 · 复习",
+      chapterTag: "第 16 讲 · 复习",
       data: {
         cards: [
           {

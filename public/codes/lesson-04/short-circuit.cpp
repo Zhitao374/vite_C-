@@ -3,12 +3,14 @@ using namespace std;
 
 // @snippet-start main
 int main() {
-    int a = 1, b = 1;
+    int a = 0, b = 1;
 
-    // 演示逻辑或 || 的短路求值
+    if (a > 0 && b++) {}
+    cout << b << endl;
+
+    a = 1;
     if (a > 0 || b++) {}
-
-    cout << b << endl; // 输出 b，看看有没有变成 2
+    cout << b << endl;
 
     return 0;
 }

@@ -1,5 +1,5 @@
 export default {
-  title: "第 18 讲 贪心入门",
+  title: "第 19 讲 贪心入门",
   subtitle: "贪心 = 每次选最好",
   total: 32,
   category: "语法与基础算法",
@@ -137,7 +137,7 @@ export default {
       type: "dialog",
       title: "什么是贪心？",
       subtitle: "从找零钱说起",
-      chapterTag: "第 18 讲 · 概念理解",
+      chapterTag: "第 19 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，什么是"贪心"？听起来像"贪心鬼"。' },
@@ -290,7 +290,7 @@ export default {
       type: "dialog",
       title: "区间调度 · 引入",
       subtitle: "怎么选最多的电影",
-      chapterTag: "第 18 讲 · 概念理解",
+      chapterTag: "第 19 讲 · 概念理解",
       data: {
         lines: [
           {
@@ -398,7 +398,7 @@ export default {
       type: "evolution",
       title: "区间调度 · cmp 一步步长成",
       subtitle: "比较函数的正确写法",
-      chapterTag: "第 18 讲 · 过程演示",
+      chapterTag: "第 19 讲 · 过程演示",
       data: {
         intro:
           "📖 <b>cmp 决定排序顺序</b>——<br>写错方向，整个贪心就错了。<br>看 cmp 怎么一步步从错误变成正确。",
@@ -449,7 +449,7 @@ export default {
       type: "dialog",
       title: "排序贪心 · 引入",
       subtitle: "排队接水问题",
-      chapterTag: "第 18 讲 · 概念理解",
+      chapterTag: "第 19 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，什么是"排序贪心"？' },
@@ -574,7 +574,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：排队接水",
       subtitle: "排序贪心的经典题",
-      chapterTag: "第 18 讲 · 实战演练",
+      chapterTag: "第 19 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -606,7 +606,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：跳跳",
       subtitle: "排序 + 贪心方向",
-      chapterTag: "第 18 讲 · 实战演练",
+      chapterTag: "第 19 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -638,7 +638,7 @@ export default {
       type: "level-map",
       title: "课堂练习3：线段覆盖",
       subtitle: "区间调度的直接应用",
-      chapterTag: "第 18 讲 · 实战演练",
+      chapterTag: "第 19 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -670,7 +670,7 @@ export default {
       type: "dialog",
       title: "挑战题思路 · 贪心为什么是对的",
       subtitle: "交换论证法入门",
-      chapterTag: "第 18 讲 · 解题思路",
+      chapterTag: "第 19 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -719,7 +719,7 @@ export default {
       type: "evolution",
       title: "挑战题演示 · 交换论证一步步展开",
       subtitle: '从"最优解"到"贪心解"',
-      chapterTag: "第 18 讲 · 过程演示",
+      chapterTag: "第 19 讲 · 过程演示",
       data: {
         intro:
           '📖 <b>看一个具体的例子</b>——<br>用交换论证法，把"最优解"一步步改造成"贪心解"。',
@@ -771,7 +771,7 @@ export default {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 18 讲 · 答疑",
+      chapterTag: "第 19 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题都做完了。" },
@@ -820,7 +820,7 @@ export default {
       type: "dialog",
       title: "初赛小知识：贪心与最优子结构",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 18 讲 · 初赛渗透",
+      chapterTag: "第 19 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考贪心吗？" },
@@ -858,7 +858,7 @@ export default {
       type: "quiz",
       title: "课堂小测",
       subtitle: "贪心思想、区间调度与排序贪心",
-      chapterTag: "第 18 讲 · 课堂小测",
+      chapterTag: "第 19 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -1035,7 +1035,7 @@ export default {
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 18 讲 · 答疑",
+      chapterTag: "第 19 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: '贪心是不是"猜"？' },
@@ -1078,7 +1078,7 @@ export default {
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 18 讲 · 复习",
+      chapterTag: "第 19 讲 · 复习",
       data: {
         words: [
           {
@@ -1138,7 +1138,7 @@ export default {
       type: "grid",
       title: "第 18 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 18 讲 · 复习",
+      chapterTag: "第 19 讲 · 复习",
       data: {
         cards: [
           {

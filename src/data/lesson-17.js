@@ -1,5 +1,5 @@
 export default {
-  title: "第 16 讲 枚举与模拟",
+  title: "第 17 讲 枚举与模拟",
   subtitle: "暴力也是一种算法",
   total: 30,
   category: "语法与基础算法",
@@ -137,7 +137,7 @@ export default {
       type: "dialog",
       title: "什么是枚举？",
       subtitle: "一个个试",
-      chapterTag: "第 16 讲 · 概念理解",
+      chapterTag: "第 17 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，什么是枚举？" },
@@ -373,7 +373,7 @@ export default {
       type: "dialog",
       title: "什么是模拟？",
       subtitle: '用代码"复现"过程',
-      chapterTag: "第 16 讲 · 概念理解",
+      chapterTag: "第 17 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，模拟题又是什么？" },
@@ -489,7 +489,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：因数个数",
       subtitle: "用优化枚举",
-      chapterTag: "第 16 讲 · 实战演练",
+      chapterTag: "第 17 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -521,7 +521,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：输出 e 的近似值",
       subtitle: "模拟级数求和",
-      chapterTag: "第 16 讲 · 实战演练",
+      chapterTag: "第 17 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -570,7 +570,7 @@ int main() {
       type: "level-map",
       title: "课堂练习3：勾股数",
       subtitle: "嵌套枚举 + 优化",
-      chapterTag: "第 16 讲 · 实战演练",
+      chapterTag: "第 17 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -602,7 +602,7 @@ int main() {
       type: "dialog",
       title: '挑战题思路 · 枚举的"剪枝"',
       subtitle: "让暴力更快",
-      chapterTag: "第 16 讲 · 解题思路",
+      chapterTag: "第 17 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -648,7 +648,7 @@ int main() {
       type: "evolution",
       title: "挑战题演示 · 优化代码一步步长成",
       subtitle: "从三重循环到两重 + 剪枝",
-      chapterTag: "第 16 讲 · 过程演示",
+      chapterTag: "第 17 讲 · 过程演示",
       data: {
         intro:
           '📖 <b>优化不是"一次到位"</b>——<br>而是从"能跑的朴素版"——<br>逐步优化到"更快的版本"。<br>看代码如何一步步生长。',
@@ -698,7 +698,7 @@ int main() {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 16 讲 · 答疑",
+      chapterTag: "第 17 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题都做完了。" },
@@ -747,7 +747,7 @@ int main() {
       type: "dialog",
       title: "初赛小知识：循环次数的估算",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 16 讲 · 初赛渗透",
+      chapterTag: "第 17 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考枚举吗？" },
@@ -785,7 +785,7 @@ int main() {
       type: "quiz",
       title: "课堂小测",
       subtitle: "枚举、模拟与循环次数",
-      chapterTag: "第 16 讲 · 课堂小测",
+      chapterTag: "第 17 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -965,7 +965,7 @@ int main() {
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 16 讲 · 答疑",
+      chapterTag: "第 17 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "枚举什么时候会超时？" },
@@ -1008,7 +1008,7 @@ int main() {
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 16 讲 · 复习",
+      chapterTag: "第 17 讲 · 复习",
       data: {
         words: [
           {

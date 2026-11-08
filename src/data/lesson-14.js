@@ -1,5 +1,5 @@
 export default {
-  title: "第 13 讲 排序基础",
+  title: "第 14 讲 排序基础",
   subtitle: "让数据排好队",
   total: 32,
   category: "语法与基础算法",
@@ -133,7 +133,7 @@ export default {
       type: "dialog",
       title: "为什么要排序？",
       subtitle: '从"乱"到"序"的价值',
-      chapterTag: "第 13 讲 · 概念理解",
+      chapterTag: "第 14 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，一排数字排好序有什么用？" },
@@ -171,7 +171,7 @@ export default {
       type: "dialog",
       title: "排序的本质是什么？",
       subtitle: '从"比较"开始',
-      chapterTag: "第 13 讲 · 概念理解",
+      chapterTag: "第 14 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，排序算法那么多种，有没有共同点？" },
@@ -209,7 +209,7 @@ export default {
       type: "dialog",
       title: "冒泡排序 · 名字的由来",
       subtitle: '为什么叫"冒泡"？',
-      chapterTag: "第 13 讲 · 概念理解",
+      chapterTag: "第 14 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，为什么这种排序叫"冒泡"？' },
@@ -254,7 +254,7 @@ export default {
       type: "sort-animation",
       title: "冒泡排序 · 先看过程",
       subtitle: "看 [5, 2, 4, 1, 6, 3] 怎么排好",
-      chapterTag: "第 13 讲 · 过程演示",
+      chapterTag: "第 14 讲 · 过程演示",
       data: {
         config: { maxVal: 6 },
         steps: [
@@ -483,7 +483,7 @@ export default {
       type: "evolution",
       title: "冒泡排序 · 代码一步步长成",
       subtitle: "从骨架到完整",
-      chapterTag: "第 13 讲 · 代码拆解",
+      chapterTag: "第 14 讲 · 代码拆解",
       data: {
         intro:
           '📖 代码不是"一次写完"的——<br>而是一步一步从骨架长成完整版。<br>每一步加一点，理解在加深。',
@@ -533,7 +533,7 @@ export default {
       type: "dialog",
       title: "选择排序 · 名字的由来",
       subtitle: '为什么叫"选择"？',
-      chapterTag: "第 13 讲 · 概念理解",
+      chapterTag: "第 14 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，选择排序的"选择"是什么意思？' },
@@ -571,7 +571,7 @@ export default {
       type: "sort-animation",
       title: "选择排序 · 先看过程",
       subtitle: "看 [5, 2, 4, 1, 6, 3] 怎么排好",
-      chapterTag: "第 13 讲 · 过程演示",
+      chapterTag: "第 14 讲 · 过程演示",
       data: {
         config: { maxVal: 6 },
         steps: [
@@ -785,7 +785,7 @@ export default {
       type: "evolution",
       title: "选择排序 · 代码一步步长成",
       subtitle: "从骨架到完整",
-      chapterTag: "第 13 讲 · 代码拆解",
+      chapterTag: "第 14 讲 · 代码拆解",
       data: {
         intro:
           '📖 选择排序的代码也一步步长成。<br>注意对比：和冒泡的"边比边换"不同，<br>选择排序是"先扫描，最后换一次"。',
@@ -835,7 +835,7 @@ export default {
       type: "dialog",
       title: "插入排序 · 名字的由来",
       subtitle: '为什么叫"插入"？',
-      chapterTag: "第 13 讲 · 概念理解",
+      chapterTag: "第 14 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: '小 C，插入排序的"插入"插到哪？' },
@@ -873,7 +873,7 @@ export default {
       type: "sort-animation",
       title: "插入排序 · 先看过程",
       subtitle: "看 [5, 2, 4, 1, 6, 3] 怎么排好",
-      chapterTag: "第 13 讲 · 过程演示",
+      chapterTag: "第 14 讲 · 过程演示",
       data: {
         config: { maxVal: 6 },
         steps: [
@@ -1102,7 +1102,7 @@ export default {
       type: "evolution",
       title: "插入排序 · 代码一步步长成",
       subtitle: "从骨架到完整",
-      chapterTag: "第 13 讲 · 代码拆解",
+      chapterTag: "第 14 讲 · 代码拆解",
       data: {
         intro:
           "📖 插入排序像打牌——<br>摸一张牌，插到手里合适的位置。<br>代码也一步步长成。",
@@ -1205,7 +1205,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：排序",
       subtitle: "用冒泡排序对 n 个数排序",
-      chapterTag: "第 13 讲 · 实战演练",
+      chapterTag: "第 14 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -1237,7 +1237,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：第 k 小",
       subtitle: "排序后取下标",
-      chapterTag: "第 13 讲 · 实战演练",
+      chapterTag: "第 14 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -1268,7 +1268,7 @@ export default {
       type: "level-map",
       title: "课堂练习3：交换次数",
       subtitle: "统计冒泡排序的交换次数",
-      chapterTag: "第 13 讲 · 实战演练",
+      chapterTag: "第 14 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -1299,7 +1299,7 @@ export default {
       type: "dialog",
       title: '挑战题思路 · 从"数交换"到"计数"',
       subtitle: "怎么把计数自然融入排序",
-      chapterTag: "第 13 讲 · 解题思路",
+      chapterTag: "第 14 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -1348,7 +1348,7 @@ export default {
       type: "evolution",
       title: "挑战题演示 · 交换计数过程",
       subtitle: "看 count 一步步增长",
-      chapterTag: "第 13 讲 · 过程演示",
+      chapterTag: "第 14 讲 · 过程演示",
       data: {
         intro:
           "📖 以 <code>[3, 1, 4, 2]</code> 为例，看冒泡排序中 <code>count</code> 如何变化。<br>每次交换后 <code>count++</code>——就像记账一样。",
@@ -1410,7 +1410,7 @@ export default {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 13 讲 · 答疑",
+      chapterTag: "第 14 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题我都做完了。" },
@@ -1453,7 +1453,7 @@ export default {
       type: "dialog",
       title: "初赛小知识：排序稳定性",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 13 讲 · 初赛渗透",
+      chapterTag: "第 14 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考排序吗？" },
@@ -1491,7 +1491,7 @@ export default {
       type: "quiz",
       title: "课堂小测",
       subtitle: "三种排序、稳定性与复杂度",
-      chapterTag: "第 13 讲 · 课堂小测",
+      chapterTag: "第 14 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -1670,7 +1670,7 @@ export default {
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 13 讲 · 答疑",
+      chapterTag: "第 14 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "三种排序都 O(n²)，那还有意义学吗？" },
@@ -1713,7 +1713,7 @@ export default {
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 13 讲 · 复习",
+      chapterTag: "第 14 讲 · 复习",
       data: {
         words: [
           {
@@ -1780,7 +1780,7 @@ export default {
       type: "grid",
       title: "第 13 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 13 讲 · 复习",
+      chapterTag: "第 14 讲 · 复习",
       data: {
         cards: [
           {

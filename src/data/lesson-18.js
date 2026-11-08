@@ -1,5 +1,5 @@
 export default {
-  title: "第 17 讲 递推",
+  title: "第 18 讲 递推",
   subtitle: "递推 = 多米诺",
   total: 30,
   category: "语法与基础算法",
@@ -145,7 +145,7 @@ export default {
       type: "dialog",
       title: "什么是递推？",
       subtitle: "多米诺骨牌",
-      chapterTag: "第 17 讲 · 概念理解",
+      chapterTag: "第 18 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，什么是递推？" },
@@ -220,7 +220,7 @@ export default {
       type: "dialog",
       title: "经典递推 · 斐波那契",
       subtitle: "从兔子问题说起",
-      chapterTag: "第 17 讲 · 经典例题",
+      chapterTag: "第 18 讲 · 经典例题",
       data: {
         lines: [
           { who: "student", text: "小 C，斐波那契数列是什么？" },
@@ -300,7 +300,7 @@ export default {
       type: "evolution",
       title: "斐波那契 · 递推一步步展开",
       subtitle: "看变量怎么滚动",
-      chapterTag: "第 17 讲 · 过程演示",
+      chapterTag: "第 18 讲 · 过程演示",
       data: {
         intro:
           '📖 <b>递推的核心是"滚动"</b>——<br>三个变量像传送带一样往前挪。<br>看每一步变量怎么变。',
@@ -391,7 +391,7 @@ export default {
       type: "dialog",
       title: "二维递推 · 杨辉三角",
       subtitle: "每行都从上一行推",
-      chapterTag: "第 17 讲 · 经典例题",
+      chapterTag: "第 18 讲 · 经典例题",
       data: {
         lines: [
           {
@@ -526,7 +526,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：爬楼梯",
       subtitle: "经典递推入门",
-      chapterTag: "第 17 讲 · 实战演练",
+      chapterTag: "第 18 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -558,7 +558,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：杨辉三角",
       subtitle: "输出前 n 行",
-      chapterTag: "第 17 讲 · 实战演练",
+      chapterTag: "第 18 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -590,7 +590,7 @@ export default {
       type: "level-map",
       title: "课堂练习3：数字三角形",
       subtitle: "递推入门 DP",
-      chapterTag: "第 17 讲 · 实战演练",
+      chapterTag: "第 18 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -622,7 +622,7 @@ export default {
       type: "dialog",
       title: '挑战题思路 · 数字三角形的"状态设计"',
       subtitle: "怎么定义 dp 数组",
-      chapterTag: "第 17 讲 · 解题思路",
+      chapterTag: "第 18 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -671,7 +671,7 @@ export default {
       type: "evolution",
       title: "挑战题演示 · 数字三角形一步步填表",
       subtitle: "从边界到答案",
-      chapterTag: "第 17 讲 · 过程演示",
+      chapterTag: "第 18 讲 · 过程演示",
       data: {
         intro:
           '📖 <b>dp 数组不是"一次填满"</b>——<br>而是从边界开始——<br>一行一行往下推。<br>看代码如何逐步填满。',
@@ -728,7 +728,7 @@ export default {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 17 讲 · 答疑",
+      chapterTag: "第 18 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，三道题都做完了。" },
@@ -777,7 +777,7 @@ export default {
       type: "dialog",
       title: "初赛小知识：递推与数列",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 17 讲 · 初赛渗透",
+      chapterTag: "第 18 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考递推吗？" },
@@ -820,7 +820,7 @@ export default {
       type: "quiz",
       title: "课堂小测",
       subtitle: "递推、斐波那契与杨辉三角",
-      chapterTag: "第 17 讲 · 课堂小测",
+      chapterTag: "第 18 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -999,7 +999,7 @@ export default {
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 17 讲 · 答疑",
+      chapterTag: "第 18 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "递推和 DP 有什么区别？" },
@@ -1042,7 +1042,7 @@ export default {
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 17 讲 · 复习",
+      chapterTag: "第 18 讲 · 复习",
       data: {
         words: [
           {
@@ -1102,7 +1102,7 @@ export default {
       type: "grid",
       title: "第 17 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 17 讲 · 复习",
+      chapterTag: "第 18 讲 · 复习",
       data: {
         cards: [
           {

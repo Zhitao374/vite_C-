@@ -1,26 +1,24 @@
 export default {
-  title: "第 7 讲 字符串基础",
+  title: "第 8 讲 字符串基础",
   subtitle: "一串字符的容器",
-  total: 22,
+  total: 21,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
     {
       id: 1, type: "cover", title: "字符串基础", subtitle: "一串字符的容器", chapterTag: false,
-      data: { accentWord: "字符串", meta: ["青少年信息学竞赛 C++ 入门课程", "CSP-J/S 冲刺 · 第 7 讲"] },
+      data: { accentWord: "字符串", meta: ["青少年信息学竞赛 C++ 入门课程", "CSP-J/S 冲刺 · 第 8 讲"] },
     },
 
-    /* ===== 2 钩子 ===== */
+    /* ===== 2 引入 ===== */
     {
-      id: 2, type: "dialog", title: "读不出来的名字", subtitle: "cin 遇空格截断", chapterTag: "第 7 讲 · 开场",
+      id: 2, type: "dialog", title: "文字怎么存？", subtitle: "引入 string 类型", chapterTag: "第 8 讲 · 概念理解",
       data: {
         lines: [
-          { who: "student", text: "小 C，我想写个程序，存一下我的英文全名 `Tom Smith`，怎么输出只剩下 `Tom` 了？" },
-          { who: "robot", text: "你是不是用了 <code>cin >> name;</code>？" },
-          { who: "student", text: "对啊，存数字不都是这么存的吗？" },
-          { who: "robot", text: "这就是今天要解决的第一个大坑。在 C++ 里，<code>cin</code> 只要遇到<b>空格</b>，就会认为输入结束了。" },
-          { who: "student", text: "那后面那半截名字去哪了？" },
-          { who: "robot", text: "留在缓冲区里了。要想读取带有空格的一整句话，我们需要换一个专门的武器：<b>字符串（string）</b>。" },
+          { who: "student", text: "小 C，前面我们学了 int、double，那像 `Hello World` 这样的一串文字，该怎么存呢？" },
+          { who: "robot", text: "在 C++ 中，我们需要请出一位新朋友：<b>字符串（string）</b>。它就像一卷会自动变长的智能卷轴。" },
+          { who: "student", text: "那它能像数组一样存很多东西吗？" },
+          { who: "robot", text: "它本质上就是字符的集合。我们先来看看它的基础用法，看完你就明白了。" }
         ]
       }
     },
@@ -43,9 +41,9 @@ export default {
       id: 4, type: "timeline", variant: "map", title: "本讲作战地图", subtitle: "四站闯关，读懂人类语言",
       data: {
         items: [
-          { icon: "📜", badge: "第一站", title: "智能卷轴", desc: "string 基础", points: ["定义与拼接", "遇到空格截断"] },
-          { icon: "🔍", badge: "第二站", title: "细心收信人", desc: "getline 读入", points: ["读取一整行", "幽灵回车急救"] },
-          { icon: "🔁", badge: "第三站", title: "遍历与统计", desc: "长度与循环", points: ["s.length()", "统计字符与回文"] },
+          { icon: "📜", badge: "第一站", title: "智能卷轴", desc: "string 基础", points: ["定义与拼接", "像数字一样用"] },
+          { icon: "🔍", badge: "第二站", title: "细心收信人", desc: "读入的痛点", points: ["cin 遇到空格截断", "getline 读一整行"] },
+          { icon: "👻", badge: "第三站", title: "幽灵回车", desc: "输入流的深坑", points: ["缓冲区原理", "cin.ignore()"] },
           { icon: "🎋", badge: "第四站", title: "底层竹简", desc: "初赛 \0 结尾", points: ["char[] 字符数组", "隐形休止符"] },
         ],
       },
@@ -70,7 +68,7 @@ export default {
 
     /* ===== 6 练习1：拼接字符串 ===== */
     {
-      id: 6, type: "level-map", title: "课堂练习1：拼接字符串", subtitle: "用 + 号连接", chapterTag: "第 7 讲 · 实战演练",
+      id: 6, type: "level-map", title: "课堂练习1：拼接字符串", subtitle: "用 + 号连接", chapterTag: "第 8 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入两个单词，用加号把它们拼起来，中间加一个横杠 `-`。输出拼接后的结果。<br>输入样例：<code>C++</code> 和 <code>No.1</code><br>输出样例：<code>C++-No.1</code>", timer: "⏱ 限时 5 分钟" },
         hints: ["定义两个 <code>string</code> 变量", "用 <code>cin >> s1 >> s2;</code> 读入", "输出 <code>s1 + \"-\" + s2</code>"],
@@ -81,9 +79,9 @@ export default {
 
     /* ===== 7 冲突①：眼见为实：空格截断 ===== */
     {
-      id: 7, type: "code-walkthrough", title: "眼见为实：空格截断", subtitle: "为什么读不到完整的话？", chapterTag: "第 7 讲 · 概念理解",
+      id: 7, type: "code-walkthrough", title: "眼见为实：空格截断", subtitle: "为什么读不到完整的话？", chapterTag: "第 8 讲 · 概念理解",
       data: {
-        intro: "刚才我们用 <code>cin</code> 读入变量。如果是读字符串呢？<br>把下面的 <code>getline</code> 暂时换成 <code>cin >> s;</code> 试试：",
+        intro: "刚才我们用 <code>cin</code> 读入单词，没问题。但如果我要读入一句带空格的完整句子呢？看代码：",
         codeFile: "codes/lesson-08/cin-vs-getline.cpp", snippet: "main",
         steps: [
           { title: "输入整句", line: 3, vars: { s: "" }, note: "我们要读入 <code>Hello World</code>。" },
@@ -96,7 +94,7 @@ export default {
 
     /* ===== 8 揭示：getline ===== */
     {
-      id: 8, type: "dialog", title: "细心的收信人", subtitle: "getline 读入整行", chapterTag: "第 7 讲 · 概念理解",
+      id: 8, type: "dialog", title: "细心的收信人", subtitle: "getline 读入整行", chapterTag: "第 8 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "那怎么办？我总不能把空格都去掉吧？" },
@@ -111,7 +109,7 @@ export default {
 
     /* ===== 9 冲突②：眼见为实：幽灵回车 ===== */
     {
-      id: 9, type: "code-walkthrough", title: "眼见为实：幽灵回车", subtitle: "程序为什么不理我？", chapterTag: "第 7 讲 · 概念理解",
+      id: 9, type: "code-walkthrough", title: "眼见为实：幽灵回车", subtitle: "程序为什么不理我？", chapterTag: "第 8 讲 · 概念理解",
       data: {
         intro: "看下面这段代码：先输入一个数字，再输入一个带空格的字符串。<br>去敲一下，猜猜会发生什么？",
         codeFile: "codes/lesson-08/_error-ghost-enter.cpp", snippet: "main",
@@ -126,7 +124,7 @@ export default {
 
     /* ===== 10 缓冲区原理解析 ===== */
     {
-      id: 10, type: "grid", title: "缓冲区原理解析", subtitle: "幽灵回车到底在哪？", chapterTag: "第 7 讲 · 概念理解",
+      id: 10, type: "grid", title: "缓冲区原理解析", subtitle: "幽灵回车到底在哪？", chapterTag: "第 8 讲 · 概念理解",
       data: {
         cards: [
           { icon: "🚚", title: "传送带", desc: "键盘输入的内容，先被放在一个叫缓冲区的传送带上。敲回车，代表包裹打包完毕。" },
@@ -155,18 +153,18 @@ export default {
 
     /* ===== 12 练习2：统计字符 ===== */
     {
-      id: 12, type: "level-map", title: "课堂练习2：统计字符", subtitle: "统计数字字符的个数", chapterTag: "第 7 讲 · 实战演练",
+      id: 12, type: "level-map", title: "课堂练习2：统计字符", subtitle: "统计数字字符的个数", chapterTag: "第 8 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入一行字符串，统计其中数字字符（'0'~'9'）的个数。<br>输入样例：<code>C++ 2026</code>　输出样例：<code>4</code>", timer: "⏱ 限时 6 分钟" },
         hints: ["用 <code>getline</code> 读入整行", "判断字符是否在 '0' 到 '9' 之间：<code>s[i] >= '0' && s[i] <= '9'</code>"],
-        answer: { codeFile: "codes/lesson-08/string-length.cpp", snippet: "main" },
+        answer: { codeFile: "codes/lesson-08/string-count.cpp", snippet: "main" },
         analysis: { title: "📖 解析", desc: "字符的底层是 ASCII 码，数字字符 '0' 到 '9' 是连续排列的，所以可以直接用大于等于和小于等于来比较。" },
       },
     },
 
     /* ===== 13 练习3：回文判断 ===== */
     {
-      id: 13, type: "level-map", title: "课堂练习3：回文判断", subtitle: "正着读和反着读一样", chapterTag: "第 7 讲 · 实战演练",
+      id: 13, type: "level-map", title: "课堂练习3：回文判断", subtitle: "正着读和反着读一样", chapterTag: "第 8 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入一个字符串，判断它是不是回文串（正着读和反着读一样，如 `level`）。<br>是输出 `Yes`，否则输出 `No`。", timer: "⏱ 限时 10 分钟" },
         hints: ["可以用双指针：一个指向开头，一个指向结尾", "如果左右对称位置的字符不一样，就不是回文", "循环条件是 <code>left < right</code>"],
@@ -177,7 +175,7 @@ export default {
 
     /* ===== 14 冲突③：竹简与休止符 ===== */
     {
-      id: 14, type: "code-walkthrough", title: "眼见为实：竹简与休止符", subtitle: "初赛必考的 \0", chapterTag: "第 7 讲 · 概念理解",
+      id: 14, type: "code-walkthrough", title: "眼见为实：竹简与休止符", subtitle: "初赛必考的 \0", chapterTag: "第 8 讲 · 概念理解",
       data: {
         intro: "复赛我们用 `string`。但初赛喜欢考它的老祖宗——`char[]` 字符数组（竹简）。<br>看下面这段代码：",
         codeFile: "codes/lesson-08/_error-char-array.cpp", snippet: "main",
@@ -192,7 +190,7 @@ export default {
 
     /* ===== 15 初赛小知识 ===== */
     {
-      id: 15, type: "grid", title: "初赛小知识：字符串与数组", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 7 讲 · 初赛渗透",
+      id: 15, type: "grid", title: "初赛小知识：字符串与数组", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 8 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "🆚", title: "string vs char[]", desc: "<code>string</code> 自动管理长度，安全；<br><code>char[]</code> 必须手动预留 <code>\\0</code> 的位置。" },
@@ -205,7 +203,7 @@ export default {
 
     /* ===== 16 课堂小测 ===== */
     {
-      id: 16, type: "quiz", title: "课堂小测", subtitle: "字符串与读入陷阱", chapterTag: "第 7 讲 · 课堂小测",
+      id: 16, type: "quiz", title: "课堂小测", subtitle: "字符串与读入陷阱", chapterTag: "第 8 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 字符串", optionLayout: "horizontal", question: "执行 <code>string s; cin >> s;</code>，输入 <code>Hello World</code>，则 s 的值是？", options: [ { label: "A", text: "Hello World" }, { label: "B", text: "Hello", correct: true }, { label: "C", text: "World" }, { label: "D", text: "空字符串" } ], analysis: '<code>cin</code> 遇到空格就停止，所以只读到了空格前面的 Hello。' },
@@ -239,13 +237,13 @@ export default {
 
     /* ===== 19 下节预告 ===== */
     {
-      id: 19, type: "radial", title: "下节预告", subtitle: "第 8 讲 · 函数",
+      id: 19, type: "radial", title: "下节预告", subtitle: "第 9 讲 · 函数",
       data: { center: "函数", items: [ { text: "代码复用" }, { text: "定义与调用" }, { text: "参数与返回" }, { text: "作用域" } ] },
     },
 
     /* ===== 20 答疑时间 ===== */
     {
-      id: 20, type: "grid", title: "答疑时间", subtitle: "字符串常见 FAQ", chapterTag: "第 7 讲 · 答疑",
+      id: 20, type: "grid", title: "答疑时间", subtitle: "字符串常见 FAQ", chapterTag: "第 8 讲 · 答疑",
       data: {
         cards: [
           { icon: "🆚", title: "string 能用 == 比较吗？", desc: "可以！<code>string s1, s2; if(s1 == s2)</code> 是合法的。<br>但如果是 <code>char[]</code>，绝对不能用 ==，必须用 <code>strcmp(s1, s2)</code>。" },
@@ -256,22 +254,9 @@ export default {
       }
     },
 
-    /* ===== 21 本讲英文单词 ===== */
+    /* ===== 21 结束页 ===== */
     {
-      id: 21, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 7 讲 · 复习",
-      data: {
-        words: [
-          { word: "string", cn: "字符串", pron: "/strɪŋ/", origin: "英文原意“一串”", category: "类型" },
-          { word: "length", cn: "长度", pron: "/leŋθ/", origin: "英文原意“长度”", category: "函数" },
-          { word: "getline", cn: "获取一行", pron: "/ɡet laɪn/", origin: "get (获取) + line (行)", category: "函数" },
-          { word: "ignore", cn: "忽略", pron: "/ɪɡˈnɔːr/", origin: "英文原意“不理睬”", category: "函数" },
-        ],
-      },
-    },
-
-    /* ===== 22 结束页 ===== */
-    {
-      id: 22, type: "ending", title: "第七讲结束", subtitle: "点击返回目录，复习本讲内容", chapterTag: false,
+      id: 21, type: "ending", title: "第八讲结束", subtitle: "你的程序，能读懂文字了", chapterTag: false,
       data: { 
         slogan: "科学教育 · 创新课程 | 像科学家一样思考，像工程师一样解决问题",
         extra: {

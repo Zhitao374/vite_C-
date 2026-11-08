@@ -1,5 +1,5 @@
 export default {
-  title: "第 11 讲 二维数组",
+  title: "第 12 讲 二维数组",
   subtitle: "数组的数组，表格的世界",
   total: 22,
   category: "语法与基础算法",
@@ -12,7 +12,7 @@ export default {
 
     /* ===== 2 钩子 ===== */
     {
-      id: 2, type: "dialog", title: "棋盘与电影院", subtitle: "从一条线到一个面", chapterTag: "第 11 讲 · 开场",
+      id: 2, type: "dialog", title: "棋盘与电影院", subtitle: "从一条线到一个面", chapterTag: "第 12 讲 · 开场",
       data: {
         lines: [
           { who: "student", text: "小 C，我想写个五子棋程序，或者像《我的世界》那样的沙盒游戏。棋盘是个 15x15 的方格，怎么用数组存啊？" },
@@ -40,7 +40,7 @@ export default {
 
     /* ===== 4 从线到面的进化 ===== */
     {
-      id: 4, type: "origin", title: "从线到面的进化", subtitle: "二维数组的本质", chapterTag: "第 11 讲 · 概念理解",
+      id: 4, type: "origin", title: "从线到面的进化", subtitle: "二维数组的本质", chapterTag: "第 12 讲 · 概念理解",
       data: {
         problem: {
           title: "一维数组装不下平面数据",
@@ -81,7 +81,7 @@ export default {
 
     /* ===== 6 二维数组的初始化 ===== */
     {
-      id: 6, type: "code-walkthrough", title: "怎么把数据装进去？", subtitle: "二维数组的初始化", chapterTag: "第 11 讲 · 概念理解",
+      id: 6, type: "code-walkthrough", title: "怎么把数据装进去？", subtitle: "二维数组的初始化", chapterTag: "第 12 讲 · 概念理解",
       data: {
         intro: "如果有一万个格子，挨个写 <code>a[0][0]=1</code> 手会断。C++ 允许我们在定义时，用大括号 <code>{}</code> 直接连着格子一起装进去。看代码：",
         codeFile: "codes/lesson-12/matrix-init.cpp", snippet: "main",
@@ -96,7 +96,7 @@ export default {
 
     /* ===== 7 冲突①：迷魂阵 ===== */
     {
-      id: 7, type: "code-walkthrough", title: "眼见为实：双重循环迷魂阵", subtitle: "为什么排成了一列？", chapterTag: "第 11 讲 · 概念理解",
+      id: 7, type: "code-walkthrough", title: "眼见为实：双重循环迷魂阵", subtitle: "为什么排成了一列？", chapterTag: "第 12 讲 · 概念理解",
       data: {
         intro: "我们想把一个 2行3列 的矩阵原样打印出来。<br>看这段代码，外层是 j（列），内层是 i（行）。跟着动画看它是怎么跑的：",
         codeFile: "codes/lesson-12/_error-loop-order.cpp", snippet: "main",
@@ -113,7 +113,7 @@ export default {
 
     /* ===== 8 揭示①：电影院查票法 ===== */
     {
-      id: 8, type: "grid", title: "电影院查票法", subtitle: "外行内列", chapterTag: "第 11 讲 · 概念理解",
+      id: 8, type: "grid", title: "电影院查票法", subtitle: "外行内列", chapterTag: "第 12 讲 · 概念理解",
       data: {
         cards: [
           { icon: "🎟️", title: "外层：排", desc: "外层循环 <code>i</code> 代表排数。<br>检票员先走到第 1 排。" },
@@ -127,7 +127,7 @@ export default {
 
     /* ===== 9 揭示②：内存里的直线 ===== */
     {
-      id: 9, type: "code-split", title: "内存里的直线与省略规则", subtitle: "二维数组是假的？", chapterTag: "第 11 讲 · 概念理解",
+      id: 9, type: "code-split", title: "内存里的直线与省略规则", subtitle: "二维数组是假的？", chapterTag: "第 12 讲 · 概念理解",
       data: {
         intro: "📖 物理内存是一条无限长的直线。二维数组在内存里，是像纸带一样<b>“按行展开”</b>的。<br>正因为如此，C++ 有一个非常奇葩的规定：<b>定义二维数组时，行数可以省，列数绝对不能省！</b>看代码：",
         codeFile: "codes/lesson-12/matrix-omit.cpp", snippet: "main",
@@ -148,7 +148,7 @@ export default {
 
     /* ===== 10 练习1：矩阵求和 ===== */
     {
-      id: 10, type: "level-map", title: "课堂练习1：矩阵求和", subtitle: "双重循环遍历实战", chapterTag: "第 11 讲 · 实战演练",
+      id: 10, type: "level-map", title: "课堂练习1：矩阵求和", subtitle: "双重循环遍历实战", chapterTag: "第 12 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入 n 行 m 列的矩阵，求所有元素的和。<br>输入样例：<br><code>2 3</code><br><code>1 2 3</code><br><code>4 5 6</code><br>输出样例：<code>21</code>", timer: "⏱ 限时 6 分钟" },
         hints: ["先读入 n 和 m", "外层循环 i 从 0 到 n-1", "内层循环 j 从 0 到 m-1", "用 <code>sum += a[i][j]</code> 累加"],
@@ -159,7 +159,7 @@ export default {
 
     /* ===== 11 冲突②：转置惨案 ===== */
     {
-      id: 11, type: "evolution", title: "眼见为实：转置惨案", subtitle: "数据凭空消失？", chapterTag: "第 11 讲 · 概念理解",
+      id: 11, type: "evolution", title: "眼见为实：转置惨案", subtitle: "数据凭空消失？", chapterTag: "第 12 讲 · 概念理解",
       data: {
         intro: "📖 我们来做一个新任务：<b>矩阵转置</b>。就像把一张 Excel 表格的行和列对调。<br>这道题有一个非常苛刻的要求：<b>不能开新数组，必须在原数组上直接交换！</b><br>既然不能开新数组，那我们自然而然会想到：把第 i 行第 j 列的值，和第 j 行第 i 列的值互换，也就是 <code>a[i][j] = a[j][i];</code>。<br>跟着动画看，这会发生什么？",
         codeFile: "codes/lesson-12/_error-transpose.cpp", snippet: "main",
@@ -179,7 +179,7 @@ export default {
 
     /* ===== 12 练习2：对角线求和 ===== */
     {
-      id: 12, type: "level-map", title: "课堂练习2：对角线求和", subtitle: "寻找下标的规律", chapterTag: "第 11 讲 · 实战演练",
+      id: 12, type: "level-map", title: "课堂练习2：对角线求和", subtitle: "寻找下标的规律", chapterTag: "第 12 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入一个 n 阶方阵（n 行 n 列），求主对角线和副对角线的元素之和。", timer: "⏱ 限时 8 分钟" },
         hints: ["主对角线：行下标 == 列下标（<code>i == j</code>）", "副对角线：行下标 + 列下标 == n - 1", "可以只用一个双重循环，在循环里用 if 判断"],
@@ -190,7 +190,7 @@ export default {
 
     /* ===== 13 机房急救：矩阵爆栈 ===== */
     {
-      id: 13, type: "pitfall", title: "机房急救：矩阵爆栈", subtitle: "为什么程序又闪退了？", chapterTag: "第 11 讲 · 实战演练",
+      id: 13, type: "pitfall", title: "机房急救：矩阵爆栈", subtitle: "为什么程序又闪退了？", chapterTag: "第 12 讲 · 实战演练",
       data: {
         intro: "一维数组开在 `main` 里可能没事。但如果二维数组开在 `main` 里，非常容易闪退。",
         cases: [
@@ -202,7 +202,7 @@ export default {
 
     /* ===== 14 初赛小知识 ===== */
     {
-      id: 14, type: "grid", title: "初赛小知识：矩阵内存", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 11 讲 · 初赛渗透",
+      id: 14, type: "grid", title: "初赛小知识：矩阵内存", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 12 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "💾", title: "计算占用空间", desc: "<code>int a[100][100];</code><br>共 100 x 100 = 10000 个元素。<br>每个 int 占 4 字节。<br>共 40000 字节（约 39 KB）。" },
@@ -215,7 +215,7 @@ export default {
 
     /* ===== 15 课堂小测 ===== */
     {
-      id: 15, type: "quiz", title: "课堂小测", subtitle: "二维数组与内存", chapterTag: "第 11 讲 · 课堂小测",
+      id: 15, type: "quiz", title: "课堂小测", subtitle: "二维数组与内存", chapterTag: "第 12 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 二维数组", optionLayout: "horizontal", question: "定义 <code>int a[3][4];</code>，合法的访问是？", options: [ { label: "A", text: "<code>a[3][4]</code>" }, { label: "B", text: "<code>a[2][3]</code>", correct: true }, { label: "C", text: "<code>a[0][4]</code>" }, { label: "D", text: "<code>a[3][0]</code>" } ], analysis: '3 行 4 列，行下标范围 0~2，列下标范围 0~3。A、C、D 都越界了。' },
@@ -255,7 +255,7 @@ export default {
 
     /* ===== 19 答疑时间 ===== */
     {
-      id: 19, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 11 讲 · 答疑",
+      id: 19, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 12 讲 · 答疑",
       data: {
         cards: [
           { icon: "🔄", title: "为什么 a[i][j] 不能写成 a[i,j]?", desc: "C++ 中中括号是下标运算符，只能放一个参数。如果要表示两个维度，必须用两个中括号分开。" },
@@ -267,7 +267,7 @@ export default {
 
     /* ===== 20 本讲英文单词 ===== */
     {
-      id: 20, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 11 讲 · 复习",
+      id: 20, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 12 讲 · 复习",
       data: {
         words: [
           { word: "matrix", cn: "矩阵", pron: "/ˈmeɪtrɪks/", origin: "源自拉丁语 mater（母亲），表示产生其他事物的基础", category: "概念" },
@@ -280,7 +280,7 @@ export default {
 
     /* ===== 21 知识清单 ===== */
     {
-      id: 21, type: "grid", title: "第 11 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 11 讲 · 复习",
+      id: 21, type: "grid", title: "第 11 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 12 讲 · 复习",
       data: {
         cards: [
           { icon: "🎬", title: "定义与访问", desc: "<code>int a[行][列];</code><br>通过 <code>a[i][j]</code> 访问。<br>行在前，列在后。" },

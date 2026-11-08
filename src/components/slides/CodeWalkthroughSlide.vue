@@ -12,10 +12,10 @@
             :code-file="d.codeFile"
             :snippet="d.snippet"
             :density="d.density"
-            :highlight-lines="
-              currentHighlightLine ? [currentHighlightLine] : []
-            "
-          />
+            :highlight-lines="currentHighlightLine ? [currentHighlightLine] : []"
+            :hidden-lines="currentHiddenLines"
+            :placeholder="currentPlaceholder"
+                    />
         </StepWrapper>
       </div>
 
@@ -99,6 +99,16 @@ const currentStepIndex = computed(() => {
 const currentHighlightLine = computed(() => {
   const step = steps.value[currentStepIndex.value];
   return step && step.line ? step.line : 0;
+});
+
+const currentHiddenLines = computed(() => {
+  const step = steps.value[currentStepIndex.value];
+  return step && step.hiddenLines ? step.hiddenLines : [];
+});
+
+const currentPlaceholder = computed(() => {
+  const step = steps.value[currentStepIndex.value];
+  return step && step.placeholder ? step.placeholder : "";
 });
 
 useStepCount(

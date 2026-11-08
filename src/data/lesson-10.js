@@ -1,5 +1,5 @@
 export default {
-  title: "第 9 讲 递归",
+  title: "第 10 讲 递归",
   subtitle: "函数调用自己",
   total: 22,
   category: "语法与基础算法",
@@ -12,7 +12,7 @@ export default {
 
     /* ===== 2 钩子 ===== */
     {
-      id: 2, type: "dialog", title: "洗盘子的分身术", subtitle: "自己召唤自己", chapterTag: "第 9 讲 · 开场",
+      id: 2, type: "dialog", title: "洗盘子的分身术", subtitle: "自己召唤自己", chapterTag: "第 10 讲 · 开场",
       data: {
         lines: [
           { who: "student", text: "小 C，老师让我一个人洗 100 个盘子，我会累死的。" },
@@ -40,7 +40,7 @@ export default {
 
     /* ===== 4 冲突①：无边界爆栈 ===== */
     {
-      id: 4, type: "code-walkthrough", title: "眼见为实：无边界爆栈", subtitle: "为什么黑窗口闪退了？", chapterTag: "第 9 讲 · 概念理解",
+      id: 4, type: "code-walkthrough", title: "眼见为实：无边界爆栈", subtitle: "为什么黑窗口闪退了？", chapterTag: "第 10 讲 · 概念理解",
       data: {
         intro: "我们来写一个阶乘的递归函数。规律是 <code>n * f(n-1)</code>。<br>敲一下这段代码，看看会发生什么：",
         codeFile: "codes/lesson-10/_error-no-boundary.cpp", snippet: "main",
@@ -55,7 +55,7 @@ export default {
 
     /* ===== 5 递归边界与归纳法 ===== */
     {
-      id: 5, type: "grid", title: "递归边界与归纳法", subtitle: "没有出口就没有递归", chapterTag: "第 9 讲 · 概念理解",
+      id: 5, type: "grid", title: "递归边界与归纳法", subtitle: "没有出口就没有递归", chapterTag: "第 10 讲 · 概念理解",
       data: {
         cards: [
           { icon: "🚪", title: "边界（出口）", desc: "明确告诉函数什么时候停下。如阶乘里：<code>if (n == 1) return 1;</code>。这是递归的基石。" },
@@ -81,7 +81,7 @@ export default {
 
     /* ===== 7 冲突②：顺序的背叛 ===== */
     {
-      id: 7, type: "code-walkthrough", title: "眼见为实：顺序的背叛", subtitle: "为什么输出反了？", chapterTag: "第 9 讲 · 概念理解",
+      id: 7, type: "code-walkthrough", title: "眼见为实：顺序的背叛", subtitle: "为什么输出反了？", chapterTag: "第 10 讲 · 概念理解",
       data: {
         intro: "看这段代码，我在递归调用的前面和后面，都写了输出。输入 3，猜猜输出什么？",
         codeFile: "codes/lesson-10/_error-sequence.cpp", snippet: "main",
@@ -97,7 +97,7 @@ export default {
 
     /* ===== 8 降维打击：函数调用栈动画 ===== */
     {
-      id: 8, type: "function-call-animation", title: "透视：函数的调用栈", subtitle: "看着动画，理解先递后归", chapterTag: "第 9 讲 · 概念理解",
+      id: 8, type: "function-call-animation", title: "透视：函数的调用栈", subtitle: "看着动画，理解先递后归", chapterTag: "第 10 讲 · 概念理解",
       data: {
         intro: "不要再死记硬背“V 字形”了。<br>看着右侧的调用栈动画，注意 f(3) 怎么一层层挂起，又怎么一层层带回结果。",
         steps: [
@@ -166,7 +166,7 @@ export default {
 
     /* ===== 9 调用栈原理 ===== */
     {
-      id: 9, type: "grid", title: "调用栈原理", subtitle: "为什么会有先进后出", chapterTag: "第 9 讲 · 概念理解",
+      id: 9, type: "grid", title: "调用栈原理", subtitle: "为什么会有先进后出", chapterTag: "第 10 讲 · 概念理解",
       data: {
         cards: [
           { icon: "🥞", title: "叠盘子", desc: "调用函数就像叠盘子。f(3) 在最底下，f(1) 在最上面。" },
@@ -179,7 +179,7 @@ export default {
 
     /* ===== 10 练习1：斐波那契 ===== */
     {
-      id: 10, type: "level-map", title: "课堂练习1：斐波那契", subtitle: "体验分支递归的重复计算", chapterTag: "第 9 讲 · 实战演练",
+      id: 10, type: "level-map", title: "课堂练习1：斐波那契", subtitle: "体验分支递归的重复计算", chapterTag: "第 10 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "斐波那契数列：1, 1, 2, 3, 5, 8...<br>输入 n，求第 n 项。用递归实现。", timer: "⏱ 限时 8 分钟" },
         hints: ["边界：<code>if(n==1 || n==2) return 1;</code>", "公式：<code>return fib(n-1) + fib(n-2);</code>"],
@@ -190,7 +190,7 @@ export default {
 
     /* ===== 11 降维打击：汉诺塔代码 ===== */
     {
-      id: 11, type: "code-split", title: "降维打击：汉诺塔", subtitle: "递归最经典的实战", chapterTag: "第 9 讲 · 实战演练",
+      id: 11, type: "code-split", title: "降维打击：汉诺塔", subtitle: "递归最经典的实战", chapterTag: "第 10 讲 · 实战演练",
       data: {
         intro: "📖 汉诺塔的规则：A 柱上有 n 个盘子，要移到 C 柱。<br>用递归的三步走，代码竟然只有 4 行！",
         codeFile: "codes/lesson-10/hanoi.cpp", snippet: "main",
@@ -206,7 +206,7 @@ export default {
 
     /* ===== 12 降维打击：汉诺塔动画 ===== */
     {
-      id: 12, type: "hanoi-animation", title: "降维打击：汉诺塔动画", subtitle: "看着动画领悟递归思维", chapterTag: "第 9 讲 · 实战演练",
+      id: 12, type: "hanoi-animation", title: "降维打击：汉诺塔动画", subtitle: "看着动画领悟递归思维", chapterTag: "第 10 讲 · 实战演练",
       data: {
         intro: "不要试图在脑子里模拟盘子怎么移，人类大脑算不过来。<br>看着动画，体会“把 n-1 个盘子当成一个整体交给分身去办”的递归思维。",
         config: { pegs: ["A", "B", "C"], maxDisks: 3 },
@@ -231,7 +231,7 @@ export default {
 
     /* ===== 13 趣味扩展：神话与科幻中的递归 ===== */
     {
-      id: 13, type: "grid", title: "🎨 递归的浪漫与恐怖", subtitle: "神话与电影中的递归", chapterTag: "第 9 讲 · 知识讲解",
+      id: 13, type: "grid", title: "🎨 递归的浪漫与恐怖", subtitle: "神话与电影中的递归", chapterTag: "第 10 讲 · 知识讲解",
       data: {
         cards: [
           { icon: "🛕", title: "汉诺塔的终极传说", desc: "传说印度神庙里有三根柱子，神留下了 64 个纯金圆盘。<br>僧侣们日夜不停地移动，当 64 个盘子全部移到另一根柱子时，世界就会毁灭。<br>你知道移完需要多久吗？按一秒移一次算，需要 <b>5849 亿年</b>！比宇宙现在的寿命还要长。" },
@@ -243,7 +243,7 @@ export default {
 
     /* ===== 14 初赛小知识：递归复杂度 ===== */
     {
-      id: 14, type: "grid", title: "初赛小知识：递归与复杂度", subtitle: "CSP-J/S 初赛高频考点", chapterTag: "第 9 讲 · 初赛渗透",
+      id: 14, type: "grid", title: "初赛小知识：递归与复杂度", subtitle: "CSP-J/S 初赛高频考点", chapterTag: "第 10 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "🕒", title: "时间复杂度", desc: "一次递归如果分成两个子问题（如斐波那契），总调用次数是 \\(2^n\\) 级别。<br>这种树形递归极慢，初赛常考计算节点数。" },
@@ -256,7 +256,7 @@ export default {
 
     /* ===== 15 课堂小测 ===== */
     {
-      id: 15, type: "quiz", title: "课堂小测", subtitle: "递归边界与执行流", chapterTag: "第 9 讲 · 课堂小测",
+      id: 15, type: "quiz", title: "课堂小测", subtitle: "递归边界与执行流", chapterTag: "第 10 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 递归", optionLayout: "horizontal", question: "写递归函数时，如果没有写边界条件（出口），会发生什么？", options: [ { label: "A", text: "编译错误" }, { label: "B", text: "无限循环，导致爆栈（RE）", correct: true }, { label: "C", text: "返回 0" }, { label: "D", text: "自动停止" } ], analysis: '没有边界，函数会无限地调用自己，直到把调用栈的内存耗尽，发生运行时错误（Runtime Error）。' },
@@ -296,7 +296,7 @@ export default {
 
     /* ===== 19 答疑时间 ===== */
     {
-      id: 19, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 9 讲 · 答疑",
+      id: 19, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 10 讲 · 答疑",
       data: {
         cards: [
           { icon: "🚪", title: "怎么找边界？", desc: "找“最小、最基础”的情况。比如阶乘的 1，斐波那契的 1 和 2，汉诺塔的 0 个盘子。" },
@@ -308,7 +308,7 @@ export default {
 
     /* ===== 20 本讲英文单词 ===== */
     {
-      id: 20, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 9 讲 · 复习",
+      id: 20, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 10 讲 · 复习",
       data: {
         words: [
           { word: "recursion", cn: "递归", pron: "/rɪˈkɜːrʒn/", origin: "英文原意“跑回来”", category: "概念" },
@@ -321,7 +321,7 @@ export default {
 
     /* ===== 21 知识清单 ===== */
     {
-      id: 21, type: "grid", title: "第 9 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 9 讲 · 复习",
+      id: 21, type: "grid", title: "第 9 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 10 讲 · 复习",
       data: {
         cards: [
           { icon: "🛑", title: "递归边界", desc: "必须写在最前面。<br>没有边界会导致<b>爆栈（RE）</b>。" },

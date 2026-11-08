@@ -1,5 +1,5 @@
 export default {
-  title: "第 8 讲 函数",
+  title: "第 9 讲 函数",
   subtitle: "让代码可以复用",
   total: 29,
   category: "语法与基础算法",
@@ -12,7 +12,7 @@ export default {
 
     /* ===== 2 钩子 ===== */
     {
-      id: 2, type: "dialog", title: "复制粘贴的灾难", subtitle: "程序员最痛恨的事", chapterTag: "第 8 讲 · 开场",
+      id: 2, type: "dialog", title: "复制粘贴的灾难", subtitle: "程序员最痛恨的事", chapterTag: "第 9 讲 · 开场",
       data: {
         lines: [
           { who: "student", text: "小 C，老师让我算 3 个圆的面积，我直接复制粘贴公式，搞定了！" },
@@ -69,7 +69,7 @@ export default {
 
     /* ===== 6 冲突①：放错位置的尴尬 ===== */
     {
-      id: 6, type: "code-walkthrough", title: "眼见为实：放错位置的尴尬", subtitle: "为什么编译器不认识它？", chapterTag: "第 8 讲 · 概念理解",
+      id: 6, type: "code-walkthrough", title: "眼见为实：放错位置的尴尬", subtitle: "为什么编译器不认识它？", chapterTag: "第 9 讲 · 概念理解",
       data: {
         intro: "刚才的代码跑得很完美，因为你把 <code>printStar()</code> 写在了 <code>main()</code> 的上面。<br>如果你习惯了写流水账，把它写在了 <code>main()</code> 的下面，会发生什么？敲一下看看：",
         codeFile: "codes/lesson-09/_error-order.cpp", snippet: "main",
@@ -84,7 +84,7 @@ export default {
 
     /* ===== 7 解药：声明与定义 ===== */
     {
-      id: 7, type: "grid", title: "声明与定义", subtitle: "提前给编译器打个招呼", chapterTag: "第 8 讲 · 概念理解",
+      id: 7, type: "grid", title: "声明与定义", subtitle: "提前给编译器打个招呼", chapterTag: "第 9 讲 · 概念理解",
       data: {
         cards: [
           { icon: "🥇", title: "方法一：写最前面", desc: "把整个函数，直接剪贴到 <code>main</code> 函数的上方。<br>这是最常用、最不易出错的办法。" },
@@ -96,7 +96,7 @@ export default {
 
     /* ===== 8 核心揭示：数学映射与黑盒 ===== */
     {
-      id: 8, type: "origin", title: "数学映射与黑盒", subtitle: "函数的本质", chapterTag: "第 8 讲 · 概念理解",
+      id: 8, type: "origin", title: "数学映射与黑盒", subtitle: "函数的本质", chapterTag: "第 9 讲 · 概念理解",
       data: {
         problem: {
           title: "函数到底是个什么东西？",
@@ -149,7 +149,7 @@ export default {
 
     /* ===== 11 动画：函数调用栈 ===== */
     {
-      id: 11, type: "function-call-animation", title: "透视：函数是怎么调用的", subtitle: "看看 main 是如何挂起的", chapterTag: "第 8 讲 · 概念理解",
+      id: 11, type: "function-call-animation", title: "透视：函数是怎么调用的", subtitle: "看看 main 是如何挂起的", chapterTag: "第 9 讲 · 概念理解",
       data: {
         intro: "当我们在 main 里调用 square(5) 时，内存里到底发生了什么？<br>看右侧的调用栈，注意程序执行的行号变化：",
         steps: [
@@ -183,7 +183,7 @@ export default {
     
     /* ===== 12 深入拆解：返回值与 return ===== */
     {
-      id: 12, type: "grid", title: "深入拆解：返回值", subtitle: "黑盒是怎么交货的？", chapterTag: "第 8 讲 · 概念理解",
+      id: 12, type: "grid", title: "深入拆解：返回值", subtitle: "黑盒是怎么交货的？", chapterTag: "第 9 讲 · 概念理解",
       data: {
         cards: [
           { icon: "📤", title: "return 的作用", desc: "把计算结果从黑盒里扔出来，交给调用者。<br>只要执行到 <code>return</code>，函数立刻结束！" },
@@ -196,7 +196,7 @@ export default {
 
     /* ===== 13 练习1：判断质数 ===== */
     {
-      id: 13, type: "level-map", title: "课堂练习1：判断质数", subtitle: "封装成独立函数", chapterTag: "第 8 讲 · 实战演练",
+      id: 13, type: "level-map", title: "课堂练习1：判断质数", subtitle: "封装成独立函数", chapterTag: "第 9 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "编写一个函数 <code>bool isPrime(int n)</code>，判断 n 是否为质数。在 main 中读入 n，调用函数，是输出 Yes，否则输出 No。", timer: "⏱ 限时 8 分钟" },
         hints: ["函数返回类型是 <code>bool</code>", "如果是质数，<code>return true;</code>", "主函数里用 <code>if (isPrime(num))</code> 来接"],
@@ -207,7 +207,7 @@ export default {
 
     /* ===== 14 冲突②：交换惨案 ===== */
     {
-      id: 14, type: "code-walkthrough", title: "眼见为实：交换惨案", subtitle: "为什么函数里改了，外面没变？", chapterTag: "第 8 讲 · 概念理解",
+      id: 14, type: "code-walkthrough", title: "眼见为实：交换惨案", subtitle: "为什么函数里改了，外面没变？", chapterTag: "第 9 讲 · 概念理解",
       data: {
         intro: "我们知道怎么交换两个数。现在我们把它封装进一个函数：<br><code>void swap(int a, int b)</code>。<br>大家敲一下看看，x 和 y 到底换了没有？",
         codeFile: "codes/lesson-09/_error-swap.cpp", snippet: "main",
@@ -222,7 +222,7 @@ export default {
 
     /* ===== 15 揭示：复印件的比喻 ===== */
     {
-      id: 15, type: "dialog", title: "为什么没交换？", subtitle: "值是“复印件”，不是原件", chapterTag: "第 8 讲 · 概念理解",
+      id: 15, type: "dialog", title: "为什么没交换？", subtitle: "值是“复印件”，不是原件", chapterTag: "第 9 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，见鬼了！函数里明明换了，怎么外面没变？" },
@@ -243,7 +243,7 @@ export default {
 
     /* ===== 16 作用域与局部变量 ===== */
     {
-      id: 16, type: "code-split", title: "作用域与局部变量", subtitle: "出了门就销毁", chapterTag: "第 8 讲 · 概念理解",
+      id: 16, type: "code-split", title: "作用域与局部变量", subtitle: "出了门就销毁", chapterTag: "第 9 讲 · 概念理解",
       data: {
         intro: "📖 既然函数是黑盒，那在函数里定义的变量，出了函数还能用吗？<br>答案是：不能。函数里的变量叫<b>局部变量</b>，它只在函数内部存活。",
         codeFile: "codes/lesson-09/func-scope.cpp", snippet: "main",
@@ -259,7 +259,7 @@ export default {
 
     /* ===== 17 揭示：为什么是铺地砖？ ===== */
     {
-      id: 17, type: "origin", title: "揭秘：为什么是铺地砖？", subtitle: "把数字变成图形的魔法", chapterTag: "第 8 讲 · 算法揭秘",
+      id: 17, type: "origin", title: "揭秘：为什么是铺地砖？", subtitle: "把数字变成图形的魔法", chapterTag: "第 9 讲 · 算法揭秘",
       data: {
         problem: {
           title: "先别管代码，回归小学知识",
@@ -300,7 +300,7 @@ export default {
 
         /* ===== 18 演算：GCD 代码运行轨迹 ===== */
     {
-      id: 18, type: "code-walkthrough", title: "眼见为实：切砖轨迹", subtitle: "几何与代码的完美对应", chapterTag: "第 8 讲 · 实战演练",
+      id: 18, type: "code-walkthrough", title: "眼见为实：切砖轨迹", subtitle: "几何与代码的完美对应", chapterTag: "第 9 讲 · 实战演练",
       data: {
         intro: "把切地砖的过程翻译成代码，它就是一个 while 循环。我们看代码一步步怎么对应的：",
         codeFile: "codes/lesson-09/func-gcd.cpp", snippet: "main",
@@ -318,7 +318,7 @@ export default {
 
     /* ===== 19 脑力挑战：自己切一刀 ===== */
     {
-      id: 19, type: "grid", title: "脑力挑战：自己切一刀", subtitle: "如果没有电脑，你会算吗？", chapterTag: "第 8 讲 · 实战演练",
+      id: 19, type: "grid", title: "脑力挑战：自己切一刀", subtitle: "如果没有电脑，你会算吗？", chapterTag: "第 9 讲 · 实战演练",
       data: {
         cards: [
           { icon: "🧠", title: "挑战题目", desc: "现在，请你不要看代码。用刚才学的“切地砖”原理，在草稿纸上手动推导：<br><b>gcd(48, 18)</b> 的过程。" },
@@ -331,7 +331,7 @@ export default {
     },
     /* ===== 20 函数设计法则：所以呢？ ===== */
     {
-      id: 20, type: "grid", title: "函数设计法则：所以呢？", subtitle: "学完了坑，以后怎么写好函数？", chapterTag: "第 8 讲 · 概念总结",
+      id: 20, type: "grid", title: "函数设计法则：所以呢？", subtitle: "学完了坑，以后怎么写好函数？", chapterTag: "第 9 讲 · 概念总结",
       data: {
         cards: [
           { icon: "📦", title: "法则一：靠“参数”进货", desc: "函数要算数据，应该通过参数（实参）传进去，就像把材料塞进机器。" },
@@ -345,7 +345,7 @@ export default {
 
     /* ===== 21 初赛小知识 ===== */
     {
-      id: 21, type: "grid", title: "初赛小知识：函数与栈", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 8 讲 · 初赛渗透",
+      id: 21, type: "grid", title: "初赛小知识：函数与栈", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 9 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "🆚", title: "声明 vs 定义", desc: "声明只有头，带分号（<code>int f(int a);</code>）。<br>定义有大括号实现的代码块。" },
@@ -358,7 +358,7 @@ export default {
 
     /* ===== 22 课堂小测 ===== */
     {
-      id: 22, type: "quiz", title: "课堂小测", subtitle: "函数、传参与作用域", chapterTag: "第 8 讲 · 课堂小测",
+      id: 22, type: "quiz", title: "课堂小测", subtitle: "函数、传参与作用域", chapterTag: "第 9 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 函数", optionLayout: "horizontal", question: "函数定义在 main 函数之后，若要在 main 中调用，必须做什么？", options: [ { label: "A", text: "把函数移到 main 前面" }, { label: "B", text: "在 main 前进行函数声明", correct: true }, { label: "C", text: "不用管，直接调用" }, { label: "D", text: "在 main 里声明" } ], analysis: '或者在 main 前写声明，或者把整个函数定义写在 main 前。这是必修的工程规范。' },
@@ -398,7 +398,7 @@ export default {
 
     /* ===== 26 答疑时间 ===== */
     {
-      id: 26, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 8 讲 · 答疑",
+      id: 26, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 9 讲 · 答疑",
       data: {
         cards: [
           { icon: "🔄", title: "为什么实参没变？", desc: "默认值传递。传的是复印件，改复印件不影响原件。" },
@@ -411,7 +411,7 @@ export default {
 
     /* ===== 27 本讲英文单词 ===== */
     {
-      id: 27, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 8 讲 · 复习",
+      id: 27, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 9 讲 · 复习",
       data: {
         words: [
           { word: "function", cn: "函数", pron: "/ˈfʌŋkʃn/", origin: "英文原意“功能”", category: "概念" },
@@ -425,7 +425,7 @@ export default {
 
     /* ===== 28 知识清单 ===== */
     {
-      id: 28, type: "grid", title: "第 8 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 8 讲 · 复习",
+      id: 28, type: "grid", title: "第 8 讲 · 知识清单", subtitle: "一页看完本讲所有重点", chapterTag: "第 9 讲 · 复习",
       data: {
         cards: [
           { icon: "📦", title: "定义与调用", desc: "函数写在 main 前，或提前声明。<br>否则编译器找不到。" },

@@ -1,5 +1,5 @@
 export default {
-  title: "第 5 讲 循环结构",
+  title: "第 6 讲 循环结构",
   subtitle: "让程序学会重复",
   total: 25,
   category: "语法与基础算法",
@@ -12,7 +12,7 @@ export default {
 
     /* ===== 2 钩子 ===== */
     {
-      id: 2, type: "dialog", title: "1 亿次加法怎么算？", subtitle: "人脑的极限，电脑的起点", chapterTag: "第 5 讲 · 开场",
+      id: 2, type: "dialog", title: "1 亿次加法怎么算？", subtitle: "人脑的极限，电脑的起点", chapterTag: "第 6 讲 · 开场",
       data: {
         lines: [
           { who: "student", text: "小 C，如果让你算 1+2+3 一直加到 1 亿，你脑子会烧掉吧？" },
@@ -50,7 +50,7 @@ export default {
 
     /* ===== 5 为什么需要循环 ===== */
     {
-      id: 5, type: "split", title: "为什么需要循环？", subtitle: "复制粘贴的噩梦", chapterTag: "第 5 讲 · 概念理解",
+      id: 5, type: "split", title: "为什么需要循环？", subtitle: "复制粘贴的噩梦", chapterTag: "第 6 讲 · 概念理解",
       data: {
         intro: "如果让你输出 100 次 “Hello”，你会怎么写？",
         panes: [
@@ -80,7 +80,7 @@ export default {
 
     /* ===== 7 for 循环执行轨迹（动画） ===== */
     {
-      id: 7, type: "evolution", title: "眼见为实：for 的执行轨迹", subtitle: "变量 i 是怎么变的？", chapterTag: "第 5 讲 · 过程演示",
+      id: 7, type: "evolution", title: "眼见为实：for 的执行轨迹", subtitle: "变量 i 是怎么变的？", chapterTag: "第 6 讲 · 过程演示",
       data: {
         intro: "📖 循环最难理解的是“代码往回跳”。看右侧，i 每次是怎么变化的：",
         codeFile: "codes/lesson-06/for-loop.cpp", snippet: "main",
@@ -96,7 +96,7 @@ export default {
 
     /* ===== 8 练习1：1~n求和 ===== */
     {
-      id: 8, type: "level-map", title: "课堂练习1：1~n求和", subtitle: "循环的第一个经典应用", chapterTag: "第 5 讲 · 实战演练",
+      id: 8, type: "level-map", title: "课堂练习1：1~n求和", subtitle: "循环的第一个经典应用", chapterTag: "第 6 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入一个整数 <code>n</code>，输出 1 + 2 + 3 + ... + n 的结果。<br>输入样例：<code>100</code>　输出样例：<code>5050</code>", timer: "⏱ 限时 5 分钟" },
         hints: ["需要一个变量 <code>sum</code> 来存累加结果，初始为 0", "在循环里写 <code>sum = sum + i</code>", "输出最后的 <code>sum</code>"],
@@ -107,7 +107,7 @@ export default {
 
     /* ===== 9 边界陷阱：多跑一次 / 少跑一次 ===== */
     {
-      id: 9, type: "code-walkthrough", title: "眼见为实：少算了一个人？", subtitle: "初学者的噩梦：差一错误 (Off-by-one)", chapterTag: "第 5 讲 · 概念理解",
+      id: 9, type: "code-walkthrough", title: "眼见为实：少算了一个人？", subtitle: "初学者的噩梦：差一错误 (Off-by-one)", chapterTag: "第 6 讲 · 概念理解",
       data: {
         intro: "体育老师让 1 到 5 号同学报数。<br>如果你把代码写成 <code>i < 5</code>，相当于老师喊“小于 5 的报数”，5 号同学（小明）直接被无视了。<br>这就是循环里最容易犯的错——<b>差一错误</b>。看代码：",
         codeFile: "codes/lesson-06/_error-bound.cpp", snippet: "main",
@@ -151,7 +151,7 @@ export default {
 
     /* ===== 12 冲突：死循环急救 ===== */
     {
-      id: 12, type: "pitfall", title: "机房急救：死循环", subtitle: "程序卡死了怎么办？", chapterTag: "第 5 讲 · 概念理解",
+      id: 12, type: "pitfall", title: "机房急救：死循环", subtitle: "程序卡死了怎么办？", chapterTag: "第 6 讲 · 概念理解",
       data: {
         cases: [
           { icon: "💣", scene: "黑窗口里疯狂刷屏，按什么都没反应", what: "你写出了死循环。比如 <code>while (1)</code> 里面忘记写 <code>break;</code>", why: "条件永远为真，程序在里面疯狂转圈，出不来。", fix: "立刻按 <kbd>Ctrl + C</kbd> 强行掐断程序！<br>如果连 Ctrl+C 都没用，直接点窗口右上角 ✕ 关掉。" },
@@ -178,7 +178,7 @@ export default {
 
     /* ===== 14 嵌套执行轨迹 ===== */
     {
-      id: 14, type: "evolution", title: "眼见为实：嵌套循环怎么跑的", subtitle: "为什么执行了 9 次？", chapterTag: "第 5 讲 · 过程演示",
+      id: 14, type: "evolution", title: "眼见为实：嵌套循环怎么跑的", subtitle: "为什么执行了 9 次？", chapterTag: "第 6 讲 · 过程演示",
       data: {
         intro: "📖 嵌套循环最容易把人绕晕。记住：<b>外层动一次，内层要跑一整个完整的循环。</b>",
         codeFile: "codes/lesson-06/multiplication-table.cpp", snippet: "main",
@@ -194,7 +194,7 @@ export default {
 
     /* ===== 15 练习2：星号三角形 ===== */
     {
-      id: 15, type: "level-map", title: "课堂练习2：星号三角形", subtitle: "打印图形", chapterTag: "第 5 讲 · 实战演练",
+      id: 15, type: "level-map", title: "课堂练习2：星号三角形", subtitle: "打印图形", chapterTag: "第 6 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入行数 <code>n</code>，输出直角三角形。<br>输入样例：<code>3</code>　输出样例：<br><code>*</code><br><code>**</code><br><code>***</code>", timer: "⏱ 限时 6 分钟" },
         hints: ["外层循环控制行数", "内层循环控制每行的星号个数", "第 i 行就输出 i 个星号"],
@@ -220,7 +220,7 @@ export default {
 
     /* ===== 17 练习3：找质数（或阶乘） ===== */
     {
-      id: 17, type: "level-map", title: "课堂练习3：阶乘计算", subtitle: "累乘器", chapterTag: "第 5 讲 · 实战演练",
+      id: 17, type: "level-map", title: "课堂练习3：阶乘计算", subtitle: "累乘器", chapterTag: "第 6 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入整数 <code>n</code>，输出 <code>n!</code>（n 的阶乘）。<br>例如 5! = 1 × 2 × 3 × 4 × 5 = 120。<br>输入样例：<code>5</code>　输出样例：<code>120</code>", timer: "⏱ 限时 6 分钟" },
         hints: ["乘法单位是 1，所以变量 <code>ans</code> 初始要设为 1", "每次用 <code>ans = ans * i</code>", "小心不要用 int 存，阶乘增长极快，容易溢出"],
@@ -231,7 +231,7 @@ export default {
 
     /* ===== 18 初赛渗透 ===== */
     {
-      id: 18, type: "grid", title: "初赛小知识：循环次数", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 5 讲 · 初赛渗透",
+      id: 18, type: "grid", title: "初赛小知识：循环次数", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 6 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "🔁", title: "单循环次数", desc: "<code>for (i=1; i<=n; i++)</code><br>执行 <b>n</b> 次。<br><code>for (i=1; i<n; i++)</code><br>执行 <b>n-1</b> 次。" },
@@ -244,7 +244,7 @@ export default {
 
     /* ===== 19 课堂小测 ===== */
     {
-      id: 19, type: "quiz", title: "课堂小测", subtitle: "循环结构", chapterTag: "第 5 讲 · 课堂小测",
+      id: 19, type: "quiz", title: "课堂小测", subtitle: "循环结构", chapterTag: "第 6 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 初赛真题练习 · 循环", optionLayout: "horizontal", question: "循环 <code>for (int i = 1; i <= 10; i++)</code> 的循环体执行了多少次？", options: [ { label: "A", text: "9" }, { label: "B", text: "10", correct: true }, { label: "C", text: "11" }, { label: "D", text: "死循环" } ], analysis: "从 1 开始，包含 10，每次加 1。分别是 1, 2, 3, 4, 5, 6, 7, 8, 9, 10。共 <b>10</b> 次。" },
@@ -286,7 +286,7 @@ export default {
 
     /* ===== 23 答疑时间 ===== */
     {
-      id: 23, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 5 讲 · 互动",
+      id: 23, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 6 讲 · 互动",
       data: {
         cards: [
           { icon: "🔁", title: "关于 for", desc: "i 能不能从 0 开始？<br>三要素可以空着不写吗？" },
@@ -300,7 +300,7 @@ export default {
 
     /* ===== 24 本讲英文单词 ===== */
     {
-      id: 24, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 5 讲 · 复习",
+      id: 24, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 6 讲 · 复习",
       data: {
         words: [
           { word: "loop", cn: "循环", pron: "/luːp/", origin: "英文原意“环、圈”", category: "概念" },

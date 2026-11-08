@@ -1,5 +1,5 @@
 export default {
-  title: "第 10 讲 阶段实战",
+  title: "第 11 讲 阶段实战",
   subtitle: "第一阶段模拟赛",
   total: 20,
   category: "语法与基础算法",
@@ -25,7 +25,7 @@ export default {
 
     /* ===== 3 考场三铁律 ===== */
     {
-      id: 3, type: "grid", title: "考场三铁律", subtitle: "价值 100 分的保命秘籍", chapterTag: "第 10 讲 · 考场策略",
+      id: 3, type: "grid", title: "考场三铁律", subtitle: "价值 100 分的保命秘籍", chapterTag: "第 11 讲 · 考场策略",
       data: {
         cards: [
           { icon: "🚫", title: "绝对不交白卷", desc: "如果压轴题写不出最优解，就写个最暴力的 `for` 循环。哪怕只能过 30% 的测试点，也能拿 30 分。在信奥赛，<b>1 分压倒 1000 人</b>。" },
@@ -37,7 +37,7 @@ export default {
 
     /* ===== 4 审题与范围预判 ===== */
     {
-      id: 4, type: "grid", title: "审题与范围预判", subtitle: "做题前先做这三件事", chapterTag: "第 10 讲 · 考场策略",
+      id: 4, type: "grid", title: "审题与范围预判", subtitle: "做题前先做这三件事", chapterTag: "第 11 讲 · 考场策略",
       data: {
         cards: [
           { icon: "✂️", title: "提取输入输出", desc: "圈出题目要输入什么，输出什么格式。变量该用 `int` 还是 `string`？" },
@@ -56,7 +56,7 @@ export default {
 
     /* ===== 6 实战一：陶陶摘苹果 ===== */
     {
-      id: 6, type: "level-map", title: "实战一：陶陶摘苹果", subtitle: "限时 15 分钟，AC 了再看解析", chapterTag: "第 10 讲 · 实战演练",
+      id: 6, type: "level-map", title: "实战一：陶陶摘苹果", subtitle: "限时 15 分钟，AC 了再看解析", chapterTag: "第 11 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入 10 个苹果的高度，再输入陶陶的身高。陶陶能够到的高度是身高 + 30。求他能摘到几个苹果。<br>（OJ 题号：P1046）", timer: "⏱ 限时 15 分钟" },
         hints: ["遍历 10 个苹果", "判断条件：<code>apples[i] &lt;= height + 30</code>"],
@@ -67,7 +67,7 @@ export default {
 
         /* ===== 7 冲突①：为什么样例过了会 WA ===== */
     {
-      id: 7, type: "code-walkthrough", title: "为什么样例过了会 WA", subtitle: "评测机没有感情，只看数据", chapterTag: "第 10 讲 · 错题复盘",
+      id: 7, type: "code-walkthrough", title: "为什么样例过了会 WA", subtitle: "评测机没有感情，只看数据", chapterTag: "第 11 讲 · 错题复盘",
       data: {
         intro: "刚才做题时，很多人自信满满交卷，结果 0 分。除了边界，数据范围也是个大坑。<br>我们来看看这段求两数之和的代码，交上去会怎样：",
         codeFile: "codes/lesson-11/_error-int-sum.cpp", snippet: "main",
@@ -103,7 +103,7 @@ export default {
 
     /* ===== 8 错题大盘点 ===== */
     {
-      id: 8, type: "pitfall", title: "错题大盘点", subtitle: "考场三大杀手", chapterTag: "第 10 讲 · 错题复盘",
+      id: 8, type: "pitfall", title: "错题大盘点", subtitle: "考场三大杀手", chapterTag: "第 11 讲 · 错题复盘",
       data: {
         cases: [
           { icon: "❌", scene: "答案溢出", what: "用 int 存了超范围的累加和", why: "没看数据范围，或忘记开 long long", fix: "大数计算，全部换成 long long" },
@@ -115,7 +115,7 @@ export default {
 
     /* ===== 9 实战二：大数求和 ===== */
     {
-      id: 9, type: "level-map", title: "实战二：大数求和", subtitle: "限时 15 分钟，不许再犯溢出的错", chapterTag: "第 10 讲 · 实战演练",
+      id: 9, type: "level-map", title: "实战二：大数求和", subtitle: "限时 15 分钟，不许再犯溢出的错", chapterTag: "第 11 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "输入 n 个整数（每个可达 \\(10^{18}\\)），求它们的和。<br>输入样例：<code>3\n1000000000 2000000000 3000000000</code>", timer: "⏱ 限时 15 分钟" },
         hints: ["输入进来的数就要用 <code>long long</code> 存", "累加和 <code>sum</code> 也必须用 <code>long long</code>"],
@@ -126,7 +126,7 @@ export default {
 
     /* ===== 10 实战三：压轴题 ===== */
     {
-      id: 10, type: "level-map", title: "实战三：选数", subtitle: "限时 20 分钟，能拿部分分也行", chapterTag: "第 10 讲 · 实战演练",
+      id: 10, type: "level-map", title: "实战三：选数", subtitle: "限时 20 分钟，能拿部分分也行", chapterTag: "第 11 讲 · 实战演练",
       data: {
         question: { title: "题干", desc: "从 n 个数中挑出 k 个数，使它们的和为素数。求有多少种挑选方案。<br>（洛谷 P1036）", timer: "⏱ 限时 20 分钟" },
         hints: ["从 n 个数里挑，可以选，也可以不选", "这就是递归的搜索树", "准备一个 <code>isPrime</code> 函数"],
@@ -137,7 +137,7 @@ export default {
 
     /* ===== 11 压轴题解析：搜索树 ===== */
     {
-      id: 11, type: "code-walkthrough", title: "压轴题解析：选数的搜索树", subtitle: "把选数问题变成二叉树", chapterTag: "第 10 讲 · 压轴精讲",
+      id: 11, type: "code-walkthrough", title: "压轴题解析：选数的搜索树", subtitle: "把选数问题变成二叉树", chapterTag: "第 11 讲 · 压轴精讲",
       data: {
         intro: "📖 题目要求：从 n 个数里挑出 k 个数。<br>怎么挑？我们画出这棵二叉搜索树：",
         code: "// 对于第 i 个数，只有两种选择：\n// 1. 选它，则目前的和 + a[i]，挑的数量 + 1\n// 2. 不选它，则目前的和不变，挑的数量不变",
@@ -152,7 +152,7 @@ export default {
 
     /* ===== 12 压轴题：选数代码 ===== */
     {
-      id: 12, type: "code-split", title: "压轴题：选数代码", subtitle: "递归与质数判断的完美结合", chapterTag: "第 10 讲 · 压轴精讲",
+      id: 12, type: "code-split", title: "压轴题：选数代码", subtitle: "递归与质数判断的完美结合", chapterTag: "第 11 讲 · 压轴精讲",
       data: {
         intro: "📖 看这段代码，`dfs` 函数就是我们刚才画的搜索树。<br>注意它调用了我们第 8 讲写过的 `is_prime` 函数。",
         codeFile: "codes/lesson-11/practice-recurse.cpp", snippet: "main",
@@ -168,7 +168,7 @@ export default {
 
     /* ===== 13 第一阶段知识图谱 ===== */
     {
-      id: 13, type: "grid", title: "第一阶段知识图谱", subtitle: "回头看，你已经走了这么远", chapterTag: "第 10 讲 · 复习",
+      id: 13, type: "grid", title: "第一阶段知识图谱", subtitle: "回头看，你已经走了这么远", chapterTag: "第 11 讲 · 复习",
       data: {
         cards: [
           { icon: "📦", title: "存储数据", desc: "变量（int, long long, double, char, bool）<br>数组（一维、二维）<br>字符串（string, getline）" },
@@ -181,7 +181,7 @@ export default {
 
     /* ===== 14 课堂小测 ===== */
     {
-      id: 14, type: "quiz", title: "课堂小测", subtitle: "综合逻辑分析", chapterTag: "第 10 讲 · 课堂小测",
+      id: 14, type: "quiz", title: "课堂小测", subtitle: "综合逻辑分析", chapterTag: "第 11 讲 · 课堂小测",
       data: {
         questions: [
           { id: 1, type: "single", difficulty: 3, source: "CSP-J 初赛模拟题 · 数据范围", optionLayout: "vertical", question: "题目要求输入 \\(n\\) (\\(n \\le 10^5\\)) 个数字，求它们的和。以下哪种做法最可能拿到满分？", options: [ { label: "A", text: "定义 int 数组，用双重循环求和" }, { label: "B", text: "定义 int 变量 sum 累加" }, { label: "C", text: "定义 long long 变量 sum 累加", correct: true }, { label: "D", text: "定义 double 变量 sum 累加" } ], analysis: '数据范围 \\(10^5\\)，且数字可能很大，累加和极可能超过 21 亿，所以必须用 <code>long long</code>。而且用一层循环累加即可，无需数组。' },
@@ -209,7 +209,7 @@ export default {
 
     /* ===== 17 答疑时间 ===== */
     {
-      id: 17, type: "grid", title: "答疑时间", subtitle: "考后复盘 FAQ", chapterTag: "第 10 讲 · 互动",
+      id: 17, type: "grid", title: "答疑时间", subtitle: "考后复盘 FAQ", chapterTag: "第 11 讲 · 互动",
       data: {
         cards: [
           { icon: "💥", title: "为什么总是 TLE？", desc: "算一下你的代码执行了多少次。如果超过 10 的 8 次方，大概率超时，必须换算法。" },
@@ -221,7 +221,7 @@ export default {
 
     /* ===== 18 本讲英文单词 ===== */
     {
-      id: 18, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 10 讲 · 复习",
+      id: 18, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 11 讲 · 复习",
       data: {
         words: [
           { word: "WA", cn: "答案错误", pron: "/dʌbljuː eɪ/", origin: "Wrong Answer 的缩写", category: "概念" },
@@ -234,7 +234,7 @@ export default {
 
     /* ===== 19 知识清单 ===== */
     {
-      id: 19, type: "grid", title: "第 10 讲 · 知识清单", subtitle: "考场必备常识", chapterTag: "第 10 讲 · 复习",
+      id: 19, type: "grid", title: "第 10 讲 · 知识清单", subtitle: "考场必备常识", chapterTag: "第 11 讲 · 复习",
       data: {
         cards: [
           { icon: "📏", title: "看范围预判", desc: "数据 \\(\\le 10^9\\)，用 <code>long long</code>。<br>数据 \\(\\le 10^5\\)，只能单层循环。" },

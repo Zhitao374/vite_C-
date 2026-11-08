@@ -1,5 +1,5 @@
 export default {
-  title: "第 12 讲 字符串进阶",
+  title: "第 13 讲 字符串进阶",
   subtitle: "打开字符串的工具箱",
   total: 30,
   category: "语法与基础算法",
@@ -137,7 +137,7 @@ export default {
       type: "dialog",
       title: "为什么需要工具箱？",
       subtitle: "自己写 vs 用现成的",
-      chapterTag: "第 12 讲 · 概念理解",
+      chapterTag: "第 13 讲 · 概念理解",
       data: {
         lines: [
           {
@@ -322,7 +322,7 @@ export default {
       type: "dialog",
       title: "字符串函数答疑",
       subtitle: "小C回答常见问题",
-      chapterTag: "第 12 讲 · 概念理解",
+      chapterTag: "第 13 讲 · 概念理解",
       data: {
         lines: [
           { who: "student", text: "小 C，substr 和 find 都能得到子串吗？" },
@@ -405,7 +405,7 @@ export default {
       type: "dialog",
       title: "双指针答疑",
       subtitle: "为什么要用双指针",
-      chapterTag: "第 12 讲 · 概念理解",
+      chapterTag: "第 13 讲 · 概念理解",
       data: {
         lines: [
           {
@@ -505,7 +505,7 @@ export default {
       type: "level-map",
       title: "课堂练习1：原地反转",
       subtitle: "用双指针反转字符串",
-      chapterTag: "第 12 讲 · 实战演练",
+      chapterTag: "第 13 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -537,7 +537,7 @@ export default {
       type: "level-map",
       title: "课堂练习2：查找所有位置",
       subtitle: "输出模式串的所有出现位置",
-      chapterTag: "第 12 讲 · 实战演练",
+      chapterTag: "第 13 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -569,7 +569,7 @@ export default {
       type: "level-map",
       title: "课堂练习3：最长回文子串",
       subtitle: '用"中心扩展法"找最长回文',
-      chapterTag: "第 12 讲 · 实战演练",
+      chapterTag: "第 13 讲 · 实战演练",
       data: {
         question: {
           title: "题干",
@@ -602,7 +602,7 @@ export default {
       type: "dialog",
       title: "挑战题思路 · 中心扩展",
       subtitle: '从"回文的本质"出发',
-      chapterTag: "第 12 讲 · 解题思路",
+      chapterTag: "第 13 讲 · 解题思路",
       data: {
         lines: [
           {
@@ -645,7 +645,7 @@ export default {
       type: "evolution",
       title: "挑战题演示 · 中心扩展的过程",
       subtitle: "看 expand 一步步扩展",
-      chapterTag: "第 12 讲 · 过程演示",
+      chapterTag: "第 13 讲 · 过程演示",
       data: {
         intro:
           '📖 以 <code>s = "babad"</code> 为例，看"中心扩展"如何一步步找到最长回文。',
@@ -701,7 +701,7 @@ export default {
       type: "dialog",
       title: "练习小结",
       subtitle: "小C点评三道练习",
-      chapterTag: "第 12 讲 · 答疑",
+      chapterTag: "第 13 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "小 C，练习 1 和练习 2 我很快做完了。" },
@@ -753,7 +753,7 @@ export default {
       type: "dialog",
       title: "初赛小知识：字符串与 npos",
       subtitle: "CSP-J/S 初赛必考",
-      chapterTag: "第 12 讲 · 初赛渗透",
+      chapterTag: "第 13 讲 · 初赛渗透",
       data: {
         lines: [
           { who: "student", text: "小 C，初赛会考字符串函数吗？" },
@@ -791,7 +791,7 @@ export default {
       type: "quiz",
       title: "课堂小测",
       subtitle: "字符串函数、双指针与匹配",
-      chapterTag: "第 12 讲 · 课堂小测",
+      chapterTag: "第 13 讲 · 课堂小测",
       data: {
         questions: [
           {
@@ -977,7 +977,7 @@ cout << s << endl;`,
       type: "dialog",
       title: "答疑时间",
       subtitle: "有问题尽管问",
-      chapterTag: "第 12 讲 · 答疑",
+      chapterTag: "第 13 讲 · 答疑",
       data: {
         lines: [
           { who: "student", text: "字符串函数太多记不住怎么办？" },
@@ -1020,7 +1020,7 @@ cout << s << endl;`,
       type: "glossary",
       title: "本讲英文单词",
       subtitle: "记牢拼写，理解原意",
-      chapterTag: "第 12 讲 · 复习",
+      chapterTag: "第 13 讲 · 复习",
       data: {
         words: [
           {
@@ -1080,7 +1080,7 @@ cout << s << endl;`,
       type: "grid",
       title: "第 12 讲 · 知识清单",
       subtitle: "一页看完本讲所有重点",
-      chapterTag: "第 12 讲 · 复习",
+      chapterTag: "第 13 讲 · 复习",
       data: {
         cards: [
           {
