@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 // @snippet-start main
 int main() {
     int win;

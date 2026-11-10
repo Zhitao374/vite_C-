@@ -3,7 +3,9 @@ using namespace std;
 
 // @snippet-start main
 int main() {
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; 
+         i <= 5; 
+         i++) {
         cout << i << " ";
     }
     cout << endl;

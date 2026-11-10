@@ -6,9 +6,8 @@ int main() {
     int n = 1;
     while (n <= 5) {
         cout << n << " ";
-        n++; // 步长更新，千万别漏
+        n++;
     }
-    cout << endl;
     return 0;
 }
 // @snippet-end main

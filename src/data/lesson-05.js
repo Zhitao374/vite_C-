@@ -1,7 +1,7 @@
 export default {
   title: "第 5 讲 多分支与 switch",
   subtitle: "让判断更加精准",
-  total: 22,
+  total: 21,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -41,12 +41,12 @@ export default {
       id: 5, type: "code-split", title: "if-else if 多分支", subtitle: "多条路，只走一条",
       data: { 
         intro: "📖 <b>题目要求</b>：输入胜场数 <code>win</code>，输出对应的段位。<br>用 <code>if-else if</code> 改写，所有条件就排成了齐平的一排，清爽多了！<br><b>语法规则</b>：从上到下依次判断，<b>一旦某个条件成立，后面不再判断</b>。", 
-        codeFile: "codes/lesson-04/if-else-if.cpp", 
+        codeFile: "codes/lesson-05/if-else-if.cpp", 
         snippet: "main", 
         annotations: [ 
           { line: 8, title: "win &gt;= 40", desc: "先判断最高段位" }, 
           { line: 10, title: "else if", desc: "上一个条件不成立时，才判断这一个" }, 
-          { line: 18, title: "else", desc: "兜底选项（低于 10 局的情况）" } 
+          { line: 16, title: "else", desc: "兜底选项（低于 10 局的情况）" } 
         ], 
         output: "（输入 25）\n白银", 
         footer: '<b>⚠️ 顺序很重要</b>：代码是从上往下执行的，一旦命中就不再往下走。所以条件必须从大到小（或从小到大）有规律地排列。' 
@@ -56,13 +56,13 @@ export default {
     /* ===== 6 冲突：顺序颠倒 ===== */
     {
       id: 6, type: "code-walkthrough", title: "眼见为实：顺序颠倒的灾难", subtitle: "为什么 90 分变成了 C？", chapterTag: "第 5 讲 · 概念理解",
-      data: { intro: "有个同学把条件顺序写反了，把 <code>score &gt;= 60</code> 放到了最前面。<br>运行之后，输入 90 分，屏幕上竟然输出了 C！这是为什么？看代码：", codeFile: "codes/lesson-04/_error-order.cpp", snippet: "main", steps: [ { title: "输入 90", line: 5, vars: { score: "90" }, note: "score 是 90。" }, { title: "第一个条件", line: 7, vars: { score: "90" }, note: "先判断 <code>90 &gt;= 60</code>，成立！<br>进入这层分支，输出 C。" }, { title: "直接结束", line: 7, vars: { score: "90" }, note: "因为已经命中了，后面的 <code>else if</code> 根本没机会执行！<br>哪怕 90 分确实大于等于 90，也晚了。" } ], footer: '<b>📌 铁律</b>：范围窄的条件放前面，范围宽的条件放后面。绝不能乱序。' }
+      data: { intro: "有个同学把条件顺序写反了，把 <code>score &gt;= 60</code> 放到了最前面。<br>运行之后，输入 90 分，屏幕上竟然输出了 C！这是为什么？看代码：", codeFile: "codes/lesson-05/_error-order.cpp", snippet: "main", steps: [ { title: "输入 90", line: 5, vars: { score: "90" }, note: "score 是 90。" }, { title: "第一个条件", line: 7, vars: { score: "90" }, note: "先判断 <code>90 &gt;= 60</code>，成立！<br>进入这层分支，输出 C。" }, { title: "直接结束", line: 7, vars: { score: "90" }, note: "因为已经命中了，后面的 <code>else if</code> 根本没机会执行！<br>哪怕 90 分确实大于等于 90，也晚了。" } ], footer: '<b>📌 铁律</b>：范围窄的条件放前面，范围宽的条件放后面。绝不能乱序。' }
     },
 
     /* ===== 7 练习1：成绩等级 ===== */
     {
       id: 7, type: "level-map", title: "课堂练习1：成绩等级", subtitle: "多分支判断", chapterTag: "第 5 讲 · 实战演练",
-      data: { question: { title: "题干", desc: "输入分数 <code>score</code>：≥90 输出 A，≥80 输出 B，≥60 输出 C，否则输出 D。", timer: "⏱ 限时 6 分钟" }, hints: ["用 <code>if-else if</code> 链", "从高分到低分判断", "不要忘了最后的 <code>else</code> 兜底"], answer: { codeFile: "codes/lesson-04/score-level.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "进入后面的分支时，系统就自动隐含了“小于上一档”的条件。" } }
+      data: { question: { title: "题干", desc: "输入分数 <code>score</code>：≥90 输出 A，≥80 输出 B，≥60 输出 C，否则输出 D。", timer: "⏱ 限时 6 分钟" }, hints: ["用 <code>if-else if</code> 链", "从高分到低分判断", "不要忘了最后的 <code>else</code> 兜底"], answer: { codeFile: "codes/lesson-05/score-level.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "进入后面的分支时，系统就自动隐含了“小于上一档”的条件。" } }
     },
 
     /* ===== 8 悬挂 else（初赛大坑） ===== */
@@ -70,7 +70,7 @@ export default {
       id: 8, type: "code-walkthrough", title: "初赛大坑：悬挂 else", subtitle: "凭空多出来的输出？", chapterTag: "第 5 讲 · 概念理解",
       data: {
         intro: "为了偷懒，我们经常在只有一行代码时省略大括号。<br>现在我们要判断：如果 a 大于 0，输出 A；否则输出 C。<br>看这段代码，本来挺正常的：",
-        codeFile: "codes/lesson-04/dangling-else.cpp", 
+        codeFile: "codes/lesson-05/dangling-else.cpp", 
         snippet: "main",
         steps: [
           { 
@@ -120,41 +120,89 @@ export default {
 
     /* ===== 10 switch 多分支 ===== */
     {
-      id: 10, type: "code-split", title: "switch 多分支", subtitle: "根据变量的值选择路径",
-      data: { intro: "📖 判断具体的几个值，用 <code>switch</code> 更清爽。<br><b>语法</b>：<code>switch (变量) { case 值: ...; break; }</code>。", codeFile: "codes/lesson-04/switch-day.cpp", snippet: "main", annotations: [ { line: 8, title: "switch (day)", desc: "根据 day 的值跳转" }, { line: 9, title: "case 1:", desc: "当 day 等于 1 时执行" }, { line: 9, title: "break;", desc: '跳出 switch，不写会"穿透"' }, { line: 16, title: "default:", desc: "兜底选项，处理未匹配的情况" } ], output: "（输入 3）\n周三", footer: '<b>⚠️ break 的作用</b>：不写 break，程序会继续执行下一个 case——这叫"<b>case 穿透</b>"。' }
-    },
-
-    /* ===== 11 switch 的穿透陷阱 ===== */
-    {
-      id: 11, type: "pitfall", title: "switch 的穿透陷阱", subtitle: "忘写 break 的惨案",
-      data: { cases: [ { icon: "💣", scene: "输入 1，却输出了周一周二...", what: "全执行了一遍。", why: "匹配成功后，会一直顺延，直到遇到 break。", fix: "在每个 case 末尾加上 break。" }, { icon: "🧠", scene: "灵魂拷问：这是 Bug 还是特性？", what: "是故意的特性。", why: "如果几个条件共用一段代码，利用穿透能少写。", fix: "新手期请无脑写上 break。" } ], footer: "<b>📌 机房自检</b>：写完 switch，向下扫一眼，确保每个 case 都有 break 兜底。" }
-    },
-
-    /* ===== 12 穿透的妙用 ===== */
-    {
-      id: 12, type: "code-split", title: "避坑：穿透的妙用", subtitle: "多个 case 共享代码",
+      id: 10, type: "split", title: "switch 分拣机", subtitle: "如何优雅地匹配多个固定值？",
       data: {
-        intro: "既然不写 break 会穿透，那我们能不能<b>故意利用穿透</b>来简化代码？<br>比如判断工作日和休息日：1-5 是工作日，6-7 是休息日。不用写 7 个 case，只需要巧妙合并。",
-        codeFile: "codes/lesson-04/switch-fallthrough.cpp", snippet: "main",
-        annotations: [
-          { line: 9, title: "case 1: case 2: ...", desc: "1 到 5 都不写 break，让它们顺延到同一处" },
-          { line: 10, title: "cout << \"工作日\"", desc: "只要命中 1-5 任何一个，都会执行这里" },
-          { line: 11, title: "break;", desc: "输出完工作日，必须退出，否则会继续执行休息日" },
+        intro: "📖 刚学了 <code>if-else if</code>，如果我们要判断星期一到星期日，得写 7 个 <code>else if</code>。<br>但其实，如果只是比对**固定的值**，用 <code>switch</code> 就像快递分拣机一样清爽：",
+        panes: [
+          {
+            title: "代码骨架",
+            icon: "💻",
+            codeFile: "codes/lesson-05/switch-day.cpp",
+            snippet: "main"
+          },
+          {
+            title: "分拣机原理",
+            icon: "📦",
+            items: [
+              { title: "1. switch (day)", desc: "把 <code>day</code> 这个包裹放上传送带。" },
+              { title: "2. 逐层比对", desc: "包裹往下走，看看是不是 <code>case 1</code>？不是，继续走。是不是 <code>case 2</code>？不是……" },
+              { title: "3. 匹配成功", desc: "走到 <code>case 3</code>，发现包裹标签也是 3，匹配成功！进入这个格子执行代码。" },
+              { title: "4. 紧急刹车", desc: "执行完输出后，必须遇到 <code>break</code>，否则传送带不会停，会继续掉进下一个格子里（这就是穿透）。" }
+            ]
+          }
         ],
-        output: "（输入 6）\n休息日",
-        footer: '<b>📌 经验</b>：连续的、处理逻辑相同的 case，故意省略 break 是一种非常优雅的写法。'
+        footer: '<b>📌 核心对比</b>：<br>如果是判断 <b>范围</b>（如成绩 60~80），用 <code>if</code>；<br>如果是判断 <b>具体是几</b>（如星期几、选项 A/B/C），用 <code>switch</code>。'
       }
     },
 
-    /* ===== 13 练习2：星期几查询 ===== */
+    /* ===== 11 switch 的穿透陷阱（动态代码演示） ===== */
     {
-      id: 13, type: "level-map", title: "课堂练习2：星期几查询", subtitle: "switch 实战", chapterTag: "第 5 讲 · 实战演练",
-      data: { question: { title: "题干", desc: "输入数字（1—7），输出对应的星期几。<br>输入样例：<code>3</code>　输出样例：<code>周三</code>", timer: "⏱ 限时 5 分钟" }, hints: ["用 <code>switch</code> 语法", "不要忘记写 <code>break</code>", "用 <code>default</code> 处理无效输入"], answer: { codeFile: "codes/lesson-04/switch-day.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "每一个 case 后面必须跟上 break，防止穿透。" } }
+      id: 11, type: "code-walkthrough", title: "眼见为实：穿透的灾难", subtitle: "删掉 break 会发生什么？", chapterTag: "第 5 讲 · 概念理解",
+      data: {
+        intro: "刚才的代码写得好好的，每个 <code>case</code> 后面都有 <code>break</code>。<br>现在，<b>假设你忘了写 break</b>（或者自己把它删了），程序会怎么运行？我们来跑一下：",
+        codeFile: "codes/lesson-05/switch-penetration.cpp", 
+        snippet: "main",
+        steps: [
+          { 
+            title: "1. 正常情况", 
+            line: 9, // 高亮 cout << "周一"
+            hiddenLines: [], 
+            vars: { day: "1" }, 
+            note: "day 是 1，匹配到 <code>case 1</code>。<br>输出“周一”，然后遇到 <code>break</code>，程序直接跳出 switch。<b>完美结束。</b>" 
+          },
+          { 
+            title: "2. 致命手滑", 
+            line: 8, // 高亮 case 1
+            hiddenLines: [10, 13, 16], // 精确隐藏三个 break 行
+            placeholder: "            // 不小心删掉了 break", 
+            vars: { day: "1" }, 
+            note: "现在我们把 3 个 <code>break</code> 全删了。<br>你觉得输出还会是“周一”吗？" 
+          },
+          { 
+            title: "3. 失控的开始", 
+            line: 11, // 高亮 case 2
+            hiddenLines: [10, 13, 16], 
+            placeholder: "            // 不小心删掉了 break", 
+            vars: { day: "1" }, 
+            note: "因为没了 <code>break</code>，执行完“周一”后，程序<b>根本停不下来</b>！<br>它像穿透了一样，顺延执行了 <code>case 2</code>，输出了“周二”。" 
+          },
+          { 
+            title: "4. 穿透到底", 
+            line: 14, // 高亮 case 3
+            hiddenLines: [10, 13, 16], 
+            placeholder: "            // 不小心删掉了 break", 
+            vars: { day: "1" }, 
+            note: "它继续往下掉，执行了 <code>case 3</code>，输出了“周三”。<br><b>最终屏幕输出：周一周二周三。</b><br>这就是可怕的 <b>case 穿透</b>。" 
+          }
+        ],
+        extra: {
+          title: "💡 进阶思考：穿透只有坏处吗？",
+          desc: "其实，“穿透”是 C++ 故意设计的特性。<br>如果几个条件要执行完全一样的代码，利用穿透能大幅减少代码量。<br>比如判断工作日和休息日：<br><code>case 1: case 2: case 3: case 4: case 5:<br>    cout &lt;&lt; \"工作日\";<br>    break;</code><br>因为 1-5 都没写 break，所以只要命中其中任意一个，都会顺延到这一行。这就是高级程序员的优雅写法。",
+          variant: "card-primary"
+        },
+        footer: '<b>📌 铁律</b>：新手期，把每个 case 都写上 break 最安全。等你完全掌握了，再去尝试利用穿透。'
+      }
     },
 
-    /* ===== 14 if vs switch ===== */
+    /* ===== 12 练习2：星期几查询（原 P13，ID 顺延） ===== */
     {
-      id: 14, type: "compare", title: "if vs switch", subtitle: "什么时候用谁？",
+      id: 12, type: "level-map", title: "课堂练习2：星期几查询", subtitle: "switch 实战", chapterTag: "第 5 讲 · 实战演练",
+      data: { question: { title: "题干", desc: "输入数字（1—7），输出对应的星期几。<br>输入样例：<code>3</code>　输出样例：<code>周三</code>", timer: "⏱ 限时 5 分钟" }, hints: ["用 <code>switch</code> 语法", "不要忘记写 <code>break</code>", "用 <code>default</code> 处理无效输入"], answer: { codeFile: "codes/lesson-05/switch-day.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "每一个 case 后面必须跟上 break，防止穿透。" } }
+    },
+
+    /* ===== 13 if vs switch ===== */
+    {
+      id: 13, type: "compare", title: "if vs switch", subtitle: "什么时候用谁？",
       data: {
         neutral: true, splitStep: true,
         groups: [
@@ -166,20 +214,20 @@ export default {
       }
     },
 
-    /* ===== 15 练习3：综合实战 简易计算器 ===== */
+    /* ===== 14 练习3：综合实战 简易计算器 ===== */
     {
-      id: 15, type: "level-map", title: "课堂练习3：简易计算器", subtitle: "综合运用 switch 和 if", chapterTag: "第 5 讲 · 实战演练",
+      id: 14, type: "level-map", title: "课堂练习3：简易计算器", subtitle: "综合运用 switch 和 if", chapterTag: "第 5 讲 · 实战演练",
       data: { 
         question: { title: "题干", desc: "输入一个简单算式（如 <code>3 + 5</code>），输出计算结果。<br>运算符包含 <code>+ - * /</code>。<br>如果除数为 0，输出 <code>Divided by zero!</code>。<br>输入样例：<code>10 / 2</code>　输出样例：<code>5</code>", timer: "⏱ 限时 8 分钟" }, 
         hints: ["读入格式是：<code>cin >> a >> op >> b;</code>，其中 op 是 char 类型", "对 <code>op</code> 进行 switch 判断", "在除号 <code>/</code> 的 case 里，还要嵌套一个 if 判断分母是否为 0", "不要忘记 break"], 
-        answer: { codeFile: "codes/lesson-04/switch-calc.cpp", snippet: "main" }, 
+        answer: { codeFile: "codes/lesson-05/switch-calc.cpp", snippet: "main" }, 
         analysis: { title: "📖 解析", desc: "这道题完美结合了 char 输入、switch 选择、以及 switch 内部嵌套 if 判断。" } 
       }
     },
 
-    /* ===== 16 初赛渗透 ===== */
+    /* ===== 15 初赛渗透 ===== */
     {
-      id: 16, type: "grid", title: "初赛小知识：switch 考点", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 5 讲 · 初赛渗透",
+      id: 15, type: "grid", title: "初赛小知识：switch 考点", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 5 讲 · 初赛渗透",
       data: {
         cards: [
           { icon: "⚠️", title: "参数限制", desc: "switch 括号里的变量，只能是<b>整数</b>或<b>字符</b>。<br>不能用 double 或 string。" },
@@ -190,9 +238,9 @@ export default {
       }
     },
 
-    /* ===== 17 课堂小测 ===== */
+    /* ===== 16 课堂小测 ===== */
     {
-      id: 17, type: "quiz", title: "课堂小测", subtitle: "多分支与 switch", chapterTag: "第 5 讲 · 课堂小测",
+      id: 16, type: "quiz", title: "课堂小测", subtitle: "多分支与 switch", chapterTag: "第 5 讲 · 课堂小测",
       data: { 
         questions: [ 
           { id: 1, type: "single", difficulty: 2, source: "CSP-J 真题", optionLayout: "horizontal", question: "在 if-else if 语句中，如果第一个条件成立，后面的 else if 还会进行判断吗？", options: [ { label: "A", text: "会" }, { label: "B", text: "不会", correct: true } ], analysis: "一旦前面命中，后面的条件会被直接跳过，不再判断。" },
@@ -203,39 +251,39 @@ export default {
       }
     },
 
-    /* ===== 18 今日总结 ===== */
+    /* ===== 17 今日总结 ===== */
     {
-      id: 18, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
+      id: 17, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
       data: { text: "条件越多，越要理清顺序。", author: "—— 分支结构第二课", points: [ "if-else if 从上往下判断，命中即止", "范围窄的条件放前面，范围宽放后面", "悬挂 else 永远是就近匹配，必须加括号", "switch 适合等值判断，注意 break 防穿透", "利用穿透可以合并相同的 case" ], highlight: { title: "📌 关键口诀", desc: "多分支排好队，范围窄的放前位；嵌套必加大括号，不被缩进骗；switch 分拣真方便，break 兜底防穿透。" } }
     },
 
-    /* ===== 19 课后作业 ===== */
+    /* ===== 18 课后作业 ===== */
     {
-      id: 19, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
+      id: 18, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
       data: { 
         cards: [ 
-          { icon: "🟢", title: "基础 1 · P5711", link: "https://www.luogu.com.cn/problem/P5711", desc: "<b>闰年判断</b><br>考察：逻辑运算<br>难度：★★" }, 
+          { icon: "🟢", title: "基础 1 · P5717", link: "https://www.luogu.com.cn/problem/P5717", desc: "<b>三角形分类</b><br>考察：if-else if 多分支<br>难度：★★<br><b>💡 提示</b>：注意条件的先后顺序！" }, 
           { icon: "🟢", title: "基础 2 · P5716", link: "https://www.luogu.com.cn/problem/P5716", desc: "<b>月份天数</b><br>考察：switch 穿透<br>难度：★★" }, 
-          { icon: "🔴", title: "挑战 · P1422", link: "https://www.luogu.com.cn/problem/P1422", desc: "<b>小玉家的电费</b><br>考察：多分支阶梯计价<br>难度：★★" } 
+          { icon: "🔴", title: "挑战 · P1422", link: "https://www.luogu.com.cn/problem/P1422", desc: "<b>小玉家的电费</b><br>考察：阶梯计价、多分支<br>难度：★★" } 
         ] 
       }
     },
 
-    /* ===== 20 下节预告 ===== */
+    /* ===== 19 下节预告 ===== */
     {
-      id: 20, type: "radial", title: "下节预告", subtitle: "第 6 讲 · 循环结构",
+      id: 19, type: "radial", title: "下节预告", subtitle: "第 6 讲 · 循环结构",
       data: { center: "循环结构", items: [ { text: "for 循环" }, { text: "while 循环" }, { text: "自增自减 i++" }, { text: "死循环急救" } ] }
     },
 
-    /* ===== 21 答疑与词汇 ===== */
+    /* ===== 20 答疑与词汇 ===== */
     {
-      id: 21, type: "grid", title: "答疑与单词", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 5 讲 · 互动",
+      id: 20, type: "grid", title: "答疑与单词", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 5 讲 · 互动",
       data: { cards: [ { icon: "📮", title: "关于 switch", desc: "switch 和 if 怎么选？<br>穿透到底有什么用？" }, { icon: "📖", title: "本讲单词", desc: "<b>switch</b>：开关 / 分拣<br><b>case</b>：情况<br><b>default</b>：默认<br><b>fall-through</b>：穿透" } ], footer: '提问的三个层次：① 是什么 ② 为什么 ③ 怎么办。' }
     },
 
-    /* ===== 22 结束页 ===== */
+    /* ===== 21 结束页 ===== */
     {
-      id: 22, type: "ending", title: "第五讲结束", subtitle: "你的程序，逻辑更加缜密了", chapterTag: false,
+      id: 21, type: "ending", title: "第五讲结束", subtitle: "你的程序，逻辑更加缜密了", chapterTag: false,
       data: { slogan: "科学教育 · 创新课程", extra: { title: "🌟 下一站：重复的力量", desc: "今天你掌握了组合条件与分拣机，程序的判断力已经拉满。<br><br>但程序目前还是只能“执行一次”。如果让你算 1 加到 1 亿，你不可能写 1 亿行 if。<br>下一讲，我们将解锁编程中最核心的引擎——<b>循环</b>。<br>还有神秘的 `i++`，我们循环见！", variant: "card-glow" } }
     },
   ],

@@ -91,7 +91,7 @@ export default {
         question: { title: "题干", desc: "输入整数 <code>n</code>，偶数输出 <code>even</code>，奇数输出 <code>odd</code>。<br>输入样例：<code>7</code>　输出样例：<code>odd</code>", timer: "⏱ 限时 5 分钟" }, 
         hints: ["数学上，偶数就是能被 2 整除的数", "C++ 里用取余 <code>%</code> 看余数", "如果 <code>n % 2 == 0</code> 就是偶数", "用 <code>if-else</code> 走两条路"], 
         answer: { codeFile: "codes/lesson-04/even-odd.cpp", snippet: "main" }, 
-        analysis: { title: "📖 解析", desc: "<code>n % 2</code> 得到余数，只有 0 和 1。余数为 0 是偶数，余数为 1 是奇数。<br>这是取余运算符最典型的应用。" } 
+        analysis: { title: "📖 解析", desc: "<code>n % 2</code> 得到余数，只有 0 和 1。余数为 0 是偶数，余数为 1 是奇数。<br>这是取余运算符最典型的应用。<br><br><b>🤔 进阶思考</b>：奇偶判断只需要 1 个条件。那如果是游乐场买票——<b>“年龄满 12 岁”并且“身高超过 1.4 米”</b>才能买儿童票，这两个条件怎么写进同一个 <code>if</code> 里呢？" } 
       }
     },
 
@@ -99,7 +99,7 @@ export default {
     {
       id: 11, type: "code-split", title: "逻辑运算符与常见组合", subtitle: "组合多个条件",
       data: { 
-        intro: "📖 有时候一个条件不够用，我们需要组合多个条件。<br><b>⚠️ 数学直觉陷阱</b>：在数学里你可以写 <code>0 &lt; x &lt; 10</code>，但在 C++ 里这是错的！<br>必须拆成两个条件用 <code>&&</code> 连起来：<code>x &gt; 0 && x &lt; 10</code>。", 
+        intro: "📖 刚才的游乐场买票问题：年龄和身高两个条件<b>必须同时满足</b>，该怎么写？<br>这就需要用到<b>逻辑运算符</b>把它们连起来：<code>age >= 12 && height > 1.4</code>。<br><br><b>⚠️ 数学直觉陷阱</b>：在数学里你可以写 <code>0 &lt; x &lt; 10</code>，但在 C++ 里这是错的！<br>必须拆成两个条件用 <code>&&</code> 连起来：<code>x &gt; 0 && x &lt; 10</code>。", 
         codeFile: "codes/lesson-04/logic-ops.cpp", 
         snippet: "main", 
         annotations: [ 
@@ -143,8 +143,32 @@ export default {
 
     /* ===== 14 初赛渗透 ===== */
     {
-      id: 14, type: "grid", title: "初赛小知识：优先级与陷阱", subtitle: "CSP-J/S 初赛常考", chapterTag: "第 4 讲 · 初赛渗透",
-      data: { cards: [ { icon: "📊", title: "优先级", desc: "算数 > 关系 > 逻辑 > 赋值<br><code>a + b > c && d == e</code><br>先算加法，再算大于，最后算且。<br><b>不确定就加括号！</b>" }, { icon: "⚡", title: "短路求值", desc: "<code>a && b</code> 中 a 为假，b 不执行<br><code>a || b</code> 中 a 为真，b 不执行<br><b>常考：变量值变了没？</b>" }, { icon: "⚠️", title: "致命陷阱", desc: "<code>if (a = 5)</code><br>单等号是赋值，非 0 永远为真。<br>编译器不报错！" } ], footer: '<b>📌 怎么考？</b><br>给你一个复杂表达式，问 a 的值；或者给一段代码，问某个变量在短路后变没变。' }
+      id: 14, type: "grid", title: "初赛小知识：优先级与陷阱", subtitle: "CSP-J/S 初赛必考", chapterTag: "第 4 讲 · 初赛渗透",
+      data: { 
+        cards: [ 
+          { 
+            icon: "📊", 
+            title: "优先级", 
+            desc: "算数 > 关系 > 逻辑 > 赋值<br><code>a + b > c && d == e</code><br>先算加法，再算大于，最后算且。<br><b>不确定就加括号！</b>" 
+          }, 
+          { 
+            icon: "⚡", 
+            title: "短路求值", 
+            desc: "<code>a && b</code> 中 a 为假，b 不执行<br><code>a || b</code> 中 a 为真，b 不执行<br><b>常考：变量值变了没？</b>" 
+          }, 
+          { 
+            icon: "⚠️", 
+            title: "致命陷阱", 
+            desc: "<code>if (a = 5)</code><br>单等号是赋值，非 0 永远为真。<br>编译器不报错，逻辑全毁！" 
+          },
+          { 
+            icon: "❓", 
+            title: "三目运算符", 
+            desc: "语法：<code>条件 ? 结果1 : 结果2</code><br>它是 <code>if-else</code> 的简写。<br>例：<code>int max = a > b ? a : b;</code><br><b>初赛常考它的运算顺序。</b>" 
+          }
+        ], 
+        footer: '<b>📌 怎么考？</b><br>① 给复杂表达式，问 a 的值；<br>② 给代码，问短路后变量变没变；<br>③ 给三目运算符，问最终结果。' 
+      }
     },
 
     /* ===== 15 课堂小测 ===== */

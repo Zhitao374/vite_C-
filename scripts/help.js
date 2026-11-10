@@ -19,6 +19,7 @@ const COMMANDS = {
     '🚀 开发': {
         'dev': { run: 'npm run dev', desc: '启动开发服务器' },
         'build': { run: 'npm run build', desc: '打包生产版本' },
+        'build:vite': { run: 'npm run build:vite', desc: '只打包前端代码（生成 dist）' },
         'preview': { run: 'npm run preview', desc: '预览生产版本' },
         'lint': { run: 'npm run lint', desc: 'ESLint 检查' },
         'format': { run: 'npm run format', desc: 'Prettier 格式化' },
