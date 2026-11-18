@@ -2,26 +2,22 @@
 #include <string>
 using namespace std;
 
-int main() {
 // @snippet-start main
+int main() {
     string s;
     cin >> s;
-    
-    bool is_palindrome = true;
-    int left = 0;
-    int right = s.length() - 1;
-    
+    int left = 0, right = s.length() - 1;
+    bool is_pal = true;
     while (left < right) {
         if (s[left] != s[right]) {
-            is_palindrome = false;
+            is_pal = false;
             break;
         }
         left++;
         right--;
     }
-    
-    if (is_palindrome) cout << "Yes";
-    else cout << "No";
-// @snippet-end main
+    if (is_pal) cout << "Yes" << endl;
+    else cout << "No" << endl;
     return 0;
 }
+// @snippet-end main

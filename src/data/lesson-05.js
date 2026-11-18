@@ -1,7 +1,7 @@
 export default {
   title: "第 5 讲 多分支与 switch",
   subtitle: "让判断更加精准",
-  total: 21,
+  total: 22,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -69,44 +69,42 @@ export default {
     {
       id: 8, type: "code-walkthrough", title: "初赛大坑：悬挂 else", subtitle: "凭空多出来的输出？", chapterTag: "第 5 讲 · 概念理解",
       data: {
-        intro: "为了偷懒，我们经常在只有一行代码时省略大括号。<br>现在我们要判断：如果 a 大于 0，输出 A；否则输出 C。<br>看这段代码，本来挺正常的：",
+        intro: "为了偷懒，我们经常在只有一行代码时省略大括号。<br>看这段代码，本来它能完美判断：输入 3 输出 A；输入 -3，走 else 输出 C。<br>运行完美。<br>但后来，需求变了……",
         codeFile: "codes/lesson-05/dangling-else.cpp", 
         snippet: "main",
         steps: [
           { 
             title: "1. 初始逻辑", 
             line: 7, 
-            hiddenLines: [9, 10, 11, 12], // 隐藏新增的内层 if 和 else
-            placeholder: "        // 暂无其他逻辑", // 占位符
+            hiddenLines: [9, 10], // 隐藏新加的内层 if
             vars: { a: "3" }, 
-            note: "a 是 3。<code>a &gt; 0</code> 成立，输出 A。<br>因为没进 else，所以不输出 C。<b>结果：输出 A。</b>" 
+            note: "此时输入 <b>3</b>，输出 A。<br>（如果输入 <b>-3</b>，走 else，输出 C）。<br>原本的逻辑毫无破绽。" 
           },
           { 
             title: "2. 插入新需求", 
             line: 9, 
-            hiddenLines: [11, 12], // 只隐藏 else
-            placeholder: "", 
-            vars: { a: "3" }, 
-            note: "现在需求变了：如果 a 大于 5，额外输出 B。<br>我们顺手在这个位置加了一个内层 <code>if</code>。<br>因为 3 不大于 5，没进内层。外层原本输出的 A 还在，所以<b>结果：输出 A。</b>" 
-          },
-          { 
-            title: "3. 加入 else", 
-            line: 11, 
             hiddenLines: [], // 全部显示
-            vars: { a: "3" }, 
-            note: "现在把原本想给外层兜底的 <code>else</code> 加上（注意缩进，它和外层是对齐的）。<br>按理说它还是不该执行。但你看屏幕……<b>它竟然输出了 C！</b>" 
+            vars: { a: "6" }, 
+            note: "现在加个需求：大于 5 就额外输出 B。<br>我们顺手加了一个内层 <code>if</code>。<br>输入 <b>6</b>：外层输出 A，内层 6 > 5 输出 B。<br><b>结果：输出 AB。看起来一切正常。</b>" 
           },
           { 
-            title: "4. 真相大白", 
+            title: "3. 灾难降临", 
             line: 11, 
             hiddenLines: [],
             vars: { a: "3" }, 
-            note: "为什么凭空多出了 C？<br>因为 <code>else</code> 被内层的 <code>if (a &gt; 5)</code> 抢走了！<br>编译器无视缩进，<b>谁离得近，else 就跟谁走。</b><br>3 不大于 5，条件不成立，于是执行了属于它的 else，输出了 C。" 
+            note: "现在再输入 <b>3</b> 试试。<br>外层输出 A。内层 3 > 5 不成立……<br><b>结果竟然输出了 C，变成了 AC！</b><br>为什么 C 突然跑出来了？" 
+          },
+          { 
+            title: "4. 彻底崩盘", 
+            line: 7, 
+            hiddenLines: [],
+            vars: { a: "-3" }, 
+            note: "那输入 <b>-3</b> 呢？<br>外层 -3 > 0 不成立，跳过外层 <code>if</code>。<br><b>结果什么都没输出。</b><br>连原本该有的 C 都没了！" 
           }
         ],
         extra: {
-          title: "💡 为什么编译器不报错？",
-          desc: "因为这段代码在语法上<b>完全合法</b>！<br>C++ 编译器根本不在乎你怎么缩进，它只按“就近原则”强行把 else 塞给了内层 if。<br>这就是为什么它被称为“静默杀手”——语法没报错，但你的逻辑全毁了。<br><br><b>想要它按你的缩进工作？必须用大括号把内外层物理隔离！</b>",
+          title: "💡 为什么逻辑全毁了？",
+          desc: "因为 C++ 编译器有个“就近原则”：<code>else</code> 永远和离它最近、且未配对的 <code>if</code> 结合。<br>加了内层 <code>if</code> 后，那个 <code>else</code> 被内层抢走了！<br><br>当 a=3 时，内层 3>5 不成立，执行被抢走的 else，输出 C。<br>当 a=-3 时，外层不成立直接跳过，内层根本没机会执行，所以什么都没输出。<br><br>这就是可怕的“悬挂 else”陷阱：语法没报错，但逻辑全毁。<br><b>解法：写嵌套 if 时，必须加大括号隔离。</b>",
           variant: "card-primary"
         },
         footer: '<b>📌 保命法则</b>：永远不要依赖缩进！只要写嵌套 if，<b>无论如何都要加上大括号 {}</b>，用物理边界锁死逻辑。'
@@ -194,10 +192,15 @@ export default {
       }
     },
 
-    /* ===== 12 练习2：星期几查询（原 P13，ID 顺延） ===== */
+    /* ===== 12 练习2：星期几查询（防抄提示） ===== */
     {
       id: 12, type: "level-map", title: "课堂练习2：星期几查询", subtitle: "switch 实战", chapterTag: "第 5 讲 · 实战演练",
-      data: { question: { title: "题干", desc: "输入数字（1—7），输出对应的星期几。<br>输入样例：<code>3</code>　输出样例：<code>周三</code>", timer: "⏱ 限时 5 分钟" }, hints: ["用 <code>switch</code> 语法", "不要忘记写 <code>break</code>", "用 <code>default</code> 处理无效输入"], answer: { codeFile: "codes/lesson-05/switch-day.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "每一个 case 后面必须跟上 break，防止穿透。" } }
+      data: { 
+        question: { title: "题干", desc: "输入数字（1—7），输出对应的星期几。<br>输入样例：<code>3</code>　输出样例：<code>周三</code>", timer: "⏱ 限时 5 分钟" }, 
+        hints: ["用 <code>switch</code> 语法", "不要忘记写 <code>break</code>", "用 <code>default</code> 处理无效输入"], 
+        answer: { codeFile: "codes/lesson-05/switch-day.cpp", snippet: "main" }, 
+        analysis: { title: "📖 解析", desc: "<b>⚠️ 注意</b>：不要直接抄左边的代码，请你把 1—7 的 case 自己完整敲一遍，这是熟练度的关键。<br>每一个 case 后面必须跟上 break，防止穿透。" } 
+      }
     },
 
     /* ===== 13 if vs switch ===== */
@@ -205,10 +208,12 @@ export default {
       id: 13, type: "compare", title: "if vs switch", subtitle: "什么时候用谁？",
       data: {
         neutral: true, splitStep: true,
+        leftLabel: "⚖️ if-else-if",
+        rightLabel: "📮 switch",
         groups: [
-          { leftLabel: "if-else-if", rightLabel: "switch", wrong: "<b>擅长判断范围</b>", right: "<b>擅长匹配精准值</b>" },
-          { leftLabel: "例子", rightLabel: "例子", wrong: "<code>if (score >= 60)</code><br><code>if (a > 0 && a < 10)</code>", right: "<code>case 1:</code><br><code>case \'A\':</code><br><code>case \'+\':</code>" },
-          { leftLabel: "特点", rightLabel: "特点", wrong: "灵活，能处理各种复杂逻辑", right: "清爽，但只能判断整数或字符。" }
+          { wrong: "<b>擅长判断范围</b>", right: "<b>擅长匹配精准值</b>" },
+          { wrong: "<code>if (score >= 60)</code><br><code>if (a > 0 && a < 10)</code>", right: "<code>case 1:</code><br><code>case \'A\':</code><br><code>case \'+\':</code>" },
+          { wrong: "灵活，能处理各种复杂逻辑", right: "清爽，但只能判断整数或字符。" }
         ],
         footer: '<b>📌 选型口诀</b>：判断“范围”用 if，判断“等于几”用 switch。'
       }
@@ -253,37 +258,66 @@ export default {
 
     /* ===== 17 今日总结 ===== */
     {
-      id: 17, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
-      data: { text: "条件越多，越要理清顺序。", author: "—— 分支结构第二课", points: [ "if-else if 从上往下判断，命中即止", "范围窄的条件放前面，范围宽放后面", "悬挂 else 永远是就近匹配，必须加括号", "switch 适合等值判断，注意 break 防穿透", "利用穿透可以合并相同的 case" ], highlight: { title: "📌 关键口诀", desc: "多分支排好队，范围窄的放前位；嵌套必加大括号，不被缩进骗；switch 分拣真方便，break 兜底防穿透。" } }
+      id: 17, type: "grid", title: "第 5 讲 · 今日总结", subtitle: "一页看完本讲所有重点", chapterTag: "第 5 讲 · 复习",
+      data: {
+        cards: [
+          { icon: "🪜", title: "if-else if", desc: "<b>语法</b>：从上往下依次判断<br><b>特点</b>：一旦命中，后面全停<br><b>铁律</b>：范围窄的放前面<br><b>陷阱</b>：>= 60 写在 >= 90 前必错" },
+          { icon: "💣", title: "悬挂 else", desc: "<b>规则</b>：就近匹配（离谁近属于谁）<br><b>破局</b>：嵌套 if 必须加 { }<br><b>初赛</b>：常考缩进骗人题<br><b>口诀</b>：不信缩进信括号" },
+          { icon: "📮", title: "switch 语法", desc: "<b>适用</b>：精准匹配固定值<br><b>限制</b>：只能是整数或字符<br><b>兜底</b>：default 不能忘<br><b>格式</b>：case 值: ... break;" },
+          { icon: "🩸", title: "穿透效应", desc: "<b>原因</b>：忘记写 break<br><b>后果</b>：会继续执行下面的 case<br><b>妙用</b>：连续相同的 case 可省略 break<br><b>自检</b>：写完扫一眼是不是每个都有" },
+        ],
+      },
     },
 
     /* ===== 18 课后作业 ===== */
     {
-      id: 18, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
+      id: 18, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题", chapterTag: "第 5 讲 · 实战",
       data: { 
         cards: [ 
-          { icon: "🟢", title: "基础 1 · P5717", link: "https://www.luogu.com.cn/problem/P5717", desc: "<b>三角形分类</b><br>考察：if-else if 多分支<br>难度：★★<br><b>💡 提示</b>：注意条件的先后顺序！" }, 
+          { icon: "🟢", title: "基础 1 · P5713", link: "https://www.luogu.com.cn/problem/P5713", desc: "<b>洛谷团队系统</b><br>考察：if-else 基础<br>难度：★" }, 
           { icon: "🟢", title: "基础 2 · P5716", link: "https://www.luogu.com.cn/problem/P5716", desc: "<b>月份天数</b><br>考察：switch 穿透<br>难度：★★" }, 
-          { icon: "🔴", title: "挑战 · P1422", link: "https://www.luogu.com.cn/problem/P1422", desc: "<b>小玉家的电费</b><br>考察：阶梯计价、多分支<br>难度：★★" } 
+          { icon: "🔴", title: "挑战 · P1422", link: "https://www.luogu.com.cn/problem/P1422", desc: "<b>小玉家的电费</b><br>考察：多分支阶梯计价<br>难度：★★" } 
         ] 
       }
     },
 
-    /* ===== 19 下节预告 ===== */
+    /* ===== 19 答疑时间 ===== */
     {
-      id: 19, type: "radial", title: "下节预告", subtitle: "第 6 讲 · 循环结构",
+      id: 19, type: "grid", title: "答疑时间", subtitle: "常见问题 FAQ", chapterTag: "第 5 讲 · 答疑",
+      data: { 
+        cards: [ 
+          { icon: "📮", title: "switch 和 if 怎么选？", desc: "判断<b>范围</b>（如分数段）用 <code>if</code>。<br>判断<b>固定值</b>（如星期几）用 <code>switch</code>。" }, 
+          { icon: "💥", title: "如果 case 忘了写 break？", desc: "会发生<b>穿透</b>。如果只是想执行当前 case，忘记 break 会导致下面的代码全被执行。" }, 
+          { icon: "🧠", title: "穿透到底有什么用？", desc: "多个 case 共用一段代码时，故意省略 break 能让代码变得非常简洁。" }, 
+          { icon: "⚠️", title: "switch 里面能写 if 吗？", desc: "可以。在 switch 的某个 case 里面，完全可以嵌套 if 语句来处理更复杂的逻辑。" }
+        ] 
+      }
+    },
+
+    /* ===== 20 本讲英文单词 ===== */
+    {
+      id: 20, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 5 讲 · 复习",
+      data: {
+        words: [
+          { word: "switch", cn: "开关 / 分拣", pron: "/swɪtʃ/", origin: '英文原意"开关"', category: "关键字" },
+          { word: "case", cn: "情况", pron: "/keɪs/", origin: '英文原意"情况"', category: "关键字" },
+          { word: "default", cn: "默认", pron: "/dɪˈfɔːlt/", origin: "de(去) + fault(错误) = 默认", category: "关键字" },
+          { word: "fall-through", cn: "穿透", pron: "/fɔːl θruː/", origin: "fall(掉落) + through(穿过)", category: "概念" },
+          { word: "nest", cn: "嵌套", pron: "/nest/", origin: "英文原意“鸟巢”", category: "概念" },
+          { word: "branch", cn: "分支", pron: "/brɑːntʃ/", origin: "英文原意“树枝”", category: "概念" }
+        ]
+      }
+    },
+
+    /* ===== 21 下节预告 ===== */
+    {
+      id: 21, type: "radial", title: "下节预告", subtitle: "第 6 讲 · 循环结构",
       data: { center: "循环结构", items: [ { text: "for 循环" }, { text: "while 循环" }, { text: "自增自减 i++" }, { text: "死循环急救" } ] }
     },
 
-    /* ===== 20 答疑与词汇 ===== */
+    /* ===== 22 结束页 ===== */
     {
-      id: 20, type: "grid", title: "答疑与单词", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 5 讲 · 互动",
-      data: { cards: [ { icon: "📮", title: "关于 switch", desc: "switch 和 if 怎么选？<br>穿透到底有什么用？" }, { icon: "📖", title: "本讲单词", desc: "<b>switch</b>：开关 / 分拣<br><b>case</b>：情况<br><b>default</b>：默认<br><b>fall-through</b>：穿透" } ], footer: '提问的三个层次：① 是什么 ② 为什么 ③ 怎么办。' }
-    },
-
-    /* ===== 21 结束页 ===== */
-    {
-      id: 21, type: "ending", title: "第五讲结束", subtitle: "你的程序，逻辑更加缜密了", chapterTag: false,
+      id: 22, type: "ending", title: "第五讲结束", subtitle: "你的程序，逻辑更加缜密了", chapterTag: false,
       data: { slogan: "科学教育 · 创新课程", extra: { title: "🌟 下一站：重复的力量", desc: "今天你掌握了组合条件与分拣机，程序的判断力已经拉满。<br><br>但程序目前还是只能“执行一次”。如果让你算 1 加到 1 亿，你不可能写 1 亿行 if。<br>下一讲，我们将解锁编程中最核心的引擎——<b>循环</b>。<br>还有神秘的 `i++`，我们循环见！", variant: "card-glow" } }
     },
   ],

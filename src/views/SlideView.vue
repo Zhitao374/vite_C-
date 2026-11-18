@@ -71,12 +71,12 @@
       </div>
 
       <div class="slide-nav">
-        <button class="nav-btn" data-no-flip @click.stop="prev">‹</button>
+        <button class="nav-btn" data-no-flip @click.stop="goPrevSlide">‹</button>
         <span class="page-num">
           {{ String(slideId).padStart(2, "0") }} /
           {{ String(totalSlides).padStart(2, "0") }}
         </span>
-        <button class="nav-btn" data-no-flip @click.stop="next">›</button>
+        <button class="nav-btn" data-no-flip @click.stop="goNextSlide">›</button>
       </div>
 
       <FloatingTools />
@@ -92,7 +92,9 @@ import { useSlideNav } from "@/composables/useSlideNav";
 import ErrorBoundary from "@/components/common/ErrorBoundary.vue";
 import { useSlideTheme } from "@/composables/useSlideTheme";
 import FloatingTools from "@/components/common/FloatingTools.vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const props = defineProps({
   lesson: { type: String, required: true },
   slide: { type: String, required: true },
@@ -140,6 +142,26 @@ onMounted(() => {
 function closeShortcuts() {
   showShortcuts.value = false;
   localStorage.setItem("cpp-course-shortcuts-seen", "1");
+}
+
+// 直接翻上一页（切换路由）
+function goPrevSlide() {
+  const cur = Number(props.slide);
+  if (cur > 1) {
+    router.push(`/slide/${props.lesson}/${cur - 1}`);
+  } else {
+    router.push(`/lesson/${props.lesson}`);
+  }
+}
+
+// 直接翻下一页（切换路由）
+function goNextSlide() {
+  const cur = Number(props.slide);
+  if (cur < totalSlides.value) {
+    router.push(`/slide/${props.lesson}/${cur + 1}`);
+  } else {
+    router.push(`/lesson/${props.lesson}`);
+  }
 }
 </script>
 
@@ -323,7 +345,7 @@ function closeShortcuts() {
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(22, 93, 255, 0.15);
   transition: all 0.2s;
-  z-index: 100;
+  z-index: 10000;
 }
 
 .back-btn:hover {
@@ -336,7 +358,7 @@ function closeShortcuts() {
 /* ============================================ */
 .step-hint {
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   left: 26px;
   font-size: 13px;
   color: var(--text-dim);
@@ -344,6 +366,13 @@ function closeShortcuts() {
   user-select: none;
   pointer-events: none;
   z-index: 100;
+  /* ⚡ 新增：默认极淡，像水印一样 */
+  opacity: 0.2; 
+  transition: opacity 0.3s;
+}
+/* 当鼠标悬浮在屏幕下半区时，稍微清晰一点 */
+.step-hint:hover {
+  opacity: 1;
 }
 
 /* ============================================ */
@@ -351,48 +380,50 @@ function closeShortcuts() {
 /* ============================================ */
 .slide-nav {
   position: fixed;
-  bottom: 16px;
+  bottom: 20px;
   right: 26px;
   display: flex;
   align-items: center;
   gap: 10px;
-  z-index: 100;
+  z-index: 10000 ;
+  /* ⚡ 新增：加个小胶囊背景，平时半透明，不抢戏 */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  opacity: 0.4;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.slide-nav:hover {
+  opacity: 1;
+  transform: translateY(-2px);
 }
 
 .nav-btn {
-  width: 40px;
-  height: 40px;
+  width: 32px; /* 稍微缩小按钮尺寸 */
+  height: 32px;
   border: none;
   border-radius: 50%;
-  background: rgba(22, 93, 255, 0.1);
+  background: transparent;
   color: var(--primary);
-  font-size: 22px;
-  line-height: 1;
+  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(22, 93, 255, 0.15);
-  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  transition: background 0.2s;
 }
-
 .nav-btn:hover {
-  background: rgba(22, 93, 255, 0.2);
-  transform: scale(1.06);
-}
-
-.nav-btn:active {
-  transform: scale(0.96);
+  background: rgba(22, 93, 255, 0.1);
 }
 
 .page-num {
   font-family: var(--font-code);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-dim);
-  letter-spacing: 0.5px;
-  min-width: 60px;
+  min-width: 50px;
   text-align: center;
-  user-select: none;
 }
+
 </style>

@@ -16,23 +16,27 @@
    标题
    ============================================ */
 .slide-title {
-  font-size: var(--fs-slide-title);
+  font-size: calc(42px * var(--font-scale)); /* 从 52 降到 42 */
   font-weight: 800;
   letter-spacing: 0.5px;
-  line-height: 1.25;
+  line-height: 1.15;
   color: var(--text-main);
   display: flex;
   align-items: baseline;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
+  margin-bottom: 4px; /* 极简贴边 */
 }
 
 .slide-title .slide-subtitle,
 .slide-subtitle {
-  font-size: var(--fs-slide-subtitle);
+  font-size: calc(20px * var(--font-scale)); /* 从 28 暴降到 20 */
   color: var(--text-dim);
   font-weight: 500;
-  margin: 0;
+  letter-spacing: 0.5px;
+  /* 改用左侧竖线分隔 */
+  padding-left: 16px;
+  border-left: 2px solid var(--primary-soft);
 }
 
 /* ============================================
@@ -40,10 +44,12 @@
    ============================================ */
 .slide-body {
   flex: 1;
-  margin-top: 10px;
+  margin-top: 8px;
   min-height: 0;
   overflow-y: auto;
   padding-right: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
 .slide-body>*+* {
@@ -154,15 +160,12 @@
 .slide {
   width: 100vw;
   height: 100vh;
-  padding: 16px 56px 56px;
+  padding: 16px 56px 64px; /* 底部留 64px 给翻页器 */
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  /* 外层绝对不能滚 */
   transition: background 0.4s ease;
-  padding-bottom: 80px;
-  /* 给底部工具栏留出安全距离 */
 }
 
 .slide-body {

@@ -111,6 +111,7 @@ export default {
         footer: '<b>📌 常见组合</b>：<br>① <b>范围判断</b>：<code>a >= 60 && a <= 100</code><br>② <b>或的关系</b>：<code>ans == \'Y\' || ans == \'y\'</code><br>③ <b>不等于</b>：<code>a != 0 && b / a > 2</code> (确保分母不为0)<br><br>口诀：与（&&）严——两边都要真；或（||）宽——一边真就行；非（!）反着来。' 
       }
     },
+
     /* ===== 12 短路求值（双演示） ===== */
     {
       id: 12, type: "code-walkthrough", title: "眼见为实：短路求值", subtitle: "初赛必考的底层逻辑", chapterTag: "第 4 讲 · 概念理解",
@@ -187,7 +188,18 @@ export default {
     /* ===== 16 今日总结 ===== */
     {
       id: 16, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
-      data: { text: "条件为真走一条路，为假走另一条路。", author: "—— 分支结构第一课", points: [ "关系运算符结果只有 true / false", "if 单分支、if-else 双分支", "== 和 = 不一样，编译器不报错", "&& 两边真才真，|| 一边真就真", "短路求值：前面决定了，后面就不执行" ], highlight: { title: "📌 关键口诀", desc: "关系判真假，if 走分支，else 兜底；单等号是赋值，双等号是判断；与严或宽非反转，短路后面不计算。" } }
+      data: { 
+        text: "条件为真走一条路，为假走另一条路。", 
+        author: "—— 分支结构第一课", 
+        points: [ 
+          "关系运算符结果只有 true / false", 
+          "if 单分支、if-else 双分支", 
+          "== 和 = 不一样，编译器不报错", 
+          "&& 两边真才真，|| 一边真就真", 
+          "短路求值：前面决定了，后面就不执行" 
+        ], 
+        highlight: { title: "📌 关键口诀", desc: "关系判真假，if 走分支，else 兜底；单等号是赋值，双等号是判断；与严或宽非反转，短路后面不计算。" } 
+      }
     },
 
     /* ===== 17 课后作业 ===== */
@@ -200,7 +212,8 @@ export default {
         ] 
       }
     },
-        /* ===== 18 高阶点拨：从 if 到布尔代数 ===== */
+
+    /* ===== 18 高阶点拨：从 if 到布尔代数 ===== */
     {
       id: 18, type: "evolution", title: "高阶点拨：从 if 到布尔代数", subtitle: "把 8 行 if 缩成 2 行代码", chapterTag: "第 4 讲 · 实战演练",
       data: {
@@ -224,7 +237,7 @@ export default {
           },
           {
             title: "布尔代数",
-            hiddenLines: [], // 全部显示，但我们可以通过高亮来总结
+            hiddenLines: [], // 全部显示
             focusLines: [13, 14],
             expression: "终极瘦身",
             note: "用 <code>&&</code> 和 <code>||</code> 组合出的结果本身就是 <code>bool</code>。<br>代码瞬间从 8 行缩减到 2 行。<br>这就是“布尔代数”的魅力！"
@@ -234,28 +247,44 @@ export default {
       }
     },
 
-    /* ===== 19 下节预告 ===== */
+    /* ===== 19 答疑时间 ===== */
     {
-      id: 19, type: "radial", title: "下节预告", subtitle: "第 5 讲 · 多分支与 switch",
-      data: { center: "逻辑风暴", items: [ { text: "if-else-if 多分支" }, { text: "顺序陷阱" }, { text: "switch 穿透" }, { text: "综合实战" } ] }
+      id: 19, type: "grid", title: "答疑时间", subtitle: "4 个最常被问到的问题", chapterTag: "第 4 讲 · 答疑",
+      data: {
+        cards: [
+          { icon: "❓", title: "为什么 if (a = 5) 不报错？", desc: "<code>=</code> 是赋值——赋完值后表达式等于 5（非 0 = true）<br>所以 if <b>永远成立</b>。<br>编译器不报错，但逻辑错了。" },
+          { icon: "⚡", title: "短路求值是什么？", desc: '<code>a &amp;&amp; b</code> 中 a 为假 → b <b>不执行</b><br>这就是短路求值。<br>注意：别在 b 里写"必须执行"的操作。' },
+          { icon: "📏", title: "if 后面只能接一句话吗？", desc: '不加大括号时，if 只管紧跟着的第一行。<br>为了安全，<b>永远加上大括号 { }</b>。' },
+          { icon: "⚠️", title: "= 与 == 的区别", desc: '<code>=</code> 赋值，把右边给左边。<br><code>==</code> 判断，比较两边是否相等。' }
+        ]
+      }
     },
 
-    /* ===== 20 答疑时间 ===== */
+    /* ===== 20 本讲英文单词 ===== */
     {
-      id: 20, type: "grid", title: "自由提问时间", subtitle: "把你不懂的问题，大声说出来", chapterTag: "第 4 讲 · 互动",
-      data: { cards: [ { icon: "⚖️", title: "关于运算符", desc: "优先级记不住怎么办？<br>怎么避免整数除法？" }, { icon: "🚪", title: "关于 if", desc: "== 和 = 怎么区分？<br>短路求值有什么用？" } ], footer: '提问的三个层次：① 是什么 ② 为什么 ③ 怎么办。' }
+      id: 20, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 4 讲 · 复习",
+      data: {
+        words: [
+          { word: "operator", cn: "运算符", pron: "/ˈɒpəreɪtə(r)/", origin: "operate（操作）+ or（物）", category: "概念" },
+          { word: "logic", cn: "逻辑", pron: "/ˈlɒdʒɪk/", origin: '英文原意"逻辑"', category: "概念" },
+          { word: "condition", cn: "条件", pron: "/kənˈdɪʃn/", origin: '英文原意"条件"', category: "概念" },
+          { word: "assignment", cn: "赋值", pron: "/əˈsaɪnmənt/", origin: "assign（分配）+ ment（名词后缀）", category: "概念" },
+          { word: "if", cn: "如果", pron: "/ɪf/", origin: '英文原意"如果"', category: "关键字" },
+          { word: "else", cn: "否则", pron: "/els/", origin: '英文原意"否则"', category: "关键字" }
+        ]
+      }
     },
 
-    /* ===== 21 英文单词 ===== */
+    /* ===== 21 下节预告 ===== */
     {
-      id: 21, type: "glossary", title: "本讲英文单词", subtitle: "记牢拼写，理解原意", chapterTag: "第 4 讲 · 复习",
-      data: { words: [ { word: "operator", cn: "运算符", pron: "/ˈɒpəreɪtə(r)/", category: "概念" }, { word: "condition", cn: "条件", pron: "/kənˈdɪʃn/", category: "概念" }, { word: "logic", cn: "逻辑", pron: "/ˈlɒdʒɪk/", category: "概念" } ] }
+      id: 21, type: "radial", title: "下节预告", subtitle: "第 5 讲 · 多分支与 switch",
+      data: { center: "switch", items: [ { text: "多条件嵌套" }, { text: "if-else if" }, { text: "穿透与兜底" } ] },
     },
 
     /* ===== 22 结束页 ===== */
     {
-      id: 22, type: "ending", title: "第四讲结束", subtitle: "你的程序，学会了组合判断", chapterTag: false,
-      data: { slogan: "科学教育 · 创新课程", extra: { title: "🌟 走出新手村", desc: "今天你避开了 `a = 5` 的致命坑，还学会了用 `&&` 和 `||` 组合条件。<br><br>但这只是基础。下一讲，我们将解锁像分拣机一样的 `switch` 语法，以及多分支的终极奥义。<br>下节课见！", variant: "card-glow" } }
+      id: 22, type: "ending", title: "第四讲结束", subtitle: "你的程序，逻辑更加缜密了", chapterTag: false,
+      data: { slogan: "科学教育 · 创新课程", extra: { title: "🌟 下一站：多分支", desc: "你已经掌握了基础的判断，但真实世界往往有无数种可能。<br>下一讲，我们将解锁更复杂的判断结构，让程序看清每一条岔路口！", variant: "card-glow" } },
     },
   ],
 };

@@ -7,7 +7,6 @@ int main() {
     int a = i++;
     int b = ++j;
     cout << a << " " << i << endl;
-    cout << b << " " << j << endl;
     return 0;
 }
 // @snippet-end main

@@ -1,8 +1,7 @@
 <template>
   <SlideShell :slide="slide" body-class="code-walkthrough-body">
-    <StepWrapper v-if="intro" :step="1">
-      <div class="intro-card" v-html="intro"></div>
-    </StepWrapper>
+    <div v-if="intro && current === 1" class="intro-card" v-html="intro"></div>
+
 
     <div class="split">
       <div class="split-left scroll-pane">

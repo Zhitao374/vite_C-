@@ -3,10 +3,11 @@ using namespace std;
 
 // @snippet-start main
 int main() {
-    int n = 1;
-    while (n <= 5) {
-        cout << n << " ";
-        n++;
+    int x;
+    cin >> x;
+    while (x != 0) {
+        cout << x << " ";
+        cin >> x;
     }
     return 0;
 }

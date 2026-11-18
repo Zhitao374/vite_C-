@@ -5,10 +5,10 @@ using namespace std;
 // @snippet-start main
 int main() {
     int n;
-    cin >> n;    // 假设输入 5 并回车
-    
+    cin >> n;
     string s;
-    getline(cin, s); // 悲剧发生：直接读到了空
+    getline(cin, s);
+    cout << "读入的字符串是：" << s << endl;
     return 0;
 }
 // @snippet-end main

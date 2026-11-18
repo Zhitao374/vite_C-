@@ -1,7 +1,7 @@
 export default {
   title: "第 6 讲 循环结构",
   subtitle: "让程序学会重复",
-  total: 23,
+  total: 24,
   category: "语法与基础算法",
   slides: [
     /* ===== 1 封面 ===== */
@@ -60,10 +60,15 @@ export default {
         annotations: [ 
           { line: 6, title: "int i = 1;", desc: "起跑线：在这里临时创建一个叫 i 的变量作为“计步器”，从 1 开始" }, 
           { line: 7, title: "i <= 5;", desc: "终点线：每次跑之前都要问，i 超过 5 了吗？没超过就继续跑" }, 
-          { line: 8, title: "i++", desc: "步长：每跑完一圈，计步器 i 自动加 1" }, 
+          { line: 8, title: "i = i + 1", desc: "步长：每跑完一圈，让 i 自己加 1（也就是把 1 变成 2，2 变成 3）" }, 
           { line: 9, title: "cout << i;", desc: "循环体：每圈真正要干的活（在这里是输出 i）" } 
         ], 
         output: "1 2 3 4 5", 
+        extra: {
+          title: "💡 灵魂拷问：如果不写 int 会怎样？",
+          desc: `<div><b>情况 1：直接不写 int（前面也没定义）</b><br><code>for (i = 1; i &lt;= 5; i = i + 1)</code><br>编译器直接报错：<code>'i' was not declared in this scope</code>（我不认识 i）。因为计算机不知道你要把 1 存到哪里去。</div><div><b>情况 2：在 for 外面先写 int，里面不写</b><br><code>int i;</code><br><code>for (i = 1; i &lt;= 5; i = i + 1)</code><br>这样<b>可以运行</b>。但缺点是：循环结束后，i 会变成 6 继续留在内存里，如果后面还有别的代码用到 i，就会发生灾难。</div><div><b>情况 3：标准的现代写法</b><br><code>for (int i = 1; i &lt;= 5; i = i + 1)</code><br>把变量直接声明在括号里。好处是：<b>循环一结束，i 就自动销毁了</b>，不占内存，也不会干扰后续代码。这叫“局部变量”。</div>`,
+          variant: "card-primary"
+        },
         footer: '<b>📌 避坑</b>：<code>int i = 1</code> 后面跟着的是<b>分号</b>，不是逗号！这三项之间必须用分号隔开。<br>另外，i 是 index（索引）的缩写，这是全世界的程序员都在用的习惯。' 
       }
     },
@@ -89,9 +94,9 @@ export default {
 
     /* ===== 8 坑王之王：i++ 与 ++i ===== */
     {
-      id: 8, type: "code-walkthrough", title: "坑王之王：i++ 与 ++i", subtitle: "谁是先加，谁是后用？", chapterTag: "第 6 讲 · 概念理解",
+      id: 8, type: "code-walkthrough", title: "进阶与偷懒：i++ 与 ++i", subtitle: "谁是先加，谁是后用？", chapterTag: "第 6 讲 · 概念理解",
       data: {
-        intro: "📖 在循环里，我们经常要让变量自己加 1。为了少敲几个字，C++ 提供了 <b>自增运算符</b>：<code>i++</code>。<br>单独写一行 <code>i++;</code> 完全没问题，它就是 <code>i = i + 1</code> 的意思。<br>但如果把它和赋值放在一起，灾难就来了。看这段代码：",
+        intro: "📖 刚才在循环里，我们写的是 <code>i = i + 1</code>。但程序员都很懒，为了少敲几个字，C++ 提供了<b>自增运算符</b> <code>i++</code>。<br>单独写一行 <code>i++;</code> 完全没问题，它就是 <code>i = i + 1</code> 的意思。<br>但如果把它和赋值放在一起，灾难就来了。看这段代码：",
         codeFile: "codes/lesson-06/increment-demo.cpp", 
         snippet: "main",
         steps: [
@@ -139,16 +144,17 @@ export default {
     {
       id: 10, type: "code-split", title: "while 循环 · 条件循环", subtitle: "不到黄河心不死",
       data: { 
-        intro: "📖 刚才的 <code>for</code> 循环很好用，但它的前提是：<b>我们必须提前知道要跑几圈</b>（比如跑 5 圈）。<br>如果程序不知道要跑几圈，只知道“一直做，直到某个条件满足才停下”呢？<br>比如：让玩家一直输入密码，直到输入正确为止。这时候 <code>for</code> 就不够用了，我们需要 <code>while</code> 循环。", 
+        intro: "📖 刚才的 <code>for</code> 循环很好用，但它的前提是：<b>我们必须提前知道要跑几圈</b>。<br>如果程序根本不知道你要输入几个数呢？比如：一直读入数据，直到用户输入 0 为止。<br>这时候 <code>for</code> 循环就写不出来了，我们需要 <code>while</code> 循环。", 
         codeFile: "codes/lesson-06/while-loop.cpp", 
         snippet: "main", 
         annotations: [ 
-          { line: 5, title: "int n = 1;", desc: "初始化放在循环外面" }, 
-          { line: 6, title: "while (n <= 5)", desc: "只写条件：只要条件为真，就一直循环" }, 
-          { line: 7, title: "n++;", desc: "步长更新必须有，否则永远出不来！" } 
+          { line: 6, title: "int x;", desc: "先准备一个变量，用来接收数据" }, 
+          { line: 7, title: "cin >> x;", desc: "读入第一个数，作为“投石问路”" }, 
+          { line: 8, title: "while (x != 0)", desc: "核心：只要读入的数不是 0，就一直循环" }, 
+          { line: 10, title: "cin >> x;", desc: "循环的最后，再读入下一个数。如果读了 0，下次判断就会失败，退出循环。" } 
         ], 
-        output: "1 2 3 4 5",
-        footer: '<b>📌 对比</b>：<code>for</code> 适合“已知次数”，<code>while</code> 适合“未知次数，条件触发”。<br>其实，任何 <code>for</code> 循环都能改写成 <code>while</code>，只是 <code>for</code> 把三要素写在了一起，看着更紧凑。'
+        output: "（输入：3 5 2 0）\n3 5 2", 
+        footer: '<b>📌 与 for 的终极区别</b>：<code>for</code> 适合<b>已知次数</b>（如跑 100 圈）；<code>while</code> 适合<b>未知次数，条件触发</b>（如不知道要输入多少个数，直到输入 0）。' 
       }
     },
 
@@ -173,12 +179,33 @@ export default {
     /* ===== 13 break 与 continue ===== */
     {
       id: 13, type: "code-split", title: "break 与 continue", subtitle: "紧急刹车与跳过本轮",
-      data: { intro: "📖 在循环中，遇到特殊情况想提前退出？<br><b>break</b>：直接砸碎整个循环（彻底不跑了）。<br><b>continue</b>：跳过本次循环后面的代码，直接进入下一圈。", codeFile: "codes/lesson-06/break-continue.cpp", snippet: "main", annotations: [ { line: 8, title: "if (i == 3) break;", desc: "当 i 是 3 时，整个循环直接毁灭" }, { line: 15, title: "if (i == 3) continue;", desc: "当 i 是 3 时，跳过这一圈后面的输出，直接去执行 i++" } ], output: "1 2\n---\n1 2 4 5", footer: '<b>📌 区别</b>：<code>break</code> 是退学（以后都不用来了）；<code>continue</code> 是请假（这节课不上，下节课还来）。' }
+      data: { 
+        intro: "📖 在循环中，遇到特殊情况想提前干预？<br>比如你在 10 个抽屉里找钥匙，<b>找到就立刻停手</b>，这叫 <code>break</code>；<br>老师点名发奖品，<b>遇到没来的人直接跳过</b>，给下一个人发，这叫 <code>continue</code>。<br>它们都是循环里的「交通信号灯」：", 
+        codeFile: "codes/lesson-06/break-continue.cpp", 
+        snippet: "main", 
+        annotations: [ 
+          { line: 8, title: "if (i == 3) break;", desc: "紧急刹车：一旦满足条件，整个循环直接毁灭，剩下的圈都不跑了" }, 
+          { line: 15, title: "if (i == 3) continue;", desc: "跳过本轮：满足条件时，本轮后面的代码不执行了，直接跑下一圈" } 
+        ], 
+        output: "1 2\n---\n1 2 4 5", 
+        footer: '<b>📌 场景总结</b>：<code>break</code> 常用于“找到了/触发了警报就立刻停止”；<code>continue</code> 常用于“过滤掉不需要的无效数据，继续处理剩下的”。' 
+      }
     },
 
-    /* ===== 14 练习2：数位分离 ===== */
+    /* ===== 14 练习2：筛选数字 ===== */
     {
-      id: 14, type: "level-map", title: "课堂练习2：数位分离", subtitle: "洛谷经典模型（回文数基础）", chapterTag: "第 6 讲 · 实战演练",
+      id: 14, type: "level-map", title: "课堂练习2：筛选数字", subtitle: "专练 break 与 continue", chapterTag: "第 6 讲 · 实战演练",
+      data: { 
+        question: { title: "题干", desc: "输出 1 到 10 之间的整数，但是：<br>① 遇到 3 的倍数就跳过（不输出）。<br>② 一旦遇到 9，直接停止输出。<br>输出样例：<code>1 2 4 5 7 8</code>", timer: "⏱ 限时 6 分钟" }, 
+        hints: ["用 <code>for (int i = 1; i <= 10; i++)</code> 遍历", "“3的倍数跳过” 用 <code>if (i % 3 == 0) continue;</code>", "“遇到 9 停止” 用 <code>if (i == 9) break;</code>", "注意这两个 if 的先后顺序"], 
+        answer: { codeFile: "codes/lesson-06/filter-numbers.cpp", snippet: "main" }, 
+        analysis: { title: "📖 解析", desc: "当 i 是 3、6 时，被 continue 跳过；当 i 是 9 时，被 break 强行终止。<br>这道题完美考察了两种控制流的区别。" } 
+      }
+    },
+
+    /* ===== 15 练习3：数位分离 ===== */
+    {
+      id: 15, type: "level-map", title: "课堂练习3：数位分离", subtitle: "洛谷经典模型（回文数基础）", chapterTag: "第 6 讲 · 实战演练",
       data: { 
         question: { title: "题干", desc: "输入一个正整数 <code>n</code>，请<b>倒序</b>输出它的每一位数字。<br>输入样例：<code>12345</code>　输出样例：<code>54321</code>", timer: "⏱ 限时 8 分钟" }, 
         hints: ["用 <code>% 10</code> 可以提取出个位数字", "用 <code>/ 10</code> 可以把个位砍掉", "因为不知道有几位数，所以用 <code>while (n > 0)</code> 循环", "每次提出个位后，别忘了 <code>n = n / 10;</code>"], 
@@ -187,21 +214,55 @@ export default {
       }
     },
 
-    /* ===== 15 嵌套循环 ===== */
+    /* ===== 16 嵌套循环 ===== */
     {
-      id: 15, type: "code-split", title: "嵌套循环", subtitle: "外圈走一步，内圈跑一圈",
-      data: { intro: "📖 就像钟表：时针走 1 格，分针要走 60 格。<br>在代码里，我们把一个循环放进另一个循环里，就是嵌套。", codeFile: "codes/lesson-06/multiplication-table.cpp", snippet: "main", annotations: [ { line: 6, title: "for (int i = 1; i <= 3; i++)", desc: "外层：控制行" }, { line: 7, title: "for (int j = 1; j <= 3; j++)", desc: "内层：控制列，每次都要完整跑一圈" }, { line: 8, title: "cout << i * j;", desc: "执行 3 × 3 = 9 次" } ], output: "1 2 3\n2 4 6\n3 6 9" }
+      id: 16, type: "evolution", title: "嵌套循环：时钟是怎么走的", subtitle: "外圈走一格，内圈跑一圈", chapterTag: "第 6 讲 · 过程演示",
+      data: { 
+        intro: "📖 嵌套循环最难理解的是执行顺序。<br>我们把这个过程想象成一个钟表：外层的 <code>h</code> 是时针，内层的 <code>m</code> 是分针。看右侧代码是怎么一步步“长”出来的：", 
+        codeFile: "codes/lesson-06/clock-demo.cpp", 
+        snippet: "main", 
+        steps: [
+          { 
+            title: "1. 只有时针（单层循环）", 
+            hiddenLines: [8, 9, 10], 
+            placeholder: "        // 假设这里没有分针",
+            focusLines: [6, 7, 11], 
+            expression: "h = 1, h = 2", 
+            note: "如果只有外层，程序会打印出当前的小时：<br><b>1点<br>2点</b><br>每走完一步，内层没有，直接换行。" 
+          },
+          { 
+            title: "2. 塞入分针（长出来了！）", 
+            hiddenLines: [],
+            focusLines: [8, 9], 
+            expression: "h = 1, m = 1,2,3", 
+            note: "现在把内层循环塞进去。<br>当外层 <code>h=1</code> 时，内层 <code>m</code> 开始发力，连续打印：<br><b>1点 1分 2分 3分</b>" 
+          },
+          { 
+            title: "3. 分针跑完，换行", 
+            hiddenLines: [],
+            focusLines: [11], 
+            expression: "内层结束，执行 endl", 
+            note: "内层 <code>m=3</code> 打印完后，内层循环结束。<br>此时程序执行第 11 行：<code>cout << endl;</code>，打出一个回车。" 
+          },
+          { 
+            title: "4. 时针前进，分针归位", 
+            hiddenLines: [],
+            focusLines: [6, 8], 
+            expression: "h = 2, m 重新从 1 开始", 
+            note: "外层 <code>h</code> 变成 2。注意！内层的 <code>m</code> 会<b>重新从 1 开始</b>，再完整跑一圈。<br><br>最终屏幕上打出完整结果：<br><div style='background:#1e2a44; color:#e6f1ff; padding:10px 14px; border-radius:6px; font-family:var(--font-code); margin-top:8px; font-size:15px; line-height:1.5;'>1点 1分 2分 3分<br>2点 1分 2分 3分</div>" 
+          }
+        ],
+        extra: {
+          title: "💡 终极口诀",
+          desc: "<b>外层动一次，内层跑全圈。</b><br>内层没有跑完，外层绝对不准动。<br>这就是嵌套循环的底层逻辑。",
+          variant: "card-primary"
+        }
+      }
     },
 
-    /* ===== 16 练习3：星号三角形 ===== */
+    /* ===== 17 练习4：质数判断 ===== */
     {
-      id: 16, type: "level-map", title: "课堂练习3：星号三角形", subtitle: "打印图形", chapterTag: "第 6 讲 · 实战演练",
-      data: { question: { title: "题干", desc: "输入行数 <code>n</code>，输出直角三角形。<br>输入样例：<code>3</code>　输出样例：<br><code>*</code><br><code>**</code><br><code>***</code>", timer: "⏱ 限时 6 分钟" }, hints: ["外层循环控制行数", "内层循环控制每行的星号个数", "第 i 行就输出 i 个星号"], answer: { codeFile: "codes/lesson-06/triangle.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "外循环决定行数，内循环的界限取决于外层的变量 i。<br>这是图形打印最基础的模型。" } }
-    },
-
-    /* ===== 17 练习4：质数口袋（质数判断） ===== */
-    {
-      id: 17, type: "level-map", title: "课堂练习4：判断质数", subtitle: "洛谷经典必考", chapterTag: "第 6 讲 · 实战演练",
+      id: 17, type: "level-map", title: "课堂练习4：判断质数", subtitle: "综合运用循环与 break", chapterTag: "第 6 讲 · 实战演练",
       data: { 
         question: { title: "题干", desc: "输入一个整数 <code>n (n >= 2)</code>，如果是质数输出 <code>yes</code>，否则输出 <code>no</code>。<br>（质数：只能被 1 和它本身整除的数）", timer: "⏱ 限时 8 分钟" }, 
         hints: ["如果 n 能被 2 到 n-1 之间的任何一个数整除，它就不是质数", "用 <code>for (int i = 2; i < n; i++)</code> 挨个试", "如果发现 <code>n % i == 0</code>，直接 <code>break;</code> 退学（不是质数了）", "最后用 <code>if (i == n)</code> 判断是怎么退出的"], 
@@ -235,29 +296,65 @@ export default {
           { id: 5, type: "judge", difficulty: 3, source: "CSP-J 初赛真题练习 · 循环边界", optionLayout: "two-cols", question: "如果写成 <code>for (int i = 0; i <= n; i++)</code>，循环体一共执行了 <code>n</code> 次。", options: [ { label: "A", text: "正确" }, { label: "B", text: "错误", correct: true } ], analysis: "从 0 开始到 n（包含 n），一共执行了 <b>n + 1</b> 次。<br>初学者最容易把左闭右开还是左闭右闭搞混。" },
         ],
       },
+    },    
+    
+    /* ===== 20 总结：程序的三大基本结构 ===== */
+    {
+      id: 20, type: "grid", title: "宏观视角：程序的三大基本结构", subtitle: "你已经学完了编程的全部底层逻辑", chapterTag: "第 6 讲 · 复习",
+      data: {
+        cards: [
+          { 
+            icon: "📜", 
+            title: "1. 顺序结构", 
+            desc: "<b>像流水账，从上到下</b><br>代码按书写顺序一行行执行。<br><br><b>核心语法</b>：<br><code>语句1;</code><br><code>语句2;</code>" 
+          },
+          { 
+            icon: "🔀", 
+            title: "2. 分支结构", 
+            desc: "<b>像十字路口，做选择</b><br>根据条件的真假，选择走哪条路。<br><br><b>核心语法</b>：<br><code>if (条件) { ... }</code><br><code>switch (变量) { ... }</code>" 
+          },
+          { 
+            icon: "🔁", 
+            title: "3. 循环结构", 
+            desc: "<b>像操场跑圈，重复劳动</b><br>只要条件满足，代码就一圈圈跑。<br><br><b>核心语法</b>：<br><code>for (初值; 条件; 步长) { ... }</code><br><code>while (条件) { ... }</code>" 
+          },
+        ],
+        extra: {
+          title: "🌟 为什么说这是“全部”？",
+          desc: "计算机科学家证明了：<b>全世界所有的复杂程序（包括操作系统、3A 游戏、AI 模型），底层都只由这三种结构组合而成。</b><br><br>从此以后，你看到任何复杂需求，只需要在脑海里拆解：<br>哪里需要<b>顺序</b>？哪里需要<b>判断</b>？哪里需要<b>循环</b>？<br>这就叫<b>算法思维</b>。",
+          variant: "card-glow"
+        },
+        footer: "📌 <b>阶段小结</b>：到这里，你已经掌握了 C++ 的“骨架”。从下一讲开始，我们将引入“数组”，让程序拥有处理海量数据的肌肉！"
+      }
     },
 
-    /* ===== 20 今日总结 ===== */
+    /* ===== 21 今日总结 ===== */
     {
-      id: 20, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
+      id: 21, type: "quote", title: "今日总结", subtitle: "今天我们学会了",
       data: { text: "让电脑替我们做无聊的重复劳动。", author: "—— 循环结构第一课", points: [ "for 适合已知次数的循环", "while 适合未知次数、条件触发的循环", "i++ 先使用后加一，++i 先加一后使用", "break 毁灭整个循环，continue 跳过本轮", "数位分离：n % 10 和 n / 10", "警惕死循环，Ctrl+C 强杀" ], highlight: { title: "📌 关键口诀", desc: "for 循环三要素：初值、条件、步长；while 循环防死锁，变量更新不能忘；嵌套外一内跑全；break 退学 continue 请假。" } }
     },
 
-    /* ===== 21 课后作业 ===== */
+    /* ===== 22 课后作业 ===== */
     {
-      id: 21, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
-      data: { cards: [ { icon: "🟢", title: "基础 1 · P5722", link: "https://www.luogu.com.cn/problem/P5722", desc: "<b>数列求和</b><br>考察：for 循环累加<br>难度：★" }, { icon: "🟢", title: "基础 2 · P5721", link: "https://www.luogu.com.cn/problem/P5721", desc: "<b>数字直角三角形</b><br>考察：嵌套循环<br>难度：★★" }, { icon: "🔴", title: "挑战 · P5727", link: "https://www.luogu.com.cn/problem/P5727", desc: "<b>冰雹猜想</b><br>考察：while 循环与数位分离<br>难度：★★" } ] }
+      id: 22, type: "grid", title: "课后作业 · OJ 实战", subtitle: "打开洛谷，完成以下 3 道题",
+      data: { 
+        cards: [ 
+          { icon: "🟢", title: "基础 1 · P5722", link: "https://www.luogu.com.cn/problem/P5722", desc: "<b>数列求和</b><br>考察：for 循环累加<br>难度：★" }, 
+          { icon: "🟢", title: "基础 2 · P5721", link: "https://www.luogu.com.cn/problem/P5721", desc: "<b>数字直角三角形</b><br>考察：嵌套循环<br>难度：★★" }, 
+          { icon: "🔴", title: "挑战 · P5727", link: "https://www.luogu.com.cn/problem/P5727", desc: "<b>冰雹猜想</b><br>考察：while 循环<br>难度：★★" } 
+        ] 
+      }
     },
 
-    /* ===== 22 下节预告 ===== */
+    /* ===== 23 下节预告 ===== */
     {
-      id: 22, type: "radial", title: "下节预告", subtitle: "第 7 讲 · 一维数组",
+      id: 23, type: "radial", title: "下节预告", subtitle: "第 7 讲 · 一维数组",
       data: { center: "数组", items: [ { text: "批量存数据" }, { text: "下标与遍历" }, { text: "数组越界" }, { text: "最值问题" } ] }
     },
 
-    /* ===== 23 结束页 ===== */
+    /* ===== 24 结束页 ===== */
     {
-      id: 23, type: "ending", title: "第六讲结束", subtitle: "你的程序，从此拥有了无穷的力量", chapterTag: false,
+      id: 24, type: "ending", title: "第六讲结束", subtitle: "你的程序，从此拥有了无穷的力量", chapterTag: false,
       data: { slogan: "科学教育 · 创新课程", extra: { title: "🌟 什么是真正的“计算”", desc: "今天，你只学了 4 行代码（for 循环），就能让电脑一秒算完 1 亿次加法。<br>这就是为什么计算机叫“电脑”——它是真正的重复劳动终结者。<br><br>但在编程世界里，如果存 1 个数据用变量，那存 100 个数据呢？<br>下一讲，我们将学习把数据排成一排的魔法——<b>数组</b>。", variant: "card-glow" } }
     },
   ],

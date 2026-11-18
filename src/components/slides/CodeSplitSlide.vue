@@ -1,6 +1,8 @@
 <template>
   <SlideShell :slide="slide" body-class="code-split-body" :auto-extra="false">
-    <div v-if="d.intro" class="intro-card" v-html="d.intro"></div>
+    
+    <!-- ⚡ 核心修复：使用 v-show 实现默认显示，后续隐藏 -->
+    <div v-show="intro && current === 1" class="intro-card" v-html="intro"></div>
 
     <div class="code-split-layout">
       
@@ -8,26 +10,21 @@
       <div class="left-code-pane scroll-pane">
         <StepWrapper :step="baseOffset" class="h-full-wrapper">
           
-          <!-- 规则 1：如果有多段代码数组且不为空，走多段布局 -->
+          <!-- 规则 1：多段代码 -->
           <div v-if="d.codes && d.codes.length > 0" class="code-list-multi">
-            <CodeBlock 
-              v-for="(c, i) in d.codes" 
-              :key="i" 
-              v-bind="c" 
-            />
+            <CodeBlock v-for="(c, i) in d.codes" :key="i" v-bind="c" />
           </div>
           
-          <!-- 规则 2：否则，只要配置了 code 或 codeFile，走单段布局 -->
+          <!-- 规则 2：单段代码 -->
           <CodeBlock 
             v-else-if="d.code || d.codeFile"
             :code="d.code" 
             :code-file="d.codeFile" 
             :snippet="d.snippet" 
             :density="d.density"
-            :highlight-lines="currentHighlightLines" 
           />
 
-          <!-- 规则 3：如果什么都没有，显示占位提示，防止白屏 -->
+          <!-- 规则 3：占位提示 -->
           <div v-else class="empty-code-hint">
             ⚠️ 当前页面没有配置代码数据 (code 或 codeFile)
           </div>
@@ -88,34 +85,22 @@ import CodeBlock from "@/components/common/CodeBlock.vue";
 import ExtraCard from "@/components/common/ExtraCard.vue";
 import SlideFooter from "@/components/common/SlideFooter.vue";
 import { useStepCount } from "@/composables/useStepCount";
-import { useStep } from "@/composables/useStep"; // 👈 新增引入
+import { useStep } from "@/composables/useStep"; // ⚡ 引入 useStep
 
 const props = defineProps({
   slide: { type: Object, required: true },
 });
 
+// ⚡ 获取当前步数
+const { current } = useStep();
+
 const d = computed(() => props.slide?.data || {});
+const intro = computed(() => d.value.intro || "");
 const annotations = computed(() => d.value.annotations || []);
 const extra = computed(() => d.value.extra);
 const footer = computed(() => d.value.footer);
 
 const baseOffset = computed(() => (d.value.intro ? 2 : 1));
-
-// 👇 新增：获取当前步数并计算高亮行
-const { current } = useStep();
-const currentHighlightLines = computed(() => {
-  // 找出当前已经显示的注解
-  const shownAnnotations = annotations.value.filter((a, i) => {
-    const step = baseOffset.value + i + 1;
-    return current.value >= step;
-  });
-  
-  if (shownAnnotations.length === 0) return [];
-  
-  // 取最后一个已经展示的注解的行号
-  const lastAnn = shownAnnotations[shownAnnotations.length - 1];
-  return lastAnn.line ? [lastAnn.line] : [];
-});
 
 const hasExtra = computed(() => extra.value && Object.keys(extra.value).length > 0);
 const hasFooter = computed(() => footer.value && footer.value.length > 0);
@@ -141,16 +126,15 @@ useStepCount(() =>
   border-left: 4px solid var(--primary); border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-size: calc(16px * var(--font-scale)); line-height: 1.5; color: var(--text-sub);
   flex-shrink: 0;
+  max-height: 18vh;
+  overflow-y: auto;
 }
 .code-split-layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
 .left-code-pane { flex: 0 0 55%; height: 100%; overflow-y: auto; display: flex; flex-direction: column; padding-right: 4px; }
 .h-full-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .h-full-wrapper :deep(.code-block) { flex: 1; height: 100%; }
 
-/* 多段代码垂直布局 */
 .code-list-multi { display: flex; flex-direction: column; gap: 16px; height: 100%; }
-
-/* 占位提示 */
 .empty-code-hint { color: var(--error); padding: 20px; text-align: center; font-weight: bold; }
 
 .right-info-pane { flex: 1; display: flex; flex-direction: column; gap: 12px; height: 100%; min-height: 0; }

@@ -16,7 +16,11 @@ function runCppCode(code, input = '') {
       
     if (!fs.existsSync(compilerPath)) compilerPath = 'g++';
 
-    const tempDir = os.tmpdir();
+    // ⚡ 核心修复：使用项目下的纯英文目录，避开中文路径和系统权限限制
+    const tempDir = path.join(__dirname, 'temp_sandbox');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
     const timeStr = Date.now();
     const cppPath = path.join(tempDir, `cpp_run_${timeStr}.cpp`);
     const exePath = path.join(tempDir, `cpp_run_${timeStr}${process.platform === 'win32' ? '.exe' : ''}`);
