@@ -1,154 +1,53 @@
 <template>
-  <SlideShell :slide="slide" body-class="code-split-body" :auto-extra="false">
-    
-    <!-- ⚡ 核心修复：使用 v-show 实现默认显示，后续隐藏 -->
-    <div v-show="intro && current === 1" class="intro-card" v-html="intro"></div>
-
-    <div class="code-split-layout">
-      
-      <!-- 左侧：代码区（独立滚动） -->
-      <div class="left-code-pane scroll-pane">
-        <StepWrapper :step="baseOffset" class="h-full-wrapper">
-          
-          <!-- 规则 1：多段代码 -->
-          <div v-if="d.codes && d.codes.length > 0" class="code-list-multi">
+  <SlideShell :slide="slide">
+    <SplitLayout :cols="2" ratio="1.1:1">
+      <div class="h-full">
+        <StepWrapper :step="1" class="h-full">
+          <CodeBlock v-if="d.codes?.length" class="code-block">
             <CodeBlock v-for="(c, i) in d.codes" :key="i" v-bind="c" />
-          </div>
-          
-          <!-- 规则 2：单段代码 -->
-          <CodeBlock 
-            v-else-if="d.code || d.codeFile"
-            :code="d.code" 
-            :code-file="d.codeFile" 
-            :snippet="d.snippet" 
-            :density="d.density"
-          />
-
-          <!-- 规则 3：占位提示 -->
-          <div v-else class="empty-code-hint">
-            ⚠️ 当前页面没有配置代码数据 (code 或 codeFile)
-          </div>
-          
+          </CodeBlock>
+          <CodeBlock v-else :code-file="d.codeFile" :code="d.code" :snippet="d.snippet" :density="d.density" />
         </StepWrapper>
       </div>
-
-      <!-- 右侧：信息区 -->
-      <div class="right-info-pane">
-        
-        <!-- 顶部固定区：运行结果 -->
-        <div v-if="d.output" class="info-top-group">
-          <StepWrapper :step="outputStep">
-            <div class="card output-card">
-              <div class="card-title" style="font-size: calc(16px * var(--font-scale));">🖥️ 运行结果</div>
-              <pre><code>{{ d.output }}</code></pre>
-            </div>
-          </StepWrapper>
-        </div>
-
-        <!-- 底部独立滚动区：注释 / Extra -->
-        <div class="info-bottom-group scroll-pane">
-          <StepWrapper
-            v-for="(a, i) in (d.annotations || [])"
-            :key="i"
-            :step="baseOffset + i + 1"
-          >
+      <div class="h-full info-pane">
+        <StepWrapper v-if="d.output" :step="outputStep">
+          <div class="card output-card"><div class="card-title">🖥️ 运行结果</div><pre><code>{{ d.output }}</code></pre></div>
+        </StepWrapper>
+        <div class="scroll-pane annotations-list">
+          <StepWrapper v-for="(a, i) in d.annotations || []" :key="i" :step="1 + i + 1">
             <div class="card annotation-card">
-              <div class="annotation-content">
-                <div class="annotation-title-wrap">
-                  <span class="badge badge-primary">第 {{ a.line }} 行</span>
-                  <span class="annotation-title" v-html="a.title"></span>
-                </div>
-                <div v-if="a.desc" class="annotation-desc" v-html="a.desc"></div>
-              </div>
+              <span class="badge badge-primary">第 {{ a.line }} 行</span>
+              <span class="annotation-title" v-html="a.title"></span>
+              <div v-if="a.desc" class="annotation-desc" v-html="a.desc"></div>
             </div>
           </StepWrapper>
-
-          <StepWrapper v-if="extra" :step="extraStep">
-            <ExtraCard v-bind="extra" />
-          </StepWrapper>
-          
-          <StepWrapper v-if="footer" :step="footerStep">
-            <SlideFooter :html="footer" />
-          </StepWrapper>
         </div>
-
       </div>
-    </div>
+    </SplitLayout>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import SlideShell from "@/components/common/SlideShell.vue";
-import StepWrapper from "@/components/common/StepWrapper.vue";
-import CodeBlock from "@/components/common/CodeBlock.vue";
-import ExtraCard from "@/components/common/ExtraCard.vue";
-import SlideFooter from "@/components/common/SlideFooter.vue";
-import { useStepCount } from "@/composables/useStepCount";
-import { useStep } from "@/composables/useStep"; // ⚡ 引入 useStep
-
-const props = defineProps({
-  slide: { type: Object, required: true },
-});
-
-// ⚡ 获取当前步数
-const { current } = useStep();
-
+import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
+import SplitLayout from '@/components/layouts/SplitLayout.vue';
+import StepWrapper from '@/components/common/StepWrapper.vue';
+import CodeBlock from '@/components/common/CodeBlock.vue';
+import { useSlideSteps } from '@/composables/useSlideSteps';
+const props = defineProps({ slide: { type: Object, required: true } });
 const d = computed(() => props.slide?.data || {});
-const intro = computed(() => d.value.intro || "");
-const annotations = computed(() => d.value.annotations || []);
-const extra = computed(() => d.value.extra);
-const footer = computed(() => d.value.footer);
-
-const baseOffset = computed(() => (d.value.intro ? 2 : 1));
-
-const hasExtra = computed(() => extra.value && Object.keys(extra.value).length > 0);
-const hasFooter = computed(() => footer.value && footer.value.length > 0);
-
-const outputStep = computed(() => baseOffset.value + annotations.value.length + 1);
-const extraStep  = computed(() => outputStep.value + (d.value.output ? 1 : 0));
-const footerStep = computed(() => extraStep.value  + (hasExtra.value  ? 1 : 0));
-
-useStepCount(() =>
-  (d.value.intro ? 1 : 0) +
-  (d.value.code || d.value.codeFile || (d.value.codes && d.value.codes.length > 0) ? 1 : 0) + 
-  annotations.value.length +
-  (d.value.output ? 1 : 0) +
-  (hasExtra.value ? 1 : 0) +
-  (hasFooter.value ? 1 : 0)
-);
+useSlideSteps(props, () => 1 + (d.value.annotations?.length || 0) + (d.value.output ? 1 : 0));
+const outputStep = computed(() => 1 + (d.value.annotations?.length || 0) + 1);
 </script>
 
 <style scoped>
-.code-split-body { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; gap: 8px !important;}
-.intro-card {
-  padding: 8px 14px; background: linear-gradient(135deg, var(--primary-soft), #fff);
-  border-left: 4px solid var(--primary); border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  font-size: calc(16px * var(--font-scale)); line-height: 1.5; color: var(--text-sub);
-  flex-shrink: 0;
-  max-height: 18vh;
-  overflow-y: auto;
-}
-.code-split-layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
-.left-code-pane { flex: 0 0 55%; height: 100%; overflow-y: auto; display: flex; flex-direction: column; padding-right: 4px; }
-.h-full-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-.h-full-wrapper :deep(.code-block) { flex: 1; height: 100%; }
-
-.code-list-multi { display: flex; flex-direction: column; gap: 16px; height: 100%; }
-.empty-code-hint { color: var(--error); padding: 20px; text-align: center; font-weight: bold; }
-
-.right-info-pane { flex: 1; display: flex; flex-direction: column; gap: 12px; height: 100%; min-height: 0; }
-.info-top-group { flex-shrink: 0; }
-.output-card { padding: 10px 14px; }
-.output-card pre {
-  margin: 0; background: var(--code-bg); color: var(--code-text);
-  border-radius: var(--radius-sm); padding: 10px 14px; font-family: var(--font-code);
-  font-size: calc(15px * var(--font-scale)); line-height: 1.4; overflow-x: auto;
-}
-.info-bottom-group { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
-.annotation-card { padding: 10px 14px; }
-.annotation-content { display: flex; flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
-.annotation-title-wrap { display: flex; align-items: baseline; gap: 8px; flex-shrink: 0; }
-.annotation-title { font-size: calc(18px * var(--font-scale)); font-weight: 700; color: var(--text-main); white-space: nowrap; }
+.h-full { height: 100%; min-height: 0; display: flex; flex-direction: column; }
+.code-block { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.info-pane { gap: 12px; }
+.output-card { padding: 10px 14px; flex-shrink: 0; }
+.output-card pre { margin: 0; background: var(--code-bg); color: var(--code-text); border-radius: var(--radius-sm); padding: 10px 14px; font-family: var(--font-code); font-size: calc(15px * var(--font-scale)); overflow-x: auto; }
+.annotations-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.annotation-card { padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.annotation-title { font-size: calc(18px * var(--font-scale)); font-weight: 700; color: var(--text-main); }
 .annotation-desc { flex: 1; min-width: 200px; font-size: calc(16px * var(--font-scale)); color: var(--text-sub); line-height: 1.5; }
 </style>

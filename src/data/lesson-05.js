@@ -49,14 +49,14 @@ export default {
           { line: 16, title: "else", desc: "兜底选项（低于 10 局的情况）" } 
         ], 
         output: "（输入 25）\n白银", 
-        footer: '<b>⚠️ 顺序很重要</b>：代码是从上往下执行的，一旦命中就不再往下走。所以条件必须从大到小（或从小到大）有规律地排列。' 
+        extra: { desc: '<b>⚠️ 顺序很重要</b>：代码是从上往下执行的，一旦命中就不再往下走。所以条件必须从大到小（或从小到大）有规律地排列。', variant: 'flat' } 
       }
     },
 
     /* ===== 6 冲突：顺序颠倒 ===== */
     {
       id: 6, type: "code-walkthrough", title: "眼见为实：顺序颠倒的灾难", subtitle: "为什么 90 分变成了 C？", chapterTag: "第 5 讲 · 概念理解",
-      data: { intro: "有个同学把条件顺序写反了，把 <code>score &gt;= 60</code> 放到了最前面。<br>运行之后，输入 90 分，屏幕上竟然输出了 C！这是为什么？看代码：", codeFile: "codes/lesson-05/_error-order.cpp", snippet: "main", steps: [ { title: "输入 90", line: 5, vars: { score: "90" }, note: "score 是 90。" }, { title: "第一个条件", line: 7, vars: { score: "90" }, note: "先判断 <code>90 &gt;= 60</code>，成立！<br>进入这层分支，输出 C。" }, { title: "直接结束", line: 7, vars: { score: "90" }, note: "因为已经命中了，后面的 <code>else if</code> 根本没机会执行！<br>哪怕 90 分确实大于等于 90，也晚了。" } ], footer: '<b>📌 铁律</b>：范围窄的条件放前面，范围宽的条件放后面。绝不能乱序。' }
+      data: { intro: "有个同学把条件顺序写反了，把 <code>score &gt;= 60</code> 放到了最前面。<br>运行之后，输入 90 分，屏幕上竟然输出了 C！这是为什么？看代码：", codeFile: "codes/lesson-05/_error-order.cpp", snippet: "main", steps: [ { title: "输入 90", line: 5, vars: { score: "90" }, note: "score 是 90。" }, { title: "第一个条件", line: 7, vars: { score: "90" }, note: "先判断 <code>90 &gt;= 60</code>，成立！<br>进入这层分支，输出 C。" }, { title: "直接结束", line: 7, vars: { score: "90" }, note: "因为已经命中了，后面的 <code>else if</code> 根本没机会执行！<br>哪怕 90 分确实大于等于 90，也晚了。" } ], extra: { desc: '<b>📌 铁律</b>：范围窄的条件放前面，范围宽的条件放后面。绝不能乱序。', variant: 'flat' } }
     },
 
     /* ===== 7 练习1：成绩等级 ===== */
@@ -139,7 +139,7 @@ export default {
             ]
           }
         ],
-        footer: '<b>📌 核心对比</b>：<br>如果是判断 <b>范围</b>（如成绩 60~80），用 <code>if</code>；<br>如果是判断 <b>具体是几</b>（如星期几、选项 A/B/C），用 <code>switch</code>。'
+        extra: { desc: '<b>📌 核心对比</b>：<br>如果是判断 <b>范围</b>（如成绩 60~80），用 <code>if</code>；<br>如果是判断 <b>具体是几</b>（如星期几、选项 A/B/C），用 <code>switch</code>。', variant: 'flat' }
       }
     },
 
@@ -192,14 +192,42 @@ export default {
       }
     },
 
-    /* ===== 12 练习2：星期几查询（防抄提示） ===== */
+    /* ===== 12 练习2：工作日与休息日 ===== */
     {
-      id: 12, type: "level-map", title: "课堂练习2：星期几查询", subtitle: "switch 实战", chapterTag: "第 5 讲 · 实战演练",
+      id: 12, type: "level-map", title: "课堂练习2：工作日与休息日", subtitle: "巧用 switch 穿透与排版", chapterTag: "第 5 讲 · 实战演练",
       data: { 
-        question: { title: "题干", desc: "输入数字（1—7），输出对应的星期几。<br>输入样例：<code>3</code>　输出样例：<code>周三</code>", timer: "⏱ 限时 5 分钟" }, 
-        hints: ["用 <code>switch</code> 语法", "不要忘记写 <code>break</code>", "用 <code>default</code> 处理无效输入"], 
-        answer: { codeFile: "codes/lesson-05/switch-day.cpp", snippet: "main" }, 
-        analysis: { title: "📖 解析", desc: "<b>⚠️ 注意</b>：不要直接抄左边的代码，请你把 1—7 的 case 自己完整敲一遍，这是熟练度的关键。<br>每一个 case 后面必须跟上 break，防止穿透。" } 
+        question: { 
+          title: "题干", 
+          desc: "输入数字（1—7），如果对应的是周一到周五，输出 <code>工作日</code>；如果是周六或周日，输出 <code>休息日</code>。<br>输入样例：<code>3</code>　输出样例：<code>工作日</code>", 
+          timer: "⏱ 限时 5 分钟" 
+        }, 
+        hints: [
+          "不要写 7 个 <code>cout</code>！利用刚刚学过的 <b>case 穿透</b>", 
+          "连续的 case 可以共用一段代码和 break", 
+          "注意观察连续 case 在同一行的排版技巧"
+        ], 
+        
+        steps: [
+          {
+            title: "思路 1：基础穿透（6 和 7）",
+            desc: "周六和周日都是休息日。<br>我们可以在 <code>case 6:</code> 的后面不写任何代码和 break，让它直接穿透到 <code>case 7:</code>，共用下面的输出。",
+            highlightLines: [13, 14, 15, 16], // 高亮 6 和 7 的部分
+            hiddenLines: [10, 11, 12], // 隐藏 1 到 5 的部分
+            placeholder: "        // 1 到 5 的代码还没写..."
+          },
+          {
+            title: "思路 2：优雅排版（1 到 5）",
+            desc: "既然 1 到 5 都输出“工作日”，我们可以把 5 个 case 全挤在同一行。<br>只要不写 break，它们最终都会顺延执行第 11 行的输出语句。这样排版非常紧凑！",
+            highlightLines: [10, 11, 12], // 高亮 1 到 5 的部分
+            hiddenLines: [] // 全部显示
+          }
+        ],
+
+        answer: { codeFile: "codes/lesson-05/switch-workday.cpp", snippet: "main" }, 
+        analysis: { 
+          title: "📖 解析", 
+          desc: "如果不用穿透，你需要写 5 遍 <code>case 1: cout &lt;&lt; \"工作日\"; break;</code>。<br>利用穿透并排在同一行，代码瞬间瘦身。<br><b>注意</b>：虽然 <code>case 1:</code> 到 <code>case 5:</code> 写在一起，但它们最后只需要保留一个 <code>break;</code> 就够了。" 
+        } 
       }
     },
 
@@ -215,7 +243,7 @@ export default {
           { wrong: "<code>if (score >= 60)</code><br><code>if (a > 0 && a < 10)</code>", right: "<code>case 1:</code><br><code>case \'A\':</code><br><code>case \'+\':</code>" },
           { wrong: "灵活，能处理各种复杂逻辑", right: "清爽，但只能判断整数或字符。" }
         ],
-        footer: '<b>📌 选型口诀</b>：判断“范围”用 if，判断“等于几”用 switch。'
+        extra: { desc: '<b>📌 选型口诀</b>：判断“范围”用 if，判断“等于几”用 switch。', variant: 'flat' }
       }
     },
 
@@ -239,7 +267,7 @@ export default {
           { icon: "💣", title: "穿透效应", desc: "某个 case 没写 break，下面的代码会全部执行。<br><b>常考：最后输出了几行？</b>" },
           { icon: "🪜", title: "嵌套 if", desc: "else 永远和最近的未配对 if 结合。<br><b>常考：缩进骗人，究竟属于谁？</b>" }
         ],
-        footer: '<b>📌 怎么考？</b><br>给一段带穿透的 switch 代码，问你最终输出什么，或者问哪个 case 没有执行。'
+        extra: { desc: '<b>📌 怎么考？</b><br>给一段带穿透的 switch 代码，问你最终输出什么，或者问哪个 case 没有执行。', variant: 'flat' }
       }
     },
 

@@ -46,7 +46,7 @@ export default {
             ]
           }
         ],
-        footer: '<b>📌 本质</b>：循环就是让电脑替我们做无聊的重复劳动。'
+        extra: { desc: '<b>📌 本质</b>：循环就是让电脑替我们做无聊的重复劳动。', variant: 'flat' }
       }
     },
 
@@ -154,14 +154,14 @@ export default {
           { line: 10, title: "cin >> x;", desc: "循环的最后，再读入下一个数。如果读了 0，下次判断就会失败，退出循环。" } 
         ], 
         output: "（输入：3 5 2 0）\n3 5 2", 
-        footer: '<b>📌 与 for 的终极区别</b>：<code>for</code> 适合<b>已知次数</b>（如跑 100 圈）；<code>while</code> 适合<b>未知次数，条件触发</b>（如不知道要输入多少个数，直到输入 0）。' 
+        extra: { desc: '<b>📌 与 for 的终极区别</b>：<code>for</code> 适合<b>已知次数</b>（如跑 100 圈）；<code>while</code> 适合<b>未知次数，条件触发</b>（如不知道要输入多少个数，直到输入 0）。', variant: 'flat' } 
       }
     },
 
     /* ===== 11 for vs while ===== */
     {
       id: 11, type: "compare", title: "for vs while", subtitle: "什么时候用谁？",
-      data: { neutral: true, splitStep: true, groups: [ { leftLabel: "for 循环", rightLabel: "while 循环", wrong: "<b>明确次数</b>", right: "<b>未知次数，条件触发</b>" }, { leftLabel: "场景", rightLabel: "场景", wrong: "跑 100 圈<br>遍历数组", right: "输入直到 0 为止<br>直到密码正确" }, { leftLabel: "习惯", rightLabel: "习惯", wrong: "将三要素写在括号里，紧凑清晰。", right: "变量定义在外面，忘了更新步长就会死循环。" } ], footer: '<b>📌 建议</b>：初学阶段，能用 <code>for</code> 写就尽量用 <code>for</code>，不容易漏写条件导致死循环。' }
+      data: { neutral: true, splitStep: true, groups: [ { leftLabel: "for 循环", rightLabel: "while 循环", wrong: "<b>明确次数</b>", right: "<b>未知次数，条件触发</b>" }, { leftLabel: "场景", rightLabel: "场景", wrong: "跑 100 圈<br>遍历数组", right: "输入直到 0 为止<br>直到密码正确" }, { leftLabel: "习惯", rightLabel: "习惯", wrong: "将三要素写在括号里，紧凑清晰。", right: "变量定义在外面，忘了更新步长就会死循环。" } ], extra: { desc: '<b>📌 建议</b>：初学阶段，能用 <code>for</code> 写就尽量用 <code>for</code>，不容易漏写条件导致死循环。', variant: 'flat' } }
     },
 
     /* ===== 12 冲突：死循环急救与浮点陷阱 ===== */
@@ -172,7 +172,7 @@ export default {
           { icon: "💣", scene: "黑窗口里疯狂刷屏，按什么都没反应", what: "写出了死循环。比如 <code>while (1)</code> 里面忘记写 <code>break;</code>", why: "条件永远为真，程序在里面疯狂转圈，出不来。", fix: "立刻按 <kbd>Ctrl + C</kbd> 强行掐断程序！" },
           { icon: "🪤", scene: "洛谷经典陷阱：浮点数死循环", what: "循环条件用了浮点数判断", why: "<code>for(double i=0; i!=1; i+=0.1)</code><br>因为小数精度不精确，i 可能永远不等于 1，导致死循环！", fix: "<b>绝对不要</b>用浮点数做循环的等号条件（!=）。" }
         ],
-        footer: '<b>📌 救命绝招</b>：写 <code>while</code> 循环，先写里面的变量更新（如 <code>i++</code>），再写其他逻辑，防止自己忘了。'
+        extra: { desc: '<b>📌 救命绝招</b>：写 <code>while</code> 循环，先写里面的变量更新（如 <code>i++</code>），再写其他逻辑，防止自己忘了。', variant: 'flat' }
       }
     },
 
@@ -188,7 +188,7 @@ export default {
           { line: 15, title: "if (i == 3) continue;", desc: "跳过本轮：满足条件时，本轮后面的代码不执行了，直接跑下一圈" } 
         ], 
         output: "1 2\n---\n1 2 4 5", 
-        footer: '<b>📌 场景总结</b>：<code>break</code> 常用于“找到了/触发了警报就立刻停止”；<code>continue</code> 常用于“过滤掉不需要的无效数据，继续处理剩下的”。' 
+        extra: { desc: '<b>📌 场景总结</b>：<code>break</code> 常用于“找到了/触发了警报就立刻停止”；<code>continue</code> 常用于“过滤掉不需要的无效数据，继续处理剩下的”。', variant: 'flat' } 
       }
     },
 
@@ -280,7 +280,7 @@ export default {
           { icon: "📦", title: "嵌套循环次数", desc: "外层跑 <code>n</code> 次，内层跑 <code>m</code> 次。<br>总次数 = <b>n × m</b>。<br>如果是 <code>for (j=1; j<=i; j++)</code>，总次数是 1+2+...+n。" },
           { icon: "⚡", title: "break vs continue", desc: "<code>break</code> 结束整个循环。<br><code>continue</code> 只结束当前这一轮，进入下一轮。<br><b>常考：最后输出的结果是什么？</b>" }
         ],
-        footer: '<b>📌 怎么考？</b><br>给一段循环代码，问你循环体执行了几次，或者最后的变量值是多少。<b>画表法是最稳妥的解法。</b>'
+        extra: { desc: '<b>📌 怎么考？</b><br>给一段循环代码，问你循环体执行了几次，或者最后的变量值是多少。<b>画表法是最稳妥的解法。</b>', variant: 'flat' }
       }
     },
 

@@ -63,7 +63,7 @@ export default {
           { line: 7, title: "printStar();", desc: "在 main 里喊一声它的名字加括号，机器就启动了！" },
         ],
         output: "*****",
-        footer: '<b>📌 总结</b>：定义一个函数，就是给它起个名字，告诉它该干什么（写在大括号里）。'
+        extra: { desc: '<b>📌 总结</b>：定义一个函数，就是给它起个名字，告诉它该干什么（写在大括号里）。', variant: 'flat' }
       }
     },
 
@@ -78,7 +78,7 @@ export default {
           { title: "尝试调用", line: 3, note: "执行到 <code>printStar();</code>。" },
           { title: "编译器罢工", line: 3, note: "报错：<code>'printStar' was not declared in this scope</code>。<br>编译器从第一行往下读，读到此时，它还没看到下面有个 printStar 函数。" }
         ],
-        footer: '<b>📌 铁律</b>：C++ 是自上而下编译的。函数<b>必须</b>在调用它的地方前面出现。'
+        extra: { desc: '<b>📌 铁律</b>：C++ 是自上而下编译的。函数<b>必须</b>在调用它的地方前面出现。', variant: 'flat' }
       }
     },
 
@@ -127,7 +127,7 @@ export default {
           { line: 10, title: "printStar(3);", desc: "这里的 <code>3</code> 叫<b>实参</b>（真正的材料），把它塞给形参 <code>n</code>。" },
         ],
         output: "***",
-        footer: '<b>📌 总结</b>：有参数时，调用必须给括号里传值，且<b>类型要匹配</b>（形参是 int，实参也得是 int）。'
+        extra: { desc: '<b>📌 总结</b>：有参数时，调用必须给括号里传值，且<b>类型要匹配</b>（形参是 int，实参也得是 int）。', variant: 'flat' }
       },
     },
 
@@ -143,7 +143,7 @@ export default {
           { line: 11, title: "square(a)", desc: "调用函数，a 是实参（真正的材料）。" },
         ],
         output: "25",
-        footer: '<b>📌 注意</b>：函数返回类型如果是 <code>int</code>，就<b>必须</b>有 <code>return</code> 返回对应类型。如果是 <code>void</code>，则不需要。'
+        extra: { desc: '<b>📌 注意</b>：函数返回类型如果是 <code>int</code>，就<b>必须</b>有 <code>return</code> 返回对应类型。如果是 <code>void</code>，则不需要。', variant: 'flat' }
       },
     },
 
@@ -177,7 +177,7 @@ export default {
             note: "square 执行完毕，返回 25，出栈。main 恢复运行并拿到了结果。"
           }
         ],
-        footer: '<b>📌 结论</b>：函数调用本质就是“压栈”和“出栈”。被调用的函数在栈顶执行，调用者压在底下等待（挂起）。'
+        extra: { desc: '<b>📌 结论</b>：函数调用本质就是“压栈”和“出栈”。被调用的函数在栈顶执行，调用者压在底下等待（挂起）。', variant: 'flat' }
       }
     },
     
@@ -216,7 +216,7 @@ export default {
           { title: "调用函数", line: 9, vars: { x: "1", y: "2" }, note: "把 x 和 y 传给 swap 函数。" },
           { title: "见证奇迹", line: 10, vars: { x: "1", y: "2" }, note: "<b>根本没交换！</b>输出依然是 1 2。函数里的交换全白费了。" }
         ],
-        footer: '<b>📌 悬念</b>：明明在函数里 a 和 b 已经换了，为什么外面的 x 和 y 稳如泰山？下一页揭晓。'
+        extra: { desc: '<b>📌 悬念</b>：明明在函数里 a 和 b 已经换了，为什么外面的 x 和 y 稳如泰山？下一页揭晓。', variant: 'flat' }
       }
     },
 
@@ -253,7 +253,7 @@ export default {
           { line: 11, title: "testScope();", desc: "调用函数，里面能成功访问全局和局部的变量。" },
         ],
         output: "函数内： 10 100",
-        footer: '<b>📌 机房急救</b>：如果在 main 里尝试打印 local_num，编译器会报错“未定义”。因为它在 testScope 的大括号结束时就已经被销毁了。'
+        extra: { desc: '<b>📌 机房急救</b>：如果在 main 里尝试打印 local_num，编译器会报错“未定义”。因为它在 testScope 的大括号结束时就已经被销毁了。', variant: 'flat' }
       },
     },
 
@@ -312,7 +312,7 @@ export default {
           { title: "循环结束", line: 8, vars: { a: "6", b: "0" }, note: "<code>a = 6</code>，<code>b = 0</code>。宽变成 0 了，循环条件不再满足。" },
           { title: "交出边长", line: 11, vars: { a: "6" }, note: "<code>return a;</code> 把最后那个完美正方形边长 6 交出去。" }
         ],
-        footer: '<b>📌 算法之美</b>：古希腊数学家欧几里得在 2000 多年前就发现了这个几何规律。今天，你们用代码重演了这伟大的智慧。'
+        extra: { desc: '<b>📌 算法之美</b>：古希腊数学家欧几里得在 2000 多年前就发现了这个几何规律。今天，你们用代码重演了这伟大的智慧。', variant: 'flat' }
       }
     },
 
@@ -326,7 +326,7 @@ export default {
           { icon: "✂️", title: "第二步", desc: "用剩下的短边继续切，直到刚好切完。最后那个完美正方形的边长是多少？" },
           { icon: "🏆", title: "终极法则", desc: "算完之后，你再去 OJ 上提交刚才的代码。你会发现，无论输入什么，它都在重复你刚才在草稿纸上切砖的动作。" },
         ],
-        footer: '<b>📌 课后作业</b>：去洛谷完成 P5735（距离函数）和 P5737（闰年展示）。今天没有新语法，只有对黑盒的深刻理解。'
+        extra: { desc: '<b>📌 课后作业</b>：去洛谷完成 P5735（距离函数）和 P5737（闰年展示）。今天没有新语法，只有对黑盒的深刻理解。', variant: 'flat' }
       }
     },
     /* ===== 20 函数设计法则：所以呢？ ===== */
@@ -339,7 +339,7 @@ export default {
           { icon: "🛡️", title: "法则三：保护“原变量”", desc: "值传递的好处就是“保护”。你在函数里把参数算得面目全非，外面的原变量依然安好。" },
           { icon: "🧱", title: "法则四：局部变量别越界", desc: "每个函数内部都有自己的变量（局部变量），它们出了门就消失。这防止了不同函数间的变量名冲突（你叫你的 <code>sum</code>，我叫我的 <code>sum</code>，互不干扰）。" },
         ],
-        footer: '<b>📌 黄金准则</b>：一个好函数，应该像一个干净的黑盒——<b>传参进去，返回结果出来，绝不在里面偷偷修改外面的大局</b>。'
+        extra: { desc: '<b>📌 黄金准则</b>：一个好函数，应该像一个干净的黑盒——<b>传参进去，返回结果出来，绝不在里面偷偷修改外面的大局</b>。', variant: 'flat' }
       }
     },
 
@@ -405,7 +405,7 @@ export default {
           { icon: "📝", title: "函数名能随便起吗？", desc: "不能跟关键字重名，最好见名知意，驼峰命名法（如 <code>getMax</code>）。" },
           { icon: "🌍", title: "全局变量好用吗？", desc: "如果在函数里改了全局变量，外面也会变。但竞赛中尽量少用，容易引发难以排查的 Bug。" },
         ],
-        footer: '<b>🔮 预告</b>：既然值传递是复印件，那如果非要传原件怎么办？<br>后面我们会学「引用传参」（加个 <code>&</code> 符号），甚至「指针」。现在只需要记住值传递的规则即可。'
+        extra: { desc: '<b>🔮 预告</b>：既然值传递是复印件，那如果非要传原件怎么办？<br>后面我们会学「引用传参」（加个 <code>&</code> 符号），甚至「指针」。现在只需要记住值传递的规则即可。', variant: 'flat' }
       }
     },
 

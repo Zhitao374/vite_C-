@@ -9,12 +9,12 @@
       </div>
       
       <div class="code-header-actions">
-        <!-- 新增：在沙盒中运行 -->
-        <button class="run-btn" @click="openInSandbox" title="在沙盒中打开此代码">
+        <!-- 在沙盒中运行 -->
+        <button class="run-btn" v-no-flip @click="openInSandbox" title="在沙盒中打开此代码">
           <Play :size="14" /> 演示运行
         </button>
-        <!-- 复制按钮保持原样 -->
-        <button class="copy-btn" :class="{ 'copy-success': copied }" @click="handleCopy" title="复制代码">
+        <!-- 复制按钮 -->
+        <button class="copy-btn" :class="{ 'copy-success': copied }" v-no-flip @click="handleCopy" title="复制代码">
           <Check v-if="copied" :size="16" />
           <Copy v-else :size="16" />
         </button>
@@ -30,7 +30,6 @@
         <span class="code-text" v-html="item.isPlaceholder ? escapeHtml(item.text) : safeHighlight(item.text)"></span>
       </span>
     </code></pre>
-
   </div>
 </template>
 
@@ -40,6 +39,7 @@ import { Play, Copy, Check } from 'lucide-vue-next';
 import { useCodeLoader } from "@/composables/useCodeLoader";
 import { useHighlight } from "@/composables/useHighlight";
 import { useCopy } from "@/composables/useCopy";
+import { useSandbox } from "@/composables/useSandbox";
 
 const props = defineProps({
   code: { type: String, default: "" },
@@ -55,33 +55,32 @@ const props = defineProps({
 const { load } = useCodeLoader();
 const { highlightLine: syntaxHighlight, escapeHtml } = useHighlight();
 const { copyText, copied } = useCopy();
+const sandbox = useSandbox();
 
 const rawCode = ref("");
 
+// 防竞态：快速切换 slide 时，保证最后加载的才生效
+let loadToken = 0;
 watchEffect(async () => {
-  if (props.code) rawCode.value = props.code;
-  else if (props.codeFile) rawCode.value = await load(props.codeFile);
-  else rawCode.value = "";
-});
-
-// ============================================
-// 行号起点 + 行内容
-// ============================================
-const startLine = ref(1);
-
-const lines = computed(() => {
-  let code = String(rawCode.value || "").replace(/\n+$/, "");
-
-  if (props.snippet) {
-    const result = extractSnippet(code, props.snippet);
-    code = result.code;
-    startLine.value = result.startLine;
-  } else {
-    startLine.value = 1;
+  const token = ++loadToken;
+  let content = "";
+  if (props.code) content = props.code;
+  else if (props.codeFile) content = await load(props.codeFile);
+  
+  if (token === loadToken) {
+    rawCode.value = content;
   }
-
-  return code.split("\n");
 });
+
+// 修复 computed 内的副作用：把 snippet 提取逻辑提出来
+const snippetData = computed(() => {
+  const raw = String(rawCode.value || "").replace(/\n+$/, "");
+  if (!props.snippet) return { code: raw, startLine: 1 };
+  return extractSnippet(raw, props.snippet);
+});
+
+const lines = computed(() => snippetData.value.code.split("\n"));
+const startLine = computed(() => snippetData.value.startLine);
 
 const renderedLines = computed(() => {
   const hiddenSet = new Set(props.hiddenLines);
@@ -149,17 +148,8 @@ const fileName = computed(() => {
 });
 
 function openInSandbox() {
-  // 如果文件还在加载，直接拦截
-  if (!rawCode.value) {
-    console.warn('代码还没加载完，无法演示');
-    return;
-  }
-  
-  console.log('🚀 准备发送代码到沙盒:', rawCode.value.slice(0, 50) + '...');
-  
-  window.dispatchEvent(new CustomEvent('open-sandbox', { 
-    detail: { code: rawCode.value } 
-  }));
+  if (!rawCode.value) return;
+  sandbox.open(rawCode.value);
 }
 
 const densityClass = computed(() => {
@@ -187,13 +177,12 @@ async function handleCopy() {
 .code-block {
   position: relative;
   border-radius: 10px;
-  /* 用 flex 垂直排列 header / pre / terminal */
   display: flex;
   flex-direction: column;
   background: var(--code-bg);
   border: 1px solid var(--code-border);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  max-height: 75vh; /* 避免无限撑高 */
+  max-height: 75vh; /* 默认最大高度，防止无限撑高 */
   overflow: hidden;
 }
 
@@ -273,7 +262,7 @@ pre {
   color: var(--code-text);
   overflow-x: auto;
   overflow-y: auto;
-  flex: 1; /* 自动填充剩余高度 */
+  flex: 1;
   min-height: 120px; 
   white-space: normal;
   tab-size: 4;
@@ -376,13 +365,4 @@ pre code { display: block; }
 }
 .run-btn:hover:not(:disabled) { background: rgba(0, 180, 42, 0.3); }
 .run-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-
-/* 旋转加载动画 */
-.spin-icon {
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 </style>

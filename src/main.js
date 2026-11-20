@@ -3,6 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import "./styles/main.css";
 
+// ✅ 新增：引入自定义指令
+import { installDirectives } from "./directives";
+
 // ============================================
 // 引入 KaTeX 渲染数学公式
 // ============================================
@@ -10,6 +13,9 @@ import "katex/dist/katex.min.css";
 import renderMathInElement from "katex/contrib/auto-render";
 
 const app = createApp(App);
+
+// ✅ 注册自定义指令（v-no-flip / v-nav-lock）
+installDirectives(app);
 
 // ============================================
 // 全局错误处理
@@ -32,7 +38,6 @@ app.use(router).mount("#app");
 // ============================================
 // 全局 KaTeX 自动渲染机制
 // ============================================
-// 渲染函数
 const renderMath = () => {
   renderMathInElement(document.body, {
     delimiters: [
@@ -42,7 +47,6 @@ const renderMath = () => {
       { left: "\\[", right: "\\]", display: true }
     ],
     throwOnError: false,
-    // 忽略代码块里的内容，防止误渲染代码
     ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
   });
 };
@@ -50,11 +54,10 @@ const renderMath = () => {
 // 初始化渲染一次
 setTimeout(renderMath, 100);
 
-// 使用 MutationObserver 监听 DOM 变化（翻页、展开 extra、显示 Step 时自动渲染）
+// 使用 MutationObserver 监听 DOM 变化
 const observer = new MutationObserver((mutations) => {
   let shouldRender = false;
   for (const mutation of mutations) {
-    // 节点新增或 class/style 变化（如 StepWrapper 变 visible）
     if (
       (mutation.type === "childList" && mutation.addedNodes.length > 0) ||
       (mutation.type === "attributes" && mutation.attributeName === "class")
@@ -65,15 +68,13 @@ const observer = new MutationObserver((mutations) => {
   }
   
   if (shouldRender) {
-    // 防抖处理，等待 Vue 完成 DOM 更新
     requestAnimationFrame(() => renderMath());
   }
 });
 
-// 监听全站 DOM 变化
 observer.observe(document.body, {
   childList: true,
   subtree: true,
   attributes: true,
-  attributeFilter: ["class"], // 只监听 class 变化（StepWrapper 的显隐）
+  attributeFilter: ["class"],
 });

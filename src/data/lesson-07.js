@@ -38,7 +38,7 @@ export default {
           { line: 10, title: "int c[10] = {0};", desc: "<b>方式三：全部清零</b>。注意！只写一个 0，编译器会自动把剩下所有的位置都填满 0。" } 
         ], 
         output: "10 2 0",
-        footer: '<b>🤔 灵魂拷问</b>：如果数组有 100 个元素，难道我们要写 100 行 <code>a[0]=...; a[1]=...</code> 吗？或者用大括号写 100 个 0？这也太蠢了。这就必须请出上节课学的「循环」了。但在那之前，必须先弄清楚数组的编号规律。'
+        extra: { desc: '<b>🤔 灵魂拷问</b>：如果数组有 100 个元素，难道我们要写 100 行 <code>a[0]=...; a[1]=...</code> 吗？或者用大括号写 100 个 0？这也太蠢了。这就必须请出上节课学的「循环」了。但在那之前，必须先弄清楚数组的编号规律。', variant: 'flat' }
       }
     },
 
@@ -62,7 +62,7 @@ export default {
           { title: "4. 循环取数据", line: 15, vars: { i: "0", "输出": "1 " }, note: "进入第二个 <code>for</code> 循环。<br><code>i</code> 重新从 0 开始，把 <code>a[0]</code> 到 <code>a[4]</code> 里的数据依次拿出来打印。" } 
         ], 
         output: "（输入 5 个数：1 2 3 4 5）\n1 2 3 4 5",
-        footer: '<b>📌 套路总结</b>：用数组配合循环时，通常都是“一个循环负责 <code>cin</code> 存数据，另一个循环负责 <code>cout</code> 取数据”。这就是批量处理数据的终极公式！'
+        extra: { desc: '<b>📌 套路总结</b>：用数组配合循环时，通常都是“一个循环负责 <code>cin</code> 存数据，另一个循环负责 <code>cout</code> 取数据”。这就是批量处理数据的终极公式！', variant: 'flat' }
       }
     },
 
@@ -146,7 +146,7 @@ export default {
           { line: 9, title: "int b[10];", desc: "<b>局部变量</b>：写在 main 里面。空间很小，只适合装小数据。" } 
         ], 
         output: "编译通过，顺利运行",
-        footer: '<b>📌 竞赛保命肌肉记忆</b>：如果你记不住原理，就记住一句话——<b>数组统统写在 <code>int main()</code> 的上一行！</b>准没错。'
+        extra: { desc: '<b>📌 竞赛保命肌肉记忆</b>：如果你记不住原理，就记住一句话——<b>数组统统写在 <code>int main()</code> 的上一行！</b>准没错。', variant: 'flat' }
       }
     },
 
@@ -155,9 +155,26 @@ export default {
       id: 14, type: "level-map", title: "课堂练习3：逆序输出", subtitle: "正着存，倒着取", chapterTag: "第 7 讲 · 实战演练",
       data: { 
         question: { title: "题干", desc: "输入 n 个数，将它们逆序输出。<br>输入样例：<code>5\n1 2 3 4 5</code>　输出样例：<code>5 4 3 2 1</code>", timer: "⏱ 限时 6 分钟" }, 
-        hints: ["数组必须定义在 <code>main</code> 外面的全局", "正序读入：<code>for(i=0; i&lt;n; i++)</code>", "逆序输出：<code>for(i=n-1; i&gt;=0; i--)</code>"], 
+        hints: ["数组必须定义在 main 外面的全局", "正序读入", "逆序输出"], 
+        
+        steps: [
+          {
+            title: "思路 1：正着存进去",
+            desc: "用常规的 for 循环，从 0 循环到 n-1，把读入的数据挨个存进数组。",
+            highlightLines: [11, 12, 13],
+            hiddenLines: [16, 17, 18],
+            placeholder: "    // 思考：接下来怎么倒着取？"
+          },
+          {
+            title: "思路 2：倒着取出来",
+            desc: "下标从 n-1 开始，一直减小到 0（注意条件是 i >= 0）。",
+            highlightLines: [16, 17, 18],
+            hiddenLines: []
+          }
+        ],
+        
         answer: { codeFile: "codes/lesson-07/reverse.cpp", snippet: "main" }, 
-        analysis: { title: "📖 解析", desc: "正着存进去，倒着取出来。<br>注意看参考代码的第一行：<b>数组定义在了 main 函数外面</b>。这样即使题目要求 n=100000，程序也不会崩溃。" } 
+        analysis: { title: "📖 解析", desc: "正着存进去，倒着取出来。<br>注意：数组定义在了 main 外面，防止 n 很大时导致程序崩溃。" } 
       }
     },
 

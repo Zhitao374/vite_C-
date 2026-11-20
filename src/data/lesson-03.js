@@ -95,7 +95,7 @@ export default {
           { line: 18, title: "printf(..., f_area);", desc: "用魔法扒出 float 的 10 位小数，<b>尾巴全乱了</b>" },
         ],
         output: "double 面积: 19.6349\nfloat 面积 : 19.6349\ndouble 底细: 19.6349540849\nfloat 底细 : 19.6349544525",
-        footer: '<b>📌 结论</b>：用 <code>cout</code> 看，float 和 double 差不多。但在魔法下就能看到，<b>float 的尾巴是瞎猜的</b>。<br>因为 float 只有 4 字节，只能保证前 <b>6-7 位</b>准确；double 有 8 字节，能保证前 <b>15-17 位</b>准确。<br>所以，<b>竞赛中小数一律无脑用 double！</b>',
+        extra: { desc: '<b>📌 结论</b>：用 <code>cout</code> 看，float 和 double 差不多。但在魔法下就能看到，<b>float 的尾巴是瞎猜的</b>。<br>因为 float 只有 4 字节，只能保证前 <b>6-7 位</b>准确；double 有 8 字节，能保证前 <b>15-17 位</b>准确。<br>所以，<b>竞赛中小数一律无脑用 double！</b>', variant: 'flat' },
       },
     },
 
@@ -131,7 +131,7 @@ export default {
           { icon: "✂️", title: "截断，而非四舍五入", desc: "<code>5 / 2</code> 是 2，<code>9 / 4</code> 也是 2。<br>C++ 直接把小数部分砍掉，绝不进位。" },
           { icon: "🌉", title: "打破围墙", desc: "要让整数除法产生小数，必须在<b>除法发生之前</b>，把其中一个数拉出整数集合。<br>这就是强制转换的意义。" },
         ],
-        footer: '<b>📌 口诀</b>：两个整数相除，结果必为整数；要得小数，必须提前强转。'
+        extra: { desc: '<b>📌 口诀</b>：两个整数相除，结果必为整数；要得小数，必须提前强转。', variant: 'flat' }
       }
     },
 
@@ -222,7 +222,7 @@ export default {
           { line: 11, title: "(int)letter", desc: "'a' = 97，大小写差 32" },
         ],
         output: "A\na\n65\n97",
-        footer: '<b>📌 竞赛常考技巧</b>：因为大小写字母的 ASCII 码刚好相差 32（小写更大）。<br>所以，<b>小写转大写：<code>char(c - 32)</code></b>；<b>大写转小写：<code>char(c + 32)</code></b>。<br><br>🔮 <b>远期应用</b>：第 5 讲遍历字符串时，你会大量用到这个技巧。',
+        extra: { desc: '<b>📌 竞赛常考技巧</b>：因为大小写字母的 ASCII 码刚好相差 32（小写更大）。<br>所以，<b>小写转大写：<code>char(c - 32)</code></b>；<b>大写转小写：<code>char(c + 32)</code></b>。<br><br>🔮 <b>远期应用</b>：第 5 讲遍历字符串时，你会大量用到这个技巧。', variant: 'flat' },
       },
     },
 
@@ -236,7 +236,7 @@ export default {
           { leftLabel: "❌ 错误写法", rightLabel: "✅ 正确写法", wrong: "<code>char c = \"A\";</code><br><span style='font-size:0.9em; color:#888'>双引号是字符串</span>", right: "<code>char c = 'A';</code><br><span style='font-size:0.9em; color:#888'>单引号才是字符</span>" },
           { leftLabel: "❌ 错误写法", rightLabel: "✅ 正确写法", wrong: "<code>'hello'</code><br><span style='font-size:0.9em; color:#888'>char 装不下</span>", right: "<code>\"hello\"</code><br><span style='font-size:0.9em; color:#888'>string 可以</span>" }
         ],
-        footer: '<b>📌 记忆口诀</b>：单引号 → 一个字符（char）；双引号 → 一串字符（string）。<br>写 char 用单引号，写 string 用双引号——<b>类型匹配，编译器才认</b>。'
+        extra: { desc: '<b>📌 记忆口诀</b>：单引号 → 一个字符（char）；双引号 → 一串字符（string）。<br>写 char 用单引号，写 string 用双引号——<b>类型匹配，编译器才认</b>。', variant: 'flat' }
       }
     },
 
@@ -264,7 +264,7 @@ export default {
           { line: 6, title: "cout << is_rain;", desc: "输出 0（false 显示为 0）" },
         ],
         output: "1\n0",
-        footer: '<b>📌 为第 4 讲铺路</b>：<code>bool</code> 是下一讲 <code>if</code> 判断的基础。<br>下一讲你会看到：<code>if (score >= 60)</code> 里面的 <code>score >= 60</code>，结果就是一个 <code>bool</code>。',
+        extra: { desc: '<b>📌 为第 4 讲铺路</b>：<code>bool</code> 是下一讲 <code>if</code> 判断的基础。<br>下一讲你会看到：<code>if (score >= 60)</code> 里面的 <code>score >= 60</code>，结果就是一个 <code>bool</code>。', variant: 'flat' },
       },
     },
 
@@ -288,7 +288,7 @@ export default {
           { icon: "🔤", title: "ASCII 记忆法", desc: "'A' = 65，'a' = 97<br>'0' = 48，空格 = 32<br><b>大小写差 32</b><br>其余字母用起点加差值推导" },
           { icon: "⚠️", title: "精度与截断", desc: "<code>int a = 3.99;</code> 得到 3<br>强转 double 到 int 是<b>截断</b>，不是四舍五入" }
         ],
-        footer: '<b>📌 怎么考？</b><br>给你一个字母，问你它的 ASCII 码。或者给两个字母相减，问差值。<br>记住：<b>\'C\' 就是 65 + 2 = 67。永远不用死记硬背。</b>'
+        extra: { desc: '<b>📌 怎么考？</b><br>给你一个字母，问你它的 ASCII 码。或者给两个字母相减，问差值。<br>记住：<b>\'C\' 就是 65 + 2 = 67。永远不用死记硬背。</b>', variant: 'flat' }
       }
     },
 
@@ -344,7 +344,7 @@ export default {
           { icon: "💡", title: "关于 bool", desc: "除了 true/false，其他数字能存吗？<br>在代码里怎么用？" },
           { icon: "🔄", title: "关于类型转换", desc: "什么时候会丢掉数据？<br>怎么避免整数除法陷阱？" }
         ],
-        footer: '<b>📌 提问的三个层次</b><br>① 问“是什么”：查资料能解决。<br>② 问“为什么”：理解原理的钥匙。<br>③ 问“怎么办”：代码报错卡住了。<br><br><b>大胆开口！</b>'
+        extra: { desc: '<b>📌 提问的三个层次</b><br>① 问“是什么”：查资料能解决。<br>② 问“为什么”：理解原理的钥匙。<br>③ 问“怎么办”：代码报错卡住了。<br><br><b>大胆开口！</b>', variant: 'flat' }
       }
     },
 

@@ -37,7 +37,7 @@ export default {
             desc: "程序也是一样。在内存里借两块空间，贴上标签叫 <code>a</code> 和 <code>b</code>。<br>用户输入具体数字，程序自动算 <code>a + b</code>。<br>这个“可变的代号”，就叫<b>变量</b>。"
           }
         ],
-        footer: '<b>📌 灵魂拷问</b>：数学里的 x 可以是 10，也可以是 200；可以是整数，也可以带小数。<br>程序里的“代号”能装下所有种类的东西吗？今天，我们就来学习怎么给内存“贴标签”。'
+        extra: { desc: '<b>📌 灵魂拷问</b>：数学里的 x 可以是 10，也可以是 200；可以是整数，也可以带小数。<br>程序里的“代号”能装下所有种类的东西吗？今天，我们就来学习怎么给内存“贴标签”。', variant: 'flat' }
       }
     },
 
@@ -107,7 +107,7 @@ export default {
           { line: 10, title: 'score = 100;', desc: '重新赋值：可以随时修改' }
         ],
         output: '11\n100',
-        footer: '<b>⚠️ 机房急救</b>：如果定义变量后没有赋值就直接使用（如 <code>int a; cout << a;</code>），它会输出一个不可预测的“垃圾值”。<br><b>铁律：定义变量，顺手给初值。</b>'
+        extra: { desc: '<b>⚠️ 机房急救</b>：如果定义变量后没有赋值就直接使用（如 <code>int a; cout << a;</code>），它会输出一个不可预测的“垃圾值”。<br><b>铁律：定义变量，顺手给初值。</b>', variant: 'flat' }
       }
     },
 
@@ -130,7 +130,7 @@ export default {
           { icon: "🔤", title: "为什么用 i、j、k？", desc: "数学里求和用 <b>Σ</b>，下标是 <b>i</b>。<br>1957 年 FORTRAN 规定：以 I 到 N 开头的变量名自动是整数。<br>从此 <code>i</code>、<code>j</code>、<code>k</code> 就成了循环变量的默契。<br><b>70 年过去，还在用。</b>" },
           { icon: "🍫", title: "为什么用 foo、bar？", desc: '<b>foo</b> 来自二战雷达术语 FU（Fouled Up，一团糟）。<br><b>bar</b> 来自 1930 年代漫画《Smokey Stover》。<br>程序员把它们当"占位符"用——<br>不重要的名字，就叫 <code>foo</code>、<code>bar</code>、<code>baz</code>。' },
         ],
-        footer: '<b>📌 好名字值千金</b><br>编程界有句名言：<b>"计算机科学只有两件难事——缓存失效和命名。"</b><br><br>❌ <code>a</code>、<code>b</code>、<code>temp</code> —— 过两天不知道是什么<br>✅ <code>math_score</code>、<code>total_count</code> —— 见名知意<br><br><b>原则</b>：名字要像"自我介绍"——不用解释就能看懂。'
+        extra: { desc: '<b>📌 好名字值千金</b><br>编程界有句名言：<b>"计算机科学只有两件难事——缓存失效和命名。"</b><br><br>❌ <code>a</code>、<code>b</code>、<code>temp</code> —— 过两天不知道是什么<br>✅ <code>math_score</code>、<code>total_count</code> —— 见名知意<br><br><b>原则</b>：名字要像"自我介绍"——不用解释就能看懂。', variant: 'flat' }
       }
     },
 
@@ -173,7 +173,7 @@ export default {
           { icon: '❌', scene: '输入 3.5，变量是 int 类型', what: '变量读到 <code>3</code>，<code>.5</code> 留在缓冲区', why: '<code>cin</code> 遇到不匹配的字符就停止读取', fix: '整数变量只读整数——小数要用 <code>double</code>' },
           { icon: '❌', scene: '输入 3,5 (带逗号)', what: '程序只读到了 <code>3</code>，后面的没读进去', why: '默认情况下，<code>cin</code> 认为空格和回车才是分隔符', fix: '输入两个数时，中间只能用<b>空格</b>或<b>回车</b>' }
         ],
-        footer: '<b>📌 机房救命小贴士</b>：在运行黑窗口输入数据时，多个数字之间只能用 <b>空格</b> 或 <b>回车</b> 隔开，千万别敲逗号 <code>,</code>。'
+        extra: { desc: '<b>📌 机房救命小贴士</b>：在运行黑窗口输入数据时，多个数字之间只能用 <b>空格</b> 或 <b>回车</b> 隔开，千万别敲逗号 <code>,</code>。', variant: 'flat' }
       }
     },
 
@@ -232,7 +232,7 @@ export default {
       data: {
         number: "2147483647", unit: "约 21 亿",
         card: { title: "这就是 int 的“天花板”", desc: "int 占 4 字节，正数最大只能存到 <b>2147483647</b>。<br><br>记住这个数字——它经常在初赛题和竞赛题里坑人。" },
-        footer: '<b>📌 灵魂拷问</b>：<br>如果我把 2147483647 <b>再加 1</b>，屏幕会输出什么？<br>是 2147483648 吗？下一页我们跑个程序看看。'
+        extra: { desc: '<b>📌 灵魂拷问</b>：<br>如果我把 2147483647 <b>再加 1</b>，屏幕会输出什么？<br>是 2147483648 吗？下一页我们跑个程序看看。', variant: 'flat' }
       },
     },
 
@@ -342,7 +342,7 @@ export default {
           { icon: "💾", title: "计算内存占用", desc: "已知 1 字节 = 8 位。<br>如果定义 <code>int a[100];</code>，占多少内存？<br>100 × 4 = <b>400 字节</b>。<br><br>通常还会考换成 KB（除以 1024）。" },
           { icon: "⚠️", title: "溢出判断", desc: "题目问：<code>int a = 2147483647; a = a + 1;</code> 结果是多少？<br>因为超了 int 范围，会发生<b>溢出</b>，变成负数（-2147483648）。" }
         ],
-        footer: '<b>📌 初赛避坑</b>：初赛不仅考概念，还会考你的“算数能力”。<b>别把 long long 的字节数和 int 记混了。</b>'
+        extra: { desc: '<b>📌 初赛避坑</b>：初赛不仅考概念，还会考你的“算数能力”。<b>别把 long long 的字节数和 int 记混了。</b>', variant: 'flat' }
       }
     },
 
@@ -402,7 +402,7 @@ export default {
           { icon: "🔢", title: "关于类型", desc: "int 和 long long 到底选哪个？<br>什么时候会溢出？" },
           { icon: "🔒", title: "关于 const", desc: "为什么要用常量？<br>它和普通变量有什么区别？" }
         ],
-        footer: '<b>📌 提问的三个层次</b><br>① 问“是什么”：查资料能解决。<br>② 问“为什么”：理解原理的钥匙。<br>③ 问“怎么办”：代码报错卡住了。<br><br><b>大胆开口！</b>'
+        extra: { desc: '<b>📌 提问的三个层次</b><br>① 问“是什么”：查资料能解决。<br>② 问“为什么”：理解原理的钥匙。<br>③ 问“怎么办”：代码报错卡住了。<br><br><b>大胆开口！</b>', variant: 'flat' }
       }
     },
 

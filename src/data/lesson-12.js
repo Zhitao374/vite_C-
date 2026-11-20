@@ -75,7 +75,7 @@ export default {
           { line: 11, title: "cout << a[1][2];", desc: "取出该位置的值。" },
         ],
         output: "99",
-        footer: '<b>📌 新手常见死穴</b>：千万不要写成 <code>a[3, 4]</code>。C++ 中必须用两个独立的方括号：<code>a[3][4]</code>。'
+        extra: { desc: '<b>📌 新手常见死穴</b>：千万不要写成 <code>a[3, 4]</code>。C++ 中必须用两个独立的方括号：<code>a[3][4]</code>。', variant: 'flat' }
       }
     },
 
@@ -90,7 +90,7 @@ export default {
           { title: "整体初始化", line: 9, vars: { "b[0][0]": "1", "b[1][2]": "6" }, note: "外层大括号代表整个矩阵，内层大括号代表每一行。一目了然。" },
           { title: "部分初始化", line: 12, vars: { "c[0][0]": "1", "c[1][1]": "0" }, note: "如果大括号里没写满，剩下的格子会自动被系统填成 <b>0</b>。" }
         ],
-        footer: '<b>📌 必杀技</b>：如果数组很大（比如 1000×1000 的地图），千万别手写，直接写 <code>int a[1000][1000] = {0};</code>，一秒钟把所有格子全初始化为 0！'
+        extra: { desc: '<b>📌 必杀技</b>：如果数组很大（比如 1000×1000 的地图），千万别手写，直接写 <code>int a[1000][1000] = {0};</code>，一秒钟把所有格子全初始化为 0！', variant: 'flat' }
       }
     },
 
@@ -107,7 +107,7 @@ export default {
           { title: "第二圈开始", line: 9, vars: { j: "1", i: "0" }, note: "外层 j 变成 1。<br>继续打印第 1 列：<code>a[0][1]</code> 和 <code>a[1][1]</code>，即 2 和 5。" },
           { title: "最终结果", line: 11, note: "屏幕输出：<code>1 4 2 5 3 6</code>。<br>你看，因为 j 在外面，它一列一列地往下走，所以打印出来全是一列列的！" }
         ],
-        footer: '<b>📌 怎么改？</b>把外层改成 i（行），内层改成 j（列），这样 i 走一步，j 就横着把一整行跑完。'
+        extra: { desc: '<b>📌 怎么改？</b>把外层改成 i（行），内层改成 j（列），这样 i 走一步，j 就横着把一整行跑完。', variant: 'flat' }
       }
     },
 
@@ -121,7 +121,7 @@ export default {
           { icon: "🔁", title: "外走一步，内跑一圈", desc: "外层 <code>i</code> 变一次，内层 <code>j</code> 就要从 0 跑到 <code>m-1</code>。" },
           { icon: "🛡️", title: "保命口诀", desc: "<b>外层控行 i，内层控列 j。</b><br>永远先写行循环，再写列循环。" },
         ],
-        footer: '<b>📌 正确写法</b>：<br><code>for (int i = 0; i &lt; n; i++) {</code><br><code>&nbsp;&nbsp;for (int j = 0; j &lt; m; j++) {</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; a[i][j] &lt;&lt; " ";</code><br><code>&nbsp;&nbsp;}</code><br><code>}</code>'
+        extra: { desc: '<b>📌 正确写法</b>：<br><code>for (int i = 0; i &lt; n; i++) {</code><br><code>&nbsp;&nbsp;for (int j = 0; j &lt; m; j++) {</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; a[i][j] &lt;&lt; " ";</code><br><code>&nbsp;&nbsp;}</code><br><code>}</code>', variant: 'flat' }
       }
     },
 
@@ -196,7 +196,7 @@ export default {
         cases: [
           { icon: "💥", scene: "地图题 / 矩阵题，编译成功但运行直接闪退 (RE)", what: "程序毫无输出，直接结束", why: "在 <code>main</code> 里开了 <code>int a[1005][1005];</code>。它占了 1000x1000x4 字节，约 4MB，直接撑爆了局部变量的栈空间。", fix: "把二维数组写在整个 <code>main</code> 函数的外面（变成全局变量）。" }
         ],
-        footer: '<b>📌 铁律</b>：<b>只要数组大于一维，统统开在 main 外面！</b> 反正竞赛里内存不花钱，全局变量不要钱。'
+        extra: { desc: '<b>📌 铁律</b>：<b>只要数组大于一维，统统开在 main 外面！</b> 反正竞赛里内存不花钱，全局变量不要钱。', variant: 'flat' }
       }
     },
 
@@ -209,7 +209,7 @@ export default {
           { icon: "📏", title: "按行展开计算", desc: "定义 <code>int a[5][6];</code>，那么 <code>a[2][3]</code> 前面有多少个元素？<br>答：2 * 6 + 3 = 15 个（它的下标是 15，是第 16 个元素）。" },
           { icon: "⚠️", title: "越界后果", desc: "二维数组越界同样不会报编译错。<br>可能会覆盖其他行/列的数据，导致难以排查的 Bug。" }
         ],
-        footer: '<b>📌 怎么考？</b><br>给你一个二维数组 <code>a[i][j]</code>，问你它的绝对地址/偏移量。套公式 <code>i * 列数 + j</code> 即可。'
+        extra: { desc: '<b>📌 怎么考？</b><br>给你一个二维数组 <code>a[i][j]</code>，问你它的绝对地址/偏移量。套公式 <code>i * 列数 + j</code> 即可。', variant: 'flat' }
       }
     },
 

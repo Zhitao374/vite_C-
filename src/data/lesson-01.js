@@ -34,8 +34,7 @@ export default {
           { line: 3, title: "换行", desc: "endl" },
         ],
         output: "    *\n   ***\n  *****\n *******\n*********",
-        footer:
-          '<b>📌 这就是编程</b>：<br>你写 3 行"指令"，计算机执行上亿次操作 —— <b>最后变成你看到的图案</b>。<br><br>后面 90 分钟，你也能写出这样的代码 —— <b>甚至更酷的</b>。',
+        extra: { desc: '<b>📌 这就是编程</b>：<br>你写 3 行"指令"，计算机执行上亿次操作 —— <b>最后变成你看到的图案</b>。<br><br>后面 90 分钟，你也能写出这样的代码 —— <b>甚至更酷的</b>。', variant: 'flat' },
       },
     },
 
@@ -83,8 +82,7 @@ export default {
               "每次新建自动生成，省 30 秒",
           },
         ],
-        footer:
-          '<b>🚨 机房急救卡</b>：按 F11 后软件黑屏、闪退或弹出一大堆红字，<b>千万不要乱点！</b><br>立刻举手，老师过去帮你排雷。<br><br><b>📌 口诀</b>：快捷键要记牢，C++11 不能少，代码补全调出来，写起代码快又好。',
+        extra: { desc: '<b>🚨 机房急救卡</b>：按 F11 后软件黑屏、闪退或弹出一大堆红字，<b>千万不要乱点！</b><br>立刻举手，老师过去帮你排雷。<br><br><b>📌 口诀</b>：快捷键要记牢，C++11 不能少，代码补全调出来，写起代码快又好。', variant: 'flat' },
       },
     },
 
@@ -142,8 +140,7 @@ export default {
           },
         ],
         output: "[Error] 'cout' was not declared in this scope",
-        footer:
-          '<b>🚨 卡住了？</b><br>你没抄错 —— 代码就是这样写。<br><b>报错说：「我不认识 cout」</b>。<br>为什么？—— 下一页揭晓。<br><br>⏱ <b>给你 30 秒，自己想</b>：cout 到底在哪？',
+        extra: { desc: '<b>🚨 卡住了？</b><br>你没抄错 —— 代码就是这样写。<br><b>报错说：「我不认识 cout」</b>。<br>为什么？—— 下一页揭晓。<br><br>⏱ <b>给你 30 秒，自己想</b>：cout 到底在哪？', variant: 'flat' },
       },
     },
 
@@ -201,8 +198,7 @@ export default {
             text: '绝对不行。<code>main</code> 是英文"<b>主要的</b>"的意思。<br>计算机启动程序，第一件事就是找 main。<br><b>没有 main，程序不知道从哪开始。</b><br>这是 C++ 的死规定 —— 必须背下来。',
           },
         ],
-        footer:
-          '<b>📌 关于「点菜」类比</b>：<br>程序 = 你去餐厅吃饭。<br>借工具（头文件）→ 报菜名（命名空间）→ 主菜（main）→ 结账（return 0）。<br>每一环都不能少。',
+        extra: { desc: '<b>📌 关于「点菜」类比</b>：<br>程序 = 你去餐厅吃饭。<br>借工具（头文件）→ 报菜名（命名空间）→ 主菜（main）→ 结账（return 0）。<br>每一环都不能少。', variant: 'flat' },
       },
     },
 
@@ -279,8 +275,7 @@ export default {
           desc:
             '<b>1972 年</b>，第一个 Hello World 程序诞生。<br><b>今天你也写了一个。</b><br><br>这是编程之路的起点。<br>从今天起，你不再是"电脑的使用者" —— <b>你是"电脑的指挥者"</b>。',
         },
-        footer:
-          '<b>📌 你比 ENIAC 快 100 万倍</b>：<br>1946 年的第一台计算机 ENIAC 每秒能算 <b>5000</b> 次；<br>今天你手机里的芯片，每秒能算 <b>几十亿</b> 次。<br><br>但无论多快，都靠你今天学的「指令 + 数据」在指挥。',
+        extra: { desc: '<b>📌 你比 ENIAC 快 100 万倍</b>：<br>1946 年的第一台计算机 ENIAC 每秒能算 <b>5000</b> 次；<br>今天你手机里的芯片，每秒能算 <b>几十亿</b> 次。<br><br>但无论多快，都靠你今天学的「指令 + 数据」在指挥。', variant: 'flat' },
       },
     },
 
@@ -405,8 +400,7 @@ export default {
               '<img src="static/ascii-art/buddha-blessing.svg" alt="佛祖保佑 永无BUG" style="display:block;margin:0 auto;max-width:340px;width:100%;">',
           },
         ],
-        footer:
-          '<b>📖 ASCII 艺术的起源</b>：<br>1960 年代，打印机只能打字符，人们就用 <code>*</code>、<code>#</code>、<code>@</code> 拼出 LOGO、动物、人像。<br>今天你看到的很多"字符画"（比如终端里的企鹅、笑脸），都是 ASCII 艺术。<br><br><b>这是最早的"计算机艺术"形式之一。</b><br>刚才你用 3 行 cout，也画了一幅 ASCII 艺术。',
+        extra: { desc: '<b>📖 ASCII 艺术的起源</b>：<br>1960 年代，打印机只能打字符，人们就用 <code>*</code>、<code>#</code>、<code>@</code> 拼出 LOGO、动物、人像。<br>今天你看到的很多"字符画"（比如终端里的企鹅、笑脸），都是 ASCII 艺术。<br><br><b>这是最早的"计算机艺术"形式之一。</b><br>刚才你用 3 行 cout，也画了一幅 ASCII 艺术。', variant: 'flat' },
       },
     },
 
@@ -437,7 +431,7 @@ export default {
             ]
           }
         ],
-        footer: "<b>📌 新手急救法</b>：遇到报错，<b>双击 Dev-C++ 下面的第一行红字</b>，光标会自动跳到出错的那一行。<br>去看看那一行是不是漏了分号，或者混进了中文标点。"
+        extra: { desc: "<b>📌 新手急救法</b>：遇到报错，<b>双击 Dev-C++ 下面的第一行红字</b>，光标会自动跳到出错的那一行。<br>去看看那一行是不是漏了分号，或者混进了中文标点。", variant: 'flat' }
       }
     },
 
@@ -470,8 +464,7 @@ export default {
               "大括号必须成对<br><br><b>原因</b>：每个 <code>{</code> 必须有对应的 <code>}</code>，不然编译器不知道代码块在哪结束",
           },
         ],
-        footer:
-          '<b>🔍 放大对比</b><br><br>英文分号：<code>;</code>（半个字符高）<br>中文分号：<code>；</code>（一个字符高）<br><br>英文引号：<code>" "</code>（直上直下）<br>中文引号：<code>" "</code>（有弧度）<br><br><b>肉眼几乎一样 —— 但编译器能看出来。</b><br>养成习惯：写代码时切换成英文输入法。',
+        extra: { desc: '<b>🔍 放大对比</b><br><br>英文分号：<code>;</code>（半个字符高）<br>中文分号：<code>；</code>（一个字符高）<br><br>英文引号：<code>" "</code>（直上直下）<br>中文引号：<code>" "</code>（有弧度）<br><br><b>肉眼几乎一样 —— 但编译器能看出来。</b><br>养成习惯：写代码时切换成英文输入法。', variant: 'flat' },
       },
     },
 
@@ -507,8 +500,7 @@ export default {
             desc: "<b>WA</b> = Wrong Answer<br>答案错误<br>需要改进",
           },
         ],
-        footer:
-          '<b>📌 常用 OJ 平台推荐</b><br>· <b>洛谷</b>（luogu.com.cn）—— 中国最大，题目丰富，CSP-J/S 首选<br>· <b>一本通</b>—— 配套教材，按章节刷题，系统训练<br>· <b>AcWing</b>—— 课程 + 题库，零基础友好<br>· <b>Codeforces</b>—— 国际平台，每周比赛，提高段位<br><br>入门用<b>洛谷 + 一本通</b>，进阶用 <b>Codeforces</b>。',
+        extra: { desc: '<b>📌 常用 OJ 平台推荐</b><br>· <b>洛谷</b>（luogu.com.cn）—— 中国最大，题目丰富，CSP-J/S 首选<br>· <b>一本通</b>—— 配套教材，按章节刷题，系统训练<br>· <b>AcWing</b>—— 课程 + 题库，零基础友好<br>· <b>Codeforces</b>—— 国际平台，每周比赛，提高段位<br><br>入门用<b>洛谷 + 一本通</b>，进阶用 <b>Codeforces</b>。', variant: 'flat' },
       },
     },
 
@@ -898,8 +890,7 @@ export default {
               "注册 → 找题 → 粘贴 → 提交<br><b>AC</b> 通过 · <b>WA</b> 答案错<br><b>CE</b> 编译错 · <b>RE</b> 运行错<br><b>TLE</b> 超时 · <b>MLE</b> 内存超",
           },
         ],
-        footer:
-          '<b>📌 关键口诀</b>：程序框架不能少，头文件加命名空间；主函数是入口，return 0 结束；cout 输出用 <code>&lt;&lt;</code>，换行用 <code>endl</code>。<br><br><b>📸 建议拍照保存，作为课后复习清单。</b>',
+        extra: { desc: '<b>📌 关键口诀</b>：程序框架不能少，头文件加命名空间；主函数是入口，return 0 结束；cout 输出用 <code>&lt;&lt;</code>，换行用 <code>endl</code>。<br><br><b>📸 建议拍照保存，作为课后复习清单。</b>', variant: 'flat' },
       },
     },
 

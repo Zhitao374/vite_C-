@@ -39,7 +39,7 @@ export default {
           { line: 11, title: "s3.length()", desc: "获取长度：点号代表调用 string 自带的测长工具，别忘了括号" } 
         ], 
         output: "Hello World\n11", 
-        footer: '<b>📌 为什么不需要提前规定大小？</b><br>因为 <code>string</code> 在底层就像一个会自动扩容的智能容器，你往里塞多少字，它就自动撑多大，极其省心。' 
+        extra: { desc: '<b>📌 为什么不需要提前规定大小？</b><br>因为 <code>string</code> 在底层就像一个会自动扩容的智能容器，你往里塞多少字，它就自动撑多大，极其省心。', variant: 'flat' } 
       }
     },
 
@@ -52,7 +52,7 @@ export default {
     /* ===== 7 冲突①：空格截断 ===== */
     {
       id: 7, type: "code-walkthrough", title: "眼见为实：空格截断", subtitle: "为什么读不到完整的话？", chapterTag: "第 8 讲 · 概念理解",
-      data: { intro: "刚才我们用 <code>cin</code> 读入单词，没问题。但如果我要读入一句带空格的完整句子呢？看代码：", codeFile: "codes/lesson-08/cin-vs-getline.cpp", snippet: "main", steps: [ { title: "输入整句", line: 7, vars: { s: "" }, note: "我们要读入 <code>Hello World</code>。" }, { title: "cin 罢工", line: 7, vars: { s: "Hello" }, note: "如果用的是 <code>cin</code>，遇到空格就停止，变量里只有 <code>Hello</code>。" }, { title: "残局", line: 7, vars: { s: "Hello" }, note: "后面的 <code>World</code> 被留在了缓冲区，没读进来。" } ], footer: '<b>📌 记住</b>：<code>cin</code> 读到空格或回车就会停下，不能用它来读带空格的句子。' }
+      data: { intro: "刚才我们用 <code>cin</code> 读入单词，没问题。但如果我要读入一句带空格的完整句子呢？看代码：", codeFile: "codes/lesson-08/cin-vs-getline.cpp", snippet: "main", steps: [ { title: "输入整句", line: 7, vars: { s: "" }, note: "我们要读入 <code>Hello World</code>。" }, { title: "cin 罢工", line: 7, vars: { s: "Hello" }, note: "如果用的是 <code>cin</code>，遇到空格就停止，变量里只有 <code>Hello</code>。" }, { title: "残局", line: 7, vars: { s: "Hello" }, note: "后面的 <code>World</code> 被留在了缓冲区，没读进来。" } ], extra: { desc: '<b>📌 记住</b>：<code>cin</code> 读到空格或回车就会停下，不能用它来读带空格的句子。', variant: 'flat' } }
     },
 
     /* ===== 8 揭示：getline ===== */
@@ -64,7 +64,7 @@ export default {
     /* ===== 9 冲突②：幽灵回车 ===== */
     {
       id: 9, type: "code-walkthrough", title: "眼见为实：幽灵回车", subtitle: "程序为什么不理我？", chapterTag: "第 8 讲 · 概念理解",
-      data: { intro: "看下面这段代码：先输入一个数字，再输入一个带空格的字符串。<br>去敲一下，猜猜会发生什么？", codeFile: "codes/lesson-08/_error-ghost-enter.cpp", snippet: "main", steps: [ { title: "前置输入", line: 7, vars: { n: "5" }, note: "输入 5 并敲了回车。" }, { title: "读入字符串", line: 9, vars: { s: "" }, note: "执行到 <code>getline</code>，它立刻读到了一个空字符串，然后程序直接结束了！" }, { title: "为什么？", line: 9, vars: { s: "" }, note: "因为 <code>cin</code> 读走 5 之后，把<b>回车符</b>留在了缓冲区。`getline` 看到回车，以为这一行结束了，直接读了个空。" } ], footer: '<b>📌 急救解药</b>：在 <code>cin >> n;</code> 之后，加一句 <code>cin.ignore();</code>，把那个垃圾回车吃掉。' }
+      data: { intro: "看下面这段代码：先输入一个数字，再输入一个带空格的字符串。<br>去敲一下，猜猜会发生什么？", codeFile: "codes/lesson-08/_error-ghost-enter.cpp", snippet: "main", steps: [ { title: "前置输入", line: 7, vars: { n: "5" }, note: "输入 5 并敲了回车。" }, { title: "读入字符串", line: 9, vars: { s: "" }, note: "执行到 <code>getline</code>，它立刻读到了一个空字符串，然后程序直接结束了！" }, { title: "为什么？", line: 9, vars: { s: "" }, note: "因为 <code>cin</code> 读走 5 之后，把<b>回车符</b>留在了缓冲区。`getline` 看到回车，以为这一行结束了，直接读了个空。" } ], extra: { desc: '<b>📌 急救解药</b>：在 <code>cin >> n;</code> 之后，加一句 <code>cin.ignore();</code>，把那个垃圾回车吃掉。', variant: 'flat' } }
     },
 
     /* ===== 10 缓冲区原理解析 ===== */
@@ -94,13 +94,78 @@ export default {
     /* ===== 12 练习2：统计字符 ===== */
     {
       id: 12, type: "level-map", title: "课堂练习2：统计字符", subtitle: "统计数字字符的个数", chapterTag: "第 8 讲 · 实战演练",
-      data: { question: { title: "题干", desc: "输入一行字符串，统计其中数字字符（'0'~'9'）的个数。<br>输入样例：<code>C++ 2026</code>　输出样例：<code>4</code>", timer: "⏱ 限时 6 分钟" }, hints: ["用 <code>getline</code> 读入整行", "判断字符是否在 '0' 到 '9' 之间：<code>s[i] >= '0' && s[i] <= '9'</code>"], answer: { codeFile: "codes/lesson-08/string-count.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "字符的底层是 ASCII 码，数字字符 '0' 到 '9' 是连续排列的，所以可以直接用大于等于和小于等于来比较。" } }
+      data: { 
+        question: { title: "题干", desc: "输入一行字符串，统计其中数字字符（'0'~'9'）的个数。<br>输入样例：<code>C++ 2026</code>　输出样例：<code>4</code>", timer: "⏱ 限时 6 分钟" }, 
+        hints: ["用 <code>getline</code> 读入整行", "判断字符是否在 '0' 到 '9' 之间"], 
+        
+        steps: [
+          {
+            title: "思路 1：遍历每一个字符",
+            desc: "用 <code>getline</code> 读入整行后，使用 <code>for</code> 循环从头到尾访问字符串。<br>先把大括号闭合好。",
+            highlightLines: [11, 15], // 高亮 for 循环的头和尾
+            hiddenLines: [12, 13, 14], // 只隐藏里面的 if
+            placeholder: "        // 思考：怎么判断它是不是数字？"
+          },
+          {
+            title: "思路 2：判断并累加",
+            desc: "在循环内部，判断当前字符 <code>s[i]</code> 是否在 '0' 到 '9' 之间。",
+            highlightLines: [12, 13, 14],
+            hiddenLines: []
+          }
+        ],
+
+        answer: { codeFile: "codes/lesson-08/string-count.cpp", snippet: "main" }, 
+        analysis: { title: "📖 解析", desc: "字符的底层是 ASCII 码，数字字符 '0' 到 '9' 是连续排列的，可以直接用大于等于和小于等于来比较。" } 
+      }
     },
 
-    /* ===== 13 练习3：回文判断 ===== */
+    /* ===== 13 课堂练习3：回文判断 ===== */
     {
       id: 13, type: "level-map", title: "课堂练习3：回文判断", subtitle: "正着读和反着读一样", chapterTag: "第 8 讲 · 实战演练",
-      data: { question: { title: "题干", desc: "输入一个字符串，判断它是不是回文串（正着读和反着读一样，如 `level`）。<br>是输出 `Yes`，否则输出 `No`。", timer: "⏱ 限时 10 分钟" }, hints: ["可以用双指针：一个指向开头，一个指向结尾", "如果左右对称位置的字符不一样，就不是回文", "循环条件是 <code>left < right</code>"], answer: { codeFile: "codes/lesson-08/palindrome.cpp", snippet: "main" }, analysis: { title: "📖 解析", desc: "利用左右两个下标向中间靠拢，每次比较对应的字符。这就是后面高级算法中“双指针”的雏形。" } }
+      data: {
+        question: { title: "题干", desc: "输入一个字符串，判断它是不是回文串。<br>输入样例：<code>level</code>　输出样例：<code>Yes</code>", timer: "⏱ 限时 10 分钟" },
+        hints: ["用双指针：一个指向开头，一个指向结尾", "如果左右对称字符不一样，就不是回文", "循环条件是 <code>left &lt; right</code>"],
+
+        steps: [
+          {
+            title: "思路 1：准备左右指针",
+            desc: "定义变量 left 指向头，right 指向尾，再用 is_pal 记录结果。",
+            highlightLines: [10, 11],
+            hiddenLines: [13, 14, 15, 16, 17, 18, 19, 20], // 隐藏整个 while 循环
+            placeholder: "    // ... 准备开始循环比较 ..."
+          },
+          {
+            title: "思路 2：循环外壳",
+            desc: "只要 left < right，说明还没相遇，就可以继续比较。我们先写好循环的开头和结尾。",
+            highlightLines: [13, 20], // 高亮 while 头和尾
+            hiddenLines: [14, 15, 16, 17, 18, 19], // 隐藏循环体内部
+            placeholder: "        // ... 循环体内部逻辑待编写 ..."
+          },
+          {
+            title: "思路 3：发现不相等",
+            desc: "如果发现字符不同，直接把 is_pal 置为 false，并用 break 终止。",
+            highlightLines: [14, 15, 16, 17], // 高亮 if 块（包括闭合的 }）
+            hiddenLines: [18, 19], // 隐藏指针移动
+            placeholder: "        // ... 相等的话，指针怎么动？ ..."
+          },
+          {
+            title: "思路 4：指针靠拢",
+            desc: "如果相等，left 向右，right 向左。",
+            highlightLines: [18, 19],
+            hiddenLines: [22, 23], // 隐藏最后输出
+            placeholder: "    // ... 输出最终结果 ..."
+          },
+          {
+            title: "思路 5：输出结果",
+            desc: "根据 is_pal 标记输出。",
+            highlightLines: [22, 23],
+            hiddenLines: []
+          }
+        ],
+        
+        answer: { codeFile: "codes/lesson-08/palindrome.cpp", snippet: "main" },
+        analysis: { title: "📖 最终解析", desc: "利用左右两个下标向中间靠拢，每次比较对应的字符。" }
+      }
     },
 
     /* ===== 14 冲突③：竹简与休止符 ===== */
@@ -115,7 +180,7 @@ export default {
           { title: "隐形的尾巴", line: 6, vars: { "s[]": "需要 6 个空间" }, note: "在 C 语言底层，为了让计算机知道这个字符串到哪里结束，最后必须有一个隐形的休止符 <code>\\0</code>。<br>你需要 6 个格子才装得下！" },
           { title: "后果", line: 7, vars: { s: "乱码" }, note: "如果内存越界，或者找不到休止符，程序会一直往后读，输出一堆乱码，甚至崩溃。" }
         ], 
-        footer: '<b>📌 初赛口诀</b>：字符数组要多开 1 格，因为结尾有隐形休止符 <code>\\0</code>。<br>（这也是为什么 <code>string</code> 比 <code>char[]</code> 好用一万倍的原因！）' 
+        extra: { desc: '<b>📌 初赛口诀</b>：字符数组要多开 1 格，因为结尾有隐形休止符 <code>\\0</code>。<br>（这也是为什么 <code>string</code> 比 <code>char[]</code> 好用一万倍的原因！）', variant: 'flat' } 
       }
     },
 

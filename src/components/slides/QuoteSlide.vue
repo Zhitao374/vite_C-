@@ -1,107 +1,49 @@
 <template>
   <SlideShell :slide="slide">
-    <div class="quote-split card-hero">
-      <StepWrapper :step="1">
-        <div class="quote-panel">
-          <div class="quote-mark">"</div>
-          <div class="quote-text" v-html="text"></div>
-          <div v-if="author" class="quote-author">{{ author }}</div>
-        </div>
-      </StepWrapper>
-
-      <div class="quote-right">
-        <ul class="list">
-          <StepWrapper v-for="(p, i) in points" :key="i" :step="i + 2" tag="li">
-            <span v-html="p"></span>
-          </StepWrapper>
-        </ul>
-
-        <StepWrapper v-if="highlight" :step="points.length + 2">
-          <div class="card card-glow">
-            <div v-if="highlight.title" class="card-title">
-              {{ highlight.title }}
-            </div>
-            <div
-              v-if="highlight.desc"
-              class="card-desc"
-              v-html="highlight.desc"
-            ></div>
+    <FlexLayout scrollable>
+      <div class="quote-split card-hero">
+        <StepWrapper :step="1">
+          <div class="quote-panel">
+            <div class="quote-mark">"</div>
+            <div class="quote-text" v-html="text"></div>
+            <div v-if="author" class="quote-author">{{ author }}</div>
           </div>
         </StepWrapper>
+        <div class="quote-right">
+          <ul class="list">
+            <StepWrapper v-for="(p, i) in points" :key="i" :step="i + 2" tag="li"><span v-html="p"></span></StepWrapper>
+          </ul>
+          <StepWrapper v-if="highlight" :step="points.length + 2">
+            <div class="card card-glow">
+              <div v-if="highlight.title" class="card-title">{{ highlight.title }}</div>
+              <div v-if="highlight.desc" class="card-desc" v-html="highlight.desc"></div>
+            </div>
+          </StepWrapper>
+        </div>
       </div>
-    </div>
+    </FlexLayout>
   </SlideShell>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import SlideShell from "@/components/common/SlideShell.vue";
-import StepWrapper from "@/components/common/StepWrapper.vue";
-import { useStepCount } from "@/composables/useStepCount";
-
-const props = defineProps({
-  slide: { type: Object, required: true },
-});
-
+import { computed } from 'vue';
+import SlideShell from '@/components/common/SlideShell.vue';
+import FlexLayout from '@/components/layouts/FlexLayout.vue';
+import StepWrapper from '@/components/common/StepWrapper.vue';
+import { useSlideSteps } from '@/composables/useSlideSteps';
+const props = defineProps({ slide: { type: Object, required: true } });
 const d = computed(() => props.slide.data || {});
-const text = computed(() => d.value.text || "");
-const author = computed(() => d.value.author || "");
+const text = computed(() => d.value.text || '');
+const author = computed(() => d.value.author || '');
 const points = computed(() => d.value.points || []);
 const highlight = computed(() => d.value.highlight);
-const extra = computed(() => d.value.extra);
-
-useStepCount(
-  () =>
-    1 + points.value.length + (highlight.value ? 1 : 0) + (extra.value ? 1 : 0),
-);
+useSlideSteps(props, () => 1 + points.value.length + (highlight.value ? 1 : 0));
 </script>
 
 <style scoped>
-.quote-split {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 22px;
-  align-items: stretch;
-}
-.quote-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 18px 22px;
-  background: linear-gradient(145deg, #f4f8ff 0%, #eef4ff 100%);
-  border-left: 5px solid var(--accent);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-.quote-mark {
-  font-size: 88px;
-  font-weight: 900;
-  color: var(--accent);
-  opacity: 0.35;
-  line-height: 0.8;
-  margin-bottom: 4px;
-}
-.quote-text {
-  font-size: var(--fs-quote-text);
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.6;
-}
-.quote-author {
-  margin-top: 14px;
-  font-size: calc(18px * var(--font-scale));
-  color: var(--text-dim);
-  text-align: right;
-  font-style: italic;
-}
-.quote-right {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-@media (max-width: 1100px) {
-  .quote-split {
-    grid-template-columns: 1fr;
-  }
-}
+.quote-split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 22px; }
+.quote-panel { background: linear-gradient(145deg, #f4f8ff 0%, #eef4ff 100%); border-left: 5px solid var(--accent); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 18px 22px; }
+.quote-text { font-size: var(--fs-quote-text); font-weight: 700; }
+.quote-right { display: flex; flex-direction: column; gap: 12px; }
+@media (max-width: 1100px) { .quote-split { grid-template-columns: 1fr; } }
 </style>
